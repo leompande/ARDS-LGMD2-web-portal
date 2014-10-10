@@ -1,0 +1,47 @@
+
+<script>
+    //var selectedOrgUnitId = $selectedOrgId;
+    //var selctedIndicatorId = $selectedIndicatorId;
+	
+	function exportToExcelFunction1( )
+	{
+		document.getElementById("exportExcelAnchor1").href = "exportTargetDataToExcel.action";
+	}
+</script>
+
+<div align="right">
+    <a id="exportExcelAnchor1" name="exportExcelAnchor1" href="#" onclick="javascript:exportToExcelFunction1()" target="_blank">Export To Excel</a>
+</div>
+<br />
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-style:solid" bordercolor="black" width="100%">
+	<tr>
+		<td class="TableHeadingCellStyles" bgcolor="#C0C0C0">DataElement</td>
+        #foreach($xaxisvalue in $surveyChartResult.categories )
+			<td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center">$xaxisvalue</td>
+        #end
+    </tr>
+	#set( $series = $surveyChartResult.series )
+	#set( $targetNames = $surveyChartResult.series2 )
+	#set( $count1 = 0 )
+    #foreach( $onedataList in $surveyChartResult.data )
+		#set( $oneTargetDataList = $listTool.get( $!surveyChartResult.data2, $count1 ) )
+		<tr>
+			<td class="TableHeadingCellStyles">$listTool.get( $series, $count1 )</td>			
+			 #foreach( $data in $onedataList )
+				<td class="TableDataCellStyles" align="center">$data</td>
+			 #end
+		</tr>
+        <tr>
+            <td class="TableHeadingCellStyles">$listTool.get( $targetNames, $count1 )</td>           
+             #foreach( $targetData in $!oneTargetDataList )
+                <td class="TableDataCellStyles" align="center">$targetData</td>
+             #end
+        </tr>
+		#set( $count1 = $count1 + 1 )
+	#end
+</table>
+
+<div align="center">
+	<iframe name="iframeForChart" id="iframeForChart" src="generateChart.action?currentChart=SurveyChart" width="800px" height="550px" scrolling=auto frameborder="0"></iframe>
+</div>

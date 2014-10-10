@@ -1,0 +1,104 @@
+
+<html>
+	<head>
+    	<title>Validation Analysis By Average (Not Passed)</title>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+        <script>	            
+        	var startDate = "$startDate"; 
+        	var endDate = "$endDate";
+			var validationRuleGroupId = "$validationRuleGroupId";
+			
+			
+        	function getDetailedInfo(evt, orgUnit)
+        	{
+        		avgOption = "yes";
+        		selOrgUnit = orgUnit;      		
+        		evt.target.href = "detailedValidationAnalysisResultAction.action?validationRuleGroupId="+validationRuleGroupId+"&avgOption="+avgOption+"&selOrgUnit="+selOrgUnit+"&startDate="+startDate+"&endDate="+endDate;
+        	}
+
+			function exportValidationResultToWorkBook()
+			{			    
+				document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+			    
+				return true;				
+			}
+			
+        </script>	
+	</head>
+	<body>
+		<form id="form1" name="form1" action="exportValidationResultToWorkBook.action" method="post" onsubmit="return exportValidationResultToWorkBook()" target="_newtab">
+			<input type="hidden" name="htmlCode" id="htmlCode" />
+			<div align="right" class="NormalB">
+				<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+			</div>
+			
+			<div id="formResult">			    
+
+		<div class="NormalB">Validation Analysis By Average (Not Passed)</div>
+		<!-- <div class="TableHeadingCellStyles" align="right"><a href="exportToExcelAverageVA.action" target="_blank">Export To Excel</a></div> -->
+        <div align="right">
+        	<table width="30%">
+            	<tr class="TableDataCellStyles" >
+                	<td bgcolor="#ff0000">&nbsp;</td>
+                	<td align="left">&nbsp;75+</td>
+                </tr>
+              	<tr class="TableDataCellStyles">
+                	<td bgcolor="#a0a0ff">&nbsp;</td>
+                	<td align="left">&nbsp;41 - 75</td>
+                </tr>
+               	<tr class="TableDataCellStyles">
+                	<td bgcolor="#905090">&nbsp;</td>
+                	<td align="left">&nbsp;1 - 40</td>
+                </tr>
+                <tr class="TableDataCellStyles">
+                	<td bgcolor="#a0c0a0">&nbsp;</td>
+                	<td align="left">&nbsp;0</td>
+                </tr>
+            </table>
+        </div>
+        <br><br>
+        
+        #set($count2 = 0)
+		<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">		
+        	<tr class="TableHeadingCellStyles" align="center">
+  				#foreach($levelName in $levelNames)
+  					<th>$levelName</th>
+  				#end
+  				#foreach($period in $selPeriodList)
+  					<th>$period.startDate To $period.endDate</th>
+  				#end
+  			</tr>
+  			#foreach($chiildorgUnit in $selOrgUnitList)
+  				#set($count1 = $minOULevel)
+  				#set($curOrgUnitLevel = $organisationUnitService.getLevelOfOrganisationUnit($chiildorgUnit))
+  				<tr class="TableHeadingCellStyles">
+  					#foreach($levelName in $levelNames)
+  				    	#if($count1 == $curOrgUnitLevel)
+  				        	<td>
+								<a href="#" onclick="javascript:getDetailedInfo(event,'$chiildorgUnit.id')" target="_blank">$chiildorgUnit.shortName</a>
+							</td>
+  				        #else
+  				        	<td>&nbsp;</td>
+  				        #end
+  				        #set($count1 = $count1 + 1)
+  				    #end
+  				    #set($vrResults = $validationAverageResult.get($chiildorgUnit))
+					#foreach($vrResult in $vrResults)						
+                    	#if($vrResult < 0)
+                        	<td  bgcolor="white">&nbsp;</td>
+  					    #elseif($vrResult == 0)
+  					        <td align="center" bgcolor="#a0c0a0"><font color="#ffffff">$vrResult</font></td>
+  					    #elseif($vrResult > 75)
+  					        <td align="center" bgcolor="#ff0000"><font color="#ffffff">$vrResult</font></td>
+  					    #elseif($vrResult > 40 && $vrResult <= 75 )
+  					        <td align="center" bgcolor="#a0a0ff"><font color="#ffffff">$vrResult</font></td>
+  					    #else
+  					        <td align="center" bgcolor="#905090"><font color="#ffffff">$vrResult</font></td>
+  					    #end
+  					#end
+  				</tr>
+            #end
+        </table>
+			</div>
+    </body>
+</html>

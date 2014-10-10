@@ -1,0 +1,21 @@
+<script>
+	jQuery(document).ready(function() {
+    getDataElements();
+    });
+</script>
+<input type="hidden" id="hiddenChkValue" value="$checkValue"/>
+<select id="dataElementGroupId" name="dataElementGroupId" style="width:325px" onChange="getDataElements()" >
+	#if($checkValue=="true")
+		<option value="0" selected>[ Select DataElementGroup / All ]</option>
+    		#foreach ( $group in $dataElementGroups )
+       			<option value="$group.id" title="$group.name">$group.name</option>
+    		#end	
+	#end
+	#if($checkValue=="false")
+    	<option value="0" selected>[ Select DataElementSection / All ]</option>
+    		#foreach ( $section in $sections )
+       			<option value="$section.id" title="$section.name">$section.name</option>
+    		#end    
+    #end
+	
+</select>

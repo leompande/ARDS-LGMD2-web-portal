@@ -1,0 +1,63 @@
+
+#if( $modelList.size() > 0 )
+<table class="mainPageTable">
+<!--
+<tr>
+	<td>&nbsp;&nbsp;</td>
+	#foreach( $modelTypeAttribute in $modelTypeAttributeList )
+		<td>&nbsp;&nbsp;</td>
+	#end
+	<td align="right"><input type="button" value='$i18n.getString( "Add new item" )' onclick="showAddModelForm();" style="width:100px"/></td>
+</tr>
+-->
+<tr>
+<td>	
+<table class="listTable" id="modelList">	
+	<tr bgcolor="#285C91">
+		<td><font color="#FFFFFF"><strong>#</strong></font></td>
+		#if( $modelType.getName().equalsIgnoreCase("Vaccines"))
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "name" )</strong></font></td>
+		#end
+		<!--<td><font color="#FFFFFF"><strong>$i18n.getString( "name" )</strong></font></td>-->
+		#foreach( $modelTypeAttribute in $modelTypeAttributeList )
+			<td><font color="#FFFFFF"><strong>$modelTypeAttribute.name</strong></font></td>
+		#end	
+		<td style="text-align:center" class="{sorter: false}">&nbsp;&nbsp;</td>	
+	</tr>
+	<tbody id="list"> 
+		#set( $mark = false )
+		#foreach( $model in $modelList )
+			<tr id="tr${model.id}" #alternate($mark) >
+		 		<td>
+		 			 #set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+		 			 $nr
+		 		</td>
+				#if( $modelType.getName().equalsIgnoreCase("Vaccines"))
+					<td>$!model.name</td>
+				#end		 		
+		 		
+		 		 <!--<td>$!model.name</td>-->
+		 		 #foreach( $modelTypeAttribute in $modelTypeAttributeList )
+		 		 	#set( $mapId = $model.id + ':' + $modelTypeAttribute.id )
+		 		 	<td>$!modelAttributeValueMap.get( $mapId )</td>
+ 		 		#end
+ 		 		<td><a href="javascript:showModelDetails( '$model.id','$model.getName()','$modelType.getName()'); " title='$i18n.getString( "model_details" )'>Details</a></td>
+	 		</tr>
+	 	#set( $mark = !$mark)
+ 		#end
+	</tbody>
+</table>
+</td>
+</tr>
+</table>
+#end
+<p></p>
+	#parse( "/dhis-web-commons/paging/paging.vm" )		
+	
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'modelList' );
+    });
+</script>	
+	
+

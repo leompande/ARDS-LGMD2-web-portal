@@ -1,0 +1,23 @@
+
+<h3>BULK SMS Form</h3>
+<hr />
+
+<form id="form1" name="form1" method="get" action="prgwiseSummaryBulkSMSResult.action">
+	<table>
+		<tr>
+			<td>
+				<select id="usergroups" name="usergroups" multiple style="width:300px;height:150px">
+					#foreach( $usergroup in $userGroups )
+						<option value="$usergroup.id">$usergroup.name</option>
+					#end
+				</select>
+			</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td>
+				<input type="submit" name="sendsms" value="send sms - prg wise summary" />
+			</td>
+		</tr>
+	</table>
+</form>

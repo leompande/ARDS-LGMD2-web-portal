@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.detargetdatavalue.DeTargetDataValue" table="detargetdatavalue">
+    <composite-id>
+      <key-many-to-one name="deTarget" class="org.hisp.dhis.detarget.DeTarget" column="detargetid" foreign-key="fk_detargetdatavalue_detargetid"/>      
+      <key-many-to-one name="dataelement" class="org.hisp.dhis.dataelement.DataElement" column="dataelementid" foreign-key="fk_detargetdatavalue_dataelementid"/>
+      <key-many-to-one name="decategoryOptionCombo" class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" column="categoryoptioncomboid" foreign-key="fk_detargetdatavalue_categoryoptioncomboid"/>
+      <key-many-to-one name="source" class="org.hisp.dhis.organisationunit.OrganisationUnit" lazy="false" column="sourceid" foreign-key="fk_detargetdatavalue_organisationunitid" />	
+      <key-many-to-one name="period" class="org.hisp.dhis.period.Period" column="periodid" foreign-key="fk_detargetdatavalue_periodid"/>		 
+    </composite-id>
+	
+    <property name="value"/>
+    <property name="storedBy" column="storedby" length="50"/>
+    <property name="timestamp" column="lastupdated" type="date"/>
+  
+  </class>
+</hibernate-mapping>

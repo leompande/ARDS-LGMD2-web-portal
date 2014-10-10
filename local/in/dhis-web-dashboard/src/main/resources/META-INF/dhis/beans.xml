@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+<!-- Home Page -->
+<!--	
+    <bean id="org.hisp.dhis.dataanalyser.action.DashBoardHomePageAction"
+		class="org.hisp.dhis.dataanalyser.action.DashBoardHomePageAction"
+		scope="prototype">
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+        <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+        <property name="statementManager" ref="statementManager"/>
+    </bean>
+
+-->	
+    <bean id="org.hisp.dhis.dataanalyser.action.NoAction"
+		class="org.hisp.dhis.dataanalyser.action.NoAction"
+		scope="prototype">
+    </bean>	
+	
+<!--		
+  <bean id="org.hisp.dhis.dataanalyser.action.GetPatientDataRecordsAction" class="org.hisp.dhis.dataanalyser.action.GetPatientDataRecordsAction"
+    scope="prototype">
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+    <property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+    <property name="programStageInstanceService" ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+    <property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+    <property name="patientAttributeService" ref="org.hisp.dhis.patient.PatientAttributeService" />
+    <property name="patientAttributeValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+  </bean>
+	
+  <bean id="org.hisp.dhis.dataanalyser.action.GetPatientDetailsAction" class="org.hisp.dhis.dataanalyser.action.GetPatientDetailsAction"
+    scope="prototype">
+    <property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+    <property name="patientIdentifierService" ref="org.hisp.dhis.patient.PatientIdentifierService" />
+    <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+    <property name="patientAttributeValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+  </bean>
+-->
+    <bean id="org.hisp.dhis.dataanalyser.action.IDSPOutbreakAction"
+        class="org.hisp.dhis.dataanalyser.action.IDSPOutbreakAction"
+        scope="prototype">
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService" />
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+        <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+        <property name="statementManager" ref="statementManager"/>
+		<property name="orgUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+
+	
+<!-- Graphical Analyser DataElements -->
+	 <bean id="org.hisp.dhis.dataanalyser.ga.action.GenerateGraphicalAnalyserDataElementsFormAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.GenerateGraphicalAnalyserDataElementsFormAction"
+        scope="prototype">
+		<property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+		<property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+		<property name="organisationUnitGroupService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+		<property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>		
+    </bean>
+<!-- Graphical Analyser DataElements Result -->
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartDataElementAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartDataElementAction"
+        scope="prototype">
+		
+		<property name="statementManager" ref="statementManager"/>
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService">
+		</property>
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService">
+		</property>
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+		</property>
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService">
+        </property>		
+		<property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService">
+		</property>
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService">
+		</property>
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService">
+		</property>
+		<property name="caseAggregationConditionService" ref="org.hisp.dhis.caseaggregation.CaseAggregationConditionService">
+        </property>
+    </bean>
+    
+	<!-- for Chart Display -->	
+	<bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartAction1"
+        class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartAction1"
+        scope="prototype">
+    </bean>
+	
+<!-- sorting DataElement data -->    
+    <bean id="org.hisp.dhis.dataanalyser.action.GetSortedDataElementAction"
+        class="org.hisp.dhis.dataanalyser.action.GetSortedDataElementAction"
+        scope="prototype">
+    </bean>	
+<!-- Export Data Elements to Excel -->
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportDataElementToExcelAction"
+        class="org.hisp.dhis.dataanalyser.action.ExportDataElementToExcelAction"
+        scope="prototype">
+    </bean>
+
+	<!-- DrillDown periodToOrgUnit Child/GroupMember dataElements-->
+	<bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownPeriodToOrgChildChartDataElementResultAction" class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownPeriodToOrgChildChartDataElementResultAction" scope="prototype">
+		<property name="statementManager" ref="statementManager"/>
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+	
+	<!-- DrillDown OrgUnitToPeriod Child/GroupMember dataElements -->
+	<bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownOrgUnitToPeriodChartDataElementResultAction" class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownOrgUnitToPeriodChartDataElementResultAction" scope="prototype">
+		
+		<property name="statementManager" ref="statementManager"/>
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService">
+        </property>
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService">
+        </property>
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService">
+        </property>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+        </property>
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService">
+        </property>
+	</bean>
+
+	<bean id="org.hisp.dhis.dataanalyser.ga.action.GetDataElementGroupAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.GetDataElementGroupAction"
+        scope="prototype">
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="sectionService" ref="org.hisp.dhis.dataset.SectionService" />
+    </bean>	
+		
+	
+<!-- Graphical Analyser DataElements End -->
+		
+<!-- Graphical Analyser Indicators Start-->
+    
+     <bean id="org.hisp.dhis.dataanalyser.ga.action.IndicatorwiseGAFormAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.IndicatorwiseGAFormAction"
+        scope="prototype">
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        
+    </bean>
+	
+	   <!-- Graphical Analyser Indicator Result -->
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartIndicatorAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartIndicatorAction"
+        scope="prototype">
+        
+        <property name="statementManager" ref="statementManager"/>
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService">
+        </property>
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService">
+        </property>
+        <property name="reportService" ref="org.hisp.dhis.reports.ReportService">
+        </property>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+        </property>
+	   <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService">
+        </property>   
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService">
+        </property>
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService">
+		</property>
+<!--    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService">
+        </property>-->
+<!--        <property name="periodService" ref="org.hisp.dhis.period.PeriodService">
+        </property>-->
+    </bean>
+<!-- sorting Indiacator data -->	
+	<bean id="org.hisp.dhis.dataanalyser.action.GetSortedIndicatorDataAction"
+        class="org.hisp.dhis.dataanalyser.action.GetSortedIndicatorDataAction"
+        scope="prototype">
+    </bean>
+<!-- Export Indicator to Excel -->
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportIndicatorToExcelAction"
+        class="org.hisp.dhis.dataanalyser.action.ExportIndicatorToExcelAction"
+        scope="prototype">
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+		<property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+    </bean>
+<!-- DrillDown periodToOrgUnit Child/GroupMember dataElements -->
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownPeriodToOrgChildChartIndicatorResultAction" class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownPeriodToOrgChildChartIndicatorResultAction" scope="prototype">
+        <property name="statementManager" ref="statementManager"/>
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService">
+        </property>
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService">
+        </property>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+        </property>
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService">
+        </property>
+    </bean>
+<!-- DrillDown OrgUnitToPeriod Child/GroupMember indicator -->
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownOrgUnitToPeriodChartIndicatorResultAction" class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownOrgUnitToPeriodChartIndicatorResultAction" scope="prototype">
+        <property name="statementManager" ref="statementManager"/>
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService">
+        </property>
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService">
+        </property>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+        </property>
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService">
+        </property>
+    </bean>
+<!-- Graphical Analyser Indicators End-->	
+	
+		
+	<!-- Graphical Analyser -->
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ga.action.GenerateGraphicalAnalyserFormAction"
+		class="org.hisp.dhis.dataanalyser.ga.action.GenerateGraphicalAnalyserFormAction"
+		scope="prototype">
+<!--    <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>-->
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>		
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartDataAction"
+		class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartDataAction"
+		scope="prototype">
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService"/>
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService"/>
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService"/>
+
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService"/>
+        <property name="statementManager" ref="statementManager"/>
+		
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService"/>
+        <property name="caseAggregationConditionService" ref="org.hisp.dhis.caseaggregation.CaseAggregationConditionService"/>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartAction"
+		class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateChartAction"
+		scope="prototype">
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownResultAction"
+        class="org.hisp.dhis.dataanalyser.ga.action.charts.GenerateDrillDownResultAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager"/>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryOptionComboService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="patientIdentifierService">
+            <ref bean="org.hisp.dhis.patient.PatientIdentifierService"/>
+        </property>
+        <property name="patientIdentifierTypeService">
+            <ref bean="org.hisp.dhis.patient.PatientIdentifierTypeService"/>
+        </property>
+        <property name="patientAttributeValueService">
+            <ref bean="org.hisp.dhis.patientattributevalue.PatientAttributeValueService"/>
+        </property>
+        <property name="patientAttributeService">
+            <ref bean="org.hisp.dhis.patient.PatientAttributeService"/>
+        </property>
+        <property name="caseAggregationConditionService">
+            <ref bean="org.hisp.dhis.caseaggregation.CaseAggregationConditionService"/>
+        </property>
+        <property name="configurationService">
+            <ref bean="org.hisp.dhis.config.ConfigurationService"/>
+        </property>
+    </bean>
+	
+	<!-- Annual Analyser -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.aa.action.GenerateAnnualAnalyserFormAction"
+		class="org.hisp.dhis.dataanalyser.aa.action.GenerateAnnualAnalyserFormAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>		
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.aa.action.GenerateAnnualAnalysisDataAction"
+		class="org.hisp.dhis.dataanalyser.aa.action.GenerateAnnualAnalysisDataAction"
+		scope="prototype">
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService">
+		</property>
+    </bean>
+	
+<!-- Export Annual Data to Excel -->
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportAnnualDataToExcelAction"
+        class="org.hisp.dhis.dataanalyser.action.ExportAnnualDataToExcelAction"
+        scope="prototype">
+		<property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+        <property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+    </bean> 
+	
+	
+	<!-- Motion Chart -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.mchart.action.MotionChartFormAction"
+		class="org.hisp.dhis.dataanalyser.mchart.action.MotionChartFormAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.mchart.action.MotionChartResultAction"
+		class="org.hisp.dhis.dataanalyser.mchart.action.MotionChartResultAction"
+		scope="prototype">
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="statementManager" ref="statementManager"/>
+		
+        <property name="organisationUnitGroupService">
+            <ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+	
+	<!-- Survey Analyser -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.sa.action.GenerateSurveyAnalysisFormAction"
+    class="org.hisp.dhis.dataanalyser.sa.action.GenerateSurveyAnalysisFormAction"
+    scope="prototype">
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="surveyService">
+            <ref bean="org.hisp.dhis.survey.SurveyService"/>
+        </property>
+	  
+    </bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.sa.action.GenerateChartSurveyAction"
+        class="org.hisp.dhis.dataanalyser.sa.action.GenerateChartSurveyAction"
+        scope="prototype">
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="statementManager" ref="statementManager"/>
+        
+        <property name="surveyService">
+            <ref bean="org.hisp.dhis.survey.SurveyService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="surveyDataValueService">
+            <ref bean="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+        </property>
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService">
+		</property>
+    </bean>
+	
+<!--	
+    <bean id="org.hisp.dhis.dataanalyser.sa.action.GenerateSurveyAnalysisDataAction"
+		class="org.hisp.dhis.dataanalyser.sa.action.GenerateSurveyAnalysisDataAction"
+		scope="prototype">
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="statementManager" ref="statementManager"/>
+		
+        <property name="surveyService">
+            <ref bean="org.hisp.dhis.survey.SurveyService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="surveyDataValueService">
+            <ref bean="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+        </property>
+    </bean>
+-->	
+<!--	<bean id="org.hisp.dhis.dataanalyser.sa.action.GenerateChartSurveyAction"
+        class="org.hisp.dhis.dataanalyser.sa.action.GenerateChartSurveyAction"
+        scope="prototype">
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="statementManager" ref="statementManager"/>
+        
+        <property name="surveyService">
+            <ref bean="org.hisp.dhis.survey.SurveyService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="surveyDataValueService">
+            <ref bean="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+        </property>
+    </bean>
+-->	
+	<!-- Export Survey to Excel -->
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportSurveyDataToExcelAction"
+        class="org.hisp.dhis.dataanalyser.action.ExportSurveyDataToExcelAction"
+        scope="prototype">
+		<property name="surveyService" ref="org.hisp.dhis.survey.SurveyService" />
+		<property name="surveyDataValueService" ref="org.hisp.dhis.surveydatavalue.SurveyDataValueService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+    </bean> 
+	
+	<!-- Target Analyser -->
+	
+	<bean id="org.hisp.dhis.dataanalyser.tr.action.GenerateTargetAnalysisFormAction"
+        class="org.hisp.dhis.dataanalyser.tr.action.GenerateTargetAnalysisFormAction"
+        scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<!--<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />-->
+		<property name="orgUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="sectionService" ref="org.hisp.dhis.dataset.SectionService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.action.GetOrgUnitNameAction"
+		class="org.hisp.dhis.dataanalyser.action.GetOrgUnitNameAction"
+		scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+    <bean id="org.hisp.dhis.dataanalyser.tr.action.GenerateTargetAnalysisDataAction"
+        class="org.hisp.dhis.dataanalyser.tr.action.GenerateTargetAnalysisDataAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService" />
+        <property name="deTargetDataValueService" ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService" />
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportTargetDataToExcelAction"
+        class="org.hisp.dhis.dataanalyser.action.ExportTargetDataToExcelAction"
+        scope="prototype">
+    </bean> 
+	
+	<!-- View Comment Related Stuff -->
+<!--	
+	<bean id="org.hisp.dhis.dataanalyser.vc.action.ViewCommentFormAction"
+    	class="org.hisp.dhis.dataanalyser.vc.action.ViewCommentFormAction" 
+		scope="prototype">
+		<property name="selectionTreeManager">
+		  <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+		</property>
+		<property name="currentUserService">
+		  <ref bean="org.hisp.dhis.user.CurrentUserService"/>
+		</property>
+		<property name="selectionManager">
+		  <ref bean="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager"/>
+	    </property>    
+    </bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.vc.action.ValidateViewCommentsAction"
+		class="org.hisp.dhis.dataanalyser.vc.action.ValidateViewCommentsAction"
+		scope="prototype">
+		<property name="selectionTreeManager">
+		  <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+	    </property>
+	</bean>
+-->			
+	
+	<!-- DataStatus -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusFormAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusFormAction"
+		scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>
+	
+	<!--  
+	<bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateGroupWiseDataStatusFormAction"
+	class="org.hisp.dhis.dataanalyser.ds.action.GenerateGroupWiseDataStatusFormAction"
+	scope="prototype">
+	<property name="dataSetService">
+	<ref bean="org.hisp.dhis.dataset.DataSetService"/>
+	</property>
+	<property name="periodService">
+	<ref bean="org.hisp.dhis.period.PeriodService"/>
+	</property>
+	</bean>
+	-->
+	
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusResultAction"
+		scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+<!--		<property name="serviceProvider" ref="dataCompletenessServiceProvider"/>-->
+    </bean>
+	
+	 <!-- Null report for DataEntry Status -->
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateNullReportResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateNullReportResultAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>		
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>	
+	
+	
+	
+	
+	
+	<!-- DataStatus Data Set Wise -->
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusDataSetWiseFormAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusDataSetWiseFormAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusDataSetWiseResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateDataStatusDataSetWiseResultAction"
+		scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />
+    </bean>
+	
+	
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.GetPeriodsForDataSetWiseAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GetPeriodsForDataSetWiseAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>			
+
+<!-- View Comment -->	
+   <bean id="org.hisp.dhis.dataanalyser.ds.action.GenerateCommentResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateCommentResultAction" scope="prototype">
+	   <property name="statementManager" ref="statementManager"/>
+	   <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService">
+	   </property>
+	   <property name="periodService" ref="org.hisp.dhis.period.PeriodService">
+	   </property>
+	   <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+	   </property>	   
+	   <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService">
+	   </property>   
+	   <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService">
+	   </property>
+	   <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService">
+	   </property>	   
+    </bean>			
+	<!-- DataStatus For Mobile start  -->
+
+	<bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateDataStatusMobileFormAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateDataStatusMobileFormAction"
+        scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+<!--    <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>-->
+    </bean>	
+	
+	<!-- for Mobile Validation Status -->
+    <bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateValidationMobileStatusResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateValidationMobileStatusResultAction"
+        scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService"/>
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore">
+		</property>
+    </bean>
+   
+	<!--  for Mobile summary data status -->
+	
+	<bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateSummaryMobileDataStatusResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateSummaryMobileDataStatusResultAction"
+        scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore">
+        </property>
+	</bean>
+	
+	<!--  for Mobile  dataStatus result -->
+    <bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateMobileDataStatusResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateMobileDataStatusResultAction"
+        scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+		<property name="reportService">
+            <ref bean="org.hisp.dhis.reports.ReportService"/>
+        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore">
+        </property>
+    </bean>	
+	
+	<bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GeneratePercentageDataStatusResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GeneratePercentageDataStatusResultAction"
+        scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+		
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore">
+        </property>
+    </bean>	
+	
+	<!--  for Mobile Group wise data status -->    
+    <bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateGroupWiseMobileDataStatusResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateGroupWiseMobileDataStatusResultAction"
+        scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+<!--	<property name="userStore" ref="org.hisp.dhis.user.UserStore">
+        </property>-->
+    </bean>	
+	
+    <!-- for Mobile Last Updated Status -->    	
+	<bean id="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateLastUpdatedMobileDataSetResultAction"
+        class="org.hisp.dhis.dataanalyser.ds.mobile.action.GenerateLastUpdatedMobileDataSetResultAction"
+        scope="prototype">
+
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+<!--        <property name="userStore">
+            <ref bean="org.hisp.dhis.user.UserStore"/>
+        </property>-->
+        <property name="userService">
+            <ref bean="org.hisp.dhis.user.UserService"/>
+        </property>		
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+	
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ds.action.GenerateSummaryDataStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateSummaryDataStatusResultAction"
+		scope="prototype">
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ds.action.GenerateGroupWiseDataStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateGroupWiseDataStatusResultAction"
+		scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+<!--	<property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>-->
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.ExportToExcelAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.ExportToExcelAction"
+		scope="prototype">
+    </bean>
+
+    <!-- DataStatus based on data entry Validation Pass-->
+
+	<bean
+		id="org.hisp.dhis.dataanalyser.ds.action.GenerateValidationStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateValidationStatusResultAction"
+		scope="prototype">
+		<property name="dashBoardService">
+			<ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+		</property>
+		<property name="dataSetService">
+			<ref bean="org.hisp.dhis.dataset.DataSetService"/>
+		</property>
+		<property name="periodService">
+			<ref bean="org.hisp.dhis.period.PeriodService"/>
+		</property>
+		<property name="organisationUnitService">
+			<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		</property>
+		<property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService"/>
+	</bean>
+
+    <!-- Data Status based on last updation in selected data set-->
+
+	<bean
+		id="org.hisp.dhis.dataanalyser.ds.action.GenerateLastUpdatedDataSetResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.GenerateLastUpdatedDataSetResultAction"
+		scope="prototype">
+
+		<property name="dashBoardService">
+			<ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+		</property>
+		<property name="dataSetService">
+			<ref bean="org.hisp.dhis.dataset.DataSetService"/>
+		</property>
+		<property name="periodService">
+			<ref bean="org.hisp.dhis.period.PeriodService"/>
+		</property>
+		<property name="organisationUnitService">
+			<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		</property>
+		<!--<property name="userStore">
+			<ref bean="org.hisp.dhis.user.UserStore"/>
+		</property>-->
+		<property name="userService">
+			<ref bean="org.hisp.dhis.user.UserService"/>
+		</property>
+	    <property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<!--<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService"/>-->
+	</bean>
+	
+	<!-- DataStatus Orgnisationunit GroupSet Wise-->
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ds.orgunitgroupsetwise.action.GenerateDataStatusOrgnisationunitGroupSetWiseFormAction"
+		class="org.hisp.dhis.dataanalyser.ds.orgunitgroupsetwise.action.GenerateDataStatusOrgnisationunitGroupSetWiseFormAction"
+		scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+    </bean>
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ds.orgunitgroupsetwise.action.GenerateDataStatusOrgnisationunitGroupSetWiseResultAction"
+		class="org.hisp.dhis.dataanalyser.ds.orgunitgroupsetwise.action.GenerateDataStatusOrgnisationunitGroupSetWiseResultAction"
+		scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+	
+	<!-- DataSatus Null Reporter -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.nr.action.GenerateNullReporterFormAction"
+		class="org.hisp.dhis.dataanalyser.nr.action.GenerateNullReporterFormAction"
+		scope="prototype">
+<!--    <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>-->
+		<property name="dataSetService">
+			<ref bean="org.hisp.dhis.dataset.DataSetService"></ref>
+			
+		</property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.nr.action.GenerateNullReporterResultAction"
+		class="org.hisp.dhis.dataanalyser.nr.action.GenerateNullReporterResultAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataValueService">
+            <ref bean="org.hisp.dhis.datavalue.DataValueService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="statementManager" ref="statementManager"/>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.nr.action.ExportToExcelAction"
+		class="org.hisp.dhis.dataanalyser.nr.action.ExportToExcelAction"
+		scope="prototype">
+    </bean>
+	
+	<!-- Maintenance 
+	<bean id="org.hisp.dhis.dataanalyser.maintenance.action.InConfigurationsFormAction"
+	class="org.hisp.dhis.dataanalyser.maintenance.action.InConfigurationsFormAction"
+	scope="prototype">
+	<property name="dashBoardService">
+	<ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+	</property>
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.maintenance.action.InConfigurationsResultAction"
+	class="org.hisp.dhis.dataanalyser.maintenance.action.InConfigurationsResultAction"
+	scope="prototype">
+	<property name="dashBoardService">
+	<ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+	</property>
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.maintenance.action.TakeMySqlBackupAction"
+	class="org.hisp.dhis.dataanalyser.maintenance.action.TakeMySqlBackupAction"
+	scope="prototype">
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.maintenance.action.StreamMySqlBackupAction"
+	class="org.hisp.dhis.dataanalyser.maintenance.action.StreamMySqlBackupAction"
+	scope="prototype">
+	</bean>
+	-->
+	<!-- DashBoard Matrix 
+	
+	<bean id="org.hisp.dhis.dataanalyser.dm.action.dataanalyserMatrixFormAction"
+	class="org.hisp.dhis.dataanalyser.dm.action.dataanalyserMatrixFormAction"
+	scope="prototype">		
+	<property name="indicatorService">
+	<ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+	</property>
+	<property name="periodService">
+	<ref bean="org.hisp.dhis.period.PeriodService"/>
+	</property>
+	<property name="organisationUnitService">
+	<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+	</property>
+	<property name="organisationUnitGroupService">
+	<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+	</property>
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.dm.action.dataanalyserMatrixResultAction"
+	class="org.hisp.dhis.dataanalyser.dm.action.dataanalyserMatrixResultAction"
+	scope="prototype">		
+	<property name="aggregationService">
+	<ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+	</property>
+	<property name="indicatorService">
+	<ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+	</property>
+	<property name="periodService">
+	<ref bean="org.hisp.dhis.period.PeriodService"/>
+	</property>
+	<property name="sourceService">
+	<ref bean="org.hisp.dhis.source.SourceService"/>
+	</property>
+	<property name="organisationUnitService">
+	<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+	</property>
+	<property name="organisationUnitGroupService">
+	<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+	</property>
+	<property name="targetService">
+	<ref bean="org.hisp.dhis.target.TargetService"/>
+	</property>
+	</bean>
+	
+	
+	-->
+	
+	<!-- Tabular Analyser -->
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.ta.action.GenerateTabularAnalysisFormAction"
+		class="org.hisp.dhis.dataanalyser.ta.action.GenerateTabularAnalysisFormAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>		
+    </bean>
+	
+    <bean
+        id="org.hisp.dhis.dataanalyser.ta.action.GenerateTabularAnalysisResultAction"
+        class="org.hisp.dhis.dataanalyser.ta.action.GenerateTabularAnalysisResultAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager"/>      
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataElementCategoryService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+<!--   <property name="configurationService">
+            <ref bean="org.hisp.dhis.config.ConfigurationService"/>
+        </property>-->
+        <property name="dataValueService">
+            <ref bean="org.hisp.dhis.datavalue.DataValueService"/>
+        </property>
+        <property name="organisationUnitGroupService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+        <property name="reportService" ref="org.hisp.dhis.reports.ReportService" />
+    </bean>
+	
+	
+	<!-- Ajax -->
+	<!-- GetWeekly Period List for Tabular Analysis -->
+	
+	<bean id="org.hisp.dhis.dataanalyser.action.GetWeeklyPeriodAction"
+        class="org.hisp.dhis.dataanalyser.action.GetWeeklyPeriodAction"
+        scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService">
+		</property>
+    </bean>
+
+	<!-- Get Financial Year List  -->
+	
+	<bean id="org.hisp.dhis.dataanalyser.action.GetFinacialYearAction"
+        class="org.hisp.dhis.dataanalyser.action.GetFinacialYearAction"
+        scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService">
+		</property>
+    </bean>		
+	
+	<bean id="org.hisp.dhis.dataanalyser.action.GetDataElementsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetDataElementsAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>		
+    </bean>
+
+    <bean id="org.hisp.dhis.dataanalyser.action.GetDataElementsForTabularAnalysisAction"
+        class="org.hisp.dhis.dataanalyser.action.GetDataElementsForTabularAnalysisAction"
+        scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>
+    </bean>
+	
+		
+    <bean
+		id="org.hisp.dhis.dataanalyser.action.GetDataElementsGroupAndDataSetAction"
+		class="org.hisp.dhis.dataanalyser.action.GetDataElementsGroupAndDataSetAction"
+		scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetIndicatorsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetIndicatorsAction"
+		scope="prototype">
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="surveyService">
+            <ref bean="org.hisp.dhis.survey.SurveyService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetOrgUnitGroupsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetOrgUnitGroupsAction"
+		scope="prototype">
+        <property name="organisationUnitGroupService">
+            <ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetOrgUnitsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetOrgUnitsAction"
+		scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="reportService" ref="org.hisp.dhis.reports.ReportService" />
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetPeriodsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetPeriodsAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetDataSetPeriodsAction"
+		class="org.hisp.dhis.dataanalyser.action.GetDataSetPeriodsAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+	
+	<!-- DashBoard Utilities -->
+	
+    <bean id="org.hisp.dhis.dataanalyser.util.DashBoardService"
+		class="org.hisp.dhis.dataanalyser.util.DashBoardService" scope="prototype">
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="reportservice" ref="org.hisp.dhis.reports.ReportService" />
+		<property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+	
+	<!-- DashBoard Utilities DataElementChartResult-->
+	
+	<bean id="org.hisp.dhis.dataanalyser.util.DataElementChartResult"
+		class="org.hisp.dhis.dataanalyser.util.DataElementChartResult" scope="prototype">
+	</bean>
+  
+	<!-- TopTen Disease Analysis -->
+    <bean
+		id="org.hisp.dhis.dataanalyser.topten.action.GenerateTopTenAnalyserFormAction"
+		class="org.hisp.dhis.dataanalyser.topten.action.GenerateTopTenAnalyserFormAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+	
+    <bean
+		id="org.hisp.dhis.dataanalyser.topten.action.GenerateTopTenAnalysisDataAction"
+		class="org.hisp.dhis.dataanalyser.topten.action.GenerateTopTenAnalysisDataAction"
+		scope="prototype">
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="dataElementCategoryService">
+            <ref
+				bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.topten.action.GetOptionCombosAction"
+		class="org.hisp.dhis.dataanalyser.topten.action.GetOptionCombosAction"
+		scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+	
+	<!-- Export to Excel -->
+    <bean id="org.hisp.dhis.dataanalyser.action.ExportToExcelAction"
+		class="org.hisp.dhis.dataanalyser.action.ExportToExcelAction"
+		scope="prototype">
+    </bean>
+	
+    <bean id="org.hisp.dhis.dataanalyser.action.GetSortedDataAction"
+		class="org.hisp.dhis.dataanalyser.action.GetSortedDataAction"
+		scope="prototype">
+    </bean>
+	
+	<!--DataStatus Mart module Stuff -->
+	
+	<bean id="org.hisp.dhis.dataanalyser.dsMart.action.GetPeriodTypesAction"
+		class="org.hisp.dhis.dataanalyser.dsMart.action.GetPeriodTypesAction"
+		scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.dsMart.action.GetPeriodsForDSMart"
+		class="org.hisp.dhis.dataanalyser.dsMart.action.GetPeriodsForDSMart"
+		scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.dataanalyser.dsMart.action.GetDataSetsForPeriodTypeAction"
+        class="org.hisp.dhis.dataanalyser.dsMart.action.GetDataSetsForPeriodTypeAction"
+        scope="prototype">
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    </bean>
+	
+	<!-- Data Entry Status -->
+    <bean id="org.hisp.dhis.dataanalyser.ds.action.DataEntryStatusSaveAction"
+		class="org.hisp.dhis.dataanalyser.ds.action.DataEntryStatusSaveAction"
+		scope="prototype">
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="dataEntryStatusService" ref="org.hisp.dhis.dataentrystatus.DataEntryStatusService" />
+		<property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+
+	<!-- Data Entry Status Validation -->
+    <bean id="org.hisp.dhis.dataanalyser.dsMart.action.ValidateDataEntryStatusAction"
+		class="org.hisp.dhis.dataanalyser.dsMart.action.ValidateDataEntryStatusAction"
+		scope="prototype">
+		<property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+    </bean>			
+		
+
+	<!-- Data Entry Status Result-->
+	
+
+	<!-- Data Entry Status -->	
+
+    <bean id="org.hisp.dhis.dataanalyser.dsMart.action.GenerateDataEntryStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.dsMart.action.GenerateDataEntryStatusResultAction"
+		scope="prototype">
+        <property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>	
+
+	<!-- Data Entry Summary Status Result-->
+	
+    <bean id="org.hisp.dhis.dataanalyser.dsMart.action.GenerateDataEntrySummaryStatusResultAction"
+		class="org.hisp.dhis.dataanalyser.dsMart.action.GenerateDataEntrySummaryStatusResultAction"
+		scope="prototype">
+        <property name="dashBoardService">
+            <ref bean="org.hisp.dhis.dataanalyser.util.DashBoardService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>		
+
+    <!-- BULK SMS due dates -->
+    
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.GenerateDueDatesFormAction"
+		class="org.hisp.dhis.dataanalyser.sms.action.GenerateDueDatesFormAction"
+		scope="prototype">
+       <property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+         <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />    
+         <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+		 <property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+		
+        </bean>			
+	
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.SendDueDatesFormAction"
+		class="org.hisp.dhis.dataanalyser.sms.action.SendDueDatesFormAction"
+		scope="prototype">
+       <property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+         <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />    
+         <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+		 </bean>			
+	
+    <!-- BULK SMS: Programwise Summary -->
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForProgSummaryFormAction"
+        class="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForProgSummaryFormAction"
+        scope="prototype">
+        <property name="userGroupService" ref="org.hisp.dhis.user.UserGroupService"/>
+    </bean>     
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForProgSummaryResultAction"
+        class="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForProgSummaryResultAction"
+        scope="prototype">
+        <property name="userGroupService" ref="org.hisp.dhis.user.UserGroupService" />
+		<property name="dashBoardService" ref="org.hisp.dhis.dataanalyser.util.DashBoardService" />
+		<!--<property name="programService" ref="org.hisp.dhis.program.ProgramService" />-->
+		
+    </bean>     
+    <!-- BULK SMS: Excel Uploading -->
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForExcelSheetFormAction"
+        class="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForExcelSheetFormAction"
+        scope="prototype">
+    </bean>     
+    <bean id="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForExcelSheetResultAction"
+        class="org.hisp.dhis.dataanalyser.sms.action.BulkSMSForExcelSheetResultAction"
+        scope="prototype">
+    </bean>
+	
+<!-- Schedular -->	
+    <bean name="schedulerForBulkSMSByExcelJob"
+        class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="org.hisp.dhis.dataanalyser.util.SendingBulkSMSFromExcelJob" />
+   </bean>
+
+   <bean id="cronTriggerForBulkSMSByExcelJob"
+        class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="schedulerForBulkSMSByExcelJob" />
+        <property name="cronExpression" value="0 53 16 * * ?" />
+   </bean>
+
+<!-- Scheduler for all Jobs -->
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTriggerForBulkSMSByExcelJob" />
+            </list>
+        </property>
+   </bean>		
+</beans>

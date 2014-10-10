@@ -1,0 +1,46 @@
+<script>
+
+    function exportDataSetReportToWorkBook()
+    {			    
+    	document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+    	    
+    	return true;				
+    }
+
+</script>
+
+
+<form id="form1" name="form1" action="exportDataSetReportToExcel.action" method="post" onsubmit="return exportDataSetReportToWorkBook()" target="_blank">
+<input type="hidden" name="htmlCode" id="htmlCode" />
+<div align="right">
+	<input type="button" value="$i18n.getString( 'back' )" style="width:100px" 
+				onclick="javascript:window.location.href='showDataSetReportForm.action'">
+	<input type="button" value="$i18n.getString( 'print' )" style="width:100px" 
+				onclick="javascript:window.print()">
+	<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; color:#000000">
+</div>
+<div id="formResult">			    
+
+<table>
+	<tr>
+		<td><h3>$i18n.getString('reporting_unit'): </h3></td>			
+		<td><h3>$reportingUnit</h3></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><h3>$i18n.getString('reporting_period'): </h3></td>			
+		<td><h3>$reportingPeriod</h3></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="3" style="height:15px"></td>
+	</tr>
+</table>
+
+$customDataEntryFormCode
+
+
+</div>
+	</form>
+	
+	

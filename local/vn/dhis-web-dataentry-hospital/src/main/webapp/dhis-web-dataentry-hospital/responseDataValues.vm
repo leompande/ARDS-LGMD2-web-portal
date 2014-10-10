@@ -1,0 +1,22 @@
+#set( $size1 = $dataValues.size() )
+#set( $size2 = $minMaxDataElements.size() )
+{ "dataValues": [
+  #foreach( $value in $dataValues )
+  {
+    "id":"${value.dataElement.id}-${value.optionCombo.id}",
+    "val":"$!{value.value}"
+  }#if( $velocityCount < $size1 ),#end
+  #end ],
+  "minMaxDataElements": [
+  #foreach( $element in $minMaxDataElements )
+  {
+    "id":"${element.dataElement.id}-${element.optionCombo.id}",
+    "min":"${element.min}",
+    "max":"${element.max}"
+  }#if( $velocityCount < $size2 ),#end
+  #end ],
+  "locked":${locked},
+  "complete":${complete},
+  "date":"$!format.formatDate( $date )",
+  "storedBy":"$!{storedBy}"
+ }

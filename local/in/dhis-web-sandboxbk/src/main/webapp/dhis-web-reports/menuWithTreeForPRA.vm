@@ -1,0 +1,40 @@
+#parse( "/dhis-web-reports/menu.vm" )
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+    index = document.reportForm.orgUnitListCB.options.length;                			
+    for(i=0;i<index;i++)
+	{
+		document.reportForm.orgUnitListCB.options[0] = null;	
+    }
+
+	document.reportForm.ouIDTB.value = orgUnitIds;
+    var orgUnitid = ""+orgUnitIds;
+    var orgUnitName = orgUnits.get(orgUnitid);
+	if(orgUnitName == null) 
+	 { 
+		document.reportForm.ouIDTB.value = "";
+		document.reportForm.ouNameTB.value = "";
+	    var reportsList = document.getElementById( "reportList" );    
+		clearList( reportsList );
+
+		return;
+	}
+    var orgUnitLevel = orgUnitLevels.get(orgUnitid);
+    document.reportForm.ouNameTB.value = orgUnitName;
+    document.reportForm.ouLevelTB.value = orgUnitLevel;
+	
+    document.reportForm.orgUnitListCB.options[0] = new Option(orgUnitName,orgUnitIds,false,false);
+    
+    getProgressReports();
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

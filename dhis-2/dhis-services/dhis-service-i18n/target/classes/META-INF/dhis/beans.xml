@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+  <bean id="org.hisp.dhis.i18n.locale.LocaleManager" class="org.hisp.dhis.i18n.locale.UserSettingLocaleManager">
+    <property name="userSettingService" ref="org.hisp.dhis.user.UserSettingService" />
+    <property name="resourceBundleManager" ref="org.hisp.dhis.i18n.resourcebundle.ResourceBundleManager" />
+  </bean>
+
+  <bean id="org.hisp.dhis.i18n.resourcebundle.ResourceBundleManager" class="org.hisp.dhis.i18n.resourcebundle.DefaultResourceBundleManager">
+    <property name="globalResourceBundleName" value="i18n_global" />
+    <property name="specificResourceBundleName" value="i18n_module" />
+  </bean>
+
+  <bean id="org.hisp.dhis.i18n.I18nManager" class="org.hisp.dhis.i18n.DefaultI18nManager">
+    <property name="resourceBundleManager" ref="org.hisp.dhis.i18n.resourcebundle.ResourceBundleManager" />
+    <property name="localeManager">
+      <ref local="org.hisp.dhis.i18n.locale.LocaleManager" />
+    </property>
+  </bean>
+
+</beans>

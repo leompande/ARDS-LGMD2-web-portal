@@ -1,0 +1,69 @@
+<script type="text/javascript">
+	jQuery(document).ready(function(){	
+		tableSorter( 'listTable' );	
+	});
+	
+    var i18n_confirm_delete = '$encoder.jsEscape($i18n.getString( "confirm_delete_orgunit_prototype_group" ) , "'")';
+	// Are you sure you want to delete this?
+	var i18n_adding_orgunit_prototype_group_failed = '$encoder.jsEscape($i18n.getString( "adding_orgunit_prototype_group_failed" ) , "'")';
+	var i18n_saving_orgunit_prototype_group_failed = '$encoder.jsEscape($i18n.getString( "saving_orgunit_prototype_group_failed" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "orgunit_prototype_group_management" ) #openHelp( "organisationUnitPrototypeGroup" )</h3>
+
+<table class="mainPageTable">
+	<tr>
+		<td style="vertical-align:top">
+			<table width="100%">
+				<tr>
+					<td>#filterDiv( "orgUnitPrototypeGroup" )</td>
+					<td colspan="4" style="text-align:right"><input type="button" value="$i18n.getString( 'add_new' )" onclick="window.location.href='showAddOrgUnitPrototypeGroupForm.action'" style="width:80px"/></td>
+				</tr>
+			</table>
+			<table class="listTable" id="listTable">
+				<col/>
+				<col width="120px"/>
+                <thead>				
+					<tr>
+						<th>$i18n.getString( "name" )</th>
+						<th class="{sorter: false}">$i18n.getString( "operations" )</th>
+					</tr>
+                </thead>
+				<tbody id="list">
+				#foreach( $group in $organisationUnitPrototypeGroups )
+				<tr id="tr${group.id}">
+					<td onclick="showOrgUnitPrototypeGroupDetails( $group.id )">$encoder.htmlEncode( $group.displayName )</td>
+					<td style="text-align:right">
+						<a href="showUpdateOrgUnitPrototypeGroupForm.action?id=$group.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>
+						<a href="javascript:translate( 'OrganisationUnitPrototypeGroup', '$group.id' )" title="$i18n.getString( 'translation_translate' )"><img src="../images/i18n.png" alt="$i18n.getString( 'translation_translate' )"/></a>				
+						<a href="javascript:removeOrgUnitPrototypeGroup( $group.id, '$encoder.jsEncode( $group.displayName )' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"/></a>
+						<a href="javascript:showOrgUnitPrototypeGroupDetails( $group.id )" title="$i18n.getString( 'show_details' )"><img src="../images/information.png" alt="$i18n.getString( 'show_details' )"/></a>
+					</td>
+				</tr>
+				#end
+				</tbody>
+			</table>
+			<p></p>
+			#parse( "/dhis-web-commons/paging/paging.vm" )
+		</td>
+
+		<td style="width:20em; padding-left:2em; vertical-align:top">
+
+			<div id="detailsArea" style="display:none">
+				<div style="float:right">
+					<a href="javascript:hideDetails()" title="$i18n.getString( 'hide_details' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_details' )"/></a>
+				</div>				
+				<p><label>$i18n.getString( "name" ):</label><br/><span id="nameField"></span></p>
+				<p><label>$i18n.getString( "number_of_members" ):</label><br/><span id="memberCountField"></span></p>
+			</div>
+			
+			<div id="warningArea" style="position:fixed;right:10px;top:200px;display:none">
+                <div style="float:right">
+                    <a href="javascript:hideWarning()" title="$i18n.getString( 'hide_warning' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_warning' )"/></a>
+                </div>
+                <p><span id="warningField"></span></p>
+            </div>
+			
+		</td>
+	</tr>
+</table>

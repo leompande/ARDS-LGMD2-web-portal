@@ -1,0 +1,29 @@
+{ "organisationUnit": 
+  {
+    "id": $!{organisationUnit.id},
+    "name": "$!encoder.jsonEncode( ${organisationUnit.name} )",
+    "shortName": "$!encoder.jsonEncode( ${organisationUnit.shortName} )",
+    "description": "$!encoder.jsonEncode( ${organisationUnit.description} )",
+    "code": "$!encoder.jsonEncode( ${organisationUnit.code} )",
+    "openingDate": "$!{organisationUnit.openingDate}",
+    "closedDate": "$!{organisationUnit.closedDate}",
+    "active": "$!{organisationUnit.active}",
+    "comment": "$!encoder.jsonEncode( ${organisationUnit.comment} )",
+    "geoCode": "$!{organisationUnit.geoCode}",
+    "featureType": "$!encoder.jsonEncode( ${organisationUnit.featureType} )",
+    "coordinates": "$!encoder.jsonEncode( ${organisationUnit.coordinates} )",
+    "latitude": "$!{organisationUnit.latitude}",
+    "longitude": "$!{organisationUnit.longitude}",
+	"hasChild": $!{organisationUnit.hasChild()},
+	
+	#set( $size = ${organisationUnit.groups.size()} )
+	"groups": [
+	#foreach( $group in ${organisationUnit.groups} )
+	{
+		"id": "$!{group.id}",
+		"groupSetId": "$!{group.groupSet.id}"
+	}#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

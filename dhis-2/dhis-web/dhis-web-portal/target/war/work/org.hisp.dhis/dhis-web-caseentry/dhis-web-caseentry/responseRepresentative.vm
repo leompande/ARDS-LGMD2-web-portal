@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patient>
+  <id>$patient.id</id>  
+  <relationshipTypeId>$relationshipTypeId</relationshipTypeId>
+  #foreach( $patientIdentifier in $patient.identifiers )
+  	#if( $patientIdentifier.identifierType && $patientIdentifier.identifierType.related )
+	     <identifier>    
+	     	<identifierTypeId>$patientIdentifier.identifierType.id</identifierTypeId>    
+	        <identifierText>$encoder.xmlEncode( $patientIdentifier.identifier )</identifierText>
+	     </identifier>
+     #end
+  #end
+</patient>
+

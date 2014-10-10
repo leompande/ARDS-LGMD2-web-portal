@@ -1,0 +1,38 @@
+
+<h2>$i18n.getString( "dataanalyser" )</h2>
+	<ul>
+		<li>Graphical Analysis</li>
+		<ul>
+		 	<li>MotionChart</li>
+		 </ul>
+	</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-20px; ">
+        <a href="index.action">
+          <img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+	document.getElementById( 'ouIdTB' ).value = orgUnitIds;
+	
+	if(document.getElementById( 'ougSetCB' ).checked)
+	{
+	 return;
+	}
+	if(orgUnitIds == null || orgUnitIds == "" )
+	{
+		return;
+	}
+	if(orgUnitIds != null)
+	{
+		getOUDeatilsForMC(orgUnitIds);
+	}		
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

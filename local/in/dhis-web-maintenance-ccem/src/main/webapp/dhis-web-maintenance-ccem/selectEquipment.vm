@@ -1,0 +1,177 @@
+
+<input type="hidden" id='selectedOrgunitID' value="$!organisationUnit.id" />
+
+<div id='selectDiv'>
+    
+    <h3>$i18n.getString( "equipment_management" ) #openHelp( "equipmentAttributeValue" )</h3>
+    
+    <table>     
+        <tr>
+            <td><label>$i18n.getString( "registering_unit" )</label></td>
+            <td style="padding-right:5px"><input type="text" id='selectedOrgunitText' value="$!organisationUnit.name" readonly style="min-width:21em"></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>	
+		</tr>
+		<tr>
+			<td><label>$i18n.getString( "equipmenttype" )</label></td>
+			<td style="padding-right:5px">
+				<!--<select id="equipmentType" style="min-width:16em" onchange="equipmentTypeChange( this.value )">-->
+				<select id="equipmentType" style="min-width:21.5em" onchange="equipmentTypeChange()">
+					<!--<option value="0">$i18n.getString( "select_equipmenttype" )</option>-->
+					#foreach( $equipmentType in $equipmentTypes )
+						<option value="$equipmentType.id">$equipmentType.name</option>
+					#end
+				</select>
+			</td>
+            <!--<td style="padding-right:5px"><input type="button" id='listAllEquipmentBtn' value="$i18n.getString( 'list_all_equipments' )" style="width:13em" onclick='loadAllEquipments();'></td>-->
+            <td><span id='warnmessage' style='color:red'></span></td>
+        </tr>
+    </table>
+
+</div>
+
+<div id='searchEquipmentDiv' style='display:none'>
+    <table id='advancedSearchTB'>   
+        <tbody>
+            <tr id='advSearchBox0'>        
+                <td id='searchingAttributeIdTD'>
+                  <select id="searchingAttributeId" name="searchingAttributeId" style="width:15em"  #if( $patientAttributes.size() == 0 ) disabled="disabled" #end onchange="searchingAttributeOnChange( this.value )">
+                  </select> 
+                  <em title="$i18n.getString( "required" )" class="required">*</em></label>
+                </td>       
+                <td>
+                    <input type="text" id="searchText" name="searchText" maxlength="30" style="width:12.5em" value="$!searchText" onkeyup='searchPatientsOnKeyUp( event );'>
+                    
+                </td>   
+                <td></td>
+                <td><input type="button" value='$i18n.getString( "search" )' style="width:13em" onclick='loadEquipmentsByFilter();'></td>
+                <td>&nbsp;</td>
+                <td><input type="button" value='$i18n.getString( "clear" )' style="width:13em" onclick='loadAllEquipments();'></td>
+                <!--<td><input type="button" value='$i18n.getString( "add_new" )' onclick="showAddEquipmentForm();"></td>-->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id='listEquipmentDiv'></div> <!-- List All/Filtered Equipments -->
+<div id='editEquipmentDiv'></div> <!-- Add / Edit EquipmentAttributeValue Form -->
+<div id='editEquipmentStatusDiv'></div> <!-- Add / Edit EquipmentAttributeValue Status -->
+<div id='editEquipmentDataDiv'></div> <!-- Add / Edit EquipmentAttributeValue Data -->
+<div id='equipmentStatusHistoryDiv'></div> <!-- List EquipmentAttributeValue Status History -->
+<div id='resultSearchDiv' style='font-size:13px'></div> <!-- List searching EquipmentAttributeValue -->
+<div id='equipmentDataEntryDiv'></div> <!-- DataEntry screen of EquipmentAttributeValue -->
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script>
+	var i18n_equipment_status_history = '$encoder.jsEscape( $i18n.getString( "equipment_status_history" ) , "'")';
+	var i18n_equipment_details = '$encoder.jsEscape( $i18n.getString( "equipment_details" ) , "'")';
+    var i18n_select_equipmenttype = '$encoder.jsEscape( $i18n.getString( "select_equipmenttype" ) , "'")';
+    var i18n_none = '$encoder.jsEscape( $i18n.getString( "none" ) , "'")';
+    var i18n_can_not_register_patient_for_orgunit = '$encoder.jsEscape( $i18n.getString( "can_not_register_patient_for_orgunit" ), "'")';   
+    var i18n_please_select_village = '[' + '$encoder.jsEscape( $i18n.getString( "please_select_village" ), "'")' + ']';
+    var i18n_specify_search_criteria = '$encoder.jsEscape( $i18n.getString( "specify_search_criteria" ) , "'")';
+    var i18n_select_program = '[' + '$encoder.jsEscape( $i18n.getString( "select_program" ), "'")' + ']';
+    var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+    var i18n_list_all_patient = '$encoder.jsEscape( $i18n.getString( "list_all_patient" ) , "'")';
+    var i18n_enrol_success = '$encoder.jsEscape( $i18n.getString( "enrol_success" ) , "'")';
+    var i18n_unenrol_success = '$encoder.jsEscape( $i18n.getString( "unenrol_success" ) , "'")';
+    var i18n_list_patients_by_program = '$encoder.jsEscape( $i18n.getString( "list_patients_by_program" ) , "'" )';
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_equipment" ) , "'" )';
+    var i18n_adding_patient_failed = '$encoder.jsEscape( $i18n.getString( "adding_patient_failed" ), "'")';
+    var i18n_updating_patient_failed = '$encoder.jsEscape( $i18n.getString( "updating_patient_failed" ), "'")'; 
+    var i18n_program_enrollment_failed = '$encoder.jsEscape( $i18n.getString( "program_enrollment_failed" ) , "'")';
+    var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+    var i18n_saving_value_failed_error_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_error_code" ) , "'")';
+    var i18n_searching_patient_failed = '$encoder.jsEscape( $i18n.getString( "searching_patient_failed" ) , "'")'; 
+    var i18n_date_invalid = '$encoder.jsEscape( $i18n.getString( "date_invalid" ) , "'")';
+    var i18n_date_less_incident = '$encoder.jsEscape( $i18n.getString( "date_less_incident" ) , "'")';
+    var i18n_enroll_to_program = '$encoder.jsEscape( $i18n.getString( "enroll_to_program" ) , "'")';
+    var i18n_update = '$encoder.jsEscape( $i18n.getString( "update" ) , "'")';
+    var i18n_oucode_must_have_9_digits = '$encoder.jsEscape( $i18n.getString( "oucode_must_be_valid" ) , "'")';
+    var i18n_patient_identifiers = '$encoder.jsEscape( $i18n.getString( "patient_identifiers" ) , "'")';
+    var i18n_patient_attributes = '$encoder.jsEscape( $i18n.getString( "patient_attributes" ) , "'")';
+    var i18n_patient_id = '$encoder.jsEscape( $i18n.getString( "id" ) , "'")';
+    var i18n_patient_full_name = '$encoder.jsEscape( $i18n.getString( "full_name" ) , "'")';
+    var i18n_patient_demographics = '$encoder.jsEscape( $i18n.getString( "demographics" ) , "'")';
+    var i18n_patient_gender = '$encoder.jsEscape( $i18n.getString( "gender" ) , "'")';
+    var i18n_patient_date_of_birth = '$encoder.jsEscape( $i18n.getString( "date_of_birth" ) , "'")';
+    var i18n_patient_dob_type = '$encoder.jsEscape( $i18n.getString( "dob_type" ), "'")';
+    var i18n_patient_age = '$encoder.jsEscape( $i18n.getString( "age" ) , "'")';
+    var i18n_patient_blood_group = '$encoder.jsEscape( $i18n.getString( "blood_group" ) , "'")';
+    var i18n_patient_phone_number = '$encoder.jsEscape( $i18n.getString( "phone_number" ) , "'")';
+    var i18n_edit_this_patient = '$encoder.jsEscape( $i18n.getString( "edit_this_patient" ) , "'")';
+    var i18n_no_duplicate_found = '$encoder.jsEscape( $i18n.getString( "no_duplicate_found" ) , "'")';
+    var i18n_patient_system_id = '$encoder.jsEscape( $i18n.getString( "patient_system_id" ) , "'")';
+    var i18n_child_representative = '$encoder.jsEscape( $i18n.getString( "child_representative" ) , "'")';
+    var i18n_no_patients_found = '$encoder.jsEscape( $i18n.getString( "no_patients_found" ) , "'")';
+    var i18n_search_result = '$encoder.jsEscape( $i18n.getString( "search_result" ) , "'")';
+    var i18n_duplicated_patient_list = '$encoder.jsEscape( $i18n.getString( "duplicated_patient_list" ) , "'")';
+    var i18n_duplicate_warning = '$encoder.jsEscape( $i18n.getString( "duplicate_warning" ) , "'")';
+    var i18n_search_by_name_identifier = '$encoder.jsEscape( $i18n.getString( "search_by_name_identifier" ) , "'")';
+    var i18n_search_by_program = '$encoder.jsEscape( $i18n.getString( "search_by_program" ) , "'")';
+    var i18n_create_new_patient = '$encoder.jsEscape( $i18n.getString( "create_new_patient" ) , "'")';
+    var i18n_yes = '$encoder.jsEscape( $i18n.getString( "yes" ) , "'")';
+    var i18n_no = '$encoder.jsEscape( $i18n.getString( "no" ) , "'")';
+    var i18n_choose_this_person = '$encoder.jsEscape( $i18n.getString( "choose_this_person" ) , "'")';
+    var i18n_representative_info = '$encoder.jsEscape( $i18n.getString( "representative_info" ) , "'")';
+    var i18n_select = '[' + '$encoder.jsEscape( $i18n.getString( "select" ), "'")' + ']';
+    var i18n_program_stages_history_plan = '$encoder.jsEscape( $i18n.getString( "program_stages_history_plan" ) , "'")';
+    
+    var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+    var i18n_value_must_number = '$encoder.jsEscape( $i18n.getString( "value_must_number" ) , "'")';
+    var i18n_value_must_positive_integer = '$encoder.jsEscape( $i18n.getString( "value_must_positive_integer" ) , "'")';
+    var i18n_value_must_negative_integer = '$encoder.jsEscape( $i18n.getString( "value_must_negative_integer" ) , "'")';
+    var i18n_invalid_date =   '$encoder.jsEscape( $i18n.getString( "invalid_date" ) , "'")' + ".\n " 
+                            + '$encoder.jsEscape( $i18n.getString( "format_date" ) , "'")' + " '" 
+                            + dateFormat.replace('yy', 'yyyy') + " '" ; 
+    var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+    var i18n_saving_value_failed_error_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_error_code" ) , "'")';
+    var i18n_searching_patient_failed = '$encoder.jsEscape( $i18n.getString( "searching_patient_failed" ) , "'")';
+    var i18n_complete_confirm_message = '$encoder.jsEscape( $i18n.getString( "complete_confirm_message" ) , "'")';
+    var i18n_error_required_field = '$encoder.jsEscape( $i18n.getString( "error_required_field" ) , "'")';
+    var i18n_violate_validation = '$encoder.jsEscape( $i18n.getString( "violate_validation" ) , "'")';
+    var i18n_date_is_greater_then_or_equals_due_date = '$encoder.jsEscape( $i18n.getString( "date_is_greater_then_or_equals_due_date" ) , "'")';
+    
+    var i18n_violate_validation = '$encoder.jsEscape( $i18n.getString( "violate_validation" ) , "'")';
+    var i18n_show_all_items = '$encoder.jsEscape( $i18n.getString( "show_all_items" ) , "'")';
+    var i18n_please_fill_out_only_one_of_these_fields = '$encoder.jsEscape( $i18n.getString( "please_fill_out_only_one_of_these_fields" ) , "'")';
+    var checkedDuplicate = false;
+    // -1: no search anything
+    //  0: show list all patient
+    //  1: search with conditions
+    var statusSearching = -1;
+    isAjax = true;
+    contentDiv = '';
+    
+    var searchTextBox = '<input type="text" id="searchText" name="searchText" maxlength="30" style="width:20em" onkeyup="searchPatientsOnKeyUp( event );">';
+    var trueFalseBox  = '<select id="searchText" name="searchText" style="width:20.2em" >';
+        trueFalseBox += '<option value="true">' + i18n_yes + '</option>';
+        trueFalseBox += '<option value="false">' + i18n_no + '</option>';
+        trueFalseBox += '</select>';
+    var programComboBox = '<select id="searchText" name="searchText" style="width:20.2em" >';
+    #foreach ( $program in $programs ) 
+        programComboBox += '<option value="$program.id">$program.name</option>';
+    #end
+    programComboBox += '</select>';
+    
+    #if( $status == 1 )
+        setFieldValue('selectedOrgunitText', i18n_please_select_village );
+        setInnerHTML('warnmessage', '' );
+    #elseif( $status == 2 )
+        setFieldValue('selectedOrgunitText', '$organisationUnit.name' );
+        setInnerHTML('warnmessage', i18n_can_not_register_patient_for_orgunit);
+    #else
+        setFieldValue('selectedOrgunitText', '$organisationUnit.name' );
+        setInnerHTML('warnmessage', '' );
+        showById('searchPatientDiv');
+    #end
+    
+</script>
+<script type="text/javascript">
+jQuery( document ).ready( function()
+{
+	equipmentTypeChange();
+	loadAllEquipments();
+});
+</script>

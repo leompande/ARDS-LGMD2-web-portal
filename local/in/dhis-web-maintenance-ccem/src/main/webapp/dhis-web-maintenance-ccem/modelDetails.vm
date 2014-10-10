@@ -1,0 +1,55 @@
+
+<table>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td><label class="bold">$i18n.getString('name') : </label></td>
+					<td>$model.name</td>
+				</tr>
+				<tr>
+					<td><label class="bold">$i18n.getString('description') : </label></td>
+					<td>$model.description</td>
+				</tr>
+				<tr>
+					<td><label class="bold">$i18n.getString('modelType') : </label></td>
+					<td>$modelType.name</td>
+				</tr>
+                <tr>
+                    <td><label class="bold">$i18n.getString('image') : </label></td>
+                    <td>$!model.modelImage</td>
+                </tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+	
+				<tr>
+					<td colspan='2'><label class="bold">$i18n.getString( "attributes" )</label></td>
+				</tr>
+				
+				#foreach( $modelTypeAttribute in $modelTypeAttributes )
+					#if( $modelTypeAttributeValueMap.get( $modelTypeAttribute.id ) != " " )
+					<tr>
+						<td><label class="bold">$modelTypeAttribute.name : </label></td>
+						<td>
+							#if($modelTypeAttribute.valueType=="YES/NO")
+								$!modelTypeAttributeValueMap.get( $modelTypeAttribute.id )
+							#else
+								$!modelTypeAttributeValueMap.get( $modelTypeAttribute.id )
+							#end
+						</td>
+					</tr>
+					#end
+				#end
+	
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+		<td>&nbsp;</td>
+		<td valign="top"><img src="showImage.action?id=$model.id" style="width:200px;height:200px;" /></td>
+	</tr>
+</table>

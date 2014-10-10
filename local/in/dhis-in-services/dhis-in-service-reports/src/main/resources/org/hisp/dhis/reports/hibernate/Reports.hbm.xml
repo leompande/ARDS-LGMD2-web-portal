@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.reports.Report_in" table="reportin">
+    <id name="id" column="reportid">
+      <generator class="native"/>
+    </id>
+
+    <property name="name" not-null="true" unique="true" length="160"/>
+    
+    <property name="model" not-null="true" length="100"/>
+
+    <many-to-one name="periodType" class="org.hisp.dhis.period.PeriodType" lazy="false"
+        column="periodtypeid" not-null="true" foreign-key="fk_reports_periodtypeid"/>
+
+    <property name="excelTemplateName" column="excelname" not-null="true" length="100"/>
+    
+    <property name="xmlTemplateName" column="xmlname" not-null="true" length="100"/>
+    
+    <property name="reportType" column="reporttype" not-null="true" length="100"/>
+
+    <many-to-one name="orgunitGroup" class="org.hisp.dhis.organisationunit.OrganisationUnitGroup" lazy="false"
+        column="orgunitgroupid" not-null="false" foreign-key="fk_reports_orgunitgroupid"/>
+
+    <property name="dataSetIds" column="datasetids" not-null="false" length="100"/>
+    
+    <set name="sources" table="reportsource">
+      <key column="reportid"/>
+	  <many-to-many column="sourceid" class="org.hisp.dhis.organisationunit.OrganisationUnit" foreign-key="fk_reportin_organisationunit"/>
+    </set>
+        
+  </class>
+</hibernate-mapping>

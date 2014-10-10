@@ -1,0 +1,32 @@
+<style type="text/css">
+    .statusBar{
+        color: white;
+        padding: 5px 5px;
+        margin: -16px 0 20px -20px;
+        font-weight: bold;
+        background-color: #8FABC7;
+    }
+</style>
+
+<div class="statusBar" #if ($smsServiceStatus)style="background-color: olive"#end>
+    #if ($smsServiceStatus)
+    <form method="post">SMS Service: Started
+        <input type="submit" name="statAction" value="Stop" />
+    </form>
+    #else
+    <form method="post">SMS Service: Not Started
+        <input type="submit" name="statAction" value="Start" />
+    </form>
+    #end
+</div>
+<h1>Send Application Download Message to Phone Numbers</h1>
+<div>
+    <form method="post">
+        <table>
+            <tr><td>Phone #:</td><td><input name="recipient" type="text"/></td></tr>
+            <tr><td>URL:</td><td><input name="url" type="text"/></td></tr>
+            <tr><td></td><td><input type="submit" name="send" value="Send OTA Message"/></td>
+        </table>
+    </form>
+<span id="message" style="display:#if($message.trim().equals(""))none #else block #end">$message</span>
+</div>

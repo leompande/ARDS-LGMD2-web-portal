@@ -1,0 +1,15 @@
+﻿{
+  "organisationUnit": "$!encoder.xmlEncode( ${organisationUnit.name} )",
+  #set( $size = $!exportReports.size() )
+  "exportReports": [
+  #foreach( $exportReport in $!exportReports )
+  {
+	#set( $reportType = ${exportReport.getReportType()} )
+    "id": "${exportReport.id}",
+    "name": "$!encoder.jsonEncode( ${exportReport.displayName} )",
+	"reportType": #if ( $reportType == "NORMAL" ) "N",#elseif ( $reportType == "CATEGORY" ) "C",#elseif ( $reportType == "PERIOD_COLUMN_LISTING" ) "P",#else "O",#end
+    "periodType": "$!idMap.get( $!{exportReport.id} )"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

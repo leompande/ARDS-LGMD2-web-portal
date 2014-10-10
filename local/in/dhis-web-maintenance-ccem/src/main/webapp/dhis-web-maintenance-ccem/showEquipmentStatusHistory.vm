@@ -1,0 +1,44 @@
+
+<table class="mainPageTable">
+	<tr>
+		<td>    
+			<table class="listTable" id="equipmentList" width='100%'>
+				<col/>
+				<col/>
+				<col/>
+				<col/>
+				<col/>
+				
+				<thead>
+					<tr>
+						<th>$i18n.getString( "reporting_date" )</th>
+						<th>$i18n.getString( "updation_date" )</th>
+						<th>$i18n.getString( "status" )</th>
+						<th>$i18n.getString( "description" )</th>
+						<th>$i18n.getString( "stored_by" )</th>
+					</tr>
+				</thead>
+	<!--value='$format.formatDate($!patient.birthDate)'-->
+				<tbody id="list"> 
+					#foreach( $equimentStatus in $equipmentStatusHistory )
+					<tr>
+						<td>$!format.formatDate($!equimentStatus.reportingDate)</td>
+						<td>$!format.formatDate($!equimentStatus.updationDate)</td>
+						<td>$equimentStatus.status</td>
+						<td>$equimentStatus.description</td>
+						<td>$equimentStatus.storedBy</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+		</td>
+	</tr>	
+</table>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'equipmentList' );
+    });
+</script>
+		
+	

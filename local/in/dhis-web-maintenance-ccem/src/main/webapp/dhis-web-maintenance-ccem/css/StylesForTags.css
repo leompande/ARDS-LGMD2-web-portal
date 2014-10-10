@@ -1,0 +1,100 @@
+
+#currentSelection 
+{
+  color: black;
+  padding: 5px;
+  background-color: #D5FFC5;
+  border: 1px solid black;
+  font-size: 14px;
+  text-align: right;
+}
+
+
+#goBack
+{
+  float: right;
+  font-size: 9pt;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Heading {
+    font-family: times,arial, georgia, tahoma;
+    font-size: 35px;
+    font-weight: bold;    
+    white-space: nowrap;
+    cursor: default;    
+}
+
+.Normal {
+    font-family: arial, georgia, tahoma;
+    font-size: 10px;    
+    white-space: nowrap;
+    cursor: default; 
+    text-align: center;       
+}
+.NormalA {
+    font-family: arial, georgia, tahoma;
+    font-size: 10px;    
+    white-space: nowrap;
+    cursor: default; 
+    text-align: left;       
+}
+
+.NormalB {
+    font-family: arial, georgia, tahoma;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: default;    
+}
+
+.NormalBHeading {
+    font-family: arial, georgia, tahoma;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: default;
+    color:#ffffff;
+    background-color: #808080;
+}
+
+.TableDataCellStyles {
+    font-family: arial, georgia, tahoma;
+    font-size: 10px;    
+    white-space: nowrap;
+    cursor: default; 
+    text-align: center;
+    border:1px solid #000000;
+}
+
+.TableHeadingCellStyles {
+    font-family: arial, georgia, tahoma;
+    font-size: 11px;   
+    white-space: nowrap;
+    cursor: default;   
+    border:1px solid #000000;  
+}
+
+.DefaultFontStyles {
+    font-family: arial, georgia, tahoma;
+    font-size: 13px;
+    font-weight: bold;   
+    white-space: nowrap;
+    cursor: default;         
+}
+
+.DefaultFontStylesNoBold {
+    font-family: arial, georgia, tahoma;
+    font-size: 15px;    
+    white-space: nowrap;
+    cursor: default;         
+}
+.TableCellDataWrapStyles {
+    font-family: arial, georgia, tahoma;
+    font-size: 11px;   
+    white-space: wrap;
+    cursor: default;   
+    border:1px solid #000000;  
+}
+

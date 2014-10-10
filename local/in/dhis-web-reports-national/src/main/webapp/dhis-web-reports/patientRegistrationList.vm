@@ -1,0 +1,216 @@
+<script type="text/javascript">
+
+
+    var programIds = new Array();
+    var programNames = new Array();
+
+    #set( $count1 = 0 );
+    #foreach( $program in $programList )
+       programIds[$count1] = $program.id;
+       programNames[$count1] = '$program.name';
+       #set( $count1 = $count1 + 1 );
+    #end
+
+    var programExcelFileNames = new HashTable();
+    var programXmlFileNames = new HashTable();
+
+    // Programs  ids and its Xls and Xml files
+    #foreach($program in $programList)
+        var programId = ""+"$program.id";
+        programExcelFileNames.put(programId,"$program.excelTemplateName");
+        programXmlFileNames.put(programId,"$program.xmlTemplateName");
+    #end
+	
+</script>
+
+
+
+<form id="patientForm" name="patientForm"  target="_blank">
+<table>
+<!--
+	<tr>
+		<td> Size of Program List : $programList.size() </td>
+		#foreach( $program in $programList )
+			<th>$program.id $program.name  $program.excelTemplateName  $program.xmlTemplateName  </th>
+	   #end
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>	
+-->
+	<input type="hidden" name="patientId" id="patientId">
+    <input type="hidden" name="selProgramId" id="selProgramId">
+    <input type="hidden" name="excelTemplateName" id="excelTemplateName">
+    <input type="hidden" name="xmlTemplateName" id="xmlTemplateName">
+	<tr>
+		<td class='text-column' >$i18n.getString( "search_result_matching_the_search_criteria" ):</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>$i18n.getString( "search_patients_by_attributes" )</td>
+	</tr>	
+	<tr>
+		<td class='text-column' >$i18n.getString( "total_result" )</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>$!total</td>
+	</tr>
+</table>
+
+
+#if( $patients.size() > 0 )
+<table class="mainPageTable">
+	<tr>
+    <td>
+      <table class="listTable" id="patientList" width='100%'>               
+          <col width="30"/>
+			#foreach( $attribute in $patientAttributes )
+				<col/>
+			#end
+          <col/>
+          <col/>
+          <col/>
+          <col/>
+		  #if($mapPatientOrgunit.size()!=0)
+          <col/>
+		  #end
+          <col width="200"/>    
+		  
+		  <thead>
+			<tr>
+				<th>#</th>
+				#foreach( $attribute in $patientAttributes )
+					<th id="patientAttributeName">$attribute.name</th>
+				#end
+				<th>$i18n.getString( "full_name" )</th>          
+				<th>$i18n.getString( "gender" )</th>
+				<th>$i18n.getString( "date_of_birth" )</th> 
+				<th class="{sorter: false}">$i18n.getString( "age" )</th>
+				#if($mapPatientOrgunit.size()!=0)
+				<th>$i18n.getString( "hierachy_orgunit" )</th>
+				#end
+				##if($mapPatientPrograms.size()!=0)
+				<th class="{sorter: false}">$i18n.getString( "enrolled_in_program" )</th>
+				##end
+				<th colspan="3" align="center" class="{sorter: false}">$i18n.getString( "operations" )</th>
+				<!--<th class="{sorter: false}">&nbsp;</th>
+				<th class="{sorter: false}">$i18n.getString( "operations" )</th>-->
+			  </tr>
+          </thead>
+		  
+          <tbody id="list">	
+		  #set( $mark = false )
+          #foreach( $patient in $patients )
+          	<tr id="tr${patient.id}" #alternate($mark) >
+				
+				<td>
+					#set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+					$nr
+				</td>
+				
+				#foreach( $attribute in $patientAttributes )
+					#set ( $key = $patient.id + '-' + $attribute.id )
+					<td>
+						#if( $attribute.valueType == 'YES/NO')
+							$i18n.getString( $mapPatientPatientAttr.get($key) )
+						#else
+							$mapPatientPatientAttr.get($key)
+						#end
+					</td>
+				#end
+					
+				<td>$!patient.getFullName()</td>
+				
+				<td>$i18n.getString($!patient.gender)</td>
+				
+				<td>$format.formatDate( $!patient.birthDate)</td>
+				
+				<td>$!patient.getAge()</td>
+				
+				#if($mapPatientOrgunit.size()!=0)
+				
+					<td>$!mapPatientOrgunit.get($patient.id)</td>
+				
+				#end
+				##if($mapPatientPrograms.size()!=0)
+				##set( $programs = $mapPatientPrograms.get( $patient.id ) )
+				#set( $programs =  $patient.getPrograms() )
+				#if( $programs.size() !=0 )
+					<td><select id="programId_$patient.id" name="programId_$patient.id" style="width:15em">
+						#foreach( $program in $programs )
+							<option value="$program.id" title="$program.name">$encoder.htmlEncode( $program.name )</option>
+						#end
+    				</select></td>
+				#else
+					<td><select id="programId_$patient.id" name="programId_$patient.id" style="width:15em" disabled="disabled">
+						#foreach( $program in $programs )
+							<option value="$program.id" title="$program.name">$encoder.htmlEncode( $program.name )</option>
+						#end
+    				</select></td>				
+				#end				
+				
+				#if( $patient.getPrograms().size() !=0 )
+				  <td>
+					<input type="button" id='generateButton' value="$i18n.getString( 'discharge' )" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "discharge" )'></td>
+					<td><input type="button" id='generateButton' value="$i18n.getString( 'followup' )" onclick="javascript:generatePatientFollowUpReport( event, '$patient.id' )" title='$i18n.getString( "followup" )'>
+				   <!-- <a  href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' target="_blank">$i18n.getString( "generate" )</a>-->
+				  <!--<a id="exportToExcel" name="exportToExcel" href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' target="_blank"><img src="images/GenerateButton.gif" alt='$i18n.getString( "generate" )'></a>-->
+				  </td>
+				#else
+				  <td>	
+				  <input type="button" id='generateButton' value="$i18n.getString( 'discharge' )" onclick="javascript:generatePatientReport( event, '$patient.id' )" disabled="disabled" title='$i18n.getString( "discharge" )'></td>
+				  <td><input type="button" id='generateButton' value="$i18n.getString( 'followup' )" onclick="javascript:generatePatientFollowUpReport( event, '$patient.id' )" disabled="disabled" title='$i18n.getString( "followup" )'>
+				  <!--<a  href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' disabled="disabled" target="_blank">$i18n.getString( "generate" )</a>-->
+				  <!--<a id="exportToExcel" name="exportToExcel" href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' target="_blank" style='display:none'><img src="images/GenerateButton.gif" alt='$i18n.getString( "generate" )'></a>-->	  
+				  </td>
+				#end  
+				
+				<td>
+				<a href="javascript:showPatientDetails( '$patient.id' )" title='$i18n.getString( "show_details" )'><img src="../images/information.png" alt='$i18n.getString( "show_details" )'></a>
+				<!--
+				#if( $patient.getPrograms().size() !=0 )
+				  <input type="button" id='generateButton' value="$i18n.getString( 'generate' )" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )'>
+				  <!--<a id="exportToExcel" name="exportToExcel" href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' target="_blank"><img src="images/GenerateButton.gif" alt='$i18n.getString( "generate" )'></a>-->
+				<!--
+				#else
+				  <input type="button" id='generateButton' value="$i18n.getString( 'generate' )" onclick="javascript:generatePatientReport( event, '$patient.id' )" style='display:none' title='$i18n.getString( "generate" )'>
+				  <!--<a id="exportToExcel" name="exportToExcel" href="#" onclick="javascript:generatePatientReport( event, '$patient.id' )" title='$i18n.getString( "generate" )' target="_blank" style='display:none'><img src="images/GenerateButton.gif" alt='$i18n.getString( "generate" )'></a>-->	  
+				<!--
+				#end  
+				  <!--<input type="button" id='generateButton' value="$i18n.getString( 'generate' )" onclick='generatePatientReport( '$patient.id' );'>-->
+				
+
+				
+				</td>
+				
+			</tr>
+			#set( $mark = !$mark)
+    	#end
+    	</tbody>
+    
+	 </table>
+    </td>
+  </tr>
+  <tr>
+  	<td colspan="8">
+		<p></p>
+  		<div class="paging-container">
+				#parse( "/dhis-web-commons/paging/paging.vm" )
+		</div>
+	</td>
+  	<td></td>
+  </tr>
+</table>
+
+
+#end
+</form>
+
+<div id="detailsInfo">
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function(){	
+		tableSorter( 'patientList' );
+	});
+	var i18n_patient_details = '$encoder.jsEscape( $i18n.getString( "patient_details" ) , "'" )';
+	var i18n_no_xls_xml = '$encoder.jsEscape( $i18n.getString( "no_xls_xml" ) , "'")';
+	
+</script>

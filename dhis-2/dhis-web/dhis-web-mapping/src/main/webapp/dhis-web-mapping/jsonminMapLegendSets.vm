@@ -1,0 +1,9 @@
+#set( $size = $object.size() )
+{ "mapLegendSets": [
+#foreach( $legendSet in $object )
+  {
+    "id": "$!{legendSet.id}",
+    "name": "$!encoder.jsonEncode( ${legendSet.name} )"
+  }#if( $velocityCount < $size ),#end
+#end
+] }

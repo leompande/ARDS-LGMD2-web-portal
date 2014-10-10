@@ -1,0 +1,15 @@
+{ "validationCriteria":
+  {
+	"id": "$!{validationCriteria.id}",
+	"name": "$!encoder.xmlEncode( $validationCriteria.name )",
+	"description": "$!encoder.xmlEncode($validationCriteria.description )",
+	"property": "$!i18n.getString($validationCriteria.property)",
+	"operator": "$!{validationCriteria.operator}",
+	"value": 
+	#if( ${validationCriteria.property} == 'birthDate' )
+	"$!format.formatDate( ${validationCriteria.value} )"
+	#else
+	"$!{validationCriteria.value}"
+	#end
+  }
+}

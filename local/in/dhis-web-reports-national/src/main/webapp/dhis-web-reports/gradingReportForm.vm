@@ -1,0 +1,75 @@
+
+		<script>
+			//Global Variables
+		    
+			// OrganisationUnit ids and its Names
+			var orgUnits = new HashTable();
+			#foreach($orgUnit in $organisationUnits)
+				var orgUnitId = ""+$orgUnit.getId();
+			    orgUnits.put(orgUnitId,"$orgUnit.getShortName()");
+			#end
+			            
+			// OrganisationUnit ids and its Level
+			var orgUnitLevels = new HashTable();
+			#foreach($orgUnit in $organisationUnits)
+				var orgUnitId = ""+$orgUnit.getId();
+			    orgUnitLevels.put(orgUnitId,"$organisationUnitService.getLevelOfOrganisationUnit( $orgUnit )");
+			#end
+		</script>
+
+		<h1>Grading Analyser</h1><hr /><br />
+	        
+		<form id="reportForm" name="reportForm" method="post" onsubmit="return formValidations()" target="_blank">        
+            <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>		                
+				<tr>
+					<td class="NormalB">
+						OrgUnit GroupSet<br />
+    			        <select name="orgUnitGroupSetListCB" id="orgUnitGroupSetListCB" style="width: 325px;" onchange="getOrgUnitGroups()" disabled>
+							#foreach($organisationUnitGroupSet in $organisationUnitGroupSets)
+								<option value="$organisationUnitGroupSet.id">$organisationUnitGroupSet.name</option>
+    			            #end
+    			        </select>
+    			        <br />
+						OrganisationUnit:<br />
+       					<select name="orgUnitListCB" id="orgUnitListCB" multiple style="width: 325px;height: 100px" ondblclick="remOUFunction()">
+       					</select>
+						<br /><br />
+						View By:<br />
+						<select name="viewByCB" id="viewByCB" onChange="viewByCBChange()">
+							<option value="selected">Selected</option>
+							<option value="ImmChildren">Immidiate Children</option>
+							<option value="children">Children</option>
+       					</select>                    				                                                                    				                                                
+    			    </td>
+                    <td class="NormalB">
+						<input type="checkbox" id="ougSetCB" name="ougSetCB" onchange="orgUnitGroupSetCB()"> OrgunitGroupwise Analysis
+						<br /><br />
+						<label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+						<input type="text" id="startDate" name="startDate" style="width:20em">
+						<img src="../images/calendar_icon.gif" width="16" height="16" id="getStartDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+						<br /><br />						  
+						<label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+						<input type="text" id="endDate" name="endDate" style="width:20em">
+						<img src="../images/calendar_icon.gif" width="16" height="16" id="getEndDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+						<br /><br />
+						<input type="submit" name="generate" value='Generate Report'onClick="document.pressed=this.name" />																					
+					</td>
+                </tr>
+            </table>
+		</form>
+
+<script type="text/javascript">
+	
+	Calendar.setup({
+        inputField     :    "startDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getStartDate"   // trigger for the calendar (button ID)
+    });
+	
+	Calendar.setup({
+        inputField     :    "endDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getEndDate"   // trigger for the calendar (button ID)
+    });
+</script>
+

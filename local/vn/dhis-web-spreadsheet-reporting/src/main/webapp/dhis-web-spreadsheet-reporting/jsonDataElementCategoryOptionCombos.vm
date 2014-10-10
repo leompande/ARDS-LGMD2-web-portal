@@ -1,0 +1,9 @@
+#set( $size = $dataElementCategoryOptionCombos.size() )
+{ "dataElementCategoryOptionCombos": [
+#foreach( $de in $dataElementCategoryOptionCombos )
+  {
+    "id": $!{de.id},
+    "name": "$!encoder.jsEncode( ${de.displayName} )"   
+  }#if( $velocityCount < $size ),#end    
+#end
+] }

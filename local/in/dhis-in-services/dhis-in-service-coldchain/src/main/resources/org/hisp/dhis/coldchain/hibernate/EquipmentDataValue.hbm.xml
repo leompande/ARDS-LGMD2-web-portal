@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.equipment.EquipmentDataValue" table="equipmentdatavalue">
+
+    <composite-id>
+	  <key-many-to-one name="equipment" class="org.hisp.dhis.coldchain.equipment.Equipment" column="equipmentid" foreign-key="fk_equipmentdatavalue_equipmentid" />
+      <key-many-to-one name="dataElement" class="org.hisp.dhis.dataelement.DataElement" column="dataelementid" foreign-key="fk_equipmentdatavalue_dataelementid" />
+      <key-many-to-one name="period" class="org.hisp.dhis.period.Period" column="periodid" foreign-key="fk_equipmentdatavalue_periodid" />      
+    </composite-id>
+
+    <property name="value" />
+
+    <property name="storedBy" column="storedby" length="31" />
+
+    <property name="timestamp" column="lastupdated" type="date" />
+
+  </class>
+</hibernate-mapping>

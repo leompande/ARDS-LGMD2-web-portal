@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attribute>
+  <id>$person.id</id>
+  <firstName>$encoder.xmlEncode( $person.firstName )</firstName>
+  <middleName>$encoder.xmlEncode( $person.middleName )</middleName>
+  <lastName>$encoder.xmlEncode( $person.lastName )</lastName>
+  <birthDate>$encoder.xmlEncode( $person.birthDate )</birthDate>
+  <nationality>$encoder.xmlEncode( $person.nationality )</nationality>
+  <dataSet>$encoder.xmlEncode( $person.dataset.name )</dataSet>
+  <valueCount>$person.dataValues.size()</valueCount>
+  <historyCount>$person.history.size()</historyCount>
+  <trainingCount>$encoder.xmlEncode( $person.training.size() )</trainingCount>
+</attribute>

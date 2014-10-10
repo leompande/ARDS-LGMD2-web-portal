@@ -1,0 +1,14 @@
+#set( $size = $object.size() )
+{ "mapLegends": [
+#foreach( $mapLegend in $object )
+  {
+    "id": $!{mapLegend.id},
+    "name": "$!encoder.jsonEncode( ${mapLegend.name} )",
+    "startValue": $!{mapLegend.startValue},
+    "endValue": $!{mapLegend.endValue},
+    "color": "$!encoder.jsonEncode( ${mapLegend.color} )",
+    "image": "$!encoder.jsonEncode( ${mapLegend.image} )",
+    "displayString": "$!encoder.jsonEncode( ${mapLegend.name} ), $!{mapLegend.startValue} - $!{mapLegend.endValue}"
+  }#if( $velocityCount < $size ),#end
+#end
+] }

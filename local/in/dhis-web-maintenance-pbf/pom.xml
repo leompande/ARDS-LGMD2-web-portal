@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.hisp.dhis</groupId>
+		<artifactId>dhis-web</artifactId>
+		<version>2.14-SNAPSHOT</version>
+	</parent>
+	<repositories>
+    <repository>
+      <id>fdvsolution.public</id>
+      <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+    </repository>
+ </repositories>
+
+	<artifactId>dhis-web-maintenance-pbf</artifactId>
+	<packaging>war</packaging>
+	<name>DHIS Maintenance PBF Module</name>
+	
+	<build>
+		<finalName>dhis-web-maintenance-pbf</finalName>
+	</build>
+	
+	<dependencies>
+
+	    <dependency>
+	      <groupId>javax.servlet</groupId>
+	      <artifactId>servlet-api</artifactId>
+		</dependency>	
+
+		<!-- DHIS -->
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons-resources</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-external</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-system</artifactId>
+		</dependency>
+	
+	</dependencies>
+	<properties>
+		<rootDir>../../</rootDir>
+	</properties>
+</project>

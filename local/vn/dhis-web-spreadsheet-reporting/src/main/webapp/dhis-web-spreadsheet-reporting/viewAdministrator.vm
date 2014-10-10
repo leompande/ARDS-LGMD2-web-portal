@@ -1,0 +1,36 @@
+﻿<h3>$i18n.getString( "administration" )</h3>
+
+<table cellspacing="0" cellpadding="0">
+<tr>
+	<td valign="top">
+		<ul class="introList" style="width:340px; margin-top:0px; margin-right:15px;">
+			#introListImgItem( "getConfiguration.action" "configuration" "systemsettings" )
+			#introListImgItem( "listAllExportReport.action" "design_export_reports" "export" )
+			#introListImgItem( "listAllImportReport.action" "design_import_reports" "import" )
+			#introListImgItem( "listDataEntryStatus.action" "data_status_management" "validationcriteria" )
+			#introListImgItem( "listAllExcelTemplates.action" "excel_template_management" "excel" )
+			#introListImgItem( "javascript: cleanUp();" "clean_up" "clean-up" )
+			<!--#introListImgItem( "jcharts.action" "chart" "jchart")-->
+		</ul>
+	</td>
+
+	<td valign="top">
+		<ul class="introList" style="width:340px; margin-top:0px;">
+			#introListImgItem( "attributeValueGroupOrders.action" "attribute_group_order" "attribute" )
+			#introListImgItem( "openOptionComboAssociations.action" "define_categoryoptioncombo_associations" "dhis-web-maintenance-datadictionary" )
+			#introListImgItem( "orgUnitPrototype.action" "organisation_unit_prototype" "organisationunit" )
+			#introListImgItem( "orgUnitPrototypeGroup.action" "organisation_unit_prototype_group" "organisationunit" )
+			#introListImgItem( "showAddMultiOrganisationUnit.action" "add_multi_organisation_unit" "organisationunit" )
+		</ul>
+	</td>
+</tr>
+<script>
+	function go(action){
+		window.location = action;
+	}
+	function cleanUp(){
+		jQuery.postJSON( 'cleanUpDraftFile.action', {}, function( json ) {
+			setHeaderDelayMessage( json.message );
+		} );
+	}
+</script>

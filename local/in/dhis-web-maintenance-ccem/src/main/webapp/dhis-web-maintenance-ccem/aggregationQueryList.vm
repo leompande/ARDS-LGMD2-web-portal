@@ -1,0 +1,67 @@
+
+<script>
+$(function() {
+  dhis2.contextmenu.makeContextMenu({
+    menuId: 'contextMenu',
+    menuItemActiveClass: 'contextMenuItemActive'
+  });
+});
+</script>
+
+<h3>$i18n.getString( 'patient_aggregation_query_builder_management' ) #openHelp( "patient_aggregation_query_builder" )</h3>
+
+<div id="contextMenu" class="contextMenu">
+  <ul id="contextMenuItems" class="contextMenuItems">
+    <li><a data-target-fn="showUpdateCaseAggregationForm"><i class="fa fa-edit"></i>&nbsp;&nbsp;$i18n.getString( "edit" )</a></li>
+    <li><a data-target-fn="translateWithContext"><i class="fa fa-globe"></i>&nbsp;&nbsp;$i18n.getString( "translation_translate" )</a></li>
+    <li><a data-target-fn="removeCaseAggregation"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;$i18n.getString( "remove" )</a></li>
+    <li><a data-target-fn="showCaseAggregationDetails"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;$i18n.getString( "show_details" )</a></li>
+  </ul>
+</div>
+
+<table class="mainPageTable">
+  <tr>
+    <td style="vertical-align:top">    	
+        <table width="100%">         
+            <tr>
+                <td style="text-align:right">
+                    <input type="button" value="$i18n.getString( 'add_new' )" onclick="showAddAggregationForm();" >
+                </td>
+            </tr>
+        </table>
+        <table class="listTable">
+            <col>
+            <thead>
+                <tr>
+                    <th>$i18n.getString( "name" )</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+                #foreach( $aggregationCondition in $aggregationConditions )
+                    <tr id="tr${aggregationCondition.id}" data-id="$!aggregationCondition.id" data-uid="$!aggregationCondition.uid" data-type="CaseAggregationCondition"
+                        data-name="$encoder.htmlEncode( $!aggregationCondition.displayName )"
+                        data-can-manage="$security.canManage( $aggregationCondition )"
+                        data-can-update="$security.canUpdate( $aggregationCondition )"
+                        data-can-delete="$security.canDelete( $aggregationCondition )">
+                        <td>$encoder.htmlEncode( $!aggregationCondition.displayName )</td>
+                    </tr>
+                #end
+            </tbody>
+      </table>
+    </td>
+
+    <td id="detailsData">
+        <div id="detailsArea">
+            <div id="hideDetailsArea">
+                <a href="javascript:hideDetails()" title="$i18n.getString( "hide_details" )"><img src="../images/close.png" alt="$i18n.getString( 'hide_details' )"></a>
+            </div>              
+            <p><label class="bold">$i18n.getString( "name" ):</label><br><span id="nameField"></span></p>
+            <p><label class="bold">$i18n.getString( "operator" ):</label><br><span id="operatorField"></span></p>
+            <p><label class="bold">$i18n.getString( "aggregation_data_element" ):</label><br><span id="aggregationDataElementField"></span></p>
+            <p><label class="bold">$i18n.getString( "option_combo" ):</label><br><span id="optionComboField"></span></p>
+            <p><label class="bold">$i18n.getString( "data_element_for_sum_avg_min_max" ):</label><br><span id="deSumField"></span></p>
+            <p><label class="bold">$i18n.getString( "aggregation_expression" ):</label><br><span id="aggregationExpressionField"></span></p>
+        </div>
+    </td>
+  </tr>
+</table>

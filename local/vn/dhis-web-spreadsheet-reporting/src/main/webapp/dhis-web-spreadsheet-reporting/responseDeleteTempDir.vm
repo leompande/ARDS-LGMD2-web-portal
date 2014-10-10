@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+	#foreach($file in $files)
+		<file>
+			<name>$file.name</name>
+			<create-date>$file.createDate</create-date>	
+			<size>$file.size KB</size>			
+		</file>
+	#end
+</files>

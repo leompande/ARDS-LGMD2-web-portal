@@ -1,0 +1,6 @@
+<lineListOption>
+  <id>$lineListOption.id</id>
+  <name>$encoder.xmlEncode( $lineListOption.name )</name>
+  <shortName>$encoder.xmlEncode( $lineListOption.shortName )</shortName>
+  <description>$!encoder.xmlEncode( $lineListOption.description )</description>
+</lineListOption>

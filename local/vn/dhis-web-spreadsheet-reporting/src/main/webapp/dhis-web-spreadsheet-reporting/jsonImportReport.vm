@@ -1,0 +1,9 @@
+{ "importReport":
+  {
+	"id": "${report.id}",
+	"name": "$!encoder.jsonEncode( $!{report.displayName} )",
+	"type": "${report.type}",
+	"periodType": "${report.periodType.name}",
+	"excelTemplateFile": "${report.excelTemplateFile}"
+  }
+}

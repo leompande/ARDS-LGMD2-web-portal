@@ -1,0 +1,82 @@
+
+<style>
+    #overlay 
+    {
+        z-index:9998;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        width:100%;
+        background:#000;
+        opacity:0.45;
+        -moz-opacity:0.45;
+        filter:alpha(opacity=45);
+        visibility:hidden;
+    }
+
+    #overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+
+<div id="overlay">
+    <div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" /></div>
+</div>
+
+<script>
+
+    function formValidations()
+    {
+        if( document.getElementById('upload').value == null || document.getElementById('upload').value == "" )
+        {
+            alert("Please select upload file"); return false;
+        }
+        
+        showOverlay();
+        
+        return true;
+    }
+    
+    function showOverlay() 
+    {
+        var o = document.getElementById('overlay');
+        o.style.visibility = 'visible';
+        jQuery("#overlay").css({
+            "height": jQuery(document).height()
+        });
+        jQuery("#overlayImg").css({
+            "top":jQuery(window).height()/2
+        });
+    }
+    function hideOverlay() 
+    {
+        var o = document.getElementById('overlay');
+        o.style.visibility = 'hidden';
+    }
+
+</script>
+
+<h3>BULK SMS Form</h3>
+<hr /><br />
+
+<form id="dataImportForm" name="dataImportForm" method="post" enctype="multipart/form-data" action="excelSheetBulkSMSResultResult.action" onsubmit="return formValidations()">
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border="0" >
+        <tr>
+        <tr>
+            <td class="NormalB">
+                Upload (XLS) File :<br />
+                <input type="file" id="upload" name="upload" size="45" class="{validate:{required:true}}" />
+            </td>
+        </tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                <input type="submit" name="importReport" value='Send SMS' style="width:325px" />
+            </td>
+        </tr>
+    </table>
+</form>

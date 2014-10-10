@@ -1,0 +1,50 @@
+<div id="caption" align="center" style="background-color: #99FFFF; height:50;width:400;margin-bottom: 20;padding-top: 7">
+<h3>$i18n.getString( "generate_globalXML" )</h3>
+</div>
+
+<form id="showGlobalConfigForm" name="showGlobalConfigForm" action="showglobalconfig.action" method="post">
+    <tbody>
+
+
+    <tr>
+        <td colspan="2">
+            <input type="button" id ="gen" onclick="llAggregate();"
+                   value="$i18n.getString( "generate" )" style="width:12em">
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td colspan="2">
+            <input type="button" id="download" disabled="true"  onclick="window.location.href='downloadnewra.action'"
+                   value="$i18n.getString( "download" )" style="width:16em">
+        </td>
+
+    </tr>
+    #parse( "/dhis-web-commons/loader/loader.vm" )
+    <div id='loaderDiv' style="margin-top: 20"></div>
+    <div id="llAggregateDiv"></div>
+    </tbody>
+</form>
+
+<script type="text/javascript">
+    function llAggregate()
+    {
+
+
+            jQuery('#loaderDiv').show();
+
+            document.getElementById("gen").disabled = true;
+
+            jQuery('#llAggregateDiv').load('globalconfig.action',
+                    {
+
+                    }, function()
+                    {
+                        document.getElementById( "download" ).disabled = false;
+
+                        jQuery('#loaderDiv').hide();
+                        jQuery('#llAggregateDiv').hide();
+                    });
+
+    }
+
+</script>

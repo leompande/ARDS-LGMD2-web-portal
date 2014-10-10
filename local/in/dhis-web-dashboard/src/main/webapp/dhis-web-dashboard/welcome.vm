@@ -1,0 +1,4 @@
+
+<h3><a href="index.action">$i18n.getString( "dataanalyser" )</a></h3>
+<p>$i18n.getString( "dataanalyser_intro" )</p>
+

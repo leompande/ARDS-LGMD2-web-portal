@@ -1,0 +1,73 @@
+<script>
+	
+	jQuery(document).ready(function(){
+		avExpressionValidator = validation( 'attributevalue-form', function(){
+			updateAVExpression();
+		});
+		
+		avExpressionDialog = setUpDialog( 'attributevalue', i18n_expression, 800, 430 );
+		
+		//remoteValidate( jQuery( "#attributevalue textarea[id=formula]" ), 'checkAttributeValueValid.action' );
+		
+		changeItemType();
+	});
+
+	var avExpressionValidator = null;
+	var avExpressionDialog = null;
+	var i18n_no_attribute = '$encoder.jsEscape( $i18n.getString( "no_attribute" ) , "'")';;
+	var i18n_label = '$encoder.jsEscape($i18n.getString( "select_attribute" ) , "'")';
+</script>
+
+<div id="attributevalue" style="display:none">
+	<form id="attributevalue-form">
+	<table width="100%">
+		<tr>
+			<th>$i18n.getString( "formula" )</th>			
+			<th id="attributeOrderHeader">$i18n.getString( "attributevalue" )</th>
+		</tr>
+		<tr valign="top">
+			<td height="139">
+				<textarea id="formula" name="expression" cols="40" rows="5" class="{validate:{required:true}}"></textarea><br/>
+			</td>
+			<td>
+				<select id="groupSelect" style="width:500px" onchange="attributeLib.loadAttributeValuesByAttribute( this.value, null, 'attributevalue select[id=elementSelect]', '', false )"></select>												
+				<select id="elementSelect" size="15" style="width:500px;" ondblclick="insertExpression()"></select>	
+			</td>			
+		</tr>
+		<tr>
+			<th colspan="2">$i18n.getString( "description" )</th>
+		<tr>	
+		<tr>
+			<td colspan="2">
+				<div id="expression-description" style="width:750px;height:30px;overflow:auto"></div>
+			</td>
+		</th>
+	</table>
+	<br/>
+	<br/>
+	<center>
+		<input type="submit" value="$i18n.getString('ok')" style="width:100px"/>
+		<input type="button" value="$i18n.getString('clean')" onclick="cleanFormula()" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( avExpressionDialog )" style="width:100px"/>
+	</center>
+	</form>
+</div>
+
+<script>	
+	function avExpressionBuilderForm()
+	{
+		attributeLib.loadAttributes( "attributevalue select[id=groupSelect]" );
+		
+		setFieldValue( 'attributevalue textarea[id=formula]', getFieldValue('expression') );
+		getExpression();
+
+		openDialog( avExpressionDialog );
+	}
+	
+	function updateAVExpression()
+	{
+		expression = jQuery( '#attributevalue textarea[id=formula]' ).val();
+		setFieldValue( 'expression', expression );
+		closeDialog( avExpressionDialog );
+	}
+</script>

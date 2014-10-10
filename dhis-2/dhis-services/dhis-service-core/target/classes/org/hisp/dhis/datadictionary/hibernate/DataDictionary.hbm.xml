@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.datadictionary.DataDictionary" table="datadictionary">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="datadictionaryid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="false" length="230" />
+
+    <property name="description" type="text" />
+
+    <property name="region" />
+
+    <set name="dataElements" table="datadictionarydataelements">
+      <key column="datadictionaryid" foreign-key="fk_datadictionarydataelements_datadictionaryid" />
+      <many-to-many class="org.hisp.dhis.dataelement.DataElement" column="dataelementid"
+        foreign-key="fk_datadictionarydataelements_dataelementid" />
+    </set>
+
+    <set name="indicators" table="datadictionaryindicators">
+      <key column="datadictionaryid" foreign-key="fk_datadictionaryindicators_datadictionaryid" />
+      <many-to-many class="org.hisp.dhis.indicator.Indicator" column="indicatorid" foreign-key="fk_datadictionaryindicators_indicatorid" />
+    </set>
+
+    <!-- Access properties -->
+    <many-to-one name="user" class="org.hisp.dhis.user.User" column="userid" foreign-key="fk_datadictionary_userid" />
+
+    <property name="publicAccess" length="8" />
+
+    <set name="userGroupAccesses" table="datadictionaryusergroupaccesses">
+      <cache usage="read-write" />
+      <key column="datadictionaryid" />
+      <many-to-many class="org.hisp.dhis.user.UserGroupAccess" column="usergroupaccessid" unique="true" />
+    </set>
+
+  </class>
+</hibernate-mapping>

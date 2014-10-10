@@ -1,0 +1,7 @@
+{ "dataElementCategoryCombo":
+  {
+    "id": "$!{dataElementCategoryCombo.id}",
+    "name": "$encoder.jsonEncode( $!{dataElementCategoryCombo.name} )",
+    "dataElementCategoryCount": "$!{dataElementCategories.size()}"
+  }
+}

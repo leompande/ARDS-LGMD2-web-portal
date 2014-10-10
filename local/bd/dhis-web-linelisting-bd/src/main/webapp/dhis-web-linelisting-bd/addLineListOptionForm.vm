@@ -1,0 +1,41 @@
+
+<h3>$i18n.getString( "create_new_line_list_option" )</h3>
+
+<form id="addLineListOptionForm" action="addLineListOption.action" method="post" onsubmit="return validateAddLineListOption()">
+
+<table>
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" style="width:20em"></td>
+	</tr>
+    <tr>
+        <td><label for="shortName">$i18n.getString( "short_name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="shortName" name="shortName" style="width:20em"></td>
+    </tr>
+    <tr>
+        <td><label for="description">$i18n.getString( "description" ) <em title="$i18n.getString( "required" )" class="required"></em></label></td>
+        <td><textarea id="description" name="description" style="width:20em; height:8em"></textarea></td>
+    </tr>
+    <tr>
+    	<td></td>
+    	<td>
+    		<input type="submit" value="$i18n.getString( "add" )" style="width:10em"><input 
+                   type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='getLineListOptions.action'" style="width:10em">
+        </td>
+    </tr>
+</table>
+
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+	
+	var nameField = document.getElementById( 'name' );
+	nameField.select();
+	nameField.focus();
+
+</script>

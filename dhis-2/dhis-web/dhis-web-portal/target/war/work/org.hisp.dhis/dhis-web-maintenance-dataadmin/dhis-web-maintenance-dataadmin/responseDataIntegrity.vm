@@ -1,0 +1,61 @@
+#macro( violation $name $list )
+#set( $size = $list.size() )
+"$!encoder.jsEncode( ${name} )": [
+#foreach( $o in $list )
+"$!encoder.jsonEncode( ${o.displayName} )"#if( $velocityCount < $size ),#end
+#end
+]
+#end
+
+#macro( violationWithCollection $name $list )
+#set( $listSize = $list.size() )
+"$!encoder.jsonEncode( ${name} )": [
+#foreach( $o in $list )
+#set( $oSize = $o.size() )
+"#foreach( $p in $o ) $!encoder.jsonEncode( ${p.displayName} ) #if( $velocityCount < $oSize ), #end
+#end "#if( $velocityCount < $listSize ),#end
+#end
+]
+#end
+
+#macro( violationWithMap $name $map )
+#set( $size = $map.keySet().size() )
+"$!encoder.jsonEncode( ${name} )": [
+#foreach( $o in $map.keySet() )
+"$!encoder.jsonEncode( ${o.displayName} ): $map.get( $o )"#if( $velocityCount < $size ),#end
+#end
+]
+#end
+
+#macro( violationWithMapList $name $map )
+#set( $mapSize = $map.keySet().size() )
+"$!encoder.jsonEncode( ${name} )": [
+#foreach( $o in $map.keySet() )
+#set( $listSize = $map.get( $o ).size() )
+"$!encoder.jsonEncode( ${o.displayName} ):#foreach( $p in $map.get( $o ) ) $!encoder.jsonEncode( ${p.displayName} )#if( $velocityCount < $listSize ), #end
+#end "#if( $velocityCount < $mapSize ),#end
+#end
+]
+#end
+{
+    #violation( "dataElementsWithoutDataSet" $dataElementsWithoutDataSet ),
+    #violation( "dataElementsWithoutGroups" $dataElementsWithoutGroups ),
+    #violationWithMapList( "dataElementsViolatingExclusiveGroupSets" $dataElementsViolatingExclusiveGroupSets ),
+    #violationWithMapList( "dataElementsInDataSetNotInForm" $dataElementsInDataSetNotInForm ),
+    #violationWithMapList( "dataElementsAssignedToDataSetsWithDifferentPeriodTypes" $dataElementsAssignedToDataSetsWithDifferentPeriodTypes ),
+    #violation( "dataSetsNotAssignedToOrganisationUnits" $dataSetsNotAssignedToOrganisationUnits ),
+    #violation( "sectionsWithInvalidCategoryCombinations" $sectionsWithInvalidCategoryCombinations ),
+    #violationWithCollection( "indicatorsWithIdenticalFormulas" $indicatorsWithIdenticalFormulas ),
+    #violation( "indicatorsWithoutGroups" $indicatorsWithoutGroups ),    
+    #violationWithMap( "invalidIndicatorNumerators" $invalidIndicatorNumerators ),
+    #violationWithMap( "invalidIndicatorDenominators" $invalidIndicatorDenominators ),    
+    #violationWithMapList( "indicatorsViolatingExclusiveGroupSets" $indicatorsViolatingExclusiveGroupSets ),        
+    #violation( "organisationUnitsWithCyclicReferences" $organisationUnitsWithCyclicReferences ),
+    #violation( "orphanedOrganisationUnits" $orphanedOrganisationUnits ),
+    #violation( "organisationUnitsWithoutGroups" $organisationUnitsWithoutGroups ),
+    #violationWithMapList( "organisationUnitsViolatingExclusiveGroupSets" $organisationUnitsViolatingExclusiveGroupSets ),
+    #violation( "organisationUnitGroupsWithoutGroupSets" $organisationUnitGroupsWithoutGroupSets ),
+    #violation( "validationRulesWithoutGroups" $validationRulesWithoutGroups ),    
+    #violationWithMap( "invalidValidationRuleLeftSideExpressions" $invalidValidationRuleLeftSideExpressions ),
+    #violationWithMap( "invalidValidationRuleRightSideExpressions" $invalidValidationRuleRightSideExpressions )
+}

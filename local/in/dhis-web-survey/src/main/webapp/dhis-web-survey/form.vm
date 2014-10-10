@@ -1,0 +1,56 @@
+
+##if( $flage == 0 )
+#parse( "/dhis-web-survey/select.vm" )
+#if( $flage == 1 )
+<table class="mainPageTable">
+	<col id="noCol" width="25">
+	<col id="indCol">	
+    <col id="entryCol" width="75">
+		
+	<tr>
+		<th>$i18n.getString( "sl_no" )</th>
+		<th>$i18n.getString( "indicator" )</th>		
+		<th>$i18n.getString( "entry" )</th>		
+	</tr>
+	
+#set( $count = 0 )
+#set( $mark = 0 )
+#set( $tabIndex = 1 )
+#foreach( $indicator in $orderedIndicators )
+	#set( $count = $count + 1 )
+	#if( $mark == 1 )
+		#set( $mark = 0 )
+	#else
+		#set( $mark = 1 )
+	#end
+	#set( $dataValue = false )
+	#set( $dataValue = $dataValueMap.get( $indicator.id ) )
+	
+	<tr #if( $mark == 0 ) style="background-color:#dddddd" #end>
+		##count
+		<td style="text-align:center">$count</td>
+		
+		##indicator name
+		<td>
+			<span id="value[$indicator.id].name" >$encoder.htmlEncode( $indicator.name )</span>
+		</td>
+	
+		##entry		
+		<td>				
+			<input name="entryfield" id="value[$indicator.id].value" size="50" type="text" value="$!encoder.htmlEncode( $dataValue.value )" onchange="saveValue( $indicator.id )" onkeypress="return keyPress(event, this)" style="width:100%;text-align:center" tabindex="$tabIndex">
+		</td>
+	</tr>
+	#set( $tabIndex = $tabIndex + 1 )
+#end
+</table>
+#end
+
+
+
+<script type="text/javascript">
+	
+	var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+	var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+	var i18n_saving_zero_values_unnecessary = 'saving zero is not necessary';
+	
+</script>

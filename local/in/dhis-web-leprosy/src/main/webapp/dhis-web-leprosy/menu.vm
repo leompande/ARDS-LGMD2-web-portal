@@ -1,0 +1,9 @@
+<h2>National Leprosy Eradication Program</h2>
+<ul>
+        <li>
+            <a href = "patientRegister.action">Add Patient</a>
+        </li>
+        <li>
+            <a href = "patientSearch.action">Search Patient</a>
+        </li>
+</ul>

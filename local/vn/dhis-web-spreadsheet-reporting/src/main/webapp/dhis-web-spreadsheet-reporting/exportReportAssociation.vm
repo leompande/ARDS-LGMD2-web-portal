@@ -1,0 +1,10 @@
+<h3>$i18n.getString( "define_associations" )</h3>
+<h4>$encoder.htmlEncode( $exportReport.getName() )</h4>
+<form name="exportReportAssociation" action="updateDefineAssociations.action" method="POST">
+<input type="hidden" name="exportReportId" value="$exportReport.id"/>
+
+#organisationUnitSelectionTree( false, true, true )		
+
+<input type="submit" id="submitButton" value="$i18n.getString( 'save' )" style="width:10em"/>
+<input type="button" onclick="window.location.href='listAllExportReport.action'" value="$i18n.getString( 'cancel' )" style="width:10em"/></p>
+</form>

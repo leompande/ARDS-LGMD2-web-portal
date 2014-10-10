@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patients>
+#foreach( $patient  in $patients )
+<patient>
+  <id>$patient.id</id>  
+  #foreach( $identifier in $patient.identifiers )
+  	#if( $identifier.identifierType )
+	    <identifier>
+	    	<id>$identifier.identifierType.id</id>
+	        <name>$!encoder.xmlEncode( $identifier.identifierType.displayName )</name>
+	        <value>$!encoder.xmlEncode( $identifier.identifier )</value>
+	    </identifier>
+    #else
+    	<systemIdentifier>$!encoder.xmlEncode( $identifier.identifier )</systemIdentifier>
+    #end
+  #end  
+  
+  #foreach( $attribute in $patient.attributes )
+    #set( $attributeValue = "" )
+    #set( $key = $patient.id + "_" + $attribute.id )
+    #set( $attributeValue = $patientAttributeValueMap.get( $key ) )             
+    <attribute>
+        <name>$!encoder.xmlEncode( $attribute.displayName )</name>
+        <value>$!encoder.xmlEncode( $attributeValue )</value>
+    </attribute> 
+  #end  
+  #foreach( $program in $patient.programs )
+    <program>
+        <name>$!encoder.xmlEncode( $program.displayName )</name>
+    </program> 
+  #end         
+</patient>
+#end
+</patients>

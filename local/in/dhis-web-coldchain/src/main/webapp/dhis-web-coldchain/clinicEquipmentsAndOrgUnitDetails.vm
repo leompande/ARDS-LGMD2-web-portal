@@ -1,0 +1,180 @@
+
+<input type="hidden" id='selectedOrgunitID' value="$!organisationUnit.id" />
+<select id="filteredOrgUnitList" name="filteredOrgUnitList" style='display:none'>
+	#foreach( $filterOrgUnit in $filteredOrgUnitList )
+    	<option value="$filterOrgUnit.id">$filterOrgUnit.name</option>
+	#end
+</select>
+
+<div id='orgUnitDetailsDiv'>
+	<h3><b>$i18n.getString( "equipment_in" )  $organisationUnit.name</b> &nbsp;&nbsp; &nbsp;&nbsp;<a href="javascript:showFullOrgUnitDetails( '$organisationUnit.id','$organisationUnit.name'); " title='$i18n.getString( "Division Detail" )'>Full details</a>
+	</h3>
+	
+	<!--
+	<table>
+		<tr bgcolor="#285C91">
+			<td><font color="#FFFFFF"><strong>Division Details</strong></font>
+			<td><strong><a href="javascript:showFullOrgUnitDetails( '$organisationUnit.id','$organisationUnit.name'); " title='$i18n.getString( "Division Detail" )'><font color="#FFFFFF">full division details</font></a></strong></td>
+		</tr>
+		#set( $mark = false )	
+		<tr #alternate($mark)>
+			<td>Parent</td>
+			<td>$!organisationUnit.parent.name</td>
+		</tr>
+	-->
+	<!--	
+		#foreach( $attribute in $attributes )
+			<tr #alternate($mark)>
+			##set( $parentValueMapId = $organisationUnit.parent.id + ':' + $attribute.id )
+			#set( $selectedOrgValueMapId = $organisationUnit.id + ':' + $attribute.id )
+				<td>$attribute.name</td>
+				<!--<td>$!parentOrgUnitAttribDataValueMap.get( $parentValueMapId )</td>-->
+				<!--<td>$!selectedOrgUnitAttribDataValueMap.get( $selectedOrgValueMapId )</td>
+			</tr>
+		#set( $mark = !$mark)
+ 		#end
+	
+	</table>
+	-->
+	
+	<br />
+	
+	<table>
+		<tr><td><strong>$i18n.getString( "facilities" )</strong></td>
+			<td id='filterOrgDiv'><a href="javascript:hideOrgFilter()" >Filter</a></td>
+			<td id='searchingOrgUnitAttributeTD' style='display:none'>
+                	<select id="searchingOrgUnitFilterOptionId" name="searchingOrgUnitFilterOptionId" onchange="searchingOrgUnitFilterOptionOnChange()">
+                  		<!--<option value="">[$i18n.getString( "please_select" )]</option>-->
+                  		<!--<option value="$organisationUnitGroupSet.name">$organisationUnitGroupSet.name</option>-->
+                  		<option value="$organisationUnitOwnershipGroupSet.name">$i18n.getString( "ownership" )</option>
+						<option value="$organisationUnitGroupSet.name">$i18n.getString( "type" )</option>
+						<option value="orgunitname">$i18n.getString( "orunit_name" )</option>
+						<option value="code">$i18n.getString( "code" )</option>
+                  		<!--
+						#foreach( $orgUniAttribute in $attributes )
+                  			<option value="$orgUniAttribute.id">$orgUniAttribute.name</option>
+		                #end
+						-->
+                  	</select>
+			</td>
+			
+			<td id='searchingOrgUnitOwnerShipGroupSetMemberTD' style='display:none'>
+                	<select id="searchingOrgUnitGroupSetOwnerShipId" name="searchingOrgUnitGroupSetOwnerShipId" #if( $orgUnitOwnershipGroupSetMember.size() == 0 )  #end onchange="loadOrgUnitsByFilter()">
+                  		<option value="">[$i18n.getString( "please_select" )]</option>
+                  		#foreach( $orgUniGroupOwnerShip in $orgUnitOwnershipGroupSetMember )
+                  			<option value="$orgUniGroupOwnerShip.id">$orgUniGroupOwnerShip.name</option>
+		                  #end
+                  	</select>
+			</td>
+			
+			
+			<td id='searchingOrgUnitGroupSetMemberTD' style='display:none'>
+                	<select id="searchingOrgUnitGroupId" name="searchingOrgUnitGroupId" #if( $orgUnitGroups.size() == 0 )  #end onchange="loadOrgUnitsByFilter()">
+                  		<option value="">[$i18n.getString( "please_select" )]</option>
+                  		#foreach( $orgUniGroup in $orgUnitGroups )
+                  			<option value="$orgUniGroup.id">$orgUniGroup.name</option>
+		                  #end
+                  	</select>
+			</td>			
+			
+			<td id='searchingOrgTextTD' style='display:none'>
+            	<input type="text" id="searchOrgText" name="searchOrgText" maxlength="30" style="width:12.5em" value="$!searchOrgText" onkeypress="isOrgUnitEnter( event )">
+            </td>
+            <td id='searchOrgDiv' style='display:none'><a href="javascript:loadOrgUnitsByFilter()" title="$i18n.getString( 'go' )"><img src="images/go.jpg" alt="$i18n.getString( 'go' )"></a></td>
+			<td id='clearOrgDiv' style='display:none'><a href="javascript:hideOrgClear()">Clear</a></td>
+		</tr>		
+	</table>
+
+
+	<table id='searchOrgDiv'>
+		<!--<tr><td><strong>Clinics</strong></td>
+			<td id='filterOrgDiv'><a href="javascript:hideOrgFilter()" >Filter</a></td>
+			<td id='searchingOrgUnitAttributeTD' style='display:none'>
+                	<select id="searchingOrgUnitAttributeTD" name="searchingOrgUnitAttributeTD" #if( $equipmentTypeAttributeList.size() == 0 ) disabled="disabled" #end onchange="searchingAttributeOnChange( this.value )">
+                  		#foreach( $orgUniAttribute in $attributes )
+                  			<option value="$orgUniAttribute.id">$orgUniAttribute.name</option>
+		                  #end
+                  	</select>
+			</td>
+			<td id='searchingOrgTextTD' style='display:none'>
+            	<input type="text" id="searchOrgText" name="searchOrgText" maxlength="30" style="width:12.5em" value="$!searchOrgText" onkeypress="isEnter( event )">
+            </td>
+            <td id='searchOrgDiv' style='display:none'><a href="javascript:loadEquipmentsByFilter()" title="$i18n.getString( 'go' )"><img src="images/go.jpg" alt="$i18n.getString( 'go' )"></a></td>
+			<td id='clearOrgDiv' style='display:none'><a href="javascript:hideOrgFilter()">Clear</a></td>
+		</tr>-->
+		<tr bgcolor="#285C91">
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "orgunit_hierarchy" )</strong></font></td>
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "health_facility_name" )</strong></font></td>
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "code" )</strong></font></td> 
+			 <!--
+			 #foreach( $attribute in $attributes )
+			 	<td><font color="#FFFFFF"><strong>$attribute.name</strong></font></td>
+			 #end
+			-->	
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "ownership" )</strong></font></td> 
+ 			<td><font color="#FFFFFF"><strong>$i18n.getString( "type" )</strong></font></td>
+			<!--<td><font color="#FFFFFF"><strong>$organisationUnitGroupSet.name</strong></font></td>-->
+			
+ 			<td>&nbsp;&nbsp;</td>
+		</tr>
+		
+		<tbody id="list">
+			#set( $mark = false )
+			 	#foreach( $orgUnit in $orgUnitList )
+			 	<tr #alternate($mark)>
+			 		<td>$!orgunitHierarchyMap.get( $orgUnit.id )</td>
+			 		<td>$encoder.htmlEncode( $orgUnit.name )</td>
+					<td>$!orgUnit.code</td>
+			 		 <!--
+					 #foreach( $attribute in $attributes )
+			 		 	#set( $valueMapId = $orgUnit.id + ':' + $attribute.id )
+			 		 	<td>$!orgUnitAttribDataValueMap.get( $valueMapId )</td>
+					 #end
+					-->
+ 		 			<td>$!orgUnitGroupSetOwnerShipNameMap.get( $orgUnit.id )</td>
+					<td>$!orgUnitGroupNameMap.get( $orgUnit.id )</td>
+			 		<td><a href="javascript:showFullOrgUnitDetails( '$orgUnit.id','$orgUnit.name'); " title='$i18n.getString( "Clinic Detail" )'>Details</a></td>
+ 			 	</tr>
+			#set( $mark = !$mark)
+ 				#end
+		</tbody>
+	</table>
+	
+	
+	<br />
+	
+    <table width="100%">     
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>
+							<!--<div id='filterDiv'>-->
+							<select id="equipmentType" name="equipmentType" onchange="equipmentTypeChange()">
+							#foreach( $equipmentType in $equipmentTypes )
+								<option value="$equipmentType.id">$equipmentType.name</option>
+							#end
+							</select>
+						</td>
+						<td id='filterDiv'><a href="javascript:hideFilter()" >Filter</a></td>
+						<td id='searchingAttributeIdTD'></td>
+               		 	<td id='searchingAttributeTD' style='display:none'>
+                			<select id="searchingAttributeId" name="searchingAttributeId" #if( $equipmentTypeAttributes.size() == 0 ) disabled="disabled" #end onchange="searchingAttributeOnChange( this.value )">
+                  			<!--<option value="modelname">$i18n.getString( "Model Name" )</option>-->
+                  			</select>
+                		</td>
+               			<td id='searchingTextTD' style='display:none'>
+                    		<input type="text" id="searchText" name="searchText" maxlength="30" style="width:12.5em" value="$!searchText" onkeypress="isEnter( event )">
+            			</td>
+            			<td id='searchDiv' style='display:none'><a href="javascript:loadEquipmentsByFilter()" title="$i18n.getString( 'go' )"><img src="images/go.jpg" alt="$i18n.getString( 'go' )"></a></td>
+						<!--</div>-->
+						<!--<div id='clearDiv' style='display:none'>-->
+							<td id='clearDiv' style='display:none'><a href="javascript:hideClear()">Clear</a></td>						
+					</tr>
+				</table>	
+			</td>
+			<!--</div>-->
+			<td id='addEquipmentTD' align="right" style='display:none'><input type="button" value='$i18n.getString( "Add new item" )' onclick="showAddEquipmentForm('$organisationUnit.id','$organisationUnit.name');" style="width:100px"/></td>
+        	<td id='addEquipmentIcePacksTD' align="right" style='display:none'><input type="button" value='$i18n.getString( "Add/update item" )' onclick="showAddEquipmentIcePacksForm('$organisationUnit.id','$organisationUnit.name');" style="width:100px"/></td>
+        </tr>
+    </table>

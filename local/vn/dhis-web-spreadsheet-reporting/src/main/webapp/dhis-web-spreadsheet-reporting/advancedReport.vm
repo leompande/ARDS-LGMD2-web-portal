@@ -1,0 +1,77 @@
+<h3>$i18n.getString( "generate_advanced_report" ) #openHelp( "excelReportingAdvancedReport" )</h3>
+<table >	
+	<tr>
+		<td ><label>$i18n.getString('group')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="group" name="group" style="width:20em" onchange="getALLExportReportByGroup()" >
+				#foreach($reportGroup in $reportGroups)
+					<option value='$reportGroup'>$reportGroup</option>				
+				#end
+			</select>
+		</td>
+    </tr>
+	<tr>
+		<td><label>$i18n.getString('export_reports')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="exportReport" name="exportReport" style="width:20em">
+			</select>
+		</td>
+    </tr>
+	<tr>
+		<td></td>
+		<td>
+			<input type="button" value="&lt;&lt;" onclick="lastPeriod();" />
+			<input type="button" value="&gt;&gt;" onclick="nextPeriod()"/>
+		</td>
+    </tr>
+	<tr>
+		<td><label>$i18n.getString('period')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="period" name="period" style="width:20em" >
+				#foreach($period in $periods)
+					<option value='$period.id'>$format.formatPeriod( $period )</option>				
+				#end
+			</select>
+		</td>
+    </tr>
+	<tr>
+	  <td>$i18n.getString('choose_orgunit_group')<em title="$i18n.getString( 'required' )" class="required">*</em> </td>
+	  <td><select id="availableOrgunitGroups" name="availableOrgunitGroups" style="width:20em" >
+	  	#foreach($organisationUnitGroup in $organisationUnitGroups)
+		<option value="$organisationUnitGroup.id">$organisationUnitGroup.displayName</option>
+		#end
+      </select></td>
+  </tr>
+</table> 
+
+<div id="actions" style="width:200px text-align:right">
+
+</div>
+
+<div id="orgUnitTree">
+
+</div>
+
+<span id="message" style="top:100px;right:5px;position:fixed;width:200px;z-index:10002" onclick="hideById(this.id);"></span>
+<br/>
+<hr/>
+<p>
+	<input type="button" value='$i18n.getString( "preview_report" )' onclick="previewAdvandReport();" />
+
+	<input name="generateExportReport" id="generateExportReport" type="button" onClick="generateAdvancedExportReport();" value='$i18n.getString( "generate_report" )' />
+</p>
+
+<div id="previewDiv"></div>
+
+<span id="info" style="display:none;top:70px;right:5px;position:fixed;" onclick="hideById(this.id)"></span>
+
+<span id="processing" style="display:none;position:fixed;"><img src="../images/ajax-loader-preview.gif" /></span>
+
+<script>
+
+	$(document).ready(function() {	
+	
+		getExportReportsByGroup();		
+	});
+
+</script>

@@ -1,0 +1,60 @@
+<h3>$encoder.htmlEncode( $dataSet.displayName )</h3>
+<table class="listTable" id="listTable">	
+	<thead>
+		<tr>
+			<th></th>
+		#foreach( $p in $periods )
+			<th>$format.formatPeriod($p)</th>
+		#end
+		</tr>
+	</thead>
+	<tbody id="list">
+	#foreach( $o in $organisationUnits )
+		<tr id="tr${o.id}">
+			<td><b>$encoder.htmlEncode( $o.name )</b></td>
+		#foreach( $p in $periods )
+			<td >
+				#if($!completedValues.get( "$o.id:$p.id" ))
+					#if($completedValues.get( "$o.id:$p.id" ) != "null" )
+						<a href='viewCustomDataSetReport.action?dataSetId=$dataSet.id&periodId=$p.id&organisationUnitId=$o.id' target="_blank">
+							<img src="../images/view_report.png" title="$i18n.getString( 'view_data' )" align="absmiddle">
+						</a>
+						#set ($percent = $completedValues.get( "$o.id:$p.id" ))
+						#if( $percent <= 100) 
+							<img src="../images/check.png" alt="$i18n.getString( 'yes' )" align="absmiddle">
+							<div style="background-color:#CCCCCC">
+							<div style="text-align: center; color: white; width: $percent%; background-color: green;">$percent%</div>
+							</div>
+						#else
+							<img src="../images/warning.png" alt="$i18n.getString( 'no' )" align="absmiddle">
+							#set ($percent = $percent/1000 )
+							<div style="background-color:#CCCCCC">
+							<div style="text-align: center; color: white; width: $percent%; background-color: green;">$percent%</div>
+							</div>
+						#end 
+					#end
+				#else
+					<a href='viewCustomDataSetReport.action?dataSetId=$dataSet.id&periodId=$p.id&organisationUnitId=$o.id' target="_blank">
+						<img src="../images/view_report.png" title="$i18n.getString( 'view_data' )" align="absmiddle">
+					</a>
+					<img src="../images/warning.png" alt="$i18n.getString( 'no' )" align="absmiddle">
+				#end
+			</td>
+		#end
+		</tr>
+	#end
+	</tbody>
+	<tfoot>
+		<tr align="right">
+			<th></th>
+			<th colspan="$periods.size()-1">
+				<img src="../images/warning.png" alt="$i18n.getString( 'no' )" align="absmiddle">$i18n.getString( "incompleted" )
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="../images/check.png" alt="$i18n.getString( 'yes' )" align="absmiddle">$i18n.getString( "completed" )
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="../images/view_report.png" title="View Data" align="absmiddle">$i18n.getString( "view_data" )
+				
+			</th>				
+		</tr>		
+	</tfoot>
+</table>

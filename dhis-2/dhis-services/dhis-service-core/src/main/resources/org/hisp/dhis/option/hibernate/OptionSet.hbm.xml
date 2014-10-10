@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.option.OptionSet" table="optionset">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="optionsetid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <property name="version" />
+
+    <list name="options" table="optionsetmembers">
+      <cache usage="read-write" />
+      <key column="optionsetid" foreign-key="fk_optionsetmembers_optionsetid" />
+      <list-index column="sort_order" />
+      <element type="text" column="optionvalue" />
+    </list>
+
+  </class>
+</hibernate-mapping>

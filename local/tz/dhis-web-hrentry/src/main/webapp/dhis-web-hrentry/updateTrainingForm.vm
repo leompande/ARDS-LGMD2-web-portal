@@ -1,0 +1,63 @@
+<script>
+	jQuery(document).ready(	function(){	
+		datePickerValid( 'startDate', false );
+		datePickerValid( 'endDate', false );
+		jQuery("#updateTrainingForm").validate({
+					 meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{
+									    validateUpdateTraining();
+									}
+				});
+				
+		jQuery("#nameField").focus();			
+	});
+</script>
+<h3>$i18n.getString( "update_training" )</h3>
+
+<form id="updateTrainingForm" name="updateTrainingForm" action="updateTraining.action" method="post">	
+
+<table>
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "course_name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="courseName" name="courseName" style="width:20em" value="$encoder.htmlEncode( $training.name )" class="{validate:{required:true,rangelength:[2,32]}}"></td></td>
+	</tr>
+	
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "course_location" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="courseLocation" name="courseLocation" style="width:20em" value="$encoder.htmlEncode( $training.location )" class="{validate:{required:true,rangelength:[2,32]}}"></td></td>
+	</tr>
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "course_sponsor" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+		<select id="courseSponsor" name="courseSponsor" style="min-width:20em" class="{validate:{required:true}}">
+				<option value="$encoder.htmlEncode( $training.sponsor )" selected="selected" >$encoder.htmlEncode( $training.sponsor )</option> 
+				<option value="Development Partner" >Development Partner</option>
+				<option value="Employer" >Employer</option>
+				<option value="Self Sponsored" >Self Sponsored</option>
+				<option value="Ministry of Health" >Ministry of Health</option>
+				<option value="Other" >Other</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td><label for="startDate">$i18n.getString( "start_date" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="startDate" name="startDate" style="width:20em" value="$encoder.htmlEncode( $training.startDate )" class="{validate:{required:true}}"/></td>
+	</tr>
+	<tr>
+		<td><label for="startDate">$i18n.getString( "end_date" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+		<input type="text" id="endDate" name="endDate" style="width:20em" value="$encoder.htmlEncode( $training.endDate )" class="{validate:{required:true}}"/>
+		<input type="hidden" id="personId" name="personId" value="$person.id" style="width:20em"/>
+		</td>
+	</tr>	
+  <tr>
+  	<td><input type="hidden" id="id" name="id" value="$encoder.htmlEncode( $training.id )"  /></td>  
+	<td><input type="submit" value="$i18n.getString( "update" )" style="width:115px">
+	<input type="button" value="$i18n.getString( "cancel" )" style="width:115px" onclick="javascript:window.location.href='inServiceTraining.action?hrDataSetId=$hrDataSet.id&personId=$person.id'">
+	</td>		
+  </tr>  
+</table>
+</form>
+<span id="message">$!message</span>

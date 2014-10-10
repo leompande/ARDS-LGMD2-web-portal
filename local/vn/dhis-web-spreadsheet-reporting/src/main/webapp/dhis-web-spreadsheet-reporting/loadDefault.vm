@@ -1,0 +1,1 @@
+<input type="checkbox" #if($dataStatus.makeDefault) checked="true" #end value="$dataStatus.makeDefault" onchange="updateDefault( $dataStatus.id, $dataStatus.makeDefault )"/>

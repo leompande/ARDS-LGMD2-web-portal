@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.patient.PatientAttribute" table="patientattribute">
+
+    <id name="id" column="patientattributeid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <property name="description" />
+
+    <property name="valueType" column="valuetype" not-null="true" />
+
+    <property name="mandatory" column="mandatory" />
+
+    <property name="groupBy" column="groupby" />
+
+    <many-to-one name="patientAttributeGroup" column="patientattributegroupid" class="org.hisp.dhis.patient.PatientAttributeGroup"
+      foreign-key="fk_attribute_group" />
+
+    <set name="attributeOptions">
+      <key column="patientattributeid" />
+      <one-to-many class="org.hisp.dhis.patient.PatientAttributeOption" />
+    </set>
+
+    <property name="inherit" column="inherit" />
+
+    <property name="expression" column="expression" />
+
+    <property name="displayOnVisitSchedule" />
+
+    <property name="sortOrderInVisitSchedule" />
+    
+    <property name="displayInListNoProgram" />
+
+  </class>
+</hibernate-mapping>

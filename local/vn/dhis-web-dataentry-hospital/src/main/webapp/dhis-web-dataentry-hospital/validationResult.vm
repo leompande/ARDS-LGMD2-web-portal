@@ -1,0 +1,68 @@
+<h3>$encoder.htmlEncode( $i18n.getString( "validation_result" ) )</h3>
+
+#if( $results.size() == 0 && $dataValues.size() == 0 )  
+    <p class="bold">$encoder.htmlEncode( $i18n.getString( "successful_validation" ) )</p>
+#else
+    <p class="bold">$encoder.htmlEncode( $i18n.getString( "unsuccessful_validation" ) )</p>
+#end
+
+#if( $results.size() > 0)
+    <p class="bold">$encoder.htmlEncode( $i18n.getString( "the_following_values_violate_rules" ) )</p>
+    <table class="listTable" width="100%">
+        <tr>
+            <th style="width:110px">$encoder.htmlEncode( $i18n.getString( "validation_rule" ) )</th>                
+            <th>$encoder.htmlEncode( $i18n.getString( "expression" ) )</th>
+            <th>$encoder.htmlEncode( $i18n.getString( "description" ) )</th>
+            <th>$encoder.htmlEncode( $i18n.getString( "value" ) )</th>
+            <th>$encoder.htmlEncode( $i18n.getString( "operator" ) )</th>
+            <th>$encoder.htmlEncode( $i18n.getString( "value" ) )</th>
+            <th>$encoder.htmlEncode( $i18n.getString( "description" ) )</th>
+        </tr>
+        #set( $mark = false )   
+        #foreach( $result in $results )
+            #set ( $id = $result.validationRule.id )
+            #set ( $leftFormula = $leftsideFormulaMap.get( $id ) )
+            #set ( $rightFormula = $rightsideFormulaMap.get( $id ) )
+            <tr>
+                <td style="height:32px"#alternate( $mark )>$encoder.htmlEncode( $result.validationRule.name )</td>
+                <td#alternate( $mark )>$!encoder.htmlEncode( $leftFormula ) $encoder.htmlEncode( $i18n.getString( $result.validationRule.operator.mathematicalOperator ) ) $!encoder.htmlEncode( $rightFormula )</td>
+                <td#alternate( $mark )>$!encoder.htmlEncode( $result.validationRule.leftSide.description )</td>
+                <td#alternate( $mark )>$result.leftsideValue</td>
+                <td#alternate( $mark )>$encoder.htmlEncode( $i18n.getString( $result.validationRule.operator.mathematicalOperator ) )</td>
+                <td#alternate( $mark )>$result.rightsideValue</td>
+                <td#alternate( $mark )>$!encoder.htmlEncode( $result.validationRule.rightSide.description )</td>
+            </tr>
+        #if( $mark )
+            #set( $mark = false )
+        #else
+            #set( $mark = true )
+        #end
+        #end
+    </table><br>       
+#end
+
+#if( $dataValues.size() > 0 )
+    <p class="bold">$encoder.htmlEncode( $i18n.getString( "the_following_values_are_outliers" ) )</p>
+    <table class="listTable" style="width:100%">
+	    <tr>
+	        <th>$i18n.getString( "data_element" )</th>
+	        <th style="text-align:center">$i18n.getString( "min" )</th>
+	        <th style="width: 100px; text-align:center">$i18n.getString( "value" )</th>
+	        <th style="text-align:center">$i18n.getString( "max" )</th>
+	    </tr>
+	    #set( $mark = false )	    
+	    #foreach( $value in $dataValues ) 
+	    <tr>	    
+	        <td style="height:32px"#alternate( $mark )>$value.dataElementName $value.categoryOptionComboNameParsed</td>	        
+	        <td style="text-align:center"#alternate( $mark )>$value.min</td>	        
+	        <td style="text-align:center;width:100px"#alternate( $mark )>$value.value</td>	        
+	        <td style="text-align:center"#alternate( $mark )>$value.max</td>
+	    </tr>
+        #if( $mark )
+            #set( $mark = false )
+        #else
+            #set( $mark = true )
+        #end
+	    #end
+	</table>
+#end

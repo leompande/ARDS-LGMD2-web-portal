@@ -1,0 +1,88 @@
+
+	<h1>Meta Data Reports Analyser</h1>
+	<hr />  
+	<br />
+	<!-- <form id="reportForm" name="reportForm" action="generateUpwardReport.action" method="post" onsubmit="return formValidations()" target="_blank">  -->      
+<form id="metaDatareportForm" name="metaDatareportForm" action="generateMetaData.action" method="post" target="_blank">        
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                      
+		 <tr>
+		    <td class="NormalB">
+		        Meta Data : <br /><br />
+		        <select id="metaDataId" name="metaDataId" style="width:200px">
+		            <!--<option value="NA">[ Select Meta Data ]</option>-->
+		            #set( $count = 0 )
+		            #foreach( $reportName in $reportNames )                                         
+		                <option value="$reportIds.get($count)">$reportName</option>
+		                #set( $count = $count + 1 )
+		            #end
+		        </select>
+		    </td>
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		   
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		
+		<tr>
+			
+			<td class="NormalB"><input type="radio" id="incID" name="incID" value="SOURCE"> Include Ids         
+			</td>
+		
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		   
+		<tr>
+		    <td class="NormalB"><input type="radio" id="incID" name="incID" value="PRINT"> Print All Attributes         
+		    </td>
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		    
+		<tr>
+	         <td class="NormalB"><input type="radio" id="incID" name="incID" value="default" checked>None(Exclude Source Ids)
+	         </td>
+		</tr>
+		    
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+	    </tr>
+	    <tr>
+	        <td>&nbsp;</td>
+	        <td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td><input type="submit" id= "generate" name="generate" value="Generate Report" #if( $!reportNames.size() == 0 ) disabled #end >
+			</td>
+		</tr>
+		            
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>           
+		 
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+		<tr>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		</tr>
+	</table>
+</form>
+          

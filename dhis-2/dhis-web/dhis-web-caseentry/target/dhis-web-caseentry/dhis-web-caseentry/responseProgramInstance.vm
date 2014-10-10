@@ -1,0 +1,7 @@
+{
+"programInstanceId":"$programInstance.id",
+"dateOfIncident":"$!format.formatDate( $programInstance.dateOfIncident )",
+"enrollmentDate":"$!format.formatDate( $programInstance.enrollmentDate )",
+"dateOfIncidentDescription":"($!programInstance.program.dateOfIncidentDescription)",
+"dateOfEnrollmentDescription":"($!programInstance.program.dateOfIncidentDescription)"
+}

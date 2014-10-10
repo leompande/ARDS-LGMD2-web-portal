@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.History" table="hr_history">
+		<id name="id" column="historyId">
+			<generator class="native" />
+		</id>
+		
+		<property name="history" column="history" length="50" />
+		
+		<property name="reason" column="reason" length="50" />
+		
+		<property name="startDate" column="startDate" length="50" />
+		
+		<many-to-one name="attribute" column="attributeId" class="org.hisp.dhis.hr.Attribute"/>		
+		
+		<many-to-one name="person" column="personId" class="org.hisp.dhis.hr.Person"/>		
+		
+	</class>
+</hibernate-mapping>

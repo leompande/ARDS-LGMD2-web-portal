@@ -1,0 +1,127 @@
+<script type="text/javascript">
+	
+	jQuery(document).ready(function(){
+		deExpressionValidator = validation( 'dataelement-form', function(){
+			updateDeExpression();
+		});
+		
+		deExpressionDialog = setUpDialog( 'dataelement', i18n_expression, 820, 450 );
+		
+		#if( !$exportReport.isCategory() )
+		remoteValidate( jQuery( "#dataelement textarea[id=formula]" ), '../dhis-web-commons-ajax-json/getExpressionText.action' );
+		#end
+		
+		changeItemType();
+		jQuery( '#elementSelect_loader' ).hide();
+	});
+
+	var deExpressionValidator = null;
+	var deExpressionDialog = null;
+	var i18n_no_group_order_created_for_category = '$encoder.jsEscape( $i18n.getString( "no_group_order_created_for_category" ) , "'" )';
+</script>
+
+<div id="dataelement" style="display:none">
+	<form id="dataelement-form">
+	<table width="100%">
+		<tr>
+			<th>$i18n.getString( "formula" )</th>			
+			<th id="dataElementGroupOrderHeader">$i18n.getString( "dataelement" )</th>
+		</tr>
+		<tr valign="top">
+			<td height="139">
+				<textarea id="formula" name="expression" cols="40" rows="5" class="{validate:{required:true}}"></textarea><br>
+				<a href="#" onclick="insertOperation( '(' )"><img src="images/left_parent.png" alt="$i18n.getString( 'left_brackets' )"/></a>
+				<a href="#" onclick="insertOperation( ')' )"><img src="images/right_parent.png" alt="$i18n.getString( 'right_brackets' )"/></a>
+				<a href="#" onclick="insertOperation( '*' )"><img src="images/multiply.png" alt="$i18n.getString( 'multiply' )"/></a>
+				<a href="#" onclick="insertOperation( '/' )"><img src="images/divide.png" alt="$i18n.getString( 'divide' )"/></a>
+				<a href="#" onclick="insertOperation( '+' )"><img src="images/plus.png" alt="$i18n.getString( 'plus' )"/></a>
+				<a href="#" onclick="insertOperation( '-' )"><img src="images/minus.png" alt="$i18n.getString( 'minus' )"/></a>
+			</td>
+			<td>
+				#if( !$exportReport.isCategory() ) 
+				<select id="groupSelect" style="width:500px" onchange="getDataElements( this.value, '#dataelement-elementSelect' );"></select>
+				#end
+				<input type="text" style="width:500px" placeholder="$i18n.getString( 'filter' )" onkeyup="filterList( this.value, 'dataelement-elementSelect');" />
+				<select id="dataelement-elementSelect" size="15" style="width:500px;" ondblclick="insertExpression()"></select>
+				<img src="../images/ajax-loader-bar.gif" id="elementSelect_loader" />
+			</td>		
+		</tr>
+		#if(!$exportReport.isCategory()) 
+		<tr>
+			<th>$i18n.getString( "description" )</th>
+		<tr>	
+		<tr>
+			<td colspan="2">
+				<div id="expression-description" style="width:750px;height:30px;overflow:auto"></div>
+			</td>
+		</th>
+		#end
+	</table>
+	<br>
+	<br>
+	<center>
+		<input type="submit" value="$i18n.getString('ok')" style="width:100px"/>
+		<input type="button" value="$i18n.getString('clean')" onclick="cleanFormula()" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( deExpressionDialog )" style="width:100px"/>
+	</center>
+	</form>
+</div>
+
+<script>
+	function updateDeExpression()
+	{
+		expression = jQuery( '#dataelement textarea[id=formula]' ).val();
+		setFieldValue( 'expression', expression );
+		closeDialog( deExpressionDialog );
+	}
+	
+	function deExpressionBuilderForm()
+	{
+		#if ( $exportReport.isCategory() )
+		getDataElementCategoryOptionCombos();
+		#else
+		dataDictionary.loadDataElementGroups("#dataelement select[id=groupSelect]") ;
+		dataDictionary.loadOperands( '#dataelement-elementSelect', {id:getFieldValue( 'groupSelect' )} );
+		#end
+
+		setFieldValue( 'dataelement textarea[id=formula]', getFieldValue('expression') );
+		getExpression();
+
+		openDialog( deExpressionDialog );
+	}
+	
+	function getDataElements( id, target )
+	{
+		#if($exportReport.isCategory())
+		dataDictionary.loadDataElementsByGroup( id, target );
+		#else
+		dataDictionary.loadOperands( target, {id:id} );
+		#end
+	}
+	
+	function getOptionCombos( id, targetId )
+	{
+		dataDictionary.loadCategoryOptionComboByDE( id, targetId );
+	}
+	
+	function getDataElementCategoryOptionCombos()
+	{
+		jQuery.postJSON('getDataElementCategoryOptionCombos.action'
+		, { id:$exportReport.id }
+		, function( json )
+		{
+			var select = jQuery( "#dataelement-elementSelect" );
+			select.empty();
+			
+			if ( json.dataElementCategoryOptionCombos.length == 0 )
+			{
+				setInnerHTML( 'dataElementGroupOrderHeader', "<i style='color:red'>"+i18n_no_group_order_created_for_category+"</i>" );
+				return;
+			}
+			
+			jQuery.each( json.dataElementCategoryOptionCombos, function(i, item ){
+				select.append( "<option value='" + item.id + "'>" + item.name + "</option>" );
+			});
+		});
+	}
+</script>

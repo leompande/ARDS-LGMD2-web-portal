@@ -1,0 +1,9 @@
+{ "map": 
+  [{
+    "id": "$!{object.id}",
+    "name": "$!encoder.jsonEncode( ${object.name} )",
+    "mapLayerPath": "$!encoder.jsonEncode( ${object.mapLayerPath} )",
+    "organisationUnitLevel": "$!{object.organisationUnitLevel.level}",
+    "nameColumn": "$!encoder.jsonEncode( ${object.nameColumn} )"
+  }]
+}

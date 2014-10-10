@@ -1,0 +1,106 @@
+
+<h3>$encoder.htmlEncode( $i18n.getString( "validation_results" ) )</h3>
+
+<table>
+	<tr>
+		<td>$i18n.getString( "start_date" ):</td>
+		<td>$startDate</td>
+		<td></td>
+		<td><input type="button" value="$i18n.getString( 'generate_pdf' )" style="width:100%" 
+				onclick="window.location.href='generateValidationResultPDF.action'"></td>
+	</tr>
+	<tr>
+		<td>$i18n.getString( "end_date" ):</td>
+		<td>$endDate</td>
+		<td></td>
+		<td><input type="button" value="$i18n.getString( 'done' )" style="width:100%" 
+				onclick="window.location.href='showRunValidationForm.action'"></td>
+	</tr>
+	<tr>
+		<td colspan="4" height="15"></td>
+	</tr>
+</table>
+
+<div align="right">
+	<table width="30%">
+    	<tr>
+        	<td bgcolor="#ff0000">&nbsp;</td>
+            <td align="left">&nbsp;Fail</td>
+        </tr>
+        <tr>
+        	<td bgcolor="#00ff00">&nbsp;</td>
+            <td align="left">&nbsp;Pass</td>
+        </tr>
+        <tr>
+        	<td bgcolor="#0000ff">&nbsp;</td>
+            <td align="left">&nbsp;No Data</td>
+        </tr>
+	</table>
+</div>
+
+#set( $violationColor = "#ffffff" )
+
+
+#foreach( $ou in $organisationUnitsWithVR )
+	
+	<table>
+	<tr>		
+		<th width="20%">$ou.name</th>
+		#foreach( $period in $periods )
+			<th>$period.startDate - $period.endDate</th>			
+		#end
+	</tr>
+	
+	
+	#set( $vRules = $validationRulesInOu.get( $ou.id ) )
+	
+	#set( $mark = false )
+	
+	#foreach( $vRule in $vRules )
+		
+		<tr>
+			<td #if( $mark ) style="background-color:#dddddd" #end>					
+				$vRule.leftSide.description
+				$i18n.getString( $vRule.operator )						
+				$vRule.rightSide.description
+			</td>
+			#foreach( $period in $periods )						
+								
+				#set( $vr = $finalValidationResults.get( "$ou.id:$vRule.id:$period.id" ) ) 
+				
+				#if( $vr.validationRule || $vr != "null" )
+					#set( $op = $i18n.getString( $vr.validationRule.operator ) )
+					
+					#if( $vr.leftsideValue == $vr.rightsideValue && $op == "=="
+						||
+						$vr.leftsideValue > $vr.rightsideValue && $op == ">"
+						||
+						$vr.leftsideValue >= $vr.rightsideValue && $op == ">="
+						||
+						$vr.leftsideValue < $vr.rightsideValue && $op == "<"
+						||
+						$vr.leftsideValue <= $vr.rightsideValue && $op == "<="	
+						)
+						#set ($violationColor = "#00ff00")
+					#else	
+						#set ($violationColor = "#ff0000")				
+					#end
+						
+					<td style="text-align:center;background-color:$violationColor" >
+						$vr.leftsideValue
+						$i18n.getString( $vr.validationRule.operator )
+						$vr.rightsideValue						
+					</td>
+					
+				#else
+					<td style="text-align:center;background-color:#0000ff"></td>
+				#end		
+				
+				#set( $vr = "null" )
+			#end
+		</tr>
+		<tr>&nbsp;</tr>
+	#end
+</table>	
+#end
+

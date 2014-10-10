@@ -1,0 +1,23 @@
+#parse( "/dhis-web-reports-in/menu.vm" )
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{   
+    document.getElementById( 'ouIDTB' ).value = orgUnitIds;
+    
+    var reportType = document.getElementById( 'reportTypeTB' ).value;
+
+	if(orgUnitIds != null && orgUnitIds != "" )
+	{
+		getReports( orgUnitIds, reportType )		
+	}
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

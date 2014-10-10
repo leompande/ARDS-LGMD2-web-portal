@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model-type-attribute-options>
+	#foreach( $option in $modelTypeAttributeOption )	
+		<model-type-attribute-option>
+			<id>$option.id</id>
+			<name>$option.name</name>
+		</model-type-attribute-option>
+	#end
+</model-type-attribute-options>

@@ -1,0 +1,45 @@
+{
+	"id": "$!id",
+	"user":
+	{
+		"id":"$!currentUser.id",
+		"name":"$!currentUser.name",
+		"isAdmin":$!currentUser.userCredentials.isSuper(),
+		"ous":[
+			#foreach( $orgunit in $currentUser.organisationUnits )
+			   {
+					 "id":  "${orgunit.uid}" ,
+					 "localid": "$orgunit.id",
+					 "name": "$!encoder.jsonEncode( ${orgunit.name} )",
+					 "leaf": "${orgunit.isLeaf()}"
+			   }#if( $velocityCount < $currentUser.organisationUnits.size() ),#end
+			#end
+		]
+	},
+	"programs": [
+		#foreach( $program in $programs )
+		  {
+			"id": "${program.uid}" ,
+			"localid": "${program.id}" ,
+			"name": "$!encoder.jsonEncode( ${program.displayName} )",
+			"type": "$program.type"
+		  }#if( $velocityCount < $programs.size() ),#end
+		#end
+	],
+	"orgunitGroups": [
+		#foreach( $orgunitGroup in $orgunitGroups )
+		  {
+			"id":  "${orgunitGroup.uid}" ,
+			"name": "$!encoder.jsonEncode( ${orgunitGroup.name} )"
+		  }#if($velocityCount < $orgunitGroups.size()),#end
+		#end
+	],
+	"levels": [
+		#foreach( $level in $levels )
+		  {
+			"value":  "${level.level}" ,
+			"name": "$!encoder.jsonEncode( ${level.displayName} )"
+		  }#if($velocityCount < $levels.size()),#end
+		#end
+	]
+}

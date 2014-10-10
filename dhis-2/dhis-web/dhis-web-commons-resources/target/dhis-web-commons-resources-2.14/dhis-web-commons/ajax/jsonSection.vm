@@ -1,0 +1,9 @@
+{ "section":
+  {
+    "id": "$!{section.id}",
+    "name": "$!encoder.jsonEncode( ${section.displayName} )",
+    "dataSet": "$!encoder.jsonEncode( ${section.dataSet.name} )",
+    "categoryCombo": "$!encoder.jsonEncode( ${categoryCombo.name} )",
+	"dataElementCount": "$!{sectionDataElements.size()}"
+  }
+}

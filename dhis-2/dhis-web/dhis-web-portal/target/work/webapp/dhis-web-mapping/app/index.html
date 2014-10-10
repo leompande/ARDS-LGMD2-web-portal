@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>ARDS Web Portal GIS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../../dhis-web-commons/javascripts/ext/resources/css/ext-all-gray.css"/>
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+</head>
+
+<body>
+	<div id="layerItems"></div>
+
+	<form id="exportForm" method="post">
+        <input type="hidden" id="filenameField" name="filename"/>
+        <input type="hidden" id="svgField" name="svg"/>
+	</form>
+
+	<script type="text/javascript">
+		window.google = null;
+	</script>
+
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/ext/ext-all.js"></script>
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/openlayers/OpenLayers.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
+    <script type="text/javascript" src="../../dhis-web-commons/javascripts/periodTypeNoDep.js"></script>
+
+    <script type="text/javascript" src="scripts/core.js"></script>
+
+    <script type="text/javascript" src="scripts/mapfish/MapFish.js"></script>
+    <script type="text/javascript" src="scripts/mapfish/core/Color.js"></script>
+    <script type="text/javascript" src="scripts/mapfish/core/Util.js"></script>
+    <script type="text/javascript" src="scripts/mapfish/core/GeoStat.js"></script>
+    <script type="text/javascript" src="scripts/mapfish/core/GeoStat/all.js"></script>
+
+    <script type="text/javascript" src="scripts/app.js"></script>
+</body>
+
+</html>

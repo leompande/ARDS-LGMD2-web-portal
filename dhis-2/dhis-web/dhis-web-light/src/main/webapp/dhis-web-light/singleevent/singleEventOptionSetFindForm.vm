@@ -1,0 +1,20 @@
+<h2>$i18n.getString("option_set_searching_result")</h2>
+<p>$i18n.getString("search_for"): "$keyword"</p>
+<p>
+	#if( $searchingResultList.size() == 0 )
+		No result
+	#else
+		<ul>
+		#foreach( $option in $searchingResultList )
+			<li><a href="showSingleEventForm.action?searchResult=$option&dataElementIdForSearching=$dataElementIdForSearching&organisationUnitId=$organisationUnitId&patientId=$patientId&programId=$programId&programStageInstanceId=$programStageInstanceId&isEditing=$!isEditing">$!encoder.htmlEncode( ${option} )</a></li>
+		#end	
+		</ul>
+	#end
+</p>
+<div id="footer">
+	<h2>$i18n.getString( "navigate_to" )</h2>
+	<ul>
+		<li><a href="showSingleEventForm.action?searchResult=0&dataElementIdForSearching=$dataElementIdForSearching&organisationUnitId=$organisationUnitId&patientId=$patientId&programId=$programId&programStageInstanceId=$programStageInstanceId&isEditing=$!isEditing">$i18n.getString("back_single_event_form")</a></li>
+		<li><a href="index.action">$i18n.getString("home")</a></li>
+	</ul>
+</div>

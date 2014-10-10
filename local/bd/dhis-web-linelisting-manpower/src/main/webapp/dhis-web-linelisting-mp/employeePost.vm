@@ -1,0 +1,66 @@
+<form id="employeePostForm" action="saveEmployeePost.action" method="post" >
+	
+	<table align="center">
+		<tr>
+			<td><label for="department"><Strong>Department</Strong> </label></td>
+			<td>
+				<input id="department" name="department" type="text" readonly="readonly" value="$linelistGroupName" style="min-width:200px">
+			</td>
+		</tr>
+		
+		<tr>
+			<td><label for="post"><Strong>Post</Strong> </label></td>
+			<td>
+				<input id="post" name="post" type="text" readonly="readonly" value="$linelistOptionName" style="min-width:200px">
+                <input type="hidden" name="groupid" id="groupid" value="$linelistGroupId">
+                <input type="hidden" name="reportingDate" id="reportingDate" value="$reportingDate">
+                <input type="hidden" name="dataValue" id="dataValue" value="$dataValue">
+                <input type="hidden" name="dataValueMapKey" id="dataValueMapKey" value="$dataValueMapKey">
+			</td>
+		</tr>
+		
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+		#set( $count = 0 )
+		#foreach( $lineListElement in $lineListElements )
+			<tr>
+				<td><label>$lineListElement.name</label></td>
+				#if($lineListElement.PresentationType == 'text')
+					<td>
+						<input type="text" name="$lineListElement.shortName" id = "$lineListElement.shortName" style="width:10em" #if($count==0) onchange="getEmployeeName( '$lineListElement.shortName', this.value )" #end onkeypress="return keyPress(event, this)" value=$!llElementValuesMap.get($element)>
+					</td>
+				#elseif($lineListElement.PresentationType == 'combobox')
+					<td>
+						<select name="$lineListElement.shortName" id="$lineListElement.shortName" onkeypress="return keyPress(event, this)">
+							<option name="SelectOption" value="" selected>--Select--</option>
+							#set( $lineListOptions = $lineListElement.lineListElementOptions )
+							#foreach( $lineListOption in $lineListOptions )
+								<option name="$lineListOption.name" value="$lineListOption.name" #if($lineListOption.name == $llElementValuesMap.get($element)) selected #end>$lineListOption.name</option>
+							#end
+						</select>
+					</td>
+				#elseif($lineListElement.PresentationType == 'calender')
+					##set($fordate = $lineListElement.shortName)						
+					<td>
+					  <input type="text" id="$lineListElement.shortName" name="$lineListElement.shortName" style="width:10em" onkeypress="return keyPress(event, this)">
+						<script>
+							jQuery(function(){
+								datePickerValid( '$lineListElement.shortName', false );
+							});						
+						</script>
+					</td>
+				#end
+			</tr>
+			#set ($count=$count+1)
+		#end
+
+		<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+		
+		<tr>
+			<td align="center" colspan="2">
+				<input type="submit" value="Save">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="Reset">
+				<input type="hidden" id="reportedDate" name="reportedDate"> 
+			</td>
+		</tr>
+	</table>
+</form>

@@ -1,0 +1,146 @@
+<div class="header-box" align="center">
+	<h3 style="text-align: left; background-color: #719953; border-color: #719953; color: white;">$patient.name</h3>
+	<p style="text-align: left;">
+	Program Stage: $encoder.htmlEncode( $programStage.name )<br/>
+	
+	#if( $programStageSectionId && $programStageSectionId != 0 )	
+		Section:$encoder.htmlEncode( $programStageSection.name )
+    #end
+	</p>
+</div>
+#set( $typeViolationsSize = $typeViolations.size() )
+#set( $programViolationsSize = $programValidationResults.size() )
+
+#if( $typeViolationsSize > 0 || $programViolationsSize > 0)
+<div class="header-box" align="center">
+	<h3 style="text-align: left; background-color: #990000; color: white;">$i18n.getString("warnings_and_errors")</h3>
+	<p style="text-align: left;">
+		#if ($typeViolationsSize > 0)$typeViolationsSize $i18n.getString("type_violation_errors"). <br /> #end
+		#foreach($result in $programValidationResults)
+			#set ( $id = $result.programValidation.id )
+			#set ( $leftFormula = $leftsideFormulaMap.get( $id ) )
+			#set ( $rightFormula = $rightsideFormulaMap.get( $id ) )
+			$!encoder.htmlEncode( $leftFormula ) $encoder.htmlEncode( $result.programValidation.operator.mathematicalOperator ) $!encoder.htmlEncode( $rightFormula ) <br/>
+		#end
+		#if ($programViolationsSize > 0 && $typeViolationsSize == 0) <a href="showPatientProgramList.action?patientId=${patientId}">$i18n.getString("save_any_way")</a> #end	
+	</p>
+</div>	
+#end
+<form action="saveProgramStageForm.action" method="POST">
+
+<input type="hidden" value=$programInstanceId name="programInstanceId"/>
+<input type="hidden" value=$programStageInstanceId name="programStageInstanceId"/>
+<input type="hidden" value=$programStageId name="programStageId"/>
+<input type="hidden" value=$orgUnitId name="orgUnitId"/>
+<input type="hidden" value=$programId name="programId" />
+<input type="hidden" value=$patientId name="patientId" />
+<input type="hidden" id="current" name="current" value=$current />
+<input type="hidden" name="programStageSectionId" value="$programStageSectionId"/>
+
+<div class="header-box" align="center">
+	<p style="text-align: left;">
+
+		#foreach( $programStageDataElement in $dataElements)
+			#set( $dataElement = $programStageDataElement.getDataElement())
+			#set( $key = "DE${dataElement.id}" )
+			#set( $dataElementName = $dataElement.getFormNameFallback() )
+
+			<label>$encoder.htmlEncode( $dataElementName )
+					#if($programStageDataElement.isCompulsory())*#end
+					#if($dataElement.type=="date") [yyyy-MM-dd] #end
+			</label>
+			
+			
+			#if( $typeViolations.get( $key ) )
+				#set( $typeViolation = $typeViolations.get( $key ) )
+				<br /><span style="color: #990000;">$prevDataValues.get($key) $i18n.getString($typeViolation)</span>
+            #end
+
+			#if ( !$dataElement.getOptionSet() )			
+				
+				#if($dataElement.type=="bool")
+					<select name="$key">
+						<option value="">$i18n.getString("please_select")</option>
+						<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+						<option #if( $prevDataValues.get( $key ) == "false" ) selected="selected" #end value="false">$i18n.getString("no")</option>
+					</select>
+				#elseif($dataElement.type=="username")
+					<select name="$key">
+						<option value="">$i18n.getString("please_select")</option>
+						#foreach ($userName in  $userService.getAllUsers())
+							<option value="$userName.getUsername()"
+							#if( $prevDataValues.get( $key ) == $userName ) 
+								selected
+								#set( $selected=true )
+							#end
+							> $userName.getUsername() </option>
+						#end
+					</select>
+				#elseif($dataElement.type=="trueOnly")
+					<select name="$key">
+						<option value="">$i18n.getString("please_select")</option>
+						<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+					</select>		
+				#else
+					<input type="text" name="$key" value="$!prevDataValues.get($key)" />
+				#end
+			
+			#elseif ($dataElement.getOptionSet())
+				#set( $options = $dataElement.getOptionSet().getOptions() )
+				<select type="text" name="$key" />
+				#set( $selected=false )
+				#foreach ($option in $options)
+					<option value="$option"
+					#if( $prevDataValues.get( $key ) == $option ) 
+						selected
+						#set( $selected=true )
+					#end
+					> $option </option>
+				#end
+
+				#if( !$selected ) 
+					<option selected > $i18n.getString("select_option") </option>
+				#end
+				
+				</select>		
+				
+			#end
+			
+			#if( $programStage.program.displayProvidedOtherFacility == 'true' && $programStageDataElement.allowProvidedElsewhere == 'true')
+			#set( $providedKey = "CB${dataElement.id}" )
+				<label>$i18n.getString( "allow_provided_elsewhere" )</label>
+				<input class='provided-elsewhere' name="CB$dataElement.id" value="true" type="checkbox" #if($prevDataValues.get($providedKey) == 'true') checked #end />
+			#end
+		#end
+
+	</p>
+</div>
+
+<div class="header-box" align="center">
+	<p>
+		<input type="submit" style="width: 100%;" value="$i18n.getString("save")" />
+	</p>
+</div>
+
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	#if( $!programStageSectionId && $!programStageSectionId != 0 )
+		<li><a href="showProgramStageSection.action?programId=$programId&programStageId=$programStageId&programStageInstanceId=$programStageInstanceId&patientId=$patient.getId()&programInstanceId=$programInstanceId&orgUnitId=0&validated=false">
+			Section List
+		</a></li>
+	#end
+	
+	#if( $orgUnitId == 0 )
+		<li><a href="showPatientProgramStageList.action?patientId=$patientId&programInstanceId=$programInstanceId&programId=$programId&validated=false">$!encoder.htmlEncode( ${program.getName()} )</a></li>
+	#else
+		<li><a href="selectActivity.action?organisationUnitId=$orgUnitId&patientId=$patientId&current=$current"> $i18n.getString("activity_list")</a></li>
+	#end
+	
+	<li><a href="showPatientProgramList.action?patientId=$patientId">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+	
+</ul>
+</div>

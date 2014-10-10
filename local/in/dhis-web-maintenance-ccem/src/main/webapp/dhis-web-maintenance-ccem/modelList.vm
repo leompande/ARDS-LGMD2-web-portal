@@ -1,0 +1,97 @@
+<script type="text/javascript">
+	jQuery(document).ready(function(){	
+		tableSorter( 'listTable' );	
+	});
+	
+	var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_model" ) , "'" )';
+	var i18n_model_details = '$encoder.jsEscape( $i18n.getString( "model__details" ) , "'" )';
+</script>
+<h3>$i18n.getString( "model_management" ) #openHelp( "model" )</h3>
+<table class="mainPageTable">
+  <tr>
+    <td style="vertical-align:top">
+		<table width="100%">
+			<tr>
+				<!--<td>$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:250px"/></td>-->
+					<td>#filterDiv( "model" )</td>
+					<td>$i18n.getString( "select_modelType" ):
+						<div style="inline">
+							<select id="id" name="id" style="min-width:20em" onchange="getModelByModelType( this.value )">
+            					<!--<option value="" selected="selected" >[ $i18n.getString( "all" ) ]</option>-->
+            						<option value="-1">[ $i18n.getString( "all" ) ]</option>
+           			    	 		#foreach( $modelType in $modelTypes )
+                						<option value="$modelType.id" #if($id==$modelType.id) selected="selected" #end>$modelType.name</option>
+            						#end
+        					</select>
+						</div>	
+					</td>
+				<td colspan="3" style="text-align:right"><input type="button" value="$i18n.getString( "add_new" )" onclick="window.location.href='addModelForm.action'" style="width:70px"></td>
+			</tr>
+		</table>
+		
+		<table class="listTable" id="listTable">
+			<col>          
+			<col width="20">
+			<col width="20">	
+			<col width="20">
+			<col width="20">          		  
+			<thead>
+			  <tr>
+				<th>$i18n.getString( "name" )</th>
+				<th colspan="4">$i18n.getString( "operations" )</th>
+			  </tr>
+			</thead>
+			<tbody id="list">
+            #foreach( $model in $models )
+              <tr id="tr${model.id}">
+              
+                <!--<td>$encoder.htmlEncode( $model.name )</td>-->             
+                <td onclick="showModelDetails( $model.id )">$encoder.htmlEncode( $model.name )</td>
+               	
+               <td style="text-align:center">
+                  <a href="showUploadImageForm.action?id=$model.id" title="$i18n.getString( 'upload_image' )"><img src="images/upload.png" alt="$i18n.getString( 'upload_image' )"></a>
+                </td>               	
+               	
+               	
+               	<td style="text-align:center">
+                  <!--<a href="javascript:showUpdateModelForm( '$model.id' )" title='$i18n.getString( "edit" )'><img src="../images/edit.png" alt='$i18n.getString( "edit_profile" )'></a>-->
+                  <a href="showUpdateModelForm.action?id=$model.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>
+                </td>
+ 				
+                <td style="text-align:center">
+                  <a href="javascript:removeModel( '$model.id', '$encoder.jsEncode( $model.name )' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )" ></a>
+               	</td>            
+                
+                <td style="text-align:center">
+                  <a href="javascript:showModelDetails( $model.id )" title="$i18n.getString( 'show_details' )"><img src="../images/information.png" alt="$i18n.getString( 'show_details' )"></a>
+               	</td>
+                
+             	</tr>
+			#end
+				
+          </tbody>
+
+        </table>
+		<p></p>
+	  	#parse( "/dhis-web-commons/paging/paging.vm" )        
+    </td>
+	
+		<td style="width:20em; padding-left:2em; vertical-align:top">
+
+			<div id="detailsArea" style="display:none">
+				<div style="float:right">
+					<a href="javascript:hideDetails()" title="$i18n.getString( 'hide_details' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_details' )"></a>
+				</div>				
+                <p><label class="bold">$i18n.getString( "name" ):</label><br><span id="nameField"></span></p>
+                <p><label class="bold">$i18n.getString( "description" ):</label><br><span id="descriptionField"></span></p>
+                <p><label class="bold">$i18n.getString( "modelType" ):</label><br><span id="modelTypeField"></span></p>
+                <!--<p><label class="bold">$i18n.getString( "mandatory" ):</label><br><span id="mandatoryField"></span></p>-->
+			</div>
+
+		</td>
+  </tr>
+</table>
+
+<div id="detailsModelInfo"></div>
+
+

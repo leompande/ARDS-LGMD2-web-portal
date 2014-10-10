@@ -1,0 +1,11 @@
+{ "programIndicator": 
+  {
+    "id": $!{programIndicator.id},
+    "name": "$!encoder.jsonEncode( ${programIndicator.displayName} )",
+    "code": "$!encoder.jsonEncode( ${programIndicator.code} )",
+	"description": "$!encoder.xmlEncode( ${programIndicator.displayDescription} )",
+    "valueType": "$!{programIndicator.valueType}",
+	"rootDate" : "$!format.formatDate( $programIndicator.rootDate )",
+	"expression": "$!encoder.jsonEncode( $!{programIndicator.expression} )"
+  }
+}

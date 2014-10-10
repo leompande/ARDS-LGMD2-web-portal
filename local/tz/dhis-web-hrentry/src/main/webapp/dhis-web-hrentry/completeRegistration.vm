@@ -1,0 +1,5 @@
+#if ( $complete ) 
+<input type="button" id="completeButton" name="completeButton" value="$i18n.getString( 'complete' )" onclick="validate($personId, $hrDataSetId)" style="width:120px" disabled="disabled">
+#else
+<input type="button" id="completeButton" name="completeButton" value="$i18n.getString( 'complete' )" onclick="validate($personId, $hrDataSetId)" style="width:120px" #if( $registration ) disabled="disabled"#end>
+#end

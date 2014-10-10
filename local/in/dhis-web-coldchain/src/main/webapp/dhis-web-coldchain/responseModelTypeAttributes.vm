@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model-type-attributes>
+	#foreach( $modelTypeAttribute in $modelTypeAttributes )	
+		<model-type-attribute>
+			<id>$modelTypeAttribute.id</id>
+			<name>$modelTypeAttribute.name</name>
+		</model-type-attribute>
+	#end
+</model-type-attributes>

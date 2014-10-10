@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  
+  <!-- Store definitions -->
+
+	
+  <!-- Service definitions -->
+
+  <bean id="org.hisp.dhis.mail.MailService"
+    class="org.hisp.dhis.mail.MailService">
+  </bean>
+  
+<bean id="org.hisp.dhis.scheduler.HelloJob"
+    class="org.hisp.dhis.scheduler.HelloJob">
+    <property name="mailService">
+      <ref bean="org.hisp.dhis.mail.MailService"/>
+    </property>           
+
+  </bean>
+
+  <!-- Startup routine definitions -->
+  
+  <bean id="org.hisp.dhis.scheduler.HelloSchedule"
+    class="org.hisp.dhis.scheduler.HelloSchedule">
+
+  </bean>
+  
+  
+  <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject"
+      ref="org.hisp.dhis.system.startup.StartupRoutineExecutor"/>
+    <property name="targetMethod" value="addStartupRoutines"/>
+    <property name="arguments">
+      <list>
+        <list>
+          <ref local="org.hisp.dhis.scheduler.HelloSchedule"/>
+        </list>
+      </list>
+    </property>
+  </bean>
+  
+  
+</beans>

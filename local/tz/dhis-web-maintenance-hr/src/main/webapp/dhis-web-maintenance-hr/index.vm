@@ -1,0 +1,13 @@
+
+<h3>$i18n.getString( "dhis_web_maintanace_title" )</h3>
+
+<ul id="introList">
+    #introListImgItem( "hrAttribute.action" "hr_attribute" "dataelement" )
+    #introListImgItem( "attributeGroup.action" "hr_attribute_group" "dataelement" )
+    #introListImgItem( "attributeOptionGroup.action" "hr_attribute_option_group" "dataelement" )
+    #introListImgItem( "hrDataSet.action" "hr_dataset" "dataset" )
+    #introListImgItem( "reportSelect.action" "hr_resource_tables" "resourcetable" )
+    #introListImgItem( "targetIndicator.action" "target_indicator" "indicator" )
+    #introListImgItem( "aggregateIndicator.action" "aggregated_indicator" "indicator" )
+    #introListImgItem( "criteria.action" "criteria" "indicator" )
+</ul>

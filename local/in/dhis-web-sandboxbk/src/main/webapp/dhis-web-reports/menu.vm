@@ -1,0 +1,39 @@
+<h2>Report Analyser</h2>
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+<!--        <li>
+            <a href = "routineReportAnalyser.action">Routine</a>
+        </li>
+        <li>
+            <a href = "progressReportAnalyser.action">Progress</a>
+        </li>
+        <li>
+            <a href = "advancedReportAnalyser.action">Advanced</a>
+        </li>		
+-->
+        <li>
+            <a href = "upwardReportAnalyser.action">Routine Reports</a>
+        </li>
+        <li>
+            <a href = "linelistingReportAnalyser.action">Linelisting Reports</a>
+        </li>
+        <li>
+            <a href = "populateUsers.action">Populate Users</a>
+        </li>
+        <li>
+            <a href = "generateInputScreen.action">Generate InputScreens</a>
+        </li>
+        <li>
+            <a href = "importingResult.action">Importing OLD DHIS Data</a>
+        </li>
+        <li>
+            <a href = "gapMinder.action" target="_blank">GapMinder</a>
+        </li>
+        <li>
+            <a href = "sendMail.action">Send e-mail</a>
+        </li>
+
+										
+    </ul>
+</ul>

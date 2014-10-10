@@ -1,0 +1,33 @@
+
+<h3>$i18n.getString( "data_update_forms" )</h3>
+
+<table class="mainPageTable" width="50%" >
+  <tr>
+    <td style="vertical-align:top">
+      <table class="listTable" id="listTable" width="50%">
+          <col>          
+          <col width="20">
+          <col width="20">          
+          <thead>
+          <tr>
+            <th>$i18n.getString( "name" )</th>
+            <th style="text-align:center" colspan="2" class="{sorter: false}">$i18n.getString( "operations" )</th>
+          </tr>
+          </thead>
+          <tbody id="list">
+            #foreach( $hrDataSet in $hrDataSets )
+              <tr id="tr${hrDataSet.id}">
+                <td onclick="showDataSetDetails( $hrDataSet.id )">$encoder.htmlEncode( $hrDataSet.name )</td>
+                <td style="text-align:center">
+                  <a href="updateRecordsList.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "update_data" )"><img src="../images/edit_compulsory_data_elements.png" alt="$i18n.getString( "update_data" )"></a>
+                </td>
+                <td style="text-align:center">
+                  <a href="searchRecord.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "update_data" )"><img src="../images/search.png" alt="$i18n.getString( "update_data" )"></a>
+                </td>
+              </tr>
+            #end
+
+          </tbody>
+
+        </table>
+</table>

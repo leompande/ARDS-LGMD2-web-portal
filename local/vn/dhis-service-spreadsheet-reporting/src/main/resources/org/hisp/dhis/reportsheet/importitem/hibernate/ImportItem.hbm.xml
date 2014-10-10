@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="org.hisp.dhis.reportsheet.importitem.ImportItem"
+		table="excelitem">
+
+		<id name="id" column="excelitemid">
+			<generator class="native" />
+		</id>
+
+		<properties name="uniqueKey" unique="true">
+
+			<property name="name" column="name" not-null="true" />
+
+			<many-to-one name="importReport" column="excelItemGroupId"
+				class="org.hisp.dhis.reportsheet.importitem.ImportReport"
+				foreign-key="fk_exceltitem_group" lazy="false" insert="true" />
+		</properties>
+
+		<property name="expression" column="expression" not-null="true" />
+		<property name="row" column="excelrow" not-null="true" />
+		<property name="column" column="excelcolumn" not-null="true" />
+		<property name="sheetNo" column="sheetNo" not-null="true" />
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,159 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.hisp.dhis</groupId>
+		<artifactId>dhis-web</artifactId>
+		<version>2.14-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>dhis-web-dashboard</artifactId>
+	<packaging>jar</packaging>
+	<name>DHIS DashBoard</name>
+	
+	<build>
+		<finalName>dhis-web-dashboard</finalName>
+	</build>
+	
+	<dependencies>
+		
+		<!-- DHIS -->
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-api</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-core</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-patient</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-linelisting</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-dbmanager</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons-resources</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-aggregationengine-default</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-external</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-system</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-api</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-survey</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-configuration</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-reports</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-dataentrystatus</artifactId>
+			<version>2.12-SNAPSHOT</version>
+		</dependency>
+        <!--<dependency>
+            <groupId>org.hisp.dhis</groupId>
+            <artifactId>dhis-in-service-coldchain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		-->
+
+		<!-- Other -->
+		<!--	     
+		<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		</dependency>
+		
+		<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart-experimental</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jcommon</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+		</dependency>
+	</dependencies>
+	<properties>
+		<rootDir>../../</rootDir>
+	</properties>
+</project>

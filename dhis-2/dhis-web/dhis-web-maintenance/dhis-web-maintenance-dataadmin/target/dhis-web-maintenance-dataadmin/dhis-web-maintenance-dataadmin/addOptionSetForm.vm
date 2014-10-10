@@ -1,0 +1,74 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function() {
+		validation2( 'addOptionSetForm', function( form ){ form.submit() }, {
+			'beforeValidateHandler': function() { listValidator( 'memberValidator', 'options' ); },
+			'rules': getValidationRules("dateElementCategory")
+		});
+		checkValueIsExist( "name", "validateOptionSet.action");	
+	});
+
+    var i18n_specify_option_name = '$encoder.jsEscape( $i18n.getString( "specify_option_name" ) , "'")';
+    var i18n_option_name_already_exists = '$encoder.jsEscape( $i18n.getString( "option_name_already_exists" ) , "'")';
+    var i18n_must_include_option = '$encoder.jsEscape( $i18n.getString( "must_include_option" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "add_option_set" )</h3>
+
+<form id="addOptionSetForm" name="addOptionSetForm" action="addOptionSet.action" method="post" class="inputForm">
+  <table>
+      <colgroup>
+          <col width="50px" />
+          <col width="150px"/>
+          <col width="50px"/>
+      </colgroup>
+
+    <tr>
+      <th colspan="4">$i18n.getString( "details" )</th>      
+    </tr>
+    <tr>
+      <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+      <td colspan="3"><input type="text" id="name" name="name" class="{validate:{required:true,minlength:2}}"></td>
+    </tr>      
+    <tr>
+      <td colspan="4" style="height:15px"></td>
+    </tr>
+  	<tr>
+  	  <th colspan="4">$i18n.getString( "options" )
+	  <select id="memberValidator" style="display:none"/></th>
+	</tr>
+	<tr>
+	  <td><label>$i18n.getString( "option" )</label></td>
+	  <td colspan="3"><input type="text" id="option" name="option"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3">
+      	<input type="button" value="$i18n.getString( 'add_option' )" onclick="addOption();" style="width:165px"/>
+		<input type="button" value="$i18n.getString( 'update_option' )" onclick="updateOption();" style="width:165px"/>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+	  <table>
+	  <tr>
+	  <td>
+        <select multiple size="10" id="options" name="options" onchange="setFieldValue('option', this.value);"></select>
+	  </td>	
+      <td>	  
+		<a href="javascript:moveUpSelectedOption( 'options' )"><img src="../images/move_up.png" style='padding-left:5px;'/></a><br/><br/>
+      	<a href="javascript:moveDownSelectedOption( 'options' )"><img src="../images/move_down.png" style='padding-left:5px;'/></a><br/><br/>
+        <a href="javascript:removeSelectedOption( 'options' )"><img src="../images/delete.png"/></a>
+      </td>
+	  </tr>
+	 </table>
+
+	<tr>
+	  <td></td>
+	  <td colspan="3">
+		<input type="submit"  value="$i18n.getString( 'add' )" style="width:10em">
+		<input type="button" onclick="window.location.href='optionSet.action'" value="$i18n.getString( 'cancel' )" style="width:10em"/></p>
+      </td>
+	</tr>
+  </table>
+</form>

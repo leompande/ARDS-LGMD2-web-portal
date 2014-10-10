@@ -1,0 +1,136 @@
+<script type="text/javascript">
+	jQuery("#representativeDiv").ready(function() {
+		addEventForPatientForm('addRepresentativeForm');
+				
+		jQuery("#searchForm").validate({
+			meta:"validate"
+			,errorElement:"span"
+			,submitHandler: function(form) { searchPerson(); }
+			,rules : {
+				relationshipTypeId  : { required: true },
+				searchType			: { required: true },
+				searchValue			: { required: true }
+			}
+		});
+
+		jQuery("#addRepresentativeForm").validate({
+			meta:"validate"
+			,errorElement:"span"
+			,submitHandler: function(form)
+				{
+					validateAddRepresentative('addRepresentativeForm');
+				}
+		});
+	}); 
+	
+	jQuery("#addRepresentativeTabs").tabs();
+</script>
+
+<!-- TAB Header -->
+<div id="addRepresentativeTabs">
+	<ul>
+		<li><a href="#tab-1">$i18n.getString("search_existing_person")</a></li>
+		<li><a href="#tab-2">$i18n.getString("add_new_person")</a></li>
+	</ul>
+
+	<!-- Search Person TAB -->
+	<div id="tab-1">
+		<form id="searchForm" name="searchForm" action="searchPerson.action" method="post" >
+			<table>
+				<tr>
+					<td >$i18n.getString("relationship_type")<em title="$i18n.getString( "required" )" class="required">*</em></td>
+					<td >
+						<select name="relationshipTypeId" id="relationshipTypeId" style='width:18em'>
+							<option value="">[$i18n.getString( "please_select" )]</option>        
+							#foreach ($relationship in $relationshipTypes)
+								<option value="$relationship.id">$!relationship.aIsToB</option>
+							#end
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>$i18n.getString("search_by")<em title="$i18n.getString( "required" )" class="required">*</em></td>
+					<td>
+						<select id="searchType" name="searchType" onclick="toggleSearchType(this)" style='width:18em'>
+							<option value="">[$i18n.getString( "please_select" )]</option>        
+							<option value="identifier">$i18n.getString("identifier")</option>
+							<option value="attribute">$i18n.getString("attribute")</option>
+							<option value="name">$i18n.getString("name")</option>		
+						</select>
+					</td>
+				</tr>
+				<tr id="rowIdentifier" style="display: none" >
+					<td>$i18n.getString("identifier_type")</td>
+					<td>
+						<select name="identifierTypeId" id="identifierTypeId" style='width:18em' >
+							<option value="">[$i18n.getString( "please_select" )]</option>       
+							#foreach($identifierType in $identifierTypes)
+								<option value="$identifierType.id">$identifierType.displayName</option>
+							#end
+						</select>
+					</td>
+				</tr>
+				<tr><td colspan="2"></td></tr>
+				<tr id="rowAttribute" style="display: none">
+					<td>$i18n.getString("attribute")</td>
+					<td>
+						<select name="attributeId" id="attributeId" style='width:18em'>
+							<option value="">[$i18n.getString( "please_select" )]</option>       
+							#foreach($attribute in $attributes)
+								<option value="$attribute.id">$attribute.displayName</option>
+							#end
+						</select>
+					</td>
+				</tr>
+				<tr><td colspan="2"></td></tr>
+				<tr>
+					<td>$i18n.getString("search_value")<em title="$i18n.getString( "required" )" class="required">*</em></td>
+					<td><input type="text" name="searchValue" id="searchValue" style='width:18em'/></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="$i18n.getString('search')"/></td>
+				</tr>
+			</table>
+
+			<div id="listPersons">
+			</div>
+
+		</form>
+	</div>
+
+	<!-- Add Person form TAB -->
+	<div id="tab-2">
+		<form id="addRepresentativeForm" name="addRepresentativeForm" action="addRepresentative.action" method="post">
+			<table id="formContainer">
+				<tr>
+					<td><label for="relationship_type">$i18n.getString("relationship_type")<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+					<td >
+						<select name="relationshipTypeId" id="relationshipTypeId" class="{validate:{required:true}}">
+							<option value="">[$i18n.getString( "please_select" )]</option>        
+							#foreach ($relationship in $relationshipTypes)
+								<option value="$relationship.id">$relationship.aIsToB</option>
+							#end
+						</select>
+					</td>
+				</tr>
+				
+				#parse( "/dhis-web-caseentry/patientForm.vm" )
+				
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" value="$i18n.getString( 'add' )" style="width:10em"/>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<div id="listPersonsDuplicate">
+		</div>
+	</div>
+</div>
+
+<script>
+	var i18n_no_result = '$encoder.jsEscape( $i18n.getString( "no_result" ) , "'")';
+</script>
+

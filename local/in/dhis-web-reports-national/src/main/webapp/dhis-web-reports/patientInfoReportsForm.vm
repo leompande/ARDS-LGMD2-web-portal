@@ -1,0 +1,39 @@
+
+<h3>$i18n.getString( "patient_management" )</h3>
+<hr style="clear:both">
+
+<div id='searchPatientDiv'>
+	<table>	
+		<tbody>
+			<tr>
+				<td>$i18n.getString( "search_by_name_id" )</td>
+				<td>
+					<select id="searchingAttributeId" name="searchingAttributeId" style='display:none'>
+						<option value="">$i18n.getString( "search_by_name_identifier" )</option>
+						<option value="0">$i18n.getString( "search_by_program" )</option>
+						#foreach( $attribute in $patientAttributes )
+							<option value="$attribute.id" valueType='$attribute.valueType'>$encoder.htmlEncode( $attribute.name )</option>
+						#end
+    				</select>
+    			</td>
+			</tr>	
+			<tr>
+				<td>
+					<input type="text" id="searchText" name="searchText" maxlength="30" style="width:20em" value="$!searchText" onkeyup='searchPatientsOnKeyUp( event );'>
+					<label><em title="$i18n.getString( "required" )" class="required">*</em></label>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>$i18n.getString( "organisationunit" ) :&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="ouNameTB" id="ouNameTB" style="width:200px" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="checkbox" name="isSelectedOrg" id="isSelectedOrg" >$i18n.getString( "in_selected_orgU" )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="button" value='$i18n.getString( "search" )' onclick='searchPatients();'></td>
+			</tr>
+			<input type="hidden" name="ouIDTB" id="ouIDTB">
+		</tbody>
+	</table>
+</div>
+<div id='listPatientDiv'></div> <!-- List searching patients -->
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script>
+	var i18n_specify_search_criteria = '$encoder.jsEscape( $i18n.getString( "specify_search_criteria" ) , "'")';
+</script>

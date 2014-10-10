@@ -1,0 +1,108 @@
+
+<!-- DATAELEMENTS -->
+#set( $tabIndex = 1 )
+#if( $sections.size() > 0 )
+	#foreach( $section in $sections )
+		<table class="formSection" width="100%">
+			<tr><td>&nbsp;</td><td>&nbsp;</td></tr>	
+			<tr bgcolor="#285C91">
+				<td><font color="#FFFFFF"><strong>$encoder.htmlEncode( $section.name )</strong></font></td>
+				<td><font color="#FFFFFF"><strong>Value</strong></font></td>
+			</tr><br />
+		
+		#if ( $section.dataElements.size() > 0 )
+			#set( $mark = false )
+			#foreach($dataElement in $section.dataElements )
+			#set( $equipmentDataValue = "" )
+			#set( $equipmentDataValue = $!equipmentDataValueMap.get( $dataElement.id ) )
+				<tr #alternate($mark)>
+					<!--#set( $dataEntryId = "${dataElement.id}" )-->
+					<td width="75%"><label>$dataElement.getFormNameFallback()</label></td>
+					<td>
+						#if( $dataElement.type == "bool" )
+							<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%"> 
+								<option value="">[$i18n.getString( "please_select" )]</option>            
+								<option value="Yes" #if( $equipmentDataValue  == "Yes" ) selected="selected" #end >$i18n.getString( "yes" )</option>
+								<option value="No" #if( $equipmentDataValue == "No") selected="selected" #end >$i18n.getString( "no" )</option>
+							</select>                
+						#elseif( $dataElement.type == "date" )
+							<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" width="25%"> 
+								<script type="text/javascript">
+						  	 	datePickerValid( 'dataelement${dataElement.id}' );
+								</script>                    
+						
+						#elseif( $!dataElement.optionSet )
+							<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+								<option value="">[$i18n.getString( "please_select" )]</option> 
+								#foreach ($option in $dataElement.optionSet.options )
+									<option value="$option" #if($equipmentDataValue == $option ) selected="selected" #end>$option</option>
+								#end	
+							</select>							
+						
+						#else 
+							<!--<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" width="25%">--> 
+							<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" width="25%" #if($dataElement.type =='int') class="{validate:{number:true}}" #end/>
+						#end
+					</td>		
+				</tr>
+			#set( $tabIndex = $tabIndex + 1 )
+			#set( $mark = !$mark)	
+			#end
+		#end
+	</table>		
+	<br>	
+#end
+	
+#else	
+
+<table class="formSection">
+	<tr><td>&nbsp;</td><td>&nbsp;</td></tr>	
+
+	<tr bgcolor="#285C91">
+		<td><font color="#FFFFFF"><strong>$encoder.htmlEncode( $dataSet.getShortName() )</strong></font></td>
+		<td><font color="#FFFFFF"><strong>Value</strong></font></td>
+	</tr>	
+<br />
+#set( $tabIndex = 1 )
+#if ( $dataElements.size() > 0)
+	#set( $mark = false )
+	#foreach($dataElement in $dataElements )
+	#set( $equipmentDataValue = "" )
+	#set( $equipmentDataValue = $!equipmentDataValueMap.get( $dataElement.id ) )
+		<tr #alternate($mark)>
+			<!--#set( $dataEntryId = "${dataElement.id}" )-->
+			<td><label>$dataElement.getFormNameFallback()</label></td>
+			<td>
+				#if( $dataElement.type == "bool" )
+					<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" style="width:150px"> 
+						<option value="">[$i18n.getString( "please_select" )]</option>            
+						<option value="Yes" #if( $equipmentDataValue  == "Yes" ) selected="selected" #end >$i18n.getString( "yes" )</option>
+						<option value="No" #if( $equipmentDataValue == "No") selected="selected" #end >$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $dataElement.type == "date" )
+						<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" style="width:150px" />
+						<script type="text/javascript">
+						   datePickerValid( 'dataelement${dataElement.id}' );
+						</script>                    
+				#elseif( $!dataElement.optionSet )
+					<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+						<option value="">[$i18n.getString( "please_select" )]</option> 
+						#foreach ($option in $dataElement.optionSet.options )
+							<option value="$option" #if($equipmentDataValue == $option ) selected="selected" #end>$option</option>
+						#end	
+					</select>							
+				
+				#else 
+					<!--<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" style="width:150px" />-->
+					<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" width="25%" #if($dataElement.type =='int') class="{validate:{number:true}}" #end/>
+				#end
+			</td>		
+		</tr>
+	#set( $tabIndex = $tabIndex + 1 )
+	#set( $mark = !$mark)	
+	#end
+#end
+</table>
+	
+#end
+

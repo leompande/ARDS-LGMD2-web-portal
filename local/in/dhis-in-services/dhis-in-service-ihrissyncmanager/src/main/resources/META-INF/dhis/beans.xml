@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.AggDataService" class="org.hisp.dhis.ihrissyncmanager.DefaultAggDataService">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService"/>
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService"/>
+        <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService"/>
+        <property name="categoryService"  ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+    </bean>
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.SyncIHRISOrgUnitService"
+          class="org.hisp.dhis.ihrissyncmanager.DefaultSyncIHRISOrgUnitService">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService"/>
+    </bean>
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.SynciHRISUserService"
+          class="org.hisp.dhis.ihrissyncmanager.DefaultSynciHRISUserService">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="userService" ref="org.hisp.dhis.user.UserService"/>
+        <property name="passwordManager" ref="org.hisp.dhis.security.PasswordManager"/>
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+    </bean>
+
+
+    <bean id="ihrisDataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/ihris_manage"/>
+        <property name="username" value="root"/>
+        <property name="password" value="admin"/>
+    </bean>
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.scheduledtasks.SyncIHRISOrgTree"
+          class="org.hisp.dhis.ihrissyncmanager.scheduledtasks.SyncIHRISOrgTreeService">
+        <property name="dataSource" ref="ihrisDataSource"/>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+    </bean>
+
+</beans>

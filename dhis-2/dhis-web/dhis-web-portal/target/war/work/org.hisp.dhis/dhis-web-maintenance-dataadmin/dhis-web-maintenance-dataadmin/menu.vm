@@ -1,0 +1,37 @@
+<div class="col-md-3 hidden-sm hidden-xs " style="width:250px;">
+    <div id="">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="parent_menu">
+                            <h2>$i18n.getString( "data_administration" )&nbsp;</h2>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a class="text-success" href="displayDataBrowserForm.action">$i18n.getString( "data_browser" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="displayDataIntegrityForm.action">$i18n.getString( "data_integrity" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="displayMaintenanceForm.action">$i18n.getString( "maintenance" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="displayResourceTableForm.action">$i18n.getString( "resource_table" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="locale.action">$i18n.getString( "locale" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="showSqlViewListForm.action">$i18n.getString( "sql_view" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="displayOrganisationUnitMergeForm.action">$i18n.getString( "organisation_unit_merge" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="displayDuplicateDataEliminationForm.action">$i18n.getString( "duplicate_data_elimination" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="viewStatistics.action">$i18n.getString( "data_statistics" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="lockException.action">$i18n.getString( "lock_exception" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="getMinMaxValidationParams.action">$i18n.getString( "min_max_value_generation")&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="constant.action">$i18n.getString( "constant")&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="optionSet.action">$i18n.getString( "option_set")&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="showCache.action">$i18n.getString( "cache_statistics" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="attribute.action">$i18n.getString( "attribute" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                            <li><a class="text-success" href="viewScheduledTasks.action">$i18n.getString( "scheduling" )&nbsp;<i class="fa fa-chevron-right pull-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

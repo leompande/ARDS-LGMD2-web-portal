@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.Attribute" table="hr_attribute">
+		<id name="id" column="attributeId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="32" />
+		
+		<property name="caption" column="caption" length="50" />
+		
+		<property name="compulsory" column="compulsory" length="10" />
+		
+		<property name="isUnique" column="isUnique" length="10" />
+		
+		<property name="history" column="history" length="10" />
+		
+		<property name="description" column="description" length="250" />
+		
+		<many-to-one name="dataType" column="dataTypeId" class="org.hisp.dhis.hr.DataType"/>
+		
+		<many-to-one name="inputType" column="inputTypeId" class="org.hisp.dhis.hr.InputType"/>	
+		
+		<set name="attributeOptions" inverse="true" cascade="all">
+			<key column="attributeId" />
+			<one-to-many class="org.hisp.dhis.hr.AttributeOptions" />
+		</set>	
+		
+		<set name="dataValues" inverse="true" cascade="all">
+			<key column="attributeId" />
+			<one-to-many class="org.hisp.dhis.hr.DataValues" />
+		</set>	
+		
+		<set name="histories" inverse="true" cascade="all">
+			<key column="attributeId" />
+			<one-to-many class="org.hisp.dhis.hr.History" />
+		</set>	
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<dataElements>
+    <dataElement code="code1" uuid="uuid1">
+        <name shortName="shortName1" alternativeName="alternativeName1">name1</name>
+        <description type="type1">description1</description>
+        <active></active>
+    </dataElement>
+    <dataElement code="code2" uuid="uuid2">
+        <name shortName="shortName2" alternativeName="alternativeName2">name2</name>
+        <description type="type2">description2</description>
+        <active></active>
+    </dataElement>
+    <dataElement code="code3" uuid="uuid3">
+        <name shortName="shortName3" alternativeName="alternativeName3">name3</name>
+        <description type="type3">description3</description>
+        <active></active>
+    </dataElement>
+    <dataElement code="code4" uuid="uuid4">
+        <name shortName="shortName4" alternativeName="alternativeName4">name4</name>
+        <description type="type4">description4</description>
+        <active></active>
+    </dataElement>
+    <dataElement code="code5" uuid="uuid5">
+        <name shortName="shortName5" alternativeName="alternativeName5">name5</name>
+        <description type="type5">description5</description>
+        <active></active>
+    </dataElement>
+</dataElements>

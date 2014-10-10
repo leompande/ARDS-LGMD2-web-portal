@@ -1,0 +1,7 @@
+
+<select id="reportList" name="reportList" style="width:20em;" onchange="javascript:periodBox( this.value )" >								
+		#foreach( $ccemReport in $reportList )									
+				<option value="$ccemReport.reportId" title="$ccemReport.reportName">$ccemReport.reportName</option>									
+		#end
+ </select>
+

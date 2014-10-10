@@ -1,0 +1,58 @@
+<h3>$i18n.getString('chart') #openHelp( "jcharts" )</h3>
+<table width=100%>
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:300px"/>
+		</td>		
+	</tr>
+</table>
+<table width="100%" class="listTable" id="listTable">
+	<thead>
+		<tr>
+			<th>$i18n.getString('title')</th>			
+			<th width="40px" class="{sorter: false}"></th>								
+		</tr>
+	</thead>	
+	<tbody id="list">	
+	#foreach($jchart in $jcharts)
+		<tr id="tr${jchart.id}">
+			<td>$encoder.htmlEncode( $jchart.title )</td>	
+			<td align="left">
+				<a href="javascript:void(0)" onclick="window.location='drawJChartParamSelection.action?id=$jchart.id'" title="$i18n.getString( 'view_chart' )"><img src="images/chart-icon.png" alt="$i18n.getString( 'view_chart' )"></a>												
+			</td>			
+		</tr>		
+	#end
+	</tbody>
+</table>
+
+<input type="hidden" id="selectedOrganisationUnit" value="$!organisationUnit.id"/>
+
+<script>
+
+	var chart = null;
+
+	function closeJChart()
+	{		
+		unLockScreen();		
+		jQuery("#container").fadeOut( function(){ 
+			if(chart!=null) chart.destroy  ();			
+		});
+		
+	}
+
+	var i18n_select_organisation = "$encoder.jsEscape($i18n.getString( 'select_organisation' ) , "'")";
+	
+	function organisationUnitSelected( orgUnits )
+	{	
+		setFieldValue( 'selectedOrganisationUnit',  orgUnits );
+	}
+	
+	jQuery(document).ready(function(){	  
+		tableSorter( 'listTable' );	
+    });
+	
+	
+	
+	
+	
+</script>

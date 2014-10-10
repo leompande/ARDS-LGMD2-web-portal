@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    
+    <!-- use the DHIS web portal default -->
+    
+    <include file="dhis-web-commons.xml"/>
+	<package name="dhis-web-survey" extends="dhis-web-commons"
+		namespace="/dhis-web-survey">
+		<action name="index" class="org.hisp.dhis.survey.action.SurveyListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/surveyList.vm</param>
+			<param name="menu">/dhis-web-survey/menu.vm</param>
+			<param name="javascripts">javascript/survey.js,javascript/filterTable.js</param>
+		</action>
+		
+		<!-- Edit Survey Form  -->
+				
+		<action name="editSurveyForm"
+			class="org.hisp.dhis.survey.action.GetSurveyAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/editSurvey.vm</param>
+			<param name="javascripts">javascript/survey.js,javascript/IndicatorList.js </param>
+			<!--<param name="requiredAuthorities">F_SURVEY_UPDATE</param>-->
+		</action>		
+		
+		
+		<action name="updateSurvey"
+			class="org.hisp.dhis.survey.action.UpdateSurveyAction">
+			<result name="success" type="redirect">index.action</result>
+			<param name="javascripts">
+				javascript/survey.js,javascript/IndicatorList.js </param>
+			<!--<param name="requiredAuthorities">F_DATASET_UPDATE</param>-->
+		</action>
+		
+		<action name="validateSurvey"
+			class="org.hisp.dhis.survey.action.ValidateSurveyAction">
+			<result name="success" type="velocity-xml">/dhis-web-survey/responseSuccess.vm</result>
+			<result name="input" type="velocity-xml">/dhis-web-survey/responseInput.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!-- Section 
+		
+		<action name="section" class="org.hisp.dhis.survey.action.SectionListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-survey/surveyList.vm</param>
+		<param name="menu">/dhis-web-survey/menu.vm</param>
+		<param name="javascripts">javascript/section.js</param>
+		<interceptor-ref name="transactionStack"/>
+		</action>-->
+		
+		<!-- Add Survey form -->
+		
+		<action name="addSurveyForm"
+			class="org.hisp.dhis.survey.action.IndicatorListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/addSurvey.vm</param>
+			<param name="menu">/dhis-web-survey/menu.vm</param>
+			<param name="javascripts">javascript/survey.js</param>
+		</action>
+		
+		<action name="addSurvey"
+			class="org.hisp.dhis.survey.action.AddSurveyAction">
+			<result name="success" type="redirect">index.action</result>
+			<param name="javascripts">javascript/survey.js</param>
+		</action>
+		
+		<!-- Delete Survey -->
+		
+		<action name="delSurvey"
+			class="org.hisp.dhis.survey.action.DelSurveyAction">
+			<result name="success" type="velocity-xml">/dhis-web-survey/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">/dhis-web-survey/responseError.vm</result>
+			<!--<param name="requiredAuthorities">F_DATASET_DELETE</param>-->
+		</action>
+		
+		<action name="filterAvailableIndicatorsByIndicatorGroup"
+			class="org.hisp.dhis.survey.action.IndicatorListFilteredByGroup">
+			<result name="success" type="velocity-xml">/dhis-web-survey/responseIndicatorGroup.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="javascripts">javascript/survey.js</param>
+		</action>
+		
+		<!-- Survry Association -->
+		
+		<action name="defineSurveyAssociationsForm"
+			class="org.hisp.dhis.survey.action.SetupAssociationsTreeAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/surveyAssociations.vm</param>
+			<param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/IndicatorList.js,javascript/associations.js</param>
+			<!--<param name="requiredAuthorities">F_DATASET_ASSIGN</param>-->
+		</action>		
+		
+				
+		<action name="defineSurveyAssociations"
+			class="org.hisp.dhis.survey.action.DefineSurveyAssociationsAction">
+			<result name="success" type="redirect">index.action</result>
+		</action>
+		
+		<action name="getSurvey"
+			class="org.hisp.dhis.survey.action.GetSurveyAction">
+			<result name="success" type="velocity-xml">/dhis-web-survey/responseSurveyObject.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!--survey data entry-->
+		
+		<action name="surveydataentry"
+			class="org.hisp.dhis.survey.action.EmptyAction">
+			<result name="success" type="redirect">select.action</result>
+		</action>
+
+		<action name="select" class="org.hisp.dhis.survey.action.FormAction">
+			<interceptor-ref name="organisationUnitTreeStack"/>
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/form.vm</param>
+			<!--<param name="page">/dhis-web-survey/select.vm</param>-->
+			<param name="menu">/dhis-web-survey/menuWithTree.vm</param>
+			<!--<result name="defaultform" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/form.vm</param>-->
+			<!--<param name="menu">/dhis-web-survey/menuWithTree.vm</param>-->
+			<param name="menuTreeHeight">350</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/general.js,javascript/form.js,javascript/tempSurvey.js</param>
+			<param name="stylesheets">style/dhis-web-dataentry.css,style/custom_data_entry_form_styles.css</param>		
+		</action>
+<!--		
+				
+		<action name="defaultform" class="org.hisp.dhis.survey.action.FormAction">
+			<interceptor-ref name="organisationUnitTreeStack"/>
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/form.vm</param>
+			<param name="menu">/dhis-web-survey/menuWithTree.vm</param>
+			<param name="menuTreeHeight">350</param>
+			<param name="javascripts"> ../dhis-web-commons/ouwt/ouwt.js,
+				javascript/general.js,javascript/form.js,
+				javascript/form.js,../dhis-web-commons/calendar/calendar.js,
+				../dhis-web-commons/calendar/calendar-lang.js,
+				../dhis-web-commons/calendar/calendar-setup.js </param>
+			<param name="stylesheets">
+				style/dhis-web-dataentry.css,style/custom_data_entry_form_styles.css</param>
+		</action>
+-->		
+		<action name="saveValue"
+			class="org.hisp.dhis.survey.action.SaveValueAction">
+			<result name="success" type="velocity-xml">status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<!--<param name="requiredAuthorities">
+			F_DATAVALUE_ADD,F_DATAVALUE_UPDATE,F_DATAVALUE_DELETE</param>-->
+		</action>
+		
+		<!--Target Mapping-->
+		
+		<action name="generateTarget"
+			class="org.hisp.dhis.target.action.GenerateTargetAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/targetFront.vm</param>
+			<param name="menu">/dhis-web-survey/menu.vm</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,javascript/target.js</param>
+		</action>
+		
+		<action name="saveMapping"
+			class="org.hisp.dhis.target.action.SaveMappingAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-survey/responseDe.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="delMapping"
+			class="org.hisp.dhis.target.action.DelMappingAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-survey/responseDe.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!-- Ajax requests -->
+		
+		<action name="getDataElements"
+			class="org.hisp.dhis.target.action.GetDataElementsAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-survey/responseDataElement.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="getmessage"
+			class="org.hisp.dhis.target.action.GetMesageAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-survey/responseDe.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		
+		<!-- Target DataEntry -->
+        
+        <action name="targetDataEntry"
+            class="org.hisp.dhis.survey.action.EmptyAction">
+            <result name="success" type="redirect">selectTarget.action</result>
+        </action>
+
+        <action name="selectTarget" class="org.hisp.dhis.detarget.action.FormAction">
+            <interceptor-ref name="organisationUnitTreeStack"/>
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/targetForm.vm</param>
+			<!--<param name="page">/dhis-web-survey/selectTarget.vm</param>-->
+			<param name="menu">/dhis-web-survey/menuWithTreeForDeTarget.vm</param>
+			<!--<result name="defaulttargetform" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-survey/targetForm.vm</param>
+            <param name="menu">/dhis-web-survey/menuWithTreeForDeTarget.vm</param>-->
+            <param name="menuTreeHeight">350</param>
+            <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/general.js,javascript/form.js,javascript/tempDeTarget.js</param>
+            <param name="stylesheets">style/dhis-web-dataentry.css,style/custom_data_entry_form_styles.css</param>
+        </action>	
+		
+<!--		        
+        <action name="defaulttargetform" class="org.hisp.dhis.detarget.action.FormAction">
+            <interceptor-ref name="organisationUnitTreeStack"/>
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-survey/targetForm.vm</param>
+            <param name="menu">/dhis-web-survey/menuWithTreeForDeTarget.vm</param>
+            <param name="menuTreeHeight">350</param>
+            <param name="javascripts"> ../dhis-web-commons/ouwt/ouwt.js,
+                javascript/general.js,javascript/form.js,
+                javascript/form.js,../dhis-web-commons/calendar/calendar.js,
+                ../dhis-web-commons/calendar/calendar-lang.js,
+                ../dhis-web-commons/calendar/calendar-setup.js </param>
+            <param name="stylesheets">
+                style/dhis-web-dataentry.css,style/custom_data_entry_form_styles.css</param>
+        </action>
+-->        
+        <action name="saveTargetValue"
+            class="org.hisp.dhis.detarget.action.SavetargetValueAction">
+            <result name="success" type="velocity-xml">status.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+            <!--<param name="requiredAuthorities">
+            F_DATAVALUE_ADD,F_DATAVALUE_UPDATE,F_DATAVALUE_DELETE</param>-->
+        </action>
+        
+        <action name="loadNextPreviousPeriods" class="org.hisp.dhis.detarget.action.LoadNextPreviousPeriodsAction">
+            <result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonPeriods.vm</result>
+        </action>
+        
+		
+		<!-- DataElement Targets -->
+		<action name="deTargetManagement" class="org.hisp.dhis.detarget.action.DeTargetListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-survey/deTargetList.vm</param>
+            <param name="menu">/dhis-web-survey/menu.vm</param>
+            <param name="javascripts">javascript/deTarget.js,javascript/filterTable.js</param>
+        </action>
+		
+		<!-- Add DataElement Target form -->
+        
+        <action name="addDeTargetForm"
+            class="org.hisp.dhis.detarget.action.DeTargetAddFormAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-survey/addDeTarget.vm</param>
+            <param name="menu">/dhis-web-survey/menu.vm</param>
+            <param name="javascripts">javascript/deTarget.js,javascript/filterTable.js</param>
+        </action>
+        
+        <action name="addDeTarget"
+            class="org.hisp.dhis.detarget.action.AddDeTargetAction">
+            <result name="success" type="redirect">deTargetManagement.action</result>
+            <param name="javascripts">javascript/deTarget.js</param>
+        </action>
+		<!-- Show Details DataElement Target  -->
+	    <action name="getDeTargetDetails"
+            class="org.hisp.dhis.detarget.action.GetDeTargetDetailsAction">
+            <result name="success" type="velocity-xml">/dhis-web-survey/responseDeTargetObject.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+		<!-- Filter By DataElement Group DataElement Target  -->
+	    <action name="filterAvailableDataElementsByDataElementGroup"
+            class="org.hisp.dhis.detarget.action.DataElementListFilterByGroupAction">
+            <result name="success" type="velocity-xml">/dhis-web-survey/responseDataElementGroupMember.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+            <param name="javascripts">javascript/deTarget.js</param>
+        </action>
+		<!-- Validation for Adding DataElement Target  -->
+	    <action name="validateDeTarget"
+            class="org.hisp.dhis.detarget.action.ValidateDeTargetAction">
+            <result name="success" type="velocity-xml">/dhis-web-survey/responseSuccess.vm</result>
+            <result name="input" type="velocity-xml">/dhis-web-survey/responseInput.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+		
+		<!-- DeTarget Association -->
+		
+        <action name="defineDeTargetAssociationsForm"
+            class="org.hisp.dhis.detarget.action.SetupAssociationsTreeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-survey/deTargetAssociations.vm</param>
+            <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/associations.js</param>
+            <!--<param name="requiredAuthorities">F_DATASET_ASSIGN</param>-->
+        </action>		
+		        
+        <action name="defineDeTargetAssociations"
+            class="org.hisp.dhis.detarget.action.DefineDeTargetAssociationsAction">
+            <result name="success" type="redirect">deTargetManagement.action</result>
+            <!--<param name="requiredAuthorities">F_DATASET_ASSIGN</param>-->
+        </action>
+		
+	   <!-- Edit DeTarget Form  -->
+
+        <action name="editDeTargetForm"
+            class="org.hisp.dhis.detarget.action.GetDeTargetAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-survey/editDeTarget.vm</param>
+            <param name="javascripts">javascript/deTarget.js,javascript/filterTable.js</param>
+            <!--<param name="requiredAuthorities">F_SURVEY_UPDATE</param>-->
+        </action>
+        
+        <action name="updateDeTarget"
+            class="org.hisp.dhis.detarget.action.UpdateDeTargetAction">
+            <result name="success" type="redirect">deTargetManagement.action</result>
+            <param name="javascripts">javascript/deTarget.js,javascript/filterTable.js</param>
+            <!--<param name="requiredAuthorities">F_DATASET_UPDATE</param>-->
+        </action>
+	    
+		<!-- Delete DeTarget -->
+        
+        <action name="delDeTarget"
+            class="org.hisp.dhis.detarget.action.DelDeTargetAction">
+            <result name="success" type="velocity-xml">/dhis-web-survey/responseSuccess.vm</result>
+            <result name="error" type="velocity-xml">/dhis-web-survey/responseError.vm</result>
+            <!--<param name="requiredAuthorities">F_DATASET_DELETE</param>-->
+        </action>
+		
+	</package>
+</struts>

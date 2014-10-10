@@ -1,0 +1,70 @@
+<div id='selectDiv'>
+    
+    <h3>$i18n.getString( "model_management" ) #openHelp( "model" )</h3>
+    
+    <table>     
+		<tr>
+			<td><label>$i18n.getString( "model" )</label></td>
+			<td style="padding-right:5px">
+				<!--<select id="modelType" style="min-width:16em" onchange="getModelTypeChange( this.value )">-->
+				<select id="modelType" style="min-width:20.5em" onchange="getModelTypeChange()">	
+					<!--<option value="0">$i18n.getString( "please_select_model_type" )</option>-->
+					#foreach( $modelType in $modelTypes )
+						<option value="$modelType.id">$modelType.name</option>
+					#end
+				</select>
+			</td>
+            <!--<td style="padding-right:5px"><input type="button" id='listAllModelBtn'  value="$i18n.getString( 'list_all_models' )" style="width:8.2em" onclick='loadAllModels();'></td>-->
+            <td><span id='warnmessage' style='color:red'></span></td>
+        </tr>
+    </table>
+
+</div>
+<div id='searchModelDiv' style='display:none'>
+    <table id='advancedSearchTB'>   
+        <tbody>
+            <tr id='advSearchBox0'>        
+                <td id='searchingAttributeIdTD'>
+                  <select id="searchingAttributeId" name="searchingAttributeId" style="width:13em" onchange="getModelTypeAttributeOptions()" #if( $modelTypeAttributes.size() == 0 ) disabled="disabled" #end >
+                  </select> 
+                  <em title="$i18n.getString( "required" )" class="required">*</em></label>
+                </td>
+				<td id='searchingAttributeOptionIdTD'>
+                  <select id="searchingAttributeOptionId" name="searchingAttributeOptionId" style="width:13em" disabled="disabled" >
+                  </select> 
+                  <em title="$i18n.getString( "required" )" class="required">*</em></label>
+                </td>                      
+                <td>
+                    <input type="text" id="searchText" name="searchText" maxlength="30" style="width:10em" value="$!searchText">
+                </td>   
+                <td></td>
+                <td><input type="button" value='$i18n.getString( "search" )' style="width:8.2em" onclick='loadModelsByFilter();'></td>
+                <td>&nbsp;</td>
+                <td><input type="button" value='$i18n.getString( "clear" )' style="width:8.2em" onclick='loadAllModels();'></td>
+                <!--<td><input type="button" value='$i18n.getString( "add_new" )' style="width:8.2em" onclick="showAddModelForm();"></td>-->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id='listModelDiv'></div> <!-- List All/Filtered Models -->
+<div id='addEditModelFormDiv'></div> <!-- Add Model Form -->
+<div id='uploadModelImageDiv'></div> <!-- Upload model Image -->
+<div id='resultSearchDiv'></div> <!-- List searching EquipmentAttributeValue -->
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script>
+	var i18n_equipment_status_history = '$encoder.jsEscape( $i18n.getString( "equipment_status_history" ) , "'")';
+	var i18n_equipment_details = '$encoder.jsEscape( $i18n.getString( "equipment_details" ) , "'")';
+    var i18n_select_please_select_model_type = '$encoder.jsEscape( $i18n.getString( "please_select_model_type" ) , "'")';
+</script>
+<script type="text/javascript">
+jQuery( document ).ready( function()
+{
+	getModelTypeChange();
+	//getModelTypeAttributeOptions();
+	loadAllModels();
+});
+</script>
+

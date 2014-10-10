@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<change>
+    <concepts>
+        <concept>
+            <id>1</id>
+            <name>test</name>
+        </concept>
+    </concepts>
+    <categoryOptions>
+        <categoryOption>
+            <id>65</id>
+            <name>categoryOptionA</name>
+        </categoryOption>
+        <categoryOption>
+            <id>66</id>
+            <name>categoryOptionB</name>
+        </categoryOption>
+        <categoryOption>
+            <id>67</id>
+            <name>categoryOptionC</name>
+        </categoryOption>
+        <categoryOption>
+            <id>68</id>
+            <name>categoryOptionD</name>
+        </categoryOption>
+    </categoryOptions>
+</change>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lineListElement>
+  <id>$lineListElement.id</id>
+  <name>$encoder.xmlEncode( $lineListElement.name )</name>
+  <shortName>$encoder.xmlEncode( $lineListElement.shortName )</shortName>
+  <dataType>$encoder.xmlEncode( $lineListElement.dataType )</dataType>
+  <presentationType>$encoder.xmlEncode( $lineListElement.presentationType )</presentationType>
+  <memberCount>$memberCount</memberCount>
+</lineListElement>

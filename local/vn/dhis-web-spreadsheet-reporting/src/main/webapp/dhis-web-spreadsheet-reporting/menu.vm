@@ -1,0 +1,35 @@
+<h2><a href="administration.action">$i18n.getString( "administration" )&nbsp;</a></h2>
+<ul>
+	<li><a href="listAllExportReport.action">$i18n.getString( "design_export_reports" )&nbsp;</a></li>
+	<li><a href="department.action">$i18n.getString( "organisation_unit" )</a></li>
+</ul>
+
+<h2><a href="index.action">$i18n.getString( "generate_report" )&nbsp;</a></h2>
+<ul>
+	<li><a href="getSettingFrame.action">$i18n.getString( "user_setting_frame" )&nbsp;</a></li>
+	<li><a href="../dhis-web-reporting/displayViewDataCompletenessForm.action">$i18n.getString( "view_data_status" )</a></li>
+	<li><a href="index.action">$i18n.getString( "generate_report" )&nbsp;</a></li>
+	<!--
+	<li><a href="viewDataEntryStatus.action">$i18n.getString( "view_data_status" )</a></li>
+	<li><a href="viewJCharts.action">$i18n.getString( "chart" )&nbsp;</a></li>
+	<li><a href="selectAdvancedExportForm.action">$i18n.getString( "generate_advanced_report" )&nbsp;</a></li>
+	<li><a href="dataSetCompletedReports.action">$i18n.getString( "dataset_completed_report" )&nbsp;</a></li>	
+	-->
+</ul>
+
+<h2><a href="getImportingParams.action">$i18n.getString( "importing" )&nbsp;</a></h2>
+<ul>
+	<li><a href="getImportingParams.action">$i18n.getString( "import" )&nbsp;</a></li>
+</ul>
+
+<h2><a href="showAutoGenerateForm.action">$i18n.getString( "automate" )&nbsp;</a></h2>
+<ul>
+	<li><a href="showAutoGenerateForm.action">$i18n.getString( "generate_form" )&nbsp;</a></li>
+</ul>
+
+<script type="text/javascript">
+	var i18n_deleted_file = '$encoder.jsEncode( $i18n.getString( "deleted_file" ) )';
+	var i18n_name = '$encoder.jsEncode( $i18n.getString( "name" ) )';
+	var i18n_size = '$encoder.jsEncode( $i18n.getString( "size" ) )';
+	var i18n_create_date = '$encoder.jsEncode( $i18n.getString( "create_date" ) )';	
+</script>

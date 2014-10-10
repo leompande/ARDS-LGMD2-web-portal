@@ -1,0 +1,26 @@
+<h2>$i18n.getString( "select_organisation_unit" )</h2>
+<form action="selectAnonymousOrgUnit.action" method="POST">
+<div class="header-box" align="center">
+<p style="text-align: left;">
+	<label>$i18n.getString( "search_orgunit" )</label>
+	<input type="text" name="keyword" value="" style="width: 100%;"/>
+</p>
+<p>
+	<input type="submit" style="width: 100%;" value="$i18n.getString("search")" />
+</p>
+</div>
+</form>
+<p>
+<ul>
+#foreach( $organisationUnit in $organisationUnits )
+	<li><a href="anonymous.action?orgUnitId=$organisationUnit.id">$!encoder.htmlEncode( ${organisationUnit.name} )</a></li>
+#end
+</ul>
+</p>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

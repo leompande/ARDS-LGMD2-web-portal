@@ -1,0 +1,188 @@
+
+<script>
+
+	//Global Variables
+
+	var reportModels = new HashTable();
+	var reportFileNames = new HashTable();
+	var reportLevels = new HashTable();
+
+	// Report ids and its Models
+	#foreach($report in $reportList)
+		var reportId = ""+"$report.id";
+		reportModels.put(reportId,"$report.model");
+		reportFileNames.put(reportId,"$report.fileName");
+		reportLevels.put(reportId,"$report.level");
+	#end
+
+    function showOrHideDates()
+    {
+		var criteria = $( "input[name='includePeriod']:checked" ).val();
+        //var includePeriodChecked = document.getElementById( "includePeriod" ).checked;
+
+        if( criteria == 'periodincluding' )
+        {
+            jQuery("#periodTR").show();
+			jQuery("#timeTR").hide();
+        }
+		else if( criteria == 'uploadingmcts' )
+		{
+		    jQuery("#timeTR").show();
+            jQuery("#periodTR").show();
+		}
+        else
+        {
+            jQuery("#periodTR").hide();
+			jQuery("#timeTR").hide();
+        }
+    }
+
+	function formValidations()
+	{
+		var includePeriodChecked = document.getElementById( "includePeriod" ).checked;
+		var reportListIndex = document.reportForm.reportList.selectedIndex;
+		var orgunitIdValue = document.reportForm.ouIDTB.value;
+		var startDateValue = document.reportForm.startDate.value;
+		var endDateValue = document.reportForm.endDate.value;
+
+		if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+		else if(orgunitIdValue == null || orgunitIdValue == "") {alert("Please Select OrganisationUnit"); return false;}
+		else if(includePeriodChecked==true)
+		{
+			if( startDateValue == null || startDateValue== "" || endDateValue == null || endDateValue=="" ) { alert("Please Select Start Date And End Date"); return false; }
+			else if( startDateValue > endDateValue ) { alert("Start Date Is Greater Than End Date"); return false; }
+		}
+
+		document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+		document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+		document.reportForm.reportLevelTB.value = reportLevels.get(document.reportForm.reportList.options[reportListIndex].value);
+
+		return true;
+	}
+
+</script>
+
+<h1>NBITS GOI Report Analyser</h1>
+<hr /><br />
+
+<form id="reportForm" name="reportForm" action="generatePortalReport.action" method="post" onsubmit="return formValidations()" target="_blank">
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+		<tr>
+			<td class="NormalB">
+				Reports :<br />
+				<select id="reportList" name="reportList" style="width:200px">
+				#foreach($report in $reportList)
+					<option value="$report.id">$report.name</option>
+				#end
+				</select>
+			</td>
+			<td class="NormalB">
+				OrganisationUnit : <br />
+				<input type="text" name="ouNameTB" id="ouNameTB" style="width:175px" disabled = "disabled">
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+            <td>&nbsp;</td>
+		</tr>
+		<tr id="periodTR">
+			<td class="NormalB">
+				<label for="startDate" id="lblStartDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+				<input type="text" id="startDate" name="startDate" style="width:175px">
+			</td>
+			<td class="NormalB">
+				<label for="endDate" id="lblEndDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+				<input type="text" id="endDate" name="endDate" style="width:175px">
+			</td>
+		</tr>
+		<tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr id="timeTR">
+            <td class="NormalB">
+				<table>
+					<tr>
+						<td>$i18n.getString( 'hour' )</td>
+						<td>&nbsp;</td>
+                        <td>$i18n.getString( 'minute' )</td>
+					</tr>
+					<tr>
+						<td>	
+							<select id="startHour" name="startHour">
+							#foreach( $count in [0..23] )
+								<option value="$count">$count</option>
+							#end
+			                </select>
+						</td>
+						<td>&nbsp;</td>
+						<td>
+			                <select id="startMinute" name="startMinute">
+							#foreach( $count in [0..59] )
+								<option value="$count">$count</option>
+							#end
+							</select>
+						</td>
+					</tr>
+				</table>
+            </td>
+            <td class="NormalB">
+                <table>
+                    <tr>
+                        <td>$i18n.getString( 'hour' )</td>
+						<td>&nbsp;</td>
+                        <td>$i18n.getString( 'minute' )</td>
+                    </tr>
+                    <tr>
+                        <td>    
+                            <select id="endHour" name="endHour">
+                            #foreach( $count in [0..23] )
+                                <option value="$count">$count</option>
+                            #end
+                            </select>
+                        </td>
+						<td>&nbsp;</td>
+                        <td>
+                            <select id="endMinute" name="endMinute">
+                            #foreach( $count in [0..59] )
+                                <option value="$count">$count</option>
+                            #end
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+			<td>
+				<input type="radio" id="includePeriod" name="includePeriod" value="periodincluding" onClick="showOrHideDates()" checked> Report With Specified Period<br/>
+				<input type="radio" id="includePeriod" name="includePeriod" value="uploadingmcts" onClick="showOrHideDates()" > For uploading to MCTS<br/>
+				<input type="radio" id="includePeriod" name="includePeriod" value="noperiod" onClick="showOrHideDates()" > No Period
+                <br/><br/>
+				<input type="submit" name="generate" value='Generate Report'/>
+				<input type="hidden" name="ouIDTB" id="ouIDTB">
+				<input type="hidden" name="ouLevelTB" id="ouLevelTB">
+				<input type="hidden" name="reportModelTB" id="reportModelTB">
+				<input type="hidden" name="reportFileNameTB" id="reportFileNameTB">
+				<input type="hidden" name="reportLevelTB" id="reportLevelTB">
+			</td>
+		</tr>
+	</table>
+</form>
+
+<script type="text/javascript">
+	jQuery( function(){
+			datePickerInRange( "startDate", "endDate", false, false );
+	});
+	
+	showOrHideDates();
+</script>

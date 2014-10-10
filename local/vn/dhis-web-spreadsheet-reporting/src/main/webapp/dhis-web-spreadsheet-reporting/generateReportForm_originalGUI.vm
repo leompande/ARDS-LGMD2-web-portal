@@ -1,0 +1,72 @@
+<script type="text/javascript">
+
+	jQuery(document).ready(function()
+	{
+		currentOrgunitName = "$!organisationUnit.name";
+		getExportReportsByGroup( currentOrgunitName );
+		
+		defaultForm = true;
+	});
+
+	var i18n_select_period = '$encoder.jsEscape( $i18n.getString( "select_period" ) , "'")';
+	var i18n_value_rounded = '$encoder.jsEscape( $i18n.getString("value_rounded"), "'" )';
+	var i18n_specify_export_report = '$encoder.jsEscape( $i18n.getString("specify_export_report"), "'" )';
+	var i18n_specify_periodtype_or_period = '$encoder.jsEscape( $i18n.getString( "specify_periodtype_or_period" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "generate_export_report" ) #openHelp( "excelReportingExportReport" )</h3>
+
+<div id="exportReportDiv" class="inputCriteria" style="width:410px;height:93px;">
+<table>	
+	<tr>
+		<td><label>$i18n.getString( 'organisation' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><span id="selectedOrganisationUnit"></span></td>
+    </tr>
+	<tr>
+		<td><label>$i18n.getString( 'group' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td >
+			<select type="text" id="group" name="group" style="width:300px" onchange="getExportReportsByGroup( currentOrgunitName )" >
+				#foreach($group in $groups)
+					<option value='$group' #if( $group == $exportReportGroup ) selected="selected" #end>$encoder.htmlEncode( $group )</option>				
+				#end
+			</select>
+		</td>
+    </tr>
+	<tr>
+		<td><label>$i18n.getString( 'export_reports' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="exportReport" name="exportReport" style="width:300px" onchange="reportSelected()"></select><br/>
+			<span id="elementSelect_loader" style="display:none;color:red" >$i18n.getString( "loading" )&nbsp;&nbsp;<img src="../images/ajax-loader-bar.gif" /></span>
+		</td>
+    </tr>
+	<tr>
+		<td><label>$i18n.getString( 'period' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="selectedPeriodId" name="selectedPeriodId" style="width:220px" onchange="getRelativePeriods( this.value )"></select>
+			<input type="hidden" id="selectedPeriodId2"/>
+			<input type="button" value="&lt;&lt;" onclick="getPreviousPeriod()" id="lastPeriod"/>
+			<input type="button" value="&gt;&gt;" onclick="getNextPeriod()" id="nextPeriod"/>
+		</td>
+    </tr>
+	<tr id="showSubItemTR" style="display:none">
+		<td colspan="2"><label class='bold'>$i18n.getString( 'do_not_show_sub_item' )</label>
+			<input type="checkbox" id="showSubItem" value="false"/>
+		</td>
+	</tr>
+	<tr id="orderedGroupLabelTR" style="display:none">
+		<td colspan="2"><label class='bold'>$i18n.getString( 'filter_on_section' )</label>
+			<select type="text" id="orderedGroups" name="orderedGroups" style="width:410px" multiple="true" size="5"></select>
+		</td>
+    </tr>
+</table>
+</div>
+
+<hr/>
+
+<p>
+	<input type="button" id="showButtonDiv" onclick="showExportDiv();" value="$i18n.getString( 'show_export_params' )" style="display:none"/>
+	<input type="button" id="previewButton" value='$i18n.getString( "preview_report" )' onclick="validatePreviewReport();" style="width:150px"/>
+	<input type="button" id="generateExportReport" value='$i18n.getString( "generate_export_report" )' onclick="validateGenerateReport();" style="width:150px"/>
+</p>
+
+<div id="previewDiv"></div>

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  
+  <bean id="org.hisp.dhis.survey.action.EmptyAction"
+    class="org.hisp.dhis.survey.action.EmptyAction"/>
+   
+  <bean id="org.hisp.dhis.survey.state.SelectedStateManager"
+    class="org.hisp.dhis.survey.state.DefaultSelectedStateManager">   
+    <property name="selectionManager"
+      ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager"/>
+    <property name="surveyService"
+      ref="org.hisp.dhis.survey.SurveyService"/>
+	<property name="deTargetService"
+      ref="org.hisp.dhis.detarget.DeTargetService"/> 
+	<property name="periodService"
+      ref="org.hisp.dhis.period.PeriodService"/>   
+	  
+  </bean>
+ 
+  <!-- Actions -->
+<!--  
+  <bean id="org.hisp.dhis.survey.action.SelectAction"
+    class="org.hisp.dhis.survey.action.SelectAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+    <property name="surveyService"
+      ref="org.hisp.dhis.survey.SurveyService"/>       
+  </bean> 
+-->
+<!--	
+  <bean id="org.hisp.dhis.survey.action.SelectAction"
+    class="org.hisp.dhis.survey.action.SelectAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+    <property name="surveyService"
+      ref="org.hisp.dhis.survey.SurveyService"/>
+    <property name="surveyDataValueService"
+      ref="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+  </bean> 	
+-->	
+		
+  <bean id="org.hisp.dhis.survey.action.FormAction"
+    class="org.hisp.dhis.survey.action.FormAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>    
+    <property name="surveyDataValueService"
+      ref="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+    <property name="surveyService"
+      ref="org.hisp.dhis.survey.SurveyService"/>	       
+  </bean>
+
+  <bean id="org.hisp.dhis.survey.action.SaveValueAction"
+    class="org.hisp.dhis.survey.action.SaveValueAction" 
+    scope="prototype">
+    <property name="currentUserService"
+      ref="org.hisp.dhis.user.CurrentUserService"/>
+    <property name="indicatorService"
+      ref="org.hisp.dhis.indicator.IndicatorService"/>
+    <property name="surveyDataValueService"
+      ref="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>    
+  </bean>
+  
+
+  <bean
+    id="org.hisp.dhis.survey.action.SurveyListAction"
+    class="org.hisp.dhis.survey.action.SurveyListAction"
+    scope="prototype">
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+   </bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.IndicatorListAction"
+    class="org.hisp.dhis.survey.action.IndicatorListAction"
+    scope="prototype">
+    <property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>
+   </bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.AddSurveyAction"
+    class="org.hisp.dhis.survey.action.AddSurveyAction"
+    scope="prototype">
+	  <property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+   </bean>
+<!--
+	<bean
+    id="org.hisp.dhis.survey.action.IndicatorGroupListAction"
+    class="org.hisp.dhis.survey.action.IndicatorGroupListAction"
+    scope="prototype">
+	  <property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>	
+	</bean>
+-->		
+	<bean
+    id="org.hisp.dhis.survey.action.IndicatorListFilteredByGroup"
+    class="org.hisp.dhis.survey.action.IndicatorListFilteredByGroup"
+    scope="prototype">
+	  <property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>	
+	</bean>
+
+	<bean
+    id="org.hisp.dhis.survey.action.DelSurveyAction"
+    class="org.hisp.dhis.survey.action.DelSurveyAction"
+    scope="prototype">
+	  <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>	
+	</bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.IndicatorListFilteredBySurvey"
+    class="org.hisp.dhis.survey.action.IndicatorListFilteredBySurvey"
+    scope="prototype">
+	  <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+    <property name="indicatorComparator">
+      <ref bean="org.hisp.dhis.indicator.Indicator"/>
+    </property>	
+	</bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.DefineSurveyAssociationsAction"
+    class="org.hisp.dhis.survey.action.DefineSurveyAssociationsAction"
+    scope="prototype">
+	  <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>	
+	</bean>
+	
+    <bean
+    id="org.hisp.dhis.survey.action.GetSurveyAction"
+    class="org.hisp.dhis.survey.action.GetSurveyAction"
+    scope="prototype">
+	  <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+	<property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>
+	</bean>
+<!--	
+	<bean
+    id="org.hisp.dhis.survey.action.GetNumberOfLevelsAction"
+    class="org.hisp.dhis.survey.action.GetNumberOfLevelsAction"
+    scope="prototype">
+	  <property name="organisationUnitService">
+      <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+    </property>		
+	</bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.SelectLevelAction"
+    class="org.hisp.dhis.survey.action.SelectLevelAction"
+    scope="prototype">
+	  <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>	
+	</bean>
+-->	
+	<bean
+    id="org.hisp.dhis.survey.action.SetupAssociationsTreeAction"
+    class="org.hisp.dhis.survey.action.SetupAssociationsTreeAction"
+    scope="prototype">
+	  <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>	
+	</bean>
+<!--	
+	<bean
+    id="org.hisp.dhis.survey.action.UnselectAllAction"
+    class="org.hisp.dhis.survey.action.UnselectAllAction"
+    scope="prototype">
+	  <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>	
+	</bean>
+	
+	<bean
+    id="org.hisp.dhis.survey.action.UnselectLevelAction"
+    class="org.hisp.dhis.survey.action.UnselectLevelAction"
+    scope="prototype">
+	  <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>	
+	</bean>
+-->	
+	<bean
+    id="org.hisp.dhis.survey.action.UpdateSurveyAction"
+    class="org.hisp.dhis.survey.action.UpdateSurveyAction"
+    scope="prototype">
+	  <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+    <property name="indicatorService">
+      <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+    </property>	
+	</bean>
+
+<!-- Validation -->
+    
+  <bean id="org.hisp.dhis.survey.action.ValidateSurveyAction"
+    class="org.hisp.dhis.survey.action.ValidateSurveyAction" 
+    scope="prototype">
+    <property name="surveyService">
+      <ref bean="org.hisp.dhis.survey.SurveyService"/>
+    </property>
+  </bean>
+	
+	
+  <!-- Target -->
+ <!-- 
+  <bean id="org.hisp.dhis.detarget.action.SelectAction"
+    class="org.hisp.dhis.detarget.action.SelectAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+    <property name="deTargetService"
+      ref="org.hisp.dhis.detarget.DeTargetService"/>       
+  </bean> 
+-->
+<!--	
+  <bean id="org.hisp.dhis.detarget.action.SelectAction"
+    class="org.hisp.dhis.detarget.action.SelectAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+    <property name="deTargetService"
+      ref="org.hisp.dhis.detarget.DeTargetService"/>
+    <property name="periodService"
+      ref="org.hisp.dhis.period.PeriodService"/> 
+    <property name="deTargetDataValueService"
+      ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService"/> 	  	      
+  </bean> 	
+-->	
+	
+	    
+  <bean id="org.hisp.dhis.detarget.action.FormAction"
+    class="org.hisp.dhis.detarget.action.FormAction" 
+    scope="prototype">
+    <property name="selectedStateManager"
+      ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+    <property name="deTargetDataValueService"
+      ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService"/>  
+    <property name="deTargetService"
+      ref="org.hisp.dhis.detarget.DeTargetService"/> 
+     <property name="periodService"
+      ref="org.hisp.dhis.period.PeriodService"/> 
+  </bean> 
+    
+  <bean id="org.hisp.dhis.detarget.action.SavetargetValueAction"
+      class="org.hisp.dhis.detarget.action.SavetargetValueAction"
+      scope="prototype">
+      <property name="selectedStateManager"
+        ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+      <property name="currentUserService"
+        ref="org.hisp.dhis.user.CurrentUserService"/>
+      <property name="dataElementService"
+        ref="org.hisp.dhis.dataelement.DataElementService"/>
+      <property name="categoryService"
+        ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+      <property name="deTargetdataValueService"
+        ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService"/>
+      <property name="periodService"
+      ref="org.hisp.dhis.period.PeriodService"/> 
+  </bean>
+    
+  <bean id="org.hisp.dhis.detarget.action.LoadNextPreviousPeriodsAction"
+      class="org.hisp.dhis.detarget.action.LoadNextPreviousPeriodsAction"
+      scope="prototype">
+      <property name="selectedStateManager"
+        ref="org.hisp.dhis.survey.state.SelectedStateManager"/>
+  </bean>
+    
+    <bean id="org.hisp.dhis.detarget.action.GenerateTargetAction"
+    class="org.hisp.dhis.detarget.action.GenerateTargetAction" 
+    scope="prototype">
+    <property name="dataElementService"
+      ref="org.hisp.dhis.dataelement.DataElementService"/> 
+     <property name="dataElementCategoryService"
+        ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>     
+  </bean>
+      
+   <bean id="org.hisp.dhis.detarget.action.SaveMappingAction"
+      class="org.hisp.dhis.detarget.action.SaveMappingAction" 
+      scope="prototype">
+      <property name="dataElementService"
+        ref="org.hisp.dhis.dataelement.DataElementService"/>  
+      <property name="deTargetMappingService"
+        ref="org.hisp.dhis.target.DeTargetMappingService"/>  
+      <property name="dataElementCategoryService"
+        ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>         
+  </bean> 
+    
+    <bean id="org.hisp.dhis.detarget.action.GetDataElementsAction"
+    class="org.hisp.dhis.detarget.action.GetDataElementsAction" 
+    scope="prototype">
+    <property name="dataElementService"
+      ref="org.hisp.dhis.dataelement.DataElementService"/>   
+    <property name="dataElementCategoryService"
+      ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>       
+  </bean>
+        
+    <bean id="org.hisp.dhis.detarget.action.GetMessageAction"
+    class="org.hisp.dhis.detarget.action.GetMessageAction" 
+    scope="prototype">
+    <property name="dataElementService"
+      ref="org.hisp.dhis.dataelement.DataElementService"/>   
+    <property name="dataElementCategoryService"
+        ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>  
+    <property name="deTargetMappingService"
+      ref="org.hisp.dhis.target.DeTargetMappingService"/>          
+  </bean> 
+    
+   <bean id="org.hisp.dhis.detarget.action.DelMappingAction"
+      class="org.hisp.dhis.detarget.action.DelMappingAction" 
+      scope="prototype">
+      <property name="dataElementService"
+        ref="org.hisp.dhis.dataelement.DataElementService"/>  
+      <property name="deTargetMappingService"
+        ref="org.hisp.dhis.target.DeTargetMappingService"/>  
+      <property name="dataElementCategoryService"
+        ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>     
+  </bean>
+		
+   <!-- DataElement Targets -->
+   <bean id="org.hisp.dhis.detarget.action.DeTargetListAction"
+      class="org.hisp.dhis.detarget.action.DeTargetListAction" 
+      scope="prototype">
+      <property name="deTargetService"
+        ref="org.hisp.dhis.detarget.DeTargetService"/>  
+   </bean>
+	
+	<!-- Add DataElement Target form -->	
+   <bean id="org.hisp.dhis.detarget.action.DeTargetAddFormAction"
+    class="org.hisp.dhis.detarget.action.DeTargetAddFormAction"
+    scope="prototype">
+    <property name="dataElementService">
+      <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+    </property>
+   </bean>
+	
+	<!-- Add DataElement Target Result -->    
+   <bean id="org.hisp.dhis.detarget.action.AddDeTargetAction"
+    class="org.hisp.dhis.detarget.action.AddDeTargetAction"
+    scope="prototype">
+	<property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService">
+	</property>
+    <property name="dataElementService">
+      <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+    </property>
+	 <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService">
+	 </property>
+   </bean>
+	
+<!-- Validation for Adding DataElement Target  -->
+	<bean id="org.hisp.dhis.detarget.action.ValidateDeTargetAction"
+    class="org.hisp.dhis.detarget.action.ValidateDeTargetAction"
+    scope="prototype">
+    <property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService">
+    </property>
+   </bean>
+	
+   <!-- Show Details DataElement Target  -->  
+   <bean id="org.hisp.dhis.detarget.action.GetDeTargetDetailsAction"
+    class="org.hisp.dhis.detarget.action.GetDeTargetDetailsAction"
+    scope="prototype">
+    <property name="deTargetService">
+      <ref bean="org.hisp.dhis.detarget.DeTargetService"/>
+    </property>
+   </bean>
+	
+   <!-- DataElement Group Member in  DataElement Target  -->  
+   <bean id="org.hisp.dhis.detarget.action.DataElementListFilterByGroupAction"
+    class="org.hisp.dhis.detarget.action.DataElementListFilterByGroupAction"
+    scope="prototype">
+    <property name="dataElementService">
+      <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+    </property>
+	<property name="dataElementCategoryService">
+		<ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+	</property>
+	<property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService"></property>
+   </bean>
+
+	<!-- DeTarget Association -->
+	
+<!--	<bean id="org.hisp.dhis.detarget.action.GetNumberOfLevelsAction"
+    class="org.hisp.dhis.detarget.action.GetNumberOfLevelsAction" scope="prototype">
+      <property name="organisationUnitService">
+      <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+    </property>     
+    </bean>	-->
+	
+	<bean id="org.hisp.dhis.detarget.action.SetupAssociationsTreeAction"
+    class="org.hisp.dhis.detarget.action.SetupAssociationsTreeAction"
+    scope="prototype">
+      <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>
+    <property name="deTargetService">
+      <ref bean="org.hisp.dhis.detarget.DeTargetService"/>
+    </property> 
+    </bean>
+			
+	
+	<bean id="org.hisp.dhis.detarget.action.DefineDeTargetAssociationsAction"
+    class="org.hisp.dhis.detarget.action.DefineDeTargetAssociationsAction"
+    scope="prototype">
+      <property name="selectionTreeManager">
+      <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+    </property>
+    <property name="deTargetService">
+      <ref bean="org.hisp.dhis.detarget.DeTargetService"/>
+    </property>
+<!--<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+	</property>-->
+    </bean>
+	
+	<!-- Edit DeTarget Form  -->
+	<bean id="org.hisp.dhis.detarget.action.GetDeTargetAction"
+    class="org.hisp.dhis.detarget.action.GetDeTargetAction"
+    scope="prototype">
+      <property name="dataElementService">
+      <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+    </property>
+	<property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService">
+	</property>
+    </bean>
+	
+	<bean id="org.hisp.dhis.detarget.action.UpdateDeTargetAction"
+    class="org.hisp.dhis.detarget.action.UpdateDeTargetAction"
+    scope="prototype">
+      <property name="dataElementService">
+      <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+    </property>
+	<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService">
+	</property>	
+    <property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService">
+    </property>
+	<property name="deTargetdataValueService" ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService">
+	</property>	
+    </bean>
+	
+	<!-- Delete DeTarget Form  -->
+    <bean id="org.hisp.dhis.detarget.action.DelDeTargetAction"
+    class="org.hisp.dhis.detarget.action.DelDeTargetAction"
+    scope="prototype">
+ 
+    <property name="deTargetService" ref="org.hisp.dhis.detarget.DeTargetService">
+    </property>
+    </bean>
+  
+</beans>

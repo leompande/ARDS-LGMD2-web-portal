@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../dhis-web-commons/javascripts/ext/resources/css/ext-plugin-gray.css" />
+    <script src="../../dhis-web-commons/javascripts/ext/ext-all.js"></script>
+    <script src="http://dhis2-cdn.org/v214/plugin/chart.js"></script>
+
+    <style type="text/css">
+		body {font-family: sans-serif; margin: 0 0 0 60px;}
+
+		h1 {font-size: 20px; margin: 20px 0;}
+
+		#chart1, #chart2 {width: 90%; margin-bottom: 50px; height: 300px; border: 2px solid #d1d1d1; border-radius: 1px;}
+    </style>
+
+	<script>
+		Ext.onReady(function() {
+			var url = 'http://localhost:8080';
+
+			DHIS.getChart({
+				url: url,
+				el: 'chart1',
+				uid: 'R0DVGvXDUNP'
+			});
+
+			DHIS.getChart({
+				url: url,
+				el: 'chart2',
+                type: 'column',
+				columns: [
+					{dimension: 'in', items: [{id: 'Uvn6LCg7dVU'}, {id: 'sB79w2hiLp8'}]}
+				],
+				rows: [
+					{dimension: 'pe', items: [{id: 'LAST_3_MONTHS'}]}
+				],
+                filters: [
+                    {dimension: 'ou', items: [{id: 'USER_ORGUNIT'}]}
+                ],
+                targetLineValue: 70,
+                //baseLineValue: 20,
+                //showTrendLine: true,
+                //hideLegend: true,
+                //title: 'My chart title',
+                //domainAxisTitle: 'Periods',
+                //rangeAxisTitle: 'Percent'
+			});
+		});
+	</script>
+</head>
+
+<body>
+    <h1>CHART BY UID</h1>
+	<div id="chart1"></div>
+
+    <h1>CHART BY CONFIG</h1>
+	<div id="chart2"></div>
+</body>
+</html>

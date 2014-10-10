@@ -1,0 +1,53 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function() {
+		
+		validation2( 'addOrgUnitPrototypeForm', function( form ){ form.submit(); },
+		{
+			'rules': getValidationRules( "organisationUnitPrototype" )
+		});
+
+		checkValueIsExist( "name", "validateOrgUnitPrototype.action" );
+	});
+	
+</script>
+
+<h3>$i18n.getString( "create_new_orgunit_prototype" )</h3>
+
+<form id="addOrgUnitPrototypeForm" action="addOrgUnitPrototype.action" method="post" >
+
+<table>
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" style="width:20em"/></td>
+	</tr>
+	<tr>
+		<td><label for="shortName">$i18n.getString( "short_name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="shortName" name="shortName" style="width:20em"/></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" value="$i18n.getString( 'add' )" style="width:10em"/>
+		<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location.href='orgUnitPrototype.action'" style="width:10em"/></td>
+	</tr>
+</table>
+</form>
+
+<script type="text/javascript">
+
+validationRules = {
+
+    "organisationUnitPrototype" : {
+        "name" : {
+            "required" : true,
+            "rangelength" : [ 2, 160 ]
+        },
+        "shortName" : {
+            "required" : true,
+            "rangelength" : [ 2, 49 ]
+        }
+	}
+};
+</script>

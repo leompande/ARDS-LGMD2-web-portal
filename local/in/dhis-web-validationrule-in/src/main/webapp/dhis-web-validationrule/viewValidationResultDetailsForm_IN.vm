@@ -1,0 +1,36 @@
+
+<table>
+	<col style="width:20em"/>
+	<col/>
+	<tr>
+		<td colspan="2"><h2>$i18n.getString( "left_side_details" )</h2></td>
+	</tr>
+	<tr>
+		<th>$i18n.getString( "data_element" )</th>
+		<th>$i18n.getString( "value" )</th>
+	</tr>
+	#foreach ( $dataElementName in $leftSideMap.keySet() )
+	<tr>
+		<td>$dataElementName</td>
+		<td style="text-align:center">$leftSideMap.get( $dataElementName )</td>
+	</tr>
+	#end
+</table>&nbsp;&nbsp;
+
+<table>
+	<col style="width:20em"/>
+	<col/>
+	<tr>
+		<td colspan="2"><h2>$i18n.getString( "right_side_details" )</h2></td>
+	</tr>
+	<tr>
+		<th>$i18n.getString( "data_element" )</th>
+		<th>$i18n.getString( "value" )</th>
+	</tr>
+	#foreach ( $dataElementName in $rightSideMap.keySet() )
+	<tr>
+		<td>$dataElementName</td>
+		<td style="text-align:center">$rightSideMap.get( $dataElementName )</td>
+	</tr>
+	#end
+</table>

@@ -1,0 +1,26 @@
+
+<h2>$i18n.getString( "hr_attribute_management" )&nbsp;</h2>
+<ul>
+    <li><a href="hrAttribute.action">$i18n.getString( "hr_attribute" )&nbsp;</a></li>
+    <li><a href="attributeGroup.action">$i18n.getString( "hr_attribute_group" )&nbsp;</a></li>
+    <li><a href="attributeOptionGroup.action">$i18n.getString( "hr_attribute_option_group" )&nbsp;</a></li>
+</ul>
+
+<h2>$i18n.getString( "hr_dataset" )&nbsp;</h2>
+<ul>
+    <li><a href="hrDataSet.action">$i18n.getString( "hr_dataset" )&nbsp;</a></li>
+</ul>
+
+<h2>$i18n.getString( "hr_indicators" )&nbsp;</h2>
+<ul>
+    <li><a href="targetIndicator.action">$i18n.getString( "target_indicator" )&nbsp;</a></li>     
+    <li><a href="aggregateIndicator.action">$i18n.getString( "aggregated_indicator" )&nbsp;</a></li>    
+    <li><a href="criteria.action">$i18n.getString( "criteria" )&nbsp;</a></li>
+</ul>
+
+<h2>$i18n.getString( "hr_importexport" )&nbsp;</h2>
+<ul>
+    <li><a href="hrimport.action">$i18n.getString( "target_indicator" )&nbsp;</a></li>     
+    <li><a href="aggregateIndicator.action">$i18n.getString( "aggregated_indicator" )&nbsp;</a></li>    
+    <li><a href="criteria.action">$i18n.getString( "criteria" )&nbsp;</a></li>
+</ul>

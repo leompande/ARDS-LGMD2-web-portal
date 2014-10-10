@@ -1,0 +1,24 @@
+
+<a href="index.action"><h2>Linelisting Aggregation Engine</h2></a>
+<ul>
+    <li><a href="linelistAggForm.action">$i18n.getString( "linelisting_aggregation" )</a></li>     
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<script type="text/javascript">
+
+    function orgUnitHasBeenSelected( orgUnitIds )
+    {    
+        if(orgUnitIds == null || orgUnitIds == "" )
+        {
+            return;
+        }
+    
+        if(orgUnitIds != null)
+            getOrgUDetails(orgUnitIds); 
+    }
+    
+    selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

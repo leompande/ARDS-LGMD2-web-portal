@@ -1,0 +1,28 @@
+
+<h2>Linelisting Aggregation Engine</h2>
+    <ul>
+        <li><a href="linelistAggForm.action">$i18n.getString( "linelisting_aggregation" )</a></li>     
+    </ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-20px; ">
+    <a href="index.action"><img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+
+<script type="text/javascript">
+
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{    
+	    if(orgUnitIds == null || orgUnitIds == "" )
+	    {
+	        return;
+	    }
+	
+	    if(orgUnitIds != null)
+	        getOrgUDetails(orgUnitIds); 
+	}
+	
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

@@ -1,0 +1,19 @@
+
+<a href="index.action"><h2>$i18n.getString( "reports" )&nbsp;</h2></a>
+<ul>
+    #if( $auth.hasAccess( "dhis-web-caseentry", "reportSelect" ) )
+		<li><a href="reportSelect.action">$i18n.getString( "program_summary" )&nbsp;</a></li>
+	#end
+	#if( $auth.hasAccess( "dhis-web-caseentry", "generateTabularReport" ) )
+		<li><a href="app/index.html"> $i18n.getString( "tabular_report" )&nbsp;</a></li> 
+	#end
+	#if( $auth.hasAccess( "dhis-web-caseentry", "statisticalProgramReportSelect" ) )
+		<li><a href="statisticalProgramReportSelect.action"> $i18n.getString( "statistical_program" )&nbsp;</a></li>
+	#end
+	#if( $auth.hasAccess( "dhis-web-caseentry", "programStageCompletenessSelect" ) )
+	<li><a href="programStageCompletenessSelect.action"> $i18n.getString( "program_stage_completeness" )&nbsp;</a></li>
+	#end
+</ul>
+
+<br>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )

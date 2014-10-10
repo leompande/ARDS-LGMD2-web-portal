@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.TargetIndicator" table="hr_target_indicator">
+		<id name="id" column="targetIndicatorId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="32" />
+		
+		<many-to-one name="organisationUnitGroup" column="orgUnitGroupId" class="org.hisp.dhis.organisationunit.OrganisationUnitGroup"/>
+		
+		<many-to-one name="attributeOptionGroup" column="attributeOptionGroupId" class="org.hisp.dhis.hr.AttributeOptionGroup"/>
+		
+		<property name="value" column="value"/>
+    
+    <property name="year" column="year"/>
+    
+	</class>
+</hibernate-mapping>

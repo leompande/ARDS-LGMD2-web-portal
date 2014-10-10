@@ -1,0 +1,13 @@
+
+#set( $size = $modelTypeAttributes.size() )
+{ "modelTypeAttributes": [
+#foreach( $modelTypeAttribute in $modelTypeAttributes )
+{
+      "id": ${modelTypeAttribute.id},
+      "name": "$!encoder.jsonEncode( ${modelTypeAttribute.name} )",
+      "description": "$!encoder.jsonEncode( ${modelTypeAttribute.description} )",
+      "valueType": "$!encoder.jsonEncode( ${modelTypeAttribute.valueType} )"
+}#if( $velocityCount < $size ),#end
+#end
+]
+}

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <!-- Utils / services -->
+
+    <bean id="org.hisp.dhis.light.utils.NamebasedUtils" class="org.hisp.dhis.light.utils.NamebasedUtilsImpl"
+        scope="prototype">
+        <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+        <property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.light.utils.FormUtils" class="org.hisp.dhis.light.utils.FormUtilsImpl"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="stdDevOutlierAnalysisService" ref="org.hisp.dhis.dataanalysis.StdDevOutlierAnalysisService" />
+        <property name="minMaxOutlierAnalysisService" ref="org.hisp.dhis.dataanalysis.MinMaxOutlierAnalysisService" />
+        <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+        <property name="validationRuleService" ref="org.hisp.dhis.validation.ValidationRuleService" />
+        <property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+    </bean>
+
+    <!-- Menu -->
+
+	<bean id="org.hisp.dhis.light.action.NoAction" class="org.hisp.dhis.light.action.NoAction"
+		scope="prototype" />
+
+	<bean id="org.hisp.dhis.light.action.MenuAction" class="org.hisp.dhis.light.action.MenuAction"
+		scope="prototype">
+		<property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+	
+	<!-- Data entry -->
+
+	<bean id="org.hisp.dhis.light.dataentry.action.GetOrganisationUnitsAction"
+		class="org.hisp.dhis.light.dataentry.action.GetOrganisationUnitsAction"
+		scope="prototype">
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.GetDataSetsAction"
+		class="org.hisp.dhis.light.dataentry.action.GetDataSetsAction" 
+		scope="prototype">
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.GetPeriodsAction"
+		class="org.hisp.dhis.light.dataentry.action.GetPeriodsAction" 
+		scope="prototype">
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.GetDataSetOverviewAction"
+		class="org.hisp.dhis.light.dataentry.action.GetDataSetOverviewAction"
+		scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.MarkComplete"
+		class="org.hisp.dhis.light.dataentry.action.MarkComplete" 
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.light.dataentry.action.UndoCompleteAction"
+		class="org.hisp.dhis.light.dataentry.action.UndoCompleteAction" 
+		scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.GetSectionFormAction"
+		class="org.hisp.dhis.light.dataentry.action.GetSectionFormAction"
+		scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dataentry.action.SaveSectionFormAction"
+		class="org.hisp.dhis.light.dataentry.action.SaveSectionFormAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+	</bean>
+
+	<!-- Namebased Data entry -->
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetNamebasedOrganisationUnitsAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetNamebasedOrganisationUnitsAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetBeneficiaryListAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetBeneficiaryListAction"
+        scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="activityReportingService"
+			ref="org.hisp.dhis.mobile.api.ActivityReportingService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.ShowActivityTypeAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.ShowActivityTypeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetActivityListAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetActivityListAction"
+        scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="activityReportingService"
+			ref="org.hisp.dhis.mobile.api.ActivityReportingService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageSectionAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageSectionAction"
+        scope="prototype">
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />	
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.MarkCompleteProgramStageAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.MarkCompleteProgramStageAction"
+        scope="prototype">
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService"/>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageFormAction"
+        scope="prototype">
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="patientDataValueService"
+			ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programStageSectionService"
+			ref="org.hisp.dhis.program.ProgramStageSectionService"/>
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService"/>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.SaveProgramStageFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.SaveProgramStageFormAction"
+        scope="prototype">
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+		<property name="programStageDataElementService" ref="org.hisp.dhis.program.ProgramStageDataElementService" />
+		<property name="programStageInstanceService" ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="programValidationService" ref="org.hisp.dhis.program.ProgramValidationService" />
+		<property name="programStageSectionService" ref="org.hisp.dhis.program.ProgramStageSectionService"/>
+		<property name="programExpressionService" ref="org.hisp.dhis.program.ProgramExpressionService" />
+		<property name="patientDataValueService" ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService"/>
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetBeneficiaryDetailAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetBeneficiaryDetailAction"
+        scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetFindBeneficiaryFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetFindBeneficiaryFormAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="patientAttributeService" ref="org.hisp.dhis.patient.PatientAttributeService" />
+		
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.FindBeneficiarytAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.FindBeneficiarytAction"
+		scope="prototype">
+		  <property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetPatientProgramListAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetPatientProgramListAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="relationshipService"
+			ref="org.hisp.dhis.relationship.RelationshipService" />
+		<property name="relationshipTypeService"
+			ref="org.hisp.dhis.relationship.RelationshipTypeService" />
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="patientIdentifierService" ref="org.hisp.dhis.patient.PatientIdentifierService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="patientAttributeValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageListAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetProgramStageListAction"
+        scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetRepeatableEventRegistrationFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetRepeatableEventRegistrationFormAction"
+        scope="prototype">
+		<property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.SaveRepeatableEventAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.SaveRepeatableEventAction"
+        scope="prototype">
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetAddNewRelationshipFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetAddNewRelationshipFormAction"
+        scope="prototype">
+		<property name="relationshipTypeService"
+			ref="org.hisp.dhis.relationship.RelationshipTypeService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.AddNewRalationshipAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.AddNewRalationshipAction"
+		scope="prototype">
+		<property name="relationshipTypeService"
+			ref="org.hisp.dhis.relationship.RelationshipTypeService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="relationshipService"
+			ref="org.hisp.dhis.relationship.RelationshipService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.RegisterPatientLocationAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.RegisterPatientLocationAction"
+        scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.GetPatientLocationFormAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.GetPatientLocationFormAction"
+        scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<!-- Beneficiary Registration -->
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryregistration.action.GetBeneficiaryRegistrationOrganisationUnitAction"
+		class="org.hisp.dhis.light.beneficiaryregistration.action.GetBeneficiaryRegistrationOrganisationUnitAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryregistration.action.RegisterBeneficiaryAction"
+		class="org.hisp.dhis.light.beneficiaryregistration.action.RegisterBeneficiaryAction"
+		scope="prototype">
+		<property name="patientIdentifierTypeService"
+			ref="org.hisp.dhis.patient.PatientIdentifierTypeService" />
+		<property name="patientAttributeService"
+			ref="org.hisp.dhis.patient.PatientAttributeService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryregistration.action.SaveBeneficiaryAction"
+		class="org.hisp.dhis.light.beneficiaryregistration.action.SaveBeneficiaryAction"
+		scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="patientIdentifierTypeService"
+			ref="org.hisp.dhis.patient.PatientIdentifierTypeService" />
+		<property name="patientAttributeService"
+			ref="org.hisp.dhis.patient.PatientAttributeService" />
+		<property name="patientAttributeOptionService"
+			ref="org.hisp.dhis.patient.PatientAttributeOptionService" />
+		<property name="patientIdentifierService"
+			ref="org.hisp.dhis.patient.PatientIdentifierService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+	</bean>
+
+	<!-- Beneficiary Enrollment -->
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.GetBeneficiaryEnrollmentOrganisationUnitAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.GetBeneficiaryEnrollmentOrganisationUnitAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.GetBeneficiarySearchingFormAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.GetBeneficiarySearchingFormAction"
+		scope="prototype">
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.SearchBeneficiaryAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.SearchBeneficiaryAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.GetEnrollmentProgramListAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.GetEnrollmentProgramListAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.GetProgramEnrollmentFormAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.GetProgramEnrollmentFormAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.beneficiaryenrollment.action.SaveMobileProgramEnrollmentAction"
+		class="org.hisp.dhis.light.beneficiaryenrollment.action.SaveMobileProgramEnrollmentAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="formUtils"
+			ref="org.hisp.dhis.light.utils.FormUtils" />
+		<property name="patientAttributeValueService"
+			ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+		<property name="patientAttributeOptionService"
+			ref="org.hisp.dhis.patient.PatientAttributeOptionService" />
+		<property name="patientAttributeService"
+			ref="org.hisp.dhis.patient.PatientAttributeService" />
+		<property name="patientIdentifierService"
+			ref="org.hisp.dhis.patient.PatientIdentifierService" />
+	</bean>
+
+	<!-- Single Event -->
+
+	<bean id="org.hisp.dhis.light.singleevent.action.GetSingleEventAction"
+		class="org.hisp.dhis.light.singleevent.action.GetSingleEventAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.singleevent.action.GetSingleEventBeneficiaryAction"
+		class="org.hisp.dhis.light.singleevent.action.GetSingleEventBeneficiaryAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.singleevent.action.GetSingleEventFormAction"
+		class="org.hisp.dhis.light.singleevent.action.GetSingleEventFormAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="patientDataValueService"
+			ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService"/>	
+	</bean>
+
+	<bean id="org.hisp.dhis.light.singleevent.action.SaveSingleEventAction"
+		class="org.hisp.dhis.light.singleevent.action.SaveSingleEventAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="patientDataValueService"
+			ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="programStageDataElementService"
+			ref="org.hisp.dhis.program.ProgramStageDataElementService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService"/>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.singleevent.action.FindSingleEventOptionSetAction"
+		class="org.hisp.dhis.light.singleevent.action.FindSingleEventOptionSetAction"
+        scope="prototype">
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+	</bean>
+	
+	<!-- Dashboard -->
+
+	<bean id="org.hisp.dhis.light.dashboard.action.ProvideContentAction"
+		class="org.hisp.dhis.light.dashboard.action.ProvideContentAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="chartService" ref="org.hisp.dhis.chart.ChartService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dashboard.action.GetReportAction"
+		class="org.hisp.dhis.light.dashboard.action.GetReportAction" scope="prototype">
+		<property name="reportTableService" ref="org.hisp.dhis.reporttable.ReportTableService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dashboard.action.GetChartAction"
+		class="org.hisp.dhis.light.dashboard.action.GetChartAction" scope="prototype">
+		<property name="chartService" ref="org.hisp.dhis.chart.ChartService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.dashboard.action.GetReportParamsAction"
+		class="org.hisp.dhis.light.dashboard.action.GetReportParamsAction"
+		scope="prototype">
+		<property name="reportTableService" ref="org.hisp.dhis.reporttable.ReportTableService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+
+	<!-- Settings -->
+
+	<bean id="org.hisp.dhis.light.settings.action.GetSettingsAction"
+		class="org.hisp.dhis.light.settings.action.GetSettingsAction" 
+		scope="prototype">
+		<property name="resourceBundleManager"
+			ref="org.hisp.dhis.i18n.resourcebundle.ResourceBundleManager" />
+		<property name="localeManager" ref="org.hisp.dhis.i18n.locale.LocaleManager" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.settings.action.SaveSettingsFormAction"
+		class="org.hisp.dhis.light.settings.action.SaveSettingsFormAction"
+		scope="prototype">
+		<property name="localeManagerInterface" ref="org.hisp.dhis.i18n.locale.LocaleManager" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<!-- Messages -->
+
+	<bean id="org.hisp.dhis.light.message.action.GetMessagesAction"
+		class="org.hisp.dhis.light.message.action.GetMessagesAction" 
+		scope="prototype">
+		<property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.message.action.GetMessageAction"
+		class="org.hisp.dhis.light.message.action.GetMessageAction" 
+		scope="prototype">
+		<property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.message.action.SendReplyAction"
+		class="org.hisp.dhis.light.message.action.SendReplyAction" 
+		scope="prototype">
+		<property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.message.action.SendFeedbackAction"
+		class="org.hisp.dhis.light.message.action.SendFeedbackAction" 
+		scope="prototype">
+		<property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+	</bean>
+	
+	<!-- Anonymous -->
+	
+	<bean
+		id="org.hisp.dhis.light.anonymous.action.SearchOrgUnitAction"
+		class="org.hisp.dhis.light.anonymous.action.SearchOrgUnitAction"
+		scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.light.anonymous.action.GetAllAnonymousProgramAction"
+		class="org.hisp.dhis.light.anonymous.action.GetAllAnonymousProgramAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="orgUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.light.anonymous.action.ShowAnonymousFormAction"
+		class="org.hisp.dhis.light.anonymous.action.ShowAnonymousFormAction"
+		scope="prototype">
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService"/>
+	</bean>
+
+	<bean id="org.hisp.dhis.light.anonymous.action.SaveAnonymousProgramAction"
+		class="org.hisp.dhis.light.anonymous.action.SaveAnonymousProgramAction"
+		scope="prototype">
+		<property name="orgUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />	
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="util" ref="org.hisp.dhis.light.utils.NamebasedUtils" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="programStageInstanceService"
+			ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="patientDataValueService"
+			ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+		<property name="programStageDataElementService"
+			ref="org.hisp.dhis.program.ProgramStageDataElementService" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService"/>	
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.light.namebaseddataentry.action.DeleteRelationshipAction"
+		class="org.hisp.dhis.light.namebaseddataentry.action.DeleteRelationshipAction"
+        scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="relationshipService"
+			ref="org.hisp.dhis.relationship.RelationshipService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.light.messaging.action.FindUserAction"
+		class="org.hisp.dhis.light.messaging.action.FindUserAction"
+        scope="prototype">
+		<property name="userService" ref="org.hisp.dhis.user.UserService" />
+	</bean>
+</beans>

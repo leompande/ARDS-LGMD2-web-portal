@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  <!-- use the DHIS web portal default -->
+    <include file="dhis-web-commons.xml"/>
+
+    <package name="dhis-web-leprosy" extends="dhis-web-commons" namespace="/dhis-web-leprosy">
+        <action name="index" class="org.hisp.dhis.sandbox.leprosy.action.HomePageAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-leprosy/homepage.vm</param>
+            <param name="menu">/dhis-web-leprosy/menu.vm</param>
+        </action>
+        <action name="patientSearch" class="org.hisp.dhis.sandbox.leprosy.action.PatientSearchAction">
+            <result name="success" type="velocity">/main.vm</result>
+        </action>
+        <action name="patientRegister" class="org.hisp.dhis.sandbox.leprosy.action.PatientRegistrationAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-leprosy/patientRegister.vm</param>
+            <param name="menu">/dhis-web-leprosy/menuWithTree.vm</param>
+            <param name="javascripts">javascript/general.js,javascript/patientRegister.js,../dhis-web-commons/ouwt/ouwt.js</param>
+			<interceptor-ref name="organisationUnitTreeStack"/>
+        </action>
+
+		<!-- AJAX Requests -->
+		<action name="getOrgUnitDetails" class="org.hisp.dhis.sandbox.leprosy.action.GetOrgUnitsAction">
+			<result name="success" type="velocity">/dhis-web-leprosy/responseOrgUnit.vm</result>
+			<interceptor-ref name="transactionStack"/>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+    </package>
+</struts>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <start>
+    <element name="dataElements">
+    <zeroOrMore>
+      <element name="dataElement">
+         <attribute name="code"><text /></attribute>
+         <attribute name="uuid"><text /></attribute>
+         <element name="name">
+             <attribute name="shortName"><text /></attribute>
+             <attribute name="alternativeName"><text /></attribute>
+             <text />
+         </element>
+         <element name="description">
+             <attribute name="type"><text /></attribute>
+             <text />
+         </element>
+         <element name="active"><text /></element>
+      </element>
+    </zeroOrMore>
+    </element>
+  </start>
+
+</grammar>

@@ -1,0 +1,97 @@
+
+<h3>$i18n.getString( "scheduling_management" ) #openHelp( "scheduling" )</h3>
+
+<input id="isRunning" type="hidden" value="${running}">
+
+<form id="schedulingForm" action="scheduleTasks.action" method="post">
+
+<!-- Resource tables -->
+
+<div class="settingHeader">$i18n.getString( "resource_tables" )</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "resource_table_task_strategy" )</div>
+
+<div class="setting settingIndent">
+<select id="resourceTableStrategy" name="resourceTableStrategy" class="scheduling">
+	<option value="never">$i18n.getString( "never" )</option>
+	<option value="allDaily"#if( $resourceTableStrategy && $resourceTableStrategy == "allDaily" ) selected="selected"#end>$i18n.getString( "all_daily" )</option>
+</select>
+</div>
+
+<!-- Analytics -->
+
+<div class="settingHeader">$i18n.getString( "analytics_tables" )</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "analytics_tables_task_strategy" )</div>
+
+<div class="setting settingIndent">
+<select id="analyticsStrategy" name="analyticsStrategy" class="scheduling">
+    <option value="never">$i18n.getString( "never" )</option>
+    <option value="allDaily"#if( $analyticsStrategy && $analyticsStrategy == "allDaily" ) selected="selected"#end>$i18n.getString( "all_daily" )</option>
+    <option value="last3YearsDaily"#if( $analyticsStrategy && $analyticsStrategy == "last3YearsDaily" ) selected="selected"#end>$i18n.getString( "last_3_years_daily" )</option>
+</select>
+</div>
+
+<!-- Data mart -->
+
+<div class="settingHeader">$i18n.getString( "data_mart" )</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "data_mart_task_strategy" )</div>
+
+<div class="setting settingIndent">
+<select id="dataMartStrategy" name="dataMartStrategy" class="scheduling" onchange="toggleDataMart()">
+    <option value="never">$i18n.getString( "never" )</option>
+    <option value="last12Daily"#if( $dataMartStrategy && $dataMartStrategy == "last12Daily" ) selected="selected"#end>$i18n.getString( "last_12_months_daily" )</option>
+    <option value="last6Daily6To12Weekly"#if( $dataMartStrategy && $dataMartStrategy == "last6Daily6To12Weekly" ) selected="selected"#end>$i18n.getString( "last_6_months_daily_6_to_12_months_weekly" )</option>       
+</select>
+</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "aggregation_period_types" )</div>
+
+<div class="setting settingIndent">
+    <input type="checkbox" id="weekly" class="scheduling dataMart" name="scheduledPeriodTypes" value="Weekly"#if( $scheduledPeriodTypes.contains( "Weekly" ) ) checked="checked"#end> <label for="weekly">$i18n.getString( "Weekly" )</label>&nbsp;
+    <input type="checkbox" id="monthly" class="scheduling dataMart" name="scheduledPeriodTypes" value="Monthly"#if( $scheduledPeriodTypes.contains( "Monthly" ) ) checked="checked"#end> <label for="monthly">$i18n.getString( "Monthly" )</label>&nbsp;
+    <input type="checkbox" id="biMonthly" class="scheduling dataMart" name="scheduledPeriodTypes" value="BiMonthly"#if( $scheduledPeriodTypes.contains( "BiMonthly" ) ) checked="checked"#end> <label for="biMonthly">$i18n.getString( "BiMonthly" )</label>&nbsp;
+    <input type="checkbox" id="quarterly" class="scheduling dataMart" name="scheduledPeriodTypes" value="Quarterly"#if( $scheduledPeriodTypes.contains( "Quarterly" ) ) checked="checked"#end> <label for="quarterly">$i18n.getString( "Quarterly" )</label><br>
+    <input type="checkbox" id="sixMonthly" class="scheduling dataMart" name="scheduledPeriodTypes" value="SixMonthly"#if( $scheduledPeriodTypes.contains( "SixMonthly" ) ) checked="checked"#end> <label for="sixMonthly">$i18n.getString( "SixMonthly" )</label>&nbsp;
+    <input type="checkbox" id="yearly" class="scheduling dataMart" name="scheduledPeriodTypes" value="Yearly"#if( $scheduledPeriodTypes.contains( "Yearly" ) ) checked="checked"#end> <label for="yearly">$i18n.getString( "Yearly" )</label>&nbsp;
+    <input type="checkbox" id="financialYearly" class="scheduling dataMart" name="scheduledPeriodTypes" value="FinancialJuly"#if( $scheduledPeriodTypes.contains( "FinancialJuly" ) ) checked="checked"#end> <label for="financialYearly">$i18n.getString( "financial_yearly" )</label>			
+</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "organisation_unit_group_set_aggregation_level" )</div>
+
+<div class="setting settingIndent">
+<select id="orgUnitGroupSetAggLevel" name="orgUnitGroupSetAggLevel" class="scheduling dataMart">
+    <option value="0"#if( $orgUnitGroupSetAggLevel && $orgUnitGroupSetAggLevel == 0 ) selected="selected"#end>[$i18n.getString( "no_aggregation" )]</option>
+	#foreach( $level in $levels )
+	<option value="$level.level"#if( $orgUnitGroupSetAggLevel && $orgUnitGroupSetAggLevel == $level.level ) selected="selected"#end>$encoder.htmlEncode( $level.displayName )</option>
+	#end
+</select>
+</div>
+
+<!-- Monitoring -->
+
+<div class="settingHeader">$i18n.getString( "data_monitoring" )</div>
+
+<div class="settingLabel settingIndent">$i18n.getString( "data_monitoring_strategy" )</div>
+
+<div class="setting settingIndent">
+<select id="monitoringStrategy" name="monitoringStrategy" class="scheduling">
+    <option value="never">$i18n.getString( "never" )</option>
+    <option value="allDaily"#if( $monitoringStrategy && $monitoringStrategy == "allDaily" ) selected="selected"#end>$i18n.getString( "all_daily" )</option>
+</select>
+</div>
+
+<div class="setting">
+	<input type="button" style="width:140px" onclick="submitSchedulingForm()"
+	#if ( $running )
+	value="$i18n.getString( 'stop' )"
+	#else
+	value="$i18n.getString( 'start' )"
+	#end
+	/>
+</div>
+
+</form>
+
+<span id="info">$i18n.getString( "scheduling_is" ) $!i18n.getString( $!status )</span>

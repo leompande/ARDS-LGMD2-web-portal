@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+  <!-- System settings -->
+
+  <bean id="org.hisp.dhis.settings.action.system.GetGeneralSettingsAction"
+      class="org.hisp.dhis.settings.action.system.GetGeneralSettingsAction"
+      scope="prototype">
+    <property name="configurationService" ref="org.hisp.dhis.configuration.ConfigurationService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="userGroupService" ref="org.hisp.dhis.user.UserGroupService" />
+    <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.SetGeneralSettingsAction"
+      class="org.hisp.dhis.settings.action.system.SetGeneralSettingsAction"
+      scope="prototype">
+    <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+    <property name="configurationService" ref="org.hisp.dhis.configuration.ConfigurationService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="userGroupService" ref="org.hisp.dhis.user.UserGroupService" />
+    <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.GetAppearanceSettingsAction"
+      class="org.hisp.dhis.settings.action.system.GetAppearanceSettingsAction"
+      scope="prototype">
+    <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+    <property name="moduleManager" ref="org.hisp.dhis.webportal.module.ModuleManager" />
+    <property name="styleManager" ref="org.hisp.dhis.setting.StyleManager" />
+    <property name="localeManager" ref="org.hisp.dhis.i18n.locale.LocaleManager" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.SetAppearanceSettingsAction"
+      class="org.hisp.dhis.settings.action.system.SetAppearanceSettingsAction"
+      scope="prototype">
+    <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+    <property name="styleManager" ref="org.hisp.dhis.setting.StyleManager" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.GetAppearanceSettingsStringAction"
+      class="org.hisp.dhis.settings.action.system.GetAppearanceSettingsStringAction"
+      scope="prototype">
+    <property name="translateSystemSettingManager" ref="org.hisp.dhis.setting.TranslateSystemSettingManager" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.settings.action.system.GetSMTPSettingsAction"
+      class="org.hisp.dhis.settings.action.system.GetSMTPSettingsAction"
+      scope="prototype">
+    <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.SetSMTPSettingsAction"
+      class="org.hisp.dhis.settings.action.system.SetSMTPSettingsAction"
+      scope="prototype">
+    <property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+  </bean>
+
+  <bean id="org.hisp.dhis.settings.action.system.GetAccessSettingsAction"
+      class="org.hisp.dhis.settings.action.system.GetAccessSettingsAction"
+      scope="prototype"/>
+
+  <bean id="org.hisp.dhis.settings.action.system.SetAccessSettingsAction"
+      class="org.hisp.dhis.settings.action.system.SetAccessSettingsAction"
+      scope="prototype"/>
+
+</beans>

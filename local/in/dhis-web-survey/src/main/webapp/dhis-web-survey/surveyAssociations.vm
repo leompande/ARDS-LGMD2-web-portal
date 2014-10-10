@@ -1,0 +1,24 @@
+
+<h3>$i18n.getString( "define_survey_associations" )</h3>
+
+<h4>$encoder.htmlEncode( $survey.name )</h4>
+
+<form id="defineSurveyAssociationsForm" action="defineSurveyAssociations.action" method="post">
+  <div style="display:inline">
+	<input type="hidden" name="surveyId" value="$surveyId">
+  </div>
+  <table id="selectionTable">
+    <tr>
+      <td>
+        #organisationUnitSelectionTree( false, true, false )
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" id="submitButton" value="$i18n.getString( "save" )" style="width:10em">
+        <input type="button" onclick="window.location.href='index.action'" value="$i18n.getString( "cancel" )" style="width:10em">
+      </td>
+    </tr>
+  </table>
+
+</form>

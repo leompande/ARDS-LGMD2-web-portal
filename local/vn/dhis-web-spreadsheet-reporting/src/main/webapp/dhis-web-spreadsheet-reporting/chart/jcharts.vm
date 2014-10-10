@@ -1,0 +1,43 @@
+<h3>$i18n.getString('chart') #openHelp( "jcharts" )</h3>
+<table width=100%>
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:300px"/>
+		</td>
+		<td align=right>			
+			<input type="button" onclick="window.location = 'addJChartForm.action'" value="$i18n.getString('add')" style="width:100px"/>
+			<input type="button" value="$i18n.getString( "cancel" )" onclick="window.location='administration.action'" style="width:100px">			
+		</td>
+	</tr>
+</table>
+
+<table width="100%" class="listTable" id="listTable">
+	<thead>
+		<tr>
+			<th>$i18n.getString('title')</th>			
+			<th width="110px" class="{sorter: false}"></th>
+					
+		</tr>
+	</thead>	
+	<tbody id="list">	
+	#foreach($jchart in $jcharts)
+		<tr id="tr${jchart.id}">
+			<td>$encoder.htmlEncode( $jchart.title )</td>	
+			<td align="left">				
+				<a href="jchartRoles.action?id=$jchart.id" title="$i18n.getString( 'update_reportexcel_userrole' )"><img src="images/user_32.png" alt="$i18n.getString( 'update_reportexcel_userrole' )"></a>				
+				<a href="updateJChartForm.action?id=$jchart.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>				
+				<a href="javascript:removeItem( $jchart.id, '$jchart.title', '$i18n.getString( 'confirm_delete' )', 'deleteJChart.action');" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+				<a href="javascript:translate( '$report.getClass().getSimpleName()', '$report.id' )" title="$i18n.getString( "translation_translate" )"><img src="../images/i18n.png" alt="$i18n.getString( "translation_translate" )"></a>
+			</td>			
+		</tr>		
+	#end
+	</tbody>
+</table>
+
+
+<script>
+	jQuery(document).ready(function(){	  
+		tableSorter( 'listTable' );	
+    });
+	
+</script>

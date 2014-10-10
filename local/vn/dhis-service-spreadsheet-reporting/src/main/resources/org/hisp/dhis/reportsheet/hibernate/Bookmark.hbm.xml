@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="org.hisp.dhis.reportsheet.Bookmark"
+		table="reportexcel_bookmarks">
+
+		<id name="id" column="bookmarkid">
+			<generator class="native" />
+		</id>
+
+		<property name="username" column="username" not-null="true" />
+		
+		<property name="description"  not-null="true" length="1000"/>
+		
+		<property name="type" not-null="true"/>
+
+		<property name="contain" column="contain" not-null="true" length="10000000"/>
+		
+		<property name="extraContain" column="extracontain" length="1000"/>
+		
+		
+
+	</class>
+
+</hibernate-mapping>

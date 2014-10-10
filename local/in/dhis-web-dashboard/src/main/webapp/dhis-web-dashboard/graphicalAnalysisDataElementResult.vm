@@ -1,0 +1,456 @@
+
+<script language="javascript">
+
+  function drillDownResult(evt, selVal )
+  {
+    evt.target.href = "drillDownResult.action?selectedValues="+selVal;
+  }
+    
+	function drillDownPeriodToOrgChildResult(evt, selDrillDownData )
+	{
+	   
+	    //var aggDataCB = '$aggDataCB';
+	    var deSelection = '$deSelection';
+	    var selectedButton  = '$selectedButton';
+	    
+	    var viewBy = 'children';
+	    
+	    //alert( deSelection + ":" + selectedButton );
+	   
+	    //alert( selDrillDownData );
+	    
+	    var arugDetails = selDrillDownData.split(":");
+	    var orgUnitId = arugDetails[0];
+	    var orgUnitGroupId = arugDetails[1];
+	    var dataElementId = arugDetails[2];
+	    var categoryCombo = arugDetails[3];
+	    var periodTypeName = arugDetails[4];
+	    var startDate = arugDetails[5];
+	    
+	    var periodLB = startDate.split("-");
+	    var year = periodLB[0];
+	    var month = periodLB[1]
+	    
+	    var endDate = arugDetails[6];
+	    
+	    var aggDataCB = arugDetails[9];
+	    //alert( aggDataCB );
+	    
+	    //alert( orgUnitId + ","  + dataElementId + "," + categoryCombo + "," + periodTypeName + "," + startDate + "," + endDate + "," + year + "," + month );
+	   
+	   
+	   	/*
+	   
+	    evt.target.href = "generatedrillDownPeriodToOrgChildChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+	   */
+	   
+   		var url = "generatedrillDownPeriodToOrgChildChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+		$('#contentDataRecord').dialog('destroy').remove();
+   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+        title: 'Period to Org Child',
+		maximize: true, 
+		closable: true,
+		modal:true,
+		overlay:{background:'#000000', opacity:0.1},
+		width: 1000,
+        height: 800
+    	});
+	   
+	   //evt.target.href = "generatedrillDownPeriodToChildChartDataElement.action?orgUnitListCB="+orgUnitId+"&periodTypeLB="+periodTypeName+"&selStartPeriodList="+startDate+"&selectedDataElements="+ dataElementId + "&categoryLB=children";
+	}
+
+    function drillDownOrgUnitToPeriodResult(evt, selDrillDownData )
+    {
+       
+        //var aggDataCB = '$aggDataCB';
+        var deSelection = '$deSelection';
+        var selectedButton  = '$selectedButton';
+        
+        var viewBy = 'period';
+        
+        //alert( viewBy );
+        var orgGroupChecked = '$ougGroupSetCB';
+       // alert( viewBy + ":" + orgGroupChecked );
+        
+        //alert( deSelection + ":" + selectedButton );
+       
+        //alert( selDrillDownData );
+        var arugDetails = selDrillDownData.split(":");
+        var orgUnitId = arugDetails[0];
+        var orgUnitGroupId = arugDetails[1];
+        var dataElementId = arugDetails[2];
+        var categoryCombo = arugDetails[3];
+        var periodTypeName = arugDetails[4];
+        var startDate = arugDetails[5];
+        var endDate = arugDetails[6];
+        
+        var periodLB = startDate.split(";");
+        var year = periodLB[0];
+        var month = periodLB[1]
+        
+        var periodName = arugDetails[7];
+        
+        var aggDataCB = arugDetails[9];
+        //alert( aggDataCB );
+        //alert( orgUnitId + "," + orgUnitGroupId + ","  + dataElementId + "," + categoryCombo + "," + periodTypeName + "," + startDate + "," + endDate + "," + periodName );
+        
+       // var radioButton = document.getElementById("riRadio").value;
+       
+       // var radioButton = document.getElementById("riRadio");
+        
+       // var ouRadioVal = $( "input[name='riRadio']:checked" ).val();
+        
+       // alert( ouRadioVal );
+        //if( ouRadioVal == "periodWiseDrillDown" )
+        //{
+            
+        /*    
+        evt.target.href = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+        */
+        
+   		var url = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+		$('#contentDataRecord').dialog('destroy').remove();
+   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+        title: 'Org Unit to Period',
+		maximize: true, 
+		closable: true,
+		modal:true,
+		overlay:{background:'#000000', opacity:0.1},
+		width: 1000,
+        height: 800
+    	});        
+        
+ 
+        
+       //}
+        //else
+        //{
+                //evt.target.href = "generatedrillDownPeriodToOrgChildChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton;
+        //}
+        //var periodName = arugDetails[7];
+       // alert( orgUnitId + "," + orgUnitGroupId + ","  + dataElementId + "," + categoryCombo + "," + periodTypeName + "," + startDate + "," + endDate + "," + periodName );
+        //evt.target.href = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton;
+    }
+
+    function drillDownOrgUnitGroupToPeriodResult(evt, selDrillDownData )
+    {
+       
+       // var aggDataCB = '$aggDataCB';
+        var deSelection = '$deSelection';
+        var selectedButton  = '$selectedButton';
+        
+        var viewBy = '$categoryLB';
+        var viewBy = 'period';
+        var orgGroupChecked = '$ougGroupSetCB';
+        //alert( viewBy + ":" + orgGroupChecked );
+        
+       // alert( deSelection + ":" + selectedButton );
+       
+       // alert( selDrillDownData );
+        var arugDetails = selDrillDownData.split(":");
+        var orgUnitId = arugDetails[0];
+        var orgUnitGroupId = arugDetails[1];
+        var dataElementId = arugDetails[2];
+        var categoryCombo = arugDetails[3];
+        var periodTypeName = arugDetails[4];
+        var startDate = arugDetails[5];
+        var endDate = arugDetails[6];
+        
+        var periodLB = startDate.split(";");
+        var year = periodLB[0];
+        var month = periodLB[1]
+        
+        var periodName = arugDetails[7];
+        
+        var aggDataCB = arugDetails[9];
+        //alert( aggDataCB );
+       // alert( orgUnitId + "," + orgUnitGroupId + ","  + dataElementId + "," + categoryCombo + "," + periodTypeName + "," + startDate + "," + endDate + "," + periodName );
+
+        //var ouRadioVal = $( "input[name='riRadio']:checked" ).val();
+        
+        //alert( ouRadioVal );
+        //if( ouRadioVal == "periodWiseDrillDown" )
+        //{
+       
+       /*  
+        evt.target.href = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+       */ 
+        
+   		var url = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy + "&aggDataCB=" + aggDataCB;
+		$('#contentDataRecord').dialog('destroy').remove();
+   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+        title: 'Org Unit Group to Period',
+		maximize: true, 
+		closable: true,
+		modal:true,
+		overlay:{background:'#000000', opacity:0.1},
+		width: 1000,
+        height: 800
+    	});                
+        
+        
+        //}
+        //else
+        //{
+            // evt.target.href = "generatedrillDownPeriodToOrgChildChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton;
+       // }
+        
+        
+        
+        //var periodName = arugDetails[7];
+        //alert( orgUnitId + "," + orgUnitGroupId + ","  + dataElementId + "," + categoryCombo + "," + periodTypeName + "," + startDate + "," + endDate + "," + periodName );
+        //evt.target.href = "generatedrillDownOurUnitToPeriodChartDataElement.action?selDrillDownData="+selDrillDownData + "&selectedButton=" + selectedButton + "&categoryLB=" + viewBy;
+    }
+
+
+// Chart Display Option change start
+
+  function chartTypeOptionChange(evt)
+   {
+     
+     var chartTypeOptionList = document.getElementById("chartTypeOption");
+     var chartTypeOptionValue = chartTypeOptionList.options[ chartTypeOptionList.selectedIndex ].value;
+     
+    // var tempICount = $selectedServiceList.size();
+    
+    // alert(chartTypeOptionValue);
+     
+     var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+     var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+     
+    // alert(chartDisplayOptionValue);   
+	
+	
+	var tempSRC = "generateChart1.action?currentChart="+chartTypeOptionValue + "&chartDisplayOption=" + chartDisplayOptionValue;
+	
+	//document.getElementById('iframeForChart').src = null;
+	document.getElementById('iframeForChart').src = tempSRC;
+	
+	 //document.getElementById("iframeForChart").location.src = "tempSRC";
+
+     //iframeForChart.location.href = "generateChart1.action?currentChart="+chartTypeOptionValue+"&chartDisplayOption="+chartDisplayOptionValue;
+     
+   }
+
+// Chart Display Option change for sorting
+
+   function chartDisplayOptionChange(evt)
+   {
+     var chartTypeOptionList = document.getElementById("chartTypeOption");
+     var chartTypeOptionValue = chartTypeOptionList.options[ chartTypeOptionList.selectedIndex ].value;   
+ 
+     var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+     var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+     
+  	
+   //iframeForChart.location.href = "generateChart1.action?currentChart="+chartNamesToView[chartType][indexForChart]+"&chartDisplayOption="+chartDisplayOptionValue;
+     //alert( iframeForChart.location.href = "generateChart1.action?currentChart="+chartTypeOptionValue+"&chartDisplayOption="+chartDisplayOptionValue);
+     
+     
+     var tempSRC = "generateChart1.action?currentChart="+chartTypeOptionValue + "&chartDisplayOption=" + chartDisplayOptionValue;
+     document.getElementById('iframeForChart').src = tempSRC;
+     
+    // iframeForChart.location.href = "generateChart1.action?currentChart="+chartTypeOptionValue+"&chartDisplayOption="+chartDisplayOptionValue;
+       
+     //getSortedList(chartDisplayOptionValue);
+     
+     getSortedListDataElement(chartDisplayOptionValue);     
+   }
+
+function getSortedListForSummary()
+{
+     var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+     var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+
+     //getSortedList(chartDisplayOptionValue);
+     getSortedListDataElement(chartDisplayOptionValue);
+}
+/*
+function getSortedList(chartDisplayOptionValue)
+{
+    //var url = "getSortedData.action?chartDisplayOption=" + chartDisplayOptionValue;
+        
+    var request = new Request();
+    request.setResponseTypeXML( 'messages' );
+    request.setCallbackSuccess( getSortedListReceived );
+    //request.send( url );
+
+    var requestString = "getSortedDataElement.action";
+    var params = "chartDisplayOption=" + chartDisplayOptionValue;
+    request.sendAsPost( params );
+    request.send( requestString );
+}
+*/
+/*
+function getSortedListReceived(xmlObject)
+{   
+    var messages = xmlObject.getElementsByTagName("message");
+    document.getElementById("headingInfoId").innerHTML = "";
+    document.getElementById("testId").value = "";
+    
+    for ( var i = 0; i < messages.length; i++ )
+    {
+        var hinfo = messages[ i ].firstChild.nodeValue;
+        //document.getElementById("headingInfoId").innerHTML += hinfo;
+        document.getElementById("testId").value += hinfo;
+    }
+    
+    document.getElementById("headingInfoId").innerHTML = document.getElementById("testId").value;           
+}
+*/
+//fucction for selected Button is ViewChart
+
+function exportToExcelFunction1( summaryOption )
+	{
+	    //alert("inside Viw Summary:" + summaryOption );
+	    var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+	    var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+	    
+	    document.getElementById("exportExcelAnchor1").href="exportDataElementsToExcel.action?viewSummary="+summaryOption+"&chartDisplayOption="+chartDisplayOptionValue;
+	
+	}
+ 
+function exportDataStatusResultToWorkBook()
+	{               
+	    document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;                                
+	
+	    return true;                
+	}
+
+//fucction for selected Button is ViewSummary
+
+function exportToExcelFunction2( summaryOption )
+	{
+	   // alert("inside Viw Summary" + summaryOption );
+	    var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+	    var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+	    
+	    document.getElementById("exportExcelAnchor2").href="exportDataElementsToExcel.action?viewSummary="+summaryOption+"&chartDisplayOption="+chartDisplayOptionValue;
+	
+	}
+
+</script>
+<div align="right" class="NormalB">
+    <table>
+        <tr>
+       
+	<td class="NormalB">
+	   #if($selectedButton.equals("ViewSummary"))
+			<!-- <td class="NormalB">
+                 #if(  !$categoryLB.equals( "period" ) )
+                    <input type="radio" id="riRadio" name="riRadio" value="periodWiseDrillDown" checked>Period Wise Drill Down
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="riRadio" name="riRadio" value="childrenWiseDrillDown" >Children Wise Drill Down
+                    &nbsp;&nbsp;&nbsp;
+               #end 
+              </td> -->  
+			  <td class="NormalB"><a id="exportExcelAnchor2" name="exportExcelAnchor2" href="#" onclick="javascript:exportToExcelFunction2('yes')" target="_blank">Export To WorkBook</a></td>
+			  <td class="NormalB">&nbsp;&nbsp;
+			            <select id="chartDisplayOption" name="chartDisplayOption" onchange="getSortedListForSummary()">
+			                <option value="none">Select Sort Type</option>
+			                <option value="ascend">Ascending</option>
+			                <option value="desend">Desending</option>
+			                <option value="alphabet">Alphabetical</option>
+			            </select>
+			            &nbsp;&nbsp;
+			  <br><br>
+			 </td>
+     </tr>      
+     #else    
+     <tr>     
+     	<!--<td class="NormalB">
+	        #if(  !$categoryLB.equals( "period" ) )
+	        <input type="radio" id="riRadio" name="riRadio" value="periodWiseDrillDown" onclick="" checked>Period Wise Drill Down
+	        &nbsp;&nbsp;&nbsp;
+	        <input type="radio" id="riRadio" name="riRadio" value="childrenWiseDrillDown" onclick="" >Children Wise Drill Down
+	        &nbsp;&nbsp;&nbsp;
+	       #end 
+        </td>   -->
+		<td class="NormalB"><a id="exportExcelAnchor1" name="exportExcelAnchor1" href="#" onclick="javascript:exportToExcelFunction1('no')" target="_blank">Export To Excel</a></td>
+		<td class="NormalB">&nbsp;&nbsp;<!--<font face="Arial, Helvetica, sans-serif" color="#000000">-->
+		            <select id="chartTypeOption" name="chartTypeOption" onchange="chartTypeOptionChange(event)">
+		                <option value="Vertical3DBarChart">Vertical 3D BarChart</option>
+		                <option value="Horizontal3DBarChart">Horizontal 3D BarChart</option>
+		                <option value="LineChart">Line Chart</option>
+		                <option value="LineAndBarChart">Line And BarChart</option>
+		                 <option value="AreaChart" >Area Chart</option>
+		            </select>
+		            &nbsp;&nbsp;
+		            <select id="chartDisplayOption" name="chartDisplayOption" onchange="chartDisplayOptionChange(event)">
+		                <option value="none">Select Sort Type</option>
+		                <option value="ascend">Ascending</option>
+		                <option value="desend">Desending</option>
+		                <option value="alphabet">Alphabetical</option>
+		            </select>
+		</td>        
+    </tr>            
+   #end 
+</table>             
+</div> 
+<div id="formResult">
+	<div id="headingInfoId">
+		<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: dotted" bordercolor="#111111" width="100%">                
+		    <tr>
+		        <td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1">Data Element Name</td>
+		        #foreach($xaxisvalue in $dataElementChartResult.categories)
+		          <td class="TableHeadingCellStyles" align="center" style="border-style: dotted; border-width: 1">$xaxisvalue</td>                   
+		        #end
+		    </tr>      
+			    #set($count1 = 0)
+			    #set( $count3 = 0 )
+			    #set( $count4 = 0 )                   
+			    #foreach($onedataList in $dataElementChartResult.data)  
+			    <!--	#set( $dataElementList = $dataElementChartResult.series )-->
+			     <!--    #set( $dataElementList = $dataElementChartResult.getSeries() )-->
+		      <tr>
+		        <!--<td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1">$yseriesList.get($count1)</td>-->
+		            <td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1">$listTool.get( $dataElementChartResult.series, $count1 )</td>  
+		          <!--  <td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1">$dataElementChartResult.series[$count1]</td>-->
+		           #foreach($data in $onedataList)
+		          <!--  #if( $categoryLB.equals( "period" ) && !$ougSetCB && $riRadio.equals( "dataElementsRadio" ) && $selectedStatus.get($count3).equals("yes") )
+		                <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownResult( event, '$selectedValues.get($count3)' )" target="_blank">$data</a></td>                                    
+		                #set( $count3 = $count3 + 1 )
+		            #else-->
+		            #if( $categoryLB.equals( "period" ) && !$ougGroupSetCB && $selectedStatus.get($count1).equals("yes") )
+                         <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownResult( event, '$selectedValues.get($count3)' )" target="_blank">$data</a></td>                                    
+                    #set( $count3 = $count3 + 1 ) 
+                    #elseif( $categoryLB.equals( "period" ) && !$ougGroupSetCB )
+                        <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownPeriodToOrgChildResult( event, '$selectedDrillDownData.get($count4)' )">$data</a></td></td>
+                    #set( $count4 = $count4 + 1 )
+                    #elseif( $categoryLB.equals( "period" ) && $ougGroupSetCB )
+                        <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownPeriodToOrgChildResult( event, '$selectedDrillDownData.get($count4)' )">$data</a></td></td>
+                    #set( $count4 = $count4 + 1 )
+                    #elseif( ( $categoryLB.equals( "children" ) || $categoryLB.equals( "random" )) && !$ougGroupSetCB )
+                        <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownOrgUnitToPeriodResult( event, '$selectedDrillDownData.get($count4)' )">$data</a></td></td>
+                    #set( $count4 = $count4 + 1 )
+                    #elseif( $categoryLB.equals( "children" ) && $ougGroupSetCB )
+                        <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownOrgUnitToPeriodResult( event, '$selectedDrillDownData.get($count4)' )">$data</a></td></td>
+                    #set( $count4 = $count4 + 1 )
+                    #elseif( $categoryLB.equals( "random" ) && $ougGroupSetCB )
+                        <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><a href="#" onclick="javascript:drillDownOrgUnitGroupToPeriodResult( event, '$selectedDrillDownData.get($count4)' )">$data</a></td></td>
+                    #set( $count4 = $count4 + 1 )
+                   
+                    #else
+		                <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1">$data</td>
+		            #end
+		          #end
+		        #end
+		        #set( $count1 = $count1 + 1 )
+		      </tr>    
+		    #end    
+		</table>
+	</div>
+#if($selectedButton.equals("ViewSummary"))
+    <br><br>
+     #else
+     <br>
+         <div align="center">
+             <iframe name="iframeForChart" id="iframeForChart" src="generateChart1.action?currentChart=Vertical3DBarChart" width="850px" height="550px" scrolling=auto frameborder="0"></iframe>
+         </div>    
+         <br>
+     #end
+</div> 
+        <textarea id="testId" rows="10" cols="70" style="display:none">&nbsp;</textarea>                                                                        
+<!--</form>-->
+
+    

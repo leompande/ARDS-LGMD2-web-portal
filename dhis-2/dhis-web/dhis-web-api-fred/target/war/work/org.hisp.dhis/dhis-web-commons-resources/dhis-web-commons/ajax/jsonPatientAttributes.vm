@@ -1,0 +1,10 @@
+#set( $size = $!{patientAttributes.size()} )
+{ "patientAttributes": [
+  #foreach( $patientAttribute in $!{patientAttributes} )
+  {
+    "id": "${patientAttribute.id}",
+	"name": "$!encoder.jsonEncode( ${patientAttribute.name} )"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

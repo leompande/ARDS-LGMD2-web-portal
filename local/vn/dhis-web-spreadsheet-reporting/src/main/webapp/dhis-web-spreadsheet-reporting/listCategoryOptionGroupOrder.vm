@@ -1,0 +1,134 @@
+<script type="text/javascript">
+	var validator = null;
+
+	jQuery(document).ready( function()
+	{
+		validator = validation( "categoryOptionGroupsForm", function( form ) { validateCategoryOptionGroupOrder( form ); });
+	} );
+</script>
+<h3>$i18n.getString( 'categoryoption_groups' )</h3>
+<h4><font color="green">$!encoder.htmlEncode( $!report.displayName )</font></h4>
+<table width="800px">
+	<tr>
+		<td colspan=2>
+			<input type="button" onclick="javascript:openAddCategoryOptionGroupOrder();" value="$i18n.getString('add')" style="width:100px"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location='listAll${clazzSimpleName}.action'" style="width:100px"/>
+		</td>
+		<td width="100px">
+			<input type="button" value="$i18n.getString( 'update_order' )" onclick="javascript:updateSortCategoryOptionGroupOrder();" style="width:150px"/>
+		</td>
+	</tr>
+	<tr>
+		<th colspan=2>$i18n.getString('name')</th>
+		<th width="100px">$i18n.getString('operations')</th>		
+	</tr>	
+</table>
+
+<table align="right">
+	<tr>
+		<td style="width:20em; padding-left:2em; vertical-align:top">
+			<div id="detailsArea" style="display:none">
+				<div style="float:right">
+					<a href="javascript:hideDetails()" title="$i18n.getString( 'hide_details' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_details' )"/></a>
+				</div>				
+				<p><label>$i18n.getString( "name" ):</label><br/><span id="nameField"></span></p>
+				<p><label>$i18n.getString( "number_of_members" ):</label><br/><span id="memberCountField"></span></p>
+			</div>
+
+			<div id="warningArea" style="position:fixed;right:10px;top:200px;display:none">
+				<div style="float:right">
+					<a href="javascript:hideWarning()" title="$i18n.getString( 'hide_warning' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_warning' )"/></a>
+				</div>
+				<p><span id="warningField"></span></p>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<ul id="sortable"> 
+#foreach( $group in $!report.categoryOptionGroupOrders )
+	<li class="ui-state-default" name="categoryOptionGroupOrder" value="$group.id" title="$i18n.getString( 'sort_order_help' )">		
+		<table cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<td width="625px">$!encoder.htmlEncode( $group.name )</td>
+				<td>
+					<a href="javascript:openUpdateCategoryOptionGroupOrder( '$group.id' );" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>
+					<a href="javascript:openSortCategoryOptionForGroupOrder( '$group.id' );" title="$i18n.getString( 'sort_categoryoption' )"><img src="../images/sort.png" border="1px"/></a>
+					<a href="javascript:deleteCategoryOptionGroupOrder( '$group.id', '$group.name' );" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"/></a>
+					<a href="javascript:showCategoryOptionGroupOrderDetails( '$group.id' );" title="$i18n.getString( 'show_details' )"><img src="../images/information.png" border="1px" alt="$i18n.getString( 'show_details' )"/></a>
+				</td>
+			</tr>
+		</table>
+	</li> 	
+#end
+</ul>
+
+<div id="categoryOptionGroups">
+	<form name="categoryOptionGroupsForm" id="categoryOptionGroupsForm" method="POST">
+		<input type="hidden" name="id" value="$report.id"/>
+		<input type="hidden" name="categoryOptionGroupOrderId" id="categoryOptionGroupOrderId"/>
+		<table>
+			<tr>
+				<td>$i18n.getString('name')</td>
+				<td><input type="text" style="width:400px" id="name" name="name" class="{validate:{required:true}}"/></td>
+			</tr>
+		</table>		
+		<br/>		
+		<table width="100%">		
+			<tr>
+				<td colspan="4">
+					<select id="categoryId" name="categoryId" 
+					onchange="javascript:categoryLib.loadCategoryOptionsByCategory( this.value , selectedCategoryOptionMap[ byId( 'categoryOptionGroupOrderId' ).value + '-' + this.value ], 'availableCategoryOptions', 'categoryOptionIds', false );"
+					style="width:300px"></select>
+				</td>
+			</tr>
+			<tr>
+				<td width="23%">
+					<select id="availableCategoryOptions" name="availableCategoryOptions" multiple="true" size="13" style="width:300px" ondblclick="javascript:moveSelectedById('availableCategoryOptions','categoryOptionIds');"></select>
+				</td>
+				<td width="7%" align="center">
+					<input type="button" value="&gt;" onclick="javascript:moveSelectedById('availableCategoryOptions','categoryOptionIds');" style="width:50px"/><br/>
+					<input type="button" value="&lt;" onclick="javascript:moveSelectedById('categoryOptionIds' , 'availableCategoryOptions' );" style="width:50px"/><br/>
+					<input type="button" value="&gt;&gt;" onclick="javascript:moveAllById('availableCategoryOptions' , 'categoryOptionIds' );" style="width:50px"/><br/>
+					<input type="button" value="&lt;&lt;" onclick="javascript:moveAllById('categoryOptionIds' , 'availableCategoryOptions' );" style="width:50px"/>
+				</td>
+				<td width="23%">
+					<select id="categoryOptionIds" name="categoryOptionIds" multiple="true" size="13" style="width:300px" ondblclick="moveSelectedById('categoryOptionIds', 'availableCategoryOptions' )"></select>
+				</td>
+				<td width="47%"><a href="javascript:moveSelectedOptionToTop( 'categoryOptionIds' );"><img src="../images/move_top.png" style="cursor: pointer; width: 20px;" align="absmiddle"/></a><br/><br/>
+					<a href="javascript:moveUpSelectedOption( 'categoryOptionIds' );"><img src="../images/move_up.png" style="cursor: pointer; width: 20px;" align="absmiddle"/></a><br/><br/>
+					<a href="javascript:moveDownSelectedOption( 'categoryOptionIds' );"><img src="../images/move_down.png" style="cursor: pointer; width: 20px;" align="absmiddle"/></a><br/><br/>
+					<a href="javascript:moveSelectedOptionToBottom( 'categoryOptionIds' );"><img src="../images/move_bottom.png" style="cursor: pointer; width: 20px;" align="absmiddle"/></a>
+				</td>
+			</tr>
+		</table>
+
+	<p align="center">
+	<input type="submit" value="$i18n.getString( 'save' )" style="width:130px"/>		
+	<input type="button" value="$i18n.getString( 'cancel' )" style="width:130px" onclick="dialog.dialog('close')"/>		
+	</p>
+	</form>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+	var i18n_confirm_delete = '$encoder.jsEscape($i18n.getString( 'confirm_delete' ) , "'")';
+	var i18n_name_is_null = '$encoder.jsEscape($i18n.getString( 'i18n_name_is_null' ) , "'")';
+	var i18n_label = '$encoder.jsEscape($i18n.getString( 'select_category' ) , "'")';
+	var i18n_verify_category = '$encoder.jsEscape($i18n.getString( 'please_select_category' ) , "'")';
+	var i18n_selected_list_empty = '$encoder.jsEscape($i18n.getString( 'selected_list_should_not_empty' ) , "'")';
+
+	var reportId = ${report.id};
+	var clazzName = '${clazzSimpleName}';
+	
+	$(function() {
+		$("#sortable").sortable({
+			placeholder: 'ui-state-highlight'
+		});
+		$("#sortable").disableSelection();
+		
+	});
+	
+	var dialog = jQuery("#categoryOptionGroups").dialog( { modal:true,autoOpen:false,width:720,title:"$i18n.getString('categoryoption_groups')" } );
+</script>

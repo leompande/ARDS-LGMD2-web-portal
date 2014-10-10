@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="org.hisp.dhis.jchart.JChartSeries"
+		table="jchart_series">
+
+		<id name="id" column="jchart_seriesid">
+			<generator class="native" />
+		</id>
+
+		<property name="color"/>
+		
+		<property name="type"/>
+		
+		<many-to-one name="indicator" column="indicatorid" class="org.hisp.dhis.indicator.Indicator"/>
+		
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,125 @@
+<table width="100%">
+    <tr>
+        <td class='text-column' >$i18n.getString( "search_result_matching_the_search_criteria" ):</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>
+        #if($!listAll)
+            $i18n.getString( "list_all_equipments" )
+        #else
+            $i18n.getString( "search_equipment_by_attributes" )
+        #end
+        </td>
+        <td>&nbsp;</td>
+    </tr>   
+    
+    <tr>
+        <td class='text-column' >$i18n.getString( "total_result" )</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>$!total</td>
+        <td align="right"><input type="button" value='$i18n.getString( "add_new" )' onclick="showAddEquipmentForm();"></td>
+    </tr>
+</table>
+
+#if( $equipmentList.size() > 0 )
+<table class="mainPageTable">
+    <tr>
+    <td> 
+      <table class="listTable" id="equipmentList" width='100%'>
+      	<col width="30"/>
+      	#set($equipmetnInstanceName = "" )
+          #foreach( $equipmentTypeAttribute in $equipmentTypeAttributeList )
+			<col/>
+			##set( $equipmetnInstanceName = $equipmetnInstanceName + " - " + $equipmentTypeAttribute.name )
+			#set( $equipmetnInstanceName = $equipmetnInstanceName + " - " + $equipmentTypeAttribute.equipmentTypeAttribute.name )
+		  #end
+          <col width="170"/>    
+          
+          <thead>
+            <tr>
+                <th>#</th>
+				  #foreach( $equipmentTypeAttribute in $equipmentTypeAttributeList )
+					<!--<th>$equipmentTypeAttribute.name</th>-->
+					<th>$equipmentTypeAttribute.equipmentTypeAttribute.name</th>
+				  #end
+
+                <th style="text-align:center" class="{sorter: false}">$i18n.getString( "operations" )</th>
+              </tr>
+          </thead>
+          
+          <tbody id="list"> 
+          #set( $mark = false )
+          #foreach( $equipment in $equipmentList )
+            <tr id="tr${equipment.id}" #alternate($mark) >
+                
+                <td>
+                    #set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+                    $nr
+                </td>
+                
+				 #foreach( $equipmentTypeAttribute in $equipmentTypeAttributeList )
+					##set( $mapId = $equipment.id + ':' + $equipmentTypeAttribute.id )
+					#set( $mapId = $equipment.id + ':' + $equipmentTypeAttribute.equipmentTypeAttribute.id )
+					##set( $equipmetnInstanceName = '' + $equipmentTypeAttribute.name )
+                    <td>$!equipmentDetailsMap.get( $mapId )</td>
+                  #end
+                <td>
+                  <a href="javascript:showUpdateEquipmentForm( '$equipment.id' )" title='$i18n.getString( "edit_equipment" )'><img src="../images/edit.png" alt='$i18n.getString( "edit_equipment" )'></a>
+				  <a href="javascript:showEquipmentDataEntryForm( '$equipment.id' ); " title='$i18n.getString( "equipment_dataentry" )'><img src="images/data_entry.png" alt='$i18n.getString( "equipment_tracking" )' style='width:25px; height:25px'></a>	
+                  #if( $equipmentType.tracking )
+					<a href="javascript:showEquipmentStatusForm( '$equipment.id' ); " title='$i18n.getString( "equipment_tracking" )'><img src="../icons/dataentry.png" alt='$i18n.getString( "equipment_tracking" )' style='width:25px; height:25px'></a>
+                    <a href="javascript:showEquipmentStatusHistoryForm( '$equipment.id' ); " title='$i18n.getString( "equipment_tracking_history" )'><img src="../icons/dataentry.png" alt='$i18n.getString( "equipment_tracking_history" )' style='width:25px; height:25px'></a>
+				  #end
+                  <a href="javascript:removeEquipment( '$equipment.id', '$equipmetnInstanceName')" title='$i18n.getString( "remove" )'><img src="../images/delete.png" alt='$i18n.getString( "remove" )'></a>
+                  <a href="javascript:showEquipmentDetails( '$equipment.id' )" title='$i18n.getString( "equipment_details" )'><img src="../images/information.png" alt='$i18n.getString( "equipment_details" )'></a>
+                </td>
+                
+            </tr>
+            #set( $mark = !$mark)
+        #end
+        </tbody>
+    
+     </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6">
+        <p></p>
+        <div class="paging-container">
+                #parse( "/dhis-web-commons/paging/paging.vm" )
+        </div>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+<div id="detailsInfo"></div>
+
+#end
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'equipmentList' );
+    });
+    var i18n_patient_details_and_history = '$encoder.jsEscape( $i18n.getString( "patient_details_and_history" ) , "'" )';
+    
+    var i18n_id = '$encoder.jsEscape( $i18n.getString( "id" ), "'")';
+    var i18n_none = '$encoder.jsEscape( $i18n.getString( "none" ), "'")';
+    var i18n_select = '[' + '$encoder.jsEscape( $i18n.getString( "select" ), "'")' + ']';
+    var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+    var i18n_value_must_number = '$encoder.jsEscape( $i18n.getString( "value_must_number" ) , "'")';
+    var i18n_value_must_positive_integer = '$encoder.jsEscape( $i18n.getString( "value_must_positive_integer" ) , "'")';
+    var i18n_value_must_negative_integer = '$encoder.jsEscape( $i18n.getString( "value_must_negative_integer" ) , "'")';
+    var i18n_invalid_date = '$encoder.jsEscape( $i18n.getString( "invalid_date" ) , "'")' + ".\n " + '$encoder.jsEscape( $i18n.getString( "format_date" ) , "'")' + " '" + dateFormat.replace('yy', 'yyyy') + " '" ; 
+    var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+    var i18n_saving_value_failed_error_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_error_code" ) , "'")';
+    var i18n_complete_confirm_message = '$encoder.jsEscape( $i18n.getString( "complete_confirm_message" ) , "'")';
+    var i18n_error_required_field = '$encoder.jsEscape( $i18n.getString( "error_required_field" ) , "'")';
+    var i18n_violate_validation = '$encoder.jsEscape( $i18n.getString( "violate_validation" ) , "'")';
+    var i18n_date_is_greater_then_or_equals_due_date = '$encoder.jsEscape( $i18n.getString( "date_is_greater_then_or_equals_due_date" ) , "'")';    
+    var i18n_scheduled_for = '$encoder.jsEscape( $i18n.getString( "scheduled_for" ) , "'")';
+    var i18n_show_all_items = '$encoder.jsEscape( $i18n.getString( "show_all_items" ) , "'")';
+    var i18n_create_new_encounter = '$encoder.jsEscape( $i18n.getString( "create_new_encounter" ) , "'")';
+    var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+    
+</script>

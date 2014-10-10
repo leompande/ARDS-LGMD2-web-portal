@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  
+  <!-- Store definitions -->
+
+  <bean id="org.hisp.dhis.config.ConfigurationStore"
+    class="org.hisp.dhis.config.hibernate.HibernateConfigurationStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+	
+  <!-- Service definitions -->
+
+  <bean id="org.hisp.dhis.config.ConfigurationService"
+    class="org.hisp.dhis.config.DefaultConfigurationService">
+    <property name="configurationStore"
+      ref="org.hisp.dhis.config.ConfigurationStore"/>
+  </bean>
+  
+</beans>

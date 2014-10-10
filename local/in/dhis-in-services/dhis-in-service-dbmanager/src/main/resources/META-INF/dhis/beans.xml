@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+  <!-- Store definitions -->
+
+  <bean id="org.hisp.dhis.dbmanager.DataBaseManagerInterface"
+    class="org.hisp.dhis.dbmanager.mysql.MySQLDataBaseManager">
+    <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    <property name="lineListService"
+      ref="org.hisp.dhis.linelisting.LineListService"/>
+    <property name="periodService"
+      ref="org.hisp.dhis.period.PeriodService"/>
+    <property name="organisationUnitService"
+      ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+  </bean>
+
+	
+</beans>

@@ -1,0 +1,3 @@
+#set( $size = $object.size() )
+{"mapValues":[
+#foreach( $de in $object.keySet() ){"dataElementName":"$!encoder.jsonEncode(${de.name})","value":$!{object.get( $de )}}#if( $velocityCount < $size ),#end#end]}

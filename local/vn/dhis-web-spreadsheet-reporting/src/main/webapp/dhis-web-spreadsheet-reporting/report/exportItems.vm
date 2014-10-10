@@ -1,0 +1,148 @@
+<script>
+	jQuery(document).ready(function(){
+		tableSorter( 'listTable', [[1,0]] );
+		
+		dialog1 = setUpDialog( 'copyToExportReport', i18n_copy_to_exportreport, 420, 170 );
+		dialog2 = setUpDialog( 'copyToImportReport', i18n_copy_to_importreport, 420, 170 );
+		
+	});
+	
+	var i18n_copy_successful = '$encoder.jsEscape( $i18n.getString( "copy_successful" ) , "'")';
+	var i18n_copy_items_duplicated = '$encoder.jsEscape( $i18n.getString( "copy_items_duplicated" ) , "'")';
+	var i18n_copy_items = '$encoder.jsEscape( $i18n.getString( "copy_items" ) , "'")';
+	var i18n_no_item = '$encoder.jsEscape( $i18n.getString( "no_item" ) , "'")';
+	var i18n_input_sheet_no = '$encoder.jsEscape( $i18n.getString( "input_sheet_no" ) , "'")';
+	var i18n_choose_export_report = '$encoder.jsEscape( $i18n.getString( "choose_export_report" ) , "'")';
+	var i18n_choose_excel_group = '$encoder.jsEscape( $i18n.getString( "choose_excel_group" ) , "'")';
+    var i18n_confirm_undo = '$encoder.jsEscape( $i18n.getString( "confirm_undo" ) , "'")';
+    var i18n_copy_to_exportreport = '$encoder.jsEscape( $i18n.getString( "copy_export_item_to_exportreport" ) , "'")';
+    var i18n_copy_to_importreport = '$encoder.jsEscape( $i18n.getString( "copy_export_item_to_importreport" ) , "'")';
+    var dialog1 = null;
+    var dialog2 = null;
+</script>
+
+<span id="message" onclick="hideMessage();"></span>
+
+<input type="hidden" id="exportReportType" value="$!exportReport.getReportType()"/>
+
+<h3>$!encoder.htmlEncode( $!exportReport.displayName )</h3>
+
+<table width="100%">
+	<tr style="vertical-align:bottom;">
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 2)" style="width:300px"/>
+			$i18n.getString('filter_by_sheet')
+			<select id="sheetNoFilter" onchange="filterValues( this.value, 8);">
+				<option value="" >$i18n.getString( "select_sheet_for_filter" )</option>
+				#foreach($sheet in $sheets)
+				<option value="$sheet" #if($sheetNo==$sheet) selected #end >$sheet</option>
+				#end
+			</select>
+		</td>
+		<td align="right">		
+			<input type="button" onclick="window.location='addExportItemForm.action?exportReportId=$exportReport.id'" value="$i18n.getString('add')" style="width:200px"/><br/>
+			<input type="button" onclick="window.location='listAllExportReport.action'" value="$i18n.getString('cancel')" style="width:200px"/><br/>
+			<input type="button" onclick="copyExportItemToExportReport()" value="$i18n.getString('copy_export_item_to_exportreport')" style="width:200px"/><br/>
+			<input type="button" onclick="copyExportItemToImportReport()" value="$i18n.getString('copy_export_item_to_importreport')" style="width:200px"/><br/>
+			<input type="button" onclick="deleteMultiExportItem( '$i18n.getString( 'confirm_delete' )')" value="$i18n.getString('remove_item')" style="width:200px"/>
+		</td>
+	</tr>
+</table>
+
+<table width="100%" class="listTable" id="listTable">
+	<col width="30px"/>
+	<col/>
+	<col width="100px"/>
+	<col width="100px"/>
+	<col width="50px"/>
+	<col width="70px"/>
+	<col/>
+	<col width="80px"/>
+	<col width="100px" />
+	<thead>
+		<tr>
+			<th class="{sorter: false}"><input type="checkbox" onclick="exportItemSelect(this.checked)"/></th>
+			<th>$i18n.getString('name')</th>
+			<th>$i18n.getString('item_type')</th>
+			<th>$i18n.getString('period_type')</th>
+			<th>$i18n.getString('row')</th>		
+			<th>$i18n.getString('column')</th>		
+			<th class="{sorter: false}">$i18n.getString('expression')</th>		
+			<th>$i18n.getString('sheet_no')</th>	
+			<th class="{sorter: false}">$i18n.getString('operations')</th>		
+		</tr>
+	</thead>
+	<tbody id="list">	
+	#foreach($exportItem in $exportItems)
+		<tr id="tr${exportItem.id}">
+			<td align="center"><input type="checkbox" exportItemID="$exportItem.id" exportItemName="$exportItem.name" name="exportItemCheck" id="exportItemCheck"/></td>
+			<td>$encoder.htmlEncode( $exportItem.name )</td>
+			<td>$i18n.getString( $exportItem.itemType )</td>
+			<td>$i18n.getString( $exportItem.periodType )</td>
+			<td>$exportItem.row</td>
+			<td>$exportItem.column</td>
+			<td>$exportItem.expression</td>
+			<td>$exportItem.sheetNo </td>
+			<td align="center">				
+				<a href="updateExportItemForm.action?exportItemId=$exportItem.id&exportReportId=$exportReport.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>
+				<a href="javascript:removeItem($exportItem.id, '$exportItem.name','$i18n.getString( 'confirm_delete' )', 'deleteExportItem.action');" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+			</td>
+		</tr>		
+	#end
+	</tbody>
+</table>
+
+<div id="copyToExportReport">
+<table width="100%">
+	<br/>
+	<tr>
+		<td>$i18n.getString('export_reports')</td>
+		<td>
+			<select id="targetExportReport" name="targetExportReport" style="max-width:25em;min-width:25em;">
+			</select>
+		</td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr>
+		<td>$i18n.getString('sheet_no')</td>
+		<td><input id="targetSheetNo" name="targetSheetNo" type="text" style="max-width:25em;min-width:25em;"/></td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr>
+		<td></td>
+		<td>
+			<input type="button" value="$i18n.getString('ok')" onclick="validateCopyExportItemsToExportReport(); " style="width:100px"/>
+			<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( dialog1 );" style="width:100px"/>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div id="copyToImportReport">
+<table width="100%">
+	<br/>
+	<tr>
+		<td>$i18n.getString('import_reports')</td>
+		<td>
+			<select id="targetImportReport" name="targetImportReport" style="max-width:25em;min-width:25em;">
+			</select>
+		</td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr>
+		<td>$i18n.getString('sheet_no')</td>
+		<td><input id="targetImportReportSheetNo" name="targetImportReportSheetNo" type="text" style="max-width:25em;min-width:25em;"/></td>
+	</tr>
+	<tr></tr>
+	<tr></tr>
+	<tr>
+		<td></td>
+		<td><input type="button" value="$i18n.getString('ok')" onclick="validateCopyExportItemsToImportReport();" style="width:100px"/>
+			<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( dialog2 );" style="width:100px"/>
+		</td>
+	</tr>
+</table>
+</div> 

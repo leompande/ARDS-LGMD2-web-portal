@@ -1,0 +1,18 @@
+{ #set( $size = $!{dataElements.size()} )
+  "dataElements": [
+  #foreach( ${dataElement} in $!{dataElements} )
+  {
+	"id": "${dataElement.id}",
+	"name": "$!encoder.jsonEncode( ${dataElement.name} )",
+	"code": "$!encoder.jsonEncode( ${dataElement.code} )",
+	"type": "${dataElement.type}",
+	"optionset": 
+		#if( $!dataElement.optionSet )
+			"$encoder.xmlEncode($!dataElement.optionSet.options.toString())"
+		#else
+			""
+		#end
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

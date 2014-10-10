@@ -1,0 +1,95 @@
+
+<h3>$i18n.getString( "add_report" )</h3>
+
+<form id="addReportForm" name="addReportForm" action="addReport.action" method="post" onsubmit="return validateAddReport()">
+  <table id="detailsList">
+    <col> ## Labels
+    <col> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "report_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "reportmodel" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="reportmodel" name="reportmodel" style="min-width:20em">
+            #foreach ( $reportModel in $reportModels )
+              <option value="$reportModel">$reportModel</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "frequency" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="frequencySelect" name="frequencySelect" style="min-width:20em">
+            #foreach ( $periodType in $periodTypes )
+              <option value="$periodType.name">$i18n.getString( $periodType.name )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "excelname" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="excelname" name="excelname" maxlength="100" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "xmlname" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="xmlname" name="xmlname" maxlength="100" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "reporttype" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="reporttype" name="reporttype" style="min-width:20em">
+            #foreach ( $reportType in $reportTypes )
+              <option value="$reportType">$reportType</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "orgunitgroup" )</label></td>
+        <td>
+          <select id="orgunitGroupId" name="orgunitGroupId" style="min-width:20em">
+            <option value="0" selected>[ $i18n.getString( "select_orgUnitGroup" ) ]</option>
+            #foreach ( $orgUnitGroup in $orgUnitGroups )
+              <option value="$orgUnitGroup.id">$orgUnitGroup.name</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "dataset" )</label></td>
+        <td><input type="text" id="dataSetIds" name="dataSetIds" maxlength="100" style="width:20em"></td>
+      </tr>
+          
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+      
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="$i18n.getString( "save" )" style="width:13em"><input type="button"
+            onclick="window.location.href='reportManagement.action'" value="$i18n.getString( "cancel" )" style="width:12em">
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+                 
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+    var nameField = document.getElementById( 'name' );
+    nameField.select();
+    nameField.focus();
+
+</script>

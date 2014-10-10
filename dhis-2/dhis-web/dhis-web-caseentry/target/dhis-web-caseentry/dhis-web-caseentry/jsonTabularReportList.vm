@@ -1,0 +1,26 @@
+#set( $size = ${reports.size()} )
+{ "tabularReports": [
+  #foreach( ${tabularReport} in $!{reports} )
+  {
+	"id": "${tabularReport.uid}",
+	"localid": "${tabularReport.id}",
+	"name": "$!encoder.jsonEncode( ${tabularReport.name} )",
+	"lastUpdated": "${tabularReport.lastUpdated}",
+	"access":
+	{
+		"manage":$security.canManage( $tabularReport ),
+		"write":$security.canWrite( $tabularReport ),
+		"read":$security.canRead( $tabularReport ),
+		"update":$security.canUpdate( $tabularReport ),
+		"delete":$security.canDelete( $tabularReport )
+	}
+  }#if( $velocityCount < $size ),#end
+  #end
+  ],
+  "pager":{
+	  "currentPage":"$!currentPage",
+	  "pageSize":10,
+	  "total":$!total,
+	  "pageCount":$!pageCount
+	}
+}

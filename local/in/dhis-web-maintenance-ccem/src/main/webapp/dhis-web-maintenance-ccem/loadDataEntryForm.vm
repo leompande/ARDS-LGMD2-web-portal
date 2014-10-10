@@ -1,0 +1,40 @@
+
+<!-- DATAELEMENTS -->
+<table>
+	<table id="dataEntryScreen" class='entryScreen formSection'>
+			<col id="deCol">    
+			<col id="entryCol">
+			<tr>
+				<th>$i18n.getString( "data_element" )</th>                   
+				<th>$i18n.getString( "entry" )</th>
+			</tr>	
+<tr><td>&nbsp;</td></tr>
+#set( $tabIndex = 1 )
+#if ( $dataElements.size() > 0) 	
+	#foreach($dataElement in $dataElements )
+	#set( $equipmentDataValue = "" )
+	#set( $equipmentDataValue = $!equipmentDataValueMap.get( $dataElement.id ) )
+		<tr>
+			<!--#set( $dataEntryId = "${dataElement.id}" )-->
+			<td class='text-column'><label>$dataElement.getFormNameFallback()</label></td>
+			<td class="input-column">
+				#if( $dataElement.type == "bool" )
+					<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" style="width:300px"> 
+						<option value="">[$i18n.getString( "please_select" )]</option>            
+						<option value="true" #if( $equipmentDataValue  == "true" ) selected="selected" #end >$i18n.getString( "yes" )</option>
+						<option value="false" #if( $equipmentDataValue == "false") selected="selected" #end >$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $dataElement.type == "date" )
+						<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" style="width:300px" />
+						<script type="text/javascript">
+						   datePickerValid( 'dataelement${dataElement.id}' );
+						</script>                    
+				#else 
+					<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!equipmentDataValue" tabindex="$tabIndex" style="width:300px" />
+				#end
+			</td>		
+		</tr>
+	#set( $tabIndex = $tabIndex + 1 )		
+	#end
+#end
+</table>

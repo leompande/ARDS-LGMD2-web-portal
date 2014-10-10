@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<processing>
+<!-- <job name="Install Visual C++ Runtime">
+		<executeForPack name="Postgres"/>
+       <os family="windows"/>  
+
+       <executefile name="$INSTALL_PATH\postgresql\vcredist_x86.exe">
+
+ </executefile>
+ </job>
+<job name="Install Postgresql Database server">
+	<executeForPack name="Postgres"/>
+       <os family="windows"/>  
+
+       <executefile name="msiexec.exe">
+
+      <arg>/i</arg>
+
+      <arg>$INSTALL_PATH\postgresql\postgresql-8.3.msi</arg>
+
+ </executefile> 
+ 
+ </job> -->
+ <job name="Install Java ">
+
+       <os family="windows"/>  
+
+       <executefile name="$INSTALL_PATH\java\jre-6u18-windows-i586-s.exe">
+
+
+ </executefile>
+ 
+ </job>
+</processing>

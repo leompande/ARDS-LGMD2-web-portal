@@ -1,0 +1,28 @@
+<h3>$i18n.getString( "sort_dataelement" )</h3>
+<input type="hidden" id="dataElementGroupOrderId" name="dataElementGroupOrderId" value="$dataElementGroupOrder.id">
+<table>
+	<tr>
+		<td>
+			<select id="sortdataElement" name="sortdataElement" multiple size="10">	
+				#foreach( $dataElement in $!dataElementGroupOrder.dataElements)
+					<option value="$dataElement.id">$dataElement.displayName</option>
+				#end
+			</select>
+		
+	 <td style="width:30px; text-align:center">
+	 	<a href="javascript:moveSelectedOptionToTop( 'sortdataElement' );"><img align="absmiddle" src="../images/move_top.png"></a><br><br>			
+        <a href="javascript:moveUpSelectedOption( 'sortdataElement' )"><img src="../images/move_up.png"></a><br><br>
+        <a href="javascript:moveDownSelectedOption( 'sortdataElement' )"><img src="../images/move_down.png"></a><br><br>
+		<a href="javascript:moveSelectedOptionToBottom( 'sortdataElement' );"><img align="absmiddle" src="../images/move_bottom.png" ></a>			
+		</td>
+    </tr>
+	<tr>
+      	<td>
+        	<input type="button" value="$i18n.getString( "update_sorted_dataelement" )" onclick="updateSortedDataElement()"/>
+			<input type="button" value="$i18n.getString( "cancel" )" onclick="history.go(-1);"/>
+		</td>
+    </tr>
+</table>
+<span id="message" style="top:100px;right:5px;position:fixed;width:200px;z-index:10002" onclick="javascript:hideById(this.id);"></span>
+
+

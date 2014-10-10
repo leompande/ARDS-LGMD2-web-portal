@@ -1,0 +1,209 @@
+<script type="text/javascript">
+	jQuery(document).ready(function(){	  
+		tableSorter( 'listTable' );	
+    });
+</script>
+
+<h3>$i18n.getString('export_reports') #openHelp( "excelReportingListOfExportReports" )</h3>
+<table width="100%">
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:300px"/>
+		</td>
+		<td align="right">
+			<input type="button" onclick="window.location = 'addExportReportForm.action'" value="$i18n.getString('add')" style="width:100px"/>
+			<!--input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location='administration.action'" style="width:100px"/-->
+		</td>
+	</tr>
+</table>
+<table width="100%" class="listTable" id="listTable">
+	<input type="hidden" />
+	<thead>
+		<tr>
+			<th>$i18n.getString('name')</th>
+			<th>$i18n.getString('report_type')</th>
+			<th>$i18n.getString('excel_template')</th>		
+			<th width="120px" class="{sorter: false}">$i18n.getString('basic')</th>
+			<th width="100px" class="{sorter: false}">$i18n.getString('advanced')</th>			
+		</tr>
+	</thead>	
+	<tbody id="list">	
+	#foreach( $exportReport in $!exportReports )
+	#set( $exist = $!templateMap.get( $exportReport.excelTemplateFile ) )
+		<tr id="tr${exportReport.id}">
+			<td>$!encoder.htmlEncode( $exportReport.displayName )</td>
+			<td>$i18n.getString( $exportReport.reportType )</td>
+			<td>
+				#if( $exist )
+					<a href="downloadFile.action?fileName=$encoder.htmlEncode( $exportReport.excelTemplateFile )" title="download">$encoder.htmlEncode( $exportReport.excelTemplateFile )</a>
+				#else
+					$!encoder.htmlEncode( $exportReport.excelTemplateFile ) <img src="images/question.png" alt="$i18n.getString( 'missing_template' )" title="$i18n.getString( 'missing_template' )"/>
+				#end
+			</td>
+			<td align="left">
+				<a href="javascript: openDefineAssociationsForm( $exportReport.id );" title="$i18n.getString( 'define_associations' )"><img src="../images/assign.png" alt="$i18n.getString( 'define_associations' )"/></a>
+				<a href="javascript: openExportReportUserRole( $exportReport.id );" title="$i18n.getString( 'assign_exportreport_userrole' )"><img src="images/user_32.png" alt="$i18n.getString( 'update_exportreport_userrole' )"/></a>				
+				<a href="javascript: updateExportReportForm( $exportReport.id );" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>				
+				<a href="javascript: removeReport( $exportReport.id, '$exportReport.displayName' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"/></a>
+			</td>
+			<td>	
+				<a href="javascript: listExportItemAction( $exportReport.id );" title="$i18n.getString( 'export_item' )"><img src="../images/add_section.png" alt="$i18n.getString( 'export_item' )"/></a>
+				#if( $exportReport.isOrgUnitGroupListing() )
+				<a href="javascript: openUpdateOrgUnitGroupListingReport( $exportReport.id );" title="$i18n.getString( 'organisation_unit_group' )"><img src="images/group_1.jpg"/></a>
+				<a href="javascript: organisationUnitAtLevels( $exportReport.id );" title="$i18n.getString( 'set_organisationunit_group_level' )"><img src="images/organisationunitlevel.png" alt="$i18n.getString( 'set_organisationunit_group_level' )"/></a>				
+				#elseif( $exportReport.isAttribute() )
+				<a href="javascript: listAttributeValueGroupOrderForExportReport( $exportReport.id );" title="$i18n.getString( 'attributevalue_groups' )"><img src="images/group.jpg" alt="$i18n.getString( 'attributevalue_groups' )"/></a>				
+				#elseif( $exportReport.isCategory() )
+				<a href="javascript: listDataElementGroupOrderForExportReport( $exportReport.id );" title="$i18n.getString( 'dataelement_groups' )"><img src="images/group.jpg" alt="$i18n.getString( 'dataelement_groups' )"/></a>				
+				#elseif( $exportReport.isCategoryVertical() )
+				<a href="javascript: listCategoryOptionGroupOrderForExportReport( $exportReport.id );" title="$i18n.getString( 'categoryoption_groups' )"><img src="images/group.jpg" alt="$i18n.getString( 'categoryoption_groups' )"/></a>				
+				#elseif( $exportReport.isPeriodColumnListing() )
+				<a href="javascript: periodColumns( $exportReport.id );" title="$i18n.getString( 'period_columns' )"><img src="images/calendar.png"/></a>
+				#end
+			</td>
+		</tr>		
+	#end
+	</tbody>
+</table>
+
+<script type="text/javascript">
+
+	function checkPermission( reportId, url )
+	{
+		jQuery.get( 'checkPermission.action', { id: reportId }, function( json )
+		{
+			if ( json.response == "error" || json.message != "granted" ) {
+				showErrorMessage( json.message, 10000 );
+				return;
+			}
+			
+			window.location = url + reportId;
+		} );
+	}
+
+	function openDefineAssociationsForm( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "openDefineAssociationsForm" ) )
+		{
+			checkPermission( reportId, 'openDefineAssociationsForm.action?exportReportId=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function openExportReportUserRole( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "openExportReportUserRole" ) )
+		{
+			checkPermission( reportId, 'openExportReportUserRole.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function updateExportReportForm( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "updateExportReportForm" ) )
+		{
+			checkPermission( reportId, 'updateExportReportForm.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function removeReport( reportId, reportName )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "deleteExportReport" ) )
+		{
+			jQuery.get( 'checkPermission.action', { id: reportId }, function( json )
+			{
+				if ( json.response == "error" || json.message != "granted" ) {
+					showErrorMessage( json.message, 10000 );
+					return;
+				}
+				
+				removeItem( reportId, reportName, '$i18n.getString( "confirm_delete" )', 'deleteExportReport.action' );
+			} );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function listExportItemAction( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "listExportItemAction" ) )
+		{
+			checkPermission( reportId, 'listExportItemAction.action?exportReportId=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function openUpdateOrgUnitGroupListingReport( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "openUpdateOrgUnitGroupListingReport" ) )
+		{
+			jQuery.get( 'checkPermission.action', { id: reportId }, function( json )
+			{
+				if ( json.response == "error" || json.message != "granted" ) {
+					showErrorMessage( json.message, 10000 );
+					return;
+				}
+				
+				window.location = 'openUpdateOrgUnitGroupListingReport.action?id=' + reportId;
+			} );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function organisationUnitAtLevels( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "organisationUnitAtLevels" ) )
+		{
+			checkPermission( reportId, 'organisationUnitAtLevels.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function listAttributeValueGroupOrderForExportReport( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "listAttributeValueGroupOrderForExportReport" ) )
+		{
+			checkPermission( reportId, 'listAttributeValueGroupOrderForExportReport.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function listDataElementGroupOrderForExportReport( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "listDataElementGroupOrderForExportReport" ) )
+		{
+			checkPermission( reportId, 'listDataElementGroupOrderForExportReport.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function listCategoryOptionGroupOrderForExportReport( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "listCategoryOptionGroupOrderForExportReport" ) )
+		{
+			checkPermission( reportId, 'listCategoryOptionGroupOrderForExportReport.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+
+	function periodColumns( reportId )
+	{
+		if ( $auth.hasAccess( "dhis-web-spreadsheet-reporting", "periodColumns" ) )
+		{
+			checkPermission( reportId, 'periodColumns.action?id=' );
+		} else {
+			showErrorMessage( '$i18n.getString( "access_denied" )' );
+		}
+	}
+</script>

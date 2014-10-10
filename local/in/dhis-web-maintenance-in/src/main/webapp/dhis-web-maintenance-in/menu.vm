@@ -1,0 +1,60 @@
+
+<style>
+	#overlay 
+	{
+		z-index:19998;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		width:100%;
+		background:#000;
+		opacity:0.45;
+		-moz-opacity:0.45;
+		filter:alpha(opacity=45);
+		visibility:hidden;
+	}
+
+	#overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+
+<div id="overlay">
+	<div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" /></div>
+</div>
+	
+<h2>Lookup Tables</h2>
+<ul>
+    <li>Configure</li>
+    <ul>
+        <li><a href="configForm.action">Configuration</a></li>
+        <li><a href="takeMysqlBackupResult.action" onclick="showOverlay()">Take MySQL Backup</a></li>
+		<li><a href="maintenance.action">Maintenance</a></li>
+		<li><a href="advanceMysqlBackupForm.action">Advance MySQL Backup</a></li>
+    </ul>
+</ul>
+
+<script>
+    
+	function showOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'visible';
+		jQuery("#overlay").css({
+			"position":"fixed",
+            "top":0+"px",
+            "left":0+"px",
+			"height": jQuery(document).height(),
+			"width": jQuery(document).width()
+		});
+		jQuery("#overlayImg").css({
+			"top":jQuery(window).height()/2
+		});
+	}
+	
+	function hideOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'hidden';
+	}
+
+</script>

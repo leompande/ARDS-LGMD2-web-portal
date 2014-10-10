@@ -1,0 +1,4 @@
+
+
+<img src="generateChart.action?hrDataSetId=$hrDataSet.id&attributeId=$attribute.id&unitId=$unit.id&selectedUnitOnly=$selectedUnitOnly"/>
+

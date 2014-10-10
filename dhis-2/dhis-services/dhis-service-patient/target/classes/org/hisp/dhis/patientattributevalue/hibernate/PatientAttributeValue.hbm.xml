@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.patientattributevalue.PatientAttributeValue" table="patientattributevalue">
+
+    <composite-id>
+      <key-many-to-one name="patient" class="org.hisp.dhis.patient.Patient" column="patientid"
+        foreign-key="fk_patientattributevalue_patientid" />
+      <key-many-to-one name="patientAttribute" class="org.hisp.dhis.patient.PatientAttribute" column="patientattributeid"
+        foreign-key="fk_patientattributevalue_patientattributeid" />
+    </composite-id>
+
+    <property name="value" />
+
+    <many-to-one name="patientAttributeOption" class="org.hisp.dhis.patient.PatientAttributeOption" column="patientattributeoptionid"
+      foreign-key="fk_patientAttributeValue_patientAttributeOption" />
+
+  </class>
+</hibernate-mapping>

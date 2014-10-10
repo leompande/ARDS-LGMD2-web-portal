@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.Training" table="hr_training">
+		<id name="id" column="trainingId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="50" />
+		
+		<property name="location" column="location" length="50" />
+		
+		<property name="sponsor" column="sponsor" length="50" />
+		
+		<property name="startDate" column="startDate" length="50" type="date" />
+		
+		<property name="endDate" column="endDate" length="50" type="date" />	
+		
+		<many-to-one name="person" column="personId" class="org.hisp.dhis.hr.Person"/>		
+		
+	</class>
+</hibernate-mapping>

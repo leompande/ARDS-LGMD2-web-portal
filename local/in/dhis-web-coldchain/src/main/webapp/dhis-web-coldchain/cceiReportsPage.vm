@@ -1,0 +1,407 @@
+
+<script type="text/javascript">
+	
+	jQuery(window).load(function() {
+   		selectFacilities();
+   		
+		//changeFacilitieType();
+   		
+		/*
+		document.getElementById('selectall').checked = true;
+   		var checkboxes = document.getElementsByName('option');
+	  	for (i=0; i < checkboxes.length; i++)
+		 {
+	   		 checkboxes[i].checked = true;
+	   	}
+		*/
+		
+		changeOrgUnitGroupSet();
+});
+ 
+function changeFacilitieType()
+{
+	//var radioButtonObj = document.getElementsByName('facilityTypeRadio');
+	
+	var groupSetList = byId("facilityTypeRadio");
+	var groupSetId = groupSetList.options[groupSetList.selectedIndex].value;
+	
+	for (i=0; i < groupSetList.length; i++ )
+	{
+		if( groupSetId == "facilityType" )
+		{	
+			showById('facilityTypeDiv');
+			hideById('ownershipTypeDiv');
+			hideById('coldStoreDiv');
+		}
+		
+		else if( groupSetId == "coldStoreType" )
+		{
+			showById('coldStoreDiv');
+			hideById('facilityTypeDiv');
+			hideById('ownershipTypeDiv');
+		}				
+		
+		else if( groupSetId == "ownershipType" )
+		{
+			showById('ownershipTypeDiv');
+			hideById('facilityTypeDiv');
+			hideById('coldStoreDiv');
+		}		
+		
+		/*
+		if ( radioButtonObj[i].checked == true )
+		{
+			if( radioButtonObj[i].value == "facilityType" )
+			{	
+				hideById('ownershipTypeDiv');
+				showById('facilityTypeDiv');
+			}
+			
+			else if( radioButtonObj[i].value == "ownershipType" )
+			{
+				showById('ownershipTypeDiv');
+				hideById('facilityTypeDiv');
+			}
+		}
+		*/		
+	}
+}
+
+
+function selectFacilities()
+{
+	var radioButtons = document.getElementsByName('facilityType');
+		
+		for (i=0; i < radioButtons.length; i++)
+		 {
+	         if (radioButtons[i].checked == true) 
+	          { 	         
+	           $('#load').load('ccemReportsPage.action',{
+				facilityType : radioButtons[i].value,			
+				}, 
+				function()
+				{
+					
+				});
+	          }
+	      } 
+}
+
+	
+function selectAll(source)
+{		
+	var checkboxes = document.getElementsByName('option');
+  	for (i=0; i < checkboxes.length; i++)
+	 {
+   		 checkboxes[i].checked = source.checked;
+   	}
+}
+
+
+function selectAllColdStore(source)
+{		
+	var checkboxes2 = document.getElementsByName('coldstore');
+  	for (i=0; i < checkboxes2.length; i++)
+	 {
+   		 checkboxes2[i].checked = source.checked;
+   	}
+}
+
+
+function selectAllOwnerShip(source)
+{		
+	var checkboxes3 = document.getElementsByName('ownership');
+  	for (i=0; i < checkboxes3.length; i++)
+	 {
+   		 checkboxes3[i].checked = source.checked;
+   	}
+}
+
+
+function formValidations()
+{	
+	//var facilityTypeRadioVal = $( "input[name='facilityTypeRadio']:checked" ).val();               			
+	
+	var groupSetList = byId("organisationUnitGroupSets");
+	var organisationUnitGroupSetVal = groupSetList.options[groupSetList.selectedIndex].value;
+	
+	var checkboxes = document.getElementsByName('option');
+	var bValue=false;
+  	for (i=0; i < checkboxes.length; i++)
+	 {	
+  		if(checkboxes[i].checked == true)
+  		{
+  			bValue=true;
+  		}
+   		
+   	}
+	
+   	var orgUnitCheck = document.getElementsByName('orgUnit');
+	var bValue2=false;
+  	for (i=0; i < checkboxes.length; i++)
+	 {		
+  		if(checkboxes[i].checked == true)
+  		{
+  			bValue2=true;
+  		}
+   		
+   	}
+   	
+	/*
+	var ownerShipcheckboxes = document.getElementsByName('ownership');
+	var bValue3=false;
+  	for (i=0; i < ownerShipcheckboxes.length; i++)
+	 {	
+  		if(ownerShipcheckboxes[i].checked == true)
+  		{
+  			bValue3=true;
+  		}
+   		
+   	}   	
+   	
+	var coldStorecheckboxes = document.getElementsByName('coldstore');
+	var bValue4=false;
+  	for (i=0; i < coldStorecheckboxes.length; i++)
+	 {	
+  		if(coldStorecheckboxes[i].checked == true)
+  		{
+  			bValue4=true;
+  		}
+   		
+   	}   	   	
+   	*/
+   	
+   	var reportListBox = document.getElementById( "reportList" );
+  	if( reportListBox.selectedIndex < 0 ) { alert( "Please select another report type" ); return false; }
+   	else if(!(document.getElementById('orgUnit'))){alert("Please select organisation unit");  return false;}
+   	else if( bValue == false ){alert("Please select atleast one Facility type");  return false;}
+	
+	/*
+	else if( facilityTypeRadioVal == "facilityType" && bValue == false ){alert("Please select atleast one Facility type");  return false;}
+   	else if( facilityTypeRadioVal == "coldStoreType" && bValue4 == false){alert("Please select atleast one Facility type");  return false;}
+   	else if( facilityTypeRadioVal == "ownershipType" && bValue3 == false){alert("Please select atleast one Facility type");  return false;}	  	               			
+	*/
+	
+	return true;
+}
+</script>
+
+<style>
+.multiselect 
+	{
+    width:20em;
+    height:10em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+    
+}
+.orgselect 
+	{
+    width:20em;
+    height:10em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+}
+.multiselect label 
+{
+    display:block;
+}
+ 
+.multiselect-on {
+    color:#ffffff;
+    background-color:#000099;
+}
+</style>
+
+	
+<h3>$i18n.getString( "ccem_reports_page" )</h3>
+
+<form id="ccemReportForm" name="ccemReportForm" action="exportTable.action" method="post" target="_blank" onsubmit="return formValidations()">
+	#foreach( $ccemReport in $reportList )
+		<input type="hidden" id="$ccemReport.reportId" value="$ccemReport.periodRequire" />
+    #end
+    <table>
+    	<tr>
+    		<td style="width:22em;">
+    			<table style="border-right: 1px solid gray; margin-left:10px; margin-right: 10px; margin-top:0 px; padding:10px;">
+    				<tr bgcolor="#285C91">
+    					<td> <font color="#FFFFFF"><strong> Step 1 - Report Type </strong></td>    					
+				    </tr>
+				    
+				    <tr>
+				    	<td>
+				    		<div>
+					    		<i>Select category:</i><br/>
+					    		<label><input type="radio" id="facilityType1" name="facilityType" value="Facility" checked onclick="selectFacilities()"/>Facility Infrastructure</label><br/>
+								<label><input type="radio" id="facilityType2" name="facilityType" value="Storage" onclick="selectFacilities()"/>Storage Requirements</label><br/>
+								<label><input type="radio" id="facilityType3" name="facilityType" value="Cold Chain" onclick="selectFacilities()"/>Cold Chain Equipment</label><br/>
+								<label><input type="radio" id="facilityType4" name="facilityType" value="Energy" onclick="selectFacilities()"/>Energy</label><br/>
+				    		</div>
+	    				</td>
+	    				
+				    </tr>
+				    <tr>
+    					<td>
+    						<div id="load" name="load">
+    						
+                            </div>
+					    </td>
+					    
+    				</tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				<tr bgcolor="#285C91">
+    					<td> <font color="#FFFFFF"><strong>Step 2 - Geographic Region </strong></td> 
+    					
+				    </tr>
+				    <tr>
+				    	<td>
+				    		<i>From left panel, double click region(s) to add <br/> below. Uncheck to remove region.</i>
+							<br/>	
+				    		<div class="orgselect" id="organisationUnit">
+				    			<label></label>									 			
+				    			  			
+          		   			 </div>
+	    				</td>
+	    				
+    				</tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				<tr><td>&nbsp; </td> </tr>
+    				
+    				
+			    </table>
+		    </td>
+		    <td style="width:22em;">
+		    	<table style="margin-left:10px; margin-right: 10px; margin-top:0 ">
+		    		<tr><td>&nbsp; </td> </tr>
+	    		
+		    		<tr bgcolor="#285C91">
+    					<td> <font color="#FFFFFF"><strong>Step 3 - Facility Type </strong></td>
+		    			
+		    		</tr>
+		    		<tr>
+		    			<td>
+		    				<!--<i>Select all that apply:</i><br/>-->
+		    				<!--<label><input type="radio" id="facilityTypeRadio" name="facilityTypeRadio" value="facilityType" checked onclick="changeFacilitieType()"/>By Facility Type</label>&nbsp;
+		    				<label><input type="radio" id="facilityTypeRadio" name="facilityTypeRadio" value="ownershipType" onclick="changeFacilitieType()"/>By Ownership</label>
+		    				-->
+		    				
+		    				<select name="organisationUnitGroupSets" id="organisationUnitGroupSets" style="width:20em;" onclick="changeOrgUnitGroupSet()">
+		    					#foreach( $organisationUnitGroupSet in $organisationUnitGroupSetList )
+									<option value="$organisationUnitGroupSet.id">$organisationUnitGroupSet.name</option>
+								#end
+								<!--
+								<option value="facilityType">$i18n.getString( "health_facility_type" )</option>
+		    					<option value="coldStoreType">$i18n.getString( "cold_store" )</option>
+		    					<option value="ownershipType">$i18n.getString( "ownership" )</option>
+								-->
+				    		</select>
+		    				<br />
+		    				
+		    				<div class="multiselect" id = 'organisationUnitGroupsDiv'>
+		    					<!--<label><input type="checkbox" name="selectall" id="selectall" value="0" onclick="selectAll(this)" /><b>SELECT ALL TYPES</b></label>-->    					
+								
+								<!--
+								#foreach( $orgUnitGrpHealthFacility in $orgUnitGroupsHealthFacility )
+									<label><input type="checkbox" name="option" value="$orgUnitGrpHealthFacility.id" />$orgUnitGrpHealthFacility.name</label>
+								#end
+								-->
+								
+								<!--
+								<lable><b>Vaccine Stores Type</b></lable>
+				    			<label><input type="checkbox" name="option" value="1" />National Vaccine Stores</label>
+				    			<label><input type="checkbox" name="option" value="2" />Regional Vaccine Stores</label>
+				   				<label><input type="checkbox" name="option" value="3" />District Vaccine Stores</label>
+				   				<lable><b>Hospital Type</b></lable>
+				    			<label><input type="checkbox" name="option" value="4" />Hospital GoK</label>
+				    			<label><input type="checkbox" name="option" value="5" />Hospital NGO</label>
+				    			<label><input type="checkbox" name="option" value="6" />Hospital Private</label>
+				    			<label><input type="checkbox" name="option" value="7" />Hospital Mission</label>
+				    			<lable><b>Others</b></lable>
+				    			<label><input type="checkbox" name="option" value="8" />Health Centre GoK</label>
+				    			<label><input type="checkbox" name="option" value="9" />Health Centre NGO</label>
+				    			<label><input type="checkbox" name="option" value="10" />Health Centre Private</label>
+				    			<label><input type="checkbox" name="option" value="11" />Heatlth Centre Mission</label>
+				    			<label><input type="checkbox" name="option" value="12" />Dispensary GoK</label>
+				    			<label><input type="checkbox" name="option" value="13" />Dispensary NGO</label>
+				    			<label><input type="checkbox" name="option" value="14" />Dispensary Private</label>
+				    			<label><input type="checkbox" name="option" value="15" />Dispensary Mission</label>
+				    			<label><input type="checkbox" name="option" value="16" />Nursing Home Private</label>
+				    			<label><input type="checkbox" name="option" value="17" />Medical Clinic NGO</label>
+				    			<label><input type="checkbox" name="option" value="18" />Medical Clinic  Private</label>
+				    			-->
+				    			<!-- <label><input type="checkbox" name="option" value="19" />Health Facality</label> -->
+         					 </div>
+         					 
+							 <!--
+							<div class="multiselect" id = 'ownershipTypeDiv' style='display:none'>
+								<label><input type="checkbox" name="selectAllOwnerShip1" id="selectAllOwnerShip1" value="0" onclick="selectAllOwnerShip(this)" /><b>SELECT ALL TYPES</b></label>
+				    			#foreach( $orgUnitGroupOwnership in $orgUnitGroupsOwnership )
+				    				<label><input type="checkbox" name="ownership" value="$orgUnitGroupOwnership.id" />$orgUnitGroupOwnership.name</label>
+				   				#end	
+         					</div>          					 
+         					 
+							<div class="multiselect" id = 'coldStoreDiv' style='display:none'>
+								<label><input type="checkbox" name="selectAllColdStore1" id="selectAllColdStore1" value="0" onclick="selectAllColdStore(this)" /><b>SELECT ALL TYPES</b></label>
+				    			#foreach( $orgUnitGroupColdStore in $orgUnitGroupsColdStore )
+				    				<label><input type="checkbox" name="coldstore" value="$orgUnitGroupColdStore.id" />$orgUnitGroupColdStore.name</label>
+				   				#end	
+         					</div>         					 
+							-->	 
+			    		</td>
+		    		</tr>
+		    		<tr><td>&nbsp; </td> </tr>
+		    		<tr bgcolor="#285C91">
+    					<td> <font color="#FFFFFF"><strong>Step 4 - Time Period </strong></td>
+		    		</tr>
+		    		<tr>
+		    			<td>
+		    				<i>Select one</i><br/>
+							<select name="periodRadio" style="width:20em;">
+								<option value="LAST_3_MONTHS">$i18n.getString( "last_3months" )</option>
+								<option value="CURRENT_YEAR" selected>$i18n.getString( "current_year" )</option>
+								<option value="LAST_6_MONTHS">$i18n.getString( "last_6months" )</option>							
+	                    		<option value="LAST_YEAR">$i18n.getString( "last_year" )</option>
+							</select>
+			    		</td>
+			    		
+		    		</tr>
+		    		<tr><td>&nbsp; </td> </tr>
+		    		<tr bgcolor="#285C91">
+    					<td> <font color="#FFFFFF"><strong>Step 5 - Report Output </strong></td>
+		    			
+		    		</tr>
+		    		<tr>
+		    			<td>
+		    				<i>Select one</i><br/>
+		    				<select name="type" id="type" style="width:20em;">
+		                       <option value="pdf">$i18n.getString( "pdf" )</option>
+		                       <option value="rtf">$i18n.getString( "doc" )</option>
+		                       <option value="html">$i18n.getString( "html" )</option>
+		                       <option value="xls">$i18n.getString( "xls" )</option>
+		                       <option value="csv">$i18n.getString( "csv" )</option>		                     
+                           </select>
+			    		</td>
+			    		
+		    		</tr>
+		    		<tr><td>&nbsp; </td> </tr>
+		    		<tr><td>&nbsp; </td> </tr>
+		    		<tr>
+		    			<td>
+		    				<input type="submit" value="Generate Report" class="ui-state-hover ui-corner-all" style="width:20em; height:3em;"/>
+			    		</td>
+			    		
+		    		</tr>
+		    		<tr><td>&nbsp; </td> </tr>
+		    		<tr>
+		    			<td>
+		    				<input type="button" value="Reset Form" class="ui-state-hover ui-corner-all" style="width:20em; height:3em;" onclick="window.location.href='jrxmlReportsPage.action'"/>
+			    		</td>
+		    		</tr>
+	    		</table>
+    		</td>
+	    </tr>
+    </table>
+</form>

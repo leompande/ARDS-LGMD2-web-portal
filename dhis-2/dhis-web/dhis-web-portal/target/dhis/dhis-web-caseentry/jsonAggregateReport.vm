@@ -1,0 +1,36 @@
+
+#set( $noRows = $grid.getRows().size() )
+{
+#set( $noHeader = $grid.getHeaders().size() )
+#set( $metaData = $noHeader - $valueTypes.size() )
+"message": "$!message",
+"total": "$total",
+"totalRecords": "$totalRecords",
+"title": "$!encoder.jsonEncode(${grid.subtitle})",
+"columns":[
+  #set($index = 0)
+  #foreach( $col in $grid.getHeaders() )
+  {
+    #set( $mapIndx = $index - $metaData  )
+    "xtype": #if( $mapSuggestedValues.get($mapIndx) && $index > $metaData && $mapSuggestedValues.get($mapIndx).size() > 0 )"combobox"#else"textfield"#end,
+    "suggested": [#set( $suggestedValues = $mapSuggestedValues.get($mapIndx) )
+    #foreach( $suggestedValue in $suggestedValues )
+    ["$!encoder.jsonEncode( ${suggestedValue} )"]
+	#if( $velocityCount < $suggestedValues.size() ),#end
+    #end],
+    "name": "$!encoder.jsonEncode($!col.name)",
+    "hidden": "$!col.hidden"
+  }#if( $velocityCount < $noHeader ),#end
+  #set($index = $index + 1)
+  #end
+],
+"items":[
+  #foreach( $row in $grid.getRows() )
+  [
+  #foreach( $col in $row )
+  "$!encoder.jsonEncode($!col)"#if( $velocityCount < $noHeader ),#end
+  #end
+  ]#if( $velocityCount < $noRows ),#end
+  #end
+ ]
+}

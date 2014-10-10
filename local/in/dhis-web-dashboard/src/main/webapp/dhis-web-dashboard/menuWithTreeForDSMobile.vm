@@ -1,0 +1,27 @@
+<a href="index.action"><h2>$i18n.getString( "dataanalyser" )</h2></a>
+<ul>
+	<li>Data Status</li>
+	<ul>
+		<li>Mobile Data Status</li>
+	 </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{
+		if(orgUnitIds == null || orgUnitIds == "" )
+		{
+			return;
+		}
+		if(orgUnitIds != null)
+		{
+			getOUDetails(orgUnitIds);
+		}
+	}
+
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

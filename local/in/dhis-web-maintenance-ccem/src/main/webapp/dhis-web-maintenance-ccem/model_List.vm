@@ -1,0 +1,99 @@
+<table width="100%">
+    <tr>
+        <td class='text-column' >$i18n.getString( "search_result_matching_the_search_criteria" ):</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>
+        #if($!listAll)
+            $i18n.getString( "list_all_models" )
+        #else
+            $i18n.getString( "search_model_by_attributes" )
+        #end
+        </td>
+        <td>&nbsp;</td>
+    </tr>   
+    
+    <tr>
+        <td class='text-column' >$i18n.getString( "total_result" )</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>$!total</td>
+        <td align="right"><input type="button" value='$i18n.getString( "add_new" )' style="width:8.2em" onclick="showAddModelForm();"></td>
+    </tr>
+</table>
+
+#if( $modelList.size() > 0 )
+<table class="mainPageTable">
+    <tr>
+    <td> 
+      <table class="listTable" id="modelList" width='100%'>
+     	<col width="30"/>
+     	<col/>
+         #foreach( $modelTypeAttribute in $modelTypeAttributeList )
+			<col/>
+		 #end
+          <col width="115"/>      	
+     	
+          <thead>
+            <tr>
+                <th>#</th>
+				<th>$i18n.getString( "name" )</th>
+				#foreach( $modelTypeAttribute in $modelTypeAttributeList )
+					<th>$modelTypeAttribute.name</th>
+				  #end
+				<!--<th>$i18n.getString( "description" )</th>-->
+				<th style="text-align:center" class="{sorter: false}">$i18n.getString( "operations" )</th>
+              </tr>
+          </thead>
+          <tbody id="list"> 
+          #set( $mark = false )
+          #foreach( $model in $modelList )
+            <tr id="tr${model.id}" #alternate($mark) >
+                
+                <td>
+                    #set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+                    $nr
+                </td>
+                <td>$!model.name</td>
+                <!--<td>$!model.description</td>-->
+ 				 #foreach( $modelTypeAttribute in $modelTypeAttributeList )
+					#set( $mapId = $model.id + ':' + $modelTypeAttribute.id )
+                    <td>$!modelAttributeValueMap.get( $mapId )</td>
+                  #end               
+                <td>
+                  <a href="javascript:showUploadModelImageForm( '$model.id' )"" title="$i18n.getString( 'upload_image' )"><img src="images/upload.png" alt="$i18n.getString( 'upload_image' )"></a>
+                  <a href="javascript:showUpdateModelForm( '$model.id' )" title='$i18n.getString( "edit_equipment" )'><img src="../images/edit.png" alt='$i18n.getString( "edit_equipment" )'></a>
+                  <a href="javascript:removeModel( '$model.id', '$encoder.jsEncode( $model.name )' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )" ></a>
+                  <a href="javascript:showModelDetails( $model.id )" title="$i18n.getString( 'show_details' )"><img src="../images/information.png" alt="$i18n.getString( 'show_details' )"></a>
+                </td>
+                
+            </tr>
+            #set( $mark = !$mark)
+        #end
+        </tbody>
+    
+     </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6">
+        <p></p>
+        <div class="paging-container">
+        	#parse( "/dhis-web-commons/paging/paging.vm" )
+        </div>
+    </td>
+    <td></td>
+  </tr>
+</table>
+
+<div id="detailsModelInfo"></div>
+
+#end
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'modelList' );
+    });
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_model" ) , "'" )';
+	var i18n_model_details = '$encoder.jsEscape( $i18n.getString( "model__details" ) , "'" )';
+	var i18n_upload_model_image = '$encoder.jsEscape( $i18n.getString( "upload_model_image" ) , "'" )';
+</script>

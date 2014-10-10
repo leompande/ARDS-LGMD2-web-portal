@@ -1,0 +1,34 @@
+{ 
+  "pivotTable": 
+  {
+    "sizeIndicators": "$pivotTable.indicators.size()",
+    "sizePeriods": "$pivotTable.periods.size()",
+    "sizeOrganisationUnits": "$pivotTable.organisationUnits.size()",
+    "indicators": 
+    [
+    #foreach( $indicator in $pivotTable.indicators )
+      { "id": "${indicator.id}", "name": "${indicator.shortName}" },
+    #end 
+    ],
+    "periods": 
+    [
+    #foreach( $period in $pivotTable.periods )
+      { "id": "${period.id}", "name": "${period.name}" },
+    #end
+    ],
+    "organisationUnits":
+    [
+    #foreach( $organisationUnit in $pivotTable.organisationUnits )
+      { "id": "${organisationUnit.id}", "name": "${organisationUnit.shortName}" },
+    #end
+    ],
+    "indicatorValues":
+    [
+      {
+      #foreach( $value in $pivotTable.indicatorValues )
+        "${value.indicatorId}-${value.periodId}-${value.organisationUnitId}": "${value.value}",
+      #end
+      }
+    ]
+  }
+}

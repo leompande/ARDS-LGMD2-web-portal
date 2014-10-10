@@ -1,0 +1,5 @@
+.ui-preview-table{ border-collapse: collapse; }
+.ui-preview-number{ font-weight: bold; color: blue }
+.ui-preview-unselected{ font-weight: bold; color: blue; cursor:pointer }
+.ui-preview-selected{ background: #F39814; color: white; cursor:pointer }
+.ui-preview-mouseover{ background: #FECA40; color: white; cursor:pointer }

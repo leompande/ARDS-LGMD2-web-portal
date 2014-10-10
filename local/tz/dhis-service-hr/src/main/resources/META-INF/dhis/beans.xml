@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+		
+  
+	<!-- Store definitions -->
+	<bean id="org.hisp.dhis.hr.AttributeStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateAttributeStore">
+		<property name="clazz" value="org.hisp.dhis.hr.Attribute" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeGroupStore"
+		class="org.hisp.dhis.hibernate.HibernateGenericStore">
+		<property name="clazz" value="org.hisp.dhis.hr.AttributeGroup" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeOptionsStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateAttributeOptionsStore">
+		<property name="clazz" value="org.hisp.dhis.hr.AttributeOptions" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeOptionGroupStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateAttributeOptionGroupStore">
+		<property name="clazz" value="org.hisp.dhis.hr.AttributeOptionGroup" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.InputTypeStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateInputTypeStore">
+		<property name="clazz" value="org.hisp.dhis.hr.InputType" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.DataTypeStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateDataTypeStore">
+		<property name="clazz" value="org.hisp.dhis.hr.DataType" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	
+	<bean id="org.hisp.dhis.hr.DataValuesStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateDataValuesStore">
+		<property name="clazz" value="org.hisp.dhis.hr.DataValues" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.HistoryStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateHistoryStore">
+		<property name="clazz" value="org.hisp.dhis.hr.History" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.HrDataSetStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateHrDataSetStore">
+		<property name="clazz" value="org.hisp.dhis.hr.HrDataSet" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.PersonStore"
+		class="org.hisp.dhis.hr.hibernate.HibernatePersonStore">
+		<property name="clazz" value="org.hisp.dhis.hr.Person" />
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="statementManager" ref="statementManager"/>
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.TargetIndicatorStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateTargetIndicatorStore">
+		<property name="clazz" value="org.hisp.dhis.hr.TargetIndicator" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="org.hisp.dhis.hr.TrainingStore"
+		class="org.hisp.dhis.hr.hibernate.HibernateTrainingStore">
+		<property name="clazz" value="org.hisp.dhis.hr.Training" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.CompletenessStore"
+        class="org.hisp.dhis.hr.hibernate.HibernateCompletenessStore">
+        <property name="clazz" value="org.hisp.dhis.hr.Completeness" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+	
+	<bean id="org.hisp.dhis.hr.AggregateAttributeStore"
+        class="org.hisp.dhis.hr.hibernate.HibernateAggregateAttributeStore">
+        <property name="clazz" value="org.hisp.dhis.hr.AggregateAttribute" />
+        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="statementManager" ref="statementManager"/>
+    </bean>
+	
+	<bean id="org.hisp.dhis.hr.CriteriaStore"
+        class="org.hisp.dhis.hr.hibernate.HibernateCriteriaStore">
+        <property name="clazz" value="org.hisp.dhis.hr.Criteria" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+	
+	<!-- Service definitions -->
+	
+	<bean id="org.hisp.dhis.hr.AttributeService" class="org.hisp.dhis.hr.DefaultAttributeService">
+		<property name="attributeStore" ref="org.hisp.dhis.hr.AttributeStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeGroupService" class="org.hisp.dhis.hr.DefaultAttributeGroupService">
+		<property name="attributeGroupStore" ref="org.hisp.dhis.hr.AttributeGroupStore" />
+		<property name="attributeStore" ref="org.hisp.dhis.hr.AttributeStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeOptionsService" class="org.hisp.dhis.hr.DefaultAttributeOptionsService">
+		<property name="attributeOptionsStore" ref="org.hisp.dhis.hr.AttributeOptionsStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.AttributeOptionGroupService" class="org.hisp.dhis.hr.DefaultAttributeOptionGroupService">
+		<property name="attributeOptionGroupStore" ref="org.hisp.dhis.hr.AttributeOptionGroupStore" />
+		<property name="attributeOptionsStore" ref="org.hisp.dhis.hr.AttributeOptionsStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.InputTypeService" class="org.hisp.dhis.hr.DefaultInputTypeService">
+		<property name="inputTypeStore" ref="org.hisp.dhis.hr.InputTypeStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.DataTypeService" class="org.hisp.dhis.hr.DefaultDataTypeService">
+		<property name="dataTypeStore" ref="org.hisp.dhis.hr.DataTypeStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.DataValuesService" class="org.hisp.dhis.hr.DefaultDataValuesService">
+		<property name="dataValuesStore" ref="org.hisp.dhis.hr.DataValuesStore" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.HistoryService" class="org.hisp.dhis.hr.DefaultHistoryService">
+		<property name="historyStore" ref="org.hisp.dhis.hr.HistoryStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.HrDataSetService" class="org.hisp.dhis.hr.DefaultHrDataSetService">
+		<property name="hrDataSetStore" ref="org.hisp.dhis.hr.HrDataSetStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.PersonService" class="org.hisp.dhis.hr.DefaultPersonService">
+		<property name="personStore" ref="org.hisp.dhis.hr.PersonStore" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.TargetIndicatorService" class="org.hisp.dhis.hr.DefaultTargetIndicatorService">
+		<property name="targetIndicatorStore" ref="org.hisp.dhis.hr.TargetIndicatorStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.TrainingService" class="org.hisp.dhis.hr.DefaultTrainingService">
+		<property name="trainingStore" ref="org.hisp.dhis.hr.TrainingStore" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.CompletenessService" class="org.hisp.dhis.hr.DefaultCompletenessService">
+        <property name="completenessStore" ref="org.hisp.dhis.hr.CompletenessStore" />
+    </bean>
+	
+	<bean id="org.hisp.dhis.hr.AggregateAttributeService" class="org.hisp.dhis.hr.DefaultAggregateAttributeService">
+        <property name="aggregateAttributesStore" ref="org.hisp.dhis.hr.AggregateAttributeStore" />
+		<property name="criteriaStore" ref="org.hisp.dhis.hr.CriteriaStore" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    </bean>
+	
+	<bean id="org.hisp.dhis.hr.CriteriaService" class="org.hisp.dhis.hr.DefaultCriteriaService">
+        <property name="criteriaStore" ref="org.hisp.dhis.hr.CriteriaStore" />
+    </bean>
+	
+	<!-- Startup routine definitions -->
+		
+	<bean id="org.hisp.dhis.hr.DataTypePopulator"
+    class="org.hisp.dhis.hr.DataTypePopulator">
+  		<property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService"/>
+    	<property name="runlevel" value="5"/>
+		<property name="name" value="DataTypePopulator"/>
+    	<property name="skipInTests" value="true"/>
+ 	</bean>
+ 	
+ 	<bean id="org.hisp.dhis.hr.InputTypePopulator"
+    class="org.hisp.dhis.hr.InputTypePopulator">
+  		<property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService"/>
+    	<property name="runlevel" value="5"/>
+		<property name="name" value="InputTypePopulator"/>
+    	<property name="skipInTests" value="true"/>
+ 	</bean>
+ 	
+ 	<bean id="org.hisp.dhis.hr.AttributePopulator"
+    class="org.hisp.dhis.hr.AttributePopulator">
+        <property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService"/>
+        <property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService"/>
+        <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService"/>
+        <property name="runlevel" value="6"/>
+        <property name="name" value="AttributePopulator"/>
+        <property name="skipInTests" value="true"/>
+    </bean>
+ 	
+ 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject"
+      ref="org.hisp.dhis.system.startup.StartupRoutineExecutor"/>
+    <property name="targetMethod" value="addStartupRoutines"/>
+    <property name="arguments">
+      <list>
+        <list>
+          <ref local="org.hisp.dhis.hr.DataTypePopulator"/>
+          <ref local="org.hisp.dhis.hr.InputTypePopulator"/>
+          <ref local="org.hisp.dhis.hr.AttributePopulator"/>
+        </list>
+      </list>
+    </property>
+  </bean>
+  
+   <!-- Aggregation Report -->
+   
+  <bean id="org.hisp.dhis.hr.AggregatedReportService" class="org.hisp.dhis.hr.DefaultAggregatedReportService">
+    <property name="personService" ref="org.hisp.dhis.hr.PersonService" />    
+    <property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+  </bean>
+
+
+</beans>

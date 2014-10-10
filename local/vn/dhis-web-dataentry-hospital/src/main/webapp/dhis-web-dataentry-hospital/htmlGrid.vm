@@ -1,0 +1,57 @@
+<style type="text/css">
+	.gridTable th, .gridTable td
+	{
+	  text-align: center;
+	  width: 150px;
+	  line-height: 170%;
+	}
+</style>
+
+<br/>
+
+<div style="margin-bottom:15px">
+	<input type="button" value="$i18n.getString( 'get_report_as_csv' )" onclick="exportICDReport( 'csv' )" />
+	<input type="button" value="$i18n.getString( 'get_report_as_xls' )" onclick="exportICDReport( 'xls' )" />
+	<input type="button" value="$i18n.getString( 'get_report_as_pdf' )" onclick="exportICDReport( 'pdf' )" />
+</div>
+
+<h3>$!encoder.htmlEncode( $grid.title )</h3>
+
+<h5>$!encoder.htmlEncode( $grid.subtitle )</h5>
+
+<table class="listTable gridTable" border="1">
+<col width="20%"/>
+<col/>
+<thead>
+	<tr>
+		#foreach( $header in $grid.getVisibleHeaders() )
+		<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( $i18n.getString( $header.name ) )</th>
+		#end
+	</tr>
+</thead>
+
+<tbody>
+	#foreach( $row in $grid.getVisibleRows() )
+	<tr>
+		#foreach( $col in $row )
+		#set( $index = ( $velocityCount - 1 ) )
+		#if( $grid.getVisibleHeaders().get( $index ).meta )
+		<td style="text-align:left">$!encoder.htmlEncode( $col )</td>
+		#else
+		<td>$!col</td>
+		#end
+		#end
+	</tr>
+	#end
+</tbody>
+
+</table>
+
+<script type="text/javascript">
+
+	function exportICDReport( _type )
+	{
+		window.location.href = "exportResult.action?type=" + _type;
+	}
+	
+</script>

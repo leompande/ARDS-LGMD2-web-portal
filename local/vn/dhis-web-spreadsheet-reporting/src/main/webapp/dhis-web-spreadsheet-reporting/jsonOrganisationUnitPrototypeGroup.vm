@@ -1,0 +1,7 @@
+{ "orgUnitPrototypeGroup":
+  {
+    "id": "$!{organisationUnitPrototypeGroup.id}",
+    "name": "$!encoder.jsonEncode( ${organisationUnitPrototypeGroup.displayName} )",
+    "memberCount": "$!{memberCount}"
+  }
+}

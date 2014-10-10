@@ -1,0 +1,12 @@
+#set( $size = $equipmentTypeAttributes.size() )
+{ "equipmentTypeAttributes": [
+#foreach( $equipmentTypeAttribute in $equipmentTypeAttributes )
+{
+      "id": ${equipmentTypeAttribute.id},
+      "name": "$!encoder.jsonEncode( ${equipmentTypeAttribute.name} )",
+      "description": "$!encoder.jsonEncode( ${equipmentTypeAttribute.description} )",
+      "valueType": "$!encoder.jsonEncode( ${equipmentTypeAttribute.valueType} )"
+}#if( $velocityCount < $size ),#end
+#end
+]
+}

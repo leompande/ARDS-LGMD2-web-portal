@@ -1,0 +1,54 @@
+<script>
+	jQuery(document).ready(function(){
+		validation( 'updateDataEntryStatus', function( form ){ form.submit(); });
+	});
+</script>
+
+<h3>$i18n.getString( "edit" ) $i18n.getString( "data_status" )</h3>
+
+<form id="updateDataEntryStatus" action="updateDataEntryStatus.action" method="post">
+<input type="hidden" id="dataStatusId" name="dataStatusId" value="$dataStatus.id" />
+<table>
+	<tr>
+		<td><label for="name">$i18n.getString( 'dataset' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><select id="dataSetId" name="dataSetId" class="{validate:{required:true}}"></select></td>
+	</tr>
+	<tr>
+		<td>$i18n.getString( 'make_default' )</td>
+		<td><input type="checkbox" id="makeDefault" name="makeDefault" #if($dataStatus.makeDefault) checked="true" #end value="true"/></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" value="$i18n.getString( 'ok' )" style="width:100px"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" style="width:100px" onclick="window.location = 'listDataEntryStatus.action'"/>
+		</td>
+	</tr>
+</table>
+</form>
+<script language="javascript">
+
+	jQuery.postJSON( 'getDataSets.action', { dataSetId: $!dataStatus.dataSet.id },
+		function( json ) {
+			var listDataSet = json.dataSets;
+			var dataSets = byId( "dataSetId" );
+			dataSets.options.length = 0;
+			
+			for (var i=0 ; i < listDataSet.length ; i++ )
+			{
+				var id = listDataSet[i].id;
+				var name = listDataSet[i].name;
+				var option = new Option( name, id );
+
+				if ( id == $!dataStatus.dataSet.id )
+				{
+					option.selected = true;				
+				}
+				dataSets.options.add( option, null );
+			}
+		}
+	);
+</script>

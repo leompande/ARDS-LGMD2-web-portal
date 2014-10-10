@@ -1,0 +1,75 @@
+<script type="text/javascript">
+ //-----------------------------------------------------------------------
+ //init jQuery validation for addTargetIndicatorForm
+ //-----------------------------------------------------------------------
+ jQuery(document).ready(
+   function() {
+     jQuery("#addTargetIndicatorForm").validate(
+      {
+        meta:"validate", errorElement:"td", submitHandler: function(form) {
+          validateAddTargetIndicator();
+        }
+      }
+     );
+     jQuery.validator.setMessages( validationMessage );
+     jQuery("#targetIndicatorName").focus();
+   }
+ );
+ var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+<h3>$i18n.getString( "add_new_indicator" )</h3>
+<form id="addTargetIndicatorForm" action="addTargetIndicator.action" method="post" >
+
+<table id="attrTable">
+    <tr>
+        <th colspan="2">
+           $i18n.getString( "details" )
+        </th>
+    <tr>
+        <td style="width:200px">$i18n.getString( "target_indicator_name" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="targetIndicatorName" name="targetIndicatorName" style="width:20em" class="{validate:{required:true,rangelength:[2,32]}}"></td>
+      </tr>   
+         
+      <tr>
+<td style="width:200px"><label for="organisationUnitGroup">$i18n.getString( "organisation_unit_group" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+<td>
+<select id="organisationUnitGroup" name="organisationUnitGroupId" style="width:20em">
+#foreach($organisationUnitGroup in $organisationUnitGroups) 
+<option value="$organisationUnitGroup.id" >$organisationUnitGroup.name </option>
+#end
+</select>
+</td>
+</tr>
+<tr>
+<td style="width:200px"><label for="attributeOptionGroup">$i18n.getString( "hr_attribute_option_group" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+<td>
+<select id="attributeOptionGroup" name="attributeOptionGroupId" style="width:20em">
+#foreach($attributeOptionGroup in $attributeOptionGroups) 
+<option value="$attributeOptionGroup.id" >$attributeOptionGroup.name </option>
+#end
+</select>
+</td>
+</tr>
+ <tr>
+        <td style="width:200px"><label for="targetIndicatorYear">$i18n.getString( "target_indicator_year" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="targetIndicatorYear" name="targetIndicatorYear" style="width:20em">
+            #foreach($targetIndicatorYear in $targetIndicatorYears) 
+            <option value="$targetIndicatorYear" >$targetIndicatorYear </option>
+            #end
+          </select>
+        </td>
+      <tr>
+        <td style="width:200px">$i18n.getString( "expected_value" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="expectedValue" name="expectedValue" style="width:20em" class="{validate:{required:true,minlength:1,number:true}}"></td>
+    </tr>  
+</table>
+
+<p>
+    <input type="submit" value="$i18n.getString( "add" )" style="width:10em">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='targetIndicator.action'" style="width:10em">
+</p>
+
+</form>    
+<span id="message"></span>

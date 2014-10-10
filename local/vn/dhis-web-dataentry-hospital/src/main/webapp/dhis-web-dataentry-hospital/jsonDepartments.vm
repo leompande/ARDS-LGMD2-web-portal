@@ -1,0 +1,10 @@
+#set( $size = $mapDataSets.keySet().size() )
+{ "department": [
+  #foreach( $id in $mapDataSets.keySet() )
+	{	
+		"id": "$id",
+		"name": "$mapDataSets.get($id)"
+	}#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

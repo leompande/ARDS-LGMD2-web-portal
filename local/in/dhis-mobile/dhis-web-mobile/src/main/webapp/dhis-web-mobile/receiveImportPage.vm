@@ -1,0 +1,69 @@
+<script type="text/javascript">
+    var pendingShown=false;
+    var bouncedShown=false;
+    function showPending(){
+        if(pendingShown){
+            $("#pendingItems").html('');
+            pendingShown = false;
+            $("#pendingLink").html('Show Details');
+        } else{
+            $("#pendingItems").html($("#pendingHidden").attr('value'));
+            pendingShown = true;
+            $("#pendingLink").html('Hide Details');
+        }
+    }
+    function showBounced(){
+        if(bouncedShown){
+            $("#bouncedItems").html('');
+            bouncedShown = false;
+            $("#bouncedLink").html('Show Details');
+        } else{
+            $("#bouncedItems").html($("#bouncedHidden").attr('value'));
+            bouncedShown = true;
+            $("#bouncedLink").html('Hide Details');
+        }
+    }
+</script>
+
+#if ($smsServiceStatus)
+<div class="header" style="background-color: olive">
+    <form method="post">SMS Service: Started
+        <input type="submit" name="statAction" value="Stop" />
+    </form>
+</div>
+#else
+<div class="header">
+    <form method="post">SMS Service: Not Started
+        <input type="submit" name="statAction" value="Start" />
+    </form>
+</div>
+#end
+<h1>Receive SMS</h1>
+<br>
+<br>
+<div class="header">Import SMS <form style="float: right;" method="post"><input type="submit" name="importAction" value="Import All Pending" /></form></div>
+<div class="box">
+    <table class="mainTable">
+        <tbody>
+            <tr>
+                <th width="33%">Pending ($pending.size())</th>
+                <th width="33%">Bounced ($bounced.size())</th>
+                <th width="33%">Completed ($completed.size())</th>
+            </tr>
+            <tr>
+                <td><a href="javascript:showPending()" id="pendingLink">Show Details</a></td>
+                <td><a href="javascript:showBounced()" id="bouncedLink">Show Details</a></td>
+                <td>$completed.size() Already Imported</td>
+            </tr>
+            <tr>
+                <td id="pendingItems"></td>
+                <td id="bouncedItems"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="hidden" id="pendingHidden" value="<ol>#foreach ($item in $pending)<li>$item</li>#end</ol>" />
+    <input type="hidden" id="bouncedHidden" value="<ol>#foreach ($item in $bounced)<li>$item</li>#end</ol>" />
+</div>
+
+<span id="message" style="display:#if($result.trim().equals(""))none #else block #end">$result</span>

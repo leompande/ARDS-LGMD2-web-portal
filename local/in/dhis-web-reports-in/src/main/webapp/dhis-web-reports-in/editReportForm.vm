@@ -1,0 +1,81 @@
+
+<h3>$i18n.getString( "edit_report" )</h3>
+
+<form id="editReportForm" name="editReportForm" action="editReport.action" method="post" onsubmit="return validateEditReport()">
+  <table id="detailsList">
+    <col> ## Labels
+    <col> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "report_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" value="$report.name" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "reportmodel" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="reportmodel" name="reportmodel" style="min-width:20em">
+            #foreach ( $reportModel in $reportModels )
+              <option value="$reportModel" #if($reportModel == $report.model) selected #end>$reportModel</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "frequency" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="frequencySelect" name="frequencySelect" style="min-width:20em">
+            #foreach ( $periodType in $periodTypes )
+              <option value="$periodType.name" #if($periodType.name == $report.periodType.name) selected #end>$i18n.getString( $periodType.name )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "excelname" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="excelname" name="excelname" value="$report.excelTemplateName" maxlength="20" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "xmlname" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="xmlname" name="xmlname" value="$report.xmlTemplateName" maxlength="20" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "reporttype" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td>
+          <select id="reporttype" name="reporttype" style="min-width:20em">
+            #foreach ( $reportType in $reportTypes )
+              <option value="$reportType" #if($reportType == $report.reportType) selected #end>$reportType</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      	  
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+      
+      <tr>
+        <td colspan="2">
+          <input type="hidden" id="reportId" name="reportId" value="$report.id">	
+          <input type="submit" value="$i18n.getString( "save" )" style="width:13em">
+          <input type="button" onclick="window.location.href='reportManagement.action'" value="$i18n.getString( "cancel" )" style="width:12em">
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+                 
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+	var nameField = document.getElementById( 'name' );
+	nameField.select();
+	nameField.focus();
+
+</script>

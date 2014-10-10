@@ -1,0 +1,9 @@
+{ "equipmentTypeAttribute":
+  {
+    "id": "${equipmentTypeAttribute.id}",
+    "name": "$!encoder.jsonEncode( ${equipmentTypeAttribute.name} )",
+    "description": "$!encoder.jsonEncode( ${equipmentTypeAttribute.description} )",
+    "mandatory":  "$!{equipmentTypeAttribute.mandatory}",
+    "valueType": "$!encoder.jsonEncode( ${equipmentTypeAttribute.valueType} )"
+  }
+}

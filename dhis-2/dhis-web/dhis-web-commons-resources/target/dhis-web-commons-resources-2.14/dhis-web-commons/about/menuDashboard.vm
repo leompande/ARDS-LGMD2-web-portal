@@ -1,0 +1,17 @@
+
+<h2>$i18n.getString( "dashboard" )&nbsp;</h2>
+
+<ul>
+    <li><a href="../dhis-web-dashboard-integration/index.action">$i18n.getString( "dashboard" )&nbsp;</a></li>
+    <li><a href="../dhis-web-dashboard-integration/profile.action?id=${currentUser.uid}">$i18n.getString( "profile" )&nbsp;</a></li>
+    <li><a href="../dhis-web-dashboard-integration/message.action">$i18n.getString( "messages" )&nbsp;</a></li>
+    <li><a href="../dhis-web-dashboard-integration/interpretation.action">$i18n.getString( "interpretations" )&nbsp;</a></li>
+    <li><a href="../dhis-web-dashboard-integration/getAllUserGroups.action">$i18n.getString( "user_groups" )&nbsp;</a></li>
+</ul>
+
+<h2>ARDS Web Portal Online</h2>
+
+<ul>
+	<li><a href="../${startModule}/index.action" target="_blank">$i18n.getString( "home_page" )&nbsp;</a></li>
+	<!--li><a href="#" target="_blank">$i18n.getString( "launchpad_site" )&nbsp;</a></-->
+</ul>

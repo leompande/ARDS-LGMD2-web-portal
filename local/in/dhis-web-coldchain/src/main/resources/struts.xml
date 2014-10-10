@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<include file="dhis-web-commons.xml"/>
+	
+<package name="dhis-web-coldchain" extends="dhis-web-commons" namespace="/dhis-web-coldchain">
+
+	
+<!-- Home page -->
+	<action name="index" class="org.hisp.dhis.coldchain.action.NoAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/welcome.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+	</action>
+
+<!-- model Type Attribute -->
+		
+	<!-- Model Type Attribute List -->
+	<action name="coldChainModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.GetColdChainModelTypeAttributeListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/coldChainModelTypeAttribute.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+	</action>
+			
+	<!-- Add Form -->
+	<action name="showAddColdChainModelTypeAttributeForm" class="org.hisp.dhis.coldchain.model.action.AddColdChainModelTypeAttributeForm">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/addColdChainModelTypeAttributeForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_ADD</param>
+	</action>
+		
+	<!-- Add -->	
+	<action name="addModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.AddModelTypeAttributeAction">
+		<result name="success" type="redirect">coldChainModelTypeAttribute.action</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_ADD</param>
+	</action>
+		
+	<!-- show details -->
+	<action name="getModelTypeAttributeDetails" class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-coldchain/jsonModelTypeAttribute.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>						
+
+	<!-- Remove/Delete -->
+	<action name="removeModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>		
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_DELETE</param>
+	</action>
+			
+	<!-- Remove/Delete Attrobute Option -->
+	<action name="removeModelTypeAttributeOption" class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeOptionAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_DELETE</param>
+	</action>
+	
+	<!-- Update Form -->
+	<action name="showUpdateModelTypeAttributeForm" class="org.hisp.dhis.coldchain.model.action.ShowUpdateModelTypeAttributeFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/updateModelTypeAttibuteForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_UPDATE</param>
+	</action>
+
+	<!-- Update -->
+	<action name="updateModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAttributeAction">
+		<result name="success" type="redirect">coldChainModelTypeAttribute.action</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_UPDATE</param>
+	</action>
+
+	<!-- Validation -->
+	<action name="validateModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAttributeAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+	</action>
+
+<!-- model Type -->	
+
+	<!-- Model Type List -->
+	<action name="modelType" class="org.hisp.dhis.coldchain.model.action.ModelTypeListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/modelTypeList.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+	</action>
+
+	<!-- Add Model Type Form -->
+	<action name="addModelTypeForm" class="org.hisp.dhis.coldchain.model.action.AddModelTypeFormAction">
+		<result name="input" type="velocity-xml">/dhis-web-commons/ajax/xmlResponseInput.vm</result>		
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/addModelTypeForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+		
+	</action>	
+
+	<!-- Model Type Attributes -->
+	<action name="getModelTypeAttributes" class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributes1Action">
+		<result name="success" type="velocity-json">/dhis-web-coldchain/jsonModelTypeAttributes.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+	
+	<!-- Add -->
+	<action name="addCataligType" class="org.hisp.dhis.coldchain.model.action.AddModelTypeAction">
+		<result name="success" type="redirect">modelType.action</result>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+	</action>
+
+	<!-- Update Form -->
+	<action name="editModelTypeForm" class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/updateModelTypeForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPE_UPDATE</param>
+	</action>	
+
+	<!-- Update -->
+	<action name="updateModelType" class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAction">
+		<result name="success" type="redirect">modelType.action</result>
+		<param name="requiredAuthorities">F_MODELTYPE_UPDATE</param>
+	</action>
+	
+	<!-- Remove/Delete -->
+	<action name="removeModelType" class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+		<param name="requiredAuthorities">F_MODELTYPE_DELETE</param>
+	</action>
+	
+	<!-- Validation -->
+	<action name="validateModelType" class="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	
+	<!-- show details -->
+	<action name="getModelTypeDetails" class="org.hisp.dhis.coldchain.model.action.GetModelTypeDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-coldchain/jsonModelType.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+
+<!-- model -->	
+	
+	<!-- Data Entry Form -->
+
+	<action name="viewModelDataEntryForm"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.ViewModelDataEntryFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/viewModelDataEntryForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">../dhis-web-commons/ckeditor/ckeditor.js,../dhis-web-commons/ckeditor/adapters/jquery.js,javascript/viewModelTypeDataEntryForm.js</param>
+	</action>	
+	
+	<!-- Validation -->
+	<action name="validateModelTypeDataEntryForm"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.ValidateModelDataEntryFormAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+	
+	<!-- Save Form -->
+	<action name="saveModelDataEntryForm" class="org.hisp.dhis.coldchain.model.dataentryform.action.SaveModelDataEntryFormAction">
+		<result name="success" type="redirect">modelType.action</result>
+	</action>		
+	
+	<!-- Delete Form -->
+	<action name="delModelDataEntryForm" class="org.hisp.dhis.coldchain.model.dataentryform.action.DeleteModelDataEntryFormAction">
+		<result name="success" type="redirect">modelType.action</result>
+	</action>	
+	
+	<!-- Model List -->
+
+	<action name="model" class="org.hisp.dhis.coldchain.model.action.ModelSelectAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/selectModel.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+	</action>	
+		
+	<action name="getModelTypeAttribute" class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeListAction">
+		<result name="success" type="velocity-xml">/dhis-web-coldchain/responseModelTypeAttributes.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	
+	<action name="getModelTypeAttributeOption" class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeOptionListAction">
+		<result name="success" type="velocity-xml">/dhis-web-coldchain/responseModelTypeAttributeOption.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>		
+	
+	<action name="getModelList" class="org.hisp.dhis.coldchain.model.action.GetModelListAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/model_List.vm</param>
+		<param name="requiredAuthorities">F_MODEL_MANAGEMENT</param>
+	</action>
+	
+	
+	<!--
+	<action name="model" class="org.hisp.dhis.coldchain.model.action.ModelListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/modelList.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+	</action>
+	-->
+	<!-- Add Model  Form -->
+	<action name="addModelForm" class="org.hisp.dhis.coldchain.model.action.AddModelFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/addModelForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+	
+	<!-- Show Add Model  Form -->
+	<action name="showAddModelForm" class="org.hisp.dhis.coldchain.model.action.ShowAddModelFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/showAddModelForm.vm</param>
+		<!--<param name="page">/dhis-web-coldchain/modelDataEntryForm.vm</param>-->
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+
+	<!-- Add -->
+	<action name="addModel" class="org.hisp.dhis.coldchain.model.action.AddModelAction">
+		<!--<result name="success" type="redirect">model.action</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+
+	<!-- Update Form -->
+	<action name="showUpdateModelForm" class="org.hisp.dhis.coldchain.model.action.UpdateModelFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/updateModelForm.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+	
+	<!-- Update -->
+	<action name="updateModel" class="org.hisp.dhis.coldchain.model.action.UpdateModelAction">
+		<!--<result name="success" type="redirect">model.action</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>
+		
+	<!-- Validation -->
+	<action name="validateModel" class="org.hisp.dhis.coldchain.model.action.ValidateModelAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+
+	<!-- show details -->
+<!--
+	<action name="getModelDetails" class="org.hisp.dhis.coldchain.model.action.GetModelDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-coldchain/jsonModel.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+-->
+	<action name="getModelDetails" class="org.hisp.dhis.coldchain.model.action.GetModelDetailsAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/modelDetails.vm</param>
+	</action>	
+	
+	
+	<!-- Remove/Delete -->
+	<action name="removeModel" class="org.hisp.dhis.coldchain.model.action.RemoveModelAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+		<param name="requiredAuthorities">F_MODEL_DELETE</param>
+	</action>	
+														
+<!-- EquipmentTypeAttribute -->
+        <action name="equipmentTypeAttributeList" class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentTypeAttributeList.vm</param>
+            <param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js</param>
+        </action>
+		
+        <action name="showAddEquipmentTypeAttributeForm" class="org.hisp.dhis.coldchain.action.NoAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/addEquipmentTypeAttributeForm.vm</param>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_ADD</param>
+        </action>
+
+        <action name="addEquipmentTypeAttribute"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAttributeAction">
+            <result name="success" type="redirect">equipmentTypeAttributeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_ADD</param>
+        </action>
+		
+		<action name="validateEquipmentTypeAttribute"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+
+        <action name="showUpdateEquipmentTypeAttributeForm"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAttributeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/updateEquipmentTypeAttibuteForm.vm</param>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_UPDATE</param>
+        </action>
+		
+        <action name="updateEquipmentTypeAttribute"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAttributeAction">
+            <result name="success" type="redirect">equipmentTypeAttributeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_UPDATE</param>
+        </action>
+		
+        <action name="removeEquipmentTypeAttribute"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_DELETE</param>
+        </action>
+
+        <action name="removeEquipmentTypeAttributeOption"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeOptionAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_DELETE</param>
+        </action>
+
+        <action name="getEquipmentTypeAttribute"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-coldchain/jsonEquipmentTypeAttribute.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+		
+		<action name="equipmentTypeAttributes" 
+			class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributesAction">
+			<result name="success" type="velocity-json">/dhis-web-coldchain/jsonEquipmentTypeAttributes.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+<!-- EquipmentType -->
+        <action name="equipmentTypeList" class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentTypeList.vm</param>
+            <param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js</param>
+        </action>
+        <action name="showAddEquipmentTypeForm" class="org.hisp.dhis.coldchain.equipmenttype.action.ShowAddEquipmentTypeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/addEquipmentTypeForm.vm</param>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_ADD</param>
+        </action>
+        <action name="validateEquipmentType" class="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+        <action name="addEquipmentType"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_ADD</param>
+        </action>
+        <action name="showUpdateEquipmentTypeForm"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/updateEquipmentTypeForm.vm</param>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_UPDATE</param>
+        </action>
+        <action name="updateEquipmentType"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_UPDATE</param>
+        </action>	
+        <action name="showEquipmentTypeDataSetForm"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.ShowEquipmentTypeDataSetFormAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentTypeDataSetForm.vm</param>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DATASET</param>
+        </action>		
+		<action name="dataSetList" 
+			class="org.hisp.dhis.coldchain.equipmenttype.action.GetDataSetListAction">
+			<result name="success" type="velocity-json">/dhis-web-coldchain/jsonDataSetList.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>	
+        <action name="updateEquipmentTypeDataSetForm"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeDataSetAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DATASET</param>
+        </action>
+        <action name="removeEquipmentType"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DELETE</param>
+        </action>
+        <action name="getEquipmentType"
+            class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAction">
+            <result name="success" type="velocity-json">/dhis-web-coldchain/jsonEquipmentType.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+	
+<!-- EquipmentDetails -->
+        <action name="enquipmentSelect"
+            class="org.hisp.dhis.coldchain.equipment.action.EquipmentSelectAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-coldchain/selectEquipment.vm</param>
+            <param name="menu">/dhis-web-coldchain/equipmentMenu.vm</param>
+            <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/equipmentAttributeValue.js</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_MANAGEMENT</param>
+            <interceptor-ref name="organisationUnitTreeStack" />
+        </action>
+        <action name="getOrganisationUnit"
+            class="org.hisp.dhis.coldchain.action.GetOrganisationUnitAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+        </action>
+        <action name="getEquipmentTypeAttributes" class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListAction">
+            <result name="success" type="velocity-xml">/dhis-web-coldchain/responseEquipmentTypeAttributes.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+        <action name="getEquipments" class="org.hisp.dhis.coldchain.equipment.action.GetEquipmentListAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentList.vm</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_MANAGEMENT</param>
+        </action>
+	
+		<!-- add EquipmentAttributeValue Form -->
+        <action name="showAddEquipmentForm"
+            class="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/addEquipmentForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>
+	
+		<!-- add EquipmentAttributeValue Ice Packs Form -->
+        <action name="showAddEquipmentIcePacksForm"
+            class="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentIcePacksFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/addEquipmentIcePacksForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>	
+
+		<!-- Load EquipmentAttributeValue IcePacks Form with data -->
+		<action name="loadEquipmentIcePacksData" 
+			class="org.hisp.dhis.coldchain.equipment.action.LoadEquipmentIcePacksDataAction">
+			<result name="success" type="velocity">/content.vm</result>
+			<param name="page">/dhis-web-coldchain/loadEquipmentIcePacksDataForm.vm</param>
+			<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+		</action>	
+	
+		<!-- add/Update EquipmentAttributeValue Ice Packs -->
+        <action name="addUpdateEquipmentIcePacks"
+            class="org.hisp.dhis.coldchain.equipment.action.AddUpdateEquipmentIcePacksAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>		
+	
+
+	
+	
+		
+	
+		<!-- add EquipmentAttributeValue -->
+        <action name="addEquipment"
+            class="org.hisp.dhis.coldchain.equipment.action.AddEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>
+        <action name="showUpdateEquipmentForm"
+            class="org.hisp.dhis.coldchain.equipment.action.GetEquipmentDataAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/updateEquipmentForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_UPDATE</param>
+        </action>
+        <action name="updateEquipment"
+            class="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_UPDATE</param>
+        </action>        
+		<action name="showEquipmentStatusForm"
+            class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentStatusForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUS_UPDATE</param>
+        </action>		
+        <action name="updateEquipmentStatus"
+            class="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentStatusAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUS_UPDATE</param>
+        </action>
+        <action name="showEquipmentStatusHistoryForm"
+            class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusHistoryFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/showEquipmentStatusHistory.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUSHISTORY</param>
+        </action>
+        <action name="showEquipmentDetails"
+            class="org.hisp.dhis.coldchain.equipment.action.GetEquipmentDataAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/showEquipmentDetails.vm</param>
+			<!--<param name="page">/dhis-web-coldchain/showEquipmentData.vm</param>-->
+        </action>		
+        <action name="removeEquipment"
+            class="org.hisp.dhis.coldchain.equipment.action.RemoveEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_DELETE</param>
+        </action>
+	
+<!-- EquipmentAttributeValue Data Entry related actions -->
+	
+        <action name="showEquipmentDataEntryForm"
+            class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentDataEntryFormAction">
+            <!--<result name="success" type="velocity">/main.vm</result>-->
+			<result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-coldchain/equipmentDataEntry.vm</param>
+            <!--<param name="menu">/dhis-web-coldchain/menu.vm</param>-->
+			<param name="stylesheets">css/equipmentDataentry.css</param>
+			<!--<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/equipmentAttributeValue.js,javascript/equipmentDataEntry.js</param>-->
+			<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+            <!--<interceptor-ref name="organisationUnitTreeStack" />-->
+        </action>	
+	
+        <action name="loadPeriods" class="org.hisp.dhis.coldchain.equipment.action.LoadPeriodsAction">
+            <result name="success" type="velocity-json">/dhis-web-coldchain/jsonPeriods.vm</result>
+        </action>	
+
+        <action name="getAvailableNextPrePeriods" class="org.hisp.dhis.coldchain.equipment.action.LoadNextPrePeriodsAction">
+            <result name="success" type="velocity-json">/dhis-web-coldchain/jsonPeriods.vm</result>
+        </action>		
+	
+	<!-- Load DataEntry Form -->
+	<action name="loadDataEntryForm" class="org.hisp.dhis.coldchain.equipment.action.LoadDataEntryFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/loadDataEntryForm.vm</param>
+		<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+	</action>
+	
+	<!-- Save DataEntry Form -->
+	<action name="saveDataEntryForm" class="org.hisp.dhis.coldchain.equipment.action.SaveEquipmentDataValueAction">
+		<!--<result name="success" type="redirect">enquipmentSelect.action</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+	</action>	
+
+	<!-- Upload Image Form -->
+	<action name="showUploadImageForm" class="org.hisp.dhis.coldchain.model.action.ShowUploadModelImageFormAction">
+		<!--<result name="success" type="velocity">/main.vm</result>-->
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/uploadModelImageForm.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+		
+	<action name="uploadModelImage" class="org.hisp.dhis.coldchain.model.action.UploadModelImageAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="page">/dhis-web-coldchain/responseUplodImageStatus.vm</param>
+		<interceptor-ref name="fileUploadStack" />
+	</action>				
+	
+	<action name="showImage" class="org.hisp.dhis.coldchain.model.action.ShowImageAction">
+		<result name="success" type="velocity">/content.vm</result>
+	</action>	
+
+	<!-- Upload Image Form Model Type-->
+	<action name="showUploadModelTypeImageForm" class="org.hisp.dhis.coldchain.model.action.ShowUploadModelTypeImageFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/uploadModelTypeImageForm.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+	
+	<action name="uploadModelTypeImage" class="org.hisp.dhis.coldchain.model.action.UploadModelTypeImageAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="page">/dhis-web-coldchain/responseUplodModelTypeImageStatus.vm</param>
+		<interceptor-ref name="fileUploadStack" />
+	</action>	
+			
+	<action name="showModelTypeImage" class="org.hisp.dhis.coldchain.model.action.ShowModelTypeImageAction">
+		<result name="success" type="velocity">/content.vm</result>
+	</action>	
+
+	<!-- CCEM Reports -->
+	<action name="cceiReportsPage" class="org.hisp.dhis.coldchain.reports.action.CCEIReportPageAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-coldchain/cceiReportsPage.vm</param>
+        <param name="menu">/dhis-web-coldchain/cceiReportMenu.vm</param>
+        <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/ccemReports.js</param>
+        <interceptor-ref name="organisationUnitTreeStack" />
+    </action>
+	
+
+	<action name="ccemReportsPage" class="org.hisp.dhis.coldchain.reports.action.CCEIReportPageAction">
+        <result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-coldchain/cceiReportForm.vm</param>
+    </action>
+	
+	<action name="organisationUnit" class="org.hisp.dhis.coldchain.action.GetOrganisationUnitAction">
+        <result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-coldchain/orgUnitWithcheckbox.vm</param>
+    </action>
+	
+    <action name="generateCCEMReport" class="org.hisp.dhis.coldchain.reports.action.GenerateCCEMReportAction">
+        <result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-coldchain/ccemReportOutput.vm</param>
+        <param name="requiredAuthorities">F_CCEM_REPORT</param>
+    </action>
+	
+	<!--<action name="exportToExcel" class="org.hisp.dhis.coldchain.action.ExportToExcelAction">
+		<result name="success" type="stream">
+			<param name="contentType">application/vnd.ms-excel</param>
+            <param name="inputName">inputStream</param>
+            <param name="contentDisposition">attachment;filename="${fileName}"</param>
+            <param name="bufferSize">1024</param>
+		</result>
+    </action>-->
+	
+	<action name="exportTable" class="org.hisp.dhis.coldchain.reports.action.GenerateCCEIReportAction">     
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="menu">/dhis-web-coldchain/menu.vm</param>
+			<param name="page">/dhis-web-coldchain/welcome.vm</param>		  
+    </action>
+		
+	
+
+	<action name="getOrganisationUnitGroups" class="org.hisp.dhis.coldchain.action.GetOrganisationUnitGroupsAction">
+        <result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-coldchain/responseOrganisationUnitGroups.vm</param>
+    </action>
+
+
+
+
+	
+<!-- Clinic Equipments -->
+	
+
+	<action name="getEquipmentTypeAttributeList" class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListForDisplayAction">
+		<result name="success" type="velocity-xml">/dhis-web-coldchain/responseEquipmentTypeAttributeListDisplay.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+
+		
+	<action name="clinicEquipments"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.ClinicEquipmentsAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/clinicEquipments.vm</param>
+		<param name="menu">/dhis-web-coldchain/clinicEquipmentsMenu.vm</param>
+		<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/clinicEquipments.js</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+		<interceptor-ref name="organisationUnitTreeStack" />
+	</action>	
+	
+	<action name="getOrganisationUnitDetails"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.GetOrganisationUnitDetailsAction">
+		<result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-coldchain/clinicEquipmentsAndOrgUnitDetails.vm</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>		
+		
+	
+	<action name="getFullOrganisationUnitDetails"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.GetFullOrganisationUnitDetailsAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/fullOrganisationUnitDetail.vm</param>
+		<param name="stylesheets">css/basic.css</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>	
+	
+
+	<action name="showUpdateOrganisationUnitForm"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateOrganisationUnitFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/updateOrganisationUnitForm.vm</param>
+		<param name="stylesheets">css/basic.css</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>		
+	
+	<action name="validateOrganisationUnitCode"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.ValidateOrganisationUnitCodeAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>	
+	
+	<action name="updateOrganisationUnit"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.UpdateOrganisationUnitAction">
+		<!--<result name="success" type="redirect">getFullOrganisationUnitDetails.action?orgUnitId=${orgUnitId}</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action> 	
+	
+    <action name="showUpdateFacilityDataEntryForm"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateFacilityDataEntryFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/facilityDataEntry.vm</param>
+		<!--<param name="stylesheets">css/facilityDataentry.css</param>-->
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>
+	
+	<!-- Facility Load DataEntry Form -->
+	<action name="loadFacilityDataEntryForm" class="org.hisp.dhis.coldchain.equipment.manager.action.LoadFacilityDataEntryFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-coldchain/loadFacilityDataEntryForm.vm</param>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>	
+	
+	<action name="saveFacilityDataEntryForm" class="org.hisp.dhis.coldchain.equipment.manager.action.SaveFacilityDataValueAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_CLINICINVENTORIES_MANAGEMENT</param>
+	</action>	
+		
+	<!--<result name="success" type="redirect">programStage.action?id=${modelTypeId}</result>-->
+	
+	
+<!-- EquipmentAttributeValue Models -->	
+	
+	<action name="equipmentModels"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.EquipmentModelsAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/equipmentModels.vm</param>
+		<param name="menu">/dhis-web-coldchain/equipmentModelsMenu.vm</param>
+		<param name="javascripts">javascript/equipmentModels.js</param>
+		<param name="requiredAuthorities">F_EQUIPMENT_MODELS_MANAGEMENT</param>
+	</action>
+	
+	<action name="vaccinesModels"
+		class="org.hisp.dhis.coldchain.equipment.manager.action.VaccinesModelsAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/vaccinesModels.vm</param>
+		<param name="menu">/dhis-web-coldchain/vaccinesModelsMenu.vm</param>
+		<param name="javascripts">javascript/equipmentModels.js</param>
+		<param name="requiredAuthorities">F_EQUIPMENT_MODELS_MANAGEMENT</param>
+	</action>	
+	
+	
+	
+	<!--
+	<action name="model" class="org.hisp.dhis.coldchain.model.action.ModelSelectAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-coldchain/selectModel.vm</param>
+		<param name="menu">/dhis-web-coldchain/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+	</action>	
+	-->
+	
+		
+	
+</package>
+</struts>

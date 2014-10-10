@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    jQuery(document).ready(	function() {
+	    validation2( 'editDataElementCategoryOptionForm', function( form ){ form.submit()}, {
+			'beforeValidateHandler': function() { listValidator( 'memberValidator', 'categoryOptions' ); },
+			'rules': getValidationRules("dateElementCategoryOption")
+		}); 
+
+        checkValueIsExist( "name", "validateDataElementCategoryOption.action", {id: $dataElementCategoryOption.id} );
+        checkValueIsExist( "code", "validateDataElementCategoryOption.action", {id: $dataElementCategoryOption.code} );
+	});
+
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_data_element_category_option" ) , "'")';
+    var i18n_specify_category_option_name = '$encoder.jsEscape( $i18n.getString( "specify_category_option_name" ) , "'")';
+    var i18n_category_option_name_already_exists = '$encoder.jsEscape( $i18n.getString( "category_option_name_already_exists" ) , "'")';
+	var i18n_option_rename_successfully = '$encoder.jsEscape( $i18n.getString( "option_rename_successfully" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "edit_data_element_category_option" )</h3>
+
+<form id="editDataElementCategoryOptionForm" name="editDataElementCategoryOptionForm" action="updateDataElementCategoryOption.action" method="post" class="inputForm">
+  
+  <input type="hidden" id="id" name="id" value="$dataElementCategoryOption.id"/>
+  
+  <table>
+    <tr>
+      <th colspan="4">$i18n.getString( "details" )</th>      
+    </tr>
+    <tr>
+      <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+      <td><input type="text" id="name" name="name" value="$!encoder.htmlEncode( $dataElementCategoryOption.name )" class="{validate:{required:true,rangelength:[2,150]}}"/></td>
+      <td></td>
+    </tr>      
+	<tr>
+	  <td><label>$i18n.getString( "code" )</label></td>
+	  <td colspan="3"><input type="text" id="code" name="code" style="width:25em" value="$!encoder.htmlEncode( $dataElementCategoryOption.code )" /></td>
+    </tr>	
+    <tr>
+      <td><label>$i18n.getString( "concept_name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	  <td>
+		<div style="inline">
+			#set ( $conceptId = $!dataElementCategoryOption.concept.id )
+			<select id="conceptId" name="conceptId">				
+				#foreach( $concept in $concepts )
+				<option value="$concept.id" #if ( $concept.id == $conceptId ) selected #end>$concept.name</option>
+				#end
+			</select>
+		</div>
+	  </td>
+      <td></td>
+    </tr>  
+    <tr>
+      <td></td>
+      <td colspan="3">
+        <input type="submit" value="$i18n.getString( 'save' )" style="width:100px"/>
+		<input type="button" onclick="dhis2.commons.redirectCurrentPage( 'categoryOption.action' )" value="$i18n.getString( 'cancel' )" style="width:100px"/></p>
+      </td>
+    </tr>
+  </table>
+</form>

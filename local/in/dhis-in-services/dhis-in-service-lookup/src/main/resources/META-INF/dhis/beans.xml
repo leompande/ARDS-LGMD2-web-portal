@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Store definitions -->	
+    <bean id="org.hisp.dhis.lookup.LookupStore" class="org.hisp.dhis.lookup.hibernate.HibernateLookupStore">
+        <property name="clazz" value="org.hisp.dhis.lookup.Lookup"/>
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+	<!-- Service definitions -->
+    <bean id="org.hisp.dhis.lookup.LookupService" class="org.hisp.dhis.lookup.DefaultLookupService">
+        <property name="lookupStore" ref="org.hisp.dhis.lookup.LookupStore" />
+    </bean>
+
+</beans>

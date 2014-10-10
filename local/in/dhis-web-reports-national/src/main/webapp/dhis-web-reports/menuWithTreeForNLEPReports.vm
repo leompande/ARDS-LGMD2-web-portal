@@ -1,0 +1,33 @@
+
+<a href="index.action"><h2>Report Analyser</h2></a>
+
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+        <li>
+            NLEP Reports
+        </li>
+    </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<script type="text/javascript">
+
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{    
+		document.reportForm.ouIDTB.value = orgUnitIds;
+		
+		if(orgUnitIds == null || orgUnitIds == "" )
+		{
+			return;
+		}
+		if(orgUnitIds !=null)
+		{
+			 getOUDetails(orgUnitIds);
+		}		
+	}
+	
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

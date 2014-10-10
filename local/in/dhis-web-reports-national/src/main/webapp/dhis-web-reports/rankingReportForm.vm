@@ -1,0 +1,52 @@
+
+<h3>$i18n.getString( "ranking_report_form" )</h3><hr /><br />
+
+<form id="reportForm" name="reportForm" action="generateRankingReport.action" method="post" onsubmit="return formValidations()" target="_blank">
+	
+<table align = "center">
+
+  <tr>
+  	  <td class="NormalB">OrganisationUnit :</td>
+  	  <td>&nbsp;</td>
+      <td class="NormalB">      	  
+          <input type="text" name="ouNameTB" id="ouNameTB" size="20">     
+      </td>
+  </tr>
+
+  <tr>
+  	  <td>&nbsp;</td>
+  	  <td>&nbsp;</td>
+      <td>&nbsp;</td>      
+  </tr>
+  
+  <tr>
+  	<td class="NormalB">Periods :</td>
+    <td>&nbsp;</td>
+  	<td class="NormalB">          
+          <select id="selectedPeriodId" name="selectedPeriodId" >              
+              #foreach( $mPeriod in $monthlyPeriods )
+                <option value="$mPeriod.id">$simpleDateFormat.format( $mPeriod.startDate )</option>
+              #end
+          </select>
+    </td>
+    
+  </tr>
+
+  <tr>
+  	  <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>      
+  </tr>
+
+  <tr>
+  	  <td>&nbsp;</td>
+  	  <td>&nbsp;</td>
+      <td>
+          <input type="submit" name="generate" value='Generate Report'/>
+          <input type="hidden" name="ouIDTB" id="ouIDTB">
+      </td>
+  </tr>
+  
+</table>
+
+</form>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    <bean
+    id="org.hisp.dhis.ll.action.llOption.GetLineListOptionListAction"
+    class="org.hisp.dhis.ll.action.llOption.GetLineListOptionListAction"
+    scope="prototype">
+
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llOption.AddLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.AddLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+  </bean>
+
+  <bean id="org.hisp.dhis.ll.action.llOption.GetLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.GetLineListOptionAction" scope="prototype">
+    <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>
+ <bean id="org.hisp.dhis.ll.action.llOption.RemoveLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.RemoveLineListOptionAction" scope="prototype">
+    <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>
+
+  <bean id="org.hisp.dhis.ll.action.lloption.ShowAddLineListOptionForm"
+    class="org.hisp.dhis.ll.action.lloption.ShowAddLineListOptionForm" scope="prototype">
+    <property name="lineListService">
+      <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>
+
+  <bean id="org.hisp.dhis.ll.action.llOption.ShowUpdateLineListOptionFormAction"
+    class="org.hisp.dhis.ll.action.llOption.ShowUpdateLineListOptionFormAction" scope="prototype">
+    <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>
+
+  <bean id="org.hisp.dhis.ll.action.llOption.UpdateLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.UpdateLineListOptionAction" scope="prototype">
+    <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>
+
+  <bean id="org.hisp.dhis.ll.action.llOption.ValidateLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.ValidateLineListOptionAction" scope="prototype">
+    <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+    </property>
+  </bean>	
+</beans>

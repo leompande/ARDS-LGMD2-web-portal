@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  
+  <class name="org.hisp.dhis.detarget.DeTarget" table="detarget">
+    <id name="id" column="detargetid">
+      <generator class="native"/>
+    </id>
+
+    <property name="name" not-null="true" unique="true" length="160"/>
+    
+    <property name="shortName" column="shortname" unique="true" length="60"/>
+    
+    <set name="sources" table="detargetsource">
+      <key column="detargetid"/>
+	  <many-to-many column="sourceid" class="org.hisp.dhis.organisationunit.OrganisationUnit" foreign-key="fk_detarget_organisationunit"/>      
+    </set>
+    
+    <property name="description" type="text"/>
+    
+    <property name="url" length = "160"/>
+  
+  </class>
+  
+</hibernate-mapping>

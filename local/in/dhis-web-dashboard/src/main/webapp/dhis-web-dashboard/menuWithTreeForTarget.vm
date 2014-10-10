@@ -1,0 +1,31 @@
+
+<a href="index.action"><h2>$i18n.getString( "dataanalyser" )</h2></a>
+
+<ul>
+	<li>$i18n.getString( "graphical_analysis" )</li>
+	<ul>
+		<li>$i18n.getString( "target" )</li>
+	 </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" ) 
+
+<script type="text/javascript">
+
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+	
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{
+		document.getElementById("ouIDTB"). value = orgUnitIds;
+		if(orgUnitIds == null || orgUnitIds == "" )
+		{
+			document.getElementById("ouNameTB"). value = "";
+			return;
+		}
+		if( orgUnitIds != null )
+		{
+			getOUDeatilsForTaget( orgUnitIds );
+		}       
+	}
+
+</script>

@@ -1,0 +1,25 @@
+<h3>$i18n.getString( "hr_data_edit_Screen" )</h3>
+<form id="selectForm" name="selectForm" method="post" action="select.action">
+<table>
+	<tr>
+		<td><label>$i18n.getString( "registering_unit" )</label><input type="hidden" readonly="readonly" id="organisationUnitId" value="$person.organisationUnit.getId()" style="min-width:350px">
+		<input type="hidden" readonly="readonly" id="personId" value = "$personId" style="min-width:350px">
+		<input type="hidden" readonly="readonly" id="hrDataSetId" value = "$hrDataSetId" style="min-width:350px"></td>
+		<td><input type="text" readonly="readonly" value="$encoder.htmlEncode( $person.organisationUnit.getName() )" style="min-width:350px"></td>
+		<td></td>
+	</tr> 		
+</table>
+
+<hr style="clear:both">
+#parse( "dhis-web-commons/loader/loader.vm" )
+</br>
+$hyperText
+#parse( "/dhis-web-hrentry/completeRegistration.vm" )
+</form>
+<hr style="clear:both">
+<span id="message"></span>
+<script type="text/javascript">
+	var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+	var i18n_value_must_number = '$encoder.jsEscape( $i18n.getString( "value_must_number" ) , "'")';
+	var i18n_value_must_positive_number = '$encoder.jsEscape( $i18n.getString( "value_must_positive_number" ) , "'")';
+</script>

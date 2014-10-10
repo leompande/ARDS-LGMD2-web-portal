@@ -1,0 +1,121 @@
+#set($hasProvideElsewhere = false)
+#foreach( $programStageDataElement in $programStageDataElements )
+	#if($programStageDataElement.allowProvidedElsewhere == 'true')
+		#set($hasProvideElsewhere = true)
+	#end
+#end
+
+<table id="defaultEntryScreenContainer" class='entryScreen formSection'>
+	<colgroup>
+		<col id="deCol">
+		<col width="45%">
+		#if( $hasProvideElsewhere=='true')
+		<col width="5%" />
+		#end
+	</colgroup>
+
+	<tr>
+		<th>$i18n.getString( "data_element" )</th>                   
+		<th>$i18n.getString( "value" )</th>
+		#if( $hasProvideElsewhere=='true')
+		<th>$i18n.getString( "provided_elsewhere" )</th>
+		#end
+	</tr>
+#set( $dataElementRowCount = 0 )
+#set( $mark = true )
+#set( $tabIndex = 1 )
+#foreach( $programStageDataElement in $programStageDataElements )
+	#set( $dataElementRowCount = $dataElementRowCount + 1 )    
+	#set( $mark = !$mark )
+	#set( $patientDataValue = false )
+	#set( $key = $programStageDataElement.dataElement.id )
+	#set( $patientDataValue = $patientDataValueMap.get( $key ) )    
+	<tr #alternate( $mark )>
+		##data element name
+		<td class='text-column' align='center'>
+			<span id="value[$programStageDataElement.dataElement.id].name" title="$!encoder.htmlEncode( $programStageDataElement.dataElement.description )">
+				$encoder.htmlEncode( $programStageDataElement.dataElement.formNameFallback )						
+				#if ( $programStageDataElement.compulsory )
+					<em title="$i18n.getString( "required" )" class="required">*</em>
+				#end        
+			</span>
+			##type        
+			<span id="value[$programStageDataElement.dataElement.id].type" class="hidden">$encoder.htmlEncode( $programStageDataElement.dataElement.type )</span></td>       
+		</td>        
+		##entry        
+		<td class='input-column'>   
+			#set( $id = $programStageDataElement.programStage.uid + '-' + $programStageDataElement.dataElement.uid + '-val' )
+			#if( $!programStageDataElement.dataElement.optionSet )
+				#set( $hasOptionSet = 'true')
+			#else
+				#set( $hasOptionSet = 'false')
+			#end
+			#if( $programStageDataElement.dataElement.textType == "longText" )
+				<textarea name="entryfield" type="text" data="{compulsory: $programStageDataElement.compulsory }" id="$id" name="entryfield" onchange="saveVal( '$programStageDataElement.dataElement.uid' )" onkeypress="return keyPress(event, this)" tabindex="$tabIndex" maxlength=255 >$!encoder.htmlEncode( $patientDataValue.value )</textarea>
+			#elseif( $programStageDataElement.dataElement.type == "bool" )
+				<select name="entryfield" data="{compulsory: $programStageDataElement.compulsory }" id="$id" onchange="saveOpt( '$programStageDataElement.dataElement.uid' )" tabindex="$tabIndex">
+					<option value="">[$i18n.getString( "select_value" )]</option>
+					<option value="true" #if( $patientDataValue.value == "true" ) selected="selected" #end>$i18n.getString( "yes" )</option>
+					<option value="false" #if( $patientDataValue.value == "false" ) selected="selected" #end>$i18n.getString( "no" )</option>
+				</select>
+			#elseif( $programStageDataElement.dataElement.type == "trueOnly" )
+				<input name="entryfield" type="checkbox" data="{compulsory: $programStageDataElement.compulsory, deType:'$programStageDataElement.dataElement.getType()'}" id="$id" name="entryfield" #if($patientDataValue.value=="true") checked #end onchange="saveVal( '$programStageDataElement.dataElement.uid' )" onkeypress="return keyPress(event, this)" tabindex="$tabIndex" >
+			#elseif( $programStageDataElement.dataElement.type == "date" )
+				<input name="entryfield" type="text" data="{compulsory: $programStageDataElement.compulsory, deType:'$programStageDataElement.dataElement.getType()' }" id="$id" name="entryfield" value="$!encoder.htmlEncode( $patientDataValue.value )" onchange="saveVal( '$programStageDataElement.dataElement.uid' )" onkeypress="return keyPress(event, this)" tabindex="$tabIndex" class="date-field datefield" />
+				<script type="text/javascript">
+					#if($programStageDataElement.allowDateInFuture=='true')
+						datePicker( '$programStageDataElement.programStage.uid'+ '-' + '$programStageDataElement.dataElement.uid' + '-val', false, false);
+					#else
+						datePickerValid( '$programStageDataElement.programStage.uid'+ '-' + '$programStageDataElement.dataElement.uid' + '-val', false, false);
+					#end
+				</script> 
+			#elseif($hasOptionSet=='true')
+				#if( $programStageDataElement.dataElement.optionSet.options.size() <= 7 && $program.dataEntryMethod =='true' )
+					<table style='width:100%'>
+						<tr>
+							<td>
+							<input id='$id' class='$id' name="$id" type='radio' options='no' optionset='$programStageDataElement.dataElement.optionSet.uid'
+								data="{compulsory: $programStageDataElement.compulsory, deName:'$programStageDataElement.dataElement.name', deType:'$programStageDataElement.dataElement.getDetailedNumberType()' }"
+								#if( $patientDataValue.value == $option) checked #end
+								onclick="saveRadio( '$programStageDataElement.dataElement.uid', '' )" tabindex="$tabIndex" />$i18n.getString("non_value")
+						</td>
+					#set($index=1)
+					#foreach($option in $programStageDataElement.dataElement.optionSet.options)
+						#if($index==4)
+							</tr><tr>
+							#set($index=0)
+						#end
+						<td>
+						<input id='$id' class='$id' name="$id" type='radio' options='no' optionset='$programStageDataElement.dataElement.optionSet.uid'
+							data="{compulsory: $programStageDataElement.compulsory, deName:'$programStageDataElement.dataElement.name', deType:'$programStageDataElement.dataElement.getDetailedNumberType()' }" 
+						#if( $patientDataValue.value == $option) checked #end value="$encoder.htmlEncode($option)"
+						onclick="saveRadio( '$programStageDataElement.dataElement.uid', '$option' )" tabindex="$tabIndex" />$encoder.htmlEncode($option)
+						</td>
+						#set($index=$index + 1)
+					#end
+					</tr>
+					</table>
+				#else
+					<input options='$hasOptionSet' optionset='$programStageDataElement.dataElement.optionSet.uid' id='$id' name="entryfield" data="{compulsory: $programStageDataElement.compulsory, deName:'$programStageDataElement.dataElement.name', deType:'$programStageDataElement.dataElement.getDetailedNumberType()' }" type="text" value="$!encoder.htmlEncode( $patientDataValue.value )" onkeypress="return keyPress(event, this)" tabindex="$tabIndex" class="auto-field optionset" />				#end
+			#elseif($programStageDataElement.dataElement.type=='username')
+				<input name="entryfield" username='true' class="auto-field optionset" data="{compulsory: $programStageDataElement.compulsory, deName:'$programStageDataElement.dataElement.name', deType:'$programStageDataElement.dataElement.getDetailedNumberType()' }" id="$id" type="text" value="$!encoder.htmlEncode( $patientDataValue.value )" onkeypress="return keyPress(event, this)" tabindex="$tabIndex" />
+			#else
+				<input name="entryfield"  
+					data="{compulsory: $programStageDataElement.compulsory, deName:'$programStageDataElement.dataElement.name', deType:'$programStageDataElement.dataElement.getDetailedNumberType()' }" onkeypress="return keyPress(event, this)" tabindex="$tabIndex"
+					id="$id" type="text" value="$!encoder.htmlEncode( $patientDataValue.value )" 
+					onchange="saveVal( '$programStageDataElement.dataElement.uid' )" 
+					onkeypress="return keyPress(event, this)" tabindex="$tabIndex"/>
+			#end
+		</td> 
+		#if($hasProvideElsewhere == true)
+		<td style='width:20px;' align='center'>
+			#set( $id = $programStageDataElement.programStage.uid + '-' + $programStageDataElement.dataElement.uid + '-facility' )
+			#if( $programStageDataElement.allowProvidedElsewhere == 'true')
+			<input class='provided-elsewhere' name="$id" id="$id" type="checkbox" onclick="updateProvidingFacility( '$programStageDataElement.dataElement.uid', this )" #if($patientDataValue.providedElsewhere == 'true') checked #end />
+			#end
+		</td>
+		#end
+	</tr>
+	#set( $tabIndex = $tabIndex + 1 )
+#end	
+</table>

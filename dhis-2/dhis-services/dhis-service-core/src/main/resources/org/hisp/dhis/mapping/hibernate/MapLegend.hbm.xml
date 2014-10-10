@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.mapping.MapLegend" table="maplegend">
+
+    <id name="id" column="maplegendid">
+      <generator class="native" />
+    </id>
+
+    <property name="name" column="name" not-null="true" unique="false" length="230" />
+
+    <property name="uid" column="uid" length="11" />
+
+    <property name="code" column="code" not-null="false" unique="true" length="50" />
+
+    <property name="created" type="timestamp" />
+
+    <property name="lastUpdated" type="timestamp" />
+
+    <property name="startValue" column="startvalue" />
+
+    <property name="endValue" column="endvalue" />
+
+    <property name="color" column="color" />
+
+    <property name="image" column="image" />
+
+  </class>
+</hibernate-mapping>

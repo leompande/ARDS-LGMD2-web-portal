@@ -1,0 +1,35 @@
+<h2>$i18n.getString( "schedule" ) $programStage.getName()</h2>
+<form action="saveRepeatableEvent.action" method="POST">
+<div class="header-box" align="center">
+    <input type="hidden" name="programInstanceId" value="$programInstanceId"/>
+    <input type="hidden" name="programStageId" value="$programStageId"/>
+    <input type="hidden" name="currentProgramStageInstanceId" value="$currentProgramStageInstanceId"/>
+
+    <p style="text-align: left;">
+        <label>$i18n.getString( "due_date" ) [yyyy-MM-dd] </label>
+        #if( $validationMap.get( "enrollmentDate" ) )
+            <br/><span style="color: #990000;"> $i18n.getString($validationMap.get( "dueDate" ))</span>
+        #end
+        <input type="text" name="nextDueDate"
+                value="#if($previousValues.get("dueDate"))$previousValues.get("dueDate")#else$defaultDueDate#end"/>
+    </p>
+</div>
+
+<div class="header-box" align="center">
+<p><input type="submit" style="width: 100%;" value="$i18n.getString("schedule_visit")"/></p>
+</form>
+
+<form action="showPatientProgramList.action">
+<input type="hidden" name="patientId" value="$patientId"/>
+<p><input type="submit" style="width: 100%;" value="$i18n.getString("do_not_schedule_visit")"/></p>
+</form>
+</div>
+
+
+<div id="footer">
+    <h2>$i18n.getString( "navigate_to" )</h2>
+    <ul>
+        <li><a href="showPatientProgramList.action?patientId=$patientId"> $i18n.getString("program_list")</a></li>
+        <li><a href="index.action">$i18n.getString("home")</a></li>
+    </ul>
+</div>

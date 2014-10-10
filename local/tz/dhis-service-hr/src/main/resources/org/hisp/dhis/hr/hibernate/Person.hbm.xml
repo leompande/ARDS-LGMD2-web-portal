@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.Person" table="hr_person">
+		<id name="id" column="personId">			
+		</id>
+		
+		<property name="instance" column="instance" length="64" unique="true" />
+		
+		<property name="firstName" column="firstName" length="32" />
+		
+		<property name="middleName" column="middleName" length="32" />
+		
+		<property name="lastName" column="lastName" length="32" />
+		
+		<property name="birthDate" column="birthDate" type="date" />
+		
+		<property name="gender" type="text" column="gender" />
+		
+		<property name="nationality" type="text" column="nationality" />
+		
+		<many-to-one name="dataset" column="datasetId" class="org.hisp.dhis.hr.HrDataSet"/>
+		
+		<many-to-one name="organisationUnit" column="organisationUnitId" class="org.hisp.dhis.organisationunit.OrganisationUnit"/>
+		
+		<set name="dataValues" inverse="true" cascade="all">
+			<key column="personId" />
+			<one-to-many class="org.hisp.dhis.hr.DataValues" />
+		</set>	
+		
+		<set name="history" inverse="true" cascade="all">
+			<key column="personId" />
+			<one-to-many class="org.hisp.dhis.hr.History" />
+		</set>		
+		
+		<set name="training" inverse="true" cascade="all">
+			<key column="personId" />
+			<one-to-many class="org.hisp.dhis.hr.Training" />
+		</set>	
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,12 @@
+<table>
+            <tr>
+                #foreach($var in $splashImg)
+                <td>
+                    <div style=" width: 96px; height: 120px; border: dotted; text-align: center;">
+                        <img style="margin-top: 30px" alt="" src="javame_src/src/main/resources/splash/$var" width="60" height="60"/> <br/>
+                        <input style="bottom: 5px" name="splash" type="radio" value="$var"  />
+                    </div>
+                </td>
+                #end
+            </tr>
+        </table>

@@ -1,0 +1,110 @@
+<h2>Report Analyser</h2>
+
+#if( $auth.hasAccess( "dhis-web-reports", "reportManagement") )
+    <ul>
+        <li>Report Management</li>
+        <ul>
+            <li><a href = "reportManagement.action">Report Management</a></li>
+            <li><a href="showglobalconfig.action">Generate Global Config</a></li>
+        </ul>
+    </ul>
+#end
+
+<ul>
+	<li>Report Analysis</li>
+	<ul>
+	    <li><a href = "dailyFoodReportAnalyser.action">Daily Food Situation Reports</a></li>
+		#if( $auth.hasAccess( "dhis-web-reports", "upwardReportAnalyser") )
+			<li><a href = "upwardReportAnalyser.action">GOI Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "edReportForm") )
+			<li><a href = "edReportForm.action">Indicator Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "routineReportAnalyser") )
+			<li><a href = "routineReportAnalyser.action">Routine Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "feedbackReportAnalyser") )
+			<li><a href = "feedbackReportAnalyser.action">Feedback Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "aggregationReportAnalyser") )
+			<li><a href = "aggregationReportAnalyser.action">Aggregation Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "linelistingReportAnalyser") )
+			<li><a href = "linelistingReportAnalyser.action">Linelisting Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "periodWiseprogressReportAnalyser") )
+			<li><a href = "periodWiseprogressReportAnalyser.action">Periodwise Progress Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "ouWiseProgressReportAnalyser") )
+			<li><a href = "ouWiseProgressReportAnalyser.action">Orgunitwise Progress Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "metaDataReportAnalyser") )
+			<li><a href = "metaDataReportAnalyser.action">Meta Data Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "dataSetLockReportAnalyser") )
+			<li><a href = "dataSetLockReportAnalyser.action">DataSet Lock Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "quarterlyPhysicalReport") )
+			<li><a href = "quarterlyPhysicalReport.action ">Quarterly Physical Output Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "mobileReportAnalyser") )
+			<li><a href = "mobileReportAnalyser.action">Mobile Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "csReviewReportForm") )
+			<li><a href = "csReviewReportForm.action">CS Review Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "populateUsers") )
+			<li><a href = "populateUsers.action">Populate Users</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "autoReportAnalyser") )
+			<li><a href = "autoReportAnalyser.action">Bulk Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "linelistingWebPortalReportAnalyser") )
+			<li><a href = "linelistingWebPortalReportAnalyser.action">Linelisting WebPortal Reports</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "populateMultipleUsers") )
+			<li><a href = "populateMultipleUsers.action">Populate Users From Excel</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "idspReportAnalyser") )
+			<li><a href = "idspReportAnalyser.action">IDSP Reports</a>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "coldChainReportAnalyser") )
+			<li><a href = "coldChainReportAnalyser.action">Cold Chain Reports</a>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "lineListingBulkReportAnalyser") )
+			<li><a href = "lineListingBulkReportAnalyser.action">Linelisting Bulk Report</a>
+		#end
+		#if( $auth.hasAccess( "dhis-web-reports", "mdReportAnalyser") )
+			<li><a href = "mdReportAnalyser.action">MD Report</a>
+		#end
+        #if( $auth.hasAccess( "dhis-web-reports", "ranking2ReportForm") )
+            <li><a href = "ranking2ReportForm.action">Ranking Report</a></li>  
+        #end
+        #if( $auth.hasAccess( "dhis-web-reports", "districtFeedbackReportAnalyser") )
+            <li><a href = "districtFeedbackReportAnalyser.action">Feedback Template</a></li>
+        #end				
+		<!--<li><a href = "advancedReportAnalyser.action">Advanced Reports</a></li>-->
+	</ul>
+</ul>
+
+
+#if( $auth.hasAccess( "dhis-web-reports", "benificiaryInfoReportsAnalyser") )
+    <ul>
+        <li>Tracker Reports</li>
+        <ul>
+            <li><a href = "patientInfoReportsAnalyser.action">Patient Information</a></li>
+            #if( $auth.hasAccess( "dhis-web-reports", "benificiaryInfoReportsAnalyser") )
+                <li><a href = "benificiaryInfoReportsAnalyser.action">Tracker Benificiary Info</a></li>
+            #end
+            #if( $auth.hasAccess( "dhis-web-reports", "activePlanReportsAnalyser") )
+                <li><a href = "activePlanReportsAnalyser.action">Tracker Activity Plan</a></li>
+            #end
+            #if( $auth.hasAccess( "dhis-web-reports", "portalReportsAnalyser") )
+                <li><a href = "portalReportsAnalyser.action">Tracker Portal Reports</a></li>
+            #end
+            #if( $auth.hasAccess( "dhis-web-reports", "nbitsReportsAnalyser") )
+                <li><a href = "nbitsReportsAnalyser.action">Tracker Reports</a></li>
+            #end
+        </ul>
+    </ul>
+#end

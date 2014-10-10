@@ -1,0 +1,36 @@
+#set( $size = $object.size() )
+{ "mapViews": [
+#foreach( $mapView in $object )
+  {
+    "id": "$!{mapView.id}",
+    "name": "$!encoder.jsonEncode( ${mapView.name} )",
+    "userId": "$!{mapView.user.id}",
+    "featureType": "$!encoder.jsonEncode( ${mapView.featureType} )",
+    "mapValueType": "$!encoder.jsonEncode( ${mapView.mapValueType} )",
+    "indicatorGroupId": "$!{mapView.indicatorGroup.id}",
+    "indicatorId": "$!{mapView.indicator.id}",
+    "dataElementGroupId": "$!{mapView.dataElementGroup.id}",
+    "dataElementId": "$!{mapView.dataElement.id}",
+    "mapDateType": "$!encoder.jsonEncode( ${mapView.mapDateTypeNullSafe} )",
+    "periodTypeId": "$!encoder.jsonEncode( ${mapView.periodType.name} )",
+    "periodId": "$!{mapView.period.id}",
+    "parentOrganisationUnitId": "$!{mapView.parentOrganisationUnit.id}",
+    "parentOrganisationUnitName": "$!encoder.jsonEncode( ${mapView.parentOrganisationUnit.name} )",
+    "parentOrganisationUnitLevel": "$!{mapView.parentOrganisationUnit.level}",
+    "organisationUnitLevel": "$!{mapView.organisationUnitLevel.level}",
+    "organisationUnitLevelName": "$!{mapView.organisationUnitLevel.displayName}",
+    "mapLegendType": "$!encoder.jsonEncode( ${mapView.mapLegendType} )",
+    "method": "$!{mapView.method}",
+    "classes": "$!{mapView.classes}",
+    "bounds": "$!{mapView.bounds}",
+    "colorLow": "$!encoder.jsonEncode( ${mapView.colorLow} )",
+    "colorHigh": "$!encoder.jsonEncode( ${mapView.colorHigh} )",
+    "mapLegendSetId": "$!{mapView.mapLegendSet.id}",
+    "radiusLow": "$!{mapView.radiusLow}",
+    "radiusHigh": "$!{mapView.radiusHigh}",
+    "longitude": "$!encoder.jsonEncode( ${mapView.longitude} )",
+    "latitude": "$!encoder.jsonEncode( ${mapView.latitude} )",
+    "zoom": "$!{mapView.zoom}"
+  }#if( $velocityCount < $size ),#end
+#end
+] }

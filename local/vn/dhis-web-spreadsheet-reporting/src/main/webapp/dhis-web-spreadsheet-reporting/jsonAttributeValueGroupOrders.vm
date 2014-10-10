@@ -1,0 +1,12 @@
+#set( $size = $!attributeValueGroupOrders.size() )
+{ "attributeValueGroupOrders": [
+#foreach( $group in $attributeValueGroupOrders )
+#set( $reports = $!group.reports )
+  {
+	"id": "${group.id}",
+    "name": "$!encoder.jsonEncode( ${group.name} )",
+	"attributeId": "$!{group.attribute.id}",
+	"reports": [ #foreach( $report in $reports )${report.id}#if( $velocityCount < $reports.size() ),#end#end ]
+  }#if( $velocityCount < $size ),#end
+#end
+] }

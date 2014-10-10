@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attribute>
+  <id>$attribute.id</id>
+  <name>$encoder.xmlEncode( $attribute.name )</name>
+  <caption>$encoder.xmlEncode( $attribute.caption )</caption>
+  <description>$encoder.xmlEncode( $attribute.description )</description>    
+</attribute>

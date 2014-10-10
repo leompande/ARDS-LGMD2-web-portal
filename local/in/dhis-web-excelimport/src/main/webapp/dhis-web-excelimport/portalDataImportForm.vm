@@ -1,0 +1,135 @@
+<style>
+	#overlay 
+	{
+		z-index:9998;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		width:100%;
+		background:#000;
+		opacity:0.45;
+		-moz-opacity:0.45;
+		filter:alpha(opacity=45);
+		visibility:hidden;
+	}
+
+	#overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+
+<div id="overlay">
+	<div id="overlayImg"><img  width="50" height="50" src="ima	ges/ajax-loader.gif" /></div>
+</div>
+
+<script>
+
+    //Global Variables
+    var proformas = new HashTable();
+    var checkerTemplateNames = new HashTable();
+	var checkerRangeForHeaders = new HashTable();
+	var checkerRangeForData = new HashTable();
+	var datasetIds = new HashTable();
+	var orgunitGroupIds = new HashTable();
+	var facilityStarts = new HashTable();
+	var periodicityTable = new HashTable();
+
+	#foreach ( $excelImportSheet in $excelImportSheetList )
+		var excelImportSheetId = ""+"$excelImportSheet.xmlTemplateName";
+		proformas.put( excelImportSheetId, "$excelImportSheet.proforma" );
+		checkerTemplateNames.put( excelImportSheetId, "$excelImportSheet.checkTemplateName" );
+		checkerRangeForHeaders.put( excelImportSheetId, "$excelImportSheet.checkRangeForHeader" );
+        checkerRangeForData.put( excelImportSheetId, "$excelImportSheet.checkRangeForData" );
+        datasetIds.put( excelImportSheetId, "$excelImportSheet.datasetId" );
+		orgunitGroupIds.put( excelImportSheetId, "$excelImportSheet.orgunitGroupId" );
+		facilityStarts.put( excelImportSheetId, "$excelImportSheet.facilityStart" );
+		periodicityTable.put( excelImportSheetId, "$excelImportSheet.periodicity" );
+	#end
+
+    function formValidations()
+    {
+		var importSheetList = document.getElementById("importSheetId");
+        var importSheetListSelectedIndex = importSheetList.selectedIndex;
+
+        if( importSheetListSelectedIndex < 0 || importSheetList.options[importSheetListSelectedIndex].text == null) { alert("Please Select Import Sheet"); return false; }
+
+        document.dataImportForm.proforma.value = proformas.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.checkerTemplateName.value = checkerTemplateNames.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.checkerRangeForHeader.value = checkerRangeForHeaders.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.checkerRangeForData.value = checkerRangeForData.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.datasetId.value = datasetIds.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.orgunitGroupId.value = orgunitGroupIds.get( importSheetList.options[importSheetListSelectedIndex].value );
+        document.dataImportForm.facilityStart.value = facilityStarts.get( importSheetList.options[importSheetListSelectedIndex].value );
+		document.dataImportForm.selectedPeriodicity.value = periodicityTable.get( importSheetList.options[importSheetListSelectedIndex].value );
+		
+		showOverlay();
+        
+		return true;
+    }
+	
+	function showOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'visible';
+		jQuery("#overlay").css({
+			"height": jQuery(document).height()
+		});
+		jQuery("#overlayImg").css({
+			"top":jQuery(window).height()/2
+		});
+	}
+	function hideOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'hidden';
+	}
+
+</script>
+
+<h3>Portal Data Import Form</h3>
+<hr /><br />
+
+<form id="dataImportForm" name="dataImportForm" method="post" enctype="multipart/form-data" action="portalExcelImportResult.action" onsubmit="formValidations()">
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border="0" >
+		<tr>
+			<td class="NormalB">
+				Import Sheets :<br />
+				<select id="importSheetId" name="importSheetId" style="width:325px" class="{validate:{required:true}}">
+				#foreach ( $excelImportSheet in $excelImportSheetList )
+					<option value="$excelImportSheet.xmlTemplateName">$excelImportSheet.displayName</option>
+                #end
+				</select>
+			</td>
+		</tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                Upload/Import (XLS) File :<br />
+                <input type="file" id="upload" name="upload" size="45" class="{validate:{required:true}}" />
+            </td>
+        </tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                <input type="submit" name="importReport" value='Import Data' style="width:325px" />
+                <input type="hidden" name="proforma" id="proforma" />
+                <input type="hidden" name="checkTemplateName" id="checkTemplateName" />
+                <input type="hidden" name="checkRangeForHeader" id="checkRangeForHeader" />
+                <input type="hidden" name="checkRangeForData" id="checkRangeForData" />
+                <input type="hidden" name="datasetId" id="datasetId" />
+				<input type="hidden" name="orgunitGroupId" id="orgunitGroupId" />
+				<input type="hidden" name="facilityStart" id="facilityStart" />
+				<input type="hidden" name="selectedPeriodicity" id="selectedPeriodicity" />
+            </td>
+        </tr>
+	</table>
+</form>

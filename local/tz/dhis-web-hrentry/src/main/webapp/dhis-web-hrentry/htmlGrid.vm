@@ -1,0 +1,59 @@
+<style type="text/css">
+.gridTable th, .gridTable td
+{
+  text-align: center;
+  width: 150px;
+}
+
+.gridLeft td
+{
+  text-align: left;
+}
+</style>
+<table class="mainPageTable">
+<tr>
+<td style="vertical-align:top">
+<h3>$!encoder.htmlEncode( $grid.title )</h3>
+
+<h5>$!encoder.htmlEncode( $grid.subtitle )</h5>
+$i18n.getString( "filter_by_name" ):
+<form action="generateRecordsReport.action?hrDataSetId=$hrDataSet.id&selectedUnitOnly=$selectedUnitOnly" method="POST">
+    <div style="inline">
+        #set ($value = $encoder.htmlEncode( ${key} ))
+        <input type="text" id="key" name="key" value="$!value"/>
+        <input type="submit" value="$i18n.getString( 'filter' )"/>
+        <input type="button" value="$i18n.getString( 'clear' )" 
+        onclick="window.location.href='${action}'"/>
+    </div>
+</form>
+<table class="listTable" id="listTable">
+
+<thead>
+<tr>
+#foreach( $header in $grid.getVisibleHeaders() )
+<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( $header.name )</th>
+#end
+</tr>
+</thead>
+
+<tbody>
+#foreach( $row in $grid.getVisibleRows() )
+<tr>
+#foreach( $col in $row )
+#set( $index = ( $velocityCount - 1 ) )
+<td #if( $grid.getVisibleHeaders().get( $index ).meta )style="text-align:left"#end>$!encoder.htmlEncode( $col )</td>
+#end
+</tr>
+#end
+</tbody>
+
+</table>
+#parse( "/dhis-web-commons/paging/paging.vm" )
+</td>       
+</tr>
+</table>
+<script type="text/javascript">
+    jQuery(document).ready(function(){      
+        tableSorter( 'listTable' ); 
+    });
+</script>

@@ -1,0 +1,28 @@
+<h1>Mobile Gateway Settings</h1>
+<div>
+    <form method="post">
+        <table>
+            #if($balancer) <tr><td>Balancer: </td><td><input size="100" name="balancer" type="text" value="$balancer" /></td></tr>#end
+            #if($router) <tr><td>Router: </td><td><input size="100" name="router" type="text" value="$router" /></td></tr>#end
+            #if($gatewayName) <tr><td>Gateway Name: </td><td><input size="100" name="gatewayName" type="text" value="$gatewayName" /></td></tr>#end
+            #if($port) <tr><td>Modem Port#: </td><td><input size="100" name="port" type="text" value="$port" /></td></tr>#end
+            #if($baudRate) <tr><td>Baudrate: </td><td><input size="100" name="baudRate" type="text" value="$baudRate" /></td></tr>#end
+            #if($manufacturer) <tr><td>Manufacturer: </td><td><input size="100" name="manufacturer" type="text" value="$manufacturer" /></td></tr>#end
+            #if($model) <tr><td>Model: </td><td><input size="100" name="model" type="text" value="$model" /></td></tr>#end
+            #if($protocol) <tr><td>Protocol: </td><td><input size="100" name="protocol" type="text" value="$protocol" /></td></tr>#end
+            #if($pin) <tr><td>Pin: </td><td><input size="100" name="pin" type="text" value="$pin" /></td></tr>#end
+            #if($inbound) <tr><td>Allow Inbound Msg: </td><td><input size="100" name="inbound" type="text" value="$inbound" /></td></tr> #end
+            #if($outbound) <tr><td>Allow Outbound Msg: </td><td><input size="100" name="outbound" type="text" value="$outbound" /></td></tr> #end
+            #if($smsc_number) <tr><td>SMSC Number: </td><td><input size="100" name="smsc_number" type="text" value="$smsc_number" /></td></tr> #end
+            #if($init_string) <tr><td>Modem Init String: </td><td><input size="100" name="init_string" type="text" value="$init_string" /></td></tr> #end
+            #if($inbound_interval) <tr><td>Inbound Interval: </td><td><input size="100" name="inbound_interval" type="text" value="$inbound_interval" /></td></tr> #end
+            #if($outbound_interval) <tr><td>Outbound Interval: </td><td><input size="100" name="outbound_interval" type="text" value="$outbound_interval" /></td></tr> #end
+            #if($delete_after_processing) <tr><td>Delete after processing: </td><td><input size="100" name="delete_after_processing" type="text" value="$delete_after_processing" /></td></tr> #end
+            #if($send_mode) <tr><td>Send Mode: </td><td><input size="100" name="send_mode" type="text" value="$send_mode" /></td></tr> #end
+            #if($simMemLocation) <tr><td>SIM Memory Location: </td><td><input size="100" name="simMemLocation" type="text" value="$simMemLocation" /></td></tr> #end
+            <tr><td></td><td></td></tr>
+            <tr><td></td><td><input type="submit" name="send" value="Save Settings"/></td>
+        </table>
+    </form>
+    <span id="message" style="display:#if($message.trim().equals(""))none #else block #end">$message</span>
+</div>

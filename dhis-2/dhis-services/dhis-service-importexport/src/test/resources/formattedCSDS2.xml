@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<CrossSectionalData xmlns="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message" xmlns:ns="urn:sdmx:org.sdmx.infomodel.keyfamily.KeyFamily=SL-MOHS:ART-SUMMARY:1.0:cross" xmlns:cross="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/cross" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.SDMX.org/resources/SDMXML/schemas/v2_0/structure SDMXMessage.xsd urn:sdmx:org.sdmx.infomodel.keyfamily.KeyFamily=SL-MOHS:ART-SUMMARY:1.0:cross CrossSectional.xsd http://www.SDMX.org/resources/SDMXML/schemas/v2_0/cross SDMXCrossSectionalData.xsd">
+  <Header>
+    <ID>SDMX-HD-CSDS</ID>
+    <Test>false</Test>
+    <Truncated>false</Truncated>
+    <Name xml:lang="en">OpenMRS SDMX-HD Export</Name>
+    <Prepared>2010-01-25</Prepared>
+    <Sender id="OMRS">
+      <Name>OpenMRS</Name>
+    </Sender>
+    <DataSetID>SLdataset</DataSetID>
+  </Header>
+  <ns:DataSet datasetID="SLdataset" dataProviderSchemeAgencyId="SL_MOHS" dataProviderSchemeId="ORGS_SL" dataProviderID="15">
+    <ns:Group FREQUENCY="3" TIME_PERIOD="2010-01">
+      <ns:Section>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8254"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="1" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8251"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8257"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8249"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8250"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8252"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8256"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8214" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8214" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8214" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8214" value="1" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358727" GENDER="8215" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358728" GENDER="8215" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358729" GENDER="8215" value="0" INDICATOR="8258"/>
+        <ns:OBS_VALUE AGE="358730" GENDER="8215" value="0" INDICATOR="8258"/>
+      </ns:Section>
+    </ns:Group>
+  </ns:DataSet>
+</CrossSectionalData>

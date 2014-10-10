@@ -1,0 +1,22 @@
+#set( $size = $!categoryOptions.size() )
+{
+	"categoryOptions": [
+	#foreach( $co in $!categoryOptions )
+	{
+	  "id": "${co.id}",
+	  "name": "$!encoder.jsonEncode( ${co.name} )",
+	  "categoryId": "${co.category.id}",
+	  
+	  #set( $subSize = $!co.categoryOptionCombos.size() )
+	  "optionCombos": [
+		#foreach( $coc in $!co.categoryOptionCombos )
+		{
+			"id": "${coc.id}",
+			"name": "$!encoder.jsonEncode( ${coc.name} )"
+		}#if( $velocityCount < $subSize ),#end
+		#end
+	   ]
+	}#if( $velocityCount < $size ),#end
+	#end
+	]
+}

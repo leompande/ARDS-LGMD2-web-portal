@@ -1,0 +1,34 @@
+
+<h3>Line List Option Sort Order</h3>
+
+<form id="sortOrderForm" action="saveLineListOptionSortOrder.action" method="post">
+    
+<p>
+<input type="button" value="$i18n.getString( 'move_up' )" style="width:130px" onclick="moveUpSelectedOption( 'lineListOptions' )"><input 
+type="button" value="$i18n.getString( 'move_down' )" style="width:130px" onclick="moveDownSelectedOption( 'lineListOptions' )"><input
+type="button" value="$i18n.getString( 'move_to_top' )" style="width:130px" onclick="moveSelectedOptionToTop( 'lineListOptions' )"><input
+type="button" value="$i18n.getString( 'move_to_bottom' )" style="width:130px" onclick="moveSelectedOptionToBottom( 'lineListOptions' )">
+</p>
+
+<p>
+<select multiple id="lineListOptions" name="lineListOptions" size="25" style="width:680px">
+#foreach ( $option in $lineListOptions )
+    <option value="$element.id">$option.name</option>
+#end
+</select>
+</p>
+
+<p>
+<input type="button" value="$i18n.getString( 'save' )" style="width:130px" onclick="submitForm()"><input 
+type="button" value="$i18n.getString( 'cancel' )" style="width:130px" onclick="window.location.href='lineListOption.action'">
+</p>
+
+</form>
+
+<script type="text/javascript">
+    function submitForm()
+    {
+        selectAllById( "lineListOptions" );
+        document.getElementById( "sortOrderForm" ).submit();
+    }
+</script>

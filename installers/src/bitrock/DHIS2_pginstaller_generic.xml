@@ -1,0 +1,807 @@
+<project>
+    <shortName>DHIS2</shortName>
+    <fullName>DHIS2</fullName>
+    <version>2.1</version>
+    <installerFilename>${product_shortname}-${product_version}-${platform_name}-live-generic-en.${platform_exec_suffix}</installerFilename>
+    <readmeFile>../../resources/files/Readme_generic.txt</readmeFile>
+    <licenseFile>../../resources/files/Licence.txt</licenseFile>
+    <leftImage>../../resources/images/dhis2-logo-blue-rotated.png</leftImage>
+    <logoImage>../../resources/images/dhis2-logo-blue.png</logoImage>
+    <splashImage>../../resources/images/dhis2-splash-blue.png</splashImage>
+    <allowLanguageSelection>1</allowLanguageSelection>
+    <initializationActionList>
+        <setInstallerVariable>
+            <name>resourcesWarningIsShown</name>
+            <value>true</value>
+            <ruleList>
+                <fileExists>
+                    <negate>1</negate>
+                    <path>${installer_directory}\resources</path>
+                </fileExists>
+            </ruleList>
+        </setInstallerVariable>
+        <showWarning>
+            <text>Cannot find the resources folder. Make sure it exists alongside the installer (The installer is NOT supposed to be inside the resources folder). If the folder is still not found, the installation process will be aborted.</text>
+            <title>resources folder is missing</title>
+            <ruleList>
+                <fileExists>
+                    <negate>1</negate>
+                    <path>${installer_directory}\resources</path>
+                </fileExists>
+            </ruleList>
+        </showWarning>
+        <throwError>
+            <customErrorMessage>Could not find the resources folder.</customErrorMessage>
+            <text>Could not find the resources folder.</text>
+            <ruleList>
+                <fileExists>
+                    <negate>1</negate>
+                    <path>${installer_directory}\resources</path>
+                </fileExists>
+            </ruleList>
+        </throwError>
+        <showInfo>
+            <text>Thank you! The resources folder was located. The installation process will continue.</text>
+            <title>Thank you!</title>
+            <ruleList>
+                <fileExists>
+                    <path>${installer_directory}\resources</path>
+                </fileExists>
+                <isTrue>
+                    <value>${resourcesWarningIsShown}</value>
+                </isTrue>
+            </ruleList>
+        </showInfo>
+        <registryFind>
+            <dataPattern>Java(TM)*6*</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>*</namePattern>
+            <rootKey>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>jreInstalled</variable>
+            <wowMode>64</wowMode>
+        </registryFind>
+        <registryFind>
+            <dataPattern>Java(TM)*6*</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>*</namePattern>
+            <rootKey>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>jreInstalled</variable>
+            <wowMode>32</wowMode>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${jreInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </registryFind>
+        <registryFind>
+            <dataPattern>PostgreSQL 9*</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>*</namePattern>
+            <rootKey>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>postgresInstalled</variable>
+            <wowMode>64</wowMode>
+        </registryFind>
+        <registryFind>
+            <dataPattern>PostgreSQL 9*</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>*</namePattern>
+            <rootKey>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>postgresInstalled</variable>
+            <wowMode>32</wowMode>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${postgresInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </registryFind>
+        <registryFind>
+            <dataPattern>Google Chrome</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>DisplayName</namePattern>
+            <rootKey>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>chromeInstalled</variable>
+            <wowMode>64</wowMode>
+        </registryFind>
+        <registryFind>
+            <dataPattern>Google Chrome</dataPattern>
+            <keyPattern>*</keyPattern>
+            <namePattern>DisplayName</namePattern>
+            <rootKey>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall</rootKey>
+            <searchDepth>1</searchDepth>
+            <variable>chromeInstalled</variable>
+            <wowMode>32</wowMode>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${chromeInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </registryFind>
+        <componentSelection>
+            <deselect></deselect>
+            <select>Java</select>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${jreInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </componentSelection>
+        <componentSelection>
+            <deselect></deselect>
+            <select>postgres</select>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${postgresInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </componentSelection>
+        <componentSelection>
+            <deselect></deselect>
+            <select>Chrome</select>
+            <ruleList>
+                <compareTextLength>
+                    <length>1</length>
+                    <logic>less</logic>
+                    <text>${chromeInstalled}</text>
+                </compareTextLength>
+            </ruleList>
+        </componentSelection>
+    </initializationActionList>
+    <readyToInstallActionList>
+        <createDirectory>
+            <path>${installdir}/database</path>
+            <progressText>Creating database directory.</progressText>
+        </createDirectory>
+        <createDirectory>
+            <path>${installdir}/log</path>
+        </createDirectory>
+        <createDirectory>
+            <path>${installdir}/webapps</path>
+        </createDirectory>
+        <createDirectory>
+            <explanation>Creating temporary directory</explanation>
+            <path>${installdir}/tmp</path>
+        </createDirectory>
+    </readyToInstallActionList>
+    <postInstallationActionList>
+        <deleteFile>
+            <path>${installdir}\tmp</path>
+        </deleteFile>
+    </postInstallationActionList>
+    <postUninstallationActionList>
+        <deleteFile>
+            <path>${installdir}</path>
+        </deleteFile>
+    </postUninstallationActionList>
+    <allowComponentSelection>1</allowComponentSelection>
+    <compressionAlgorithm>lzma</compressionAlgorithm>
+    <enableRollback>1</enableRollback>
+    <enableTimestamp>1</enableTimestamp>
+    <requestedExecutionLevel>highestAvailable</requestedExecutionLevel>
+    <requireInstallationByRootUser>1</requireInstallationByRootUser>
+    <saveRelativePaths>1</saveRelativePaths>
+    <vendor>DHIS2</vendor>
+    <componentList>
+        <component>
+            <name>dhis2live</name>
+            <description>DHIS2 Live</description>
+            <canBeEdited>0</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <desktopShortcutList>
+                <shortcut>
+                    <comment>Start DHIS 2</comment>
+                    <exec></exec>
+                    <icon></icon>
+                    <name>DHIS 2</name>
+                    <path></path>
+                    <platforms>windows</platforms>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/dhis2-live.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsPath></windowsPath>
+                </shortcut>
+            </desktopShortcutList>
+            <folderList>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfiles</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <origin>../../resources/conf</origin>
+                        </distributionDirectory>
+                        <distributionFile>
+                            <origin>../../../dhis-live/target/dhis2-live-jar-with-dependencies.jar</origin>
+                        </distributionFile>
+                    </distributionFileList>
+                    <shortcutList>
+                        <shortcut>
+                            <comment>Uninstall</comment>
+                            <exec>${installdir}/${uninstallerName}</exec>
+                            <icon></icon>
+                            <name>Uninstall ${product_fullname}</name>
+                            <path>${installdir}</path>
+                            <platforms>all</platforms>
+                            <runAsAdmin>0</runAsAdmin>
+                            <runInTerminal>0</runInTerminal>
+                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                            <windowsExecArgs></windowsExecArgs>
+                            <windowsIcon></windowsIcon>
+                            <windowsPath>${installdir}</windowsPath>
+                        </shortcut>
+                    </shortcutList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileslinux</name>
+                    <platforms>linux</platforms>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileswindows</name>
+                    <platforms>windows</platforms>
+                    <distributionFileList>
+                        <distributionFile>
+                            <origin>../../../dhis-live/target/dhis2-live.exe</origin>
+                        </distributionFile>
+                    </distributionFileList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfilesosx</name>
+                    <platforms>osx</platforms>
+                </folder>
+            </folderList>
+            <postInstallationActionList>
+                <renameFile>
+                    <destination>${installdir}/dhis2-live.jar</destination>
+                    <origin>${installdir}/dhis2-live-jar-with-dependencies.jar</origin>
+                </renameFile>
+                <deleteFile>
+                    <path>${installdir}/conf/hibernate.properties</path>
+                </deleteFile>
+                <renameFile>
+                    <destination>${installdir}/conf/hibernate.properties</destination>
+                    <origin>${installdir}/conf/generic_hibernate.properties</origin>
+                </renameFile>
+            </postInstallationActionList>
+            <startMenuShortcutList>
+                <startMenuShortcut>
+                    <comment>Uninstall ${product_fullname}</comment>
+                    <name>Uninstall ${product_fullname}</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsPath>${installdir}/</windowsPath>
+                </startMenuShortcut>
+                <startMenuShortcut>
+                    <comment>Start DHIS 2</comment>
+                    <name>Start DHIS 2</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/dhis2-live.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsPath></windowsPath>
+                </startMenuShortcut>
+                <startMenuFileShortcut>
+                    <comment>DHIS2 Docs</comment>
+                    <filePath>${installdir}/docs/dhis2_user_manual_en.pdf</filePath>
+                    <name>DHIS2 Documentation</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsIcon></windowsIcon>
+                </startMenuFileShortcut>
+            </startMenuShortcutList>
+        </component>
+        <component>
+            <name>dhis2core</name>
+            <description>DHIS2 Core</description>
+            <canBeEdited>0</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <postInstallationActionList>
+                <createDirectory>
+                    <path>${installdir}\webapps\dhis</path>
+                </createDirectory>
+                <unzip>
+                    <destinationDirectory>${installdir}\webapps\dhis</destinationDirectory>
+                    <explanation>Extracting the dhis.war file to the installer directory</explanation>
+                    <progressText>Copying DHIS 2 files</progressText>
+                    <zipFile>${installer_directory}\resources\dhis.war</zipFile>
+                </unzip>
+            </postInstallationActionList>
+            <preInstallationActionList>
+                <setInstallerVariable>
+                    <name>coreWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis.war</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find dhis.war in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>dhis.war is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis.war</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find dhis.war in the resources folder.</customErrorMessage>
+                    <text>Could not find dhis.war in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis.war</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! dhis.war was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\dhis.war</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${coreWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </preInstallationActionList>
+        </component>
+        <component>
+            <name>Java</name>
+            <description>Java</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>0</selected>
+            <show>1</show>
+            <postInstallationActionList>
+                <runProgram>
+                    <explanation>Installing Java Runtime Environment</explanation>
+                    <program>jre*.exe</program>
+                    <programArguments>/s /v</programArguments>
+                    <progressText>Installing Java</progressText>
+                    <workingDirectory>${installer_directory}\resources</workingDirectory>
+                </runProgram>
+            </postInstallationActionList>
+            <readyToInstallActionList>
+                <setInstallerVariable>
+                    <name>jreWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\jre*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find jre*.exe in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>JRE is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\jre*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find jre*.exe in the resources folder.</customErrorMessage>
+                    <text>Could not find jre*.exe in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\jre*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! The JRE file was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\jre*.exe</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${jreWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </readyToInstallActionList>
+        </component>
+        <component>
+            <name>postgres</name>
+            <description>Postgres</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>0</selected>
+            <show>1</show>
+            <parameterList>
+                <passwordParameter>
+                    <name>pg_password</name>
+                    <title>Postgresql Password</title>
+                    <description>Please enter a password for the Postgresql superuser.</description>
+                    <explanation></explanation>
+                    <value></value>
+                    <default>postgres</default>
+                    <allowEmptyValue>0</allowEmptyValue>
+                    <askForConfirmation>0</askForConfirmation>
+                    <descriptionRetype></descriptionRetype>
+                    <width>20</width>
+                </passwordParameter>
+            </parameterList>
+            <postInstallationActionList>
+                <substitute>
+                    <files>${installdir}\tmp\restore_db_psql.bat</files>
+                    <type>regexp</type>
+                    <substitutionList>
+                        <substitution>
+                            <pattern>PG_PASSWORD</pattern>
+                            <value>${pg_password}</value>
+                        </substitution>
+                    </substitutionList>
+                </substitute>
+                <runProgram>
+                    <explanation>Installing PostgreSQL</explanation>
+                    <program>postgresql*.exe</program>
+                    <programArguments>--unattendedmodeui none --mode unattended --superaccount postgres --servicepassword postgres --superpassword postgres</programArguments>
+                    <progressText>Installing Postgres</progressText>
+                    <workingDirectory>${installer_directory}\resources</workingDirectory>
+                </runProgram>
+            </postInstallationActionList>
+            <readyToInstallActionList>
+                <setInstallerVariable>
+                    <name>postgresWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\postgresql*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find postgresql*.exe in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>postgresql*.exe is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\postgresql*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find postgresql*.exe in the resources folder.</customErrorMessage>
+                    <text>Could not find postgresql*.exe in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\postgresql*.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! The PostgreSQL setup file was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\postgresql*.exe</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${postgresWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </readyToInstallActionList>
+        </component>
+        <component>
+            <name>dhis2db</name>
+            <description>DHIS2 database</description>
+            <canBeEdited>1</canBeEdited>
+            <detailedDescription>DHIS2 Database</detailedDescription>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <destination>${installdir}\tmp\</destination>
+                    <name>newfolder</name>
+                    <platforms>windows</platforms>
+                    <distributionFileList>
+                        <distributionFile>
+                            <origin>../../resources/postgres/restore_db_psql.bat</origin>
+                        </distributionFile>
+                    </distributionFileList>
+                </folder>
+            </folderList>
+            <postInstallationActionList>
+                <registryGetMatch>
+                    <key>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL*</key>
+                    <name>InstallLocation</name>
+                    <variable>postgresInstallLocation</variable>
+                    <wowMode>64</wowMode>
+                </registryGetMatch>
+                <registryGetMatch>
+                    <key>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\PostgreSQL*</key>
+                    <name>InstallLocation</name>
+                    <variable>postgresInstallLocation</variable>
+                    <wowMode>32</wowMode>
+                    <ruleList>
+                        <compareTextLength>
+                            <length>1</length>
+                            <logic>less</logic>
+                            <text>${postgresInstallLocation}</text>
+                        </compareTextLength>
+                    </ruleList>
+                </registryGetMatch>
+                <createDirectory>
+                    <path>${installdir}\tmp\dhis2db</path>
+                </createDirectory>
+                <unzip>
+                    <destinationDirectory>${installdir}\tmp\dhis2db\</destinationDirectory>
+                    <zipFile>${installer_directory}\resources\dhis2db.zip</zipFile>
+                </unzip>
+                <findFile>
+                    <baseDirectory>${installdir}\tmp\dhis2db</baseDirectory>
+                    <pattern>*dhis*</pattern>
+                    <variable>databaseFile</variable>
+                </findFile>
+                <substitute>
+                    <files>${installdir}\tmp\restore_db_psql.bat</files>
+                    <type>exact</type>
+                    <substitutionList>
+                        <substitution>
+                            <pattern>PG_PASSWORD</pattern>
+                            <value>${pg_password}</value>
+                        </substitution>
+                        <substitution>
+                            <pattern>DATABASE_FILE</pattern>
+                            <value>${databaseFile}</value>
+                        </substitution>
+                        <substitution>
+                            <pattern>POSTGRES_INSTALL_LOCATION</pattern>
+                            <value>${postgresInstallLocation}</value>
+                        </substitution>
+                    </substitutionList>
+                </substitute>
+                <runProgram>
+                    <explanation>Restoring database</explanation>
+                    <program>restore_db_psql.bat</program>
+                    <programArguments></programArguments>
+                    <progressText>Restoring database. This might take a few minutes.</progressText>
+                    <workingDirectory>${installdir}\tmp\</workingDirectory>
+                </runProgram>
+                <deleteFile>
+                    <path>${installdir}\tmp\restore_db_psql.bat</path>
+                </deleteFile>
+            </postInstallationActionList>
+            <readyToInstallActionList>
+                <setInstallerVariable>
+                    <name>dhis2dbWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2db.zip</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find dhis2db.zip in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>dhis2db.zip is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2db.zip</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find dhis2db.zip in the resources folder.</customErrorMessage>
+                    <text>Could not find dhis2db.zip in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2db.zip</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! dhis2db.zip was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\dhis2db.zip</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${dhis2dbWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </readyToInstallActionList>
+        </component>
+        <component>
+            <name>dhis2docs</name>
+            <description>DHIS2 Docs</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <postInstallationActionList>
+                <createDirectory>
+                    <path>${installdir}\docs</path>
+                </createDirectory>
+                <copyFile>
+                    <destination>${installdir}\docs\dhis2_user_manual_en.pdf</destination>
+                    <origin>${installer_directory}\resources\dhis2_user_manual_en.pdf</origin>
+                    <progressText>Adding DHIS 2 documentation</progressText>
+                </copyFile>
+            </postInstallationActionList>
+            <readyToInstallActionList>
+                <setInstallerVariable>
+                    <name>docsWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2_user_manual_en.pdf</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find dhis2_user_manual_en.pdf in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>dhis2_user_manual_en.pdf is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2_user_manual_en.pdf</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find dhis2_user_manual_en.pdf in the resources folder.</customErrorMessage>
+                    <text>Could not find dhis2_user_manual_en.pdf in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\dhis2_user_manual_en.pdf</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! dhis2_user_manual_en.pdf was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\dhis2_user_manual_en.pdf</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${docsWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </readyToInstallActionList>
+        </component>
+        <component>
+            <name>Chrome</name>
+            <description>Google Chrome</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>0</selected>
+            <show>1</show>
+            <postInstallationActionList>
+                <runProgram>
+                    <explanation>Installing Google Chrome</explanation>
+                    <program>ChromeStandaloneSetup.exe</program>
+                    <programArguments></programArguments>
+                    <progressText>Installling Google Chrome web browser</progressText>
+                    <workingDirectory>${installer_directory}\resources</workingDirectory>
+                </runProgram>
+            </postInstallationActionList>
+            <preInstallationActionList>
+                <componentSelection>
+                    <deselect></deselect>
+                    <select>Google Chrome</select>
+                </componentSelection>
+            </preInstallationActionList>
+            <readyToInstallActionList>
+                <setInstallerVariable>
+                    <name>chromeWarningIsShown</name>
+                    <value>true</value>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\ChromeStandaloneSetup.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </setInstallerVariable>
+                <showWarning>
+                    <text>Cannot find ChromeStandaloneSetup.exe in the resources folder. Place it there and press OK. If it is still not found, the installation process will be aborted.</text>
+                    <title>ChromeStandaloneSetup.exe is missing</title>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\ChromeStandaloneSetup.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </showWarning>
+                <throwError>
+                    <customErrorMessage>Could not find ChromeStandaloneSetup.exe in the resources folder.</customErrorMessage>
+                    <text>Could not find ChromeStandaloneSetup.exe in the resources folder.</text>
+                    <ruleList>
+                        <fileExists>
+                            <negate>1</negate>
+                            <path>${installer_directory}\resources\ChromeStandaloneSetup.exe</path>
+                        </fileExists>
+                    </ruleList>
+                </throwError>
+                <showInfo>
+                    <text>Thank you! ChromeStandaloneSetup.exe was located. The installation process will continue.</text>
+                    <title>Thank you!</title>
+                    <ruleList>
+                        <fileExists>
+                            <path>${installer_directory}\resources\ChromeStandaloneSetup.exe</path>
+                        </fileExists>
+                        <isTrue>
+                            <value>${chromeWarningIsShown}</value>
+                        </isTrue>
+                    </ruleList>
+                </showInfo>
+            </readyToInstallActionList>
+        </component>
+    </componentList>
+    <finalPageActionList>
+        <deleteFile>
+            <abortOnError>0</abortOnError>
+            <explanation>Delete temporary files</explanation>
+            <path>${installdir}\tmp\postgresql-9.0.3-1-windows.exe</path>
+        </deleteFile>
+    </finalPageActionList>
+    <parameterList>
+        <directoryParameter>
+            <name>installdir</name>
+            <description>Installer.Parameter.installdir.description</description>
+            <explanation>Installer.Parameter.installdir.explanation</explanation>
+            <value></value>
+            <default>${platform_install_prefix}/${product_shortname}-${product_version}</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>yes</ask>
+            <cliOptionName>prefix</cliOptionName>
+            <mustBeWritable>yes</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+    </parameterList>
+    <platformOptionsList>
+        <platformOptions>
+            <platform>windows</platform>
+        </platformOptions>
+    </platformOptionsList>
+</project>
+

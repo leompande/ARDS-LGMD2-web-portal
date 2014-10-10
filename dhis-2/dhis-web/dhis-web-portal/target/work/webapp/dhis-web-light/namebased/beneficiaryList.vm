@@ -1,0 +1,19 @@
+<h2>$i18n.getString( "beneficiary_list" )</h2>
+
+<p>
+<ul>
+#foreach( $pav in $pavSet )
+	#if($pav.getPatientAttribute().getDisplayInListNoProgram()== true)
+<li><a href="showPatientProgramList.action?patientId=$pav.getPatient().getId()">$!encoder.htmlEncode( ${pav.value} )</a></li>
+#end	
+#end
+</ul>
+</p>
+<p><strong>Total found: $patients.size()</strong></p>
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li> <a href="showFindBeneficiaryForm.action"> $i18n.getString("find_beneficiary")</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

@@ -1,0 +1,9 @@
+
+<h2>$i18n.getString( "validation" )</h2>
+<ul>
+	<li><a href="showValidationRuleForm.action">$i18n.getString( "validation_rule" )</a></li>
+	<li><a href="showValidationRuleGroupForm.action">$i18n.getString( "validation_rule_group" )</a></li>
+	<li><a href="showRunValidationForm.action">$i18n.getString( "run_validation" )</a></li>
+	<li><a href="showRunValidationByAverageForm.action">$i18n.getString( "run_validation_by_average" )</a></li>
+	<!--<li><a href="minMaxViolationForm.action">MinMax Violation</a></li>-->
+</ul>

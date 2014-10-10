@@ -1,0 +1,10 @@
+<h3>$i18n.getString( "dhis-web-maintenance-organisationunit" ) #openHelp( "ou_hierarchy" )</h3>
+
+<ul class="introList">
+    #introListImgItem( "organisationUnit.action" "org_unit" "organisationunit" )
+    #introListImgItem( "organisationUnitGroup.action" "org_unit_group" "organisationunit" )
+    #introListImgItem( "organisationUnitGroupSet.action" "org_unit_group_set" "groupset" )
+    #introListImgItem( "organisationUnitLevel.action" "org_unit_level" "hierarchy" )
+    #introListImgItem( "organisationUnitSearch.action?skipSearch=true" "org_unit_search" "search" )
+    #introListImgItem( "hierarchyOperations.action" "hierarchy_operations_menu" "hierarchy" )
+</ul>

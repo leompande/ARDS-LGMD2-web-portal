@@ -1,0 +1,44 @@
+<h3>$i18n.getString( "assign_program_to_userroles" )</h3>
+
+<h4>$program.displayName</h4>
+
+<form name="userRole" action="defineProgramUserrole.action" method="POST" onsubmit="selectAllById( 'userRoleIds' );">
+<input type="hidden" name="id" value="$program.id"/>
+<table>
+	<tr>
+		<th>$i18n.getString( "available" )</th>
+		<td></td>
+		<th>$i18n.getString( "selected" )</th>
+	</tr>
+	<tr>
+		<td>
+			 <select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'availableList', 'userRoleIds' )">
+            #foreach ( $userRole in $userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+          </select>
+		</td>
+		<td>
+			<input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableList', 'userRoleIds' )" class="filterButton" /><br/>
+			<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'userRoleIds', 'availableList' )" class="filterButton" />
+		</td>
+		<td>
+			<select id="userRoleIds" name="userRoleIds" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'userRoleIds', 'availableList' )">
+			#foreach ( $userRole in $program.userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+			</select>
+        </td>
+	</tr>
+</table>
+<br>
+<input type="submit" value="$i18n.getString( 'ok' )" style="width:100px"/>
+<input type="button" value="$i18n.getString( 'cancel' )"  style="width:100px" onclick="window.location = 'program.action'"/>
+</form>
+
+<script>
+	$(document).ready(function(){
+		sortList('availableList', 'ASC');
+		sortList('selectedList', 'ASC');
+	});
+</script>

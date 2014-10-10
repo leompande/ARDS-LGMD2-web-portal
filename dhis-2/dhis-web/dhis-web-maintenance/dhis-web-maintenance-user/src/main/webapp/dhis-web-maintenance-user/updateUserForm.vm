@@ -1,0 +1,173 @@
+<script type="text/javascript">
+	jQuery(function() {
+	    var rules = getValidationRules( "user" );
+	    rules["rawPassword"].required = false;
+	    rules["retypePassword"].required = false;
+	
+	    validation2( 'updateUserForm', function( form )
+	    {
+	        jQuery( "#selectedList" ).children().attr( "selected", true );
+
+            if( $('#selectionTree').find('.selected').size() == 0 ) {
+                setHeaderDelayMessage('$i18n.getString( "organisation_unit_required_for_user" )');
+            } else {
+                form.submit();
+            }
+	    }, {
+	        'beforeValidateHandler' : function()
+	        {
+	            listValidator( 'roleValidator', 'selectedList' );
+	            #tblDynamicAttributesJavascript()
+	        },
+	        'rules' : rules
+	    } );
+
+	    jQuery( "#cancel" ).click( function()
+	    {
+            dhis2.commons.redirectCurrentPage( 'alluser.action' );
+	    } );
+
+		jQuery("#availableList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getUserRoles.action",
+			iterator: 'userRoles',
+			connectedTo: 'selectedList',
+			handler: function(item) {
+				var option = jQuery("<option />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			}
+		});
+	});
+</script>
+
+<h3>$i18n.getString( "edit_user" )</h3>
+
+<form id="updateUserForm" action="updateUser.action" method="post" class="inputForm">
+	
+  <div>
+	<input type="hidden" id="id" name="id" value="$userCredentials.id"/>
+  </div>
+
+<table>
+    <col style="width: 120px"/>
+    <col style="width: 350px"/>
+    <col/>
+    <col style="width: 350px"/>
+
+	<tr>
+		<th colspan="4">$i18n.getString( "details" )</th>
+	</tr>
+
+	<tr>
+		<td><label for="username">$i18n.getString( "username" )</label></td>
+		<td colspan="3"><input type="text" id="username" name="username" value="$encoder.htmlEncode( $userCredentials.username )" disabled="disabled" autocomplete="off"/></td>				
+	</tr>
+
+	<tr>
+		<td><label for="rawPassword">$i18n.getString( "password" )</label></td>
+		<td colspan="3"><input type="password" id="rawPassword" name="rawPassword" autocomplete="off"></td>			
+	</tr>
+
+	<tr>
+		<td><label for="retypePassword">$i18n.getString( "retype_password" ) </label></td>
+		<td colspan="3"><input type="password" id="retypePassword" name="retypePassword" autocomplete="off"></td>	
+	</tr>
+
+	<tr>
+		<td><label for="surname">$i18n.getString( "surname" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="text" id="surname" name="surname" value="$encoder.htmlEncode( $userCredentials.user.surname )"></td>	
+	</tr>
+
+	<tr>
+		<td><label for="firstName">$i18n.getString( "firstName" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="text" id="firstName" name="firstName" value="$encoder.htmlEncode( $userCredentials.user.firstName )"></td>		
+	</tr>
+
+	<tr>
+		<td><label for="email">$i18n.getString( "email" )</label></td>
+		<td colspan="3"><input type="text" id="email" name="email" value="$!encoder.htmlEncode( $userCredentials.user.email )"></td>
+	</tr>
+
+    <tr>
+        <td><label for="phoneNumber">$i18n.getString( "phone_number" )</label></td>
+        <td colspan="3"><input type="text" id="phoneNumber" name="phoneNumber" value="$!encoder.htmlEncode( $userCredentials.user.phoneNumber )"></td> 
+    </tr>
+    
+    <tr>
+        <td><label>$i18n.getString( "language" )</label></td>
+        <td>
+            <select id="localeUi" name="localeUi">
+            #foreach( $locale in $availableLocales )
+                <option value="$locale.toString()" #if( $locale == $currentLocale )selected="selected"#end>$locale.getDisplayName()</option>
+            #end
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+        <td><label>$i18n.getString( "db_language" )</label></td>
+        <td>
+            <select id="localeDb" name="localeDb">
+            <option value="">[$i18n.getString( "use_db_locale_no_translation" )]</option>
+            #foreach( $locale in $availableLocalesDb )
+                <option value="$locale.toString()" #if( $locale == $currentLocaleDb )selected="selected"#end>$locale.getDisplayName()</option>
+            #end
+            </select>
+        </td>
+    </tr>
+    
+</table>
+
+#tblDynamicAttributes( { "attributes": $attributes, "attributeValues": $attributeValues } )
+
+<table>
+    <colgroup>
+      <col style="width: 500px;"/>
+      <col/>
+      <col style="width: 500px;"/>
+    </colgroup>
+
+	<tr>
+		<th>$i18n.getString( "available" )</th>
+		<th></th>
+		<th>$i18n.getString( "selected" )
+			<select id="roleValidator" style="display:none"/>
+		</th>
+	</tr>
+
+	<tr>
+        <td>
+            <select id="availableList" name="availableList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+
+        <td style="text-align:center">
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'selectedList' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'selectedList' );"/>
+        </td>
+
+		<td>
+        	<select id="selectedList" name="selectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;">
+            #foreach ( $selectedRole in $userCredentials.userAuthorityGroups )
+            	<option value="$selectedRole.id">$encoder.htmlEncode( $selectedRole.name )</option>
+            #end
+        	</select>
+        </td>
+	</tr>  
+
+	<tr>
+		<td colspan="3">
+			#organisationUnitSelectionTree( false, true, false )
+		</td>
+	</tr>
+</table>
+
+<p>
+	<input type="submit" value="$i18n.getString( 'save' )" style="width:10em" />
+	<input type="button" id="cancel" value="$i18n.getString( 'cancel' )" style="width:10em" />
+</p>
+
+</form>

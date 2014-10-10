@@ -1,0 +1,7 @@
+[
+#set( $size1 = $images.size() )
+#foreach( $image in $images )
+
+{"id":"$encoder.jsonEncode( ${image[0]})","file_name":"$encoder.jsonEncode( ${image[1]})","status":"$encoder.jsonEncode( ${image[2]})"}#if( $velocityCount < $size1 ),#end
+
+#end ]

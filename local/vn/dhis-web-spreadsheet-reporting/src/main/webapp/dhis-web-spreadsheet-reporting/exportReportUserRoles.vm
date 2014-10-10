@@ -1,0 +1,48 @@
+<h3>$i18n.getString( "assign_exportreport_userrole" )</h3>
+
+<form name="userRole" action="updateExportReportUserRole.action" method="POST" onsubmit="selectAllById( 'selectedList' );">
+<input type="hidden" name="id" value="$exportReport.id"/>
+<table>
+	<tr>
+		<th colspan=3>$i18n.getString( "export_report" )</th>
+	</tr>
+	<tr>
+		<td colspan=3>$encoder.htmlEncode( $exportReport.displayName )</td>
+	</tr>
+	<tr>
+		<th>$i18n.getString( "available" )</th>
+		<td></td>
+		<th>$i18n.getString( "selected" )</th>
+	</tr>
+	<tr>
+		<td>
+			 <select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'availableList', 'selectedList' )">
+            #foreach ( $userRole in $userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+          </select>
+		</td>
+		<td>
+			<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'selectedList', 'availableList' )"/><br/>
+			<input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableList', 'selectedList' )"/>
+		</td>
+		<td>
+			<select id="selectedList" name="userRoles" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'selectedList', 'availableList' )">
+			#foreach ( $userRole in $exportReport.userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+			</select>
+        </td>
+	</tr>
+</table>
+<br>
+<input type="submit" value="$i18n.getString( 'ok' )" style="width:100px"/>
+<input type="button" value="$i18n.getString( 'cancel' )"  style="width:100px" onclick="window.location = 'listAllExportReport.action'"/>
+</form>
+
+<script>
+	$(document).ready(function(){
+		sortList('availableList', 'ASC');
+		sortList('selectedList', 'ASC');
+	});
+</script>

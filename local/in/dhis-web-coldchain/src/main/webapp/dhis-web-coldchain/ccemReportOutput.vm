@@ -1,0 +1,134 @@
+<script src="javascript/highcharts.js"></script>
+<script src="javascript/exporting.js"></script>
+
+
+<script>
+    
+    function exportToWorkBook()
+    {
+        document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+        return true;
+    }
+    
+</script>
+
+#set( $tableHeadings = $ccemReportOutput.tableHeadings )
+#set( $tableSubHeadings = $ccemReportOutput.tableSubHeadings )
+#set( $tableData = $ccemReportOutput.tableData )
+#set( $totalDataForPieChart = 0 )
+
+<form id="form1" name="form1" action="exportToExcel.action" method="post" onsubmit="return exportToWorkBook()" target="_newtab">
+
+<div align="right">
+	<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000" />
+</div>
+
+<input type="hidden" name="htmlCode" id="htmlCode" />
+
+<div id="formResult" style="height:444px;width:650px;overflow:auto;">
+	<div align="center">$!ccemReportOutput.reportHeading - $!ccemReportOutput.outputType</div>
+	#if( $!ccemReportOutput.outputType == "chart" )
+		<table>
+			<tr>
+				<td>
+					<table class="listTable" id="ccemReportOutput" >
+						<tr>
+							#foreach( $tableHeading in $tableHeadings )
+								<th>$tableHeading</th>
+							#end
+						</tr>
+						#set( $mark = false )
+						#set( $count1 = 0 )
+						#foreach( $oneTableRowData in $tableData )
+						<tr #alternate($mark)>
+							#foreach( $oneTableCellData in $oneTableRowData )
+								<td>$oneTableCellData</td>
+								#set( $totalDataForPieChart = $totalDataForPieChart + $oneTableCellData )
+							#end
+						</tr>
+						#set( $mark = !$mark)
+						#set( $count1 = $count1 + 1 )   
+						#end
+					</table>
+				</td>
+				<td>&nbsp;</td>
+				<td><div id="container" style="min-width: 300px; height: 300px; margin: 0 auto"></div></td>
+			</tr>
+		</table>
+	#else	
+		<table class="listTable" id="ccemReportOutput" >
+			<tr>
+				#foreach( $tableHeading in $tableHeadings )
+					<th>$tableHeading</th>
+				#end
+			</tr>
+			#foreach( $oneSubHeadingRow in $tableSubHeadings )
+			<tr>
+				#foreach( $oneSubHeadingCellData in $oneSubHeadingRow )
+					<th>$oneSubHeadingCellData</th>
+				#end
+			</tr>   
+			#end
+		
+			#set( $mark = false )
+			
+			#foreach( $oneTableRowData in $tableData )
+			<tr #alternate($mark)>
+				#foreach( $oneTableCellData in $oneTableRowData )
+					<td>$oneTableCellData</td>
+				#end
+			</tr>
+			#set( $mark = !$mark)	
+			#end
+		</table>
+	#end
+</div>
+
+
+#if( $!ccemReportOutput.outputType == "chart" )
+
+<script>
+	
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+				
+					#foreach( $oneTableRowData in $tableData )
+						['$oneTableRowData.get(0)',   $oneTableRowData.get(1)],
+					#end
+                ]
+            }]
+        });
+    });
+    
+});
+
+</script>
+#end

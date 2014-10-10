@@ -1,0 +1,62 @@
+<h3>$i18n.getString( 'organisation_unit_group' )</h3>
+<form name="organisationUnitGroupReport" action="updateOrgUnitGroupListingReport.action" method="GET">
+<input type="hidden" name="id" value="$exportReportOrgUnitGroupListing.id"/>
+<table>
+	<colgroup>
+  		<col width="325px"/>
+  		<col width="80px"/>
+ 		<col width="325px"/>
+		<col/>
+  	</colgroup>
+	
+  	<tr>
+  		<th>$i18n.getString( "available_groups" )</th>
+  		<td></td>
+  		<th>$i18n.getString( "selected_groups" )</th>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>
+			<select multiple size="13" id="availableGroups" name="availableGroups" style="width:100%" ondblclick="moveSelectedById( 'availableGroups', 'selectedGroups' )">
+				#foreach ( $group in $availableOrganisationUnitGroups )
+    				<option value="$group.id">$group.displayName</option>
+    			#end
+			</select>
+		</td>
+		<td style="text-align:center">
+			<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availableGroups', 'selectedGroups' )"><br>
+			<input type="button" value="&lt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveSelectedById( 'selectedGroups', 'availableGroups' )"><br>		
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveAllById( 'availableGroups', 'selectedGroups' )"><br>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedGroups', 'availableGroups' )">
+		</td>
+		<td>
+			<select multiple size="13" id="selectedGroups" name="selectedOrganisationUnitGroups" style="width:100%" ondblclick="moveSelectedById( 'selectedGroups', 'availableGroups' )">
+				#foreach ( $group in $selectedOrganisationUnitGroups )
+					<option value="$group.id">$group.displayName</option>
+    			#end
+			</select>
+		</td>
+		<td>
+			<a href="javascript:moveSelectedOptionToTop( 'selectedGroups' );"><img align="absmiddle" src="../images/move_top.png" style="cursor:pointer;width:20px;"></a><br><br>			
+			<a href="javascript:moveUpSelectedOption( 'selectedGroups' );"><img align="absmiddle" src="../images/move_up.png" style="cursor:pointer;width:20px;"></a><br><br>		
+			<a href="javascript:moveDownSelectedOption( 'selectedGroups' );"><img align="absmiddle" src="../images/move_down.png" style="cursor:pointer;width:20px;"></a><br><br>		
+			<a href="javascript:moveSelectedOptionToBottom( 'selectedGroups' );"><img align="absmiddle" src="../images/move_bottom.png" style="cursor:pointer;width:20px;"></a>			
+		</td>
+	</tr>
+	<tr>
+		<td colspan=4>
+			<input type="button" value="$i18n.getString( 'ok')" onclick="submitForm()"/>
+			<input type="button" value="$i18n.getString( 'cancel')" onclick="window.location='listAllExportReport.action'"/>
+		</td>
+	</tr>
+</table>
+
+</form>
+
+<script>
+	function submitForm(){
+		selectAllById('selectedGroups');
+		document.forms['organisationUnitGroupReport'].submit();
+	}
+</script>

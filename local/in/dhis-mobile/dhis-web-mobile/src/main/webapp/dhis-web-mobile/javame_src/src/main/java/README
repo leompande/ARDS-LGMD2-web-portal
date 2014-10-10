@@ -1,0 +1,16 @@
+This is the documentation for the dhis-javame application. It uses the
+Light-weight User Interface Toolkit (LWUIT) for the user-interface
+components of the application and targets to run with a common UI on
+even the low-cost handsets.
+
+RecordStore Documentation:
+  [1] appVersion
+  [2] author
+  [3] messageFormat-version
+  [4] update-url
+  [5] Phone#1:
+  [6] Phone#2:
+  [7] Phone#3:
+  [8] --NA--
+  [9] --NA--
+ [10] true (if previous msg stored) | false (if no previous msg)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attribute>
+  <id>$targetIndicator.id</id>
+  <name>$encoder.xmlEncode( $targetIndicator.name )</name>
+  <organisationUnitGroup>$encoder.xmlEncode( $targetIndicator.organisationUnitGroup.name )</organisationUnitGroup>
+  <attributeOptionGroup>$encoder.xmlEncode( $targetIndicator.attributeOptionGroup.name )</attributeOptionGroup>
+  <year>$targetIndicator.year</year>
+  <value>$targetIndicator.value</value>    
+</attribute>

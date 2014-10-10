@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelTypeAttributes>
+#foreach( $modelTypeAttribute in $modelTypeAttributes )
+	<modelTypeAttribute>
+		<id>$modelTypeAttribute.id</id>
+		<name>$encoder.xmlEncode( $modelTypeAttribute.name )</name>
+		<description>$!encoder.xmlEncode( $modelTypeAttribute.description )</description>
+		<valueType>$modelTypeAttribute.valueType</valueType>
+		<mandatory>$modelTypeAttribute.mandatory</mandatory>
+	</modelTypeAttribute>
+#end
+</modelTypeAttributes>

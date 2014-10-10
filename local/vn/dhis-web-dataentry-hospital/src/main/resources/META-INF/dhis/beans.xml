@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <bean id="org.hisp.dhis.de.history.HistoryRetriever" class="org.hisp.dhis.de.history.DefaultHistoryRetriever">
+    <property name="minMaxDataElementService" ref="org.hisp.dhis.minmax.MinMaxDataElementService" />
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+  </bean>
+
+  <!-- Actions -->
+
+  <bean id="org.hisp.dhis.de.action.ShowHospitalEntryFormAction" class="org.hisp.dhis.de.action.ShowHospitalEntryFormAction"
+	  scope="prototype"/>
+
+  <bean id="org.hisp.dhis.de.action.GetMetaDataAction" class="org.hisp.dhis.de.action.GetMetaDataAction"
+      scope="prototype">
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+    <property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.GetDataValuesForDataSetAction"
+      class="org.hisp.dhis.de.action.GetDataValuesForDataSetAction" scope="prototype">
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="minMaxDataElementService" ref="org.hisp.dhis.minmax.MinMaxDataElementService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.LoadFormAction" class="org.hisp.dhis.de.action.LoadFormAction" scope="prototype">
+    <property name="dataEntryFormService" ref="org.hisp.dhis.dataentryform.DataEntryFormService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="localDataElementService" ref="org.hisp.dhis.dataelement.LocalDataElementService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.LoadICDFormAction" class="org.hisp.dhis.de.action.LoadICDFormAction" scope="prototype" />
+
+  <bean id="org.hisp.dhis.de.action.SaveValueAction" class="org.hisp.dhis.de.action.SaveValueAction" scope="prototype">
+    <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.SaveCommentAction" class="org.hisp.dhis.de.action.SaveCommentAction"
+      scope="prototype">
+    <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.SaveMinMaxLimitsAction" class="org.hisp.dhis.de.action.SaveMinMaxLimitsAction"
+      scope="prototype">
+    <property name="minMaxDataElementService" ref="org.hisp.dhis.minmax.MinMaxDataElementService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.RemoveMinMaxLimitsAction" class="org.hisp.dhis.de.action.RemoveMinMaxLimitsAction"
+      scope="prototype">
+    <property name="minMaxDataElementService" ref="org.hisp.dhis.minmax.MinMaxDataElementService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.HistoryAction" class="org.hisp.dhis.de.action.HistoryAction" scope="prototype">
+    <property name="historyRetriever" ref="org.hisp.dhis.de.history.HistoryRetriever" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="dataValueAuditService" ref="org.hisp.dhis.datavalue.DataValueAuditService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="userService" ref="org.hisp.dhis.user.UserService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.RegisterCompleteDataSetAction"
+      class="org.hisp.dhis.de.action.RegisterCompleteDataSetAction"
+      scope="prototype">
+    <property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    <property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.UndoCompleteDataSetAction" class="org.hisp.dhis.de.action.UndoCompleteDataSetAction"
+      scope="prototype">
+    <property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.ValidationAction" class="org.hisp.dhis.de.action.ValidationAction"
+      scope="prototype">
+    <property name="validationRuleService" ref="org.hisp.dhis.validation.ValidationRuleService" />
+    <property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+    <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    <property name="minMaxOutlierAnalysisService" ref="org.hisp.dhis.dataanalysis.MinMaxOutlierAnalysisService" />
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.MarkForFollowupAction" class="org.hisp.dhis.de.action.MarkForFollowupAction"
+      scope="prototype">
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.de.action.GetHistoryChartAction" class="org.hisp.dhis.de.action.GetHistoryChartAction"
+      scope="prototype">
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    <property name="chartService" ref="org.hisp.dhis.chart.ChartService" />
+    <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.dataelement.LoadAttributeValuesByAttributeAction" class="org.hisp.dhis.dataelement.LoadAttributeValuesByAttributeAction" scope="prototype">
+	 <property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+	 <property name="localAttributeValueService" ref="org.hisp.dhis.attribute.LocalAttributeValueService" />
+  </bean>
+  
+   <bean id="org.hisp.dhis.de.action.LoadDataSetsAction" class="org.hisp.dhis.de.action.LoadDataSetsAction" scope="prototype">
+	 <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	 <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	 <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.de.action.LoadAttributeValuesAction" class="org.hisp.dhis.de.action.LoadAttributeValuesAction" scope="prototype">
+	 <property name="localAttributeValueService" ref="org.hisp.dhis.attribute.LocalAttributeValueService" />
+	 <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.de.action.LoadDepartmentsAction" class="org.hisp.dhis.de.action.LoadDepartmentsAction" scope="prototype">
+	 <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	 <property name="associationService" ref="org.hisp.dhis.reportsheet.OptionComboAssociationService" />
+	 <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	 <property name="localDataSetService" ref="org.hisp.dhis.dataset.LocalDataSetService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.de.action.ShowICDReportAction" 
+	class="org.hisp.dhis.de.action.ShowICDReportAction" scope="prototype"/>
+  
+  <bean id="org.hisp.dhis.de.action.ExportResultAction" 
+	class="org.hisp.dhis.de.action.ExportResultAction" scope="prototype"/>
+
+</beans>

@@ -1,0 +1,51 @@
+
+#if( $smsServiceStatus )
+    <div class="header" style="background-color: olive">
+        <form method="post">SMS Service: Started
+            <input type="submit" name="statAction" value="Stop" />
+        </form>
+    </div>
+#else
+    <div class="header">
+        <form method="post">SMS Service: Not Started
+            <input type="submit" name="statAction" value="Start" />
+        </form>
+    </div>
+#end
+
+#if( $smsServiceStatus )
+    <br><br>
+    <div class="header">Draft| Pending Messages to Send : $!pendingMsgList.size()
+        <form style="float: right;" method="post"><input type="submit" name="sendPendingSMS" value="Send Pending SMS" #if( $!pendingMsgList.size() == 0 ) disabled #end /></form>
+    </div>
+    #if( $!pendingMsgList.size() != 0 )
+        <br/>
+        <table width="100%" class="listTable">
+        
+            <col width="25%">
+            <col width="75%">
+        
+            <tr>
+                <th>Sender</th>
+                <th>Message</th>
+            </tr>
+            
+            <tbody id="list">
+            #set( $mark = false )
+            #foreach( $draft in $pendingMsgList )
+                <tr>
+                    <td #alternate( $mark )>$draft.senderInfo</td>
+                    <td #alternate( $mark )>$draft.sendingMessage</td>
+                </tr>
+                #if( $mark )
+                    #set( $mark = false )
+                #else
+                    #set( $mark = true )
+                #end
+            #end
+             </tbody>
+        </table>
+    #end
+    
+    <span id="message" style="display:#if($result.trim().equals(""))none #else block #end">$result</span>
+#end

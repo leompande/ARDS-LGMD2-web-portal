@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		getFollowUpAnalysis();
+	});
+
+	var i18n_analysing_please_wait = '$encoder.jsEscape( $i18n.getString( "analysing_data" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "followup_analysis" ) #openHelp( "followupAnalysis" )</h3>
+
+<span id="message"></span>
+<div id="analysisResult"></div>

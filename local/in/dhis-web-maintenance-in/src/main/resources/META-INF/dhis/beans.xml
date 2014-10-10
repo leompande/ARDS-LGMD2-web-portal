@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+<!-- Home Page -->
+  <bean id="org.hisp.dhis.config.action.NoAction" class="org.hisp.dhis.config.action.NoAction"
+    scope="prototype">
+  </bean>
+
+  <!-- Configuration -->
+
+  <bean id="org.hisp.dhis.config.action.ConfigurationFormAction" class="org.hisp.dhis.config.action.ConfigurationFormAction"
+    scope="prototype">
+    <property name="configurationService" ref="org.hisp.dhis.config.ConfigurationService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.config.action.ConfigurationResultAction" class="org.hisp.dhis.config.action.ConfigurationResultAction"
+    scope="prototype">
+    <property name="configurationService" ref="org.hisp.dhis.config.ConfigurationService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.config.action.TakeMySqlBackupAction" class="org.hisp.dhis.config.action.TakeMySqlBackupAction"
+    scope="prototype">
+    <property name="configurationService" ref="org.hisp.dhis.config.ConfigurationService" />
+    <property name="provider" ref="databaseInfoProvider" />
+  </bean>
+
+  <bean id="org.hisp.dhis.config.action.StreamMySqlBackupAction" class="org.hisp.dhis.config.action.StreamMySqlBackupAction"
+    scope="prototype" />
+
+  <!-- Maintenance -->
+
+  <bean id="org.hisp.dhis.config.action.ClearFolderAction" class="org.hisp.dhis.config.action.ClearFolderAction"
+    scope="prototype">
+    <property name="configurationService">
+      <ref bean="org.hisp.dhis.config.ConfigurationService" />
+    </property>
+  </bean>
+
+<!-- Advance MySQL Backup -->
+  <bean id="org.hisp.dhis.config.action.AdvanceMySqlBackupFormAction" class="org.hisp.dhis.config.action.AdvanceMySqlBackupFormAction"
+    scope="prototype">
+	  <property name="jdbcTemplate" ref="jdbcTemplate"/>	
+  </bean>
+
+  <bean id="org.hisp.dhis.config.action.AdvanceMySqlBackupResultAction" class="org.hisp.dhis.config.action.AdvanceMySqlBackupResultAction"
+    scope="prototype">
+    <property name="configurationService" ref="org.hisp.dhis.config.ConfigurationService" />
+    <property name="provider" ref="databaseInfoProvider" />
+  </bean>	
+		
+</beans>

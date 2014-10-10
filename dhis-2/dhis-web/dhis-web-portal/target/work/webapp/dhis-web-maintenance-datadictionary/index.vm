@@ -1,0 +1,18 @@
+<h3>$i18n.getString( "dhis-web-maintenance-datadictionary" )</h3>
+
+<ul class="introList">
+	#introListImgItem( "dataElement.action" "data_element" "dataelement" )
+	#introListImgItem( "dataElementGroup.action" "data_element_group" "dataelement" )
+    #introListImgItem( "dataElementGroupEditor.action" "data_element_group_editor" "dataelement" )
+    #introListImgItem( "dataElementGroupSet.action" "data_element_group_set" "groupset" )
+    #introListImgItem( "categoryOption.action" "data_element_category_option" "category" )
+    #introListImgItem( "category.action" "data_element_category" "category" )
+    #introListImgItem( "categoryCombo.action" "data_element_category_combo" "category" )
+    #introListImgItem( "dataDictionary.action" "data_dictionary" "datadictionary" )
+	#introListImgItem( "concept.action" "concept" "dataelement" )
+    #introListImgItem( "indicator.action" "indicator" "indicator" )
+    #introListImgItem( "indicatorType.action" "indicator_type" "indicator" )
+    #introListImgItem( "indicatorGroup.action" "indicator_group" "indicator" )
+    #introListImgItem( "indicatorGroupEditor.action" "indicator_group_editor" "indicator" )
+    #introListImgItem( "indicatorGroupSet.action" "indicator_group_set" "groupset" )
+</ul>

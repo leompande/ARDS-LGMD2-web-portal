@@ -1,0 +1,173 @@
+<script type="text/javascript" src="javascript/bulkSMS.js"></script>
+
+<script type="text/javascript" language="javascript">
+
+function Select()
+{
+##alert("Size= "+$availableOrganisationUnitGroups.size());
+##alert("size sele="+document.getElementById("selectedOrganisationUnitGroups").options);
+
+for ( i=0;i<document.getElementById("selectedOrganisationUnitGroups").length;i++){
+##alert(document.getElementById("selectedOrganisationUnitGroups").options[i].value);
+
+if (document.theForm.selectedIdString.value.length==0){
+document.theForm.selectedIdString.value= document.getElementById("selectedOrganisationUnitGroups").options[i].value;
+}else {
+document.theForm.selectedIdString.value=document.theForm.selectedIdString.value +","+ document.getElementById("selectedOrganisationUnitGroups").options[i].value;
+    }
+}
+##alert("....>"+document.theForm.selectedIdString.value);
+
+}
+
+
+function checkCheckBox() {
+    if (document.theForm.texttype.checked == false)
+    {
+        document.theForm.message.disabled = false;
+        document.theForm.availableDataElements.disabled = true;
+       
+    }
+    else
+    {
+        document.theForm.message.disabled = true;
+        document.theForm.availableDataElements.disabled = false;
+        document.theForm.isMessageDisabled.value="true";
+       
+    }
+}
+
+
+function validateSend()
+{
+    var validate=true;
+    if (document.theForm.texttype.checked == false)
+    {
+        if(document.theForm.message.value.length == 0)
+
+        {
+            alert("Enter the message");
+            validate=false;
+        }
+    }
+    else
+    if(document.theForm.availableDataElements.selectedIndex < 0)
+    {  
+        alert("Select a data element");
+        validate=false;
+    }
+  
+    if (document.theForm.selectedOrganisationUnitGroups.value.length==0)
+    {
+        alert("Select atleast 1 organization unit group");
+        validate=false;
+    }
+    if(validate==true)
+    {
+        if (document.theForm.texttype.checked == true)
+    {
+document.theForm.selectedAvailableDataElements.value=document.theForm.availableDataElements.value;
+//alert("sel"+document.theForm.selectedAvailableDataElements.value);
+        }
+
+         Select();
+        alert("Sending");
+    }
+   
+}
+
+</script>
+
+
+<style type="text/css">
+    .statusBar{
+        color: white;
+        padding: 5px 5px;
+        margin: -16px 0 20px -20px;
+        font-weight: bold;
+        background-color: #8FABC7;
+    }
+</style>
+
+
+<h1>Send Bulk SMS</h1>
+<div>
+    <form method="post" name="theForm">
+    <textarea ID="selectedIdString" name="selectedIdString" style="display:none;"></textarea>
+    <textarea ID="isMessageDisabled" name="isMessageDisabled" style="display:none;"></textarea>
+    <textarea ID="selectedAvailableDataElements" name="selectedAvailableDataElements" style="display:none;"></textarea>
+
+  
+     <INPUT TYPE=CHECKBOX NAME="texttype" ID="p" VALUE="p" onClick="checkCheckBox()"/>Predefined Text <BR>
+        <select size="1" id="availableDataElements" disabled=true name="availableDataElements" style="min-width:400px">
+ 
+             #set($countavailableDataElements=0);
+            #foreach ( $str in $availableDataElements )
+            
+           <option value="$str">$str</option>
+            #set($countavailableDataElements=$countavailableDataElements+1);
+            #end
+           
+        </select><BR><BR>
+           Enter Text<BR>
+    <textarea name="message" ID="message" cols="68" rows="3"></textarea><BR><BR>
+<table id="groupSelectionArea">
+    <col/> ## Available Organisation Unit Groups
+    <col/> ## Filter
+    <col/> ## Selected Organisation Unit Groups
+    <thead>
+      <tr>
+        <th>$i18n.getString( "Available Organisation Unit Groups" )</th>
+<th>$i18n.getString( "filter" )</th>
+        <th>$i18n.getString( "Selected Organisation Unit Groups" )</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+ <!---->
+ <td>
+          <select size="5" id="availableOrganisationUnitGroups" name="availableOrganisationUnitGroups" multiple="multiple" style="min-width:20em;height:17em" ondblclick="moveSelectedById( 'availableOrganisationUnitGroups', 'selectedOrganisationUnitGroups');">
+              #foreach( $group in $availableOrganisationUnitGroups )
+              <option value="$group.id">$encoder.htmlEncode( $group.name )</option>
+          #end
+          </select>
+          </td>
+ <td>
+            <input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="moveSelectedById( 'availableOrganisationUnitGroups', 'selectedOrganisationUnitGroups');"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="moveSelectedById( 'selectedOrganisationUnitGroups', 'availableOrganisationUnitGroups');"/><br/>
+            <input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveAllById( 'availableOrganisationUnitGroups', 'selectedOrganisationUnitGroups' );"/><br/>
+            <input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedOrganisationUnitGroups', 'availableOrganisationUnitGroups' );"/>
+          </td>
+          <td>
+          <!---->
+          <select size="5" id="selectedOrganisationUnitGroups" name="selectedOrganisationUnitGroups" multiple="multiple" style="min-width:20em;height:17em" ondblclick="moveSelectedById( 'selectedOrganisationUnitGroups', 'availableOrganisationUnitGroups');">
+              #foreach( $group in $selectedOrganisationUnitGroups )
+              <option value="$group.id">$encoder.htmlEncode( $group.name )</option>
+          #end
+          </select>
+          </td>
+      
+        </tr>
+       </tbody>
+</table>
+   ## </form>
+   
+    #if ($smsServiceStatus)
+    ##<form method="post" >
+        <BUTTON type="submit" name="send" value="Send" onClick="Select();">Send</BUTTON>
+    ##</form>
+    #else
+    ##<form method="post">
+        <BUTTON type="submit" name="send" value="Send"  onClick="Select();">Send</BUTTON>
+   
+    #end
+</form>
+
+
+</div>
+<p>
+<span id="result" style="#if($result.trim().equals("")) none#else background-color:yellow;
+border:3px; padding:.3em;#end">  $result
+
+</span>
+

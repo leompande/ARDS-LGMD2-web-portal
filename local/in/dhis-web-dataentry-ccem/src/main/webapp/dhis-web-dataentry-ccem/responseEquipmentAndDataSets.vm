@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<equipments>
+	#foreach( $equipment in $equipments )	
+		<equipment>
+			<id>$equipment.id</id>
+			<name>$equipment.getModel().getName()</name>
+		</equipment>
+	#end
+	#foreach( $dataset in $datasets )	
+		<dataSet>
+			<id>$dataset.id</id>
+			<name>$dataset.name</name>
+		</dataSet>
+	#end
+</equipments>

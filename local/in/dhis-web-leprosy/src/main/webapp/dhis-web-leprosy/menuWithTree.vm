@@ -1,0 +1,27 @@
+
+#parse( "/dhis-web-leprosy/menu.vm" )
+<br>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+    document.getElementById("ouIDTB").value = orgUnitIds;        
+	
+	if(orgUnitIds == null || orgUnitIds == "" )
+	{
+		return;
+	}
+	
+    if(orgUnitIds !=null)
+	{
+	   getOUDetails(orgUnitIds);
+	}	
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

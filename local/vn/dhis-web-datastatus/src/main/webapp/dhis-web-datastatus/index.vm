@@ -1,0 +1,64 @@
+<table width="100%" class="list">
+	<tr>
+		<th style="background:#DFDFDF">$i18n.getString( 'dataset' )</th>
+		<th style="background:#DFDFDF"></th>		
+	</tr>
+	#set( $mark = false )
+	#foreach($ds in $dataStatus)
+		<tr #alternate( $mark )>
+			<td width="300px"><h3>$ds.dataSet.name</h3></td>
+			<td>	
+				<table width="100%" style="background-color:#000000;" cellpadding="2" cellspacing="1">	
+					#foreach($ds_ in $maps.get($ds.dataSet))
+						<tr style="background-color:white">
+							<td rowspan=2 style="width:200px">$format.formatPeriod($ds_.period)</td>		
+							<td style="width:150px">$i18n.getString( 'number_datavalue' )</td>
+							<td ><div style="text-align:center;#if($ds_.getCompletedPercent()>0) padding:2px;color:white; #end width:$ds_.getCompletedPercent()%;background-color:green;">$ds_.getCompletedPercent()%</div></td>	
+						</tr>	
+						<tr style="background-color:white">
+							<td>$i18n.getString( 'completed' )</td>
+							<td >
+							#if($ds_.completed) 
+								<img src="../images/check.png" alt="$i18n.getString( 'yes' )">
+							#else 
+								<img src="../images/uncheck.png" alt="$i18n.getString( 'no' )">
+							#end	
+							</td>
+						</tr>	
+					#end
+				</table>
+			<!--
+				<table width="100%">	
+					<tr>
+					#foreach($ds_ in $maps.get($ds.dataSet))
+						<td>
+						<table width="100%">
+							<tr>
+								<th style="background:#DFDFDF">$format.formatPeriod($ds_.period)</th>
+							</tr>
+							<tr>							
+								<td style="background-color:#00FF3A;color:white">
+								<div style="width:$ds_.getCompletedPercent()%;background-color:green;">$ds_.getCompletedPercent()%</div>
+								</td>
+							</tr>	
+							<tr>
+								<td style="background-color:#if($ds_.completed)blue #else red #end;color:white">$i18n.getString( 'completed' ) : #if($ds_.completed) $i18n.getString( 'yes' ) #else $i18n.getString( 'no' ) #end</td>
+							</tr>		
+						</table>
+						</td>	
+					#end
+					<tr>
+				</table>
+				-->
+			</td>
+			<td>
+				
+			</td>
+		</tr>
+		#if( $mark )
+			#set( $mark = false )
+		#else
+			#set( $mark = true )
+		#end
+	#end
+</table>

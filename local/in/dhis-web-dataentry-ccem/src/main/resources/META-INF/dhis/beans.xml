@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+<!-- Actions -->	 
+	<bean id="org.hisp.dhis.dataentry.action.PageInitAction" class="org.hisp.dhis.dataentry.action.PageInitAction">
+  		<property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+  		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+  		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+	
+  	<!-- Get OrganisationUnit Unit name -->
+    <bean id="org.hisp.dhis.dataentry.action.GetOrganisationUnitAction" class="org.hisp.dhis.dataentry.action.GetOrganisationUnitAction" scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+	
+	<!-- Get Equipment and DataSet name -->
+    <bean id="org.hisp.dhis.dataentry.action.GetEquipmentAndDataSetListAction" class="org.hisp.dhis.dataentry.action.GetEquipmentAndDataSetListAction" scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+    </bean>	
+	
+	<!-- Get Periods -->
+	 <bean id="org.hisp.dhis.dataentry.action.LoadPeriodsAction" class="org.hisp.dhis.dataentry.action.LoadPeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	 </bean>		
+	
+	<!-- Get Next and Previous Periods -->
+	 <bean id="org.hisp.dhis.dataentry.action.LoadNextPrePeriodsAction" class="org.hisp.dhis.dataentry.action.LoadNextPrePeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	 </bean>	
+	
+	
+	<!-- Load DataEntry Form -->
+	 <bean id="org.hisp.dhis.dataentry.action.LoadDataEntryFormAction" class="org.hisp.dhis.dataentry.action.LoadDataEntryFormAction" scope="prototype">   
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+		<property name="equipmentDataValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentDataValueService"/>  
+	 </bean>
+
+	<!-- Save DataEntry Form -->
+	 <bean id="org.hisp.dhis.dataentry.action.SaveEquipmentDataValueAction" class="org.hisp.dhis.dataentry.action.SaveEquipmentDataValueAction" scope="prototype">   
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+		<property name="equipmentDataValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentDataValueService"/>     
+	 </bean>	
+	
+	
+	
+	
+	
+</beans>

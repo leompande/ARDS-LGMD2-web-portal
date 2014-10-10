@@ -1,0 +1,7 @@
+{
+	"programInstanceId": "${programInstance.id}",
+	"activeProgramStageInstanceId": "$!activeProgramStageInstance.id",
+	"programStageId": "$!activeProgramStageInstance.programStage.id",
+	"activeProgramStageName": "$!encoder.jsonEncode( ${activeProgramStageInstance.programStage.displayName} )",
+	"dueDate": "$!format.formatDate( ${activeProgramStageInstance.dueDate} )"
+}

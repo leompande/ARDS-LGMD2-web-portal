@@ -1,0 +1,9 @@
+{ "linelistOptions": [
+#foreach ( $llOption in $lineListOptions )
+  {
+    "id": $!{llOption.id},
+    "name": "$!{llOption.name}",
+	"llelement": $!{lineListElement.id}
+  },
+#end
+] }

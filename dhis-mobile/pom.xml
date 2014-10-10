@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>org.hisp.dhis</groupId>
+  <artifactId>dhis-sms</artifactId>
+  <version>2.9-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Mobile SMS Modules</name>
+
+  <url>http://dhis2.org/mobile</url>
+  <description>
+     The DHIS2 Mobile SMS Modules add functionality for sending and
+     recieving SMS to DHIS2. With a configured SMS modem, a custom
+     built mobile client and a corresponding mapping from the SMS
+     format used by the clients, mobiles can be used to report on data
+     sets to DHIS2.
+  </description>
+
+  <organization>
+    <name>DHIS2</name>
+    <url>http://dhis2.org</url>
+  </organization>
+  
+  <modules>
+    <module>dhis-service-sms</module>
+    <module>dhis-web-sms</module>
+  </modules>
+      
+</project>

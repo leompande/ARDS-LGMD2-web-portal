@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+>
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.validation.ValidationRuleGroup" table="validationrulegroup">
+  
+    <cache usage="read-write" />
+      
+    <id name="id" column="validationrulegroupid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+    
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <property name="description" type="text" />
+
+    <set name="members" table="validationrulegroupmembers">
+      <key column="validationgroupid" foreign-key="fk_validationrulegroupmembers_validationrulegroupid" />
+      <many-to-many class="org.hisp.dhis.validation.ValidationRule" column="validationruleid"
+        foreign-key="fk_validationrulegroup_validationruleid" />
+    </set>
+
+    <set name="userAuthorityGroupsToAlert" table="validationrulegroupuserrolestoalert">
+      <key column="validationgroupid" foreign-key="fk_validationrulegroupuserrolestoalert_validationgroupid" />
+      <many-to-many class="org.hisp.dhis.user.UserAuthorityGroup" column="userroleid"
+        foreign-key="fk_validationrulegroupuserrolestoalert_userroleid" />
+    </set>
+
+  </class>
+</hibernate-mapping>

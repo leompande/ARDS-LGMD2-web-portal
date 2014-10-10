@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.hisp.dhis</groupId>
+		<artifactId>dhis-in-services</artifactId>
+		<version>2.14-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>dhis-in-service-dbmanager</artifactId>
+	<packaging>jar</packaging>
+	<name>DHIS India DBManager Service</name>
+	
+	<dependencies>
+		
+		<!-- DHIS -->
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-hibernate</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-system</artifactId>
+		</dependency>
+		<!--
+		<dependency>
+		<groupId>org.hisp.dhis</groupId>
+		<artifactId>dhis-service-options</artifactId>
+		</dependency>  
+		-->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+		</dependency>
+		
+		<!-- Other -->
+		<!--
+		<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>jep</groupId>
+			<artifactId>jep</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		
+	</dependencies>
+</project>

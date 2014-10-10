@@ -1,0 +1,39 @@
+{ "programStage":
+  {
+    "id": "${programStage.id}",
+	"name": "$!encoder.jsonEncode( ${programStage.name} )",
+	"description": "$!encoder.jsonEncode( ${programStage.description} )",
+	"minDaysFromStart": "${programStage.minDaysFromStart}",
+	"dataElementCount": "${programStageDataElements.size()}",
+	"standardInterval": "$!programStage.standardInterval",
+	"reportDateDescription": "$!encoder.jsonEncode( ${programStage.reportDateDescription} )",
+	"blockEntryForm": "$!programStage.blockEntryForm",
+	"remindCompleted": "$!programStage.remindCompleted",
+	"allowGenerateNextVisit": "$!programStage.allowGenerateNextVisit",
+	"generatedByEnrollmentDate": "$!programStage.generatedByEnrollmentDate",
+	"openAfterEnrollment": "$!programStage.openAfterEnrollment",
+	"reportDateToUse": "$!programStage.reportDateToUse",
+	"patientReminders":[
+	#foreach($patientReminder in $programStage.patientReminders)
+	  {
+		"daysAllowedSendMessage": "$!patientReminder.daysAllowedSendMessage",
+		"templateMessage": "$!encoder.jsonEncode( ${patientReminder.templateMessage} )"
+	  }#if( $velocityCount < $programStage.patientReminders.size() ),#end
+	#end 
+	],
+	"irregular": "$!programStage.irregular",
+	"autoGenerateEvent": "$!programStage.autoGenerateEvent",
+	"validCompleteOnly": "$!programStage.validCompleteOnly",
+	"displayGenerateEventBox": "$!programStage.displayGenerateEventBox",
+	"captureCoordinates": "$!programStage.captureCoordinates",
+	#set( $size = ${programStageDataElements.size()} )
+	"dataElement": [
+	#foreach($d in $programStageDataElements)
+	  {
+		"id": "${d.dataElement.id}",
+		"name": "$!encoder.jsonEncode( ${d.dataElement.name} )"
+	  }#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

@@ -1,0 +1,93 @@
+<script>
+    	// OrganisationUnit ids and its Names
+        /* 
+          var orgUnits = new HashTable();
+          #foreach($orgUnit in $organisationUnits)
+      	    var orgUnitId = ""+$orgUnit.getId();
+      	    orgUnits.put(orgUnitId,"$orgUnit.getShortName()");
+     	 #end
+       function formValidations()
+    	  {                 
+	        
+	      
+	          var startDateValue = document.reportForm.startDate.value;
+	      	  var endDateValue = document.reportForm.endDate.value;
+	      	  var ouIdTb = document.getElementById("ouIDTB");
+      		  var orgunitIdValue = ouIdTb.value;
+	                                  
+	      	  if(startDateValue == null || startDateValue== "" || endDateValue == null || endDateValue=="") {alert("Please Select Period"); return false;}
+	          else if(startDateValue > endDateValue) {alert("Start Date is Greater than End Date"); return false;}
+	          else if(orgunitIdValue == null || orgunitIdValue=="" || orgunitIdValue==" ") {alert("Please Select OrganisationUnit"); return false;}
+	                document.forms['reportForm'].submit();
+	      }
+	      
+		//-----------------------------------------------------------------------
+		//init jQuery validation for reportForm
+		//@added validation for all fields and additional rules alphanumericwithbasicpuncspaces, date and url.
+		//-----------------------------------------------------------------------
+		  jQuery(document).ready(
+		      function()
+		      {
+		        jQuery("#reportForm").validate({
+		            meta:"validate"
+		          ,errorElement:"td"
+		          ,submitHandler: function(form)
+		                  {
+		                    formValidations();
+		                  }
+		        });
+		        ///jQuery.validator.loadLocaled( jQuery("#curLocaleCode").val() );
+		        jQuery("#name").focus();
+		      }
+		  );
+	      
+</script>
+<h1>Mobile Report</h1><hr /><br />
+ 
+            <form id="reportForm" name="reportForm" action="generateMobileReport.action" method="post" target="_blank">
+            	
+		            	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                    
+		        <tr>
+		          <td class="NormalB">
+		                        <label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+		                        <input type="text" id="startDate" name="startDate" onchange="if(!checkStartDate( this.value )) this.value='';" style="width:15em" class="{validate:{required:true,dateISO:true}}">
+		                        
+		                    </td>
+		           <td class="NormalB">
+		                        <label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+		                        <input type="text" id="endDate" name="endDate" onchange="if(!checkEndDate( this.value )) this.value='';"  style="width:15em" class="{validate:{required:true,dateISO:true}}">
+		                        
+		                    </td>
+		        </tr>
+		        
+		        <tr>
+		          <td>&nbsp;</td>
+		          <td>&nbsp;</td>
+		        </tr>
+		        <tr>
+		          <td>&nbsp;</td>
+		          <td>&nbsp;</td>
+		        </tr>
+		        
+		        <tr>
+		        	<td class="NormalB">                            
+                        OrganisationUnit : <br />
+                        <input type="text" name="ouNameTB" id="ouNameTB" size="20" disabled>         
+                      </td>
+                      
+                     <td>
+                     	<input type="submit" name="generate" value="Generate Report"/>
+                     	<input type="hidden" name="ouIDTB" id="ouIDTB">
+                     </td>
+                </tr>
+            </table>
+                  
+            </form>
+            
+            
+            <script type="text/javascript">
+				jQuery( function(){
+					datePickerInRange( "startDate", "endDate", false, false );
+				});		
+	
+			</script>

@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<root xmlns="dummy">
+	<dataElements id="42">
+		<dataElement name="name1" shortName="shortName1" code="code1"></dataElement>
+		<dataElement name="name2" shortName="shortName2" code="code2"></dataElement>
+		<dataElement name="name3" shortName="shortName3" code="code3"></dataElement>
+		<dataElement name="name4" shortName="shortName4" code="code4"></dataElement>
+		<dataElement name="name5" shortName="shortName5" code="code5"></dataElement>
+	</dataElements>
+</root>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+  <include file="dhis-web-commons.xml" />
+
+  <package name="dhis-web-maintenance-settings" extends="dhis-web-commons" namespace="/dhis-web-maintenance-settings">
+
+    <action name="index" class="org.hisp.dhis.settings.action.NoAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-settings/index.vm</param>
+      <param name="menu">/dhis-web-maintenance-settings/settingsMenu.vm</param>
+    </action>
+
+    <!-- General settings -->
+
+    <action name="systemGeneralSettings" class="org.hisp.dhis.settings.action.system.GetGeneralSettingsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-settings/systemGeneralSettings.vm</param>
+      <param name="menu">/dhis-web-maintenance-settings/settingsMenu.vm</param>
+      <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+
+
+
+      <action name="setSystemGeneralSettings" class="org.hisp.dhis.settings.action.system.SetGeneralSettingsAction">
+      <result name="success" type="velocity-json">
+		/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+	  <param name="onExceptionReturn">plainTextError</param>
+	  <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+	
+	<!-- Appearance settings -->
+
+    <action name="systemAppearanceSettings" class="org.hisp.dhis.settings.action.system.GetAppearanceSettingsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-settings/systemAppearanceSettings.vm</param>
+      <param name="menu">/dhis-web-maintenance-settings/settingsMenu.vm</param>
+      <param name="javascripts">javascripts/systemAppearanceSettings.js</param>
+      <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+
+    <action name="setSystemAppearanceSettings" class="org.hisp.dhis.settings.action.system.SetAppearanceSettingsAction">
+      <result name="success" type="velocity-json">
+		/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+	  <param name="onExceptionReturn">plainTextError</param>
+	  <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+	
+	<action name="systemAppearanceSettingsString" class="org.hisp.dhis.settings.action.system.GetAppearanceSettingsStringAction">
+      <result name="success" type="velocity-json">/dhis-web-maintenance-settings/systemAppearanceSettingsString.vm</result>
+    </action>
+    
+	<!-- Email settings -->
+
+    <action name="systemEmailSettings" class="org.hisp.dhis.settings.action.system.GetSMTPSettingsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-settings/systemEmailSettings.vm</param>
+      <param name="menu">/dhis-web-maintenance-settings/settingsMenu.vm</param>
+      <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+
+    <action name="setSystemEmailSettings" class="org.hisp.dhis.settings.action.system.SetSMTPSettingsAction">
+      <result name="success" type="velocity-json">
+		/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+	  <param name="onExceptionReturn">plainTextError</param>
+	  <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+    
+    <!-- Access settings -->
+
+    <action name="systemAccessSettings" class="org.hisp.dhis.settings.action.system.GetAccessSettingsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-settings/systemAccessSettings.vm</param>
+      <param name="menu">/dhis-web-maintenance-settings/settingsMenu.vm</param>
+      <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+
+    <action name="setSystemAccessSettings" class="org.hisp.dhis.settings.action.system.SetAccessSettingsAction">
+      <result name="success" type="velocity-json">
+        /dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+      <param name="requiredAuthorities">F_SYSTEM_SETTING</param>
+    </action>
+    
+  </package>
+</struts>

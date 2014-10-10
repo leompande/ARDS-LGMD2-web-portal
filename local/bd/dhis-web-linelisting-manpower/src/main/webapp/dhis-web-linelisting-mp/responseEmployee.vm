@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employee>
+  <pdsCode>$employee.pdsCode</pdsCode>
+  <name>$encoder.xmlEncode( $employee.name )</name>
+  <dateOfBirth>$!format.formatDate( $employee.dateOfBirth )</dateOfBirth>
+  <lprDate>$!format.formatDate( $employee.lprDate )</lprDate>
+  <sex>$encoder.xmlEncode( $employee.sex )</sex>
+  <joinDateToGovtService>$!format.formatDate( $employee.joinDateToGovtService )</joinDateToGovtService>
+  <resAddress>$encoder.xmlEncode( $employee.resAddress )</resAddress>
+  <contactNumber>$encoder.xmlEncode( $employee.contactNumber )</contactNumber>
+  <emergencyContactNumber>$encoder.xmlEncode( $employee.emergencyContactNumber )</emergencyContactNumber>
+</employee>

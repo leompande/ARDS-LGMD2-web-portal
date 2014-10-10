@@ -1,0 +1,23 @@
+<h2>$i18n.getString("details_for") $!encoder.htmlEncode( ${patient.name} )   </h2>
+<p>
+
+<ul>
+	<li><strong>$i18n.getString("id"):</strong>  $patient.id</li>
+	<li><b>$i18n.getString("gender"):</b>  #if ($patient.gender == "F") Female #else Male #end</li>
+	#set($day = $patient.birthDate.date)
+	#set($month = $patient.birthDate.month+1)
+	#set($year = $patient.birthDate.year + 1900)
+	<li><b>$i18n.getString("date_of_birth"):</b>  $year - $month - $day </li>			
+</ul>
+
+<p>
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	#if($organisationUnitId == "0")
+		<li><a href="showPatientProgramList.action?patientId=$patient.id">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	#else
+		<li><a href="selectActivity.action?organisationUnitId=$organisationUnitId&patientId=$patient.id&current=$current"> $i18n.getString("activity_list")</a></li>
+	#end
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>

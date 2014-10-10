@@ -1,0 +1,53 @@
+<script>
+
+	jQuery(document).ready(function(){
+		inExpressionDialog = setUpDialog( 'indicator', i18n_expression, 600, 370 );
+		jQuery( '#elementSelect_loader' ).hide();
+	});
+	
+	var inExpressionDialog = null;
+</script>
+
+<div id="indicator">
+	<table width="100%">
+		<tr>			
+			<th>$i18n.getString( "indicator" )</th>
+		<tr>
+		<tr valign="top">			
+			<td>	
+				<select id="groupSelect" style="width:500px" onchange="getIndicators(this.value, '#indicator-elementSelect]')"></select>
+				<input type="text" placeholder="$i18n.getString( 'filter' )" style="width:500px" onkeyup="filterList( this.value, 'indicator-elementSelect' );"/>
+				<select id="indicator-elementSelect" size="15" style="width:500px;"></select>
+				<img src="../images/ajax-loader-bar.gif" id="elementSelect_loader" />
+			</td>			
+		</tr>	
+	</table>
+	<br/>
+	<br/>
+	<center>
+		<input type="button" value="$i18n.getString('ok')" onclick="updateInExpression()" style="width:100px"/>		
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( inExpressionDialog )" style="width:100px"/>
+	</center>
+</div>
+
+<script>
+	
+	function inExpressionBuilderForm()
+	{
+		dataDictionary.loadIndicatorGroups( "#indicator select[id=groupSelect]" );
+		dataDictionary.loadAllIndicators( "#indicator-elementSelect" );
+		openDialog( inExpressionDialog );
+	}
+	
+	function updateInExpression()
+	{
+		expression = jQuery( '#indicator-elementSelect' ).val();
+		setFieldValue( 'expression', '[' + expression + ']');
+		closeDialog( inExpressionDialog );
+	}
+	
+	function getIndicators( id, target)
+	{
+		dataDictionary.loadIndicatorsByGroup( id, target );
+	}
+</script>

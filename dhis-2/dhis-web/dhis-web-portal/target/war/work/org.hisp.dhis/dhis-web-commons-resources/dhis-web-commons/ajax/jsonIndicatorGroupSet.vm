@@ -1,0 +1,7 @@
+{ "indicatorGroupSet": 
+  {
+    "id": $!{indicatorGroupSet.id},
+    "name": "$!encoder.jsonEncode( ${indicatorGroupSet.displayName} )",
+    "memberCount": "$!indicatorGroupSet.members.size()"
+  }
+}

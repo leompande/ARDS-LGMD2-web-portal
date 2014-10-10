@@ -1,0 +1,120 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for addAttributeGroupForm
+//-----------------------------------------------------------------------
+jQuery(document).ready(
+  function()
+  {
+     jQuery("#addAggregateIndicatorForm").validate({
+       meta:"validate",
+       errorElement:"td",
+       submitHandler: function(form){
+         validateAddAggregateIndicator();
+       }
+     });
+     jQuery.validator.setMessages( validationMessage );
+     jQuery("#nameField").focus();
+}
+);
+var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+<h3>$i18n.getString( "add_aggregate_indicator" )</h3>
+<div id="tooltip"></div>
+<form id="addAggregateIndicatorForm" action="addAggregateIndicator.action" method="post" >
+
+<table> 
+    <tr>
+      <th colspan="4">$i18n.getString( "aggregate_indicator_details" ) </th>
+    </tr>
+    <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="nameField" name="nameField"  style="width:20em" class="{validate:{required:true,rangelength:[2,32]}}"></td>
+        </td>
+        <tr>
+        <td width="20em"><label for="dataelementId">$i18n.getString( "dataelement" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+	<td>
+		<select id="dataelementId" name="dataelementId" style="min-width:20em">
+		#foreach($dataelement in $dataelements) 
+			<option value="$dataelement.id" >$dataelement.name </option>
+		#end	
+		</select>
+	</td>
+    </tr>
+    </tr>  
+    
+    <tr>
+      <td colspan="2">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th colspan="2">$i18n.getString( "available_attribute_options" ) </th>
+      <th>$i18n.getString( "filter" ) </th>
+      <th>$i18n.getString( "selected_attribute_options" )</th>
+    </tr>
+    <tr>
+        <td colspan="2">
+              <select multiple id="availableAttributeOptions" name="availableAttributeOptions" size="15" style="width:25em " ondblclick="moveSelectedById( 'availableAttributeOptions', 'selectedAttributeOptions' )" >
+                #foreach($attributeOption in $attributeOptions)
+                <option value='$attributeOption.id' >$attributeOption.value</option>
+                #end
+              </select>
+        </em></label>        </td>
+        <td>
+          <input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableAttributeOptions', 'selectedAttributeOptions' )">
+          <br>
+          <input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'selectedAttributeOptions', 'availableAttributeOptions' )">
+        </td>
+        <td><select multiple id="selectedAttributeOptions" name="selectedAttributeOptions" size="15" style="width:25em " ondblclick="moveSelectedById( 'selectedAttributeOptions', 'availableAttributeOptions' )"
+             class="{validate:{required:true}}" >
+            </select>
+        </td>
+        
+        <td>
+          <a href="javascript:moveUpSelectedOption( 'selectedAttributeOptions')" title="$i18n.getString( "move_up" )"><img src="../images/move_up.png" alt="$i18n.getString( "move_up" )"></a>
+          <br><br>
+          <a href="javascript:moveDownSelectedOption( 'selectedAttributeOptions' )" title="$i18n.getString( "move_down" )"><img src="../images/move_down.png" alt="$i18n.getString( "move_up" )"></a>
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="2">
+              <select multiple id="availableCriterias" name="availableCriterias" size="15" style="width:25em " ondblclick="moveSelectedById( 'availableCriterias', 'selectedCriterias' )" >
+                #foreach($criteria in $criterias)
+                <option value='$criteria.id' >$criteria.name</option>
+                #end
+              </select>
+        </em></label>        </td>
+        <td>
+          <input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableCriterias', 'selectedCriterias' )">
+          <br>
+          <input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'selectedCriterias', 'availableCriterias' )">
+        </td>
+        <td><select multiple id="selectedCriterias" name="selectedCriterias" size="15" style="width:25em " ondblclick="moveSelectedById( 'selectedCriterias', 'availableCriterias' )"
+             class="{validate:{required:true}}" >
+            </select>
+        </td>
+        
+        <td>
+          <a href="javascript:moveUpSelectedOption( 'selectedCriterias')" title="$i18n.getString( "move_up" )"><img src="../images/move_up.png" alt="$i18n.getString( "move_up" )"></a>
+          <br><br>
+          <a href="javascript:moveDownSelectedOption( 'selectedCriterias' )" title="$i18n.getString( "move_down" )"><img src="../images/move_down.png" alt="$i18n.getString( "move_up" )"></a>
+        </td>
+    </tr>  
+    
+    <tr>
+      <td colspan="2">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+</table>
+
+<p>
+    <input type="submit" value="$i18n.getString( "add" )" style="width:10em" onclick="javascript:selectAllElementsById( 'selectedAttributeOptions', 'selectedCriterias' );">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='aggregateIndicator.action'" style="width:10em">
+</p>
+
+</form>     
+
+<span id="message"></span>

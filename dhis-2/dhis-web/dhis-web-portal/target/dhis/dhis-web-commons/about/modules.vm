@@ -1,0 +1,10 @@
+
+<ul class="moduleList">
+#foreach( $module in $menuModules )
+#if ( $module.icon ) ## detect if app
+	#introListImgApp( $module )
+#else
+	#introListImgItem( "${module.defaultAction}" "${module.name}" "${module.name}" )
+#end
+#end
+</ul>

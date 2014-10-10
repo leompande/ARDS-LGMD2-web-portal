@@ -1,0 +1,31 @@
+
+<a href="index.action"><h2>Report Analyser</h2></a>
+
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+    	<li>
+            IDSP Reports
+        </li>
+    </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{
+		document.reportForm.ouIDTB.value = orgUnitIds;
+	
+		reportTypeName = document.reportForm.reportTypeNameTB.value;
+	
+		if(orgUnitIds != null && orgUnitIds != "" )
+		{
+			getReports(orgUnitIds, reportTypeName)
+		}
+	}
+	
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

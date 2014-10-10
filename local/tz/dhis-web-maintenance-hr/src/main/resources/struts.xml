@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<include file="dhis-web-commons.xml" />
+
+	<package name="dhis-web-maintenance-hr" extends="dhis-web-commons"
+		namespace="/dhis-web-maintenance-hr">
+
+		<action name="index" class="org.hisp.dhis.hr.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-hr/index.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		</action>
+		
+		<action name="dataSet" class="org.hisp.dhis.hr.action.DataSetListAction">
+      		<result name="success" type="velocity">/main.vm</result>
+      		<param name="page">/dhis-web-maintenance-hr/dataSetList.vm</param>
+      		<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      		<param name="javascripts">javascript/dataSet.js</param>
+    	</action>
+    	
+    	<action name="viewDataEntryForm" class="org.hisp.dhis.hr.action.dataentryform.ViewDataEntryFormAction">
+      		<result name="success" type="velocity">/main.vm</result>
+      		<param name="page">/dhis-web-maintenance-hr/viewDataEntryForm.vm</param>
+      		<param name="javascripts">
+      		../dhis-web-maintenance-hr/javascript/FCK/fckeditor.js, ../dhis-web-maintenance-hr/javascript/FCK/editor/js/fckeditorcode_gecko.js, ../dhis-web-maintenance-hr/javascript/dataEntryForm.js
+      		,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+     		 ,../dhis-web-commons/util/validate/additional-methods.js</param>
+      		<param name="stylesheets">../dhis-web-maintenance-hr/css/cde.css</param>
+    	</action>
+
+		<!-- Attribute -->
+
+		<action name="hrAttribute"
+			class="org.hisp.dhis.hr.action.attribute.GetAttributeListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-hr/attribute.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attribute.js</param>
+		</action>
+		
+		<action name="getAttribute"
+			class="org.hisp.dhis.hr.action.attribute.GetAttributeAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseAttribute.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="removeAttribute"
+			class="org.hisp.dhis.hr.action.attribute.RemoveAttributeAction">
+			<result name="success" type="redirect">hrAttribute.action</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>
+		</action>
+		
+		<action name="updateAttribute"
+			class="org.hisp.dhis.hr.action.attribute.UpdateAttributeAction">
+			<result name="success" type="redirect">hrAttribute.action</result>
+			<!-- <param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>-->
+		</action>
+		
+		<action name="showUpdateAttributeForm"
+			class="org.hisp.dhis.hr.action.attribute.GetAttributeAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/updateAttributeForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attribute.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js
+				,javascript/jquery/cluetip/jquery.cluetip.min.js</param>
+			<param name="stylesheets">javascript/jquery/cluetip/jquery.cluetip.css</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>	
+		
+		<action name="addAttribute"
+			class="org.hisp.dhis.hr.action.attribute.AddAttributeAction">
+			<result name="success" type="redirect">hrAttribute.action</result>
+			 <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="showAddAttributeForm" class="org.hisp.dhis.hr.action.attribute.ShowAddAttributeFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/addAttributeForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attribute.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+				<param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="validateAttribute"
+			class="org.hisp.dhis.hr.action.attribute.ValidateAttributeAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!-- Attribute Option -->
+		
+		<action name="defineAttributeOptionForm"
+			class="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-hr/attributeOptions.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeOptions.js</param>
+			<!-- <param name="requiredAuthorities">F_PROGRAM_UPDATE</param> -->
+		</action>
+		
+		<action name="getAttributeOptions"
+			class="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionsAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseAttributeOptions.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="updateAttributeOptions"
+			class="org.hisp.dhis.hr.action.attributeoptions.UpdateAttributeOptionsAction">
+			<result name="success" type="chain">defineAttributeOptionForm</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="showUpdateAttributeOptionsForm"
+			class="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionsAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/updateAttributeOptionsForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeOptions.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js
+				,javascript/jquery/cluetip/jquery.cluetip.min.js</param>
+			<param name="stylesheets">javascript/jquery/cluetip/jquery.cluetip.css</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="removeAttributeOptions"
+			class="org.hisp.dhis.hr.action.attributeoptions.RemoveAttributeOptionsAction">
+			<result name="success" type="chain">defineAttributeOptionForm</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>
+		</action>
+		
+		<action name="addAttributeOptions"
+			class="org.hisp.dhis.hr.action.attributeoptions.AddAttributeOptionsAction">
+			<result name="success" type="chain">defineAttributeOptionForm</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="showAddAttributeOptionsForm" class="org.hisp.dhis.hr.action.attributeoptions.ShowAddAttributeOptionsFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/addAttributeOptionsForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			 <param name="javascripts">javascript/attributeOptions.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="validateAttributeOptions"
+			class="org.hisp.dhis.hr.action.attributeoptions.ValidateAttributeOptionsAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!-- Attribute Group -->
+		
+		<action name="attributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-hr/attributeGroup.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeGroup.js</param>
+		</action>
+		
+		<action name="getAttributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseAttributeGroup.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="addAttributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.AddAttributeGroupAction">
+			<result name="success" type="redirect">attributeGroup.action</result>
+		    <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="showAddAttributeGroupForm" class="org.hisp.dhis.hr.action.attributegroup.ShowAddAttributeGroupFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/addAttributeGroupForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeGroup.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+			<!--  <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>-->
+		</action>
+		
+		<action name="updateAttributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.UpdateAttributeGroupAction">
+			<result name="success" type="redirect">attributeGroup.action</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="showUpdateAttributeGroupForm"
+			class="org.hisp.dhis.hr.action.attributegroup.ShowUpdateAttributeGroupFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/updateAttributeGroupForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeGroup.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="removeAttributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.RemoveAttributeGroupAction">
+			<result name="success" type="redirect">attributeGroup.action</result>
+			<!-- <param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>-->
+		</action>
+		
+		<action name="validateAttributeGroup"
+			class="org.hisp.dhis.hr.action.attributegroup.ValidateAttributeGroupAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<!-- Attribute Option Group -->
+		
+		<action name="attributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-hr/attributeOptionGroup.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeOptionGroup.js</param>
+		</action>
+		
+		<action name="getAttributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseAttributeOptionGroup.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+		<action name="addAttributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.AddAttributeOptionGroupAction">
+			<result name="success" type="redirect">attributeOptionGroup.action</result>
+		    <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="showAddAttributeOptionGroupForm" 
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.ShowAddAttributeOptionGroupFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/addAttributeOptionGroupForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeOptionGroup.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		
+		<action name="updateAttributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.UpdateAttributeOptionGroupAction">
+			<result name="success" type="redirect">attributeOptionGroup.action</result>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="showUpdateAttributeOptionGroupForm"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-maintenance-hr/updateAttributeOptionGroupForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+			<param name="javascripts">javascript/attributeOptionGroup.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js</param>
+			<param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>
+		</action>
+		
+		<action name="removeAttributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.RemoveAttributeOptionGroupAction">
+			<result name="success" type="redirect">attributeOptionGroup.action</result>
+			<!-- <param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>-->
+		</action>
+		
+		<action name="validateAttributeOptionGroup"
+			class="org.hisp.dhis.hr.action.attributeoptiongroup.ValidateAttributeOptionGroupAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+				
+		<!-- Target Indicators -->
+		
+		<action name="targetIndicator"
+		  class="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorListAction">
+		  <result name="success" type="velocity">/main.vm</result>
+		  <param name="page">/dhis-web-maintenance-hr/targetIndicatorList.vm</param>
+		  <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		  <param name="javascripts">javascript/targetIndicator.js</param>
+		</action>
+		<action name="showAddTargetIndicatorForm" class="org.hisp.dhis.hr.action.indicator.ShowAddTargetIndicatorFormAction">
+		  <result name="success" type="velocity">/main.vm</result>
+		  <param name="page">/dhis-web-maintenance-hr/addTargetIndicatorForm.vm</param>
+		  <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		  <param name="javascripts">javascript/targetIndicator.js
+        ,../dhis-web-commons/util/validate/jquery.validate.js
+        ,../dhis-web-commons/util/validate/additional-methods.js</param>
+        <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+		</action>
+		<action name="addTargetIndicator"
+      class="org.hisp.dhis.hr.action.indicator.AddTargetIndicatorAction">
+      <result name="success" type="redirect">targetIndicator.action</result>
+      <param name="requiredAuthorities">F_PATIENTATTRIBUTE_ADD</param>
+    </action>
+    <action name="showUpdateTargetIndicatorForm"
+      class="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/updateTargetIndicatorForm.vm</param>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="javascripts">javascript/targetIndicator.js
+        ,../dhis-web-commons/util/validate/jquery.validate.js
+        ,../dhis-web-commons/util/validate/additional-methods.js
+        ,javascript/jquery/cluetip/jquery.cluetip.min.js</param>
+      <param name="stylesheets">javascript/jquery/cluetip/jquery.cluetip.css</param>
+    </action> 
+    <action name="updateTargetIndicator"
+      class="org.hisp.dhis.hr.action.indicator.UpdateTargetIndicatorAction">
+      <result name="success" type="redirect">targetIndicator.action</result>
+      <!-- <param name="requiredAuthorities">F_PATIENTATTRIBUTE_UPDATE</param>-->
+    </action>
+    <action name="getTargetIndicator"
+      class="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorAction">
+      <result name="success" type="velocity-xml">
+        /dhis-web-maintenance-hr/responseTargetIndicator.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    <action name="validateTargetIndicator"
+      class="org.hisp.dhis.hr.action.indicator.ValidateTargetIndicatorAction">
+      <result name="success" type="velocity-xml">
+        /dhis-web-maintenance-hr/responseSuccess.vm</result>
+      <result name="error" type="velocity-xml">
+        /dhis-web-maintenance-hr/responseError.vm</result>
+      <result name="input" type="velocity-xml">
+        /dhis-web-maintenance-hr/responseInput.vm</result>
+      <result name="duplicate" type="velocity-xml">
+        /dhis-web-maintenance-hr/responseDuplicate.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+    <action name="removeTargetIndicator"
+      class="org.hisp.dhis.hr.action.indicator.RemoveTargetIndicatorAction">
+      <result name="success" type="redirect">targetIndicator.action</result>
+      <param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>
+    </action>
+   
+    
+    <!-- Dataset -->
+    
+    <action name="hrDataSet" class="org.hisp.dhis.hr.action.hrdataset.GetDataSetListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/dataSetList.vm</param>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="javascripts">javascript/dataSet.js</param>
+    </action>
+    <action name="getHrDataSet"
+      class="org.hisp.dhis.hr.action.hrdataset.GetDataSetAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseDataSetObject.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    <action name="addDataSetForm"
+      class="org.hisp.dhis.hr.action.hrdataset.ShowAddHrDataSetAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="page">/dhis-web-maintenance-hr/addHrDataSetForm.vm</param>
+      <param name="javascripts">javascript/description.js,javascript/dataSet.js
+      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+    </action>
+    <action name="addHrDataSet"
+      class="org.hisp.dhis.hr.action.hrdataset.AddHrDataSetAction">
+      <result name="success" type="redirect">hrDataSet.action</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    <action name="removeHrDataSet"
+      class="org.hisp.dhis.hr.action.hrdataset.RemoveDataSetAction">
+      <result name="success" type="redirect">hrDataSet.action</result>
+    </action>
+    <action name="showUpdateHrDataSetForm"
+      class="org.hisp.dhis.hr.action.hrdataset.ShowUpdateDataSetAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/updateHrDataSetForm.vm</param>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="javascripts">javascript/dataSet.js
+      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+    </action>
+    
+    <action name="updateHrDataSet"
+      class="org.hisp.dhis.hr.action.hrdataset.UpdateHrDataSetAction">
+      <result name="success" type="redirect">hrDataSet.action</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+    <action name="validateHrDataSet"
+      class="org.hisp.dhis.hr.action.hrdataset.ValidateHrDataSetAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseSuccess.vm</result>
+      <result name="error" type="velocity-xml">/dhis-web-maintenance-hr/responseError.vm</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+      <result name="duplicate" type="velocity-xml">/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+    <action name="validateDataEntryForm"
+      class="org.hisp.dhis.hr.action.dataentryform.ValidateDataEntryFormAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseSuccess.vm</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+      <result name="mismatch" type="velocity-xml">/dhis-web-maintenance-hr/responseMismatch.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+    <!-- Person -->
+    <action name="hrPerson"
+      class="org.hisp.dhis.hr.action.person.GetHrPersonListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/personList.vm</param>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="javascripts">javascript/person.js</param>
+    </action>
+    
+    <!-- Custom Value -->
+    
+    <action name="selectDataElement"
+      class="org.hisp.dhis.hr.action.dataentryform.SelectDataElementAction">
+      <result name="success" type="velocity">selectDataElement.vm</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+    </action>
+    
+    <action name="getSelectedDataElements"
+      class="org.hisp.dhis.hr.action.dataentryform.GetSelectedDataElementsAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseSelDataElementList.vm</result>
+      <param name="javascripts">javascript/dataEntryForm.js,javascript/FCK/fckeditor.js</param>
+    </action>
+    
+    <action name="autoSaveDataEntryForm"
+      class="org.hisp.dhis.hr.action.dataentryform.AutoSaveDataEntryFormAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseSuccess.vm</result>
+    </action>
+    
+    <action name="saveDataEntryForm"
+      class="org.hisp.dhis.hr.action.dataentryform.SaveDataEntryFormAction">
+      <result name="success" type="redirect">hrDataSet.action</result>
+    </action>
+
+    <action name="editDataSetFormCustomValues"
+      class="org.hisp.dhis.hr.action.dataentryform.SelectDataElementAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/editCustomValues.vm</param>
+      <param name="javascripts">javascript/dataSet.js</param>
+      <param name="requiredAuthorities">F_DATASET_UPDATE</param>
+    </action>
+	
+	<!-- Data Entry -->
+    
+    <action name="dataEntrySelect" class="org.hisp.dhis.hrentry.action.dataentry.DataEntrySelectAction">
+      <interceptor-ref name="organisationUnitTreeStack"/>
+      <result name="searchform" type="chain">searchform</result>
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-caseentry/select.vm</param>
+      <param name="menu">/dhis-web-caseentry/dataEntryMenu.vm</param>   
+      <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/dataEntry.js, ../dhis-web-commons/javascripts/date.js</param>      
+    </action> 
+	
+	<!-- Aggregate Indicator -->
+      <action name="getAggregateIndicatorParam"
+      class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorParamAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-hr/getParam.vm</param>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/aggregateIndicator.js</param>
+      <param name="requiredAuthorities">F_PATIENTATTRIBUTE_DELETE</param>
+    </action>
+     
+    <action name="aggregateIndicatorMapping"
+      class="org.hisp.dhis.hr.action.indicator.AggregateIndicatorAction">
+      <result name="success" type="redirect">aggregateIndicator.action</result>      
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+	<action name="aggregateIndicator"
+		class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-hr/aggregateIndicator.vm</param>
+		<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		<param name="javascripts">javascript/aggregateIndicator.js</param>
+	</action>
+	
+	<action name="showAddAggregateIndicatorForm"
+      class="org.hisp.dhis.hr.action.indicator.ShowAddAggregateIndicatorAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="page">/dhis-web-maintenance-hr/addAggregateIndicatorForm.vm</param>
+      <param name="javascripts">javascript/description.js,javascript/aggregateIndicator.js
+      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+    </action>
+	<action name="addAggregateIndicator"
+      class="org.hisp.dhis.hr.action.indicator.AddAggregateIndicatorAction">
+      <result name="success" type="redirect">aggregateIndicator.action</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	<action name="getAggregateIndicator"
+		class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorAction">
+		<result name="success" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseAggregateIndicator.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	<action name="removeAggregateIndicator"
+		class="org.hisp.dhis.hr.action.indicator.RemoveAggregateIndicatorAction">
+		<result name="success" type="redirect">aggregateIndicator.action</result>
+	</action>
+	<action name="validateAggregateIndicator"
+		class="org.hisp.dhis.hr.action.indicator.ValidateAggregateIndicatorAction">
+		<result name="success" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseSuccess.vm</result>
+		<result name="error" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseError.vm</result>
+		<result name="input" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseInput.vm</result>
+		<result name="duplicate" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	<action name="showUpdateAggregateIndicatorForm"
+		class="org.hisp.dhis.hr.action.indicator.ShowUpdateAggregateIndicatorAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">
+			/dhis-web-maintenance-hr/updateAggregateIndicatorForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		<param name="javascripts">javascript/aggregateIndicator.js
+	      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+	      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+		<param name="stylesheets">javascript/jquery/cluetip/jquery.cluetip.css</param>
+	</action>
+	<action name="updateAggregateIndicator"
+      class="org.hisp.dhis.hr.action.indicator.UpdateAggregateIndicatorAction">
+      <result name="success" type="redirect">aggregateIndicator.action</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	<action name="criteria"
+		class="org.hisp.dhis.hr.action.indicator.GetCriteriaListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-hr/criteria.vm</param>
+		<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		<param name="javascripts">javascript/criteria.js</param>
+	</action>
+	<action name="getCriteria"
+		class="org.hisp.dhis.hr.action.indicator.GetCriteriaAction">
+		<result name="success" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseCriteria.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	<action name="removeCriteria"
+		class="org.hisp.dhis.hr.action.indicator.RemoveCriteriaAction">
+		<result name="success" type="velocity-xml">/dhis-web-maintenance-hr/responseError.vm</result>
+		<result name="error" type="velocity-xml">/dhis-web-maintenance-hr/responseError.vm</result>
+	</action>
+	<action name="showAddCriteriaForm"
+      class="org.hisp.dhis.hr.action.indicator.ShowAddCriteriaFormAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+      <param name="page">/dhis-web-maintenance-hr/addCriteriaForm.vm</param>
+      <param name="javascripts">javascript/description.js,javascript/criteria.js
+      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+    </action>
+	<action name="validateCriteria"
+		class="org.hisp.dhis.hr.action.indicator.ValidateCriteriaAction">
+		<result name="success" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseSuccess.vm</result>
+		<result name="error" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseError.vm</result>
+		<result name="input" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseInput.vm</result>
+		<result name="duplicate" type="velocity-xml">
+			/dhis-web-maintenance-hr/responseDuplicate.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	<action name="addCriteria"
+      class="org.hisp.dhis.hr.action.indicator.AddCriteriaAction">
+      <result name="success" type="redirect">criteria.action</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	<action name="showUpdateCriteriaForm"
+		class="org.hisp.dhis.hr.action.indicator.ShowUpdateCriteriaFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">
+			/dhis-web-maintenance-hr/updateCriteriaForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-hr/menu.vm</param>
+		<param name="javascripts">javascript/criteria.js
+	      ,../dhis-web-commons/util/validate/jquery.validate.js,../dhis-web-commons/util/jquery.metadata.js
+	      ,../dhis-web-commons/util/validate/additional-methods.js</param>
+		<param name="stylesheets">javascript/jquery/cluetip/jquery.cluetip.css</param>
+	</action>
+	<action name="updateCriteria"
+      class="org.hisp.dhis.hr.action.indicator.UpdateCriteriaAction">
+      <result name="success" type="redirect">criteria.action</result>
+      <result name="input" type="velocity-xml">/dhis-web-maintenance-hr/responseInput.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    </package> 
+</struts>

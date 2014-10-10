@@ -1,0 +1,81 @@
+<div id="tabs">
+	<ul>
+		<li><a href="#tab-1">$i18n.getString("dataelements")</a></li>
+		<li><a href="#tab-2">$i18n.getString("program")</a></li>
+	</ul>	
+	
+	<div id="tab-1">
+	  <table>
+        <tr>
+			<td><label for="dataelement">$i18n.getString( "dataelement" )</label></td>
+			 </tr>
+        <tr>
+			<td>
+				<input type='text' id='txtSearchValue' name='txtSearchValue' onKeyUp="filterDE(event, this.value, 'dataElements');" style='width:265px;'/>
+				<input type='button' value='$i18n.getString("clear")' onClick="setFieldValue('txtSearchValue', '');" style='width:50px'>			
+			</td>
+        </tr>
+        <tr>
+			<td>
+				<select id="dataElements" name="dataElements" size="8" style="height:120px;" ondblclick="insertDataElement(this);"></select>
+			</td>
+		</tr>
+      </table>
+	</div>
+	
+	<div id="tab-2">
+		<table>
+			<tr>
+				<td><label>$i18n.getString('program_properties')</label></td>
+			</tr>
+			<tr>
+				<td>
+					<select id="programProperty" name="programProperty" size="10" ondblclick="insertInfo(this, false);" >
+						<option value="incident_date">$i18n.getString( "incident_date" )</option>
+						<option value="enrollment_date">$i18n.getString( "date_of_enrollment" )</option>
+						<option value="current_date">$i18n.getString( "current_date" )</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<tr>
+	<td>
+		<br/>
+		<input type='button' class="small-button" alt="$i18n.getString( 'plus' )" onclick='insertOperator( "+" );' value="+" />
+		<input type='button' class="small-button" alt="$i18n.getString( 'minus' )" onclick='insertOperator( "-" );' value="-" />
+		<input type='button' class="small-button" alt="$i18n.getString( 'multiply' )" onclick='insertOperator( "*" );' value="*" />
+		<input type='button' class="small-button" alt="$i18n.getString( 'divide' )" onclick='insertOperator( "/" );' value="/" />
+		&nbsp;&nbsp;&nbsp;
+		<input type='button' class="small-button" alt="$i18n.getString( 'left_parent' )" onclick='insertOperator( "(" );' value="(" />
+		<input type='button' class="small-button" alt="$i18n.getString( 'right_parent' )" onclick='insertOperator( ")" );' value=")" />
+	</td>
+</tr>
+	
+<p></p>
+<table>
+	
+	<tr>
+		<td>
+			<fieldset>
+				<legend>$i18n.getString( "expression" )</legend>
+				<textarea style="width:660px" id="expression" name="expression" onkeyup='getConditionDescription();' maxlength="254" class="{validate:{required:true}}">$!programIndicator.expression</textarea>
+			</fieldset>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<fieldset>
+				<legend>$i18n.getString( "description" )</legend>
+				<div id='aggregationDescription'>$!description</div>
+			</fieldset>
+		</td>
+	</tr>
+</table>		
+
+<script>
+	$('#tabs').tabs();
+</script>

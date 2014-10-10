@@ -1,0 +1,18 @@
+{ "categoryOptionGroupOrder":
+  {
+    "name": "$!encoder.jsonEncode( ${categoryOptionGroupOrder.name} )",
+	
+	#set( $size = ${categoryOptionGroupOrder.categoryOptions.size()} )
+	"memberCount": "${size}",
+
+	"categoryOptions": [
+	#foreach( $co in $!categoryOptionGroupOrder.categoryOptions )
+	{
+	  "id": "${co.id}",
+	  "name": "$!encoder.jsonEncode( ${co.name} )",
+	  "categoryId": "${co.category.id}"
+	}#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

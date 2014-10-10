@@ -1,0 +1,71 @@
+
+<h3>$i18n.getString( "aggregated_report" )</h3>
+
+<form id="reportForm" name="reportForm" action="ShowAggregatedReport.action" method="post">	
+
+<table>
+	<tr>
+	  	<th colspan="2">$i18n.getString( "criteria" )</th>
+	</tr>
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "hrDataSet" )</label></td>
+		<td>
+			<select id="hrDataSetId" name="hrDataSetId" style="width:325px" onchange="hrDataSetSelected()">
+			<option value="">[ $i18n.getString( "select" ) ]</option>
+				#foreach( $hrDataSet in $hrDataSets )
+				<option value="$hrDataSet.id">$encoder.htmlEncode( $hrDataSet.name )</option>
+				#end
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><label for="attributeId">$i18n.getString( "attribute" )</label></td>
+		<td>
+			<select id="attributeId" name="attributeId" style="width:325px">
+			<option value="">[ $i18n.getString( "select" ) ]</option>
+			</select>
+		</td>
+	</tr>
+	
+	
+  <tr>  	
+      <td><label>$i18n.getString( "use_data_for" ) $i18n.getString( "selected_unit_only" )</label></td>
+      <td><input type="checkbox" id="selectedUnitOnly" name="selectedUnitOnly" value="true"></td>
+  </tr>
+  <tr>
+  	<td colspan="2" style="height:10px"></td>
+  </tr>
+</table>
+  
+<table>	
+  <tr>	
+    <td>$i18n.getString( "reporting_organisation_unit" )</td>	
+  </tr>  
+  <tr>	
+	<td>
+        <div id="selectionTree" style="width:40em;height:30em;overflow:auto;border:1px solid #cccccc">			
+			<script type="text/javascript">
+          		selectionTreeSelection.setMultipleSelectionAllowed( false );
+				selectionTree.clearSelectedOrganisationUnits();
+          		selectionTree.buildSelectionTree();
+        	</script>										
+		</div>		
+    </td>
+  </tr>  
+  <tr>  
+	<td><input type="button" value="$i18n.getString( "generate" )" style="width:115px" onclick="validateAggregatedReport()"></td>
+	<td></td>		
+  </tr>  
+</table>
+ 
+</form>
+
+<span id="message">$!message</span>
+
+<script type="text/javascript">
+    var i18n_select_data_set = '$encoder.jsEscape( $i18n.getString( "select_data_set" ), "'")';
+    var i18n_select_attribute = '$encoder.jsEscape( $i18n.getString( "select_attribute" ), "'")';
+    var i18n_select_organisation_unit = '$encoder.jsEscape( $i18n.getString( "select_organisation_unit" ), "'")';
+    var i18n_generating_report = '$encoder.jsEscape( $i18n.getString( "generating_report" ), "'")';    
+</script>

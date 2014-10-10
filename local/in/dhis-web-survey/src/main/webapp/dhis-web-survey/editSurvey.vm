@@ -1,0 +1,124 @@
+
+<h3>$i18n.getString( "edit_survey" )</h3>
+
+<form id="editSurveyForm" name="editSurveyForm" action="updateSurvey.action" method="post" onsubmit="return validateEditSurvey()">
+  <div style="display:inline">
+  <input type="hidden" id="surveyId" name="surveyId" value="$survey.id">
+  </div>
+  
+  <table id="detailsList">
+    <col> ## Labels
+    <col> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "survey_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" style="width:20em" value="$!encoder.htmlEncode( $survey.name )"></td>
+      </tr>      
+      <tr>
+        <td><label>$i18n.getString( "short_name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="shortName" name="shortName" maxlength="20" style="width:20em" value="$!encoder.htmlEncode( $survey.shortName )"></td>
+      </tr>     
+      <tr>
+        <td><label>$i18n.getString( "url" )</label></td>
+        <td><input type="text" id="url" name="url" style="width:20em" value="$!encoder.htmlEncode( $survey.url )"></td>
+      </tr>
+       <tr>
+        <td><label>$i18n.getString( "description" )</label></td>
+         <td><textarea id="description" name="description" cols=41 rows=4>$!encoder.htmlEncode( $survey.description )</textarea></td>
+      </tr>	  
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </tbody>
+  </table>
+
+  <table id="indicatorSelectionArea">
+    <col> ## Available Indicators
+    <col> ## Filter
+    <col> ## Selected Indicators
+    <thead>
+      <tr>
+        <th>$i18n.getString( "available_indicators" )</th>
+		<th>$i18n.getString( "filter" )</th>
+        <th>$i18n.getString( "selected_indicators" )</th>
+      </tr>
+    </thead>
+    <tbody>
+    	
+      <tr>
+        <td>
+          <select id="indicatorGroupSelect" name="indicatorGroupSelect" style="min-width:20em"
+              onchange="javascript:filterByIndicatorGroup( this.options[this.selectedIndex].value )">
+            <option value="ALL" selected="selected">$i18n.getString( "all" )</option>
+            #foreach ( $indicatorGroup in $indicatorGroups )
+              <option value="$indicatorGroup.id">$encoder.htmlEncode( $indicatorGroup.name )</option>
+            #end
+          </select>
+        </td>
+        <td>Group</td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td><input type="text" id="availableIndicatorsFilter" onkeyup="filterAvailableIndicators()" style="min-width:20em"></td>
+      	<td>$i18n.getString( "name" )</td>
+      	<td><input type="text" id="surveyMembersFilter" onkeyup="filterSurveyMembers()" style="min-width:20em"></td>        
+      </tr>
+      
+      <tr>
+        <td>
+          <!-- List of all available Indicators -->
+          <!--<select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="addSurveyMembers()">-->
+          <select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'availableList', 'selectedList' )">            
+          </select>
+        </td>
+        <td>
+          <!--<input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="addSurveyMembers()">-->
+          <input type="button" value="&gt;" title=$i18n.getString( 'move_selected' ) onClick="moveSelectedById( 'availableList', 'selectedList' )">
+          <br>
+          <!--<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="removeSurveyMembers()">-->
+          <input type="button" value="&lt;" title=$i18n.getString( 'remove_selected' ) onClick="moveSelectedById( 'selectedList', 'availableList' )">
+        </td>
+        <td>
+          <!-- List of all selected Indicators -->
+          <!--<select id="selectedList" name="selectedList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="removeSurveyMembers()">-->
+          <select id="selectedList" name="selectedList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'selectedList', 'availableList' )">	
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3">
+          <input type="submit" value="$i18n.getString( "save" )" style="width:10em"><input type="button"
+            onclick="window.location.href='index.action'" value="$i18n.getString( "cancel" )" style="width:10em">
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+	var surveyMembers = new Object();
+#foreach ( $indicator in $surveyIndicators )
+	surveyMembers['$indicator.id'] = '$encoder.jsEscape( $indicator.name, "'" )';
+#end
+
+	var availableIndicators = new Object();	
+#foreach ( $availableIndicator in $indicators )
+	availableIndicators['$availableIndicator.id'] = '$encoder.jsEscape( $availableIndicator.name, "'" )';
+#end
+
+	initLists();
+
+	var nameField = document.getElementById( 'name' );
+	nameField.select();
+	nameField.focus();
+
+</script>

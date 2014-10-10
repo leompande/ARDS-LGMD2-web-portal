@@ -1,0 +1,32 @@
+
+<a href="index.action"><h2>Data Integration</h2></a>
+<ul>
+    <li>Data Import</li>
+    <ul>
+        <li><a href = "excelImportForm.action">Data Import From Excel</a></li>
+    </ul>
+</ul>
+
+<br/>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+
+    function orgUnitHasBeenSelected( orgUnitIds )
+    {
+        document.reportForm.ouIDTB.value = orgUnitIds;
+        
+        document.getElementById("ouNameTB").value = "";
+
+        reportListFileName = document.reportForm.reportListFileNameTB.value;
+
+        if( orgUnitIds != null && orgUnitIds != "" )
+        {
+            getReports( orgUnitIds, reportListFileName )
+        }
+    }
+
+    selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>

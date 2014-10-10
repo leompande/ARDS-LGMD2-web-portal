@@ -1,0 +1,9 @@
+
+<h2>$i18n.getString( "pbf_setup" )</h2>
+<ul>	
+	<li><a href="pbfDataEntry.action">$i18n.getString( "dataentry" )</a></li>
+	
+	<li><a href="dataElementTariffManagement.action">$i18n.getString( "dataelement_tariff_management" )</a></li>
+	
+	<li><a href="bankDetailsManagement.action">$i18n.getString( "bank_details_management" )</a></li>
+</ul>

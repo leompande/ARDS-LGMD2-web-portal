@@ -1,0 +1,60 @@
+<script type="text/javascript">
+
+	var defaultName = "hồ chí minh";
+
+	jQuery(document).ready( function()
+	{
+		jQuery.ajax(
+		{
+			type: 'GET',
+			url: '../dhis-web-commons-ajax-json/getOrganisationUnits.action',
+			data: 'level=2',
+			dataType: 'json',
+			async: false,
+			success: function( json )
+			{
+				var selector = jQuery( "#provinceLevel" );
+				selector.empty();
+				selector.append( '<option value="-1">[ ' + i18n_label + ' ]</option>' );
+				
+				jQuery.each( json.organisationUnits , function( i, item )
+				{
+					if ( item.name.toLowerCase().indexOf( defaultName ) != -1 ) {
+						selector.append( "<option value='" + item.id + "' selected='true'>" + item.name + "</option>" );
+					} else {
+						selector.append( "<option value='" + item.id + "'>" + item.name + "</option>" );
+					}
+				} );
+
+				loadPureChildrens( getFieldValue( 'provinceLevel' ), 'districtLevel' );
+			}
+		} );
+	} );
+
+	function loadPureChildrens( id, elementId )
+	{
+		jQuery.get( "../dhis-web-phieusanh/getPureChildren.action", { id: id },
+		function ( json ) { buildUpList( json.organisationUnits, elementId ); } );
+	}
+	
+	function buildUpList( elements, elementId )
+	{
+		var selector = jQuery( "#" + elementId );
+		selector.empty();
+		selector.append( '<option value="-1">[ ' + i18n_label + ' ]</option>' );
+		
+		jQuery.each( elements, function( i, item )
+		{
+			selector.append( "<option value='" + item.id + "'>" + item.name + "</option>" );
+		} );
+	}
+	
+	var i18n_label = '$encoder.jsEscape( $i18n.getString( "select_orgunit" ) , "'" )';
+	var i18n_please_select_unit = '$encoder.jsEscape( $i18n.getString( "please_select_unit" ) , "'" )';
+	var i18n_register_patient_successfully = '$encoder.jsEscape( $i18n.getString( "register_patient_successfully" ) , "'" )';
+	var i18n_please_select_address = '$encoder.jsEscape( $i18n.getString( "please_select_address" ) , "'" )';
+</script>
+
+<select id="provinceLevel" name="provinceLevel" onchange="loadPureChildrens( this.value, 'districtLevel' )"></select><br/>
+<select id="districtLevel" name="districtLevel" onchange="loadPureChildrens( this.value, 'wardLevel' )"></select><br/>
+<select id="wardLevel" name="wardLevel"></select>

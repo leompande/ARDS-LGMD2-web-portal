@@ -1,0 +1,33 @@
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+
+<h3>$encoder.htmlEncode( $i18n.getString( "add_new_sql_view" ) )</h3>
+
+<form id="addSqlViewForm" action="addSqlView.action" method="post" class="inputForm">
+	<table>
+		<tr>
+			<th colspan="2">$i18n.getString( "details" )</th>
+		</tr>
+		<tr>
+			<td><label for="name">$encoder.htmlEncode( $i18n.getString( "name" ) ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="name" name="name"></td>
+		</tr>
+		<tr>
+			<td><label for="description">$encoder.htmlEncode( $i18n.getString( "description" ) )</label></td>
+			<td><textarea id="description" name="description"></textarea></td>
+		</tr>
+		<tr>
+			<td><label for="sql_statement">$encoder.htmlEncode( $i18n.getString( "sql_statement" ) ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><textarea type="text" id="sqlquery" name="sqlquery" style="width:80em;height:20em">SELECT </textarea></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input type="submit" value="$i18n.getString( 'save' )" style="width:10em" />
+				<input type="button" value="$i18n.getString( 'cancel' )" id="cancel" name="cancel" onclick="window.location.href='showSqlViewListForm.action'" style="width:10em" />
+			</td>
+		</tr>
+	</table>
+
+</form>
+
+<span id="message"></span>

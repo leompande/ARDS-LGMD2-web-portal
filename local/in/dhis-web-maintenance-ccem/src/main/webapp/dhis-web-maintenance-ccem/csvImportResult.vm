@@ -1,0 +1,14 @@
+
+<br/>
+<div style="font-size:16px; width:70%; margin:auto;" class="ui-widget-header ui-corner-all"><b>$i18n.getString( "offline_data_upload_result" )</b></div>
+<div id="reportFilterDiv" style="width:70%; margin:auto; border-width: 1px;background-color:#E0ECF8;border-color: #A9D0F5; display:block;">
+<table>
+    <tr>
+        <td><input type="button" value="Back" onclick="window.location.href='importDataForm.action'" /></td>
+    </tr>
+    <tr>
+        <td>$message</td>
+    </tr>    
+</table>    
+</div>
+</div>

@@ -1,0 +1,99 @@
+
+<html>
+	<head>
+    	<title>Null Reporter Result</title>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css" >
+        </link>
+        <script>
+        	function exportNullReporterResultToWorkBook()
+			{
+				document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+
+				return true;
+			}
+        </script>
+   	</head>
+	<body>
+
+		<form id="form1" name="form1" action="exportNullReporterToExcel.action" method="post" onsubmit="return exportNullReporterResultToWorkBook()" target="_newtab">
+
+			<input type="hidden" name="htmlCode" id="htmlCode" />
+			<div align="right" class="Normal">
+				<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+			</div>
+
+			<div id="formResult" >
+			#set( $ouList = $nullReportResult.keySet() )
+
+                            <table border="1" cellpadding="5" cellspacing="0">
+                                    <tr align="center">
+                                    	<td class="NormalBHeading"><strong>Data Set Name</strong></td>
+                                    	<td class="NormalBHeading" colspan="$size"><strong>$!dataSetName</strong></td>
+                                    </tr>
+                                    <tr align="center">
+                                        #if( $size == 0)
+                                            <td cellspacing="1" class="NormalBHeading" >There is no null value.</th>
+                                        #else
+                                            <td cellspacing="1" class="NormalBHeading">&nbsp;</td>
+                                        #end
+                                       #foreach( $period in $periods )
+                                       <td cellspacing="1" class="NormalBHeading">
+                                           #if( $simpleDateFormat.format($period.startDate) == $simpleDateFormat.format($period.endDate) )
+                                              $simpleDateFormat.format($period.startDate)
+                                           #else
+                                               $simpleDateFormat.format($period.startDate) to $simpleDateFormat.format($period.endDate)
+                                           #end
+                                           
+                                      </td>
+                                      #end
+                                    </tr>
+                                #foreach( $parentOu in $ouHavingNullValuesWithLowerLevel )
+                                    <tr>
+                                        <td bgcolor="#B8B8B8" cellspacing="1" class="NormalBHeading"> $!parentOu.name</td>
+
+                                            #set( $periodDeListMap = $nullReportResult.get( $parentOu ) )
+                                            #set( $periodlist = $periodDeListMap.keySet() )
+                                            #foreach( $period in $periods )
+                                                <td valign="top" class="Normal">
+
+                                                <table >
+
+                                                  #foreach( $de in $periodDeListMap.get( $period ) )
+                                                    <tr>
+                                                        <td class="Normal">$!de.name</td>
+                                                    </tr>
+                                                  #end
+                                                </table>
+
+                                                </td>
+                                            #end
+                                    </tr>
+                                #end
+                                #foreach( $orgunit in $ouHavingNullValues )
+                                    <tr>
+                                        <td bgcolor="#D8D8D8" cellspacing="1" class="NormalBHeading"> $!orgunit.name</td>
+
+                                            #set( $periodDeListMap = $nullReportResult.get( $orgunit ) )
+                                            #set( $periodlist = $periodDeListMap.keySet() )
+                                            #foreach( $period in $periods )
+                                                <td valign="top" class="Normal">
+
+                                                <table width="100%">
+
+                                                  #foreach( $de in $periodDeListMap.get( $period ) )
+                                                    <tr>
+                                                        <td class="Normal">$!de.name</td>
+                                                    </tr>
+                                                  #end
+                                                </table>
+
+                                                </td>
+                                            #end
+                                    </tr>
+                               #end
+                            </table>
+			</div>
+		</form>
+    </body>
+</html>

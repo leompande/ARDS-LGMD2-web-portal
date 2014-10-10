@@ -1,0 +1,88 @@
+
+<html>
+	<head>
+		<title>Routine Reports</title>
+        		
+		<script>
+			//Global Variables
+		            
+			var reportModels = new HashTable();
+			var reportFileNames = new HashTable();
+			
+			#foreach($report in $reportList)
+				reportModels.put("$report.id","$report.model");
+				reportFileNames.put("$report.id","$report.fileName");
+			#end
+						            
+			function formValidations()
+            {			            
+             	var reportListIndex = document.reportForm.reportList.selectedIndex;
+			 	var periodIndex = document.reportForm.availablePeriods.selectedIndex;
+			                			            
+                if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+                else if(document.reportForm.availablePeriods.options[periodIndex].text == null || document.reportForm.availablePeriods.options[periodIndex].text== "") {alert("Please Select Period"); return false;}
+			                
+				document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+				document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+
+                return true;
+			}			
+		</script>
+	    </head>
+	    <body>
+	        <h1>RoutineReport Analyser</h1>
+	        <hr />	
+	        <br />
+	        <form id="reportForm" name="reportForm" action="generateReport.action" method="post" onsubmit="return formValidations()" target="_blank">        
+            <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>		                
+		    	<tr>
+    				<td class="NormalB">
+    			    	Reports :<br />
+                    	<select id="reportList" name="reportList" style="width:200px">
+                    		#foreach($report in $reportList)
+                    			<option value="$report.id">$report.name</option>
+                    		#end
+                        </select>
+    			    </td>
+                    <td class="NormalB">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>			
+                <tr>
+          	    	<td class="NormalB">
+          	        	Periods : <br />
+                        <select id="availablePeriods" name="availablePeriods" style="width:200px">
+                        	#foreach($period in $periodList)
+                        		<option value="$period.id">$simpleDateFormat.format($period.startDate)</option>
+                        	#end
+                        </select>          	                    	              
+          	       	</td>
+	       	        <td class="NormalB">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+	            <tr>
+          	    	<td>
+						<input type="submit" name="generate" value='Generate Report'/>          	          
+          	        </td>
+          	        <td>
+          	        	<input type="hidden" name="reportModelTB" id="reportModelTB">
+						<input type="hidden" name="reportFileNameTB" id="reportFileNameTB">
+                    </td>
+                </tr>
+            	</table>
+        </form>
+	    </body>
+	</html>        

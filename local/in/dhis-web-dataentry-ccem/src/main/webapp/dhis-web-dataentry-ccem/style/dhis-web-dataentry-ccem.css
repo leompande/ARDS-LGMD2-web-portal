@@ -1,0 +1,102 @@
+
+#currentSelection
+{
+  padding: 6px;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  text-align: right;
+  position: fixed;
+  top: 55px;
+  right: 10px;
+  filter: alpha(opacity=85);
+  opacity: 0.85;
+  border-radius: 3px;
+}
+
+#actions
+{
+  float: right;
+  width: 160px;
+  text-align: right;
+}
+
+#closeCurrentSelection
+{
+  float:left;
+  cursor:pointer;
+  margin-right:5px;
+}
+
+#contentDiv
+{
+  margin-bottom: 8px;
+}
+
+#completenessDiv
+{
+  display: none;
+  width: 386px;
+  height: 29px;
+}
+
+#infoDiv
+{
+  display: none;
+  width: 386px;
+  height: 20px;
+}
+
+#completedByDiv
+{
+  display: none;
+}
+
+.currentRow
+{
+  background-color: #d5ffc5;
+  padding-right: 50px;
+}
+
+.hidden 
+{
+  display: none;
+}
+
+input[type=text],textarea
+{
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.formSection td
+{
+  padding-right: 2px;
+  padding-left: 2px;
+  height: 28px;
+  white-space: nowrap;
+}
+
+.formSection th
+{
+  text-align: center;
+  min-width: 46px;
+}
+
+.sectionFilter
+{
+  padding: 5px;
+  border: solid 1px #f0f0f0; 
+  outline: 0;
+  color: #333;
+  height: 14px;
+}
+
+.historyHeader
+{
+  color: #606060;
+  font-size: 17px;
+  padding: 5px 0;
+}

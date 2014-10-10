@@ -1,0 +1,101 @@
+.heading-column { width : 30.5em;}
+td.input-column { width : 30.5em;}
+td.input-column input, td.input-column select { width: 28.5em;}
+td.error {padding-left:1em}
+
+textarea{
+	width:320px; 
+	text-align:left;
+}
+
+input[type="text"]{
+	width:320px; 
+	text-align:left;
+}
+
+select
+{
+	width:325px; 
+	text-align:left;
+}
+
+input[type="button"], input[type="submit"]
+{
+	width: 160px;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+input.filterButton
+{
+	width: 30px;
+	padding-left:5px;
+	padding-right:5px;
+	text-align:center;
+}
+
+.hidden 
+{
+	display: none;
+}
+
+.visible
+{
+	display: block;
+}
+
+.imgButton
+{
+	cursor:pointer;
+}
+
+fieldset
+{
+	border: 1px solid #3f5d8e;
+}
+
+tr.selected{
+	background-color:#3399FF;
+	color:#FFFFFF;
+}
+
+#selectedList tr{
+	cursor:pointer;
+}
+
+.dataElementDiv
+{
+	overflow:auto; 
+	height:20em; 
+	width:30em;
+	border:1px solid #9DA1AA;
+}
+
+.dataElementDiv table
+{
+	width:100%;
+}
+
+.small-button {
+	font-size: .8em !important;
+}
+
+.ui-autocomplete { height: 100px; overflow-y: scroll; overflow-x: hidden; }
+
+
+input.autocompleted-field
+{
+	width:25em; 
+	text-align:left;
+}
+.modelTypeAttributeDiv
+{
+	overflow:auto; 
+	height:20em; 
+	width:30em;
+	border:1px solid #9DA1AA;
+}
+.modelTypeAttributeDiv table
+{
+	width:100%;
+}

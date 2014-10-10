@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+  <class name="org.hisp.dhis.linelisting.linelistdataelementmapping.LineListDataElementMapping" table="lldataelementmapping">
+    <id column="lldataelementmapid" name="id">
+      <generator class="native"/>
+    </id>
+    <property length="256" name="description" unique="false"/>
+    <property length="160" name="dataElementExpression" not-null="true" unique="true"/>
+    <property length="160" name="lineListExpression" not-null="true" unique="true"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,9 @@
+{ "periodColumn":
+  {
+	"id": "${periodColumn.id}",
+	"startdate": "$!encoder.jsonEncode( $!format.formatDate( ${periodColumn.startdate} ) )",
+	"enddate": "$!encoder.jsonEncode( $!format.formatDate( ${periodColumn.enddate} ) )",
+	"column": "${periodColumn.column}",
+	"periodType": "$!encoder.jsonEncode( ${periodColumn.periodType} )"
+  }
+}

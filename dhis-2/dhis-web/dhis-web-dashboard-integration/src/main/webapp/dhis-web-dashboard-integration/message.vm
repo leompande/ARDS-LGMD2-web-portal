@@ -1,0 +1,50 @@
+
+<h3>$i18n.getString( "messages" ) #openHelp( "dashboard_messages" )</h3>
+
+<div class="horizontalMenu" style="padding: 8px 0 40px 0;">
+    <ul>
+        #if( $auth.hasAccess( "dhis-web-dashboard-integration", "sendMessage" ) )
+            <li><a class="blueButtonLink" href="showSendMessage.action">$i18n.getString( 'write_message' )</a></li>
+        #end
+        <li><a class="blueButtonLink" href="showSendFeedback.action">$i18n.getString( "write_feedback" )</a></li>
+        <li><span style="padding-left:12px"></span></li>
+        <li><a class="greyButtonLink" href="message.action">$i18n.getString( "inbox" )</a></li>
+        <li><a class="greyButtonLink" href="message.action?followUp=true">$i18n.getString( "follow_up" )</a></li>
+        <li><a class="greyButtonLink" href="message.action?unread=true">$i18n.getString( "unread" )</a></li>
+    </ul>
+</div>
+
+<div style="width:100%">
+    <div style="padding-right:15px">
+        <table class="plainList" style="width:100%">
+            <tr>
+                <th></th>
+                <th>$i18n.getString( "sender" )</th>
+                <th>$i18n.getString( "subject" )</th>
+                <th>$i18n.getString( "date" )</th>
+                <th></th>
+            </tr>
+            #foreach( $conversation in $conversations )
+                <tr id="tr${conversation.id}" #if( !$conversation.read )class="unread bold"#end>
+                    <td style="width:40px;padding-left:5px;" onclick="toggleFollowUp( '${conversation.id}' )">
+                        <img id="followUp${conversation.id}" #if( $conversation.followUp ) src="../images/marked.png"#else src="../images/unmarked.png"#end></td>
+                    <td style="width:200px" onclick="read( '${conversation.uid}' )">
+                        #if( $conversation.lastSenderName )$!encoder.htmlEncode( $conversation.lastSenderName )#else$i18n.getString( "system_notification" )#end
+                        #if( $conversation.messageCount > 1 ) <span class="normal">(${conversation.messageCount})</span>#end
+                    </td>
+                    <td onclick="read( '${conversation.uid}' )">$!encoder.htmlEncode( $conversation.subject )</td>
+                    <td onclick="read( '${conversation.uid}' )" style="width:80px">$!format.formatDate( $conversation.lastMessage )</td>
+                    <td style="width:70px; text-align:center;">
+                        <a href="readMessage.action?id=${conversation.uid}"><img src="../images/read.png" title="$i18n.getString( 'read' )"></a>
+                        <a href="javascript:removeMessage( '${conversation.id}' )"><img src="../images/delete.png" title="$i18n.getString( 'delete' )"></a>
+                    </td>
+                </tr>
+            #end
+        </table>
+        #parse( "/dhis-web-commons/paging/paging.vm" )
+    </div>
+</div>
+
+<script type="text/javascript">
+    var i18n_confirm_delete_message = '$encoder.jsEscape( $i18n.getString( "confirm_delete_message" ) , "'" )';
+</script>

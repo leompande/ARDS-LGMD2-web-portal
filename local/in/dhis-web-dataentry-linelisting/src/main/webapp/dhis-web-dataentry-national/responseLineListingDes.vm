@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataValues>
+#foreach ( $dataElementId in $llValueMap.keySet() )
+  <dataValue dataElementId="$dataElementId" optionComboId="$liDEMap.get($dataElementId)">$llValueMap.get($dataElementId)</dataValue>
+#end
+</dataValues>

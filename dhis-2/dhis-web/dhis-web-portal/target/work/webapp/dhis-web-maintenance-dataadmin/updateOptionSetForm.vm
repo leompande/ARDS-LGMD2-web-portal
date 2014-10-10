@@ -1,0 +1,72 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function() {
+		validation2( 'updateOptionSetForm', function( form ){ form.submit() }, {
+			'beforeValidateHandler': function() { listValidator( 'memberValidator', 'options' ); }		});
+
+		checkValueIsExist( "name", "validateOptionSet.action",{id:getFieldValue('id')});	
+	});
+
+    var i18n_specify_option_name = '$encoder.jsEscape( $i18n.getString( "specify_option_name" ) , "'")';
+    var i18n_option_name_already_exists = '$encoder.jsEscape( $i18n.getString( "option_name_already_exists" ) , "'")';
+    var i18n_must_include_option = '$encoder.jsEscape( $i18n.getString( "must_include_option" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "edit_option_set" )</h3>
+
+<form id="updateOptionSetForm" name="updateOptionSetForm" action="updateOptionSet.action" method="post" class="inputForm">
+  <input id='id' name='id' value='$optionSet.id' type='hidden'>
+  <table>
+    <colgroup>
+        <col width="50px" />
+        <col width="150px"/>
+        <col width="50px"/>
+    </colgroup>
+    <tr>
+      <th colspan='3'>$i18n.getString( "details" )</th>      
+    </tr>
+    <tr>
+      <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+      <td ><input type="text" id="name" name="name" value='$optionSet.name' class="{validate:{required:true,minlength:2}}" /></td>
+    </tr>      
+    <tr>
+      <td style="height:15px"></td>
+    </tr>
+  	<tr>
+  	  <th colspan='3'>$i18n.getString( "options" )
+	  <select id="memberValidator" style="display:none"/></th>
+	</tr>
+	<tr>
+	  <td><label>$i18n.getString( "option" )</label></td>
+	  <td><input type="text" id="option" name="option"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="3">
+      	<input type="button" value="$i18n.getString( 'add_option' )" onclick="addOption();" style="width:165px"/>
+      	<input type="button" value="$i18n.getString( 'update_option' )" onclick="updateOption();" style="width:165px"/>
+	  </td>
+    </tr>
+    <tr>
+		<td></td>
+		<td>
+			<select multiple size="10" id="options" name="options" onchange="setFieldValue('option', this.value);">  
+				#foreach( $option in $optionSet.options )
+					<option value='$option'>$option</option>
+				#end
+			</select>
+		</td>
+		<td>	  
+			<a href="javascript:moveUpSelectedOption( 'options' )"><img src="../images/move_up.png" style='padding-left:5px;'/></a><br/><br/>
+			<a href="javascript:moveDownSelectedOption( 'options' )"><img src="../images/move_down.png" style='padding-left:5px;'/></a><br/><br/>
+			<a href="javascript:removeSelectedOption( 'options' )"><img src="../images/delete.png"/></a>
+		</td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td colspan="2">
+		<input type="submit"  value="$i18n.getString( 'update' )" style="width:10em">
+		<input type="button" onclick="window.location.href='optionSet.action'" value="$i18n.getString( 'cancel' )" style="width:10em"/></p>
+      </td>
+	</tr>
+  </table>
+</form>

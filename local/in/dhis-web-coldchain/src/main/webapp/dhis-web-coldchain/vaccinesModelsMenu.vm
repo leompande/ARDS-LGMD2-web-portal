@@ -1,0 +1,7 @@
+
+<a href="index.action"><h2>$i18n.getString( "equipment_manager" )&nbsp;</h2></a>
+<ul>
+    <!--<li>$i18n.getString( "equipment_models" )</li>-->
+   
+</ul>
+<br>

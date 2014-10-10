@@ -1,0 +1,55 @@
+<h3>$i18n.getString( "patient_attribute_visit_schedule_form" ) #openHelp('patient_attribute_visit_schedule')</h3>
+																			
+<form id="patientAttributeVisitScheduleForm" name="patientAttributeVisitScheduleForm" action="savePatientAttributeVisitSchedule.action" method="post" action='savePatientAttributeVisitSchedule.action' onsubmit="selectAllById('selectedAttributeIds');">
+
+<table>
+	<colgroup>
+		<col style='width:300px'/>
+		<col/>
+		<col style='width:300px'/>
+	</colgroup>
+	<tr>
+		<th>$i18n.getString( "availableAttribute" )</th>
+		<th>$i18n.getString( "filter" )</th>
+		<th>$i18n.getString( "selectedAttribute" )</th>
+	</tr>
+	
+	<tr>
+		<td>
+			<select style='width:322px' multiple="multiple" id="availableAttributes" name="availableAttributes" size="15" ondblclick="moveSelectedById( 'availableAttributes', 'selectedAttributeIds' )" >
+				#foreach($attribute in $availablePatientAttributes)
+					<option value='$attribute.id'>$attribute.name</option>
+				#end
+			</select>
+		</td>
+		<td>
+			<input type="button" value="&gt;" onclick="moveSelectedById( 'availableAttributes', 'selectedAttributeIds' )" class='filterButton' /><br/>
+			<input type="button" value="&lt;" onclick="moveSelectedById( 'selectedAttributeIds', 'availableAttributes' )" class='filterButton' /><br/>
+			<input type="button" value="&gt;&gt;" onclick="moveAllById( 'availableAttributes', 'selectedAttributeIds' )" class='filterButton' /><br/>
+			<input type="button" value="&lt;&lt;" onclick="moveAllById( 'selectedAttributeIds', 'availableAttributes' )" class='filterButton' />
+		</td>
+		<td>
+			<select style='width:322px' multiple="multiple" id="selectedAttributeIds" name="selectedAttributeIds" size="15" ondblclick="moveSelectedById( 'selectedAttributeIds', 'availableAttributes' )" >
+				#foreach($attribute in $selectedPatientAttributes)
+					<option value='$attribute.id'>$attribute.name</option>
+				#end
+			</select>
+		</td>
+		<td>
+			<a href="javascript:moveUpSelectedOption( 'selectedAttributeIds')" title="$i18n.getString( 'move_up' )"><img src="../images/move_up.png" alt="$i18n.getString( 'move_up' )"/></a><br/><br/>
+			<a href="javascript:moveDownSelectedOption( 'selectedAttributeIds' )" title="$i18n.getString( 'move_down' )"><img src="../images/move_down.png" alt="$i18n.getString( 'move_up' )"/></a>
+		</td>
+	</tr>  
+	<tr>
+		<td colspan='2'>
+			<input type="submit" value="$i18n.getString( 'save' )" />
+			<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location.href='patientAttributeGroup.action'"/>
+		</td>
+	</tr>
+</table>
+
+</form>
+
+<script>
+	var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+</script>

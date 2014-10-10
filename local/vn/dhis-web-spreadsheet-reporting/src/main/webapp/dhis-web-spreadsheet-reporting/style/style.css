@@ -1,0 +1,22 @@
+#messageUpload 
+{
+  color: black;
+  padding: 5px;
+  background-color: #D5FFC5;
+  border: 1px solid black;
+  font-size: 14px;
+  text-align: right;
+}
+
+#tooltip {
+    color:#00000; font-size:11px; line-height:1.2;
+    background-color:#FFFFCC; border:1px solid #667295; 
+    width:210px; padding:4px;
+	z-index: 100000;
+	display: none;
+	position:absolute;
+}
+
+.itemDrescription {
+    border:1px solid #667295; 
+}

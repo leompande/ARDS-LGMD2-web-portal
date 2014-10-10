@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="org.hisp.dhis.jchart.JChart" table="jchart">
+
+		<id name="id" column="jchartid">
+			<generator class="native" />
+		</id>
+
+		<property name="title" not-null="true" />				
+		
+		<property name="loadPeriodBy" column="loadperiodby"/>
+		
+		<property name="categoryType" column="categorytype" not-null="true"/>	
+		
+		<many-to-one name="periodType" column="periodtypeid" class="org.hisp.dhis.period.PeriodType" 
+		foreign-key="fk_jchart_periodtypeid" not-null="true" lazy="false"/>	
+		
+		<set name="series" cascade="all-delete-orphan" table="jchart_jchartseries">
+			<key column="jchartid"/>
+			<one-to-many class="org.hisp.dhis.jchart.JChartSeries"/>
+		</set>
+		
+		<set name="periods" table="jchart_periods">
+			<key column="jchartid"/>
+			<many-to-many column="periodid" class="org.hisp.dhis.period.Period" foreign-key="pk_jchart_period"/>			
+		</set>	
+		
+		<set name="userRoles" table="jchart_userroles">
+			<key column="jchartid"/>
+			<many-to-many column="userroleid" class="org.hisp.dhis.user.UserAuthorityGroup" foreign-key="pk_jchart_userroleid"/>			
+		</set>
+		
+		<property name="legend" column="legend" length="1000"/>		
+		
+		<property name="storedby"/>		
+		
+
+	</class>
+
+</hibernate-mapping>

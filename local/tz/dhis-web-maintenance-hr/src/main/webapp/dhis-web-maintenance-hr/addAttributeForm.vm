@@ -1,0 +1,84 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for addAttributeForm
+//-----------------------------------------------------------------------
+	jQuery(document).ready(
+			function()
+			{
+				jQuery("#addAttributeForm").validate({
+					 meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{
+									    validateAddAttribute();
+									}
+				});
+				
+				jQuery("#nameField").focus();
+			}
+	);
+	var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+</script>																		
+<h3>$i18n.getString( "add_new_attribute" )</h3>
+<form id="addAttributeForm" action="addAttribute.action" method="post" >
+
+<table id="attrTable"> 
+    <tr>
+        <td>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="nameField" name="nameField" style="width:30em" class="{validate:{required:true,rangelength:[2,32]}}"></td>
+      </tr>   
+         
+      <tr>
+		<td width="20em"><label for="input_type">$i18n.getString( "input_type" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td>
+			<select id="inputTypeId" name="inputTypeId" style="min-width:20em">
+			#foreach($inputTypes in $inputType) 
+				<option value="$inputTypes.id" >$inputTypes.name </option>
+			#end	
+			</select>
+		</td>		
+		<td></td>				
+	</tr>
+	<tr>
+		<td width="20em"><label for="data_type">$i18n.getString( "data_type" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td>
+			<select id="dataTypeId" name="dataTypeId" style="min-width:20em">
+			#foreach($dataTypes in $dataType) 
+				<option value="$dataTypes.id" >$dataTypes.name </option>
+			#end
+			</select>
+		</td>		
+		<td></td>				
+	</tr>
+	 <tr>
+        <td>$i18n.getString( "caption" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="caption" name="caption" style="width:30em" class="{validate:{required:true,minlength:2}}"></td>
+      </tr>
+      
+        <tr>
+        <td style="width:200px">$i18n.getString( "compulsory" )</td>
+        <td><input type="checkbox" id="compulsory" name="compulsory" value="true"></td>
+    </tr>
+    
+      <tr>
+        <td style="width:200px">$i18n.getString( "unique" )</td>
+        <td><input type="checkbox" id="unique" name="unique" value="true"></td>
+    </tr>
+    
+      <tr>
+        <td style="width:200px">$i18n.getString( "history" )</td>
+        <td><input type="checkbox" id="history" name="history" value="true"></td>
+    </tr>
+	<tr>
+        <td>$i18n.getString( "description" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><textarea id="description" name="description" rows="3" style="width:30em" class="{validate:{required:true,minlength:2}}"></textarea></td>
+      </tr>    
+</table>
+
+<p>
+    <input type="submit" value="$i18n.getString( "add" )" style="width:10em">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='hrAttribute.action'" style="width:10em">
+</p>
+
+</form>    
+<span id="message"></span>

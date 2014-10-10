@@ -1,0 +1,10 @@
+
+
+<br /><br />
+
+<h3>$encoder.xmlEncode( $statusMessage ) 
+	#if( $!status == "SUCCESS" ) 
+		<a href="streamMySQLBackup.action?backupFilePath=$backupFilePath"><img  width="60" height="50" src="images/download-icon.jpg" /></a> 
+	#end
+</h3>
+

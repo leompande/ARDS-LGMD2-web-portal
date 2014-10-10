@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	<include file="dhis-web-commons.xml"/>
+	
+	<package name="dhis-web-maintenance-pbf" extends="dhis-web-commons" namespace="/dhis-web-maintenance-pbf">
+	
+		<!-- Home page -->
+		<action name="index" class="org.hisp.dhis.pbf.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-pbf/welcome.vm</param>
+			<param name="menu">/dhis-web-maintenance-pbf/menu.vm</param>
+		</action>
+		<action name="dataElementTariffManagement" class="org.hisp.dhis.pbf.action.GetDataElementforTariffAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-maintenance-pbf/loadDataElementsforTariff.vm</param>
+			<param name="menu">/dhis-web-maintenance-pbf/tariffMenu.vm</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,../dhis-web-commons/javascripts/ext/ext-all.js,javascript/TransformGrid.js,javascript/dataElement_combo.js</param>
+			<param name="stylesheets">../dhis-web-commons/javascripts/ext/resources/css/ext-all-gray.css</param>
+		</action>
+		<action name="loadTariffDetails" class="org.hisp.dhis.pbf.action.LoadTariffDetailsAction">
+			<result name="success" type="velocity">/content.vm</result>
+			<param name="page">/dhis-web-maintenance-pbf/loadTariffData.vm</param>
+		</action>
+		 <action name="addTariffData" class="org.hisp.dhis.pbf.action.AddTariffDataAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-pbf/status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>					
+		</action>
+		<action name="deleteTariffData" class="org.hisp.dhis.pbf.action.DeleteTariffDataAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-pbf/status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">F_TARIFFDATAVALUE_UPDATE</param>					
+		</action>
+		
+		<action name="validateTariffData" class="org.hisp.dhis.pbf.action.ValidateTariffDataAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-pbf/status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>								
+		</action>
+		
+		<!-- Load Bank Details -->
+		<action name="bankDetailsManagement" class="org.hisp.dhis.pbf.action.NoAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-pbf/loadBankData.vm</param>
+            <param name="menu">/dhis-web-maintenance-pbf/tariffMenu.vm</param>
+            <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,../dhis-web-commons/javascripts/ext/ext-all.js,javascript/TransformGrid.js</param>
+        	<param name="stylesheets">../dhis-web-commons/javascripts/ext/resources/css/ext-all-gray.css</param>
+        </action>
+        
+        <action name="loadbankDetails" class="org.hisp.dhis.pbf.action.LoadBankDetailsAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-pbf/getBankDetails.vm</param>            
+        </action>
+		
+		<action name="addBankData" class="org.hisp.dhis.pbf.action.AddBankDataAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-pbf/status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>					
+		</action>
+		<action name="deleteBankData" class="org.hisp.dhis.pbf.action.DeleteBankDataAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-pbf/status.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">F_BANKDATA_UPDATE</param>					
+		</action>
+	
+	
+	
+<!--  PBF Data Entry -->	
+	
+	
+    <action name="pbfDataEntry" class="org.hisp.dhis.pbf.dataentry.PageInitAction">
+      <interceptor-ref name="organisationUnitTreeStack" />
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-maintenance-pbf/dataEntrySelection.vm</param>
+      <param name="menu">/dhis-web-maintenance-pbf/menuDataEntry.vm</param>
+      <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/pbfDataEntry.js</param>
+      <param name="stylesheets">css/dataentry.css</param>
+    </action>	
+	
+    <!-- Get OrganisationUnit Unit name -->
+    <action name="getOrganisationUnit" class="org.hisp.dhis.pbf.dataentry.GetOrganisationUnitAction">
+        <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+        <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+    </action>	
+	
+	<!-- Get Periods -->
+    <action name="loadPeriods" class="org.hisp.dhis.pbf.dataentry.LoadPeriodsAction">
+        <result name="success" type="velocity-json">/dhis-web-maintenance-pbf/jsonPeriods.vm</result>
+    </action>	
+	
+	<!-- Get Next and Previous Periods -->
+    <action name="getAvailableNextPrePeriods" class="org.hisp.dhis.pbf.dataentry.LoadNextPrePeriodsAction">
+        <result name="success" type="velocity-json">/dhis-web-maintenance-pbf/jsonPeriods.vm</result>
+    </action>		
+	
+	<!-- Load DataEntry Form -->
+	<action name="loadDataEntryForm" class="org.hisp.dhis.pbf.dataentry.LoadDataEntryFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-pbf/loadDataEntryForm.vm</param>
+	</action>	
+	
+	<!-- Save Value -->
+	<action name="saveValue"
+		class="org.hisp.dhis.pbf.dataentry.SaveValueAction">
+		<result name="success" type="velocity-json">
+			/dhis-web-maintenance-pbf/status.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>					
+	</action>
+	
+	</package>
+	
+	
+</struts>

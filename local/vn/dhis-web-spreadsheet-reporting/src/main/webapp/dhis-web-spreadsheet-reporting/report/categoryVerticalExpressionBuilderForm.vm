@@ -1,0 +1,77 @@
+<script>
+	
+	jQuery(document).ready(function(){
+		coExpressionValidator = validation( 'categoryoption-form', function(){
+			updateCOExpression();
+		});
+		
+		coExpressionDialog = setUpDialog( 'categoryoption', i18n_expression, 800, 430 );
+		
+		//remoteValidate( jQuery( "#categoryoption textarea[id=formula]" ), 'checkAttributeValueValid.action' );
+
+		changeItemType();
+		jQuery( '#elementSelect_loader' ).hide();
+	});
+
+	var coExpressionValidator = null;
+	var coExpressionDialog = null;
+	var i18n_no_dataelement_group = '$encoder.jsEscape( $i18n.getString( "no_dataelement_group" ) , "'")';;
+	var i18n_label = '$encoder.jsEscape($i18n.getString( 'select_dataelement_group' ) , "'")';
+</script>
+
+<div id="categoryoption" style="display:none">
+	<form id="categoryoption-form">
+	<table width="100%">
+		<tr>
+			<th>$i18n.getString( "formula" )</th>			
+			<th id="attributeOrderHeader">$i18n.getString( "categoryoption" )</th>
+		</tr>
+		<tr valign="top">
+			<td height="139">
+				<textarea id="formula" name="expression" cols="40" rows="5" class="{validate:{required:true}}"></textarea><br/>
+			</td>
+			<td>
+				<select id="groupSelect" style="width:500px" onchange="dataDictionary.loadDataElementsByGroup( this.value, '#categoryoption-elementSelect' )"></select>
+				<input type="text" style="width:500px" placeholder="$i18n.getString( 'filter' )" onkeyup="filterList( this.value, 'categoryoption-elementSelect');" />
+				<select id="categoryoption-elementSelect" size="15" style="width:500px;" ondblclick="insertExpression()"></select>
+				<img src="../images/ajax-loader-bar.gif" id="elementSelect_loader" />
+			</td>			
+		</tr>
+		<tr>
+			<th>$i18n.getString( "description" )</th>
+		<tr>	
+		<tr>
+			<td colspan="2">
+				<div id="expression-description" style="width:750px;height:30px;overflow:auto"></div>
+			</td>
+		</th>
+	</table>
+	<br/>
+	<br/>
+	<center>
+		<input type="submit" value="$i18n.getString('ok')" style="width:100px"/>
+		<input type="button" value="$i18n.getString('clean')" onclick="cleanFormula()" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( coExpressionDialog )" style="width:100px"/>
+	</center>
+	</form>
+</div>
+
+<script>	
+	function coExpressionBuilderForm()
+	{
+		dataDictionary.loadDataElementGroups( "#categoryoption select[id=groupSelect]" );
+		dataDictionary.loadDataElementsByGroup( 'all', "#categoryoption-elementSelect" );
+
+		setFieldValue( 'categoryoption textarea[id=formula]', getFieldValue( 'expression' ) );
+		getExpression();
+
+		openDialog( coExpressionDialog );
+	}
+	
+	function updateCOExpression()
+	{
+		expression = jQuery( '#categoryoption textarea[id=formula]' ).val();
+		setFieldValue( 'expression', expression );
+		closeDialog( coExpressionDialog );
+	}
+</script>

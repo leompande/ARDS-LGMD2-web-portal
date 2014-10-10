@@ -1,0 +1,107 @@
+<!--
+<script>
+    leftBar.hideAnimated();
+</script>
+-->
+<h3>$i18n.getString( "jrxml_reports" )</h3>
+
+<form id="ccemReportForm" name="ccemReportForm" action="exportTable.action" method="post" target="_blank">
+	#foreach( $ccemReport in $reportList )
+		<input type="hidden" id="$ccemReport.reportId" value="$ccemReport.periodRequire" />
+    #end
+	<table boarder="1">
+		<tr>
+			<!--<td>
+				<table style="border-collapse: collapse;border-style: solid;border-width: 1px;">
+					<tr style="background-color: #C0C0C0;"><td><strong>$i18n.getString( "orgunit_tree" )</strong></td></tr>
+					<tr><td><div style="height:450px;width:200px;overflow:auto;">#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )</div></td></tr>
+				</table>
+			</td>-->		
+			<td>				
+				<table style="border-collapse: collapse;border-style: solid;border-width: 1px;">
+                    <tr style="background-color: #C0C0C0;"><td><strong>$i18n.getString( "ccem_reports_list" )</strong></td></tr>
+					<tr>
+						<td>		
+                            <select id="reportList" name="reportList" style="width:200px;" onchange="javascript:periodBox( this.value )" >								
+								#foreach( $ccemReport in $reportList )
+									<option value="$ccemReport.reportId" title="$ccemReport.reportName">$ccemReport.reportName</option>
+								#end
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="background-color: #C0C0C0;"><td><strong>$i18n.getString( "ccem_reports_period_list" ):</strong></td></tr>
+					<tr>			
+                        <td>
+							<input type="radio" id="periodRadio" name="periodRadio" value="LAST_3_MONTHS" disabled /><strong>$i18n.getString( "last_3months" )</strong>
+							<input type="radio" id="periodRadio" name="periodRadio" value="CURRENT_YEAR" disabled /><strong>$i18n.getString( "current_year" )</strong><br/>
+							<input type="radio" id="periodRadio" name="periodRadio" value="LAST_6_MONTHS" disabled /><strong>$i18n.getString( "last_6months" )</strong>							
+                            <input type="radio" id="periodRadio" name="periodRadio" value="LAST_YEAR" disabled /><strong>$i18n.getString( "last_year" )</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr><td style="background-color: #C0C0C0;"><strong>$i18n.getString( "orgunit_group_list" ):</strong></td></tr>
+					<tr>
+						<td>	
+                            <select id="orgunitGroupList" name="orgunitGroupList" size="7" multiple style="width:200px;">
+								#foreach( $orgUnitGroup in $orgUnitGroupList )
+									<option value="$orgUnitGroup.id">$orgUnitGroup.name</option>
+								#end
+                            </select>							
+                        </td>						
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="background-color: #C0C0C0;"><td><strong>$i18n.getString( "selected_orgunit_list" )</td></tr>
+					<tr>
+						<td>		
+							<select id="selOrgUnitList" name="selOrgUnitList" size="7" multiple style="width:200px;" ondblclick="javascript:remOUFunction()"></select>
+						</td>
+                    </tr>                   
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr style="background-color: #C0C0C0;"><td><strong>$i18n.getString( "output_type" )</td></tr>
+                    <tr>
+                        <td>        
+                            <select name="type" id="type" style="width:200px;">
+                            	<option value="pdf">$i18n.getString( "pdf" )</option>
+                                <option value="rtf">$i18n.getString( "rtf" )</option>
+                                <option value="html">$i18n.getString( "html" )</option>
+                                <option value="xls">$i18n.getString( "xls" )</option>
+                                <option value="csv">$i18n.getString( "csv" )</option>
+                                <option value="text">$i18n.getString( "text" )</option>
+                            </select>
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>                            
+                            <input type="button" value='$i18n.getString( "generate" )' style="width: 200px;height: 25; font-family:Arial;font-weight:bold; color:#000000" onclick="generateJRXMLReport()"/>
+                        </td>
+                    </tr>
+                </table>
+			</td>
+			<td>
+				<!--<table style="border-collapse: collapse;border-style: solid;border-width: 1px;">
+					<tr><td><div>#parse( "/dhis-web-commons/loader/loader.vm" )</div>
+						<div id="resultContent"> </div></td>
+					</tr>
+				</table>-->
+				<table>
+					<tr><td><div>#parse( "/dhis-web-commons/loader/loader.vm" )</div>
+						<div id="resultContent"> </div></td>
+					</tr>
+				</table>							
+			</td>
+		</tr>
+	</table>	
+</form>
+

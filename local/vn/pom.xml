@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.hisp.dhis</groupId>
+    <artifactId>dhis-local-vn</artifactId>
+    <version>2.12-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Local Vietnam Modules</name>
+    
+    <modules>
+        <module>dhis-service-vn</module>
+        <module>dhis-service-spreadsheet-reporting</module>
+        <module>dhis-web-spreadsheet-reporting</module>
+    </modules>
+
+    <properties>
+        <rootDir>../../dhis-2/</rootDir>
+    </properties>
+    
+</project>

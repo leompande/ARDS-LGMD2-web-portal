@@ -1,0 +1,13 @@
+#set( $size = $exportItems.size() )
+{
+  "exportItems": [
+  #foreach( $exportItem in $exportItems )
+  {
+    "id": "${exportItem.id}",
+	"name": "$!encoder.jsonEncode( ${exportItem.name} )",
+	"row": "${exportItem.row}",
+	"column": "${exportItem.column}"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

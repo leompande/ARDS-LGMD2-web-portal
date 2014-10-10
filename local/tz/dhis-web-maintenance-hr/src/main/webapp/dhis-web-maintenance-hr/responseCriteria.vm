@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<criteria>
+  <id>$criteria.id</id>
+  <name>$encoder.xmlEncode( $criteria.name )</name>
+  <attribute>$encoder.xmlEncode( $criteria.attribute.name )</attribute>
+</criteria>

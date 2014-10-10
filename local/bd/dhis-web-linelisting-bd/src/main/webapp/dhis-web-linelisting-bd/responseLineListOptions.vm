@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lineListOptions>
+#foreach( $lineListOption in $lineListOptions )
+	<lineListOption>
+		<id>$lineListOption.id</id>
+		<name>$encoder.xmlEncode( $lineListOption.name )</name>
+	</lineListOption>
+#end
+</lineListOptions>

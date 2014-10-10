@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!-- use the DHIS web portal default -->
+    <include file="dhis-web-commons.xml"/>
+	<package name="dhis-web-sms" extends="dhis-web-commons"
+		namespace="/dhis-web-sms">
+		
+		<!-- Pages -->
+		<action name="index"
+			class="org.hisp.dhis.mobile.action.MobileHomePageAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-sms/welcome.vm</param>
+			<param name="menu">/dhis-web-sms/menu.vm</param>
+		</action>
+		<action name="receiveImport"
+			class="org.hisp.dhis.mobile.action.ReceiveImportPageAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-sms/receiveImportPage.vm</param>
+			<param name="menu">/dhis-web-sms/menu.vm</param>
+			<param name="stylesheets">css/receiveImportPage.css</param>
+		</action>
+		<action name="sendSMS" class="org.hisp.dhis.mobile.action.SendSMSAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-sms/sendSMSPage.vm</param>
+			<param name="menu">/dhis-web-sms/menu.vm</param>
+			<param name="requiredAuthorities">F_MOBILE_SENDSMS</param>
+		</action>
+		<action name="mobileSettings"
+			class="org.hisp.dhis.mobile.action.MobileSettingsAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-sms/mobileSettingsPage.vm</param>
+			<param name="menu">/dhis-web-sms/menu.vm</param>
+			<param name="requiredAuthorities">F_MOBILE_SETTINGS</param>
+		</action>
+		
+	</package>
+</struts>

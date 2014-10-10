@@ -1,0 +1,106 @@
+<script>
+    
+	jQuery(document).ready( function(){
+	currentDiv = 'ccemDataEntryForm';
+	isSubmit = true;
+    jQuery("#ccemDataEntryForm").validate({
+		meta:"validate"
+		,errorElement:"span"
+		,submitHandler: function(form)
+		{
+        	if( isSubmit ) 
+            {
+            	saveEquipmentDataEntryForm();
+            }
+		}
+    	});
+    }); 
+    
+</script>
+
+<h3>$i18n.getString( "ccem_dataentry" )</h3>
+
+<form id="ccemDataEntryForm" name="ccemDataEntryForm" method="post" >	
+<div>
+	<input type="hidden" id='selectedOrgunitID' name = 'selectedOrgunitID' value="$!organisationUnit.id" />
+	<input type="hidden" id='selectedOrgunitName' name = 'selectedOrgunitName' value="$!organisationUnit.name" />
+	
+</div>
+
+<div class="inputCriteria" style="width:500px;height:130px;">
+<table>
+	<tr>
+		<td><label for="orgUnitName">$i18n.getString( "organisation_unit" )</label></td>
+		<td><input type="text" id="orgUnitName" name = "orgUnitName" readonly="readonly" value="$!organisationUnit.name" style="width:352px"></td>
+	</tr>
+	
+	<tr>
+		<td><label>$i18n.getString( "equipment_type" )</label></td>
+		<td>
+			<select id="equipmentTypeId" name = "equipmentTypeId" style="width:354px" disabled="disabled" onchange="loadEquipmentAndDataSet()">
+				<option value="-1">$i18n.getString( "select_equipmenttype" )</option>
+				#foreach( $equipmentType in $equipmentTypes )
+					<option value="$equipmentType.id">$equipmentType.name</option>
+				#end
+			</select>
+		</td>
+    </tr>	
+	
+	<tr>
+		<td><label>$i18n.getString( "equipment" )</label></td>
+		<td>
+			<select id="equipmentId" name = "equipmentId" style="width:354px" disabled="disabled" onchange="equipmentChange();">
+				<option value="-1">$i18n.getString( "select_equipment" )</option>
+			</select>
+		</td>
+    </tr>	
+	
+	<tr>
+		<td><label>$i18n.getString( "dataset" )</label></td>
+		<td>
+			<select id="dataSetId" name = "dataSetId" style="width:354px" disabled="disabled" onchange="loadPeriods();">
+				<option value="-1">$i18n.getString( "select_dataSet" )</option>
+			</select>
+		</td>
+    </tr>	
+
+	
+	<tr>
+		<td><label for="selectedPeriodId">$i18n.getString( "period" )</label></td>
+		<td><select id="selectedPeriodId" name="selectedPeriodId" style="width:200px" disabled="disabled" onchange="loadDataEntryForm()">
+				<option value="-1">[$i18n.getString( "select" )]</option>
+				#foreach( $period in $periods )
+					<option value="$period.iso">$encoder.htmlEncode( $period.name )</option>
+    			#end
+			</select>
+			<input type="button" id="prevButton" disabled="disabled" style="width:75px" value="$i18n.getString( 'prev_year' )" title="$i18n.getString('earlier_periods')" onclick="getAvailablePeriodsTemp( 'selectedPeriodId', 'selectedPeriodId', '-1' )" >
+			<input type="button" id="nextButton" disabled="disabled" style="width:75px" value="$i18n.getString( 'next_year' )" title="$i18n.getString('later_periods')" onclick="getAvailablePeriodsTemp( 'selectedPeriodId', 'selectedPeriodId', '1' )" >
+		</td>
+	</tr>		
+
+</table>
+</div>
+
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+<div id='dataEntryFormDiv'></div> <!-- DataEntry Form -->  	
+
+<p>
+	<input type="button"  value="$i18n.getString( 'Cancel' )" style="width:100px" onclick="window.location.href='index.action'"/>&nbsp;&nbsp;
+	&nbsp;&nbsp;<input type="submit"  id="saveButton" name="saveButton" value="$i18n.getString( 'save' )" disabled="disabled" style="width:100px"/>
+</p>
+
+
+</form>
+
+<script type="text/javascript">
+
+var i18n_select_equipmenttype = '$encoder.jsEscape( $i18n.getString( "select_equipmenttype" ) , "'")';
+var i18n_select_equipment = '$encoder.jsEscape( $i18n.getString( "select_equipment" ) , "'")';
+var i18n_select_dataset = '$encoder.jsEscape( $i18n.getString( "select_dataSet" ) , "'")';
+
+
+jQuery( document ).ready( function()
+{
+});
+</script>

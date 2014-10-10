@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  <!-- use the DHIS web portal default -->
+  <include file="dhis-web-commons.xml"/>
+
+  <package name="dhis-web-reports-in" extends="dhis-web-commons" namespace="/dhis-web-reports-in">
+
+    <action name="index" class="org.hisp.dhis.reports.action.NoAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-reports-in/welcome.vm</param>
+		<param name="menu">/dhis-web-reports-in/menu.vm</param>
+	</action>
+
+    <action name="reportManagement" class="org.hisp.dhis.reports.action.ReportsListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-reports-in/reportsList.vm</param>
+		<param name="menu">/dhis-web-reports-in/menu.vm</param>
+		<param name="javascripts">javascript/report.js,javascript/filterTable.js</param>
+	</action>
+
+<!-- Report Addition -->	  	  	
+    <action name="addReportForm" class="org.hisp.dhis.reports.action.AddReportFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-reports-in/addReportForm.vm</param>
+		<param name="menu">/dhis-web-reports-in/menu.vm</param>
+		<param name="javascripts">javascript/report.js</param>
+	</action>
+
+    <action name="addReport"
+      class="org.hisp.dhis.reports.action.AddReportAction">
+      <result name="success" type="redirect">reportManagement.action</result>
+    </action>
+	  
+<!-- Report Updation -->	  
+    <action name="editReportForm" class="org.hisp.dhis.reports.action.UpdateReportForm">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-reports-in/editReportForm.vm</param>
+		<param name="menu">/dhis-web-reports-in/menu.vm</param>
+		<param name="javascripts">javascript/report.js</param>
+	</action>
+    <action name="editReport"
+      class="org.hisp.dhis.reports.action.UpdateReportAction">
+      <result name="success" type="redirect">reportManagement.action</result>
+    </action>
+	  	  
+<!-- Report Validation -->
+    
+    <action name="validateReport"
+      class="org.hisp.dhis.reports.action.ValidateReportAction">
+      <result name="success" type="velocity-xml">/dhis-web-reports-in/responseSuccess.vm</result>
+      <result name="input" type="velocity-xml">/dhis-web-reports-in/responseInput.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+    
+<!-- Report Deletion -->
+    <action name="delReport"
+      class="org.hisp.dhis.reports.action.DelReportAction">
+      <result name="success" type="redirect">reportManagement.action</result>
+    </action>
+	  
+
+<!-- Get Report details -->
+    
+    <action name="getReport"
+      class="org.hisp.dhis.reports.action.GetReportAction">
+      <result name="success" type="velocity-xml">/dhis-web-reports-in/responseReportObject.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+
+<!-- Report Source Association -->
+    
+    <action name="defineReportAssociationsForm"
+      class="org.hisp.dhis.reports.action.GetNumberOfLevelsAction">
+      <result name="success" type="chain">defineReportAssociationsFormChain</result>
+    </action>
+    
+    <action name="defineReportAssociationsFormChain"
+      class="org.hisp.dhis.reports.action.SetupAssociationsTreeAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-reports-in/reportAssociations.vm</param>
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/associations.js</param>
+    </action>
+    
+    <action name="defineReportAssociations"
+      class="org.hisp.dhis.reports.action.DefineReportAssociationsAction">
+      <result name="success" type="redirect">reportManagement.action</result>
+    </action>
+    
+    <action name="selectLevel"
+      class="org.hisp.dhis.reports.action.SelectLevelAction">
+      <result name="success" type="chain">getNumberOfLevelsSelectLevelChain</result>
+    </action>
+    
+    <action name="unselectLevel"
+      class="org.hisp.dhis.reports.action.UnselectLevelAction">
+      <result name="success" type="chain">getNumberOfLevelsSelectLevelChain</result>
+    </action>
+    
+    <action name="unselectAll"
+      class="org.hisp.dhis.reports.action.UnselectAllAction">
+      <result name="success" type="chain">getNumberOfLevelsSelectLevelChain</result>      
+    </action>
+    
+    <action name="getNumberOfLevelsSelectLevelChain"
+      class="org.hisp.dhis.reports.action.GetNumberOfLevelsAction">
+      <result name="success" type="chain">getReportSelectLevelChain</result>      
+    </action>
+    
+    <action name="getReportSelectLevelChain"
+      class="org.hisp.dhis.reports.action.GetReportAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-reports-in/reportAssociations.vm</param>
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/associations.js</param>      
+    </action>
+
+<!-- Routine Reports -->
+    <action name="routineReportForm"
+		class="org.hisp.dhis.reports.routine.action.RoutineReportFormAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-reports-in/routineReportForm.vm</param>          
+        <param name="menu">/dhis-web-reports-in/menuWithTree.vm</param>
+        <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,../dhis-web-commons/lists/lists.js,javascript/report.js</param>
+        <param name="stylesheets">css/StylesForTags.css</param>
+    </action>
+	  
+    <action name="generateRoutineReport"
+        class="org.hisp.dhis.reports.routine.action.RoutineReportResultAction">
+        <result name="success" type="stream">
+            <param name="contentType">application/vnd.ms-excel</param>
+            <param name="inputName">inputStream</param>
+            <param name="contentDisposition">filename="${fileName}"</param>
+            <param name="bufferSize">1024</param>
+        </result>
+    </action>
+	  
+
+<!-- AJAX Requests -->
+    <action name="getPeriods" class="org.hisp.dhis.reports.action.GetPeriodsAction">
+        <result name="success" type="velocity">/dhis-web-reports-in/responsePeriod.vm</result>
+        <param name="onExceptionReturn">plainTextError</param>
+    </action>
+
+    <action name="getReports" class="org.hisp.dhis.reports.action.GetReportsAction">
+        <result name="success" type="velocity">/dhis-web-reports-in/responseReport.vm</result>
+        <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	  
+  </package>
+</struts>

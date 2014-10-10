@@ -1,0 +1,60 @@
+
+
+#parse( "/dhis-web-survey/selectTarget.vm" )
+#if( $flage == 1 )
+<table class="mainPageTable">
+	<col id="noCol" width="25">
+	<col id="indCol">	
+    <col id="entryCol" width="75">
+		
+	<tr>
+		<th>$i18n.getString( "sl_no" )</th>
+		<th>$i18n.getString( "dataelement" )</th>		
+		<th>$i18n.getString( "value" )</th>		
+	</tr>
+	
+#set( $count = 0 )
+#set( $mark = 0 )
+#set( $tabIndex = 1 )
+#set( $optionCombos = $orderdCategoryOptionCombos.get( $categoryCombo.id )  )
+
+#foreach( $deTargetMember in $deTargetmembers )
+	#set( $count = $count + 1 )
+	#set( $deOptionComboId = $deTargetMember.dataelements.id + ":" + $deTargetMember.decategoryOptionCombo.id )
+	#set( $deOptionComboName = $deTargetMember.dataelements.name + " " + $deTargetMember.decategoryOptionCombo.name  )	
+	#if( $mark == 1 )
+		#set( $mark = 0 )
+	#else
+		#set( $mark = 1 )
+	#end
+	#set( $dataValue = false )
+	#set( $dataValue = $deTargetDataValueMap.get( $deOptionComboId ) )
+	
+	<tr #if( $mark == 0 ) style="background-color:#dddddd" #end>
+		##count
+		<td style="text-align:center">$count</td>
+		
+		##dataElement name
+		<td>
+			<span id="value[$deOptionComboId].name" >$encoder.htmlEncode( $deOptionComboName )</span>
+		</td>
+	
+		##entry		
+		<td>				
+			<input name="entryfield" id="value[$deOptionComboId].value" size="50" type="text" value="$!encoder.htmlEncode( $dataValue.value )" onchange="saveTargetValue( ${deTargetMember.dataelements.id},${deTargetMember.decategoryOptionCombo.id} )" onkeypress="return keyPress(event, this)" style="width:100%;text-align:center" tabindex="$tabIndex">
+		</td>
+	</tr>
+	#set( $tabIndex = $tabIndex + 1 )
+#end
+</table>
+#end
+
+
+
+<script type="text/javascript">
+	
+	var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+	var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+	var i18n_saving_zero_values_unnecessary = 'saving zero is not necessary';
+	
+</script>

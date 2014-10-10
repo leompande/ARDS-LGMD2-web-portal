@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  <!-- use the DHIS web portal default -->
+    <include file="dhis-web-commons.xml"/>
+
+    <package name="dhis-web-linelisting-in" extends="dhis-web-commons" namespace="/dhis-web-linelisting-in">
+
+        <action name="index" class="">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-linelisting-in/welcome.vm</param>
+            <param name="menu">/dhis-web-linelisting-in/menu.vm</param>
+        </action>
+
+        <action name="getLineListOptions"
+			class="org.hisp.dhis.ll.action.llOption.GetLineListOptionListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-linelisting-in/lineListOption.vm</param>
+            <param name="menu">/dhis-web-linelisting-in/menu.vm</param>
+            <param name="javascripts">
+				javascript/lineListOption.js,javascript/filterTable.js
+            </param>
+            <param name="stylesheets">css/StylesForTags.css</param>
+            <interceptor-ref name="organisationUnitTreeStack"/>
+        </action>
+	  <action name="getLineListOption"
+      class="org.hisp.dhis.ll.action.llOption.GetLineListOptionAction">
+      <result name="success" type="velocity-xml">/dhis-web-linelisting-in/responseLineListOption.vm</result>
+      <interceptor-ref name="transactionStack"/>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+
+    <action name="removeLineListOption"
+      class="org.hisp.dhis.ll.action.llOption.RemoveLineListOptionAction">
+      <result name="success" type="velocity-xml">/dhis-web-linelisting-in/responseSuccess.vm</result>
+      <result name="error" type="velocity-xml">/dhis-web-linelisting-in/responseError.vm</result>
+      <interceptor-ref name="transactionStack"/>
+      <param name="onExceptionReturn">plainTextError</param>
+      <param name="requiredAuthorities">F_LINELISTOPTION_DELETE</param>
+    </action>
+
+    <action name="showAddLineListOptionForm"
+      class="org.hisp.dhis.ll.action.llOption.ShowAddLineListOptionForm">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-linelisting-in/addLineListOptionForm.vm</param>
+      <param name="javascripts">javascript/shortName.js,javascript/lineListOption.js</param>
+      <param name="stylesheets">style/dhis-web-linelisting-in.css</param>
+      <param name="requiredAuthorities">F_LINELISTOPTION_ADD</param>
+    </action>
+
+    <action name="addLineListOption"
+      class="org.hisp.dhis.ll.action.llOption.AddLineListOptionAction">
+      <result name="success" type="redirect">getLineListOptions.action</result>
+      <interceptor-ref name="transactionStack"/>
+      <param name="requiredAuthorities">F_LINELISTOPTION_ADD</param>
+    </action>
+
+    <action name="showUpdateLineListOptionForm"
+      class="org.hisp.dhis.ll.action.llOption.ShowUpdateLineListOptionFormAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-linelisting-in/updateLineListOptionForm.vm</param>
+      <param name="javascripts">javascript/shortName.js,javascript/lineListOption.js,javascript/updateLoad.js</param>
+      <param name="stylesheets">style/dhis-web-linelisting-in.css</param>
+      <interceptor-ref name="transactionStack"/>
+      <param name="requiredAuthorities">F_LINELISTOPTION_UPDATE</param>
+    </action>
+
+    <action name="updateLineListOption"
+      class="org.hisp.dhis.ll.action.llOption.UpdateLineListOptionAction">
+      <result name="success" type="redirect">getLineListOptions.action</result>
+      <interceptor-ref name="transactionStack"/>
+      <param name="requiredAuthorities">F_LINELISTOPTION_UPDATE</param>
+    </action>
+
+    <action name="validateLineListOption"
+      class="org.hisp.dhis.ll.action.llOption.ValidateLineListOptionAction">
+      <result name="success" type="velocity-xml">/dhis-web-linelisting-in/responseSuccess.vm</result>
+      <result name="error" type="velocity-xml">/dhis-web-linelisting-in/responseError.vm</result>
+      <result name="input" type="velocity-xml">/dhis-web-linelisting-in/responseInput.vm</result>
+      <interceptor-ref name="transactionStack"/>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+
+    </package>
+</struts>

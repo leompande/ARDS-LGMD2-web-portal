@@ -1,0 +1,75 @@
+        		
+<script>
+	//Global Variables
+	 
+	var reportModels = new HashTable();
+	var reportFileNames = new HashTable();
+					
+	function formValidations()
+	{			            
+		var reportListIndex = document.reportForm.reportList.selectedIndex;
+		var periodIndex = document.reportForm.availablePeriods.selectedIndex;
+		var orgunitIdValue = document.reportForm.ouIDTB.value;
+											
+		if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+		else if(document.reportForm.availablePeriods.options[periodIndex].text == null || document.reportForm.availablePeriods.options[periodIndex].text== "") {alert("Please Select Period"); return false;}
+		else if(orgunitIdValue == null || orgunitIdValue=="" || orgunitIdValue==" ") {alert("Please Select OrganisationUnit"); return false;}
+						
+		document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+		document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+
+		return true;
+	}			
+</script>
+
+<h1>Linelisting Report Analyser</h1>
+<hr />	
+<br />
+<form id="reportForm" name="reportForm" action="generateLinelistingReport.action" method="post" onsubmit="return formValidations()" target="_blank">        
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>		                
+		<tr>
+			<td class="NormalB">
+   			    <select id="periodTypeId" name="periodTypeId" style="width:200px; display:none">
+					<option value="$monthlyPeriodType.name">$monthlyPeriodType.name</option>
+				</select>
+				Periods : <br />
+                <select id="availablePeriods" name="availablePeriods" style="width:200px">
+					#foreach ( $mperiod in $monthlyPeriods )
+						<option value="$mperiod.id">$simpleDateFormat.format( $mperiod.startDate )</option>
+                    #end
+                </select>
+    		</td>
+            <td class="NormalB">
+				Reports :<br />
+                <select id="reportList" name="reportList" style="width:200px"></select>
+           	</td>
+       	</tr>
+        <tr>
+			<td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+			<td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>			
+        <tr>
+			<td class="NormalB">
+				OrganisationUnit : <br />
+                <input type="text" name="ouNameTB" id="ouNameTB" size="20">    
+          	</td>
+          	<td class="NormalB">
+				<input type="submit" name="generate" value='Generate Report'/>
+         	</td>
+		</tr>
+	    <tr>
+			<td>&nbsp;</td>
+          	<td>
+          	    <input type="hidden" name="ouIDTB" id="ouIDTB">
+          	    <input type="hidden" name="ouLevelTB" id="ouLevelTB">
+          	    <input type="hidden" name="reportModelTB" id="reportModelTB">
+				<input type="hidden" name="reportFileNameTB" id="reportFileNameTB">
+				<input type="hidden" name="reportListFileNameTB" id="reportListFileNameTB" value="linelistingReportsList.xml">	
+            </td>
+        </tr>
+    </table>
+</form>

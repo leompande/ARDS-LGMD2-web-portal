@@ -1,0 +1,62 @@
+
+<h3>Indicator Report Analyser</h3>
+<hr /><br />
+
+<form id="reportForm" name="reportForm" action="generateEDReport.action" method="post" onsubmit="return formValidationsForEDReport()" target="_blank">
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="70%" border=0>
+        <tr>
+            <td class="NormalB">
+                1.$i18n.getString( "indicator_group" ) :<br />
+                <select id="indicatorGroupId" name="indicatorGroupId" style="width:200px">
+                    <option value="ALL">[ Select IndicatorGroup / All ]</option>
+                    #foreach ( $group in $indicatorGroups )
+                    <option value="$group.id" title="$group.name">$group.name</option>
+                    #end
+                </select>
+            </td>
+            <td class="NormalB">
+                3.From Date : <br />
+                <select id="selectedStartPeriodId" name="selectedStartPeriodId" style="width:200px">
+                    #foreach ( $mperiod in $periods )
+                        <option value="$mperiod.id">$simpleDateFormat.format( $mperiod.startDate )</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                2.$i18n.getString( "generated_data_type" ) :<br />
+                <select id="aggData" name="aggData" style="width:200px">
+                    <option value="generateaggdata">$i18n.getString( "generate_agg_data" )</option>
+                    <option value="useexistingaggdata">$i18n.getString( "use_existing_agg_data" )</option>
+                    <option value="usecaptureddata">$i18n.getString( "use_captured_data" )</option>
+                </select>
+            </td>
+            <td class="NormalB">
+                4.To Date : <br />
+                <select id="selectedEndPeriodId" name="selectedEndPeriodId" style="width:200px">
+                    #foreach ( $mperiod in $periods )
+                        <option value="$mperiod.id">$simpleDateFormat.format( $mperiod.startDate )</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td>&nbsp;</td>
+        </tr>
+        <tr>   
+            <td class="NormalB">
+                <input type="submit" name="generate" value='Generate Report' style="width:200px" />
+            </td>
+        </tr>
+    </table>  
+ </form>

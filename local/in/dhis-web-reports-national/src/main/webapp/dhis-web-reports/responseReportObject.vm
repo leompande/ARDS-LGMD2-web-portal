@@ -1,0 +1,7 @@
+<report>
+  <id>$report.id</id>
+  <name>$encoder.xmlEncode( $report.name )</name>
+  <code>$encoder.xmlEncode( $report.code )</code>  
+  <type>$report.periodType.name</type>
+  <level>$report.level</level>  
+</report>

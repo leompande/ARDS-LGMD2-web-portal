@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<include file="dhis-web-commons.xml"/>
+	
+<package name="dhis-web-maintenance-ccem" extends="dhis-web-commons" namespace="/dhis-web-maintenance-ccem">
+	
+<!-- Home page -->
+	<action name="index" class="org.hisp.dhis.ccem.action.NoAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/welcome.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+	</action>
+
+<!-- model Type Attribute -->
+		
+	<!-- Model Type Attribute List -->
+	<action name="coldChainModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.GetColdChainModelTypeAttributeListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/coldChainModelTypeAttribute.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+	</action>
+			
+	<!-- Add Form -->
+	<action name="showAddColdChainModelTypeAttributeForm" class="org.hisp.dhis.ccem.model.action.AddColdChainModelTypeAttributeForm">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/addColdChainModelTypeAttributeForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_ADD</param>
+	</action>
+		
+	<!-- Add -->	
+	<action name="addModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.AddModelTypeAttributeAction">
+		<result name="success" type="redirect">coldChainModelTypeAttribute.action</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_ADD</param>
+	</action>
+		
+	<!-- show details -->
+	<action name="getModelTypeAttributeDetails" class="org.hisp.dhis.ccem.model.action.GetModelTypeAttributeDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonModelTypeAttribute.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>						
+
+	<!-- Remove/Delete -->
+	<action name="removeModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.RemoveModelTypeAttributeAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>		
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_DELETE</param>
+	</action>
+			
+	<!-- Remove/Delete Attrobute Option -->
+	<action name="removeModelTypeAttributeOption" class="org.hisp.dhis.ccem.model.action.RemoveModelTypeAttributeOptionAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_DELETE</param>
+	</action>
+	
+	<!-- Update Form -->
+	<action name="showUpdateModelTypeAttributeForm" class="org.hisp.dhis.ccem.model.action.ShowUpdateModelTypeAttributeFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/updateModelTypeAttibuteForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttribute.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_UPDATE</param>
+	</action>
+
+	<!-- Update -->
+	<action name="updateModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.UpdateModelTypeAttributeAction">
+		<result name="success" type="redirect">coldChainModelTypeAttribute.action</result>
+		<param name="requiredAuthorities">F_MODELTYPEATTRIBUTE_UPDATE</param>
+	</action>
+
+	<!-- Validation -->
+	<action name="validateModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.ValidateModelTypeAttributeAction">
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+	</action>
+
+<!-- model Type -->	
+
+	<!-- Model Type List -->
+	<action name="modelType" class="org.hisp.dhis.ccem.model.action.ModelTypeListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/modelTypeList.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+	</action>
+
+	<!-- Add Model Type Form -->
+	<action name="addModelTypeForm" class="org.hisp.dhis.ccem.model.action.AddModelTypeFormAction">
+		<result name="input" type="velocity-xml">/dhis-web-commons/ajax/xmlResponseInput.vm</result>		
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/addModelTypeForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+		
+	</action>	
+
+	<!-- Model Type Attributes -->
+	<action name="getModelTypeAttributes" class="org.hisp.dhis.ccem.model.action.GetModelTypeAttributesAction">
+		<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonModelTypeAttributes.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+	
+	<!-- Add -->
+	<action name="addCataligType" class="org.hisp.dhis.ccem.model.action.AddModelTypeAction">
+		<result name="success" type="redirect">modelType.action</result>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+	</action>
+
+	<!-- Update Form -->
+	<action name="editModelTypeForm" class="org.hisp.dhis.ccem.model.action.UpdateModelTypeFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/updateModelTypeForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelType.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPE_UPDATE</param>
+	</action>	
+
+	<!-- Update -->
+	<action name="updateModelType" class="org.hisp.dhis.ccem.model.action.UpdateModelTypeAction">
+		<result name="success" type="redirect">modelType.action</result>
+		<param name="requiredAuthorities">F_MODELTYPE_UPDATE</param>
+	</action>
+	
+	<!-- Remove/Delete -->
+	<action name="removeModelType" class="org.hisp.dhis.ccem.model.action.RemoveModelTypeAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+		<param name="requiredAuthorities">F_MODELTYPE_DELETE</param>
+	</action>
+	
+	<!-- Validation -->
+	<action name="validateModelType" class="org.hisp.dhis.ccem.model.action.ValidateModelTypeAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	
+	<!-- show details -->
+	<action name="getModelTypeDetails" class="org.hisp.dhis.ccem.model.action.GetModelTypeDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonModelType.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+
+<!-- model -->	
+	
+	<!-- Data Entry Form -->
+
+	<action name="viewModelDataEntryForm"
+		class="org.hisp.dhis.ccem.model.dataentryform.action.ViewModelDataEntryFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/viewModelDataEntryForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">../dhis-web-commons/ckeditor/ckeditor.js,../dhis-web-commons/ckeditor/adapters/jquery.js,javascript/viewModelTypeDataEntryForm.js</param>
+	</action>	
+	
+	<!-- Validation -->
+	<action name="validateModelTypeDataEntryForm"
+		class="org.hisp.dhis.ccem.model.dataentryform.action.ValidateModelDataEntryFormAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+	
+	<!-- Save Form -->
+	<action name="saveModelDataEntryForm" class="org.hisp.dhis.ccem.model.dataentryform.action.SaveModelDataEntryFormAction">
+		<result name="success" type="redirect">modelType.action</result>
+	</action>		
+	
+	<!-- Delete Form -->
+	<action name="delModelDataEntryForm" class="org.hisp.dhis.ccem.model.dataentryform.action.DeleteModelDataEntryFormAction">
+		<result name="success" type="redirect">modelType.action</result>
+	</action>	
+	
+	<!-- Model List -->
+
+	<action name="model" class="org.hisp.dhis.ccem.model.action.ModelSelectAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/selectModel.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+	</action>	
+		
+	<action name="getModelTypeAttribute" class="org.hisp.dhis.ccem.model.action.GetModelTypeAttributeListAction">
+		<result name="success" type="velocity-xml">/dhis-web-maintenance-ccem/responseModelTypeAttributes.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	
+	<action name="getModelTypeAttributeOption" class="org.hisp.dhis.ccem.model.action.GetModelTypeAttributeOptionListAction">
+		<result name="success" type="velocity-xml">/dhis-web-maintenance-ccem/responseModelTypeAttributeOption.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>		
+	
+	<action name="getModelList" class="org.hisp.dhis.ccem.model.action.GetModelListAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/model_List.vm</param>
+		<param name="requiredAuthorities">F_MODEL_MANAGEMENT</param>
+	</action>
+	
+	
+	<!--
+	<action name="model" class="org.hisp.dhis.ccem.model.action.ModelListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/modelList.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+	</action>
+	-->
+	<!-- Add Model  Form -->
+	<action name="addModelForm" class="org.hisp.dhis.ccem.model.action.AddModelFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/addModelForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/model.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+	
+	<!-- Show Add Model  Form -->
+	<action name="showAddModelForm" class="org.hisp.dhis.ccem.model.action.ShowAddModelFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/showAddModelForm.vm</param>
+		<!--<param name="page">/dhis-web-maintenance-ccem/modelDataEntryForm.vm</param>-->
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+
+	<!-- Add -->
+	<action name="addModel" class="org.hisp.dhis.ccem.model.action.AddModelAction">
+		<!--<result name="success" type="redirect">model.action</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_MODEL_ADD</param>
+	</action>
+
+	<!-- Update Form -->
+	<action name="showUpdateModelForm" class="org.hisp.dhis.ccem.model.action.UpdateModelFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/updateModelForm.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+	
+	<!-- Update -->
+	<action name="updateModel" class="org.hisp.dhis.ccem.model.action.UpdateModelAction">
+		<!--<result name="success" type="redirect">model.action</result>-->
+		<result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>
+		
+	<!-- Validation -->
+	<action name="validateModel" class="org.hisp.dhis.ccem.model.action.ValidateModelAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+
+	<!-- show details -->
+<!--
+	<action name="getModelDetails" class="org.hisp.dhis.ccem.model.action.GetModelDetailsAction">
+		<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonModel.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+	</action>	
+-->
+	<action name="getModelDetails" class="org.hisp.dhis.ccem.model.action.GetModelDetailsAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/modelDetails.vm</param>
+	</action>	
+	
+	
+	<!-- Remove/Delete -->
+	<action name="removeModel" class="org.hisp.dhis.ccem.model.action.RemoveModelAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+		<param name="onExceptionReturn">plainTextError</param>
+		<param name="requiredAuthorities">F_MODEL_DELETE</param>
+	</action>	
+														
+<!-- EquipmentTypeAttribute -->
+        <action name="equipmentTypeAttributeList" class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeAttributeListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentTypeAttributeList.vm</param>
+            <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js</param>
+        </action>
+		
+        <action name="showAddEquipmentTypeAttributeForm" class="org.hisp.dhis.ccem.model.action.AddColdChainModelTypeAttributeForm">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/addEquipmentTypeAttributeForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_ADD</param>
+        </action>
+
+        <action name="addEquipmentTypeAttribute"
+            class="org.hisp.dhis.ccem.equipmenttype.action.AddEquipmentTypeAttributeAction">
+            <result name="success" type="redirect">equipmentTypeAttributeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_ADD</param>
+        </action>
+		
+		<action name="validateEquipmentTypeAttribute"
+            class="org.hisp.dhis.ccem.equipmenttype.action.ValidateEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+
+        <action name="showUpdateEquipmentTypeAttributeForm"
+            class="org.hisp.dhis.ccem.equipmenttype.action.ShowUpdateEquipmentTypeAttributeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/updateEquipmentTypeAttibuteForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentTypeAttribute.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_UPDATE</param>
+        </action>
+		
+        <action name="updateEquipmentTypeAttribute"
+            class="org.hisp.dhis.ccem.equipmenttype.action.UpdateEquipmentTypeAttributeAction">
+            <result name="success" type="redirect">equipmentTypeAttributeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_UPDATE</param>
+        </action>
+		
+        <action name="removeEquipmentTypeAttribute"
+            class="org.hisp.dhis.ccem.equipmenttype.action.RemoveEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_DELETE</param>
+        </action>
+
+        <action name="removeEquipmentTypeAttributeOption"
+            class="org.hisp.dhis.ccem.equipmenttype.action.RemoveEquipmentTypeAttributeOptionAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPEATTRIBUTE_DELETE</param>
+        </action>
+
+        <action name="getEquipmentTypeAttribute"
+            class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeAttributeAction">
+            <result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonEquipmentTypeAttribute.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+		
+		<action name="equipmentTypeAttributes" 
+			class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeAttributesAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonEquipmentTypeAttributes.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+<!-- EquipmentType -->
+        <action name="equipmentTypeList" class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeListAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentTypeList.vm</param>
+            <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js</param>
+        </action>
+        <action name="showAddEquipmentTypeForm" class="org.hisp.dhis.ccem.equipmenttype.action.ShowAddEquipmentTypeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/addEquipmentTypeForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_ADD</param>
+        </action>
+        <action name="validateEquipmentType" class="org.hisp.dhis.ccem.equipmenttype.action.ValidateEquipmentTypeAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+        <action name="addEquipmentType"
+            class="org.hisp.dhis.ccem.equipmenttype.action.AddEquipmentTypeAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_ADD</param>
+        </action>
+        <action name="showUpdateEquipmentTypeForm"
+            class="org.hisp.dhis.ccem.equipmenttype.action.ShowUpdateEquipmentTypeAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/updateEquipmentTypeForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_UPDATE</param>
+        </action>
+        <action name="updateEquipmentType"
+            class="org.hisp.dhis.ccem.equipmenttype.action.UpdateEquipmentTypeAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_UPDATE</param>
+        </action>	
+        <action name="showEquipmentTypeDataSetForm"
+            class="org.hisp.dhis.ccem.equipmenttype.action.ShowEquipmentTypeDataSetFormAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentTypeDataSetForm.vm</param>
+			<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+            <param name="javascripts">javascript/equipmentType.js,../dhis-web-commons/javascripts/jQuery/ui/jquery.cluetip.min.js</param>
+            <param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DATASET</param>
+        </action>		
+		<action name="dataSetList" 
+			class="org.hisp.dhis.ccem.equipmenttype.action.GetDataSetListAction">
+			<result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonDataSetList.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>	
+        <action name="updateEquipmentTypeDataSetForm"
+            class="org.hisp.dhis.ccem.equipmenttype.action.UpdateEquipmentTypeDataSetAction">
+            <result name="success" type="redirect">equipmentTypeList.action</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DATASET</param>
+        </action>
+        <action name="removeEquipmentType"
+            class="org.hisp.dhis.ccem.equipmenttype.action.RemoveEquipmentTypeAction">
+            <result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+			<result name="input" type="velocity-json">../dhis-web-commons/ajax/jsonResponseInput.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTTYPE_DELETE</param>
+        </action>
+        <action name="getEquipmentType"
+            class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeAction">
+            <result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonEquipmentType.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+	
+<!-- EquipmentDetails -->
+        <action name="enquipmentSelect"
+            class="org.hisp.dhis.ccem.equipment.action.EquipmentSelectAction">
+            <result name="success" type="velocity">/main.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/selectEquipment.vm</param>
+            <param name="menu">/dhis-web-maintenance-ccem/equipmentMenu.vm</param>
+            <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/equipmentAttributeValue.js</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_MANAGEMENT</param>
+            <interceptor-ref name="organisationUnitTreeStack" />
+        </action>
+        <action name="getOrganisationUnit"
+            class="org.hisp.dhis.ccem.action.GetOrganisationUnitAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="input" type="velocity-json">/dhis-web-commons/ajax/jsonResponseInput.vm</result>
+        </action>
+        <action name="getEquipmentTypeAttributes" class="org.hisp.dhis.ccem.equipmenttype.action.GetEquipmentTypeAttributeListAction">
+            <result name="success" type="velocity-xml">/dhis-web-maintenance-ccem/responseEquipmentTypeAttributes.vm</result>
+            <param name="onExceptionReturn">plainTextError</param>
+        </action>
+        <action name="getEquipments" class="org.hisp.dhis.ccem.equipment.action.GetEquipmentListAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentList.vm</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_MANAGEMENT</param>
+        </action>
+        <action name="showAddEquipmentForm"
+            class="org.hisp.dhis.ccem.equipment.action.ShowAddEquipmentFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/addEquipmentForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>
+        <action name="addEquipment"
+            class="org.hisp.dhis.ccem.equipment.action.AddEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_ADD</param>
+        </action>
+        <action name="showUpdateEquipmentForm"
+            class="org.hisp.dhis.ccem.equipment.action.GetEquipmentDataAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/updateEquipmentForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENT_UPDATE</param>
+        </action>
+        <action name="updateEquipment"
+            class="org.hisp.dhis.ccem.equipment.action.UpdateEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_UPDATE</param>
+        </action>        
+		<action name="showEquipmentStatusForm"
+            class="org.hisp.dhis.ccem.equipment.action.ShowEquipmentStatusFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentStatusForm.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUS_UPDATE</param>
+        </action>		
+        <action name="updateEquipmentStatus"
+            class="org.hisp.dhis.ccem.equipment.action.UpdateEquipmentStatusAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUS_UPDATE</param>
+        </action>
+        <action name="showEquipmentStatusHistoryForm"
+            class="org.hisp.dhis.ccem.equipment.action.ShowEquipmentStatusHistoryFormAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/showEquipmentStatusHistory.vm</param>
+			<param name="stylesheets">css/basic.css</param>
+            <param name="requiredAuthorities">F_EQUIPMENTSTATUSHISTORY</param>
+        </action>
+        <action name="showEquipmentDetails"
+            class="org.hisp.dhis.ccem.equipment.action.GetEquipmentDataAction">
+            <result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/showEquipmentData.vm</param>
+        </action>		
+        <action name="removeEquipment"
+            class="org.hisp.dhis.ccem.equipment.action.RemoveEquipmentAction">
+            <result name="success" type="velocity-json">/dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+            <result name="error" type="velocity-json">/dhis-web-commons/ajax/jsonResponseError.vm</result>
+            <param name="requiredAuthorities">F_EQUIPMENT_DELETE</param>
+        </action>
+	
+<!-- EquipmentAttributeValue Data Entry related actions -->
+	
+        <action name="showEquipmentDataEntryForm"
+            class="org.hisp.dhis.ccem.equipment.action.ShowEquipmentDataEntryFormAction">
+            <!--<result name="success" type="velocity">/main.vm</result>-->
+			<result name="success" type="velocity">/content.vm</result>
+            <param name="page">/dhis-web-maintenance-ccem/equipmentDataEntry.vm</param>
+            <!--<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>-->
+			<param name="stylesheets">css/equipmentDataentry.css</param>
+			<!--<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/equipmentAttributeValue.js,javascript/equipmentDataEntry.js</param>-->
+			<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+            <!--<interceptor-ref name="organisationUnitTreeStack" />-->
+        </action>	
+	
+        <action name="loadPeriods" class="org.hisp.dhis.ccem.equipment.action.LoadPeriodsAction">
+            <result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonPeriods.vm</result>
+        </action>	
+
+        <action name="getAvailableNextPrePeriods" class="org.hisp.dhis.ccem.equipment.action.LoadNextPrePeriodsAction">
+            <result name="success" type="velocity-json">/dhis-web-maintenance-ccem/jsonPeriods.vm</result>
+        </action>		
+	
+	<!-- Load DataEntry Form -->
+	<action name="loadDataEntryForm" class="org.hisp.dhis.ccem.equipment.action.LoadDataEntryFormAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/loadDataEntryForm.vm</param>
+		<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+	</action>
+	
+	<!-- Save DataEntry Form -->
+	<action name="saveDataEntryForm" class="org.hisp.dhis.ccem.equipment.action.SaveEquipmentDataValueAction">
+		<result name="success" type="redirect">enquipmentSelect.action</result>
+		<param name="requiredAuthorities">F_EQUIPMENT_DATAENTRY</param>
+	</action>	
+
+	<!-- Upload Image Form -->
+	<action name="showUploadImageForm" class="org.hisp.dhis.ccem.model.action.ShowUploadModelImageFormAction">
+		<!--<result name="success" type="velocity">/main.vm</result>-->
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/uploadModelImageForm.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+		
+	<action name="uploadModelImage" class="org.hisp.dhis.ccem.model.action.UploadModelImageAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="page">/dhis-web-maintenance-ccem/responseUplodImageStatus.vm</param>
+		<interceptor-ref name="fileUploadStack" />
+	</action>				
+	
+	<action name="showImage" class="org.hisp.dhis.ccem.model.action.ShowImageAction">
+		<result name="success" type="velocity">/content.vm</result>
+	</action>	
+
+	<!-- Upload Image Form Model Type-->
+	<action name="showUploadModelTypeImageForm" class="org.hisp.dhis.ccem.model.action.ShowUploadModelTypeImageFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/uploadModelTypeImageForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODEL_UPDATE</param>
+	</action>	
+	
+	<action name="uploadModelTypeImage" class="org.hisp.dhis.ccem.model.action.UploadModelTypeImageAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="page">/dhis-web-maintenance-ccem/responseUplodModelTypeImageStatus.vm</param>
+		<interceptor-ref name="fileUploadStack" />
+	</action>	
+			
+	<action name="showModelTypeImage" class="org.hisp.dhis.ccem.model.action.ShowModelTypeImageAction">
+		<result name="success" type="velocity">/content.vm</result>
+	</action>	
+
+	<!-- ModelType Attribute Group List -->
+	<action name="showCalatogTypeAttributeGroupList" class="org.hisp.dhis.ccem.model.action.ModelTypeAttributeGroupListAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/modelTypeAttributeGroupList.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttributeGroup.js</param>
+	</action>
+	
+	<!-- Add Model Type Attribute Group Form -->
+	<action name="addModelTypeAttributeGroupForm" class="org.hisp.dhis.ccem.model.action.AddModelTypeAttributeGroupFormAction">
+		<result name="input" type="velocity-xml">/dhis-web-commons/ajax/xmlResponseInput.vm</result>
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/addModelTypeAttributeGroupForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/modelTypeAttributeGroup.js</param>
+		<param name="stylesheets">css/style.css</param>
+		<param name="requiredAuthorities">F_MODELTYPE_ATT_GROUP_ADD</param>
+	</action>	
+	
+	<!-- Group Name Validation -->
+	<action name="validateModelTypeAttributeGroup" class="org.hisp.dhis.ccem.model.action.ValidateModelTypeAttributeGroupAction">
+		<result name="success" type="velocity-json">../dhis-web-commons/ajax/jsonResponseSuccess.vm</result>
+		<result name="error" type="velocity-json">../dhis-web-commons/ajax/jsonResponseError.vm</result>
+		<result name="input" type="velocity-json">../dhis-web-commons/ajax/jsonResponseInput.vm</result>
+	</action>
+	
+	<!-- Add Model Type Attribute Group -->
+	<action name="addCataligTypeAttributeGroup" class="org.hisp.dhis.ccem.model.action.AddModelTypeAttributeGroupAction">
+		<result name="success" type="redirect">showCalatogTypeAttributeGroupList.action?id=${modelTypeId}</result>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+	</action>
+	
+	<!-- Model Type Attribute Group Sort Form-->
+	<action name="showSortGroupForm" class="org.hisp.dhis.ccem.model.action.GetModelTypeAttributeGroupListSortOrderAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/sortModelTypeAttributeGroupForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+	    <param name="javascripts">javascript/modelTypeAttributeGroup.js</param>
+	</action>
+	
+	<!-- Save Sort OREDER -->
+	<action name="saveModelTypeAttributeGroupsSortOrder" class="org.hisp.dhis.ccem.model.action.SaveModelTypeAttributeGroupSortOrderAction">
+		<result name="success" type="redirect">showCalatogTypeAttributeGroupList.action?id=${modelTypeId}</result>
+		<param name="requiredAuthorities">F_MODELTYPE_ADD</param>
+	</action>	
+	
+	<!--<result name="success" type="redirect">programStage.action?id=${modelTypeId}</result>-->
+
+	<!-- Transfer Facility Data -->
+	<action name="transferFacilityDataForm" class="org.hisp.dhis.ccem.transferfacilitydata.action.TraferFacilityDataFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/transferFacilityDataForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+		<param name="javascripts">javascript/transferFacilityData.js</param>
+		<param name="requiredAuthorities">F_TRANSFER_FACILITY_DATA</param>
+	</action>	
+
+	<action name="transferFacilityDataResult" class="org.hisp.dhis.ccem.transferfacilitydata.action.TraferFacilityDataResultAction">
+		<result name="success" type="velocity">/content.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/transferFacilityDataResult.vm</param>
+		<param name="requiredAuthorities">F_TRANSFER_FACILITY_DATA</param>
+	</action>	
+
+	<!--  Import ColdChain Data -->
+	<action name="importDataForm" class="org.hisp.dhis.ccem.action.NoAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-ccem/importDataForm.vm</param>
+		<param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>		
+	</action>
+
+    <action name="importCSVData" class="org.hisp.dhis.ccem.importexport.action.CSVImportAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/csvImportResult.vm</param>
+        <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+        <interceptor-ref name="fileUploadStack"/>
+    </action>
+    
+    <!--  Aggregation Engine -->
+    <action name="aggregationQueryList" class="org.hisp.dhis.ccem.aggregation.action.AggregationQueryListAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/aggregationQueryList.vm</param>
+        <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+        <param name="javascripts">javascript/aggregationEngine.js</param>
+    </action>
+
+    <action name="addAggregationQueryForm" class="org.hisp.dhis.ccem.aggregation.action.AddAggregationQueryFormAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/addAggregationQuery.vm</param>
+        <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+        <param name="javascripts">javascript/aggregationEngine.js</param>
+    </action>
+    
+	<action name="loadAggregationParam" class="org.hisp.dhis.ccem.aggregation.action.GetAggregationParameterAction">
+        <result name="success" type="velocity">/content.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/addAggregationParam.vm</param>            
+    </action>
+
+    <action name="addAggregationQuery" class="org.hisp.dhis.ccem.aggregation.action.AddAggregationQueryAction">
+        <result name="success" type="redirect">aggregationQueryList.action</result>
+    </action>
+
+    <action name="runAggregationQueryForm" class="org.hisp.dhis.ccem.action.NoAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/runAggregationQueryForm.vm</param>
+        <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+    </action>
+
+    <action name="runAggregationQuery" class="org.hisp.dhis.ccem.aggregation.action.RunAggregationQueryAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-ccem/runAggregationQueryResult.vm</param>
+        <param name="menu">/dhis-web-maintenance-ccem/menu.vm</param>
+    </action>
+
+</package>
+</struts>

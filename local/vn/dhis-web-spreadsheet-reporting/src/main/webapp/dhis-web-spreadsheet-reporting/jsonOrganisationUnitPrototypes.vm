@@ -1,0 +1,14 @@
+﻿{
+  #set( $size = $!organisationUnitPrototypes.size() )
+  "orgUnitPrototypes": [
+  #foreach( $orgUnitPrototype in $!organisationUnitPrototypes )
+  {
+	#set( $groups = $!orgUnitPrototype.groups )
+    "id": "${orgUnitPrototype.id}",
+    "name": "$!encoder.jsonEncode( ${orgUnitPrototype.displayName} )",
+    "shortName": "$!encoder.jsonEncode( ${orgUnitPrototype.displayShortName} )",
+	"groups": [ #foreach( $group in $groups )${group.id}#if( $velocityCount < $groups.size() ),#end#end ]
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

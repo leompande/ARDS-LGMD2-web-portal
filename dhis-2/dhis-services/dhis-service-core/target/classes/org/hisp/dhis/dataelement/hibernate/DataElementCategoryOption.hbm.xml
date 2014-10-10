@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+>
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.dataelement.DataElementCategoryOption" table="dataelementcategoryoption">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="categoryoptionid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <many-to-one name="concept" class="org.hisp.dhis.concept.Concept" column="conceptid"
+      foreign-key="fk_dataelementcategory_conceptid" />
+
+    <set name="categoryOptionCombos" table="categoryoptioncombos_categoryoptions" inverse="true">
+      <cache usage="read-write" />
+      <key column="categoryoptionid" foreign-key="fk_categoryoptioncombos_categoryoptions_categoryoptionid" />
+      <many-to-many class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" column="categoryoptioncomboid"
+        foreign-key="fk_categoryoption_categoryoptioncomboid" />
+    </set>
+
+    <set name="categories" table="categories_categoryoptions" inverse="true">
+      <cache usage="read-write" />
+      <key column="categoryoptionid" />
+      <many-to-many class="org.hisp.dhis.dataelement.DataElementCategory" column="categoryid" />
+    </set>
+
+  </class>
+</hibernate-mapping>

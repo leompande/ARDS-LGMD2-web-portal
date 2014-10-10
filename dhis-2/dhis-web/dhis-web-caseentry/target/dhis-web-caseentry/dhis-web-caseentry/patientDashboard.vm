@@ -1,0 +1,268 @@
+<table style='margin-top:-25px;'>
+	<tr>
+		<td colspan='3'>
+			<h3><a name="mainPagelink" href="javascript:onClickBackBtn();">$i18n.getString( 'patient_management' )</a>
+			&#8226; $i18n.getString( 'patient_dashboard' )</h3>
+		</td>
+		<td><span style="float:right;"><h4><a href="javascript:dashboardHistoryToggle();" >$i18n.getString( 'access_log' )</a></h4></span></td>
+	</tr>
+<tr>
+#if( $auth.hasAccess( "dhis-web-caseentry", "accessPatientAttributes" ) )
+<td>
+	<div class="link-area">
+		<p class='header'>
+			$i18n.getString("demographics")
+			&#8226; <a href="javascript:showUpdatePatientForm( '$patient.id', true );">$i18n.getString("edit_profile")</a>
+			#if( $auth.hasAccess( "dhis-web-caseentry", "getPatientLocation" ) )
+				&#8226; <a href="javascript:getPatientLocation( '$patient.id', true );">$i18n.getString("change_location")</a>
+			#end<br>&nbsp;
+		</p>
+		<div class="contentProviderTable">
+			<table>
+				<tr>
+					<td>$i18n.getString("location")</td>
+					<td>$encoder.htmlEncode($!patient.organisationUnit.name)</td>
+				</tr>
+				#foreach($key in $programIndicatorsMap.keySet())
+				<tr class='bold'>
+					<td>$encoder.htmlEncode($key)</td>
+					<td>$!programIndicatorsMap.get($key)</td>
+				</tr>
+				#end
+				#foreach( $identifier in $identifiers )
+				<tr>
+					<td>
+						$!identifier.identifierType.displayName
+					</td>
+					<td id='dashboard_iden$identifier.identifierType.id'>$identifier.identifier</td>
+				</tr>
+				#end
+				#foreach( $attributeValue in $attributeValues )
+				<tr>
+					<td>$attributeValue.patientAttribute.displayName</td>
+					<td id='dashboard_attr$attributeValue.patientAttribute.id'>
+						#if($attributeValue.patientAttribute.valueType=='bool' 
+							|| $attributeValue.patientAttribute.valueType=='trueOnly')
+							#if($attributeValue.value=='true')
+								$i18n.getString("yes")
+							#else
+								$i18n.getString("no")
+							#end
+						#else
+							$encoder.htmlEncode($attributeValue.value)
+						#end	
+					</td>
+				</tr>
+				#end
+			</table>
+		</div>
+	</div>
+
+</td>
+#end
+
+<td>
+
+	<div class="link-area" id="activeDiv" name="activeDiv">
+		<p class='header'>
+			$i18n.getString("active_programs")
+			&#8226; <a href='javascript:viewPersonProgram( "completedDiv","activeDiv" )'>$i18n.getString("completed_programs")</a>
+			
+			#if( $auth.hasAccess( "dhis-web-caseentry", "showProgramEnrollmentForm" ) )
+			&#8226; <a href='javascript:showProgramEnrollmentForm( "$patient.id" )'>$i18n.getString("enroll")</a>
+			#end
+			<br>&nbsp;
+		</p>
+		<div class="contentProviderTable">
+			<table id='activeTB' name='activeTB' style='cursor:pointer;'>
+				#foreach( $programInstance in $activeProgramInstances ) 
+					#set($programStageInstance='') 
+					#foreach ( $psi in $programInstance.programStageInstances )
+						#if( $psi.programStage.openAfterEnrollment=='true' && $psi.getStatus() != 1 && $psi.getStatus() != 5 )
+							#set($programStageInstance=$psi)
+						#end
+					#end
+					
+					#if($programStageInstance=='')
+							#foreach( $psi in $programInstance.programStageInstances )
+								#if ( $psi.getStatus() != 1 && $psi.getStatus() != 5  )
+									#set($programStageInstance=$psi)
+								#end
+							#end
+					#end
+					#if( $!programStageInstance!='')
+						#set( $status = $programStageInstance.getEventStatus() )
+						<tr id='tr1_$programInstance.id' type='$programInstance.program.type'
+						programStageInstanceId='$programStageInstance.id' 
+						relationshipText='$!programInstance.program.relationshipText'
+						relationshipType='$!programInstance.program.relationshipType.id'
+						relationshipSide='$!programInstance.program.relationshipSide'
+						relatedProgram='$!programInstance.program.relatedProgram.id'
+						programId='$programInstance.program.id'
+						style='cursor:pointer;'
+						onclick='javascript:setFieldValue("programIdAddPatient",$programInstance.program.id);loadActiveProgramStageRecords("$programInstance.id", "$programStageInstance.id")' >
+							<td id='td_$programInstance.id'>
+								<a><span id='infor_$programInstance.id'>$programInstance.program.displayName ($format.formatDate($programInstance.enrollmentDate))</span></a>
+								<img id='followup_$programInstance.id' src='images/risk_small.png' #if($programInstance.followup=='true') #else class='hidden' #end >
+							</td>
+						</tr>
+						#if($programInstance.program.type==1 && $programStageInstance)
+							<tr>
+								<td id='tr2_$programInstance.id' 
+									onclick='javascript:loadActiveProgramStageRecords("$programInstance.id", "$programStageInstance.id")'
+									style='cursor:pointer;'>
+									<a>&#8226; $programStageInstance.programStage.displayName ($format.formatDate($programStageInstance.dueDate))</a>
+								</td>
+							</tr>
+						#end
+					#else
+					<tr id='tr1_$programInstance.id' type='$programInstance.program.type'
+						programStageInstanceId='$programStageInstance.id' style='cursor:pointer;'
+						relationshipText='$!programInstance.program.relationshipText'
+						relationshipType='$!programInstance.program.relationshipType.id'
+						relationshipSide='$!programInstance.program.relationshipSide'
+						relatedProgram='$!programInstance.program.relatedProgram.id'
+						onclick='javascript:loadActiveProgramStageRecords("$programInstance.id", false)' >
+						<td id='td_$programInstance.id'>
+							<a><span id='infor_$programInstance.id'>$programInstance.program.displayName ($format.formatDate($programInstance.enrollmentDate))</span></a>
+						</td>
+					</tr>
+					#end
+				#end
+			</table>
+		</div>
+	</div>
+
+
+</td>
+
+<td>
+	
+	<div class="link-area" id="completedDiv" name="completedDiv" style="display:none;">
+		<p class="header">
+			<a href='javascript:viewPersonProgram( "activeDiv","completedDiv" )'>$i18n.getString("active_programs")</a>
+			&#8226; $i18n.getString("completed_programs")
+			&#8226; <a href='javascript:showProgramEnrollmentForm( "$patient.id" )'>$i18n.getString("enroll")</a>
+			<br>&nbsp;
+		</p>
+		<div class="contentProviderTable">
+			<table id='completedTB' name='completedTB' style='cursor:pointer;'>
+				#foreach($programInstance in $completedProgramInstances)
+					#set($programStageInstanceId = '')
+					#if($programInstance.program.type==2)
+						#foreach( $programStageInstance in $programInstance.programStageInstances)
+							#set($programStageInstanceId = $programStageInstance.id)
+						#end
+					#end
+					<tr onclick='javascript:setFieldValue("programIdAddPatient",$programInstance.program.id);loadActiveProgramStageRecords($programInstance.id);' >
+						<td>
+							<a><span id='infor_$programInstance.id'>$programInstance.program.displayName ($format.formatDate($programInstance.enrollmentDate))</span></a>
+						</td>
+					</tr>
+				#end
+			</table>
+		</div>
+	</div>
+	
+</td>
+
+<td>
+
+	<div class="link-area" style="width:120%">
+		<p class='header'>
+			$i18n.getString("relationships")
+			
+			#if( $auth.hasAccess( "dhis-web-caseentry", "showRelationshipList" ) )			
+				&#8226; <a href="javascript:showRelationshipList( '$patient.id');">$i18n.getString("add_relative")</a>
+				<span id="patientRelatedStageSpan">&nbsp;<span>
+			#end
+		</p>
+		<div class="contentProviderTable">
+			<table>
+				#foreach( $rel in $relationships )
+					#set($value="")
+					#if($rel.patientA.id==$patient.id)
+						<tr onclick="showPatientDashboardForm('$rel.patientB.uid')" title='$i18n.getString( "move_to_dashboard_of" ) $rel.patientB.name'>
+							<td><a href='#'>$rel.relationshipType.bIsToA</a></td>
+							<td>
+								#set($patient=$rel.patientB)
+								#foreach( $identifier in $patient.identifiers)
+									#set($value=$identifier.identifier)
+								#end
+								<a href='#'>$!value</a>
+							</td>
+						</tr>
+					#else
+						<tr onclick="showPatientDashboardForm('$rel.patientA.uid')" title='$i18n.getString( "move_to_dashboard_of" ) $!rel.patientB.name'>
+							<td><a href='#'>$!rel.relationshipType.aIsToB</a></td>
+							<td><a href='#'>
+								#set($patient=$!rel.patientA)
+								#foreach( $identifier in $patient.identifiers)
+									#set($value=$identifier.identifier)
+								#end
+								<a href='#'>$!value</a>
+							</td>
+						</tr>
+					#end
+				#end
+			</table>
+		</div>
+	</div>
+
+</td>
+</tr>
+</table>
+
+</div>
+<br>
+<div id='programEnrollmentDiv' class='hidden'></div>
+<div id='dataEntryFormDiv'></div>
+<div id='dashboardHistoryDiv' class="dashboard-history" style="display:none;height:250px;width:400px;">
+	<table width="400px;">
+		<colgroup>
+			<col width="200px">
+			<col width="100px">
+			<col>
+		</colgroup>
+		<tr>
+			<th>$i18n.getString("date")</th>
+			<th>$i18n.getString("visitor")</th>
+			<th>$i18n.getString("accessed_module") 
+				<a href="javascript:dashboardHistoryToggle();" class='bold'><img src='../images/cross.png' style="float:right; padding-right:2px;"></a>
+			</th>
+		</tr>
+	</table>
+	<div style="height:200px;width:450px;overflow:auto">
+		<table width='400px'>
+			<colgroup>
+				<col width="200px">
+				<col width="100px">
+				<col>
+			</colgroup>
+			#set( $mark = false )
+			#foreach( $patientAudit in $patientAudits )
+			<tr #alternate( $mark )>
+				<td>$format.formatDate($patientAudit.date)</td>
+				<td>$!encoder.htmlEncode($patientAudit.visitor)</td>
+				<td>$i18n.getString($patientAudit.accessedModule)</td>
+			</tr>
+			#set( $mark = !$mark )
+			#end
+		</table>
+	</div>
+</div>
+
+<script>
+	hideById('mainLinkLbl');
+	jQuery('[name=mainPagelink]').html(i18n_main_form_link);
+	var i18n_history = '$encoder.jsEscape( $i18n.getString( "history" ) , "'" )';
+	var i18n_this_field_is_required = '$encoder.jsEscape( $i18n.getString( "this_field_is_required" ) , "'" )';
+	var i18n_comment = '$encoder.jsEscape( $i18n.getString( "comment" ) , "'")';
+	var i18n_message = '$encoder.jsEscape( $i18n.getString( "message" ) , "'")';
+	var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+	var i18n_update_comment = '$encoder.jsEscape( $i18n.getString( "update_comment" ) , "'")';
+	var i18n_save_comment = '$encoder.jsEscape( $i18n.getString( "save_comment" ) , "'")';
+	var i18n_update_success = '$encoder.jsEscape( $i18n.getString( "update_success" ) , "'")';
+	var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+	var i18n_please_enter_report_date = '$encoder.jsEscape( $i18n.getString( "please_enter_report_date " ) , "'")';
+</script>

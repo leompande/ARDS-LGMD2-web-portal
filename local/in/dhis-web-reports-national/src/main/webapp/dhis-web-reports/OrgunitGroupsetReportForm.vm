@@ -1,0 +1,126 @@
+
+
+        <script>
+            //Global Variables
+                    
+            var reportModels = new HashTable();
+            var reportFileNames = new HashTable();
+			var reportOrgUnitGroupSets = new HashTable();
+                        
+            // Report ids and its Models
+            #foreach($report in $reportList)
+                var reportId = ""+"$report.id";
+                reportModels.put(reportId,"$report.model");
+                reportFileNames.put(reportId,"$report.fileName");
+				reportOrgUnitGroupSets.put(reportId,"$report.set");
+            #end
+
+                                            
+            function formValidations()
+            {                       
+                var reportListIndex = document.reportForm.reportList.selectedIndex;
+                var availablePeriodsIndex = document.reportForm.availablePeriods.selectedIndex;
+				var orgUnitGroupSetListIndex = document.reportForm.orgUnitGroupSetList.selectedIndex;
+				
+                if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null || document.reportForm.reportList.options[reportListIndex].text == "[ Select A Report ]") {alert("Please Select Report"); return false;}
+				else if(orgUnitGroupSetListIndex < 0 || document.reportForm.orgUnitGroupSetList.options[orgUnitGroupSetListIndex].text == null || document.reportForm.orgUnitGroupSetList.options[orgUnitGroupSetListIndex].text == "[ Select OrganisationUnitGroupSet ]") {alert("Please Select A Organisation Unit Group Set"); return false;}
+                else if(availablePeriodsIndex < 0 || document.reportForm.availablePeriods.options[availablePeriodsIndex].text == null || document.reportForm.availablePeriods.options[availablePeriodsIndex].text == "[ Select A Period ]") {alert("Please Select Period"); return false;}
+
+                document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+                document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+                document.reportForm.reportOrgUnitGroupSetTB.value = reportOrgUnitGroupSets.get(document.reportForm.reportList.options[reportListIndex].value);
+				
+                return true;
+            }
+        </script>
+		
+        <h1> $i18n.getString( "organization_unt_groupset_reports_analyser" ) </h1><hr /><br />
+            
+        <form id="reportForm" name="reportForm" action="generateSpecialReport.action" method="post" target="_blank">
+
+            <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                                   
+				<tr>
+                                <td class="NormalB" width="325">&nbsp;</td>
+                                <td class="NormalB" width="80">&nbsp;</td>
+                                <td class="NormalB" width="325">&nbsp;</td>
+                </tr>
+				<tr>
+                                <td class="NormalB" width="325">&nbsp;</td>
+                                <td class="NormalB" width="80">&nbsp;</td>
+                                <td class="NormalB" width="325">&nbsp;</td>
+                </tr>
+                <tr>
+                                <td class="NormalB"> $i18n.getString( "reports" ) <br>
+                                        <select id="reportList" name="reportList" style="width: 300px;">
+                                            <option value="NA">[ Select A Report ]</option>
+                                                #foreach($report in $reportList)
+                                                    <option value="$report.id">$report.name</option>
+                                                #end
+                                        </select>
+                                </td>
+								<td class="NormalB" width="80">&nbsp;<br/></td>
+								<td class="NormalB" width="80">&nbsp;<br/></td>								
+                 </tr>
+				 <tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                 </tr>
+				 <tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                 </tr>
+				 <tr>                               
+            					<td class="NormalB"> $i18n.getString( "organisationunit_group_set_list" ) <br>
+                                        <select name="orgUnitGroupSetList" id="orgUnitGroupSetList" style="width: 300px;" onchange="getOrgUnitGroups()">
+                                             <option value="NA">[ Select OrganisationUnitGroupSet ]</option>
+                                                    #foreach($organisationUnitGroupSet in $organisationUnitGroupSets)
+                                                        <option value="$organisationUnitGroupSet.id">$organisationUnitGroupSet.name</option>
+                                                    #end
+                                        </select>
+                                </td>
+            					<td class="NormalB" width="80">&nbsp;<br/></td>
+            					<td>
+                                      <input type="submit" name="generate" value='Generate Report'/>
+                                </td>
+                </tr>
+                <tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                </tr>
+				<tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                </tr>
+				<tr>
+                                <td class="NormalB"> $i18n.getString( "periods" ) <br>
+                                    <select id="availablePeriods" name="availablePeriods" style="width: 300px;">
+                                        <option value="NA">[ Select A Period ]</option>  
+                                                #foreach($period in $periods)
+                                                    <option value="$period.id">$simpleDateFormat.format($period.startDate)</option>
+                                                #end
+                                    </select>
+                                </td>
+                                <td class="NormalB" width="80">&nbsp;<br/></td> 
+                                <td class="NormalB" width="80">&nbsp;<br/></td> 
+                </tr>
+                <tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td class="NormalB">&nbsp;<br/></td>
+                </tr>
+                <tr>
+                                <td class="NormalB">&nbsp;<br/></td>
+                                <td>                 
+                                    <input type="hidden" name="reportModelTB" id="reportModelTB">
+                                    <input type="hidden" name="reportFileNameTB" id="reportFileNameTB">
+                                    <!--<input type="hidden" name="reportOrgUnitGroupSetTB" id="reportOrgUnitGroupSetTB">-->                       
+                                </td>
+            					<td class="NormalB">&nbsp;<br/></td>
+                </tr>                         
+            </table>
+        </form>
+

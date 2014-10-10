@@ -1,0 +1,49 @@
+<input type="button" value="$i18n.getString( 'add_new' )" style="width:100px" onclick="javascript:window.location.href='showAddHistoryForm.action?personId=$person.id&hrDataSetId=$hrDataSet.id'"/>
+<input type="button" value="$i18n.getString( 'back' )" style="width:100px" onclick="javascript:window.location.href='updateRecordsList.action?hrDataSetId=$hrDataSet.id'"/>
+<style type="text/css">
+.gridTable th, .gridTable td
+{
+  text-align: center;
+  width: 150px;
+}
+
+.gridLeft td
+{
+  text-align: left;
+}
+</style>
+<table class="mainPageTable">
+<tr>
+<td style="vertical-align:top">
+<h3>$!encoder.htmlEncode( $reportingUnit )</h3>
+<h5>History Records for $person.firstName $person.middleName $person.lastName</h5>
+<table class="listTable" id="listTable">
+<thead>
+<tr>
+<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( "History" )</th>
+<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( "Reason" )</th>
+<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( "Date" )</th>
+<th style="text-align:center" colspan="2">$i18n.getString( "update_options" )</th>
+</tr>
+</thead>
+
+<tbody>
+#foreach( $history in $histories )
+<tr>
+<td style="text-align:left">$!encoder.htmlEncode( $history.history )</td>
+<td style="text-align:left">$!encoder.htmlEncode( $history.reason )</td>
+<td style="text-align:left">$!encoder.htmlEncode( $history.startDate )</td>
+<td style="text-align:center"><a href="showUpdateHisotryForm.action?id=$history.id&personId=$person.id&hrDataSetId=$hrDataSet.id" title="$i18n.getString( "edit_history" )"><img src="../images/edit.png" alt="$i18n.getString( "edit_history" )"></a></td>
+<td style="text-align:center"><a href="javascript:removeHistory( '$history.id', '$encoder.jsEncode( $history.history )' )" title="$i18n.getString( "delete" )"><img src="../images/delete.png" alt="$i18n.getString( "delete" )"></a></td>
+</tr>
+#end
+</tbody>
+
+</table>
+#parse( "/dhis-web-commons/paging/paging.vm" )
+</td>       
+</tr>
+</table>
+<script type="text/javascript">
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_history" ) , "'" )';
+</script>

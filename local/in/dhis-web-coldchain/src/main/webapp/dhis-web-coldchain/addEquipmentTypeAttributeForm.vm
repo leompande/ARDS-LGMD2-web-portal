@@ -1,0 +1,92 @@
+<script type="text/javascript" src="javascript/addEquipmentTypeAttributeForm.js"></script>
+                                                                        
+<h3>$i18n.getString( "create_new_equipmenttype_attribute" )</h3>
+<form id="addEquipmentTypeAttributeForm" action="addEquipmentTypeAttribute.action" method="post" >
+
+<table id="attrTable"> 
+    <thead>
+        <tr><th colspan="2">$i18n.getString( "equipmenttype_attribute_details" )</th></tr>
+    </thead>
+    
+    <tbody>
+    <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" class="{validate:{required:true,rangelength:[2,160]}}"/></td>
+        <td></td>
+    </tr>   
+    
+    <tr>
+        <td><label>$i18n.getString( "description" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" id="description" name="description" class="{validate:{required:true,minlength:2}}"/></td>
+        <td></td>
+    </tr>
+
+   <tr>
+        <td><label for="display">$i18n.getString( "display" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td>
+            <select id="display" name="display">
+                <option value="true" >$i18n.getString( "yes" )</option>
+                <option value="false" selected="selected">$i18n.getString( "no" )</option>
+            </select>
+        </td>       
+        <td></td>               
+    </tr>
+    
+    <tr>
+        <td><label for="mandatory">$i18n.getString( "mandatory" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td>
+            <select id="mandatory" name="mandatory">
+                <option value="true" >$i18n.getString( "yes" )</option>
+                <option value="false" selected="selected">$i18n.getString( "no" )</option>
+            </select>
+        </td>       
+        <td></td>               
+    </tr>
+    
+    <tr>
+        <td><label for="noChar">$i18n.getString( "no_of_char" )</label></td>
+        <td>
+            <input type="text" name="noChars" id="noChars" class="{validate:{required:false, number:true}}" />
+        </td>       
+        <td></td>               
+    </tr>
+        
+    <tr>
+        <td><label for="valueType">$i18n.getString( "value_type" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td>
+            <select id="valueType" name="valueType" onchange="ATTRIBUTE_OPTION.selectValueType(this);">
+                <option value="NUMBER" selected="selected">$i18n.getString( "number" )</option>
+                <option value="TEXT">$i18n.getString( "text" )</option>
+                <option value="YES/NO">$i18n.getString( "yes_no" )</option>
+                <option value="DATE">$i18n.getString( "date" )</option>
+                <option value="COMBO">$i18n.getString( "attribute_combo_type" )</option>
+                <option value="MODEL">$i18n.getString( "model" )</option>
+            </select>
+        </td>
+        <td></td>
+    </tr>  
+    <tr id="attributeComboRow"> 
+        <td><label>$i18n.getString( "attribute_options" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td ><table id="attrOptionContainer"></table><a href="#" style="text-decoration: none;margin-top: 0.5em" onclick="ATTRIBUTE_OPTION.addOption()">[ $i18n.getString( "add_more_option" ) ]</a>
+        </td>
+        <td><span id="attrMessage"  name="attrMessage" style="color:red;"></span></td>
+    </tr>
+    
+    </tbody>
+    <tr>
+        <td></td>
+        <td>
+            <input type="submit" value="$i18n.getString( 'add' )" />
+			<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location.href='equipmentTypeAttributeList.action'" />
+        </td>
+    </tr>
+</table>
+<span id='message'></span>
+
+</form>   
+
+<script type="text/javascript">
+    var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+    var i18n_field_is_required = '$encoder.jsEscape( $i18n.getString( "field_is_required" ) , "'") ';
+    var isSubmit = true;
+</script>

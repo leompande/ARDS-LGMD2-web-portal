@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<periods>
+#set($count1 = 0)
+#foreach( $periodName in $periodNameList )
+	#set($period = $periods.get($count1))
+	#set($count1 = $count1 + 1)
+	<period>
+		<id>$period.id</id>
+		<periodname>$periodName</periodname>
+		<periodtype>$periodType.name</periodtype>
+	</period>
+#end
+</periods>

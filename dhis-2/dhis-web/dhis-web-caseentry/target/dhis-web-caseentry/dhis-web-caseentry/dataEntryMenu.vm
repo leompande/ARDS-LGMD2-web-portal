@@ -1,0 +1,25 @@
+<a href="index.action"><h2>$i18n.getString( "data_entry" )&nbsp;</h2></a>
+<div id="dataEntryMenu">
+	<ul>
+		#if( $auth.hasAccess( "dhis-web-caseentry", "multipledataEntrySelect" ) )
+			<li><a href="multipledataEntrySelect.action">$i18n.getString( "multiple_individual_records" )&nbsp;</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-caseentry", "singleEventSelect" ) )
+			<li><a href="singleEventSelect.action">$i18n.getString( "single_event_with_registration" )</a></li>
+		#end
+		#if( $auth.hasAccess( "dhis-web-caseentry", "anonymousRegistration" ) )
+			<li><a href="anonymousRegistration.action">$i18n.getString( "anonymous_events" )</a></li>
+		#end
+	</ul>
+
+	<br>
+	#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+</div>
+
+<div id="eventActionMenu" class="hidden">
+	<ul>
+		<li><a href="javascript:backEventList();">$i18n.getString( "back_to_event_list" )</a></li>     
+		<li id="nextEventLink" name="eventActionLink"><a href="javascript:completedAndAddNewEvent();">$i18n.getString('complete_and_add_new_event')</a></li>
+		<li id="removeEventLink" name="eventActionLink"><a href="javascript:javascript:removeCurrentEvent();">$i18n.getString('remove')</a></li>
+	</ul>
+</div>

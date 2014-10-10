@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="org.hisp.dhis.importexport.ImportDataValue" table="importdatavalue">
+    <composite-id>
+      <key-property column="dataelementid" name="dataElementId"/>
+      <key-property column="categoryoptioncomboid" name="categoryOptionComboId"/>
+      <key-property column="periodid" name="periodId"/>
+      <key-property column="sourceid" name="sourceId"/>
+    </composite-id>
+    <property column="value" name="value"/>
+    <property column="storedby" name="storedBy"/>
+    <property column="lastupdated" name="timestamp" type="date"/>
+    <property column="comment" name="comment" type="text"/>
+    <property column="status" name="status"/>
+  </class>
+</hibernate-mapping>

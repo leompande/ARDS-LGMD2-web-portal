@@ -1,0 +1,8 @@
+{ "report": 
+  {
+    "id": $!{report.id},
+    "name": "$!encoder.jsonEncode( ${report.displayName} )",
+    "reportTableName": "$!encoder.jsonEncode( ${report.reportTable.displayName} )",
+    "orgGroupSets": "$!{report.usingOrgUnitGroupSets}"
+  }
+}

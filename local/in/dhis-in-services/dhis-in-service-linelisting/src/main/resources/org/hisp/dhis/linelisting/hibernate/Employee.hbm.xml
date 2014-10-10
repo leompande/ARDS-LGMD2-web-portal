@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.linelisting.Employee" table="employee">
+
+    <id name="pdsCode" column="pdscode" />
+
+    <property name="name" not-null="true" length="160" />
+    
+    <property name="dateOfBirth" column="dob" not-null="true" type="date" />
+    
+    <property name="lprDate" column="lprdate" not-null="true" type="date" />
+
+    <property name="sex" column="sex" not-null="true" length="10" />
+    
+    <property name="joinDateToGovtService" column="govtserjoindate" not-null="true" type="date" />
+    
+    <property name="resAddress" column="resadd" not-null="true" length="160" />
+    
+    <property name="contactNumber" column="contactno" not-null="true" length="25" />
+    
+    <property name="emergencyContactNumber" column="emergencycontactno" not-null="true" length="25" />
+
+    <property name="isTransferred" column="istransferred" />
+    
+  </class>
+</hibernate-mapping>

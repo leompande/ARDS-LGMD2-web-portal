@@ -1,0 +1,182 @@
+
+
+<!-- Facility Details -->
+<table width="100%">
+	<tr>
+		<td valign="top" width="50%">
+			<table>
+				<tr bgcolor="#285C91">
+					<td><font color="#FFFFFF"><strong>Location</strong></font></td>
+					<td align="left"><a href="javascript:showUpdateOrganisationUnitForm( '$organisationUnit.id','$organisationUnit.getName()'); " title='$i18n.getString( "Edit OrganisationUnit Details" )'><font color="#FFFFFF"><u>edit</u></font></a></td>
+				</tr>
+				<tr>
+					<td>Code</td>
+					<td>$!encoder.htmlEncode( $!organisationUnit.code )</td>
+				</tr>
+				<tr>
+					<td>Latitude</td>
+					<td>$!{latitude}</td>
+				</tr>
+				<tr>
+					<td>Longitude</td>
+					<td>$!{longitude}</td>
+				</tr>
+				#set( $mark = false )
+				#foreach( $attribute in $attributes )
+				#set( $selectedOrgValueMapId = $organisationUnit.id + ':' + $attribute.id )	
+					<tr #alternate($mark)>
+						<td>$attribute.name</td>
+						<td>$!selectedOrgUnitAttribDataValueMap.get( $selectedOrgValueMapId )</td>
+					</tr>
+				#set( $mark = !$mark)	
+				#end
+				<tr bgcolor="#285C91">
+					<td colspan="2"><font color="#FFFFFF"><strong>Contact</strong></font></td>
+				</tr>				
+				<tr>
+					<td>Contact Person</td>
+					<td>$!organisationUnit.contactPerson</td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td>$!organisationUnit.address</td>
+				</tr>				
+				
+				<tr>
+					<td>Email</td>
+					<td>$!organisationUnit.email</td>
+				</tr>				
+				<tr>
+					<td>Phone Number</td>
+					<td>$!organisationUnit.phoneNumber</td>
+				</tr>
+				
+				<tr bgcolor="#285C91">$i18n.getString( "equipment_manager" )
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "equipmentAttributeValue" )</strong></font></td>
+					<!--<td align="left"><a href="javascript:closeFullOrgDetailsWindow(); " title='$i18n.getString( "EquipmentAttributeValue Detail" )'><font color="#FFFFFF"><u>equipmentAttributeValue details</u></font></a></td>-->
+					<td align="left"><font color="#FFFFFF">$i18n.getString( "equipment_count" )</font></td>
+				</tr>				
+				#set( $mark = false )
+				#foreach( $equipmentType in $equipmentTypes )
+				#set( $totalCount = "-" )
+            	#set( $totalCount = $!equipmentTypeCountMap.get( $equipmentType.id ) )	
+					<tr #alternate($mark)>
+						<td>$equipmentType.name</td>
+						<td align="center">$totalCount</td>
+					</tr>
+				#set( $mark = !$mark)	
+				#end				
+				
+			</table>
+		</td>
+		<td valign="top" width="50%">
+			#if( $isDataSetAssign )
+				<table>
+					<tr bgcolor="#285C91">
+						<td><font color="#FFFFFF"><strong>Period &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $year </strong></font></td>
+						<td align="left"><a href="javascript:showUpdateFacilityDataEntryForm( '$organisationUnit.id','$organisationUnit.getName()'); " title='$i18n.getString( "Edit OrganisationUnit Details" )'><font color="#FFFFFF"><u>edit</u></font></a></td>
+					</tr>					
+				#if( $sections.size() > 0 )
+					#foreach( $section in $sections )
+						<tr bgcolor="#285C91">
+							<td colspan="2"><font color="#FFFFFF"><strong>$encoder.htmlEncode( $section.name )</strong></font></td>
+							<!--<td><font color="#FFFFFF"><strong>Value</strong></font></td>-->
+						</tr>
+					
+						#set( $tabIndex = 1 )
+						#if ( $section.dataElements.size() > 0 )
+							#set( $mark = false )
+							
+							#foreach($dataElement in $section.dataElements )
+							#set( $valueMapId = $organisationUnit.id + ':' + $period.id + ':' + $dataElement.id )
+							#set( $dataValue = "" )
+            				#set( $dataValue = $!dataValueMap.get( $valueMapId ) )
+								<tr #alternate($mark)>
+									<td><label>$dataElement.getFormNameFallback()</label></td>
+									<!---<td align="center">$!dataValueMap.get( $valueMapId )</td>-->
+									<td align="center">$!dataValue</td>
+								</tr>
+							#set( $mark = !$mark)
+							#end
+						#end
+						#set( $tabIndex = $tabIndex + 1 )
+										
+					#end
+				#else
+				
+				<tr bgcolor="#285C91">
+					<td colspan="2"><font color="#FFFFFF"><strong>$encoder.htmlEncode( $dataSet.name )</strong></font></td>
+					<!--<td><font color="#FFFFFF"><strong>Value</strong></font></td>-->
+				</tr>	
+				#set( $tabIndex = 1 )
+				#if ( $dataElementList.size() > 0)
+					#set( $mark = false )
+					#foreach($dataElement in $dataElementList )
+					
+					#set( $valueMapId = $organisationUnit.id + ':' + $period.id + ':' + $dataElement.id )
+					#set( $dataValue = "" )
+            		#set( $dataValue = $!dataValueMap.get( $valueMapId ) )
+						<tr #alternate($mark)>
+							<td><label>$dataElement.getFormNameFallback()</label></td>
+							<td align="center">$!dataValue</td>
+						</tr>
+					#set( $mark = !$mark)	
+					#end
+				#end
+				#set( $tabIndex = $tabIndex + 1 )
+				
+				#end
+			</table>
+		
+		#else
+			No data set assign
+		#end
+		
+		</td>		
+	</tr>		
+</table>
+	<p align="right">
+		<input type="button"  value="$i18n.getString( 'Done' )" style="width:100px" onclick="closeFullOrgDetailsWindow();"/>
+	</p>
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<!-- DataSet Details 
+<table>
+	
+	
+</table>
+#if( $sections.size() > 0 )
+	<tr>
+	
+	#set( $count = 0 )
+	#foreach( $section in $sections )
+		#if( $count == 2 )
+			$count = 0
+			</tr>
+			<tr>				
+		#end 		
+		<td valign="top">$section.name</td>
+		#foreach( $dataElement in $section.dataElements )
+			
+		#end	
+	#end	
+
+
+			<table width="100%">
+				<tr bgcolor="#285C91">
+					<td><font color="#FFFFFF"><strong>DataSet</strong></font>
+					<td align="left"><font color="#FFFFFF"><u>edit</u></font>
+				</tr>
+			</table>
+		</td>		
+	</tr>
+
+</table>
+
+#else
+
+
+#end
+
+-->

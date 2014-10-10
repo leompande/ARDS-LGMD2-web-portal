@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.equipment.Equipment" table="equipment">
+
+    <id name="id" column="equipmentid">
+      <generator class="native" />
+    </id>
+
+    <many-to-one name="equipmentType" class="org.hisp.dhis.coldchain.equipment.EquipmentType" column="equipmenttypeid"
+      not-null="true" foreign-key="fk_equipment_equipmenttypeid" />
+
+    <many-to-one name="organisationUnit" class="org.hisp.dhis.organisationunit.OrganisationUnit"
+        column="organisationunitid" foreign-key="fk_equipment_organisationunitid" />
+
+    <many-to-one name="model" class="org.hisp.dhis.coldchain.model.Model" column="modelid"
+      not-null="false" foreign-key="fk_equipment_modelid" />
+
+    <property name="working" not-null="true" />
+    
+    <property name="registrationDate" column="registrationdate" />
+    
+	<set name="equipmentStatusUpdates" cascade="all-delete-orphan" inverse="true" >
+      <key column="equipmentid" />
+	  <one-to-many class="org.hisp.dhis.coldchain.equipment.EquipmentStatus" />
+    </set>
+	
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,141 @@
+
+<script>
+    var holdFocus;
+    var intType = '$intType';
+    var stringType = '$stringType';
+    var dateType = '$dateType';
+    var boolType = '$boolType';
+    var tableRowCount = 0;
+</script>
+
+<h3>$i18n.getString( "case_aggregation_mapping" )</h3>
+
+<form id="caseAggFrom" name="caseAggFrom"  method="post" action="saveLinelistAggMapping.action">
+
+<table>
+    <tr valign="top">
+        <td>
+            
+            <table>             
+                <tr>
+                    <td>                
+                        $i18n.getString( "dataelement_group_list" )<br>
+                        <select id="degroup" name="degroup" style="width:325px" onchange="getAggDataElements()">
+                        #foreach( $deGroup in $dataElementGroups )
+                            <option value="$deGroup.id">$encoder.htmlEncode( $deGroup.name )</option>
+                        #end
+                        </select>
+                        <br/><br/>
+                        $i18n.getString( "dataelement_list" )<br>
+                        <select id="aggde" name="aggde" style="width:325px" onchange="getLinelistAggExpression()">
+                        </select>
+                    </td>           
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>         
+                </tr>
+                <tr>
+                    <td>
+                        $i18n.getString( "linelist_group_list" )<br>
+                        <select id="llgroup" name="llgroup" style="width:325px" onchange="getLinelistElements()">
+                        #foreach( $lineListGroup in $lineListGroups )
+                            <option value="$lineListGroup.id">$encoder.htmlEncode( $lineListGroup.name )</option>
+                        #end
+                        </select>
+                        <br/><br/>
+                        $i18n.getString( "linelist_group_de_list" )<br>
+                        <select id="linelistGroupDE" name="linelistGroupDE" size="8" style="width:325px" ondblclick="displayLLEInfo()">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>         
+                </tr>                   
+            </table>            
+        </td>
+        <td>&nbsp;</td>
+        <td>            
+            $i18n.getString( "expression" )<br>
+            <textarea id="expression" name="expression" style="width:415px; height:5em"></textarea> 
+            <br><br>
+            <input type="radio" id="csRadio" name="csRadio" value="countRadio" onclick="" checked> $i18n.getString( "count" )
+            &nbsp;&nbsp;&nbsp;
+            <input type="radio" id="csRadio" name="csRadio" value="sumRadio" onclick="" > $i18n.getString( "sum" )
+            &nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="onchangeCB" name="onchangeCB"> $i18n.getString( "onchange" )
+            <br>                
+            
+            <div id="expressionTable" ><!--style="overflow: auto; height: 280px; width: 455px;"-->  
+            <table id="tblGrid">
+                <tr>
+                    <th width="30%">$i18n.getString( "left_expression" )</th>                   
+                    <th width="20%">$i18n.getString( "operator" )</th>
+                    <th width="30%">$i18n.getString( "right_expression" )</th>
+                    <th width="15%">$i18n.getString( "and_or" )</th>
+                    <th width="5%">&nbsp;</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="le0" name="le0" data="{pos:'left'}" onfocus="updateFocus(this)"></td>                    
+                    <td>
+                        <select id="operator0" name="operator0" onchange="">
+                            <option value="NA">$i18n.getString( "select" )</option>
+                            <option value="less_than"><</option>
+                            <option value="greater_than">></option>
+                            <option value="less_than_equal"><=</option>
+                            <option value="greater_than_equal">>=</option>
+                            <option value="equal">=</option>
+                            <option value="not_equal">!=</option>
+                            <option value="in">IN</option>
+                            <option value="diff">DIFF</option>
+                        </select>
+                    </td>
+                    <td><input type="text" id="re0" name="re0" data="{pos:'right'}" onfocus="updateFocus(this)"></td>
+                    <td>
+                        <select id="andor0" name="andor0" onchange="addNewRow()">
+                            <option value="NA">$i18n.getString( "select" )</option>
+                            <option value="and">$i18n.getString( "AND" )</option>
+                            <option value="or">$i18n.getString( "OR" )</option>
+                        </select>                       
+                    </td>
+                    <td>
+                        <a href="javascript:removeRecord( 0 )" title="$i18n.getString( "remove" )"><img src="../images/delete.png" alt="$i18n.getString( "remove" )"></a>
+                    </td>                   
+                </tr>
+                
+            </table>
+            </div>  
+            
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>   
+    <tr>
+        <td colspan="3">
+            <input type="submit" value="Save">&nbsp;&nbsp;
+            <input type="button" value="Test" onclick="prepareExpression()">&nbsp;&nbsp;
+            <input type="button" value="Cancel">&nbsp;&nbsp;
+            <input type="text" name="delRecTB" id="delRecTB">
+        </td>       
+    </tr>
+            
+</table>
+
+</form>
+
+<script language="javascript">
+    
+    window.onload=function()
+    {   
+        //jQuery.metadata.setType( "attr", "data" );
+        //getProgramStages();
+
+        getAggDataElements();
+
+        getLinelistElements();
+    }
+    
+</script>
+

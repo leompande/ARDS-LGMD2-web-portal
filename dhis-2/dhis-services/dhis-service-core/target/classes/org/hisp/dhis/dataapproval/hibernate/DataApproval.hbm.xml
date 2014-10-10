@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+<hibernate-mapping>
+  <class name="org.hisp.dhis.dataapproval.DataApproval" table="dataapproval">
+
+    <id name="id" column="dataapprovalid">
+      <generator class="native" />
+    </id>
+
+    <properties name="dataapproval_dataset_period_orgunit_unique_key" unique="true">
+      <many-to-one name="dataSet" class="org.hisp.dhis.dataset.DataSet" column="datasetid" foreign-key="fk_dataapproval_datasetid" />
+      <many-to-one name="period" class="org.hisp.dhis.period.Period" column="periodid" foreign-key="fk_dataapproval_periodid" />
+      <many-to-one name="organisationUnit" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="organisationunitid" foreign-key="fk_dataapproval_organisationunitid" />
+      <many-to-one name="attributeOptionCombo" class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" column="attributeoptioncomboid" foreign-key="fK_dataapproval_attributeoptioncomboid" />
+    </properties>
+
+    <property name="created" column="created" type="timestamp" />
+
+    <many-to-one name="creator" class="org.hisp.dhis.user.User" column="creator" foreign-key="fk_dataapproval_creator" />
+
+  </class>
+</hibernate-mapping>

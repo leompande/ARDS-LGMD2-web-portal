@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.hisp.dhis.reportsheet.ExportReport" table="reportexcels">
+	
+		<id name="id" column="reportexcelid">
+			<generator class="native" />
+		</id>
+		<property name="name" not-null="true" unique="true"/>
+		<property name="excelTemplateFile" column="exceltemplate" not-null="true" />
+		<property name="periodRow" column="periodrow" />
+		<property name="periodColumn" column="periodcolumn" />
+		<property name="organisationRow" column="organisationrow" />
+		<property name="organisationColumn" column="organisationcolumn" />
+		<property name="group" column="reportgroup" not-null="true"/>
+		<property name="createdBy" column="createdby" />
+
+		<set name="exportItems" lazy="false" cascade="all-delete-orphan" inverse="true">
+			<key column="reportexcelid" />
+			<one-to-many class="org.hisp.dhis.reportsheet.ExportItem" />
+		</set>
+
+		<set name="organisationAssocitions" table="reportexcel_associations" lazy="false">
+			<key column="reportexcelid" />
+			<many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnit"
+				column="organisationid" foreign-key="fk_reportexcel_organisation"/>
+		</set>
+
+		<set name="dataSets" table="reportexcel_datasets" lazy="false">
+			<key column="reportexcelid" />
+			<many-to-many class="org.hisp.dhis.dataset.DataSet"
+				column="datasetid" foreign-key="fk_reportexcel_dataset"/>
+		</set>	
+		
+		<set name="userRoles" table="reportexcel_userroles" lazy="false">
+			<key column="reportexcelid" />
+			<many-to-many class="org.hisp.dhis.user.UserAuthorityGroup"
+				column="userroleid" foreign-key="fk_reportexcel_userroles"/>
+		</set>
+		
+		<!-- NORMAL -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportNormal" table="reportexcels_normal">
+			<key column="reportexcelid" />
+		</joined-subclass>
+		
+		<!-- PERIOD-LISTING -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportPeriodColumnListing" table="reportexcels_periodcolumnlisting">
+			<key column="reportexcelid" />
+			<set name="periodColumns" table="reportexcel_periodcolumns" cascade="all" lazy="false">
+				<key column="reportexcelid"/>
+				<one-to-many class="org.hisp.dhis.reportsheet.PeriodColumn"/>
+			</set>
+		</joined-subclass>
+		
+		<!-- CATEGORY -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportCategory" table="reportexcels_category">
+			<key column="reportexcelid"/>
+			<list name="dataElementOrders" table="reportexcel_dataelementgrouporders" cascade="all" lazy="false">
+				<key column="reportexcelid"/>
+				<list-index base="0" column="dataelementgrouporder"/>
+				<one-to-many class="org.hisp.dhis.reportsheet.DataElementGroupOrder"/>
+		    </list>
+		</joined-subclass>
+		
+		<!-- CATEGORY-VERTICAL -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportVerticalCategory" table="reportexcels_verticalcategory">
+			<key column="reportexcelid"/>
+			<list name="categoryOptionGroupOrders" table="reportexcel_categoryoptiongrouporders" cascade="all" lazy="false">
+				<key column="reportexcelid"/>
+				<list-index column="categoryoptiongrouporder" base="0"/>
+				<one-to-many class="org.hisp.dhis.reportsheet.CategoryOptionGroupOrder"/>
+		    </list>
+		</joined-subclass>
+		
+		<!-- ATTRIBUTE -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportAttribute" table="reportexcels_attribute">
+			<key column="reportexcelid"/>
+			<list name="attributeValueOrders" table="attributevaluegrouporder_reportexcels">
+				<key column="reportexcelid" foreign-key="fk_attributevaluegroupordermembers_reportexcelid"/>
+				<list-index column="attributevaluegrouporderindex" base="0"/>
+				<many-to-many class="org.hisp.dhis.reportsheet.AttributeValueGroupOrder" column="attributevaluegrouporderid"
+				foreign-key="fk_reportexcel_attributevaluegrouporderid"/>
+		    </list>
+		</joined-subclass>
+		
+		<!-- ORG-UNIT-LISTING -->
+		<joined-subclass name="org.hisp.dhis.reportsheet.ExportReportOrganizationGroupListing" table="reportexcels_organizationgrouplisting">			
+			<key column="reportexcelid"/>			
+			<list name="organisationUnitGroups" table="reportexcel_organisationgroup">
+				<key column="reportexcelid" />
+				<list-index column="grouporder" base="0"/>				
+				<many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnitGroup" column="oganisationunitgroupid"
+				foreign-key="fk_reportexcel_organisationgroup"/>				
+			</list>		
+			<map name="organisationUnitLevels" table="reportexcel_organisationunit_levels">
+				<key column="reportexcelid"/>
+				<index-many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnitGroup" column="organisationunitgroupid" foreign-key="fk_organisationunitgroup_level"/>
+				<many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnitLevel" column="organisationunitlevelid" foreign-key="pk_organisationunitgroup_level"/>
+			</map>
+		</joined-subclass>
+		
+	</class>
+</hibernate-mapping>

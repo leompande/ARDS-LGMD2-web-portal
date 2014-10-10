@@ -1,0 +1,7 @@
+{ "dataElementCategoryOption":
+  {
+    "id":  "${dataElementCategoryOption.id}" ,
+    "name": "$!encoder.jsonEncode( ${dataElementCategoryOption.name} )",
+	"concept": "$!encoder.jsonEncode(${dataElementCategoryOption.concept.name})"
+  }
+}

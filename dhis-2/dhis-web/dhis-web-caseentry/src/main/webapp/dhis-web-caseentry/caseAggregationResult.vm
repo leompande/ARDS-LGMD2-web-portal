@@ -1,0 +1,86 @@
+					
+<h4> $i18n.getString( "case_aggregation_result" )</h4>
+<div>
+		<input type="button" value="$i18n.getString( 'back' )" onclick="backBtnOnClick();" style="width:10em">
+		<input type='button' value="$i18n.getString( 'save_selected_values' )" onclick='saveAggregateDataValues( false )' >
+		<input type='button' value="$i18n.getString( 'save_all_values' )" onclick='saveAggregateDataValues( true )' >
+</div><br>
+
+#set($divIdx=0)
+#set($hashValues=false)
+#foreach( $grid in $grids )
+	#if($grid.getRows().size() > 0)
+	#set($hashValues=true)
+	#set($divIdx=$divIdx+1)
+	<h3>
+		$!encoder.htmlEncode( $grid.title ) - $!encoder.htmlEncode( $grid.subtitle )
+		<img src="../images/down.png" onclick="toggleResult('$divIdx');" style="cursor: pointer;"></h4>
+	</h3>
+
+	<h5>
+		</h5>
+	<table class="listTable gridTable" id='div-$divIdx' name='div-$divIdx' style='display:none;'>
+		<thead>
+			<tr>
+				<th><input type='checkbox' onchange="toogleAllCheckBoxes( '$divIdx', this.checked );"></th>
+				#foreach( $header in $grid.getVisibleHeaders() )
+					#if($velocityCount!=2)
+						<th #if( $header.meta ) style="text-align:left" #end>$!encoder.htmlEncode( $header.name )</th>
+					#end
+				#end
+				<th>$i18n.getString('operator')</th>
+			</tr>
+		</thead>
+		<tbody>
+			#foreach( $row in $grid.getRows() )
+				<tr>
+					#foreach( $col in $row ) 
+						#if($velocityCount==1)
+							#set($dataelementid=$col)
+						#elseif($velocityCount==2)
+							#set($categoryoptioncomboid=$col)
+						#elseif($velocityCount==3)
+							#set($attributeoptioncomboid=$col)
+						#elseif($velocityCount==4)
+							#set($organisationunitid=$col)
+						#elseif($velocityCount==7)
+							#set($periodid=$col)
+						#elseif($velocityCount==$row.size())
+							#set($value=$col)
+						#end
+						#set($item=$dataelementid + '_' + $categoryoptioncomboid + '_' + $periodid + '_' + $organisationunitid + '_' + $value)
+					#end
+					<td>
+						<input type='checkbox' name='aggregateValues' value='$item'>
+					</td>
+					
+					#foreach( $col in $row )
+						#if($velocityCount == 7)
+							<td>$col
+						#elseif($velocityCount==8) 
+							$col</td>
+						#elseif( $velocityCount > 8 )
+							<td>$col</td> 
+						#end
+					#end
+					<td>
+						<a href='javascript:viewResultDetails( "$grid.title", $organisationunitid, "$periodid")' title="$i18n.getString( 'show_details' )"><img src="../images/information.png" alt="$i18n.getString( 'show_details' )"></a>
+					</td>
+				</tr>
+			#end
+		</tbody>
+	</table>
+	#end
+#end
+
+#if($hashValues==false)
+	<input type="button" value="$i18n.getString( 'back' )" onclick="backBtnOnClick();" style="width:10em">
+	<h2>$i18n.getString('no_aggregate_date_values_are_added_or_update_in_all_facilities')</h2>
+#end
+<div id='contentDetails'></div>
+
+<script>
+	var i18n_aggregate_details = '$encoder.jsEscape( $i18n.getString( "aggregate_details" ) , "'")';
+	var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+	var i18n_saved = '$encoder.jsEscape( $i18n.getString( "saved" ) , "'")';
+</script>

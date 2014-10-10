@@ -1,0 +1,44 @@
+<h3>$i18n.getString( "sort_dataelement" )</h3>
+<form action="updateSortedDataElementsFor${clazzName}.action" method="POST">
+<input type="hidden" value="$dataElementGroupOrder.id" name="id"/>
+<input type="hidden" value="$reportId" name="reportId"/>
+<table>
+	<tr>
+  		<th>$i18n.getString( "available_dataelements" )</th>
+  		<td></td>
+  		<th>$i18n.getString( "selected_dataelements" )</th>
+		<td></td>
+	</tr>
+	<tr>		
+		<td>
+			<select multiple size="30" id="availableList" name="availableList" style="min-width:300px;" ondblclick="moveSelectedById( 'availableList', 'selectedList' )">
+				#foreach( $dataElement in $!dataElementGroupOrder.dataElements)
+    				<option value="$dataElement.id">$dataElement.displayName</option>
+    			#end
+			</select>
+		</td>
+		<td style="text-align:center">
+			<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availableList', 'selectedList' )"/><br/>
+			<input type="button" value="&lt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveSelectedById( 'selectedList', 'availableList' )"/><br/>		
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveAllById( 'availableList', 'selectedList' )"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedList', 'availableList' )"/>
+		</td>
+		<td>
+			<select type="text" multiple size="30" id="selectedList" name="dataElementIds" style="min-width:300px;" ondblclick="moveSelectedById('selectedList','availableList')">
+			</select>
+		</td>	
+		<td>
+			<a href="javascript:moveSelectedOptionToTop( 'selectedList' );"><img align="absmiddle" src="../images/move_top.png" style="cursor:pointer;width:20px;"/></a><br/><br/>
+			<a href="javascript:moveUpSelectedOption( 'selectedList' );"><img align="absmiddle" src="../images/move_up.png" style="cursor:pointer;width:20px;"/></a><br/><br/>
+			<a href="javascript:moveDownSelectedOption( 'selectedList' );"><img align="absmiddle" src="../images/move_down.png" style="cursor:pointer;width:20px;"/></a><br/><br/>
+			<a href="javascript:moveSelectedOptionToBottom( 'selectedList' );"><img align="absmiddle" src="../images/move_bottom.png" style="cursor:pointer;width:20px;"/></a>
+		</td>
+	</tr>
+</table>
+
+<p>
+	<input type="button" value="$i18n.getString( 'ok' )" onclick="updateSortedDataElement()"/>
+	<input type="button" value="$i18n.getString( 'cancel' )" onclick="history.go(-1);"/>
+</p>
+
+<span id="message" style="top:100px;right:5px;position:fixed;width:200px;z-index:10002" onclick="javascript:hideById(this.id);"></span>

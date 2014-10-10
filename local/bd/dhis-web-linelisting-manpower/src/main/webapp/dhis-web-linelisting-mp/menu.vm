@@ -1,0 +1,31 @@
+<h2>Linelisting Meta Data</h2>
+    <ul>
+        <li><a href="getLineListOptions.action">Linelist Option</a></li>
+        <li><a href="lineListElements.action">Linelist Element</a></li>
+        <li><a href="getLineListGroups.action">Department Management</a></li>
+        <li><a href="getEmployeeList.action">Employee Management</a></li>
+        <li><a href="sanctionedPostMapping.action">Sanctioned Post Mapping</a></li>
+    </ul>
+<h2>Linelisting DataEntry</h2>
+    <ul>
+        <li><a href="select.action">DataEntry</a></li>
+    </ul>
+<h2>Linelisting Reports</h2>
+    <ul>
+        <li><a href="summaryReport.action">Linelist Summary Report</a></li>
+    </ul>
+<!--
+<h2>Linelisting Validation Rules</h2>
+    <ul>
+        <li><a href="showValidationRules.action">Linelist Validation Rules</a></li>
+    </ul>
+<h2>Linelisting Aggregation Engine</h2>
+    <ul>
+        <li><a href="showLLAggQueryBuilderForm.action">Linelisting Aggregation Query Builder</a></li>
+        <li><a href="linelistAggForm.action">Linelisting Aggregation</a></li>
+    </ul>
+<h2>Linelisting Data Import</h2>
+    <ul>
+        <li><a href="lldataImport.action">Linelisting Data Import</a></li>
+    </ul>
+-->    

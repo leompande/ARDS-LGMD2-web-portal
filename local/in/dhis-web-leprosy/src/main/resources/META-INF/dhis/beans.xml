@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="org.hisp.dhis.sandbox.leprosy.action.HomePageAction"
+		class="org.hisp.dhis.sandbox.leprosy.action.HomePageAction"
+		scope="prototype">
+    </bean>
+	
+    <bean id="org.hisp.dhis.sandbox.leprosy.action.PatientSearchAction"
+		class="org.hisp.dhis.sandbox.leprosy.action.PatientSearchAction"
+		scope="prototype">
+    </bean>
+	
+    <bean id="org.hisp.dhis.sandbox.leprosy.action.PatientRegistrationAction"
+		class="org.hisp.dhis.sandbox.leprosy.action.PatientRegistrationAction"
+		scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>  
+        </property>  
+        <property name="dataValueService">
+            <ref bean="org.hisp.dhis.datavalue.DataValueService"/>  
+        </property>  
+        <property name="dataElementCategoryOptionComboService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryOptionComboService"/>   
+        </property>
+	    <property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService"/>
+		<property name="organisationUnitService"
+			 ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>				
+    </bean>
+	
+	<!-- AJAX Requests -->
+	
+	<bean id="org.hisp.dhis.sandbox.leprosy.action.GetOrgUnitsAction"
+		class="org.hisp.dhis.sandbox.leprosy.action.GetOrgUnitsAction" scope="prototype">
+		<property name="organisationUnitService">
+			<ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		</property>
+	</bean>
+
+</beans>

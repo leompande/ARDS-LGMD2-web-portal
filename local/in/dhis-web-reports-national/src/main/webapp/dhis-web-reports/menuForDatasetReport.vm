@@ -1,0 +1,33 @@
+<h2>Report Analyser</h2>
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+    	<li>
+            Dataset Reports
+        </li>
+    </ul>
+</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-15px; ">
+        <a href="index.action">
+          <img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+    document.reportForm.ouIDTB.value = orgUnitIds;
+	
+	reportListFileName = document.reportForm.reportListFileNameTB.value;
+
+	if(orgUnitIds != null && orgUnitIds != "" )
+	{
+		getReports(orgUnitIds, reportListFileName)		
+	}
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

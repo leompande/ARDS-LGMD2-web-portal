@@ -1,0 +1,936 @@
+<?xml version='1.0'?>
+<dxf>
+<categoryOptions>
+<categoryOption>
+<id>1</id>
+<name>default</name>
+</categoryOption>
+<categoryOption>
+<id>282</id>
+<name>&lt; 12 mths</name>
+</categoryOption>
+<categoryOption>
+<id>283</id>
+<name>12 to 59 mths</name>
+</categoryOption>
+<categoryOption>
+<id>284</id>
+<name>Fixed</name>
+</categoryOption>
+<categoryOption>
+<id>285</id>
+<name>Outreach</name>
+</categoryOption>
+<categoryOption>
+<id>293</id>
+<name>15-49 yrs Preg</name>
+</categoryOption>
+<categoryOption>
+<id>294</id>
+<name>15-49 yrs NonPreg</name>
+</categoryOption>
+<categoryOption>
+<id>302</id>
+<name>Start Balance</name>
+</categoryOption>
+<categoryOption>
+<id>303</id>
+<name>Received</name>
+</categoryOption>
+<categoryOption>
+<id>304</id>
+<name>Distributed</name>
+</categoryOption>
+<categoryOption>
+<id>305</id>
+<name>Discarded</name>
+</categoryOption>
+<categoryOption>
+<id>306</id>
+<name>End Balance</name>
+</categoryOption>
+<categoryOption>
+<id>307</id>
+<name>Batch No.</name>
+</categoryOption>
+<categoryOption>
+<id>308</id>
+<name>Expiry Date</name>
+</categoryOption>
+<categoryOption>
+<id>323</id>
+<name>Distributed/Opened</name>
+</categoryOption>
+<categoryOption>
+<id>350</id>
+<name>Expiry date</name>
+</categoryOption>
+<categoryOption>
+<id>351</id>
+<name>VVM change</name>
+</categoryOption>
+<categoryOption>
+<id>361</id>
+<name>0-4 yrs</name>
+</categoryOption>
+<categoryOption>
+<id>362</id>
+<name>5-14yrs</name>
+</categoryOption>
+<categoryOption>
+<id>363</id>
+<name>15-24yrs</name>
+</categoryOption>
+<categoryOption>
+<id>364</id>
+<name>25-34yrs</name>
+</categoryOption>
+<categoryOption>
+<id>365</id>
+<name>35-44yrs</name>
+</categoryOption>
+<categoryOption>
+<id>368</id>
+<name>45-54yrs</name>
+</categoryOption>
+<categoryOption>
+<id>369</id>
+<name>55-64yrs</name>
+</categoryOption>
+<categoryOption>
+<id>372</id>
+<name>65yrs +</name>
+</categoryOption>
+<categoryOption>
+<id>358572</id>
+<name>D. End Balance</name>
+</categoryOption>
+<categoryOption>
+<id>358573</id>
+<name>D. Batch No</name>
+</categoryOption>
+<categoryOption>
+<id>8214</id>
+<name>Male</name>
+</categoryOption>
+<categoryOption>
+<id>8215</id>
+<name>Female</name>
+</categoryOption>
+<categoryOption>
+<id>167629</id>
+<name>At PHU</name>
+</categoryOption>
+<categoryOption>
+<id>167630</id>
+<name>In Community</name>
+</categoryOption>
+<categoryOption>
+<id>358727</id>
+<name>&lt;15y</name>
+</categoryOption>
+<categoryOption>
+<id>358728</id>
+<name>15-24y</name>
+</categoryOption>
+<categoryOption>
+<id>358729</id>
+<name>25-49y</name>
+</categoryOption>
+<categoryOption>
+<id>358569</id>
+<name>D. Distributed</name>
+</categoryOption>
+<categoryOption>
+<id>358570</id>
+<name>D. Received</name>
+</categoryOption>
+<categoryOption>
+<id>358571</id>
+<name>D. Start Balance</name>
+</categoryOption>
+<categoryOption>
+<id>358730</id>
+<name>&gt;49y</name>
+</categoryOption>
+<categoryOption>
+<id>358886</id>
+<name>New</name>
+</categoryOption>
+<categoryOption>
+<id>358887</id>
+<name>Follow-up</name>
+</categoryOption>
+<categoryOption>
+<id>358889</id>
+<name>0-11m</name>
+</categoryOption>
+<categoryOption>
+<id>358890</id>
+<name>12-59m</name>
+</categoryOption>
+<categoryOption>
+<id>358891</id>
+<name>5-14y</name>
+</categoryOption>
+<categoryOption>
+<id>358892</id>
+<name>15y+</name>
+</categoryOption>
+<categoryOption>
+<id>358903</id>
+<name>0-4y</name>
+</categoryOption>
+<categoryOption>
+<id>358904</id>
+<name>5y+</name>
+</categoryOption>
+<categoryOption>
+<id>359073</id>
+<name>0-28d.</name>
+</categoryOption>
+<categoryOption>
+<id>359074</id>
+<name>1-11m.</name>
+</categoryOption>
+<categoryOption>
+<id>359075</id>
+<name>12-59m.</name>
+</categoryOption>
+<categoryOption>
+<id>359076</id>
+<name>5-14y.</name>
+</categoryOption>
+<categoryOption>
+<id>359077</id>
+<name>15y.+</name>
+</categoryOption>
+<categoryOption>
+<id>359424</id>
+<name>.Fixed</name>
+</categoryOption>
+<categoryOption>
+<id>359425</id>
+<name>.Outreach</name>
+</categoryOption>
+<categoryOption>
+<id>359426</id>
+<name>.School</name>
+</categoryOption>
+<categoryOption>
+<id>359428</id>
+<name>Pregnant</name>
+</categoryOption>
+<categoryOption>
+<id>359429</id>
+<name>Non-pregnant</name>
+</categoryOption>
+<categoryOption>
+<id>359611</id>
+<name>MCH Aides</name>
+</categoryOption>
+<categoryOption>
+<id>359612</id>
+<name>SECHN</name>
+</categoryOption>
+<categoryOption>
+<id>359613</id>
+<name>Midwives</name>
+</categoryOption>
+<categoryOption>
+<id>359614</id>
+<name>CHO</name>
+</categoryOption>
+<categoryOption>
+<id>359615</id>
+<name>Trained TBA</name>
+</categoryOption>
+<categoryOption>
+<id>359616</id>
+<name>Untrained TBA</name>
+</categoryOption>
+<categoryOption>
+<id>359618</id>
+<name>Live birth</name>
+</categoryOption>
+<categoryOption>
+<id>359619</id>
+<name>Still birth</name>
+</categoryOption>
+<categoryOption>
+<id>359679</id>
+<name>Oral contraceptive pills</name>
+</categoryOption>
+<categoryOption>
+<id>359680</id>
+<name>Male condoms</name>
+</categoryOption>
+<categoryOption>
+<id>359681</id>
+<name>Female condoms</name>
+</categoryOption>
+<categoryOption>
+<id>359682</id>
+<name>IUD</name>
+</categoryOption>
+<categoryOption>
+<id>359683</id>
+<name>Injectables</name>
+</categoryOption>
+<categoryOption>
+<id>359684</id>
+<name>Implants</name>
+</categoryOption>
+<categoryOption>
+<id>359685</id>
+<name>Spermicide</name>
+</categoryOption>
+<categoryOption>
+<id>359687</id>
+<name>New clients</name>
+</categoryOption>
+<categoryOption>
+<id>359688</id>
+<name>Continuing clients</name>
+</categoryOption>
+<categoryOption>
+<id>359739</id>
+<name>Malaria in 1st trimester (treat with oral quinine)</name>
+</categoryOption>
+<categoryOption>
+<id>359740</id>
+<name>Malaria in 2nd or 3rd trimester (treat with ACT)</name>
+</categoryOption>
+<categoryOption>
+<id>359741</id>
+<name>Anaemia</name>
+</categoryOption>
+<categoryOption>
+<id>359742</id>
+<name>Hypertension</name>
+</categoryOption>
+<categoryOption>
+<id>359743</id>
+<name>Abortion</name>
+</categoryOption>
+<categoryOption>
+<id>359744</id>
+<name>STI</name>
+</categoryOption>
+<categoryOption>
+<id>359745</id>
+<name>Other early complication (hyperemesis,UTI, etc)</name>
+</categoryOption>
+<categoryOption>
+<id>359746</id>
+<name>Pre-eclampsia/Eclampsia/Hypertension</name>
+</categoryOption>
+<categoryOption>
+<id>359747</id>
+<name>Ante-partum hemmorhage</name>
+</categoryOption>
+<categoryOption>
+<id>359748</id>
+<name>Obstructed labour</name>
+</categoryOption>
+<categoryOption>
+<id>359749</id>
+<name>Post-partum sepsis</name>
+</categoryOption>
+<categoryOption>
+<id>359750</id>
+<name>Post-partum hemmorhage</name>
+</categoryOption>
+<categoryOption>
+<id>359751</id>
+<name>Retained placenta</name>
+</categoryOption>
+<categoryOption>
+<id>359752</id>
+<name>Malpresentation</name>
+</categoryOption>
+<categoryOption>
+<id>359753</id>
+<name>Other late complication</name>
+</categoryOption>
+<categoryOption>
+<id>359786</id>
+<name>Managed at PHU</name>
+</categoryOption>
+<categoryOption>
+<id>359787</id>
+<name>Referred</name>
+</categoryOption>
+<categoryOption>
+<id>360265</id>
+<name>Expired</name>
+</categoryOption>
+<categoryOption>
+<id>360266</id>
+<name>Damages</name>
+</categoryOption>
+<categoryOption>
+<id>360267</id>
+<name>VVM Change</name>
+</categoryOption>
+<categoryOption>
+<id>360520</id>
+<name>On salary</name>
+</categoryOption>
+<categoryOption>
+<id>360521</id>
+<name>Not on salary</name>
+</categoryOption>
+<categoryOption>
+<id>374548</id>
+<name>&lt;12m</name>
+</categoryOption>
+<categoryOption>
+<id>374549</id>
+<name>12-18m</name>
+</categoryOption>
+<categoryOption>
+<id>374550</id>
+<name>&gt;18m</name>
+</categoryOption>
+<categoryOption>
+<id>419066</id>
+<name>No patient on ART previous month</name>
+</categoryOption>
+<categoryOption>
+<id>419067</id>
+<name>New patient on ART current month</name>
+</categoryOption>
+<categoryOption>
+<id>419068</id>
+<name>No shift during the month to regimen</name>
+</categoryOption>
+<categoryOption>
+<id>419069</id>
+<name>No shift during the month from regimen</name>
+</categoryOption>
+</categoryOptions>
+<categories>
+<category>
+<id>286</id>
+<name>Fixed/Outreach</name>
+<concept>LOCATION</concept>
+</category>
+<category>
+<id>2</id>
+<name>default</name>
+<concept>DEFAULT</concept>
+</category>
+<category>
+<id>295</id>
+<name>ANC Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>359617</id>
+<name>Births attended by</name>
+<concept>BIRTH_ATT</concept>
+</category>
+<category>
+<id>359620</id>
+<name>Delivery outcome</name>
+<concept>DELIVERY_OUTCOME</concept>
+</category>
+<category>
+<id>358574</id>
+<name>District stock</name>
+<concept>STOCK</concept>
+</category>
+<category>
+<id>287</id>
+<name>EPI/Nutrition Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>324</id>
+<name>Facility Stock status</name>
+<concept>STOCK_STATUS</concept>
+</category>
+<category>
+<id>359686</id>
+<name>FP method</name>
+<concept>FP_METHOD</concept>
+</category>
+<category>
+<id>358731</id>
+<name>HIV Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>374551</id>
+<name>HIV Paed. Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>8216</id>
+<name>Male+Female</name>
+<concept>SEX</concept>
+</category>
+<category>
+<id>358893</id>
+<name>Morbidity Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>373</id>
+<name>Morbidity age group</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>359078</id>
+<name>Mortality Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>359788</id>
+<name>Outcome</name>
+<concept>OUTCOME</concept>
+</category>
+<category>
+<id>167631</id>
+<name>PHU/Community</name>
+<concept>LOCATION</concept>
+</category>
+<category>
+<id>359427</id>
+<name>Point of service</name>
+<concept>LOCATION</concept>
+</category>
+<category>
+<id>359754</id>
+<name>Pregn/labour complications</name>
+<concept>PREG_COMPLICATIONS</concept>
+</category>
+<category>
+<id>359430</id>
+<name>Preg/Non-preg</name>
+<concept>PREG_STATUS</concept>
+</category>
+<category>
+<id>358905</id>
+<name>Referrals Age</name>
+<concept>AGE</concept>
+</category>
+<category>
+<id>360522</id>
+<name>Staffing</name>
+<concept>SALARIED</concept>
+</category>
+<category>
+<id>360268</id>
+<name>Stock discarded</name>
+<concept>STOCK_DISCARDED</concept>
+</category>
+<category>
+<id>359689</id>
+<name>Type of client</name>
+<concept>CLIENT</concept>
+</category>
+<category>
+<id>352</id>
+<name>ExpDate+VVMchange</name>
+<concept>STOCK_DISCARDED</concept>
+</category>
+</categories>
+<categoryCombos>
+<categoryCombo>
+<id>3</id>
+<name>default</name>
+</categoryCombo>
+<categoryCombo>
+<id>296</id>
+<name>FixedOutreach+Preg&amp;NonPreg15-49y</name>
+</categoryCombo>
+<categoryCombo>
+<id>325</id>
+<name>Facility Stock status</name>
+</categoryCombo>
+<categoryCombo>
+<id>353</id>
+<name>ExpDate+VVMchange</name>
+</categoryCombo>
+<categoryCombo>
+<id>167632</id>
+<name>At PHUc&amp; In Community </name>
+</categoryCombo>
+<categoryCombo>
+<id>358575</id>
+<name>District stock new</name>
+</categoryCombo>
+<categoryCombo>
+<id>358906</id>
+<name>Morbidity Referrals</name>
+</categoryCombo>
+<categoryCombo>
+<id>358962</id>
+<name>Morbidity Cases</name>
+</categoryCombo>
+<categoryCombo>
+<id>359079</id>
+<name>Mortality</name>
+</categoryCombo>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryCombo>
+<id>374</id>
+<name>Morbidity age group (2009)</name>
+</categoryCombo>
+<categoryCombo>
+<id>359431</id>
+<name>TT</name>
+</categoryCombo>
+<categoryCombo>
+<id>167659</id>
+<name>Fixed/Outreach</name>
+</categoryCombo>
+<categoryCombo>
+<id>359659</id>
+<name>Births</name>
+</categoryCombo>
+<categoryCombo>
+<id>359690</id>
+<name>Family planning</name>
+</categoryCombo>
+<categoryCombo>
+<id>288</id>
+<name>EPI/Nutrition</name>
+</categoryCombo>
+<categoryCombo>
+<id>359755</id>
+<name>Maternal deaths</name>
+</categoryCombo>
+<categoryCombo>
+<id>359789</id>
+<name>Pregnancy complications</name>
+</categoryCombo>
+<categoryCombo>
+<id>360269</id>
+<name>Stock discarded</name>
+</categoryCombo>
+<categoryCombo>
+<id>360523</id>
+<name>Staffing</name>
+</categoryCombo>
+<categoryCombo>
+<id>363357</id>
+<name>HIV age</name>
+</categoryCombo>
+<categoryCombo>
+<id>374552</id>
+<name>HIV Paed age+gender</name>
+</categoryCombo>
+<categoryCombo>
+<id>419035</id>
+<name>Morbidity sex+ age group</name>
+</categoryCombo>
+</categoryCombos>
+<categoryOptionCombos>
+<categoryOptionCombo>
+<id>358733</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358727</id>
+<name>&lt;15y</name>
+</categoryOption>
+<categoryOption>
+<id>8215</id>
+<name>Female</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358734</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358727</id>
+<name>&lt;15y</name>
+</categoryOption>
+<categoryOption>
+<id>8214</id>
+<name>Male</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358735</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358728</id>
+<name>15-24y</name>
+</categoryOption>
+<categoryOption>
+<id>8215</id>
+<name>Female</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358736</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358728</id>
+<name>15-24y</name>
+</categoryOption>
+<categoryOption>
+<id>8214</id>
+<name>Male</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358737</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358729</id>
+<name>25-49y</name>
+</categoryOption>
+<categoryOption>
+<id>8215</id>
+<name>Female</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358738</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358729</id>
+<name>25-49y</name>
+</categoryOption>
+<categoryOption>
+<id>8214</id>
+<name>Male</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358739</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358730</id>
+<name>&gt;49y</name>
+</categoryOption>
+<categoryOption>
+<id>8215</id>
+<name>Female</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+<categoryOptionCombo>
+<id>358740</id>
+<categoryCombo>
+<id>358732</id>
+<name>HIV age+gender</name>
+</categoryCombo>
+<categoryOptions>
+<categoryOption>
+<id>358730</id>
+<name>&gt;49y</name>
+</categoryOption>
+<categoryOption>
+<id>8214</id>
+<name>Male</name>
+</categoryOption>
+</categoryOptions>
+</categoryOptionCombo>
+</categoryOptionCombos>
+<categoryCategoryOptionAssociations>
+</categoryCategoryOptionAssociations>
+<categoryComboCategoryAssociations>
+</categoryComboCategoryAssociations>
+<dataElements>
+    <dataElement>
+        <id>374586</id>
+        <uuid>8E95E229-4A10-4022-94E8-E64AAA60FB86</uuid>
+        <name>ART entry point: TB</name>
+        <shortName>ART entry point: TB</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated>2010-02-05</lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8240</id>
+        <uuid>179DEBC9-7E63-4B17-8D25-1EE981321850</uuid>
+        <name>ART enrollment stage 1</name>
+        <shortName>ART No stage 1</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8244</id>
+        <uuid>FDCE22AD-CBA3-4AC6-9789-863849733666</uuid>
+        <name>ART entry ponit: No diagnostic testing</name>
+        <shortName>ARTdiag.testing</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8245</id>
+        <uuid>2F4F0D61-83CF-43A2-9323-0E8E44C8EB11</uuid>
+        <name>ART entry point: No walk in</name>
+        <shortName>ART No walk in</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8246</id>
+        <uuid>25267C95-4B02-42C0-BA5E-6CAE9BFA58E0</uuid>
+        <name>ART entry point: No PMTCT</name>
+        <shortName>ART.E.P:PMTCT</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8248</id>
+        <uuid>76FC7E40-C6BC-44E8-A721-1A5CA55F64C9</uuid>
+        <name>ART entry point: No other</name>
+        <shortName>ART.E.P:other</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8249</id>
+        <uuid>0F295EB0-8FE0-487D-AD64-63A0319E31F7</uuid>
+        <name>ART entry point: No transfer in</name>
+        <shortName>ART.E.P:transferIn</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8251</id>
+        <uuid>0F295EB0-8FE0-487D-AD64-63A0319E31F7</uuid>
+        <name>ART entry point: dummy</name>
+        <shortName>ART dummy</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8254</id>
+        <uuid>236F53A8-9AFA-4B41-AFC6-DFB90BD29806</uuid>
+        <name>ART No clients with change of regimen due to drug toxicity</name>
+        <shortName>ARTChangeRegDrugToxi</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+    <dataElement>
+        <id>8255</id>
+        <uuid>29A99B8F-1426-4E77-BB3B-D766FA612722</uuid>
+        <name>ART No clients who stopped TRT due to TRT failure</name>
+        <shortName>ARTStop.TRTdueFailur</shortName>
+        <code></code>
+        <description></description>
+        <active>true</active>
+        <type>int</type>
+        <aggregationOperator>sum</aggregationOperator>
+        <categoryCombo>358732</categoryCombo>
+        <lastUpdated></lastUpdated>
+    </dataElement>
+</dataElements>
+<organisationUnits>
+    <organisationUnit>
+        <id>278320</id>
+        <uuid>8A901620-3281-4A0F-8546-BB354FB9392A</uuid>
+        <name>Connaught Hospital</name>
+        <shortName>Connaught Hospital</shortName>
+        <code></code>
+        <openingDate>1994-01-01</openingDate>
+        <closedDate></closedDate>
+        <active>true</active>
+        <comment></comment>
+        <geoCode></geoCode>
+        <lastUpdated></lastUpdated>
+    </organisationUnit>
+    <organisationUnit>
+<id>15</id>
+<uuid>845DAE1B-C67D-4AC5-B47C-78A8C0A1EFB8</uuid>
+<name>Bo Govt. Hosp.</name>
+<shortName>Bo Govt. Hosp.</shortName>
+<code></code>
+<openingDate></openingDate>
+<closedDate></closedDate>
+<active>true</active>
+<comment></comment>
+<geoCode></geoCode>
+<lastUpdated></lastUpdated>
+</organisationUnit>
+</organisationUnits>
+</dxf>

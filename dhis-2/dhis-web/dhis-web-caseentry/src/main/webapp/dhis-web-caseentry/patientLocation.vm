@@ -1,0 +1,37 @@
+<script>
+	hideById('mainLinkLbl');
+	jQuery('[name=mainPagelink]').html(i18n_main_form_link);
+</script>
+
+<h3>
+	<a name="mainPagelink" href="javascript:onClickBackBtn();">$i18n.getString( 'patient_management' )</a>
+	&#8226; <a href="javascript:showPatientDashboardForm('$patient.uid');">$i18n.getString( 'patient_dashboard' )</a>
+	&#8226; $i18n.getString( "change_location" )
+</h3>
+	
+<table>
+	#foreach( $identifier in $patient.identifiers)
+		<tr>
+			<td>$identifier.identifierType.displayName:</td>
+			<td>$identifier.identifier</td>
+		</tr>
+	#end
+</table>
+
+<form method='post'>
+	<table>
+		<tr>
+			<td>
+				#organisationUnitSelectionTree( false, false, true )
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" class='button' value="$i18n.getString('save')" onclick='registerPatientLocation( "$patientId" )'>
+				<input type='button' class="button" value="$i18n.getString( 'cancel' )" onclick="backPreviousPage( $patientId )" />
+			</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</form>

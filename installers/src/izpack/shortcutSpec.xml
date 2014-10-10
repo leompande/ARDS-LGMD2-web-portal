@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<shortcuts>
+  <skipIfNotSupported/>
+  <programGroup defaultName="DHIS2"
+                location="applications"/>
+  <shortcut
+    name="Start DHIS2"
+    target="$INSTALL_PATH\dhis2-live.exe"
+    commandLine=""
+    workingDirectory="$INSTALL_PATH\"
+    description="Start DHIS2"
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes"
+    applications="yes"
+    startMenu="yes"
+    startup="no">
+  </shortcut>
+    <shortcut
+    name="DHIS2 Documentation"
+    target="$INSTALL_PATH\docs\dhis2_user_manual_en.pdf"
+    commandLine=""
+    workingDirectory=""
+    description="DHIS2 Documentation"
+    initialState="noShow"
+    programGroup="yes"
+    desktop="no"
+    applications="no"
+    startMenu="no"
+    startup="no"
+	type="Application"
+	encoding="UTF-8"
+	iconfile="%SystemRoot%\system32\SHELL32.dll"
+	iconIndex="23"
+    >
+  </shortcut>
+  <shortcut
+name="Uninstall DHIS2"
+programGroup="yes"
+desktop="yes"
+applications="no"
+startMenu="no"
+startup="no"
+target="java"
+commandLine="-jar
+&quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&quot;"
+initialState="noShow"
+iconFile="%SystemRoot%\system32\SHELL32.dll"
+iconIndex="32"
+workingDirectory=""
+type="Application"
+encoding="UTF-8"
+description="DHIS2 uninstaller">
+
+</shortcut>
+</shortcuts>

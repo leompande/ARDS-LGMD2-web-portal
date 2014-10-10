@@ -1,0 +1,36 @@
+<h2>$i18n.getString( "enrolled_programs" ) for $patient.name</h2>
+	#if( $validated)
+		<div class="header-box">
+			<h3 style="text-align: left;">$i18n.getString("successfully_saved")</h3>
+		</div>
+	#else	
+	
+	#end
+<p>
+<ul>
+#if( $enrolledProgramList.size() > 0)
+    #foreach( $program in $enrolledProgramList )
+    	<li>$program.getName()</li>
+    #end
+#else
+    <li>$i18n.getString( "no_enrolled_programs" )</li>
+#end
+</ul>
+</p>
+
+<h2>$i18n.getString( "available_programs" )</h2>
+<p>
+<ul>
+#foreach( $program in $programList )
+	<li><a href="showProgramEnrollmentForm.action?patientId=$patient.Id&programId=$program.Id">$program.getName()</a></li>
+#end
+</ul>
+</p>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="showBeneficiarySearchingForm.action">$i18n.getString("beneficiary_search")</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

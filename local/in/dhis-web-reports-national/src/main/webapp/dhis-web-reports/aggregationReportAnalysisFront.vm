@@ -1,0 +1,127 @@
+                
+<script>
+                        
+    function formValidations()
+    {                                  
+        var orgunitIdValue = document.getElementById("ouIDTB").value;
+        var reportList = document.getElementById("reportList");
+        var periodType = document.getElementById("periodTypeId");
+        var periodTypeIndex = periodType.selectedIndex;
+        var reportListIndex = reportList.selectedIndex;
+                                            
+        var startDateValue = document.getElementById("startDate").value;
+        var endDateValue = document.getElementById("endDate").value;
+        
+        if( periodType.options[periodTypeIndex].text == null || periodType.options[periodTypeIndex].text== "" || periodType.options[periodTypeIndex].text== "[ Select PeriodType ]") { alert("Please Select A Period Type"); return false; }
+        else if( orgunitIdValue == null || orgunitIdValue=="" || orgunitIdValue==" " ) { alert("Please Select OrganisationUnit"); return false; }    
+        else if( reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null ) { alert("Please Select a Report"); return false; }               
+        else if( startDateValue == null || startDateValue== "" || endDateValue == null || endDateValue=="" ) { alert("Please Select Start Date And End Date"); return false; }
+        else if( startDateValue > endDateValue ) { alert("Start Date Is Greater Than End Date"); return false; }        
+                                    
+        document.forms['reportForm'].submit();
+    }
+
+    jQuery(document).ready(
+            function()
+            {
+                jQuery("#reportForm").validate({
+                      meta:"validate"
+                    ,errorElement:"td"
+                    ,submitHandler: function(form)
+                                    {
+                                        formValidations();
+                                    }
+                });
+                jQuery("#name").focus();
+            }
+    );
+    
+</script>
+       
+<h1>$i18n.getString( "aggregation_ra" )</h1>
+<hr /><br />
+
+<form id="reportForm" name="reportForm" action="generateAggregationReport.action" method="post" target="_blank">
+
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                      
+        <tr>
+            <td class="NormalB">
+                1. $i18n.getString( "periodtype" ) :<br />
+                <select id="periodTypeId" name="periodTypeId" style="width:200px" onchange="getPeriodsForCumulative()">
+                    <option value="NA">[ $i18n.getString( "select_periodtype" ) ]</option>
+                    #foreach ( $type in $periodTypes )
+                    <option value="$type.name">$type.name</option>
+                    #end
+                </select>
+            </td>
+            <td class="NormalB">                            
+                2. $i18n.getString( "organisationunit" ) :<br />
+                <input type="text" name="ouNameTB" id="ouNameTB" size="20" style="width:200px" disabled>         
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr> 
+        <tr>
+            <td class="NormalB">
+                <label for="startDate">3. $i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+                <input type="text" id="startDate" name="startDate" onChange="if(!isDate( this.value )) this.value='';" style="width:175px" class="{validate:{required:true,dateISO:true}}">                            
+            </td>
+            <td class="NormalB">
+                <label for="endDate">4. $i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+                <input type="text" id="endDate" name="endDate" onChange="if(!isDate( this.value )) this.value='';" style="width:180px" class="{validate:{required:true,dateISO:true}}">                            
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr> 
+        <tr>         
+            <td class="NormalB">
+                5. $i18n.getString( "reports" ) :<br />
+                <select id="reportList" name="reportList" style="width:200px"></select>
+            </td>
+            <td class="NormalB">
+                6. $i18n.getString( "generated_data_type" ) :<br />
+                <select id="aggData" name="aggData" style="width:200px">
+                    <option value="generateaggdata">$i18n.getString( "generate_agg_data" )</option>
+                    <option value="useexistingaggdata">$i18n.getString( "use_existing_agg_data" )</option>
+                    <option value="usecaptureddata">$i18n.getString( "use_captured_data" )</option>
+                </select>
+            </td>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr> 
+            <td>&nbsp;</td>
+            <td>
+                <!--<input type="checkbox" id="aggCB" name="aggCB" checked> $i18n.getString( "aggregated_data" )
+                <br><br>-->                    
+                <input type="submit" name="generate" value="Generate Report" disabled="disabled" style="width:200px" />
+                <input type="hidden" name="autogen" id="autogen" value="0" >
+                <input type="hidden" name="ouIDTB" id="ouIDTB">
+                <input type="hidden" name="reportTypeNameTB" id="reportTypeNameTB" value="$reportTypeName">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript">
+    jQuery( function()
+    {
+        datePickerInRange( "startDate", "endDate", false, false );
+    });     
+</script>

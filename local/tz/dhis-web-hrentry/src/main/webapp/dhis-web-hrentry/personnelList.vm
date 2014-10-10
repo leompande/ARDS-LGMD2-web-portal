@@ -1,0 +1,29 @@
+<h3>$i18n.getString( "employees_available" )</h3>
+
+	<table class="listTable" id="listTable" width="100%">  
+		  <thead>        
+          <tr>
+            <th>$i18n.getString( "name" )</th>
+            <th style="text-align:center" colspan="8" class="{sorter: false}">$i18n.getString( "operations" )</th>
+          </tr>
+          </thead>
+          <tbody id="list">
+            #foreach( $person in $persons )
+              <tr id="tr${$person.id}">
+                <td onclick="showDataSetDetails( $person.id )">$encoder.htmlEncode( $person.name )</td>
+                <td style="text-align:center">
+                  <a href="getUpdatePersonnelInfo.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "edit" )"><img src="../images/down.png" alt="$i18n.getString( "edit" )"></a>
+                </td>
+                <td style="text-align:center">
+                  <a href="getUpdatePersonnelInfo.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "edit" )"><img src="../images/down.png" alt="$i18n.getString( "edit" )"></a>
+                </td>
+                <td style="text-align:center">
+                  <a href="getUpdatePersonnelInfo.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "edit" )"><img src="../images/down.png" alt="$i18n.getString( "edit" )"></a>
+                </td>
+                <td style="text-align:center">
+                  <a href="getUpdatePersonnelInfo.action?hrDataSetId=$hrDataSet.id" title="$i18n.getString( "delete" )"><img src="../images/down.png" alt="$i18n.getString( "edit" )"></a>
+                </td>
+              </tr>
+            #end
+          </tbody>
+	</table>

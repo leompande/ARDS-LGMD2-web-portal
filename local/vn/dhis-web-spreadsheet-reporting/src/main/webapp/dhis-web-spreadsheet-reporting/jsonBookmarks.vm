@@ -1,0 +1,15 @@
+#set( $size = $bookmarks.size() )
+{ "bookmarks":[ 
+#foreach( $bookmark in $bookmarks )
+	{
+		"id": $bookmark.id,
+		"description": "$bookmark.description",
+		"contain": $bookmark.contain
+		#if($!bookmark.extraContain && $!bookmark.extraContain!="")
+			,"extraContain": $bookmark.extraContain
+		#end
+	}#if( $velocityCount < $size ),#end
+#end
+	]
+	
+}

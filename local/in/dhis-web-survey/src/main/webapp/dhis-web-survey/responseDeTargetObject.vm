@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deTarget>
+  <id>$deTarget.id</id>
+  <name>$encoder.xmlEncode( $deTarget.name )</name> 
+  <dataElementSize>$dataElementSize</dataElementSize>
+  <url>$encoder.xmlEncode( $!deTarget.url )</url>
+  <description>$encoder.xmlEncode( $!deTarget.description )</description>   
+</deTarget>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<equipmentType-type-attributes>
+	#foreach( $equipmentTypeAttribute in $equipmentTypeAttributes )	
+		<equipmentType-type-attribute>
+			<id>$equipmentTypeAttribute.id</id>
+			<name>$equipmentTypeAttribute.name</name>
+		</equipmentType-type-attribute>
+	#end
+</equipmentType-type-attributes>

@@ -1,0 +1,160 @@
+<style type='text/css'>
+    .hidden{ display: none; }
+</style>
+
+<script>
+    // Global Variables
+    var selCategory = "";
+    var selFacility = "";
+    var ouName="";
+    var dsName="";
+    var sDateIndex=0;
+    var eDateIndex=0;
+    var sDate="";
+    var eDate="";
+    var curPeriodType="";
+</script>
+
+<h1>$i18n.getString( "ds_form_mobile" )</h1>
+<hr />
+<form id="ChartGenerationForm" name="ChartGenerationForm" method="get" target="chartWindow1">
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+        <colgroup>
+            <col width="325">
+            <col width="80">
+            <col width="325">
+        </colgroup>
+
+        <tr>
+            <td class="NormalB" align="center">
+                <table>
+                    <tr>
+                        <td class="NormalB" colspan="2">
+                            $i18n.getString( "mobile_ds_dataset_list" ) : <br>
+                            <select id="selectedDataSets" name="selectedDataSets" onchange="getdSetPeriods()" >
+                                #foreach ( $dataSet in $dataSetList )
+                                    <option value='$dataSet.id' title='$dataSet.name'>$dataSet.name</option>
+                                #end
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="NormalB">
+                            $i18n.getString( "ga_facilityby" )<br>
+                                <select id="facilityLB" name="facilityLB" onchange="facilityChangeFunction(event)">
+                                    <option value="random" >Selected</option>
+                                    <option value="immChildren" selected>Immediate Children</option>
+                                    <option value="children" >Child Tree</option>
+                                </select>
+                        </td>
+                        <td class="NormalB">
+                        	$i18n.getString( "filetr" )<br>
+                        		<select id ="percentage" name ="percentage" onchange="disablebuttons()">
+                        			<option value="select">Select/None</option>
+                        			<option value="0">0%</option>
+                        			<option value="10">10% or Less</option>
+                        			<option value="20">20% or Less</option>
+                        			<option value="30">30% or Less</option>
+                        			<option value="40">40% or Less</option>
+                        			<option value="50">50% or Less</option>
+                        			<option value="60">60% or Less</option>
+                        			<option value="70">70% or Less</option>
+                        			<option value="80">80% or Less</option>
+                        			<option value="90">90% or Less</option>
+                        			<option value="100">100% or Less</option>
+		                        </select>
+                        </td>
+                        <td class="NormalB" display="none">
+                            <br>
+                            <select class='hidden' id="categoryLB" name="categoryLB" onchange="categoryChangeFunction(event)" disabled>
+                                <option value="period">Period</option>
+                                <option value="facility" selected>Facility</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">
+                            $i18n.getString( "ga_from" )<br>
+                            <select id="sDateLB" name="sDateLB"></select>
+                        </td>
+                        <td class="NormalB">
+                            $i18n.getString( "ga_to" )<br>
+                            <select id="eDateLB" name="eDateLB"></select>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="NormalB">&nbsp; </td>
+            <td class="NormalB">
+                <table>
+                    <tr>
+                        <td class="NormalB">
+                            <input type="checkbox" name="includeZeros" id="includeZeros" checked> Include Zero
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">
+                            $i18n.getString( "ga_orgunit" )<br>
+                            <select name="orgUnitListCB" id="orgUnitListCB" multiple style="width: 325px;height: 110px" ondblclick="remOUFunction()">
+                            </select>
+                        </td>
+                    </tr>
+               </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" class="NormalB"> </td>
+            <td class="NormalB"> </td>
+            <td class="NormalB"> </td>
+            <td class="NormalB"> </td>
+        </tr>
+        <tr>
+            <td>
+                
+                <input type="button" name="ViewSummary" value="View DataSummary" style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('SummaryMobileStatus')"/>
+                <input type="button" name="ViewStatus" value="View DataStatus" style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('MobileDataStatus')"/>
+            </td>
+            <td class="NormalB">
+                <br/><br/><br/><br/><br/>
+                <input type="button" name="LastUpdatedStatus" value="   User Details   " style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('LastUpdatedMobileStatus')"/>
+            </td>
+            <td>
+                
+                <input type="button" name="ViewGroupWise" value="View By Data Element Group" style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('GroupWiseMobileStatus')"/>
+                <input type="button" name="ValidationStatus" value="Validation Status" style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('ValidationMobileStatus')"/>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="selectedButton" id="selectedButton"/>
+</form>
+
+<script>
+    getdSetPeriods();
+    
+    function disablebuttons()
+    {
+ 		var selIndex= document.getElementById("percentage").selectedIndex;
+ 		var selValue = document.getElementById("percentage").options[selIndex].value;
+ 		if ( selValue != "select" )
+ 		{
+ 			document.ChartGenerationForm.ViewSummary.disabled=true;
+ 			document.ChartGenerationForm.LastUpdatedStatus.disabled=true;
+ 			document.ChartGenerationForm.ViewGroupWise.disabled=true;
+ 			document.ChartGenerationForm.ValidationStatus.disabled=true;
+ 		}
+ 		else
+ 		{
+ 			document.ChartGenerationForm.ViewSummary.disabled=false;
+ 			document.ChartGenerationForm.LastUpdatedStatus.disabled=false;
+ 			document.ChartGenerationForm.ViewGroupWise.disabled=false;
+ 			document.ChartGenerationForm.ValidationStatus.disabled=false;
+ 		}
+ 		
+    }
+</script>            

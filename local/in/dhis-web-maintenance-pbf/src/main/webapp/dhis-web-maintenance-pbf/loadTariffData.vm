@@ -1,0 +1,308 @@
+<script type="text/javascript" >
+	
+	Ext.Loader.setConfig({
+		enabled: true
+	});
+	Ext.Loader.setPath('Ext.ux.grid', 'javascript');
+	Ext.require([
+		'Ext.data.*',
+		'Ext.grid.*',
+		'Ext.toolbar.Paging',
+		'Ext.ux.grid.TransformGrid'
+	]);
+	
+</script>
+
+<script >
+	
+$(function() {
+			Ext.QuickTips.init();
+			
+			var grid = Ext.create('Ext.ux.grid.TransformGrid', "tariffDetails", {				
+			sortableColumns: true,
+            enableColumnMove: true,
+            enableColumnResize: true,
+            sortOnLoad: true,
+			minWidth: 100,
+        	minHeight: 100,			
+            sorters: {direction: 'ASC'}
+			});
+			
+			grid.render();
+			
+datePicker( 'startDate');
+datePicker( 'endDate');
+$("#openAddTariff").button()
+			.click(function() {
+			
+			validateAddTariff();
+
+			$( "#addTariff" ).dialog('option', 'title', 'Add New Tariff');
+			$( "#addTariff" ).dialog( "open" );
+			$('#pbfType option[value=-1]').attr('selected','selected');
+			$("#pbfType ").removeAttr('disabled');
+			$("#tariff").val('');			
+			$("#startDate").val('');
+			$("#startDate ").removeAttr('disabled');
+			$("#endDate").val('');
+			$("#endDate ").removeAttr('disabled');
+});
+			
+			
+$( "#addTariff" ).dialog({
+			width: 320,
+			autoOpen: false,			
+			modal: true,
+			buttons: [
+        {
+            id: "button-save",
+            text: "Save",
+            click: function() {
+                validateTariff();
+            }
+        },
+        {
+            id: "button-cancel",
+            text: "Cancel",
+            click: function() {
+                $(this).dialog("close");
+            }
+        }
+    ],
+			close: function() {				
+			}
+		});
+		
+});
+
+	function deleteTariffDataValue( organisationUnitId, dataElementId, dataSetId, startDate, endDate)
+	{
+		var dataValue = {
+		        		'organisationUnitId' : organisationUnitId ,
+						'dataElementId' : dataElementId,								
+						'dataSetId' : dataSetId,
+						'startDate' : startDate,
+						'endDate' : endDate
+		    			};
+									
+		jQuery.ajax( {
+	                url: 'deleteTariffData.action', 
+					data: dataValue,
+	                dataType: 'json',
+					success: handleSuccess,
+	                error: handleError
+	              } );
+	    function handleSuccess( json )
+	    {
+			getTariffData();			
+	    }
+	    function handleError( json )
+	    {
+			getTariffData();			
+	    }
+	}
+
+	function editTariffDataValue( organisationUnitId, dataElementId, dataSetId, startDate, endDate, value )
+	{	
+		validateAddTariff();
+		$( "#addTariff" ).dialog('option', 'title', 'Edit Tariff');
+		$('#pbfType option[value='+dataSetId+']').attr('selected','selected');
+		$('#pbfType').attr('disabled','disabled');
+		$('#tariff').val(value);
+		$('#startDate').val(startDate);
+		$('#startDate').attr('disabled','disabled');
+		$('#endDate').val(endDate);
+		$('#endDate').attr('disabled','disabled');
+		
+		$( "#addTariff" ).dialog( "open" );
+	}
+	function validateTariff()
+	{
+		var bValue = false;
+		var date1 = Date.parse($("#startDate").val());
+		var date2 = Date.parse($("#endDate").val());
+		
+		if (date1 > date2) 
+		{
+    		alert ("Please enter correct date");                         
+		}
+		else
+		{
+		 var dataValue = {
+        		        			'pbfType' : $("#pbfType").val(),        		        			
+        		        			'startDate' : $("#startDate").val(),
+        							'endDate' : $("#endDate").val(),
+									'orgUnitUid': $("#orgUnitUid").val(),
+									'dataElementId' : $("#dataElementId").val()
+        		    			};
+								jQuery.ajax( {
+                                url: 'validateTariffData.action', 
+								data: dataValue,
+                                dataType: 'json',
+                                success: handleSuccess,
+                                error: handleError
+                            } );
+							
+		
+		}
+		return bValue;
+	}	
+	function handleSuccess( json )
+	    {		
+			if(json.message == "true")	
+			{
+				alert("Tariff value of this pbf type exist between this range");
+				bValue = true;				
+			}
+			else
+			{
+				 var dataValue = {
+        		        			'pbfType' : $("#pbfType").val(),
+        		        			'tariff' : $("#tariff").val(),
+        		        			'startDate' : $("#startDate").val(),
+        							'endDate' : $("#endDate").val(),
+									'orgUnitUid': $("#orgUnitUid").val(),
+									'dataElementId' : $("#dataElementId").val()
+        		    			};
+								jQuery.ajax( {
+                                url: 'addTariffData.action', 
+								data: dataValue,
+                                dataType: 'json',
+                                success: addTariffSuccess,
+                                error: addTariffError
+                            } );
+			}
+	    }
+	    function handleError( json )
+	    {						
+	    }
+		
+		 function addTariffSuccess( json )
+	    {	
+			$('#pbfType option[value=-1]').attr('selected','selected');
+			$("#pbfType ").removeAttr('disabled');
+			$("#tariff").val('');			
+			$("#startDate").val('');
+			$("#startDate ").removeAttr('disabled');
+			$("#endDate").val('');
+			$("#endDate ").removeAttr('disabled');
+			
+			getTariffData();
+			$( "#addTariff" ).dialog( "close" );
+	    }
+	    function addTariffError( json )
+	    {
+			$('#pbfType option[value=-1]').attr('selected','selected');
+			$("#pbfType ").removeAttr('disabled');
+			$("#tariff").val('');			
+			$("#startDate").val('');
+			$("#startDate ").removeAttr('disabled');
+			$("#endDate").val('');
+			$("#endDate ").removeAttr('disabled');
+			getTariffData();
+			$( "#addTariff" ).dialog( "close" );
+	    }
+	function validateAddTariff()
+	{
+		if($("#pbfType ").val() != '-1' && $("#tariff").val() != "" && $("#startDate").val() != "" && $("#endDate").val() != "")
+        {
+        	$("#button-save").button( "option", "disabled", false ).removeClass("ui-state-disabled");
+        }
+        else
+        {
+			$("#button-save").button( "option", "disabled", true ).addClass("ui-state-disabled");       	
+        }
+	}
+</script>
+<style >
+	.mandatory
+	{
+		color:red;
+		font-size: 1.5em;
+	}
+</style>
+<div style="width:100%">
+	<input type="button" value="Add New Tariff" style="float:right;" id="openAddTariff" />
+</div>
+<br/><br/>
+<input type="hidden" id="dataElementId" name="dataElementId" value="$!selecteddataElement.id"/>
+<div style="width:100%;margin:auto;">
+<table style="width:100%" id="tariffDetails" name="tariffDetails">
+	<thead >
+		<tr >
+			<th >PBF Type</th>
+			<th >Tariff</th>
+			<th >Start Date</th>
+			<th >End Date</th>
+			##if( $updateAuthority == 'Yes' )
+				<th >Operations</th>
+			##end
+        </tr>
+	</thead>
+	<tbody>
+		#set( $mark = false )
+		#foreach( $tariff in $tariffList )
+			#if( $mark )
+                #set( $mark = false )
+			#else
+				#set( $mark = true )
+			#end
+            <tr >
+				<td >$!tariff.dataSet.name</td>
+				<td >$!tariff.value</td>
+				<td data-sorter="shortDate" data-date-format="yyyymmdd">$simpleDateFormat.format($!tariff.startDate)</td>
+				<td data-sorter="shortDate" data-date-format="yyyymmdd">$simpleDateFormat.format($!tariff.endDate)</td>
+			##if($updateAuthority == 'Yes')
+	            <td>
+					<a href="javascript:deleteTariffDataValue('$tariff.organisationUnit.id','$tariff.dataElement.id','$tariff.dataSet.id','$tariff.startDate','$tariff.endDate')">
+						<img src="images/delete.png" width="17px"/>
+					</a>
+					<a href="javascript:editTariffDataValue('$tariff.organisationUnit.id','$tariff.dataElement.id','$tariff.dataSet.id','$tariff.startDate','$tariff.endDate','$tariff.value')">
+						<img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/>
+					</a>				
+				</td>
+			##end
+        </tr>
+		#end
+    </tbody>
+</table>
+
+<div id="addTariff" title="Add New Tariff">
+	<table style="width:100%;table-layout:fixed;">
+		<tr >
+			<td style="width:40%;">PBF Type <b class="mandatory">*</b> </td>
+			<td style="width:60%;">
+				<select id="pbfType" style="width:100%;" onchange="validateAddTariff()">
+					<option value="-1">Select PBF Type</option>
+					#foreach( $dataSet in $dataSets )
+						<option value="$dataSet.id">$dataSet.name</option>
+					#end
+                </select>
+			</td>
+        </tr>
+		<tr >
+			<td colspan="2">&nbsp;</td>
+        </tr>
+		<tr >
+			<td style="width:40%;">Start Date <b class="mandatory">*</b> </td>
+			<td style="width:60%;"><input type="text" id="startDate" style="width:100%;" value="" onblur="validateAddTariff()" /></td>
+        </tr>
+		<tr >
+			<td colspan="2">&nbsp;</td>
+        </tr>
+		<tr >
+			<td style="width:40%;">End Date <b class="mandatory">*</b> </td>
+			<td style="width:60%;"><input type="text" id="endDate" style="width:100%;" value="" onblur="validateAddTariff()" /></td>
+        </tr>
+		<tr >
+			<td colspan="2">&nbsp;</td>
+        </tr>
+		<tr >
+			<td style="width:40%;">Tariff <b class="mandatory">*</b> </td>
+			<td style="width:60%;"><input type="text" id="tariff" style="width:100%;" value="" onblur="validateAddTariff()" /></td>
+        </tr>
+		
+		
+		
+    </table>
+</div>

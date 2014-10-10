@@ -1,0 +1,5 @@
+
+<a href="index.action"><h2>$i18n.getString( "person_aggregation" )&nbsp;</h2></a>
+<ul>
+    <li><a href="caseAggregationForm.action">$i18n.getString( "manual_person_aggregation" )</a></li>     
+</ul>

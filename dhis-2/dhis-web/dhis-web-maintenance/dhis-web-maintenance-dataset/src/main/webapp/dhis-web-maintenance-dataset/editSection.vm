@@ -1,0 +1,107 @@
+<script type="text/javascript" src="javascript/editSection.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(	function(){
+		jQuery("#availableList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getSectionDataElements.action",
+			iterator: 'dataElements',
+			sortSelected: false,
+			connectedTo: 'selectedList',
+			handler: function(item) {
+				var option = jQuery("<option />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			},
+			params: {
+				'dataSetId': $dataSet.id,
+				'categoryComboId': $categoryCombo.id
+			}
+		});
+	});
+</script>
+
+<h3>$i18n.getString( "edit_section" )</h3>
+
+<form id="editDataSetForm" name="editDataSetForm" action="updateSection.action" method="post" class="inputForm">
+  <input type="hidden" id="dataSetId" name="dataSetId" value="$dataSet.id"/>
+  <input type="hidden" id="sectionId" name="sectionId" value="$section.id"/>
+  <input type="hidden" id="categoryComboId" name="categoryComboId" value="$!categoryCombo.id"/>
+  
+  <table id="detailsList">
+    <col/> ## Labels
+    <col/> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "section_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" id="sectionName" name="sectionName" value= "$section.name"></td>
+      </tr>     
+      <tr>
+      	<td><label>$i18n.getString( "dataset" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" value="$dataSet.displayName" disabled="disabled"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "category_combo" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" value="$!categoryCombo.displayName" disabled="disabled"/></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="dataElementSelectionArea">
+      <colgroup>
+        <col style="width: 500px;"/>
+        <col/>
+        <col style="width: 500px;"/>
+        <col/>
+      </colgroup>
+
+    <thead>
+      <tr>                
+        <th>$i18n.getString( "available_data_elements" )</th>
+		<th></th>
+		<th>$i18n.getString( "selected_data_elements" )</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+			<select id="availableList" name="availableList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+
+        <td style="text-align:center">
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'selectedList' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'selectedList' );"/>
+        </td>
+
+		<td>
+			<select id="selectedList" name="selectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;">
+            #foreach ( $dataElement in $section.dataElements )
+              <option value="$dataElement.id">$dataElement.displayName</option>
+            #end
+			</select>
+        </td> 
+
+        <td style="width:30px; text-align:center">
+            <a href="javascript:moveUpSelectedOption( 'selectedList' )"><img src="../images/move_up.png"/></a><br/><br/>
+            <a href="javascript:moveDownSelectedOption( 'selectedList' )"><img src="../images/move_down.png"/></a><br/><br/>
+        </td>       
+
+      </tr>
+
+      <tr>
+        <td colspan="4">
+          <input type="submit" name="save" value="$i18n.getString( 'save' )" style="width:120px" />
+          <input type="button" onclick="window.location.href='section.action'" value="$i18n.getString( 'cancel' )" style="width:120px" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

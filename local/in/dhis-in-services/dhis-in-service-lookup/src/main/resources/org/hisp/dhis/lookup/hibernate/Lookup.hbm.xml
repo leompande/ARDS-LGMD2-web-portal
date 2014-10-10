@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+
+    <class name="org.hisp.dhis.lookup.Lookup" table="lookup">
+
+	   <id name="id" column="lookupid">
+	      <generator class="native" />
+	    </id>
+	    
+	    &identifiableProperties;
+	
+	    <property name="name" column="name" not-null="true" unique="true" length="230" />
+	
+	    <property name="description" type="text" />
+	     
+	    <property name="type" column="type" length="230" />   
+	         
+	    <property name="value" column="value" type="text" />
+
+    </class>
+    
+</hibernate-mapping>

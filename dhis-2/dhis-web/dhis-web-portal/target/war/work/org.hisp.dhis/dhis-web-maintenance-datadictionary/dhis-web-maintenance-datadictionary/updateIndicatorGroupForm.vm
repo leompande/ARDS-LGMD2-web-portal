@@ -1,0 +1,95 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function(){
+        validation2( 'updateIndicatorGroupForm', function( form )
+        {
+            form.submit();
+        }, {
+            'beforeValidateHandler' : function()
+            {
+                listValidator( 'memberValidator', 'groupMembers' );
+                #tblDynamicAttributesJavascript()
+            },
+            'rules' : getValidationRules( "indicatorGroup" )
+        } );
+
+		jQuery("#availableIndicatorsList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getIndicators.action",
+			iterator: "indicators",
+			connectedTo: 'groupMembers',
+			handler: function(item) {
+				var option = jQuery("<option data-id='" + item.groups + "' />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			}
+		});
+
+		// checkValueIsExist( "name", "validateIndicatorGroup.action", {id: $indicatorGroup.id});
+	});
+</script>
+
+<h3>$i18n.getString( "edit_indicator_group" )</h3>
+
+<form id="updateIndicatorGroupForm" action="updateIndicatorGroup.action" method="post" class="inputForm">
+
+<div>
+	<input type="hidden" id="id" name="id" value="$indicatorGroup.id"/>
+</div>
+
+<table>
+    <col width="120px" />
+
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" value="$encoder.htmlEncode( $indicatorGroup.name )"></td>
+	</tr>
+</table>
+
+#tblDynamicAttributes( { "attributes": $attributes, "attributeValues": $attributeValues } )
+
+<table>
+    <colgroup>
+      <col style="width: 500px;"/>
+      <col/>
+      <col style="width: 500px;"/>
+    </colgroup>
+
+	<tr>
+		<th>$i18n.getString( "available_indicators" )</th>
+		<th></th>
+		<th>$i18n.getString( "group_members" )</th>
+	</tr>
+
+	<tr>
+		<td>
+			<select id="availableIndicatorsList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+		</td>
+		
+        <td style="text-align:center">          
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableIndicatorsList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'groupMembers' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableIndicatorsList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'groupMembers' );"/>
+        </td>
+    
+		<td>
+			<select id="groupMembers" name="groupMembers" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;">
+				#foreach( $indicator in $groupMembers )
+                    <option value="$indicator.id">$encoder.htmlEncode( $indicator.displayName )</option>
+                #end
+			</select>
+		</td>
+		
+	</tr>
+</table>
+
+<p>
+	<input type="submit" value="$i18n.getString( 'save' )" style="width:10em"/>
+	<input type="button" value="$i18n.getString( 'cancel' )" onclick="dhis2.commons.redirectCurrentPage( 'indicatorGroup.action' )" style="width:10em"/>
+</p>
+
+</form>

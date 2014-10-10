@@ -1,0 +1,59 @@
+
+<div id='selectDiv'>
+    
+<h3><strong>$i18n.getString( "equipment_models" )</strong></h3>
+<input type="hidden" id='modelTypeId' value="$modelType.id" />
+<input type="hidden" id='modelTypeName' value="$modelType.name" />
+<table width="100%">
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td><strong>$modelType.name</strong></td>
+					<td id='filterModelDiv'><a href="javascript:hideVaccineFilter()" >Filter</a></td>
+					<td id='searchingModelAttributeTD' style='display:none'>
+						<select id="searchingModelAttributeId" name="searchingModelAttributeId" #if( $modelTypeAttributes.size() == 0 ) disabled="disabled" #end onchange="searchingModelAttributeOnChange( this.value )">
+						</select>	
+					</td>
+					<td id='searchingModelTextTD' style='display:none'>
+						<input type="text" id="searchModelText" name="searchModelText" maxlength="30" style="width:12.5em" value="$!searchModelText" onkeypress="isVaccinesEnter( event )">
+					</td>
+					<td id='searchModelDiv' style='display:none'><a href="javascript:loadVaccinesByFilter()" title="$i18n.getString( 'go' )"><img src="images/go.jpg" alt="$i18n.getString( 'go' )"></a></td>
+					<td id='clearModelDiv' style='display:none'><a href="javascript:hideVaccinesClear()">Clear</a></td>	
+				</tr>
+			</table>
+			
+		</td>
+
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td align="right"><input type="button" value='$i18n.getString( "Add new item" )' onclick="showAddVaccineForm();" style="width:100px"/></td>
+	</tr>
+</table>
+
+</div>
+
+
+
+<div id='listModelDiv'></div> <!-- List All/Filtered Models -->
+<div id='addEditModelFormDiv'></div> <!-- Add Model Form -->
+<div id='modelDetailsDiv'></div> <!-- Add Model Form -->
+<div id='uploadModelImageDiv'></div> <!-- Upload model Image -->
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script type="text/javascript">
+jQuery( document ).ready( function()
+{
+	var modelTypeId = document.getElementById('modelTypeId').value;
+	//alert( modelTypeId );
+	getVaccinesTypeAttribute();
+	
+	loadAllVaccines();
+});
+</script>
+<script>
+	var i18n_confirm_delete_model = '$encoder.jsEscape( $i18n.getString( "confirm_delete_model" ) , "'" )';
+</script>

@@ -1,0 +1,45 @@
+<h3>$i18n.getString( "detarget_data_entry" )</h3>
+
+<br>
+
+<form id="selectForm" name="selectForm" method="post" action="selectTarget.action">
+<input type="hidden" name="temp" id="temp" value="deTarget">
+    <table>	
+	   <tr>
+    		<td><label>$i18n.getString( "organisation_unit" )</label></td>
+    		<td><input type="text" readonly="readonly" #if( $orgUnit ) value="$encoder.htmlEncode( $orgUnit.name )" #else value="[$i18n.getString( "select" )]" #end style="min-width:350px"></td>
+	   </tr>
+	   <tr>
+            <td class="NormalB">&nbsp;</td>
+            <td class="NormalB">&nbsp;</td>
+       </tr>
+	   <tr>
+    		<td><label for="selectedDeTargetId">$i18n.getString( "target" )</label></td>
+    		<td>
+    		    <select id="selectedDeTargetId" name="selectedDeTargetId" style="min-width:350px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $deTargets.size() == 0 ) disabled="disabled" #end style="min-width:350px">
+    				<option value="null">[$i18n.getString( "select" )]</option>
+    			    #foreach( $deTarget in $deTargets )
+    				    <option value="$deTarget.id" #if( $selectedDeTargetId && $deTarget.id == $selectedDeTargetId ) selected="selected" #end>$encoder.htmlEncode( $deTarget.name )</option>
+    			    #end
+    			</select>
+    		</td>
+	   </tr>	
+	   <tr>
+	   		<td><label for="selectedPeriodIndex">$i18n.getString( "period" )</label></td>
+	   		<td>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('earlier_periods')" onclick="previousPeriodsSelected()" #if( $periods.size() == 0 ) disabled="disabled" #end />
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('later_periods')" onclick="nextPeriodsSelected()" #if( $periods.size() == 0 ) disabled="disabled" #end /><br/>
+			<select id="selectedPeriodIndex" name="selectedPeriodIndex" style="min-width:350px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $periods.size() == 0 ) disabled="disabled" #end>
+    				<option value="-1">[$i18n.getString( "select" )]</option>
+    				#set( $count = 0 )
+    			    #foreach( $period in $periods )
+    				    <option value="$count" #if( $selectedPeriodIndex == $count ) selected="selected" #end>$encoder.htmlEncode( $period.name )</option>
+    				    #set( $count = $count + 1 )
+    			    #end				
+			</select>
+		</td>	
+   	   </tr>
+    </table>
+</form>
+
+<hr style="clear:both">

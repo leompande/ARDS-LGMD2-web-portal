@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.expression.Expression" table="expression">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="expressionid">
+      <generator class="native" />
+    </id>
+
+    <property name="description" />
+
+    <property name="expression" type="text" />
+
+	<property name="nullIfBlank" />
+
+    <set name="dataElementsInExpression" table="expressiondataelement">
+      <cache usage="read-write" />      
+      <key column="expressionid" foreign-key="fk_expressiondataelement_expressionid" />
+      <many-to-many class="org.hisp.dhis.dataelement.DataElement" column="dataelementid" foreign-key="fk_expression_dataelementid" />
+    </set>
+    
+    <set name="optionCombosInExpression" table="expressionoptioncombo">
+      <key column="expressionid" foreign-key="fk_expressionoptioncombo_expressionid"/>
+      <many-to-many class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" 
+          column="categoryoptioncomboid" foreign-key="fk_expression_categoryoptioncomboid"/>
+   </set>
+
+  </class>
+</hibernate-mapping>

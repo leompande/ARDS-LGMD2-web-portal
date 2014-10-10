@@ -1,0 +1,33 @@
+<h2>$i18n.getString( "register_location_for" ) $patient.name</h2>
+
+<form action="registerPatientLocation.action" method="POST">
+<div class="header-box" align="center">
+<input type="hidden" name="patientId" value="$patient.id"/>	
+
+<p style="text-align: left;">
+		<label>$i18n.getString( "select_orgunit" )</label>
+		<select name="orgUnitId">
+			#foreach($orgUnit in $organisationUnits)
+				<option value="$orgUnit.getId()" #if($orgUnit.id == $patient.getOrganisationUnit().id) selected="selected" #end>$orgUnit.getName()</option>
+			#end
+		</select>
+</p>
+	
+</div>
+
+<div class="header-box" align="center">
+	<p>
+		<input type="submit" style="width: 100%;" value="$i18n.getString("register")" />
+	</p>
+</div>
+
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="showPatientProgramList.action?patientId=$patient.getId()">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	<li> <a href="trackingMenu.action"> $i18n.getString("tracking_menu")</a> </li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

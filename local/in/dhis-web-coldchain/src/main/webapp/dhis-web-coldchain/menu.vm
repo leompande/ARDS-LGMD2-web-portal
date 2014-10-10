@@ -1,0 +1,39 @@
+
+
+
+<h2>$i18n.getString( "equipment_manager" )</h2>
+<ul>
+	<li><a href="clinicEquipments.action">$i18n.getString( "facility_equipments" )</a></li>
+	<li><a href="equipmentModels.action">$i18n.getString( "equipment_models" )</a></li>
+	<li><a href="vaccinesModels.action">$i18n.getString( "vaccines" )</a></li>	
+</ul>
+
+<!--
+<h2>$i18n.getString( "ccem_setup" )</h2>
+<ul>
+	<li><a href="coldChainModelTypeAttribute.action">$i18n.getString( "modelType_attribute" )</a></li>
+	<li><a href="modelType.action">$i18n.getString( "modelType" )</a></li>
+	<br/>
+	<li><a href="equipmentTypeAttributeList.action">$i18n.getString( "equipmenttype_attribute" )</a></li>
+    <li><a href="equipmentTypeList.action">$i18n.getString( "equipmenttype" )</a></li>
+	
+	
+</ul>
+
+<h2>$i18n.getString( "ccem_entry" )</h2>
+<ul>
+	<li><a href="model.action">$i18n.getString( "model" )</a></li>
+	<li><a href="enquipmentSelect.action">$i18n.getString( "equipmentAttributeValue" )</a></li>	
+</ul>
+-->
+
+<h2>$i18n.getString( "ccem_reports" )</h2>
+<ul>
+	<li><a href="cceiReportsPage.action">$i18n.getString( "ccem_reports_page" )</a></li>
+	<!--<li><a href="jrxmlReportsPage.action">$i18n.getString( "jrxml_reports" )</a></li>  -->  
+</ul>
+
+<h2>$i18n.getString( "ccem_setup" )</h2>
+<ul>
+	<li><a href="../dhis-web-maintenance-ccem/index.action">$i18n.getString( "ccem_setup" )</a></li>
+</ul>

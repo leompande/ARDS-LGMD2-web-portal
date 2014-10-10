@@ -1,0 +1,139 @@
+<script>
+	jQuery(document).ready(	function(){
+		validation( 'updateExportReportForm', function( form ){
+			selectAllById( "selectedDataSetsList" );
+			form.submit();
+		});
+		
+		checkValueIsExist( "name", "validateExportReportAction.action", {id: "$exportReport.id"} );
+		
+		jQuery( "#availableDataSetsList" ).dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getDataSets.action",
+			iterator: "dataSets",
+			connectedTo: "selectedDataSetsList",
+			handler: function( item ) {
+				var option = jQuery( "<option />" );
+				option.text( item.name );
+				option.attr( "value", item.id );
+				
+				return option;
+			}
+		});
+
+		var cache = {},	lastXhr;
+		jQuery( "#group" ).autocomplete({
+			minLength: 2,
+			source: function( request, response ) {
+				var term = request.term;
+				if ( term in cache ) {
+					response( cache[ term ] );
+					return;
+				}
+
+				lastXhr = jQuery.postJSON( "getExportReportGroups.action", request, function( data, status, xhr ) {
+					cache[ term ] = data;
+					if ( xhr === lastXhr ) {
+						response( data );
+					}
+				});
+			}
+		});	
+	});	
+</script>
+
+<h3>$i18n.getString('export_reports') : $i18n.getString('update')</h3>
+
+<form id="updateExportReportForm" method="POST" action="updateExportReport.action">
+	<input type="hidden" value="$exportReport.id" name="id" id="id"/>
+	<table>
+		<thead><tr><th colspan="2">$i18n.getString( "details" )</th></tr></thead>
+		<tbody>
+			<tr>
+				<td><label for="name">$i18n.getString('name')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+				<td><input type="text" name="name" id="name" value="$!encoder.htmlEncode( $exportReport.displayName )" style="width:20em" class="{validate:{required:true,minlength:2,maxlength:160}}"/></td>
+			</tr>
+			<tr>
+				<td><label>$i18n.getString('excel_template')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+				<td>				
+					<select name="excel" style="width:20em" class="{validate:{required:true}}">
+						#foreach($templateFileName in $mapTemplateFiles.keySet())
+							<option value="$encoder.htmlEncode( $templateFileName )" #if( $exportReport.excelTemplateFile==$templateFileName) selected="selected" #end>
+								$encoder.htmlEncode( $templateFileName )
+							</option>
+						#end						
+					</select>	
+				</td>
+			</tr>
+			<tr>
+				<td><label>$i18n.getString('export_report_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+				<td>
+					<select name="exportReportType" style="min-width:20em" disabled="true">
+						#foreach( $type in $reportTypes )
+							<option value='$type' #if( $exportReport.getReportType()==$type) selected="selected" #end>$i18n.getString( $type )</option>
+						#end												
+					</select>
+				</td>
+			</tr>	
+			<tr>		
+				<td><label>$i18n.getString('group')</label></td>
+				<td><input type="text" id="group" value="$encoder.htmlEncode( $exportReport.group )" name="group" style="width:20em" class="{validate:{required:true,minlength:2,maxlength:160}}"/></td>
+			<td>		
+			<tr>
+				<td><label>$i18n.getString('period_postion_row')</label></td>
+				<td><input type="text" name="periodRow" value="$!exportReport.periodRow"  style="width:10em" class="{validate:{required:false,number:true}}"/></td>
+			</tr>
+			<tr>
+				<td><label>$i18n.getString('period_postion_column')</label></td>
+				<td><input type="text" name="periodCol" value="$!exportReport.periodColumn" style="width:10em" class="{validate:{required:false,number:true}}"/></td>
+			</tr>
+			<tr>
+				<td><label>$i18n.getString('organisation_position_row')</label></td>
+				<td><input type="text" name="organisationRow" value="$!exportReport.organisationRow" style="width:10em" class="{validate:{required:false,number:true}}"/></td>
+			</tr>
+
+			<tr>		
+				<td><label>$i18n.getString('organisation_position_column')</label></td>
+				<td><input type="text" name="organisationCol" value="$!exportReport.organisationColumn" style="width:10em" class="{validate:{required:false,number:true}}"/></td>
+			<td>
+		</tbody>
+	</table>
+	
+	<table id="dataSetSelectionArea">
+		<col style="width: 450px"/>
+		<col/>
+		<col style="width: 450px"/>
+
+		<thead>
+			<tr>
+				<th>$i18n.getString( "available_data_sets" )</th>
+				<th>$i18n.getString( "filter" )</th>
+				<th>$i18n.getString( "selected_data_sets" )</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>
+					<select id="availableDataSetsList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+				</td>
+				<td>
+					<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableDataSetsList' );"/><br/>
+					<input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'selectedDataSetsList' );"/><br/>
+					<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableDataSetsList' );"/><br/>
+					<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'selectedDataSetsList' );"/>
+				</td>			
+				<td>
+					<select id="selectedDataSetsList" name="dataSetIds" multiple="multiple" style="height: 200px; width: 100%; margin-top: 45px;" class="{validate:{required:true}}">
+						#foreach( $dataSet in $exportReport.dataSets )
+						<option value="$dataSet.id">$!encoder.htmlEncode( $dataSet.displayName )</option>
+						#end
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="$i18n.getString('ok')" style="width:150px"/>
+				<input type="button" value="$i18n.getString('cancel')" onclick="window.location = 'listAllExportReport.action'" style="width:150px"/></td>			
+			</tr>
+		</tbody>
+	</table>
+</form>

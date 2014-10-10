@@ -1,0 +1,69 @@
+<script>
+    
+    jQuery(document).ready( function(){
+
+        currentDiv = 'equipmentStatusForm';
+        isSubmit = true;
+        
+        jQuery("#equipmentStatusForm").validate({
+                 meta:"validate"
+                ,errorElement:"span"
+                ,submitHandler: function(form)
+                    {
+                        if( isSubmit ) 
+                        {
+                            updateEquipmentStatus();
+                        }
+                    }
+            });
+    }); 
+    
+</script>
+
+<h3>$i18n.getString( "equipmentstatus" )</h3>
+
+<form id="equipmentStatusForm" name="equipmentStatusForm" method="post" >
+	<input type="hidden" id="equipmentId" name="equipmentId" value="$equipmentId" />
+    <table>
+        <tr>
+            <td>$i18n.getString( "reporting_date" ) : </td>
+            <td>
+				<input type="text" id="reportingDate" name="reportingDate" class="{validate:{required:true}}" />
+				<script type="text/javascript">
+					datePickerValid( 'reportingDate' );
+                </script>
+			</td>
+        </tr>   
+        <tr>
+            <td>$i18n.getString( "updation_date" ) : </td>
+            <td>
+				<input type="text" id="dateOfUpdation" name="dateOfUpdation" class="{validate:{required:true}}" />
+				<script type="text/javascript">
+                    datePickerValid( 'dateOfUpdation' );
+                </script>
+			</td>
+        </tr>
+        <tr>
+            <td>$i18n.getString( "status" ) : </td>
+            <td>
+				<select id="status" name="status" class="{validate:{required:true}}">
+					<option value="" >[$i18n.getString( "please_select" )]</option>
+					<option value="NOTWORKING" >$i18n.getString( "notworking" )</option>
+					<option value="UNDERREPAIR" >$i18n.getString( "under_repair" )</option>
+                    <option value="WORKING">$i18n.getString( "working" )</option>
+				</select>
+			</td>
+        </tr>
+        <tr>
+            <td>$i18n.getString( "description" ) : </td>
+            <td><textarea id="description" name="description" class="{validate:{required:true}}"></textarea></td>
+        </tr>
+	</table>
+
+    <p>
+        <input type="submit" class="button" value="$i18n.getString( 'add' )"/>
+        <input type="button" class="button" value="$i18n.getString( 'back' )" onclick="loadAllEquipments();"/>
+		<!--<input type="button" class="button" value="$i18n.getString( 'show_history' )" onclick="showEquipmentStatusHistory( "$equipmentId" );" />-->
+    </p>
+
+</form>	

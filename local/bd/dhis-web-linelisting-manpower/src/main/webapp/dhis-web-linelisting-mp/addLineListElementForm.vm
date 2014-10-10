@@ -1,0 +1,133 @@
+
+<h3>Add Line List Element</h3>
+
+<form id="addLineListElementForm" name="addLineListElementForm" action="addLineListElement.action" method="post" onsubmit="submitForm(); return validateAddLineListElement()">
+  <table id="lineListElements">
+    <col> ## Labels
+    <col> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">Line List Elements</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" style="width:20em"></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "short_name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="shortName" name="shortName" maxlength="20" style="width:20em"></td>
+      </tr>
+	<tr>
+		<td><label for="description">$i18n.getString( "description" )</label></td>
+		<td><textarea id="description" name="description" style="width:20em; height:8em"></textarea></td>
+	</tr>
+      <tr>
+        <td><label>Data Type <em title="$i18n.getString( "required" )" class="required">*</label></td>
+		<td>
+			<select id="dataType" name="dataType" style="min-width:20em">
+				<option value="int" selected="selected">Number</option>
+				<option value="string">$i18n.getString( "text" )</option>
+				<option value="date">Date</option>
+			</select>
+      </tr>
+      <tr>
+        <td><label>Presentation Type <em title="$i18n.getString( "required" )" class="required">*</label></td>
+		<td>
+			<select id="presentationType" name="presentationType" style="min-width:20em" onclick="return valueChanged()">
+				<option value="text" selected="selected">Text Field</option>
+				<option value="combobox">Combo Box</option>
+                                <option value="calender">Calender</option>
+			</select>
+      </tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </tbody>
+  </table>
+
+  <table id="lineListOptionSelectionArea">
+    <col> ## Available Line List Options
+    <col> ## Filter
+    <col> ## Selected Line List Options
+    <thead>
+      <tr>
+        <th>Available Line List Options</th>
+		<th>Filter</th>
+        <th>Selected Line List Options</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+      	<td><input type="text" id="availableLineListOptionsFilter" onkeyup="filterAvailableLineListOptions()" style="min-width:25em"></td>
+      	<td>$i18n.getString( "name" )</td>
+      	<td><input type="text" id="lineListElementOptionsFilter" onkeyup="filterLineListElementOptions()" style="min-width:25em"></td>
+      </tr>
+
+
+      <tr>
+        <td>
+          <!-- List of all available Line List Elements -->
+          <select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:25em;height:20em" ondblclick="addLineListElementOptions()">
+          </select>
+        </td>
+        <td>
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" onclick="addLineListElementOptions()">
+        	<br>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" onclick="removeLineListElementOptions()">
+        </td>
+        <td>
+          <!-- List of all selected Line List Options -->
+          <select id="selectedList" name="selectedList" multiple="multiple" style="min-width:25em;height:20em" ondblclick="removeLineListElementOptions()">
+          </select>
+        </td>
+        <td>
+            <a href="javascript:moveUp('selectedList')"><img src="../images/move_up.png" alt="$i18n.getString( "move_up" )"></a><br><br>
+            <a href="javascript:moveDown('selectedList')"><img src="../images/move_down.png" alt="$i18n.getString( "move_down" )"></a>
+    	</td>
+      </tr>
+
+    </tbody>
+  </table>
+<table>
+      <tr>
+        <td colspan="3">
+          <input type="submit" value="$i18n.getString( "save" )" style="width:13em"><input type="button"
+            onclick="window.location.href='lineListElements.action'" value="$i18n.getString( "cancel" )" style="width:12em">
+        </td>
+      </tr>
+</table>
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+	var lineListElementOptions = new Object();
+
+	var availableLineListOptions = new Object();
+#foreach ( $availableLineListOption in $lineListOptions )
+	availableLineListOptions['$availableLineListOption.id'] = '$encoder.jsEscape( $availableLineListOption.name, "'" )';
+#end
+
+	initListsLineListElement();
+
+	var nameField = document.getElementById( 'name' );
+	nameField.select();
+	nameField.focus();
+
+        function valueChanged()
+	{
+            if(document.getElementById("presentationType").value == "combobox")
+            {
+                document.getElementById("lineListOptionSelectionArea").style.display="block";
+            }
+            else
+            {
+
+                document.getElementById("lineListOptionSelectionArea").style.display="none";
+            }
+        }
+
+        valueChanged();
+</script>

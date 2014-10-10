@@ -1,0 +1,52 @@
+
+<h3>Sanctioned Post Mapping Form</h3>
+<table>
+    <tr>
+        <td>Department : </td>
+        <td>
+            <select id="lineListGroupId" name="lineListGroupId" style="min-width:300px" onchange="getPosts()">
+                <option value="NA">[$i18n.getString( "select" )]</option>
+				#foreach( $department in $departments )
+					<option value="$department.id">$encoder.htmlEncode( $department.name )</option>
+				#end
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>Post Name : </td>
+        <td>
+            <select id="lineListOptId" name="lineListOptId" style="min-width:300px" onchange="getSelDataElement()" >
+				<option value="NA">[$i18n.getString( "select" )]</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>Dataelement : </td>
+        <td>
+            <select id="deId" name="deId" style="min-width:300px" >
+                <option value="NA">[$i18n.getString( "select" )]</option>
+				#set( $count = 0 )
+                #foreach( $optionComboName in $optionComboNames )
+                    <option value="$optionComboIds.get($count)">$encoder.htmlEncode( $optionComboName )</option>
+					#set( $count = $count + 1 )
+                #end
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td><input type="button" value="Save" style="min-width:300px" onclick="saveSanctionedPostMapping()" /></td>
+    </tr>
+</table>

@@ -1,0 +1,14 @@
+#set( $size = $!importReports.size() )
+{
+  "importReports": [
+  #foreach( $importReport in $importReports )
+  {
+    "id": "${importReport.id}",
+	"name": "$!encoder.jsonEncode( $!{importReport.displayName} )",
+	"type": "${importReport.type}",
+	"periodType": "${importReport.periodType.name}",
+	"excelTemplateFile": "${importReport.excelTemplateFile}"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

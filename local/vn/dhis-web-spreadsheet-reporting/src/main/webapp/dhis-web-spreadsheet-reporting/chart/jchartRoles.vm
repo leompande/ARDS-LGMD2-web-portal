@@ -1,0 +1,56 @@
+<script>
+	jQuery( function(){
+		validation( 'userRole', function( form ){ form.submit()}, function(){ selectAllById( 'selectedList' ) } );		
+	});
+</script>
+<h3>$i18n.getString( "update_reportexcel_userrole" )</h3>
+
+<form id="userRole" action="updateJChartRoles.action" method="POST">
+<input type="hidden" name="id" value="$jchart.id"/>
+<table>
+	<tr>
+		<th colspan=3>$i18n.getString( "chart" )</th>
+	</tr>
+	<tr>
+		<td colspan=3>$encoder.htmlEncode( $jchart.title )</td>
+	</tr>
+	<tr>
+		<th>$i18n.getString( "available" )</th>
+		<td></td>
+		<th>$i18n.getString( "selected" )</th>
+	</tr>
+	<tr>
+		<td>
+			<select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'availableList', 'selectedList' )">
+            #foreach ( $userRole in $userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+			</select>
+		</td>
+		<td>
+			<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'selectedList', 'availableList' )"><br>
+			<input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableList', 'selectedList' )">
+		</td>
+		<td>
+			<select id="selectedList" name="userRoles" multiple="multiple" style="min-width:20em;height:20em" class="{validate:{required:true}}" ondblclick="moveSelectedById( 'selectedList', 'availableList' )">
+			#foreach ( $userRole in $jchart.userRoles )
+              <option value="$userRole.id">$encoder.htmlEncode( $userRole.name )</option>
+            #end
+			</select>
+        </td>
+	</tr>
+</table>
+<br>
+<input type="submit" value="$i18n.getString( 'ok' )" style="width:100px"/>
+<input type="button" value="$i18n.getString( 'cancel' )"  style="width:100px" onclick="window.location = 'jcharts.action'"/>
+</form>
+<script>
+	function submitForm(){
+		selectAllById( 'selectedList' );
+		document.forms['userRole'].submit();
+	}
+	$(document).ready(function(){
+		sortList('availableList', 'ASC');
+		sortList('selectedList', 'ASC');
+	});
+</script>

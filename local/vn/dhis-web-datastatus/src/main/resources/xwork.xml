@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN"
+  "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	<include file="dhis-web-commons.xml" />
+
+	<package name="dhis-web-datastatus" extends="dhis-web-commons"
+		namespace="/dhis-web-datastatus">
+
+		<action name="index" class="org.hisp.dhis.status.action.DefaultDataStatusAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-datastatus/index.vm</param>
+			<param name="menu">/dhis-web-datastatus/menu.vm</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js</param>
+			<param name="menuTreeHeight">400</param>
+		</action>
+
+		<action name="listDataStatus" class="org.hisp.dhis.status.action.ListDataStatusAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-datastatus/listDataStatus.vm</param>
+			<param name="menu">/dhis-web-datastatus/menu.vm</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js</param>
+			<param name="menuTreeHeight">400</param>
+		</action>
+		
+		<action name="addDataStatus" class="org.hisp.dhis.status.action.AddDataStatusAction">
+			<result name="success" type="redirect">listDataStatus.action</result>
+			<param name="requiredAuthorities">F_EDIT_DATASTATUS</param>								
+		</action>
+		
+		<action name="updateDataStatus" class="org.hisp.dhis.status.action.UpdateDataStatusAction">
+			<result name="success" type="redirect">listDataStatus.action</result>		
+			<param name="requiredAuthorities">F_EDIT_DATASTATUS</param>				
+		</action>
+		
+		<action name="deleteDataStatus" class="org.hisp.dhis.status.action.DeleteDataStatusAction">
+			<result name="success" type="redirect">listDataStatus.action</result>		
+			<param name="requiredAuthorities">F_EDIT_DATASTATUS</param>				
+		</action>
+		
+		<action name="openUpdateDataStatus" class="org.hisp.dhis.status.action.GetDataStatusAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-datastatus/updateDataStatus.vm</param>
+			<param name="menu">/dhis-web-datastatus/menu.vm</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js</param>
+			<param name="menuTreeHeight">400</param>
+			<param name="requiredAuthorities">F_EDIT_DATASTATUS</param>			
+		</action>
+		
+		<action name="openAddDataStatus" class="org.hisp.dhis.status.action.NoAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">/dhis-web-datastatus/addDataStatus.vm</param>
+			<param name="menu">/dhis-web-datastatus/menu.vm</param>
+			<param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js</param>
+			<param name="menuTreeHeight">400</param>
+			<param name="requiredAuthorities">F_EDIT_DATASTATUS</param>			
+		</action>
+		
+		<action name="getDataSets" class="org.hisp.dhis.status.action.GetDataSetAction">
+			<result name="success" type="velocity-xml">/dhis-web-datastatus/responseDataSets.vm</result>			
+		</action>
+		
+		
+		
+
+
+	</package>
+</xwork>

@@ -1,0 +1,19 @@
+{ "modelType":
+  {
+    "id": "${modelType.id}",
+	"name": "$!encoder.jsonEncode( ${modelType.name} )",
+	"description": "$!encoder.jsonEncode( ${modelType.description} )",
+	"modelTypeAttributeCount": "${modelTypeAttributes.size()}",
+	"dataEntryForm": "$!encoder.jsonEncode( ${modelType.dataEntryForm.name} )",
+	
+	#set( $size = ${modelTypeAttributes.size()} )
+	"modelTypeAttribute": [
+	#foreach($typeAttribute in $modelTypeAttributes)
+	  {
+		"id": "${typeAttribute.modelTypeAttribute.id}",
+		"name": "$!encoder.jsonEncode( ${typeAttribute.modelTypeAttribute.name} )"
+	  }#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

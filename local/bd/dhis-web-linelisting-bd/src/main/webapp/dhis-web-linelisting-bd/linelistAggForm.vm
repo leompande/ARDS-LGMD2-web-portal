@@ -1,0 +1,99 @@
+
+<script>
+    //Global Variables
+    var curPeriodType="";
+</script>
+
+<h1>Linelisting Aggregation Form</h1>
+<hr />
+    <form id="caseAggregationForm" name="caseAggregationForm" action="linelistAggregationResult.action" method="post" onsubmit="return formValidationsForLLAggMapping()">
+        <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+            <colgroup>
+                    <col width="325">
+                    <col width="80">
+                    <col width="325">
+                </colgroup>
+
+                <tr>
+                    <td class="NormalB" align="center">
+                        <table>
+                            <tr>
+                                <td class="NormalB" colspan="2">
+                                    <strong>$i18n.getString( "ds_dataset_list" )</strong> : <br>
+                                    <select id="selectedDataSets" name="selectedDataSets" onchange="getdSetPeriods()" >
+                                        #foreach ( $dataSet in $datasets )
+                                            <option value='$dataSet.id' title='$dataSet.name'>$dataSet.name</option>
+                                        #end
+                                    </select>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="NormalB">&nbsp;</td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td class="NormalB">
+                                   <strong> $i18n.getString( "from" )</strong><br>
+                                    <select id="sDateLB" name="sDateLB"></select>
+                                </td>
+                                <td class="NormalB">
+                                   <strong> $i18n.getString( "to" )</strong><br>
+                                    <select id="eDateLB" name="eDateLB"></select>
+                                </td>
+                            </tr>
+                                <td class="NormalB">&nbsp;</td>
+                                <td class="NormalB">&nbsp;</td>
+                            </tr>
+
+                            <tr>
+                                <td class="NormalB"><br/><input type="submit" name="Aggregate" value="Aggregate" style="font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" /></td>
+                                <td class="NormalB">
+                                   <strong> $i18n.getString( "ga_facilityby" )</strong><br>
+                                        <select id="facilityLB" name="facilityLB">
+                                            <option value="random" selected>Selected</option>
+                                            <option value="immChildren" >Immediate Children</option>
+                                            <option value="children" >Child Tree</option>
+                                        </select>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                    <td class="NormalB">&nbsp; </td>
+
+                    <td class="NormalB">
+                        <table>
+                            <tr>
+                                <td class="NormalB">&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="NormalB">
+                                    <strong>$i18n.getString( "ga_orgunit" )</strong><br>
+                                    <select name="orgUnitListCB" id="orgUnitListCB" multiple style="width: 325px;height: 110px" ondblclick="remOUFunction()">
+                                    </select>
+                                </td>
+                            </tr>
+                       </table>
+                   </td>
+
+                </tr>
+
+        <tr>                    
+                    <td class="NormalB"> </td>
+                    <td class="NormalB"> </td>
+                    <td class="NormalB"> </td>
+                </tr>
+        <tr>
+                    <td>
+                    </td>
+                    <td class="NormalB">&nbsp; </td>
+                    <td>&nbsp;</td>
+                        
+        </tr>
+            </table>
+        </form>
+<script>
+    window.onload=getdSetPeriods;
+</script>

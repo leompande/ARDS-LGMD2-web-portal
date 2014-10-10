@@ -1,0 +1,6 @@
+
+<span id="message" style="display:block">$encoder.xmlEncode( $message )</span>
+
+<br/><br/>
+
+<input type="button" value="Back" onclick="window.location.href='excelImportForm.action'" />

@@ -1,0 +1,1 @@
+#set($size = $units.size())[#foreach($unit in $units){"id":"${unit.uid}","localid":"${unit.id}","level":${unit.level},"text":"$encoder.jsonEncode(${unit.name})"#if(!$unit.hasChild()),"leaf":true#end}#if($velocityCount < $size),#end#end]

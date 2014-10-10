@@ -1,0 +1,88 @@
+{ "metaData": {
+
+#if( $emptyOrganisationUnits )
+"emptyOrganisationUnits": $emptyOrganisationUnits,
+#end
+
+"significantZeros": [
+#set( $size = $significantZeros.size() )
+#foreach( $dataElement in $significantZeros )
+"${dataElement.uid}"#if( $velocityCount < $size ),#end
+#end ],
+
+"dataElements": {
+#set( $size = $dataElements.size() )
+#foreach( $dataElement in $dataElements )
+"${dataElement.uid}":"$encoder.jsonEncode( ${dataElement.getDetailedNumberType()} )"#if( $velocityCount < $size ),#end
+#end },
+
+"optionSets": {
+#set( $size = $dataElementsWithOptionSet.size() )
+#foreach( $dataElement in $dataElementsWithOptionSet )
+  #set( $size2 = $dataElement.categoryCombo.getSortedOptionCombos().size() )
+  #foreach( $option in $dataElement.categoryCombo.getSortedOptionCombos() )
+  "${dataElement.uid}-$option.uid":{"uid": "$encoder.jsonEncode( ${dataElement.optionSet.uid} )", "v":${dataElement.optionSet.version}}
+  #if( $velocityCount < $size2 ),#end
+  #end
+#if( $velocityCount < $size ),#end
+#end },
+
+"indicatorFormulas": {
+#set( $size = $indicators.size() )
+#foreach( $indicator in $indicators )
+"${indicator.uid}":"($!{indicator.explodedNumerator})/($!{indicator.explodedDenominator})*($!{indicator.indicatorType.factor})"#if( $velocityCount < $size ),#end
+#end },
+
+"dataSets": {
+#set( $size = $dataSets.size() )
+#foreach( $dataSet in $dataSets )
+"${dataSet.uid}":{"name":"$encoder.jsonEncode( ${dataSet.displayName} )","periodType":"$encoder.jsonEncode( ${dataSet.periodType.name} )",
+"categoryCombo":"${dataSet.categoryCombo.uid}","version":"${dataSet.version}","type":"${dataSet.getDataSetType()}","expiryDays":"${dataSet.expiryDays}",
+"allowFuturePeriods":${dataSet.allowFuturePeriods},"fieldCombinationRequired":${dataSet.fieldCombinationRequired},"validCompleteOnly":${dataSet.validCompleteOnly},
+"skipOffline":${dataSet.skipOffline}, "renderAsTabs":${dataSet.renderAsTabs}, "renderHorizontally":${dataSet.renderHorizontally}
+}#if( $velocityCount < $size ),#end
+#end },
+
+"dataSetAssociationSets": {
+#set( $size1 = $dataSetAssociationSets.size() )
+#set( $index = 0 )
+#foreach( $associationSet in $dataSetAssociationSets )
+"${index}": [
+#set( $index = $index + 1 )
+#set( $size2 = $associationSet.size() )
+#foreach( $id in $associationSet )
+"$encoder.jsonEncode( $id )"#if( $velocityCount < $size2 ),#end
+#end ]#if( $velocityCount < $size1 ),#end
+#end },
+
+"organisationUnitAssociationSetMap": {
+#set( $size = $organisationUnitAssociationSetMap.size() )
+#foreach( $orgUnit in $organisationUnitAssociationSetMap.keySet() )
+"${orgUnit}":"$organisationUnitAssociationSetMap.get( ${orgUnit} )"#if( $velocityCount < $size ),#end
+#end },
+
+"defaultCategoryCombo":"${defaultCategoryCombo.uid}",
+
+"categoryCombos": {
+#set( $size1 = $categoryCombos.size() )
+#foreach( $categoryCombo in $categoryCombos )
+"${categoryCombo.uid}":{"id":"${categoryCombo.uid}","name":"$encoder.jsonEncode( ${categoryCombo.displayName} )","categories":[
+#set( $size2 = $categoryCombo.categories.size() )
+#foreach( $category in $categoryCombo.categories )
+"${category.uid}"#if( $velocityCount < $size2 ),#end
+#end
+] }#if( $velocityCount < $size1 ),#end
+#end
+},
+
+"categories": {
+#set( $size1 = $categories.size() )
+#foreach( $category in $categories )
+"${category.uid}":{"id":"${category.uid}","name":"$encoder.jsonEncode( ${category.displayName} )","options":[
+#set( $size2 = $category.categoryOptions.size() )
+#foreach( $option in $category.categoryOptions )
+{"id":"${option.uid}","name":"$encoder.jsonEncode( ${option.displayName} )"}#if( $velocityCount < $size2 ),#end
+#end
+] }#if( $velocityCount < $size1 ),#end
+#end }
+} }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+  <!-- Store definitions -->
+
+  <bean id="org.hisp.dhis.linelisting.LineListStore"
+    class="org.hisp.dhis.linelisting.hibernate.HibernateLineListStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="periodStore"
+      ref="org.hisp.dhis.period.PeriodStore"/>
+  </bean>
+	
+
+  <bean id="org.hisp.dhis.linelisting.linelistdataelementmapping.LineListDataElementMappingStore"
+    class="org.hisp.dhis.linelisting.linelistdataelementmapping.hibernate.HibernateLineListDataElementMappingStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+    
+	
+	
+	
+  <bean id="org.hisp.dhis.linelisting.LineListValidationRuleStore"
+    class="org.hisp.dhis.linelisting.hibernate.HibernateLineListValidationRuleStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  
+  <bean id="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapStore"
+    class="org.hisp.dhis.linelisting.llaggregation.hibernate.HibernateLinelistAggMapStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="jdbcTemplate" ref="jdbcTemplate"/>  
+  </bean>
+	
+ <!-- 15/10/2010 start--> 
+  <bean id="org.hisp.dhis.linelisting.EmployeeStore"
+    class="org.hisp.dhis.linelisting.hibernate.HiberateEmployeeStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+ <!-- 15/10/2010 end--> 	
+		
+  <!-- Service definitions -->
+	
+ <!-- 12/10/2010 start--> 
+  <bean id="org.hisp.dhis.linelisting.linelistdataelementmapping.LineListDataElementMappingService"
+    class="org.hisp.dhis.linelisting.linelistdataelementmapping.DefaultLineListDataElementMappingService">
+    <property name="lineListDataElementMappingStore" ref="org.hisp.dhis.linelisting.linelistdataelementmapping.LineListDataElementMappingStore"/>
+  </bean>
+ <!-- 12/10/2010 end-->  
+
+ <!-- 15/10/2010 start--> 
+  <bean id="org.hisp.dhis.linelisting.EmployeeService"
+    class="org.hisp.dhis.linelisting.DefaultEmployeeService">
+    <property name="employeeStore" ref="org.hisp.dhis.linelisting.EmployeeStore"/>
+  </bean>
+ <!-- 15/10/2010 end-->  		   	
+
+  <bean id="org.hisp.dhis.linelisting.LineListService"
+    class="org.hisp.dhis.linelisting.DefaultLineListService">
+    <property name="lineListStore"
+      ref="org.hisp.dhis.linelisting.LineListStore"/>
+    <property name="i18nService"
+      ref="org.hisp.dhis.i18n.I18nService"/>
+  </bean>
+
+  <bean id="org.hisp.dhis.linelisting.LineListValidationRuleService"
+    class="org.hisp.dhis.linelisting.DefaultLineListValidationRuleService">
+    <property name="lineListValidationRuleStore"
+      ref="org.hisp.dhis.linelisting.LineListValidationRuleStore"/>
+  </bean>
+
+  <bean id="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapService"
+    class="org.hisp.dhis.linelisting.llaggregation.DefaultLinelistAggMapService">
+    <property name="linelistAggMapStore" 
+      ref="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapStore"/>  
+    <property name="lineListService" 
+      ref="org.hisp.dhis.linelisting.LineListService"/>  
+  </bean>
+  
+</beans>

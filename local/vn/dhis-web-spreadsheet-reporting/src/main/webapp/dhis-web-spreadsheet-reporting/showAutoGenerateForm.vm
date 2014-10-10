@@ -1,0 +1,31 @@
+<script type="text/javascript" src="javascript/autoGenerateForm.js"></script>
+<body>
+
+#if( $!fileExcel )
+	<div id="messageUpload">
+		$i18n.getString( "upload_file" ) $i18n.getString( "success" )<br>$fileExcel.getName()
+	</div>
+#end
+<span id="message" style="top:70px;right:5px;position:fixed;width:200px;z-index:100009" onclick="hideById(this.id);"></span>
+
+<table width="82%">
+	<h3>$i18n.getString( 'auto_generate_form' ) #openHelp( "" )</h3>
+	<form name="uploadForm" id="uploadForm" action="autoGenerateFormByTemplate.action" method="POST" enctype="multipart/form-data">   
+		<tr>
+			<td width="18%" style=" width:25% ">$i18n.getString( 'select_excel_file' )</td>
+			<td width="82%">
+				<input type="file" id="upload" name="upload" onChange="enable( 'uploadButton' );">
+				<input name="uploadButton" id="uploadButton" type="button" value="$i18n.getString( 'upload_file' )" onclick="validateUploadExcelTemplateForGenerateForm();"/>
+				<input type="button" onClick="javascript: autoGenerateFormByTemplate();" style="width:150px" value="$i18n.getString( 'auto_generate_form' )" />
+			</td>   
+		</tr>
+	</form>
+</table>
+
+<div id="previewDiv"></div>
+</body>
+
+<script type="text/javascript">
+	var i18n_generate_form_confirm = '$encoder.jsEscape( $i18n.getString("generate_form_confirm"), "'" )';
+	var i18n_auto_generate_form_completed = '$encoder.jsEscape( $i18n.getString("auto_generate_form_completed"), "'" )';
+</script>

@@ -1,0 +1,9 @@
+{ "modelTypeAttribute":
+  {
+    "id": "${modelTypeAttribute.id}",
+	"name": "$!encoder.jsonEncode( ${modelTypeAttribute.name} )",
+	"description": "$!encoder.jsonEncode( ${modelTypeAttribute.description} )",
+	"valueType": "$!encoder.jsonEncode( ${modelTypeAttribute.valueType} )",
+	"mandatory":  "$!{modelTypeAttribute.mandatory}"
+  }
+}

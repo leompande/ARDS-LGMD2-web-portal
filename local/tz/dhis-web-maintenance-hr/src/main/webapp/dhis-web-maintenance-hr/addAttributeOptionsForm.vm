@@ -1,0 +1,57 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for addAttributeOptionsForm
+//-----------------------------------------------------------------------
+	jQuery(document).ready(
+			function()
+			{
+				jQuery("#addAttributeOptionsForm").validate({
+					 meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{					                   
+					 					    validateAddAttributeOptions();
+									}
+				});
+				jQuery.validator.setMessages( validationMessage );
+				jQuery("#nameField").focus();
+				
+			}
+	);
+	var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+	var i118_at_least_2_option = '$encoder.jsEscape( $i18n.getString( "at_least_2_option" ) , "'") ';
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>	
+<h3>$i18n.getString( "add_attribute_options" )</h3>
+
+<form id="addAttributeOptionsForm" name="addAttributeOptionsForm" action="addAttributeOptions.action" method="post" >
+
+<div style="display:inline">
+  <input type="hidden" id="attributeId" name="attributeId" value="$attribute.id">
+  
+</div>
+  
+  <table id="detailsList">
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "attribute_options_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$i18n.getString( "value" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="nameField" name="nameField" style="width:30em" class="{validate:{required:true,rangelength:[2,35]}}"></td>
+      </tr> 
+      <tr>
+        <td colspan="3" style="height:15px"></td>
+      </tr>
+    </tbody>
+  </table>  
+
+<p>
+    <input type="submit" value="$i18n.getString( "add" )" style="width:10em">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='defineAttributeOptionForm.action?attributeId=$attribute.id'" style="width:10em">
+</p>
+
+</form>     
+<span id="message"></span>

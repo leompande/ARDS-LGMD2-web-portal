@@ -1,0 +1,8 @@
+{ "patientAttributeGroup":
+  {
+    "id": "${patientAttributeGroup.id}",
+    "name": "$!encoder.jsonEncode( ${patientAttributeGroup.name} )",
+	"description": "$!encoder.jsonEncode( ${patientAttributeGroup.description} )",
+	"noAttribute": "${patientAttributeGroup.attributes.size()}"
+  }
+}

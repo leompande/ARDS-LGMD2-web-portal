@@ -1,0 +1,19 @@
+<h1>$i18n.getString( "transfer_facility_data" )</h1>
+
+<hr />
+<!--<form id="autoLLAggForm" name="autoLLAggForm" action="autoLLAgg.action" method="post" onsubmit="return formValidationsLLAggregation()">-->
+<form id="transferFacilityDataForm" name="transferFacilityDataForm">
+<input type="hidden" id="previousYear" name="previousYear" value="$previousYear" />
+<input type="hidden" id="currentYear" name="currentYear" value="$currentYear" />	
+<table>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+    	<td class="NormalB"><input type="button" id="transfer" name="transfer"  value="$i18n.getString( 'transfer_facility_data' )" style="width:200px" onclick="transferFacilityData()" /></td>
+    </tr>
+</table>
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+<div id='transferFacilityDataResultDiv'></div>
+<div id='loaderDiv'></div>
+
+</form>

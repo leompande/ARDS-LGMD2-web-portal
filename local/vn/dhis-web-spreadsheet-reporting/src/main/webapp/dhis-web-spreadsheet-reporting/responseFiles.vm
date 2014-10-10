@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+#foreach($templateFileName in $mapTemplateFiles.keySet())		
+	<file>$encoder.htmlEncode( $templateFileName )</file>
+#end	
+</files>

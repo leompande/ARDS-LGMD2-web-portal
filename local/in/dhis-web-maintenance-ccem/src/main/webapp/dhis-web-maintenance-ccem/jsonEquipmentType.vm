@@ -1,0 +1,9 @@
+{ "equipmentType":
+  {
+    "id": "${equipmentType.id}",
+	"name": "$!encoder.jsonEncode( ${equipmentType.name} )",
+	"description": "$!encoder.jsonEncode( ${equipmentType.description} )",
+	"modelType": "$!encoder.jsonEncode( ${equipmentType.modelType.name} )",
+	"tracking":  "$!{equipmentType.tracking}"
+  }
+}

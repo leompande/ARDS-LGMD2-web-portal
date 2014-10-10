@@ -1,0 +1,67 @@
+
+## Macro for generating the jQuery validation rules
+#macro( validate $type $require )
+  #if( $type == "NUMBER" )
+    {validate:{ number:true #if($require), required:true #end }}
+  #elseif( $require )
+    {validate:{required:true}}
+  #end
+#end
+
+<script>
+    
+    jQuery(document).ready( function(){
+
+        currentDiv = 'equipmentIcePacksForm';
+        isSubmit = true;
+        jQuery("#equipmentIcePacksForm").validate({
+                 meta:"validate"
+                ,errorElement:"span"
+                ,submitHandler: function(form)
+                    {
+                        if( isSubmit ) 
+                        {
+                            addUpdateEquipmentIcePacks();
+                        }
+                    }
+            });
+    }); 
+    
+</script>
+
+<form id="equipmentIcePacksForm" name="equipmentIcePacksForm" method="post" >
+	<input type="hidden" id="ouId" name="ouId" value="$organisationUnit.id" />
+	<input type="hidden" id="equipmentTypeIcePacksId" name="equipmentTypeIcePacksId" value="$equipmentType.id" />	
+	<table width="100%">
+		<tr bgcolor="#285C91">
+			<td colspan="2"><font color="#FFFFFF"><strong>$equipmentType.name Details</strong></font></td>
+		</tr>
+		<tr>
+			<td width="75%">Clinic<em title="$i18n.getString( 'required' )" class="required">*</em></td>
+			<td width="25%">
+				<select  id="healthFacility" name="healthFacility" class="{validate:{required:true}}" onchange="getEquipmentTypeIcePacksData()">
+					<option value="-1">[$i18n.getString( "please_select" )]</option>
+					#foreach ( $orgUnit in $orgUnitList )
+						<option value="$orgUnit.id" >$orgUnit.name</option>
+					#end
+				</select>
+			</td>
+		</tr>
+	</table>
+
+<div id='loadEquipmentIcePacksDataForm'></div> <!-- Load EquipmentIcePacks Data Form --> 
+	
+	<p align="right">
+		<input type="button"  value="$i18n.getString( 'Cancel' )" style="width:100px" onclick="closewindowEquipmentIcePacksData();"/>&nbsp;&nbsp;
+		&nbsp;&nbsp;<input type="submit"  id="saveButtonIcePacks" name="saveButtonIcePacks" value="$i18n.getString( 'save' )" disabled="disabled" style="width:100px"/>
+	</p>
+
+</form>
+
+
+
+<script>
+    var i18n_error_connect_to_server = '$encoder.jsEscape( $i18n.getString( "error_connect_to_server" ) , "'" )';
+    var i18n_add_equipment_successfully = '$encoder.jsEscape( $i18n.getString( "add_equipment_successfully" ) , "'" )';
+
+</script>

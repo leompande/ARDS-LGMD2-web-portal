@@ -1,0 +1,8 @@
+<script type="text/javascript">
+jQuery( document ).ready( function() {
+    $( "input[name='entryfield']" ).addClass( "formInputField" ).css( "width", "20em" );
+} );
+</script>
+<div id="customEntryScreenContainer">
+   $customDataEntryFormCode
+</div>

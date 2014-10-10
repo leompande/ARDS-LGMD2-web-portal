@@ -1,0 +1,7 @@
+{ "orgUnitPrototype":
+  {
+    "id" : "${organisationUnitPrototype.id}",
+    "name" : "$!encoder.jsonEncode( ${organisationUnitPrototype.displayName} )",
+    "shortName" : "$!encoder.jsonEncode( ${organisationUnitPrototype.displayShortName} )"
+  }
+}

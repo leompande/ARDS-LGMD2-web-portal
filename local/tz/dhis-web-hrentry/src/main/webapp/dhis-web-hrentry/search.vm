@@ -1,0 +1,38 @@
+
+<h3>$i18n.getString( "name_based_data_entry" )</h3>
+
+<table>    
+    <tr>
+        <td><label>$i18n.getString( "registering_unit" )</label></td>
+        <td><input type="text" readonly="readonly" #if( $organisationUnit ) value="$encoder.htmlEncode( $organisationUnit.name )" #else value="[$i18n.getString( "please_select_village" )]" #end style="min-width:350px"></td>
+        <td>&nbsp;</td>
+        <td><input type="button" value="$i18n.getString( "list_all_patients" )" onclick="window.location.href='listAllPatients.action'"></td>        
+    </tr>        
+</table>
+
+<hr style="clear:both">
+
+
+<form id="searchForm" name="searchForm" action="searchPatient.action" method="post" onsubmit="return validateSearch()">
+
+<table> 
+    <tr>           
+        <td>
+          <select id="searchingAttributeId" name="searchingAttributeId" style="min-width:300px"  #if( $patientAttributes.size() == 0 ) disabled="disabled" #end>
+            <option value="">$i18n.getString( "search_by_name_identifier" )</option>
+                #foreach( $attribute in $patientAttributes )
+                    <option value="$attribute.id" #if( $searchingAttributeId && $attribute.id == $searchingAttributeId ) selected="selected" #end>$encoder.htmlEncode( $attribute.name )</option>
+                #end
+          </select> 
+          <em title="$i18n.getString( "required" )" class="required">*</em></label>
+        </td>       
+        <td><input type="text" id="searchText" name="searchText" maxlength="30" style="width:20em"></td>        
+        <td><input type="submit" value="$i18n.getString( "search" )"</td>        
+    </tr>    
+    <tr></tr>        
+</table>
+
+</form>
+
+<span id="message"></span>
+

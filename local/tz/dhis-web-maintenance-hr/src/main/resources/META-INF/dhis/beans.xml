@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Attribute -->
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.GetAttributeListAction"
+		class="org.hisp.dhis.hr.action.attribute.GetAttributeListAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.GetAttributeAction"
+		class="org.hisp.dhis.hr.action.attribute.GetAttributeAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService" />
+		<property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.RemoveAttributeAction"
+		class="org.hisp.dhis.hr.action.attribute.RemoveAttributeAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.UpdateAttributeAction"
+		class="org.hisp.dhis.hr.action.attribute.UpdateAttributeAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService" />
+		<property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService" />
+	</bean>
+		
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.ValidateAttributeAction"
+		class="org.hisp.dhis.hr.action.attribute.ValidateAttributeAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.AddAttributeAction"
+		class="org.hisp.dhis.hr.action.attribute.AddAttributeAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService" />
+		<property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attribute.ShowAddAttributeFormAction"
+		class="org.hisp.dhis.hr.action.attribute.ShowAddAttributeFormAction"
+		scope="prototype">
+		<property name="inputTypeService" ref="org.hisp.dhis.hr.InputTypeService" />
+		<property name="dataTypeService" ref="org.hisp.dhis.hr.DataTypeService" />
+	</bean>	
+	
+	
+	<!-- AttributeOption -->
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionListAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionListAction"
+		scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionsAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.GetAttributeOptionsAction"
+		scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.RemoveAttributeOptionsAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.RemoveAttributeOptionsAction"
+		scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.UpdateAttributeOptionsAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.UpdateAttributeOptionsAction"
+		scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.ShowAddAttributeOptionsFormAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.ShowAddAttributeOptionsFormAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.AddAttributeOptionsAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.AddAttributeOptionsAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptions.ValidateAttributeOptionsAction"
+		class="org.hisp.dhis.hr.action.attributeoptions.ValidateAttributeOptionsAction"
+		scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<!-- Attribute Group -->
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupListAction"
+		class="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupListAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupAction"
+		class="org.hisp.dhis.hr.action.attributegroup.GetAttributeGroupAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.ShowAddAttributeGroupFormAction"
+		class="org.hisp.dhis.hr.action.attributegroup.ShowAddAttributeGroupFormAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.AddAttributeGroupAction"
+		class="org.hisp.dhis.hr.action.attributegroup.AddAttributeGroupAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.ShowUpdateAttributeGroupFormAction"
+		class="org.hisp.dhis.hr.action.attributegroup.ShowUpdateAttributeGroupFormAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.UpdateAttributeGroupAction"
+		class="org.hisp.dhis.hr.action.attributegroup.UpdateAttributeGroupAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.RemoveAttributeGroupAction"
+		class="org.hisp.dhis.hr.action.attributegroup.RemoveAttributeGroupAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributegroup.ValidateAttributeGroupAction"
+		class="org.hisp.dhis.hr.action.attributegroup.ValidateAttributeGroupAction"
+		scope="prototype">
+		<property name="attributeGroupService" ref="org.hisp.dhis.hr.AttributeGroupService" />
+	</bean>
+	
+	<!-- Attribute Option Group -->
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupListAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupListAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.GetAttributeOptionGroupAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.ShowAddAttributeOptionGroupFormAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.ShowAddAttributeOptionGroupFormAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.AddAttributeOptionGroupAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.AddAttributeOptionGroupAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.UpdateAttributeOptionGroupAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.UpdateAttributeOptionGroupAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.RemoveAttributeOptionGroupAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.RemoveAttributeOptionGroupAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.attributeoptiongroup.ValidateAttributeOptionGroupAction"
+		class="org.hisp.dhis.hr.action.attributeoptiongroup.ValidateAttributeOptionGroupAction"
+		scope="prototype">
+		<property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+	</bean>
+	
+	<!-- Indicators -->
+	
+	<bean
+    id="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorListAction"
+    class="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorListAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.ShowAddTargetIndicatorFormAction"
+    class="org.hisp.dhis.hr.action.indicator.ShowAddTargetIndicatorFormAction"
+    scope="prototype">
+    <!-- <property name="periodService" ref="org.hisp.dhis.period.PeriodService"/> -->
+    <property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+    <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.AddTargetIndicatorAction"
+    class="org.hisp.dhis.hr.action.indicator.AddTargetIndicatorAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+    <property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+    <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorAction"
+    class="org.hisp.dhis.hr.action.indicator.GetTargetIndicatorAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+    <property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+    <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.UpdateTargetIndicatorAction"
+    class="org.hisp.dhis.hr.action.indicator.UpdateTargetIndicatorAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+    <property name="attributeOptionGroupService" ref="org.hisp.dhis.hr.AttributeOptionGroupService" />
+    <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.ValidateTargetIndicatorAction"
+    class="org.hisp.dhis.hr.action.indicator.ValidateTargetIndicatorAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+  </bean>
+  <bean
+    id="org.hisp.dhis.hr.action.indicator.RemoveTargetIndicatorAction"
+    class="org.hisp.dhis.hr.action.indicator.RemoveTargetIndicatorAction"
+    scope="prototype">
+    <property name="targetIndicatorService" ref="org.hisp.dhis.hr.TargetIndicatorService" />
+  </bean>
+  
+  <!-- Dataset -->
+  
+  <bean id="org.hisp.dhis.hr.action.hrdataset.GetDataSetListAction"
+    class="org.hisp.dhis.hr.action.hrdataset.GetDataSetListAction" scope="prototype">
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.hr.action.hrdataset.GetDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.GetDataSetAction" scope="prototype">
+    <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+    <property name="dataEntryFormService" ref="org.hisp.dhis.dataentryform.DataEntryFormService"/>
+  </bean>
+  <bean id="org.hisp.dhis.hr.action.hrdataset.ShowUpdateDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.ShowUpdateDataSetAction" scope="prototype">
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  <bean id="org.hisp.dhis.hr.action.hrdataset.ShowAddHrDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.ShowAddHrDataSetAction" scope="prototype">
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+  </bean>
+  <bean id="org.hisp.dhis.hr.action.hrdataset.AddHrDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.AddHrDataSetAction" scope="prototype">
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  <bean id="org.hisp.dhis.hr.action.hrdataset.RemoveDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.RemoveDataSetAction" scope="prototype">
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  <bean id="org.hisp.dhis.hr.action.hrdataset.UpdateHrDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.UpdateHrDataSetAction" scope="prototype">
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.hr.action.hrdataset.ValidateHrDataSetAction"
+    class="org.hisp.dhis.hr.action.hrdataset.ValidateHrDataSetAction"
+    scope="prototype">
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+  </bean>
+  
+  <!-- Data Entry Form -->
+	<bean id="org.hisp.dhis.hr.action.dataentryform.ViewDataEntryFormAction"
+		class="org.hisp.dhis.hr.action.dataentryform.ViewDataEntryFormAction"
+		scope="prototype">
+		<property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService" />
+		<property name="userSettingService" ref="org.hisp.dhis.user.UserSettingService"/>
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.action.dataentryform.SelectDataElementAction"
+		class="org.hisp.dhis.hr.action.dataentryform.SelectDataElementAction"
+		scope="prototype">
+		<property name="hrDataSetService">
+			<ref bean="org.hisp.dhis.hr.HrDataSetService"/>
+		</property>
+	</bean>	
+	<bean
+		id="org.hisp.dhis.hr.action.dataentryform.ValidateDataEntryFormAction"
+		class="org.hisp.dhis.hr.action.dataentryform.ValidateDataEntryFormAction"
+		scope="prototype">
+	</bean>
+	
+	<bean
+		id="org.hisp.dhis.hr.action.dataentryform.GetSelectedDataElementsAction"
+		class="org.hisp.dhis.hr.action.dataentryform.GetSelectedDataElementsAction"
+		scope="prototype">
+		<property name="hrDataSetService">
+			<ref bean="org.hisp.dhis.hr.HrDataSetService"/>
+		</property>
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.action.dataentryform.AutoSaveDataEntryFormAction"
+		class="org.hisp.dhis.hr.action.dataentryform.AutoSaveDataEntryFormAction"
+		scope="prototype">
+		<property name="hrDataSetService">
+			<ref bean="org.hisp.dhis.hr.HrDataSetService"/>
+		</property>
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.action.dataentryform.SaveDataEntryFormAction"
+		class="org.hisp.dhis.hr.action.dataentryform.SaveDataEntryFormAction"
+		scope="prototype">
+		<property name="hrDataSetService">
+			<ref bean="org.hisp.dhis.hr.HrDataSetService"/>
+		</property>
+	</bean>
+	
+  <!-- Person -->
+  <bean
+    id="org.hisp.dhis.hr.action.person.GetHrPersonListAction"
+    class="org.hisp.dhis.hr.action.person.GetHrPersonListAction"
+    scope="prototype">
+    <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+  </bean>
+  
+	<!-- AggregateAttribute/AggregateIndicator -->
+	<bean
+        id="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorListAction"
+        class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorListAction"
+        scope="prototype">
+        <property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+    </bean>
+    
+    <bean
+        id="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorParamAction"
+        class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorParamAction"
+        scope="prototype">
+        <property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+    </bean>
+    
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.AggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.AggregateIndicatorAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.hr.action.indicator.ShowAddAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.ShowAddAggregateIndicatorAction" scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="dataelementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.AddAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.AddAggregateIndicatorAction" scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="dataelementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.GetAggregateIndicatorAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.RemoveAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.RemoveAggregateIndicatorAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+	</bean>
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.ValidateAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.ValidateAggregateIndicatorAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+	</bean>
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.ShowUpdateAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.ShowUpdateAggregateIndicatorAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.UpdateAggregateIndicatorAction"
+		class="org.hisp.dhis.hr.action.indicator.UpdateAggregateIndicatorAction" scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.GetCriteriaListAction"
+		class="org.hisp.dhis.hr.action.indicator.GetCriteriaListAction"
+		scope="prototype">
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.GetCriteriaAction"
+		class="org.hisp.dhis.hr.action.indicator.GetCriteriaAction"
+		scope="prototype">
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.RemoveCriteriaAction"
+		class="org.hisp.dhis.hr.action.indicator.RemoveCriteriaAction"
+		scope="prototype">
+		<property name="aggregateAttributeService" ref="org.hisp.dhis.hr.AggregateAttributeService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.ShowAddCriteriaFormAction"
+		class="org.hisp.dhis.hr.action.indicator.ShowAddCriteriaFormAction" scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+	</bean>
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.ValidateCriteriaAction"
+		class="org.hisp.dhis.hr.action.indicator.ValidateCriteriaAction"
+		scope="prototype">
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.AddCriteriaAction"
+		class="org.hisp.dhis.hr.action.indicator.AddCriteriaAction" scope="prototype">
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+	</bean>
+	<bean
+		id="org.hisp.dhis.hr.action.indicator.ShowUpdateCriteriaFormAction"
+		class="org.hisp.dhis.hr.action.indicator.ShowUpdateCriteriaFormAction"
+		scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+	<bean id="org.hisp.dhis.hr.action.indicator.UpdateCriteriaAction"
+		class="org.hisp.dhis.hr.action.indicator.UpdateCriteriaAction" scope="prototype">
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="criteriaService" ref="org.hisp.dhis.hr.CriteriaService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+	</bean>
+  
+</beans>

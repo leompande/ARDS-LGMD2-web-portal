@@ -1,0 +1,10 @@
+{ "importItem":
+  {
+	"id": "${importItem.id}",
+	"name": "$!encoder.jsonEncode( ${importItem.name} )",
+	"row": "${importItem.row}",
+	"column": "${importItem.column}",
+	"expression": "$!encoder.jsonEncode( ${importItem.expression} )",
+	"sheetNo": "$importItem.sheetNo"
+  }
+}

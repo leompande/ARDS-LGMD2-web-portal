@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.hisp.dhis</groupId>
+		<artifactId>dhis-web</artifactId>
+		<version>2.14-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>dhis-web-excelimport</artifactId>
+	<packaging>war</packaging>
+	<name>DHIS Excel Import Module</name>
+	
+	<dependencies>
+		
+		<!-- DHIS -->
+		
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-in-service-configuration</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-web-commons-resources</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-service-aggregationengine-default</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hisp.dhis</groupId>
+			<artifactId>dhis-support-external</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+		</dependency>
+		
+		<!-- Web -->
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.struts.xwork</groupId>
+            <artifactId>xwork-core</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+        <!--JAVA-MAIL-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!--Quartz framework-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+
+	</dependencies>
+</project>

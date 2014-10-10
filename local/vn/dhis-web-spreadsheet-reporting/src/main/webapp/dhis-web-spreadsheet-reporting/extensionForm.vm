@@ -1,0 +1,97 @@
+<meta http-equiv="Cache-control" content="private;no-cache">
+<meta http-equiv="pragma" content="no-cache">
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function()
+	{
+		currentOrgunitName = "$!organisationUnit.name";
+		getExportReportsByGroup( currentOrgunitName );
+	});
+	
+	var i18n_specify_periodtype_or_period = '$encoder.jsEscape( $i18n.getString( "specify_periodtype_or_period" ) , "'")';
+	var i18n_value_rounded = '$encoder.jsEscape( $i18n.getString("value_rounded"), "'" )';
+	var i18n_specify_export_report = '$encoder.jsEscape( $i18n.getString("specify_export_report"), "'" )';
+</script>
+
+<h3>$i18n.getString( "generate_export_report" ) #openHelp( "excelReportingExportReport" )</h3>
+
+<div id="exportReportDiv" class="inputCriteria" style="width:640px;height:300px">
+<table>	
+	<tr>
+		<td><label class='bold'>$i18n.getString( 'organisation' )<em title="$i18n.getString( 'required' )" class="required">*</em></label>
+		<span id="selectedOrganisationUnit"></span>
+		</td>
+    </tr>
+	<tr>
+		<td><label class='bold'>$i18n.getString( 'group' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><label class='bold'>$i18n.getString( 'period_type' )</label></td>
+	</tr>
+	<tr>
+		<td>
+			<select type="text" id="group" name="group" style="width:380px" size="5" onchange="getExportReportsByGroup( currentOrgunitName )" >
+				#foreach($group in $groups)
+					<option value='$group' #if( $group == $exportReportGroup ) selected="selected" #end>$encoder.htmlEncode( $group )</option>				
+				#end
+			</select>
+		</td>
+		<td id="periodTypeCol">
+			<select type="text" id="periodType" name="periodType" style="width:220px" disabled="true" size="5" onchange="reportSelected( this.value )">
+				<option value="Daily">$i18n.getString( 'Daily' )</option>
+				<option value="Monthly">$i18n.getString( 'Monthly' )</option>
+				<option value="Quarterly">$i18n.getString( 'Quarterly' )</option>
+				<option value="SixMonthly">$i18n.getString( 'SixMonthly' )</option>
+				<option value="Yearly">$i18n.getString( 'Yearly' )</option>
+			</select>
+		</td>
+    </tr>
+	<!--tr>
+		<td><label class='bold'>$i18n.getString('export_multi')</label>&nbsp;&nbsp;<input type="checkbox" id="exportTypeCB" onchange="changeExportType( this );"/></td>
+	</tr-->
+	<tr>
+		<td><label class='bold'>$i18n.getString( 'export_reports' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><label class='bold'>$i18n.getString( 'period' )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	</tr>
+	<tr>
+		<td>
+			<select type="text" id="exportReport" name="exportReport" style="width:380px" size="8" onchange="reportSelected()"></select><br/>
+			<span id="elementSelect_loader" style="display:none;color:red" >$i18n.getString( "loading" )&nbsp;&nbsp;<img src="../images/ajax-loader-bar.gif" /></span>
+		</td>
+		<td id="periodCol">
+			<select type="text" id="selectedPeriodId" name="selectedPeriodId" style="width:220px" size="6" onchange="getRelativePeriods( this.value )"></select>
+			<input type="hidden" id="selectedPeriodId2"/><br/>
+			<input type="button" value="&lt;&lt;" onclick="getPreviousPeriod()" id="lastPeriod"/>
+			<input type="button" value="&gt;&gt;" onclick="getNextPeriod()" id="nextPeriod"/>
+		</td>
+    </tr>
+	<tr id="showSubItemTR" style="display:none">
+		<td><label class='bold'>$i18n.getString( 'do_not_show_sub_item' )</label>
+		<input type="checkbox" id="showSubItem" value="false"/>
+		</td>
+	</tr>
+	<tr id="orderedGroupLabelTR" style="display:none">
+		<td><label class='bold'>$i18n.getString( 'filter_on_section' )</label></td>
+	</tr>
+	<tr id="orderedGroupSelectTR" style="display:none">
+		<td colspan="2">
+			<select type="text" id="orderedGroups" name="orderedGroups" style="width:610px" multiple="true" size="5"></select>
+		</td>
+    </tr>
+    <tr>
+		<td colspan="2" align="right">
+			<a title="$i18n.getString( 'hide_params' )" href="javascript:hideExportDiv();">
+			<img width="16" height="16" title="$i18n.getString( 'hide_export_params' )" src="../images/up_left.png"/></a>
+		</td>
+    </tr>
+</table>
+</div>
+
+<hr/>
+
+<p>
+	<input type="button" id="showButtonDiv" onclick="showExportDiv();" value="$i18n.getString( 'show_export_params' )" style="display:none"/>
+	<input type="button" id="previewButton" value='$i18n.getString( "preview_report" )' onclick="validatePreviewReport();" style="width:150px"/>
+	<input type="button" id="generateExportReport" value='$i18n.getString( "generate_export_report" )' onclick="validateGenerateReport();" style="width:150px"/>
+</p>
+
+<div id="previewDiv"></div>

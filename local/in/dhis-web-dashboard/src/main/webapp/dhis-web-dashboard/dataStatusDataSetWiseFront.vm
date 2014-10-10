@@ -1,0 +1,64 @@
+<style type='text/css'>
+    .hidden{ display: none; }
+</style>
+
+<script>
+    // Global Variables
+    var selCategory = "";
+    var selFacility = "";
+    var ouName = "";
+    var dsName = "";
+    var sDateIndex = 0;
+    var eDateIndex = 0;
+    var sDate = "";
+    var eDate = "";
+    var curPeriodType = "";
+</script>
+
+<h3>$i18n.getString( "dsform_datasetwise" )</h3>
+<hr />
+
+<!--<form id="ChartGenerationDataSetWiseForm" name="ChartGenerationDataSetWiseForm" action="dataStatusDataSetWiseResult.action"  onsubmit="return formValidationsDataStatusDataSetWise()" method="get" target="chartWindow1">-->
+<form id="ChartGenerationDataSetWiseForm" name="ChartGenerationDataSetWiseForm">
+    <table align="center" style="border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="80%" border="0">
+        <tr>
+            <td class="NormalB">
+				1. $i18n.getString( "ds_periodtype" ) : <br/>
+				<select id="periodTypeId" name="periodTypeId" onchange="getPeriodsForDataSetWise()" style="width:200px">
+					<option value="NA">[ $i18n.getString( "select_periodtype" ) ]</option>
+					#foreach ( $periodType in $periodTypes )
+						<option value='$periodType.name' title='$periodType.name'>$periodType.name</option>
+					#end
+				</select>
+				<br/><br/>
+				2. $i18n.getString( "ga_from" )<br />
+				<select id="sDateLB" name="sDateLB" style="width:200px"></select>
+				<br/><br/>
+				3. $i18n.getString( "ga_to" )<br />
+				<select id="eDateLB" name="eDateLB" style="width:200px"></select>
+				<br/><br/>
+				4. $i18n.getString( "ga_facilityby" )<br/>
+				<select id="facilityLB" name="facilityLB" onchange="facilityChangeDataSetWiseFunction(event)" style="width:200px">
+                    <option value="random" >Selected</option>
+                    <option value="immChildren" selected>Immediate Children</option>
+                    <option value="children" >Child Tree</option>
+                </select>				
+			</td>
+			<td class="NormalB">
+				<input type="checkbox" name="includeZeros" id="includeZeros" checked> Include Zero
+				<br/><br/>
+				5. $i18n.getString( "ga_orgunit" )<br />
+				<select name="orgUnitListCB" id="orgUnitListCB" multiple style="width:200px;height:100px" ondblclick="remOUDataSetWiseFunction()">
+                </select>
+                <br/><br/>
+                <!--<input type="submit" name="ViewSummary" value="View DataSummary" style="width:200px" />-->
+                <input type="button" name="ViewSummary" value="View DataSummary" style="width:200px" onClick="javascript:formValidationsDataStatusDataSetWise()">		
+			</td>
+		</tr>
+    </table>
+    <input type="hidden" name="selectedButton" id="selectedButton"/>
+</form>
+<div id="contentDiv"></div>
+<script>
+	//getdSetPeriods();
+</script>

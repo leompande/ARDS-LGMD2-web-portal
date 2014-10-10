@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+  <!-- use the DHIS web portal default -->
+  <include file="dhis-web-commons.xml"/>
+
+  <package name="dhis-web-maintenance-in" extends="dhis-web-commons" namespace="/dhis-web-maintenance-in">
+
+    <action name="index" class="org.hisp.dhis.config.action.NoAction">
+		<result name="success" type="velocity">/main.vm</result>
+		<param name="page">/dhis-web-maintenance-in/welcome.vm</param>
+		<param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+	</action>
+	
+<!-- Configuration -->	  
+	<action name="configForm" class="org.hisp.dhis.config.action.ConfigurationFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/configurationForm.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+    </action>
+
+    <action name="configurationResult" class="org.hisp.dhis.config.action.ConfigurationResultAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/welcome.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+    </action>
+
+<!-- MySQL Backup --> 	  	  	  
+	<action name="takeMysqlBackupResult" class="org.hisp.dhis.config.action.TakeMySqlBackupAction">
+		<result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/takeMysqlBackupResult.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+        <param name="stylesheets">css/StylesForTags.css</param>
+        <param name="requiredAuthorities">F_CONFIGURE_DOWNLOAD_BACKUP</param>
+    </action>
+
+    <action name="streamMySQLBackup" class="org.hisp.dhis.config.action.StreamMySqlBackupAction">
+		<result name="success" type="stream">
+			<param name="contentType">application/zip</param>
+            <param name="inputName">inputStream</param>
+            <param name="contentDisposition">filename="${fileName}"</param>
+            <param name="bufferSize">1024</param>
+        </result>
+    </action>
+<!-- Advance MySQL Backup -->
+	<action name="advanceMysqlBackupForm" class="org.hisp.dhis.config.action.AdvanceMySqlBackupFormAction">
+		<result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/advanceMysqlBackupForm.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+        <param name="stylesheets">css/StylesForTags.css</param>
+        <param name="requiredAuthorities">F_CONFIGURE_DOWNLOAD_BACKUP</param>
+    </action>
+	  
+	<action name="advanceMySQLBackupResult" class="org.hisp.dhis.config.action.AdvanceMySqlBackupResultAction">
+		<result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/advanceMysqlBackupResult.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+        <param name="stylesheets">css/StylesForTags.css</param>
+        <param name="requiredAuthorities">F_CONFIGURE_DOWNLOAD_BACKUP</param>
+    </action>	  
+	  
+<!-- Maintenance -->             
+    <action name="maintenance" class="org.hisp.dhis.config.action.NoAction">
+        <result name="success" type="velocity">/main.vm</result>
+        <param name="page">/dhis-web-maintenance-in/maintenanceForm.vm</param>
+        <param name="menu">/dhis-web-maintenance-in/menu.vm</param>
+        <param name="stylesheets">css/StylesForTags.css</param>
+        <param name="javascripts">javascript/config.js</param>
+        <param name="requiredAuthorities">F_MAINTENANCE_FORM</param>
+    </action>
+
+    <action name="clearFolder" class="org.hisp.dhis.config.action.ClearFolderAction">
+      <result name="success" type="velocity-xml">/dhis-web-maintenance-in/responseStatus.vm</result>
+        <result name="download" type="stream">
+            <param name="contentType">application/zip</param>
+            <param name="inputName">inputStream</param>
+            <param name="contentDisposition">filename="${fileName}"</param>
+            <param name="bufferSize">1024</param>
+        </result>
+    </action>
+	  	  
+  </package>
+</struts>

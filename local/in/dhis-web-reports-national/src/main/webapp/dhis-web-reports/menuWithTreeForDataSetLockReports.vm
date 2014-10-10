@@ -1,0 +1,25 @@
+
+<a href="index.action"><h2>Report Analyser</h2></a>
+
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+    	<li>
+            DataSet Lock Reports
+        </li>
+    </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+	
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{   
+		document.reportForm.ouIDTB.value = orgUnitIds;
+		
+		getSelectedOrgUnit( orgUnitIds );
+	}
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+	
+</script>

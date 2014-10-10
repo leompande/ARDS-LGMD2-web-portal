@@ -1,0 +1,11 @@
+﻿<h3>$i18n.getString( 'user_setting_frame' ) #openHelp( "userSettingFrame" )</h3>
+<form id="configurationForm" action="saveSettingFrame.action" method="get">
+<table>
+	<tr>
+		<td>
+			<input type="radio" name="interfaceType" value="default" #if( $!interfaceType && $interfaceType == "default" ) checked="checked" #end />&nbsp;$i18n.getString( 'default_frame' )
+			<input type="radio" name="interfaceType" value="extension" #if( $!interfaceType && $interfaceType == "extension" ) checked="checked" #end />&nbsp;$i18n.getString( 'extension_frame' )
+		</td>
+		<td><input type="submit" value="$i18n.getString( 'save' )" style="width:150px"/></td>
+	</tr>
+</table>

@@ -1,0 +1,78 @@
+<h3>$i18n.getString( "data_status_mart" )</h3>
+	
+<form id="dataStatusMartForm" name="dataStatusMartForm" action="calculateDataStatus.action" method="POST">
+	<input type="hidden" id="selectForDataStatusMart" name="selectForDataStatusMart"/>
+	<table>
+		<tr>
+			<td valign="top">
+				<table valign="top">
+					<tr><th>$i18n.getString( "period_type" )</th><td></td><td><input type="checkbox" name="includeZeros" id="includeZeros" checked> Include Zero</td></tr>
+					<tr>
+						<td>
+							<select id="periodTypeId" name="periodTypeId" style="min-width:325px" onchange="getPeriods()">
+								<option value="">[ $i18n.getString( "select_period_type" ) ]</option>
+								#foreach ( $periodType in $periodTypes )
+								  <option value="$periodType.name"#if( $currentPeriodTypeId == $type.name ) selected="selected"#end>$periodType.name</option>
+								#end
+							</select>
+						</td>
+					</tr>
+					
+					<tr><td>&nbsp;</td></tr>
+					
+					<tr><th>$i18n.getString( "available_periods" )</th><td></td><th>$i18n.getString( "selected_periods" )</th></tr>
+					
+					<tr>	
+						<td>	
+							<select id="availablePeriods" name="availablePeriods" multiple="multiple" style="min-width:325px;height:11.25em" disabled="true" ondblclick="moveSelectedById( this.id, 'selectedPeriods' )">
+							</select>
+						</td>
+						<td style="text-align:center">			
+							<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availablePeriods', 'selectedPeriods' )" /><br/>
+							<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveSelectedById( 'selectedPeriods', 'availablePeriods' )" /><br/>
+							<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveAllById( 'availablePeriods', 'selectedPeriods' )"/><br/>
+							<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedPeriods', 'availablePeriods' )"/>			
+						</td>	
+						<td>
+							<select id="selectedPeriods" name="selectedPeriods" size="2" multiple="multiple" style="min-width:325px;height:11.25em" ondblclick="moveSelectedById( this.id, 'availablePeriods' )"></select>
+						</td>
+					</tr>
+						
+					<tr><td>&nbsp;</td></tr>
+					
+					<tr><th>$i18n.getString( "available_datasets" )</th><td></td><th>$i18n.getString( "selected_datasets" )</th></tr>
+					<tr>
+						<td>
+							<select id="availableDataSets" name="availableDataSets" multiple="multiple" style="min-width:325px;height:12.5em" ondblclick="moveSelectedById( this.id, 'selectedDataSets' )" disabled="true"></select>				
+						</td>
+						<td style="text-align:center">			
+							<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availableDataSets', 'selectedDataSets' )" /><br/>
+							<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveSelectedById( 'selectedDataSets', 'availableDataSets' )" /><br/>
+							<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveAllById( 'availableDataSets', 'selectedDataSets' )"/><br/>
+							<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedDataSets', 'availableDataSets' )"/>			
+						</td>	
+						<td>
+							<select id="selectedDataSets" name="selectedDataSets" size="2" multiple="multiple" style="min-width:325px;height:11.25em" ondblclick="moveSelectedById( this.id, 'availableDataSets' )"></select>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>#organisationUnitSelectionTree( false, true, false )</td>										
+		</tr>
+		<tr></tr>
+		<tr>
+			<td>
+				<input type="submit" id="calculate" name="calculate" value="$i18n.getString( 'calculate' )" style="width:10em" disabled="true" />
+				###if( $auth.hasAccess( "dhis-web-maintenance-dataadmin", "collectiveDataLockingForUnlocking") )
+					##<input type="submit" id="unlock" name="unlock" onclick="setClickedButtonElementValue( false )" value="$i18n.getString( 'unlock' )" style="width:10em" disabled="true"/>
+			##	#end	
+			</td>
+		</tr>
+	</table>
+</form>
+
+<span id="message"></span>

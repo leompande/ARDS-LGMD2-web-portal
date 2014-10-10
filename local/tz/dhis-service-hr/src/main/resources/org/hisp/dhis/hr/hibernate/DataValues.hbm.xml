@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.DataValues" table="hr_datavalues">
+		<id name="id" column="datavaluesId">
+			<generator class="native" />
+		</id>
+		
+		<property name="value" type="text" column="value" />
+		
+		<property name="storedBy" type="text" column="storedby"/>
+				
+		<property name="timestamp" column="lastupdated" type="date"/>
+		
+		<many-to-one name="attribute" column="attributeId" class="org.hisp.dhis.hr.Attribute"/>		
+		
+		<many-to-one name="person" column="personId" class="org.hisp.dhis.hr.Person"/>		
+		
+	</class>
+</hibernate-mapping>

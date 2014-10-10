@@ -1,0 +1,10 @@
+#set( $size = $itemTypes.size() )
+{	"itemTypes": [
+#foreach( $type in $itemTypes )
+	{
+		"value": "$!encoder.jsonEncode( ${type} )",
+		"name": "$i18n.getString( $!encoder.jsonEncode( ${type} ) )"
+	}#if( $velocityCount < $size ),#end
+#end
+]
+}

@@ -1,0 +1,68 @@
+
+<script type="text/javascript">
+    function exportDataStatusNullReportResultToWorkBook()
+    {
+        //alert( document.getElementById('formResult1').innerHTML );
+        document.getElementById('htmlCode1').value = document.getElementById('formResult1').innerHTML;
+        //alert( document.getElementById('htmlCode1').value );
+        return true;
+    }
+</script>
+
+        <form id="form2" name="form2" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusNullReportResultToWorkBook()" target="_newtab">
+        <input type="hidden" name="htmlCode1" id="htmlCode1" />
+		<div align="right" class="NormalB">
+		<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+		</div>
+   <div id="formResult1">
+            <div align="center" class="NormalB">Data Entry Status</div>
+            <div align="right">
+                <table width="30%">
+                    <tr class="TableDataCellStyles">
+                        <td bgcolor="#ff0000">&nbsp;</td>
+                        <td align="left">&nbsp;Value Not Entered</td>
+                    </tr>
+                    <tr class="TableDataCellStyles">
+                        <td bgcolor="#a0c0a0">&nbsp;</td>
+                        <td align="left">&nbsp;Zero value Entered</td>
+                    </tr>
+                    <tr class="TableDataCellStyles" >
+                        <td bgcolor="a0a0ff">&nbsp;</td>
+                        <td align="left">&nbsp;Value Entered</td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <div align="left" class="NormalB">DataSet Name : $dataSetName ( Total DataElement : $dataElementCount ,Null : $nullValuDeCount , Fill with Zero : $zeroValueDeCount , Fill with some Value: $notZeroValueDeCount  )</div>
+            <hr style="clear:both">
+            <div align="left" class="NormalB">OrganisationUnit Name : $orgUnitName For the Period : $periodName </div>
+            <hr style="clear:both">
+            <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+                <tr class="TableHeadingCellStyles" align="center">
+                   <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Sl.No</strong></td>
+                   <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Data Element Names</strong></td>
+				   <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Value</strong></td>
+				   
+                </tr>
+				#set( $count1 = 1 )
+                #foreach( $dataElement in $deFinalList )
+                    #set( $dataElementName = $deMapForName.get( $dataElement ) )
+                    #set( $dataElementValue = $deMapForValue.get( $dataElement ) )
+                    
+                    <tr class="TableHeadingCellStyles">
+                    	<td align="center">$count1</td>
+	                    <td align="left">$dataElementName</td>
+	                    #if( !$dataElementValue )
+	                    	<td align="center" bgcolor="#ff0000"><font color="#000000">&nbsp;</font></td>
+	                    #elseif( $dataElementValue == "0" )
+	                    	<td align="center" bgcolor="#a0c0a0"><font color="#000000">$dataElementValue</font></td>
+	                    #else
+	                    	<td align="center" bgcolor="a0a0ff"><font color="#000000">$dataElementValue</font></td>
+	                    #end	
+                         #set( $count1 = $count1 + 1 )
+					</tr>
+				#end
+            </table>
+		 </div>
+    </form>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.AggregateAttribute" table="hr_aggregate_attribute">
+		<id name="id" column="aggregateAttributeId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="32" />
+		
+		<many-to-one name="dataelement" column="dataelementId" class="org.hisp.dhis.dataelement.DataElement"/>
+		
+		<set name="attributeOptions" table="hr_aggregateattribute_attributeoptions_members">
+			<key column="aggregateAttributeId" />
+			<many-to-many class="org.hisp.dhis.hr.AttributeOptions"
+				column="attributeOptionId" />
+		</set>
+		<set name="criterias" table="hr_aggregateattribute_criteria_members">
+			<key column="aggregateAttributeId" />
+			<many-to-many class="org.hisp.dhis.hr.Criteria"
+				column="criteriaId" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,2628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<include file="dhis-web-commons.xml" />
+
+	<package name="dhis-web-spreadsheet-reporting"
+		extends="dhis-web-commons"
+		namespace="/dhis-web-spreadsheet-reporting">
+
+		<action name="index"
+			class="org.hisp.dhis.reportsheet.action.CheckDefaultFrameAction">
+			<result name="default" type="redirect">
+				default.action
+			</result>
+			<result name="extension" type="redirect">
+				defau1t.action
+			</result>
+		</action>
+		
+		<action name="getSettingFrame"
+			class="org.hisp.dhis.reportsheet.configuration.action.GetUserSettingFrameAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/userSettingFrame.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+		</action>
+
+		<action name="saveSettingFrame"
+			class="org.hisp.dhis.reportsheet.configuration.action.SaveUserSettingFrameAction">
+			<result name="success" type="redirect">
+				index.action
+			</result>
+		</action>
+
+		<action name="administration"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/viewAdministrator.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="downloadFile"
+			class="org.hisp.dhis.reportsheet.filemanager.action.DownloadFileAction">
+			<result name="success" type="stream">
+				<param name="contentType">${outputFormat}</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">
+					filename="${fileName}"
+				</param>
+				<param name="bufferSize">10240</param>
+			</result>
+		</action>
+
+		<!-- SYSTEM CONFIGURATION ACTION -->
+
+		<action name="openAdministrator"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/viewAdministrator.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="getConfiguration"
+			class="org.hisp.dhis.reportsheet.configuration.action.GetReportConfigurationAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/configuration.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="setConfiguration"
+			class="org.hisp.dhis.reportsheet.configuration.action.SetReportConfigurationAction">
+			<result name="success" type="redirect">
+				administration.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="checkConfiguration"
+			class="org.hisp.dhis.reportsheet.configuration.action.CheckReportConfigurationAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="backUpTemplateFiles"
+			class="org.hisp.dhis.reportsheet.configuration.action.BackUpTemplateFilesAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<!-- PROCESSED FOR PERIOD IN REPORT -->
+
+		<action name="getPeriodsByPeriodTypeDB"
+			class="org.hisp.dhis.reportsheet.period.db.action.GetPeriodsByPeriodTypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<action name="nextPeriodsDB"
+			class="org.hisp.dhis.reportsheet.period.db.action.NextPeriodsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<action name="previousPeriodsDB"
+			class="org.hisp.dhis.reportsheet.period.db.action.PreviousPeriodsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<action name="getPeriodsByPeriodTypeGeneric"
+			class="org.hisp.dhis.reportsheet.period.generic.action.GetPeriodsByPeriodTypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<action name="nextPeriodsGeneric"
+			class="org.hisp.dhis.reportsheet.period.generic.action.NextPeriodsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<action name="previousPeriodsGeneric"
+			class="org.hisp.dhis.reportsheet.period.generic.action.PreviousPeriodsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+		</action>
+
+		<!-- REPORT EXCEL CORE ACTION -->
+
+		<action name="checkPermission"
+			class="org.hisp.dhis.reportsheet.exportreport.action.CheckPermissionAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="addExportReportForm"
+			class="org.hisp.dhis.reportsheet.filemanager.action.ExcelTemplateListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/addExportReportForm.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_ADD
+			</param>
+		</action>
+
+		<action name="addExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.AddExportReportAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_ADD
+			</param>
+		</action>
+
+		<action name="deleteExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.DeleteExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_DELETE
+			</param>
+		</action>
+
+		<action name="getExportReportGroups"
+			class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportGroupsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportGroups.vm
+			</result>
+		</action>
+
+		<action name="listAllExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/exportReports.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="getAllExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportReports.vm
+			</result>
+		</action>
+
+		<action name="getAllExportReportByType"
+			class="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportByReportTypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportReports.vm
+			</result>
+		</action>
+
+		<action name="updateExportReportForm"
+			class="org.hisp.dhis.reportsheet.filemanager.action.ExcelTemplateListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/updateExportReportForm.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_UPDATE
+			</param>
+		</action>
+
+		<action name="updateExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_REPORT_UPDATE
+			</param>
+		</action>
+
+		<action name="validateExportReportAction"
+			class="org.hisp.dhis.reportsheet.exportreport.action.ValidateExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<!-- CATEGORYOPTION GROUP ORDER FOR CATEGORY OPTION 			   -->
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<action name="listCategoryOptionGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listCategoryOptionGroupOrder.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/category.ajax.js,javascript/categoryOptionGroupOrder.js
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_CATEGORY_OPTION_GROUP_ORDER_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="listCategoryOptionGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.GetImportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listCategoryOptionGroupOrder.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/category.ajax.js,javascript/categoryOptionGroupOrder.js
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+		</action>
+
+		<action name="validateCategoryOptionGroupOrder"
+			class="org.hisp.dhis.reportsheet.cogroup.action.ValidateCategoryOptionGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+		</action>
+
+		<action name="addCategoryOptionGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.SaveCategoryOptionGroupOrderAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForExportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="addCategoryOptionGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.SaveCategoryOptionGroupOrderAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForImportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="updateCategoryOptionGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionGroupOrderAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForExportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="updateCategoryOptionGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionGroupOrderAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForImportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="deleteCategoryOptionGroupOrder"
+			class="org.hisp.dhis.reportsheet.cogroup.action.DeleteCategoryOptionGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="updateSortCategoryOptionGroupOrder"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="getCategoryOptionGroupOrder"
+			class="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonCategoryOptionGroupOrder.vm
+			</result>
+		</action>
+
+		<action name="openSortCategoryOption"
+			class="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionGroupOrderAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/sortCategoryOptions.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/categoryOptionGroupOrder.js
+			</param>
+			<param name="stylesheets">style/basic.css</param>
+		</action>
+
+		<action name="updateSortedCategoryOptionsForExportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForExportReport.action?id=${reportId}
+			</result>
+		</action>
+
+		<action name="updateSortedCategoryOptionsForImportReport"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionAction">
+			<result name="success" type="redirect">
+				listCategoryOptionGroupOrderForImportReport.action?id=${reportId}
+			</result>
+		</action>
+
+		<action name="getCategoryOptionsByCategory"
+			class="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionsByCategoryAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonCategoryOptions.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="openCategoryOptionAssociations"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/categoryOptionAssociations.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/category.ajax.js
+			</param>
+			<param name="stylesheets">style/basic.css</param>
+		</action>
+
+		<action name="showAssociationsByCategoryOption"
+			class="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineCategoryOptionAssociationsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="updateCategoryOptionAssociations"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionAssociationsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+
+		<action name="openOptionComboAssociations"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/optionComboAssociations.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/category.ajax.js
+			</param>
+			<param name="stylesheets">style/basic.css</param>
+		</action>
+
+		<action name="showAssociationsByOptionCombo"
+			class="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineOptionComboAssociationsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="updateOptionComboAssociations"
+			class="org.hisp.dhis.reportsheet.cogroup.action.UpdateOptionComboAssociationsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<!-- DATAELEMENT GROUP ORDER FOR CATEGORY ACTION 				   -->
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<action name="listDataElementGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listDataElementGroupOrder.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/dataElementGroupOrder.js
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_DATAELEMENT_GROUP_ORDER_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="listDataElementGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.GetImportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listDataElementGroupOrder.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/dataElementGroupOrder.js
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+		</action>
+
+		<action name="validateDataElementGroupOrder"
+			class="org.hisp.dhis.reportsheet.degroup.action.ValidateDataElementGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+		</action>
+
+		<action name="addDataElementGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.SaveDataElementGroupOrderAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForExportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="addDataElementGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.SaveDataElementGroupOrderAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForImportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="updateDataElementGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.UpdateDataElementGroupOrderAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForExportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="updateDataElementGroupOrderForImportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.UpdateDataElementGroupOrderAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForImportReport.action?id=${id}
+			</result>
+		</action>
+
+		<action name="deleteDataElementGroupOrder"
+			class="org.hisp.dhis.reportsheet.degroup.action.DeleteDataElementGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="updateSortDataElementGroupOrder"
+			class="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="getDataElementGroupOrder"
+			class="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonDataElementGroupOrder.vm
+			</result>
+		</action>
+
+		<action name="getDataElementGroupOrdersByReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrdersByReportAction">
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonDataElementGroupOrders.vm
+			</result>
+		</action>
+
+		<action name="openSortDataElement"
+			class="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrderAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/sortDataElements.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/dataElementGroupOrder.js
+			</param>
+			<param name="stylesheets">style/basic.css</param>
+		</action>
+
+		<action name="updateSortedDataElementsForExportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForExportReport.action?id=${reportId}
+			</result>
+		</action>
+
+		<action name="updateSortedDataElementsForImportReport"
+			class="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementAction">
+			<result name="success" type="redirect">
+				listDataElementGroupOrderForImportReport.action?id=${reportId}
+			</result>
+		</action>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<!-- ATTRIBUTEVALUE GROUP ORDER FOR ATTRIBUTE VALUE 			   -->
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<action name="attributeValueGroupOrders"
+			class="org.hisp.dhis.reportsheet.avgroup.action.ListAttributeValueGroupOrdersAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listAttributeValueGroupOrder.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/attribute.ajax.js,javascript/attributeValueGroupOrder.js
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+		</action>
+
+		<action name="getAttributeValueGroupOrders"
+			class="org.hisp.dhis.reportsheet.avgroup.action.ListAttributeValueGroupOrdersAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonAttributeValueGroupOrders.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="listAttributeValueGroupOrderForExportReport"
+			class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/updateAttributeValueGroupOrderForReportForm.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="stylesheets">
+				style/basic.css,style/style.css
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_ATTRIBUTE_VALUE_GROUP_ORDER_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="validateAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.ValidateAttributeValueGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="addAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.SaveAttributeValueGroupOrderAction">
+			<result name="success" type="redirect">
+				attributeValueGroupOrders.action
+			</result>
+		</action>
+
+		<action name="updateAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderAction">
+			<result name="success" type="redirect">
+				attributeValueGroupOrders.action
+			</result>
+		</action>
+
+		<action name="deleteAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.DeleteAttributeValueGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="updateSortAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="getAttributeValueGroupOrder"
+			class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValueGroupOrderAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonAttributeValueGroupOrder.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="openSortAttributeValue"
+			class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValueGroupOrderAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/sortAttributeValues.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/attributeValueGroupOrder.js
+			</param>
+			<param name="stylesheets">style/basic.css</param>
+		</action>
+
+		<action name="updateSortedAttributeValues"
+			class="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueAction">
+			<result name="success" type="redirect">
+				attributeValueGroupOrders.action
+			</result>
+		</action>
+
+		<action name="getAttributeValuesByAttribute"
+			class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByAttributeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonAttributeValues.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="loadAttributeValuesByChapter"
+			class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByChapterAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonAttributeValues.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="updateAttributeValueGroupOrderForReport"
+			class="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderForReportAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+		</action>
+
+		<!-- REPORT ORGANISATION UNIT GROUP LISTING ACTION -->
+
+		<action name="openUpdateOrgUnitGroupListingReport"
+			class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.OpenUpdateOrgUnitGroupAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/organisationUnitGroupListingReport.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_ORG_UNIT_GROUP_LISTING_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="updateOrgUnitGroupListingReport"
+			class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+		</action>
+
+		<action name="organisationUnitAtLevels"
+			class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.ListOrgUnitGroupAtLevelAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/organisationUnitAtLevels.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_ORG_UNIT_LEVEL_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="updateOrganisationUnitGroupAtLevel"
+			class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAtLevelAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<!-- REPORT EXCEL ASSOCIATION ACTION -->
+
+		<action name="openDefineAssociationsForm"
+			class="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportAssociationsAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/exportReportAssociation.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				../dhis-web-commons/oust/oust.js,javascript/associations.js
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_DEFINE_ASSOCIATION
+			</param>
+		</action>
+
+		<action name="updateDefineAssociations"
+			class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAssociationsAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+		</action>
+
+		<!-- REPORT EXCEL USER ROLES -->
+
+		<action name="openExportReportUserRole"
+			class="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportUserRoleAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/exportReportUserRoles.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ASSIGN_USER_ROLE
+			</param>
+		</action>
+
+		<action name="updateExportReportUserRole"
+			class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportUserRoleAction">
+			<result name="success" type="redirect">
+				listAllExportReport.action
+			</result>
+		</action>
+
+		<!-- EXPORT ITEM ACTION -->
+
+		<action name="listExportItemAction"
+			class="org.hisp.dhis.reportsheet.exportitem.action.ListExportItemAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/exportItems.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">javascript/exportItems.js</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="validationExportItem"
+			class="org.hisp.dhis.reportsheet.exportitem.action.ValidationExportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="validationFormula"
+			class="org.hisp.dhis.reportsheet.exportitem.action.ValidationFormulaAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="addExportItemForm"
+			class="org.hisp.dhis.reportsheet.exportitem.action.SetupExportItemFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/addExportItemForm.vm
+			</param>
+			<param name="javascripts">javascript/exportItems.js</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_ADD
+			</param>
+		</action>
+
+		<action name="addExportItem"
+			class="org.hisp.dhis.reportsheet.exportitem.action.AddExportItemAction">
+			<result name="success" type="redirect">
+				listExportItemAction.action?exportReportId=${exportReportId}
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_ADD
+			</param>
+		</action>
+
+		<action name="updateExportItemForm"
+			class="org.hisp.dhis.reportsheet.exportitem.action.SetupExportItemFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/report/updateExportItemForm.vm
+			</param>
+			<param name="javascripts">javascript/exportItems.js</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_UPDATE
+			</param>
+		</action>
+
+		<action name="updateExportItem"
+			class="org.hisp.dhis.reportsheet.exportitem.action.UpdateExportItemAction">
+			<result name="success" type="redirect">
+				listExportItemAction.action?exportReportId=${exportReportId}
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_UPDATE
+			</param>
+		</action>
+
+		<action name="getDataElementCategoryOptionCombos"
+			class="org.hisp.dhis.reportsheet.exportitem.action.GetDataElementCategoryOptionCombosAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonDataElementCategoryOptionCombos.vm
+			</result>
+		</action>
+
+		<action name="deleteExportItem"
+			class="org.hisp.dhis.reportsheet.exportitem.action.DeleteExportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_DELETE
+			</param>
+		</action>
+
+		<action name="deleteMultiExportItem"
+			class="org.hisp.dhis.reportsheet.exportitem.action.DeleteMultiExportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_DELETE
+			</param>
+		</action>
+
+		<action name="getExportItemTypes"
+			class="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemTypesAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonItemTypes.vm
+			</result>
+		</action>
+
+		<action name="getExportItemsBySheet"
+			class="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemsBySheetAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportItems.vm
+			</result>
+		</action>
+
+		<action name="copyExportItemToExportReport"
+			class="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_COPY
+			</param>
+		</action>
+
+		<action name="copyExportItemToImportReport"
+			class="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_EXPORT_ITEM_COPY
+			</param>
+		</action>
+
+		<action name="getListSheet"
+			class="org.hisp.dhis.reportsheet.exportitem.action.GetListSheetAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonSheets.vm
+			</result>
+		</action>
+
+		<!-- GENERATE REPORT EXCEL ACTION -->
+
+		<action name="default"
+			class="org.hisp.dhis.reportsheet.exporting.action.SelectFormAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/defaultForm.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="menuTreeHeight">250</param>
+			<param name="stylesheets">style/previewStyle.css</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,
+				javascript/jQuery/jquery.jqprint.0.3.js,
+				javascript/export.js, javascript/preview.js
+			</param>
+		</action>
+
+		<action name="defau1t"
+			class="org.hisp.dhis.reportsheet.exporting.action.SelectFormAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/extensionForm.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="menuTreeHeight">250</param>
+			<param name="stylesheets">style/previewStyle.css</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,
+				javascript/jQuery/jquery.jqprint.0.3.js,
+				javascript/export.js, javascript/preview.js
+			</param>
+		</action>
+
+		<action name="getExportReportsByGroup"
+			class="org.hisp.dhis.reportsheet.exporting.action.GetExportReportsByGroupAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportReports.vm
+			</result>
+		</action>
+
+		<!-- Generate Report Excel use POI -->
+
+		<action name="validateGenerateReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.ValidateGenerateExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+		</action>
+
+		<action name="generateExportReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction">
+			<result name="ATTRIBUTE" type="redirect">
+				generateReportAttribute.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="CATEGORY" type="redirect">
+				generateReportCategory.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="CATEGORY_VERTICAL" type="redirect">
+				generateReportVerticalCategory.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="NORMAL" type="redirect">
+				generateReportNormal.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				generateReportOrgGroupListing.action?generateByDataSet=${generateByDataSet}&amp;showSubItem=${showSubItem}
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				generateReportPeriodColumnListing.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="MULTI" type="redirect">
+				generateMultiReport.action?generateByDataSet=${generateByDataSet}
+			</result>
+		</action>
+
+		<action name="generateReportAttribute"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportAttributeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateReportCategory"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportCategoryAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateReportVerticalCategory"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportVerticalCategoryAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateReportNormal"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportNormalAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateReportOrgGroupListing"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportOrgGroupListingAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateReportPeriodColumnListing"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportPeriodColumnListingAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateMultiReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateMultiReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+
+		<!-- DATA ENTRY STATUS ACTION -->
+
+		<action name="viewDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.DefaultDataEntryStatusAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/dataStatusShow.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js
+			</param>
+			<param name="menuTreeHeight">400</param>
+		</action>
+
+		<action name="listDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.ListDataEntryStatusAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/listDataStatus.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,javascript/datastatus.js
+			</param>
+			<param name="menuTreeHeight">400</param>
+		</action>
+
+		<action name="openAddDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/addDataStatus.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_ENTRY_STATUS_ADD
+			</param>
+		</action>
+
+		<action name="addDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.AddDataEntryStatusAction">
+			<result name="success" type="redirect">
+				listDataEntryStatus.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_ENTRY_STATUS_ADD
+			</param>
+		</action>
+
+		<action name="openUpdateDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataEntryStatusAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/updateDataStatus.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_ENTRY_STATUS_UPDATE
+			</param>
+		</action>
+
+		<action name="updateDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDataEntryStatusAction">
+			<result name="success" type="redirect">
+				listDataEntryStatus.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_ENTRY_STATUS_UPDATE
+			</param>
+		</action>
+
+		<action name="updateDefault"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDefaultForDataStatusAction">
+			<result name="success" type="velocity">
+				/dhis-web-spreadsheet-reporting/loadDefault.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="deleteDataEntryStatus"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.DeleteDataEntryStatusAction">
+			<result name="success" type="redirect">
+				listDataEntryStatus.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_ENTRY_STATUS_DELETE
+			</param>
+		</action>
+
+		<action name="getDataSets"
+			class="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataSetsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonDataSets.vm
+			</result>
+		</action>
+
+		<!-- DATA SET COMPLETED REPORT ACTION -->
+
+		<action name="dataSetCompletedReports"
+			class="org.hisp.dhis.reportsheet.datasetcompleted.action.DataSetCompletedReportFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/dataSetCompleteds.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+		</action>
+
+		<action name="viewByPeriodForm"
+			class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewByPeriodFormAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+
+		<action name="viewCompleteReportByPeriod"
+			class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByPeriodsAction">
+			<result name="success" type="velocity">
+				/dhis-web-spreadsheet-reporting/dataSetCompletedByPeriods.vm
+			</result>
+		</action>
+
+		<action name="viewCompleteReportByDataSet"
+			class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByDataSetAction">
+			<result name="success" type="velocity">
+				/dhis-web-spreadsheet-reporting/dataSetCompletedByDataSets.vm
+			</result>
+		</action>
+
+		<action name="viewCustomDataSetReport"
+			class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCustomDataSetReportAction">
+			<result name="success" type="velocity">
+				/dhis-web-spreadsheet-reporting/customDataSetReport.vm
+			</result>
+		</action>
+
+		<!-- PREVIEW REPORT EXCEL ACTION -->
+
+		<action name="previewExportReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction">
+			<result name="ATTRIBUTE" type="redirect">
+				generatePreviewAttribute.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="CATEGORY" type="redirect">
+				generatePreviewCategory.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="CATEGORY_VERTICAL" type="redirect">
+				generatePreviewVerticalCategory.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="NORMAL" type="redirect">
+				generatePreviewNormal.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				generatePreviewOrgGroupListing.action?generateByDataSet=${generateByDataSet}&amp;showSubItem=${showSubItem}
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				generatePreviewPeriodColumnListing.action?generateByDataSet=${generateByDataSet}
+			</result>
+			<result name="MULTI" type="redirect">
+				generatePreviewMultiReport.action?generateByDataSet=${generateByDataSet}
+			</result>
+		</action>
+
+		<action name="generatePreviewAttribute"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportAttributeAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewCategory"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportCategoryAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewVerticalCategory"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportVerticalCategoryAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewNormal"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportNormalAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewOrgGroupListing"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportOrgGroupListingAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewPeriodColumnListing"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportPeriodColumnListingAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewMultiReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateMultiReportAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="exportXML"
+			class="org.hisp.dhis.reportsheet.preview.action.ExportXMLAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseExportReportPreview.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+		</action>
+
+		<!--  GERERATE ADVANCE -->
+
+		<action name="selectAdvancedExportForm"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.SelectAdvancedExportFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/advancedReport.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="menuTreeHeight">250</param>
+			<param name="stylesheets">style/previewStyle.css</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js, javascript/export.js,
+				javascript/preview.js
+			</param>
+		</action>
+
+		<action name="getALLExportReportByGroup"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GetExportReportsByGroupAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonExportReports.vm
+			</result>
+		</action>
+
+		<action name="generateAdvancedExportReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction">
+			<result name="CATEGORY" type="redirect">
+				generateAdvancedReportCategory.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="NORMAL" type="redirect">
+				generateAdvancedReportNormal.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				generateAdvancedReportOrganizationGroupListing.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				generateAdvancedReportPeriodColumnListing.action?organisationGroupId=${organisationGroupId}
+			</result>
+		</action>
+
+		<action name="generateAdvancedReportNormal"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportNormalAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateAdvancedReportOrganizationGroupListing"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportOrgGroupListingAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateAdvancedReportPeriodColumnListing"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportPeriodColumnListingAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="generateAdvancedReportCategory"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateAdvancedReportCategoryAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<!-- PREVIEW ADVANCED REPORT -->
+
+		<action name="previewAdvancedExportReport"
+			class="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction">
+			<result name="CATEGORY" type="redirect">
+				generatePreviewAdvancedCategory.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="NORMAL" type="redirect">
+				generatePreviewAdvancedNormal.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				generatePreviewAdvancedOrgGroupListing.action?organisationGroupId=${organisationGroupId}
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				generatePreviewAdvancedPeriodColumnListing.action?organisationGroupId=${organisationGroupId}
+			</result>
+		</action>
+
+		<action name="generatePreviewAdvancedCategory"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportCategoryAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewAdvancedNormal"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportNormalAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewAdvancedOrgGroupListing"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportOrgGroupListingAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+		<action name="generatePreviewAdvancedPeriodColumnListing"
+			class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportPeriodColumnListingAction">
+			<result name="success" type="redirect">
+				exportXML.action
+			</result>
+		</action>
+
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<!-- IMPORT REPORT                                                 -->
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<action name="listAllImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/importReports.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="menuTreeHeight">220</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="addImportReportForm"
+			class="org.hisp.dhis.reportsheet.importreport.action.SetupImportReportFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/addImportReport.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_ADD
+			</param>
+		</action>
+
+		<action name="addImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.AddImportReportAction">
+			<result name="success" type="redirect">
+				listAllImportReport.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_ADD
+			</param>
+		</action>
+
+		<action name="deleteImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.DeleteImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_DELETE
+			</param>
+		</action>
+
+		<action name="getAllImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonImportReports.vm
+			</result>
+		</action>
+
+		<action name="getAllImportReportByType"
+			class="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportByTypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonImportReports.vm
+			</result>
+		</action>
+
+		<action name="updateImportReportForm"
+			class="org.hisp.dhis.reportsheet.importreport.action.SetupImportReportFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/updateImportReport.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_UPDATE
+			</param>
+		</action>
+
+		<action name="updateImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAction">
+			<result name="success" type="redirect">
+				listAllImportReport.action
+			</result>
+		</action>
+
+		<action name="validateImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.ValidateImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="getImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.GetImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonImportReport.vm
+			</result>
+		</action>
+
+		<action name="updateImportReportAssociations"
+			class="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAssociationsAction">
+			<result name="success" type="redirect">
+				listAllImportReport.action
+			</result>
+		</action>
+
+		<action name="openUpdateOrgUnitGroupForImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.OpenUpdateOrgUnitGroupForCategoryAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/associateOrgunitGroup.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+		</action>
+
+		<action name="updateOrgnisationUnitGroupForImportReport"
+			class="org.hisp.dhis.reportsheet.importreport.action.UpdateOrgUnitGroupAction">
+			<result name="success" type="redirect">
+				listAllImportReport.action
+			</result>
+		</action>
+
+
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		<!-- IMPORT ITEM                                                     -->
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<action name="addImportItemForm"
+			class="org.hisp.dhis.reportsheet.importitem.action.SetupImportItemFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/addImportItem.vm
+			</param>
+			<param name="javascripts">javascript/importItems.js</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_ITEM_ADD
+			</param>
+		</action>
+
+		<action name="addImportItem"
+			class="org.hisp.dhis.reportsheet.importitem.action.AddImportItemAction">
+			<result name="success" type="redirect">
+				listImportItems.action?importReportId=${importReportId}
+			</result>
+		</action>
+
+		<action name="deleteImportItem"
+			class="org.hisp.dhis.reportsheet.importitem.action.DeleteImportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_ITEM_DELETE
+			</param>
+		</action>
+
+		<action name="getSelectedDataElements"
+			class="org.hisp.dhis.reportsheet.importitem.action.GetSelectedDataElementsAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonDataElements.vm
+			</result>
+		</action>
+
+		<action name="getImportItemParam"
+			class="org.hisp.dhis.reportsheet.importitem.action.GetImportItemParamAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/importItems.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="menuTreeHeight">220</param>
+			<param name="javascripts">
+				javascript/importItems.js,../dhis-web-commons/ouwt/ouwt.js
+			</param>
+		</action>
+
+		<action name="listImportItems"
+			class="org.hisp.dhis.reportsheet.importitem.action.ListImportItemAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/importItems.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="menuTreeHeight">220</param>
+			<param name="javascripts">
+				javascript/importItems.js,
+				../dhis-web-commons/ouwt/ouwt.js
+			</param>
+			<param name="stylesheets">style/style.css</param>
+		</action>
+
+		<action name="updateImportItemForm"
+			class="org.hisp.dhis.reportsheet.importitem.action.ShowUpdateImportItemFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/updateImportItem.vm
+			</param>
+			<param name="javascripts">javascript/importItems.js</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_ITEM_UPDATE
+			</param>
+		</action>
+
+		<action name="updateImportItem"
+			class="org.hisp.dhis.reportsheet.importitem.action.UpdateImportItemAction">
+			<result name="success" type="redirect">
+				listImportItems.action?importReportId=${importReportId}
+			</result>
+		</action>
+
+		<action name="validateImportItem"
+			class="org.hisp.dhis.reportsheet.importitem.action.ValidateImportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="getImportItem"
+			class="org.hisp.dhis.reportsheet.importitem.action.GetImportItemByIdAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonImportItem.vm
+			</result>
+		</action>
+
+		<action name="getImportItemsByImportReport"
+			class="org.hisp.dhis.reportsheet.importitem.action.ListImportItemAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonImportItems.vm
+			</result>
+		</action>
+
+		<action name="copyImportItemToImportReport"
+			class="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_ITEM_COPY
+			</param>
+		</action>
+
+		<action name="copyImportItemToExportReport"
+			class="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToExportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_ITEM_COPY
+			</param>
+		</action>
+
+		<!-- IMPORT DATA -->
+
+		<action name="cleanUpDraftFile"
+			class="org.hisp.dhis.reportsheet.filemanager.action.CleanUpDraftFilesAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="validateUploadExcelImport"
+			class="org.hisp.dhis.reportsheet.filemanager.action.ValidateUploadExcelFile">
+			<interceptor-ref name="fileUploadStack" />
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<result name="input" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseInput.vm
+			</result>
+			<param name="requiredAuthorities">F_EXCEL_IMPORTING</param>
+		</action>
+
+		<action name="uploadExcelImport"
+			class="org.hisp.dhis.reportsheet.filemanager.action.UploadExcelFileAction">
+			<result name="success" type="redirect">
+				getImportingParams.action
+			</result>
+			<interceptor-ref name="fileUploadStack" />
+		</action>
+
+		<action name="getImportingParams"
+			class="org.hisp.dhis.reportsheet.importing.action.GetImportingParamsAction">
+			<interceptor-ref name="organisationUnitTreeStack" />
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/importDataParams.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="menuTreeHeight">220</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js, javascript/export.js,
+				javascript/preview.js, javascript/import.js,
+				javascript/jQuery/jquery.jqprint.0.3.js
+			</param>
+			<param name="stylesheets">
+				style/style.css, style/previewStyle.css
+			</param>
+			<param name="requiredAuthorities">F_EXCEL_IMPORTING</param>
+		</action>
+
+		<action name="getPeriodsByImportReport"
+			class="org.hisp.dhis.reportsheet.importing.action.GetPeriodsByImportReportAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonPeriods.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+		</action>
+
+		<action name="openImportReportAssociations"
+			class="org.hisp.dhis.reportsheet.importreport.action.OpenImportReportAssociationsAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/import/importReportAssociation.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_IMPORT_REPORT_ASSOCIATION
+			</param>
+		</action>
+
+		<!--  function - Prewiew Data  flow from excel file  -->
+
+		<action name="previewDataFlow"
+			class="org.hisp.dhis.reportsheet.importing.action.ViewDataFlowAction">
+			<result name="CATEGORY" type="redirect">
+				previewDataCategory.action
+			</result>
+			<result name="NORMAL" type="redirect">
+				previewDataNormal.action
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				previewDataOrganizationGroup.action
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				previewDataNormal.action
+			</result>
+		</action>
+
+		<!--  function - Prewiew Data - NORMAL -->
+		<action name="previewDataNormal"
+			class="org.hisp.dhis.reportsheet.importing.action.ViewDataNormalAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseExportReportPreview.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+		</action>
+
+		<!--  function - Prewiew Data - CATEGORY GROUP  -->
+		<action name="previewDataCategory"
+			class="org.hisp.dhis.reportsheet.importing.action.ViewDataCategoryAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseExportReportPreview.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+		</action>
+
+		<!--  function - Prewiew Data - ORGANISATION GROUP  -->
+		<action name="previewDataOrganizationGroup"
+			class="org.hisp.dhis.reportsheet.importing.action.ViewDataOrganizationGroupAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseExportReportPreview.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+		</action>
+
+		<!--WORKING HERE-->
+		<action name="importData"
+			class="org.hisp.dhis.reportsheet.importing.action.ImportDataFlowAction">
+			<result name="NORMAL" type="redirect">
+				importDataNormal.action
+			</result>
+			<result name="CATEGORY" type="redirect">
+				importDataCategory.action
+			</result>
+			<result name="ORGANIZATION_GROUP_LISTING" type="redirect">
+				importDataOrganizationGroup.action
+			</result>
+			<result name="PERIOD_COLUMN_LISTING" type="redirect">
+				generateExportReportPeriodColumnListingAjax.action
+			</result>
+			<param name="requiredAuthorities">F_EXCEL_IMPORTING</param>
+		</action>
+
+		<action name="importDataNormal"
+			class="org.hisp.dhis.reportsheet.importing.action.ImportDataNormalAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="importDataCategory"
+			class="org.hisp.dhis.reportsheet.importing.action.ImportDataCategoryAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="importDataOrganizationGroup"
+			class="org.hisp.dhis.reportsheet.importing.action.ImportDataOrganizationGroupAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="rollbackImporting"
+			class="org.hisp.dhis.reportsheet.importing.action.RollbackImportingAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">F_EXCEL_IMPORTING</param>
+		</action>
+
+		<!-- Period Column -->
+
+		<action name="periodColumns"
+			class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/periodcolumns.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_PERIOD_COLUMN_LISTING_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="savePeriodColumn"
+			class="org.hisp.dhis.reportsheet.periodcolumn.action.SavePeriodColumnAction">
+			<result name="success" type="redirect">
+				periodColumns.action?id=${exportReportId}
+			</result>
+		</action>
+
+		<action name="updatePeriodColumn"
+			class="org.hisp.dhis.reportsheet.periodcolumn.action.UpdatePeriodColumnAction">
+			<result name="success" type="redirect">
+				periodColumns.action?id=${exportReportId}
+			</result>
+		</action>
+
+		<action name="deletePeriodColumn"
+			class="org.hisp.dhis.reportsheet.periodcolumn.action.DeletePeriodColumnAction">
+			<result name="success" type="redirect">
+				periodColumns.action?id=${exportReportId}
+			</result>
+		</action>
+
+		<action name="getPeriodColumn"
+			class="org.hisp.dhis.reportsheet.periodcolumn.action.GetPeriodColumnAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonPeriodColumn.vm
+			</result>
+		</action>
+
+		<!-- Excel Templates Management -->
+
+		<action name="listAllExcelTemplates"
+			class="org.hisp.dhis.reportsheet.filemanager.action.ExcelTemplateListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/excelTemplateList.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/exceltemplate.js
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_TEMPLATE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="deleteExcelTemplate"
+			class="org.hisp.dhis.reportsheet.filemanager.action.DeleteExcelTemplateAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_TEMPLATE_DELETE
+			</param>
+		</action>
+
+		<action name="uploadExcelTemplate"
+			class="org.hisp.dhis.reportsheet.filemanager.action.UploadExcelFileAction">
+			<result name="success" type="redirect">
+				listAllExcelTemplates.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_TEMPLATE_UPLOAD
+			</param>
+			<interceptor-ref name="fileUploadStack" />
+		</action>
+
+		<action name="renameExcelTemplate"
+			class="org.hisp.dhis.reportsheet.filemanager.action.RenameExcelTemplateAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<result name="none" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseInput.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_TEMPLATE_RENAME
+			</param>
+		</action>
+
+		<action name="updateExportReportByTemplate"
+			class="org.hisp.dhis.reportsheet.filemanager.action.UpdateExportReportByTemplateAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_TEMPLATE_UPLOAD
+			</param>
+		</action>
+
+		<action name="validateUploadExcelTemplate"
+			class="org.hisp.dhis.reportsheet.filemanager.action.ValidateUploadExcelFile">
+			<interceptor-ref name="fileUploadStack" />
+			<result name="success" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseError.vm
+			</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-commons/ajax/xmlResponseInput.vm
+			</result>
+		</action>
+
+		<!-- jQuery Chart -->
+
+		<action name="jcharts"
+			class="org.hisp.dhis.reportsheet.jchart.action.GetALLJchartAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/jcharts.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+		</action>
+
+		<action name="addJChartForm"
+			class="org.hisp.dhis.reportsheet.jchart.action.PrepareDataForAddOrUpdateJChartAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/addJChart.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				chart/js/colorpicker.js, chart/js/jchart.js
+			</param>
+			<param name="stylesheets">
+				chart/css/colorpicker.css, chart/css/jchart.css
+			</param>
+		</action>
+
+		<action name="addJChart"
+			class="org.hisp.dhis.reportsheet.jchart.action.AddJChartAction">
+			<result name="success" type="redirect">
+				jcharts.action
+			</result>
+		</action>
+
+		<action name="updateJChartForm"
+			class="org.hisp.dhis.reportsheet.jchart.action.PrepareDataForAddOrUpdateJChartAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/updateJChart.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				chart/js/colorpicker.js, chart/js/jchart.js
+			</param>
+			<param name="stylesheets">
+				chart/css/colorpicker.css, chart/css/jchart.css
+			</param>
+		</action>
+
+		<action name="updateJChart"
+			class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartAction">
+			<result name="success" type="redirect">
+				jcharts.action
+			</result>
+		</action>
+
+		<action name="deleteJChart"
+			class="org.hisp.dhis.reportsheet.jchart.action.DeleteJChartAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="jchartRoles"
+			class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/jchartRoles.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="updateJChartRoles"
+			class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleAction">
+			<result name="success" type="redirect">
+				jcharts.action
+			</result>
+			<param name="requiredAuthorities">
+				F_EXCEL_REPORT_ADMINISTRATION
+			</param>
+		</action>
+
+		<action name="viewJCharts"
+			class="org.hisp.dhis.reportsheet.jchart.action.GetALLJchartAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/viewJCharts.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">chart/js/highcharts.js</param>
+		</action>
+
+		<action name="drawJChartParamSelection"
+			class="org.hisp.dhis.reportsheet.jchart.action.GetJChartAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/chart/drawJChartParams.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				chart/js/highcharts.js, chart/js/modules/exporting.js
+			</param>
+			<param name="stylesheets">chart/css/jchart.css</param>
+		</action>
+
+		<action name="drawJChart"
+			class="org.hisp.dhis.reportsheet.jchart.action.draw.DrawJChartAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/chart/jsonJChartData.vm
+			</result>
+		</action>
+
+		<!-- Bookmark  -->
+
+		<action name="saveBookmark"
+			class="org.hisp.dhis.reportsheet.bookmark.action.SaveBookmarkAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="deleteBookmark"
+			class="org.hisp.dhis.reportsheet.bookmark.action.DeleteBookmarkAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+		</action>
+
+		<action name="getBookmark"
+			class="org.hisp.dhis.reportsheet.bookmark.action.GetBookmarkAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonBookmark.vm
+			</result>
+		</action>
+
+		<action name="getAllBookmark"
+			class="org.hisp.dhis.reportsheet.bookmark.action.GetAllBookmarkAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonBookmarks.vm
+			</result>
+		</action>
+
+		<!-- OrganisationUnitPrototype -->
+
+		<action name="getOrgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonOrganisationUnitPrototype.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="getOrgUnitPrototypes"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeListAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonOrganisationUnitPrototypes.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="orgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/organisationUnitPrototype.vm
+			</param>
+			<param name="javascripts">
+				javascript/organisationUnitPrototype.js
+			</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="showAddOrgUnitPrototypeForm"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/addOrgUnitPrototypeForm.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_ADD
+			</param>
+		</action>
+
+		<action name="addOrgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.AddOrgUnitPrototypeAction">
+			<result name="success" type="redirect">
+				orgUnitPrototype.action
+			</result>
+			<result name="error" type="redirect">index.action</result>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_ADD
+			</param>
+		</action>
+
+		<action name="showUpdateOrgUnitPrototypeForm"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/updateOrgUnitPrototypeForm.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_UPDATE
+			</param>
+		</action>
+
+		<action name="updateOrgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.UpdateOrgUnitPrototypeAction">
+			<result name="success" type="redirect">
+				orgUnitPrototype.action
+			</result>
+			<result name="error" type="redirect">index.action</result>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_UPDATE
+			</param>
+		</action>
+
+		<action name="validateOrgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.ValidateOrgUnitPrototypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="removeOrgUnitPrototype"
+			class="org.hisp.dhis.reportsheet.orgunitprototype.action.RemoveOrgUnitPrototypeAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_DELETE
+			</param>
+		</action>
+
+		<!-- OrganisationUnitPrototypeGroup -->
+
+		<action name="orgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/organisationUnitPrototypeGroup.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="javascripts">
+				javascript/organisationUnitPrototypeGroup.js
+			</param>
+		</action>
+
+		<action name="getOrgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonOrganisationUnitPrototypeGroup.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="getOrgUnitPrototypeGroups"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupListAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonOrganisationUnitPrototypeGroups.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPE_MANAGEMENT
+			</param>
+		</action>
+
+		<action name="removeOrgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.RemoveOrgUnitPrototypeGroupAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				/dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPEGROUP_DELETE
+			</param>
+		</action>
+
+		<action name="showAddOrgUnitPrototypeGroupForm"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/addOrgUnitPrototypeGroupForm.vm
+			</param>
+			<param name="javascripts">
+				javascript/organisationUnitPrototypeGroup.js
+			</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPEGROUP_ADD
+			</param>
+		</action>
+
+		<action name="addOrgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.AddOrgUnitPrototypeGroupAction">
+			<result name="success" type="redirect">
+				orgUnitPrototypeGroup.action
+			</result>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPEGROUP_ADD
+			</param>
+		</action>
+
+		<action name="showUpdateOrgUnitPrototypeGroupForm"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/updateOrgUnitPrototypeGroupForm.vm
+			</param>
+			<param name="javascripts">
+				javascript/organisationUnitPrototypeGroup.js
+			</param>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPEGROUP_UPDATE
+			</param>
+		</action>
+
+		<action name="updateOrgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.UpdateOrgUnitPrototypeGroupAction">
+			<result name="success" type="redirect">
+				orgUnitPrototypeGroup.action
+			</result>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNITPROTOTYPEGROUP_UPDATE
+			</param>
+		</action>
+
+		<action name="validateOrgUnitPrototypeGroup"
+			class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.ValidateOrgUnitPrototypeGroupAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="showAddMultiOrganisationUnit"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.ShowAddOrganisationUnitFormAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/addMultiOrganisationUnitForm.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_MULTI_ORGANISATION_UNIT_ADD
+			</param>
+		</action>
+
+		<action name="addMultiOrganisationUnit"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.AddMultiOrganisationUnitAction">
+			<result name="success" type="redirect">
+				administration.action
+			</result>
+			<param name="requiredAuthorities">
+				F_MULTI_ORGANISATION_UNIT_ADD
+			</param>
+		</action>
+
+		<action name="showAutoGenerateForm"
+			class="org.hisp.dhis.reportsheet.action.NoAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/showAutoGenerateForm.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menu.vm
+			</param>
+			<param name="requiredAuthorities">
+				F_AUTO_GENERATE_FORM_BY_TEMPLATE
+			</param>
+		</action>
+
+		<action name="uploadExcelTemplateForGenerateForm"
+			class="org.hisp.dhis.reportsheet.filemanager.action.UploadExcelFileAction">
+			<result name="success" type="redirect">
+				showAutoGenerateForm.action
+			</result>
+			<interceptor-ref name="fileUploadStack" />
+		</action>
+
+		<action name="autoGenerateFormByTemplate"
+			class="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormByTemplate">
+			<result name="success" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseExportReportPreview.vm
+			</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-spreadsheet-reporting/responseAutoGenerateFormError.vm
+			</result>
+			<result name="input" type="velocity-xml">
+				../dhis-web-commons/ajax/xmlResponseInput.vm
+			</result>
+		</action>
+
+		<action name="autoGenerateFormRollback"
+			class="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormRollBack">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<!-- OrganisationUnit -->
+
+		<action name="getDepartment"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/jsonOrganisationUnit.vm
+			</result>
+		</action>
+
+		<action name="department"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentListAction">
+			<result name="success" type="velocity">/main.vm</result>
+			<param name="page">
+				/dhis-web-spreadsheet-reporting/department.vm
+			</param>
+			<param name="menu">
+				/dhis-web-spreadsheet-reporting/menuWithTree.vm
+			</param>
+			<param name="javascripts">
+				../dhis-web-commons/ouwt/ouwt.js,javascript/department.js
+			</param>
+			<interceptor-ref name="organisationUnitTreeStack" />
+		</action>
+
+		<action name="addDepartment"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.AddDepartmentAction">
+			<result name="success" type="redirect">
+				department.action
+			</result>
+			<param name="requiredAuthorities">
+				F_ORGANISATIONUNIT_ADD
+			</param>
+		</action>
+		
+		<action name="renameDepartment"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.RenameOrganisationUnitAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">F_ORGANISATIONUNIT_UPDATE</param>
+		</action>
+		
+		<action name="removeDepartment"
+			class="org.hisp.dhis.reportsheet.organisationunit.action.RemoveDepartmentAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<result name="error" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseError.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+			<param name="requiredAuthorities">F_ORGANISATIONUNIT_DELETE</param>
+		</action>
+
+		<!-- Data Entry module -->
+
+		<action name="getDataValues"
+			class="org.hisp.dhis.reportsheet.de.action.GetDataValuesForDataSetAction">
+			<result name="success" type="velocity-json">
+				/dhis-web-spreadsheet-reporting/dataentry/responseDataValues.vm
+			</result>
+		</action>
+
+	</package>
+</struts>

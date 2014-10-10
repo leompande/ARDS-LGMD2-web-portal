@@ -1,0 +1,60 @@
+<h3>$i18n.getString( "data_status_management" ) #openHelp( "excelReportingDataEntryStatus" )</h3>
+<table width="100%">
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:300px"/>
+		</td>
+		<td align="right">
+			<input type="button" value="$i18n.getString( 'add' )" style="width:100px" onclick="window.location='openAddDataEntryStatus.action'"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" style="width:100px" onclick="window.location='administration.action'"/>
+		</td>
+	</tr>
+</table>
+<table width="100%" id="listTable" class="listTable">
+	<thead>
+	<tr>
+		<th>$i18n.getString( 'dataset' )</th>
+		<th class="{sorter: false}">$i18n.getString( 'make_default' )</th>
+		<th class="{sorter: false}"></th>
+	</tr>
+	</thead>
+	<tbody id="list">
+	#set( $mark = false )
+	#foreach($ds in $!dataStatus)
+		<tr #alternate( $mark )>
+			<td>$!ds.dataSet.displayName</td>
+			<td id="td${ds.id}">
+				<input type="checkbox" #if($ds.makeDefault) checked="true" #end value="$ds.makeDefault" onchange="updateDefault( $ds.id, $ds.makeDefault )"/>
+			</td>
+			<td>
+				<a href="javascript:deleteDataStatus('$ds.id');" title="$i18n.getString( 'delete' )"><img src="../images/delete.png" alt="$i18n.getString( 'delete' )"></a>
+				<a href="openUpdateDataEntryStatus.action?id=$ds.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>
+			</td>
+		</tr>
+		#if( $mark )
+			#set( $mark = false )
+		#else
+			#set( $mark = true )
+		#end
+	#end
+	</tbody>
+</table>
+
+<script language="javascript">
+	var i18n_confirm_delete = '$encoder.jsEscape($i18n.getString( 'confirm_delete' ) , "'")';
+	
+	function deleteDataStatus( id ){
+		if(window.confirm(i18n_confirm_delete)){
+			window.location = "deleteDataEntryStatus.action?dataStatusId=" + id;
+		}
+	}
+	
+	function updateDefault( id, value )
+	{
+		jQuery( "#td" + id ).load( 'updateDefault.action', { dataStatusId: id, makeDefault: !value }, function() {});
+	}
+	
+	jQuery(document).ready(function(){		
+		tableSorter( 'listTable' );	
+	});
+</script>

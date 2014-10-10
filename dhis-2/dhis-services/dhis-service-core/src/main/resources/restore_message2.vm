@@ -1,0 +1,12 @@
+Someone, probably you, have asked us to restore your user account at ${object.rootPath}. 
+You have been sent two emails, where this is the second one. Please read the 
+first email and follow the instructions. If you already have done so, please 
+use the code below to complete the account restore form.
+
+
+${object.code}
+
+
+You must complete the restore process within 1 hour. If you take no action, your
+account will not be restored. If you did not request this restore, please disregard
+this message.

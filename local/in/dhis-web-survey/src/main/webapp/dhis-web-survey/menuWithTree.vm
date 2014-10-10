@@ -1,0 +1,38 @@
+
+<h2>Survey</h2>
+
+<ul>
+    <li>Survey Data Entry</a></li>
+</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-20px; ">
+    <a href="index.action"><img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+##parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+<!--
+<script>
+	
+	function organisationUnitSelected( orgUnits )
+	{
+  	 	if(orgUnits != null && orgUnits != "" )
+		{
+			window.location.href = 'select.action';
+		}
+  	 	
+  	 	
+  	 	//window.location.href = 'select.action';
+	}
+
+	selection.setListenerFunction( organisationUnitSelected );
+</script>
+
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		selection.setListenerFunction( organisationUnitSelected );
+	});
+</script>
+
+-->

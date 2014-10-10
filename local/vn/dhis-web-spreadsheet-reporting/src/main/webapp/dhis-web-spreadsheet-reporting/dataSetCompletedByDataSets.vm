@@ -1,0 +1,48 @@
+<table class="listTable" id="listTable">	
+	<thead>
+		<tr>
+			<th></th>
+		#foreach( $d in $dataSets )
+			<th>$!encoder.htmlEncode( $d.displayName )</th>
+		#end
+		</tr>
+	</thead>
+	<tbody>
+	#foreach( $o in $organisationUnits )
+		<tr>
+			<td>$o.name</td>
+		#foreach( $d in $dataSets )
+			<td>
+			#if($!completedValues.get( "$o.id:$d.id" ))
+				#if($completedValues.get( "$o.id:$d.id" )!="null")
+					<a href='javascript:viewDataSetReport($d.id,$period.id,$o.id, "$period.name")'>
+						<img src="../images/view_report.png" title="View Data" align="absmiddle">
+					</a>
+					<img src="../images/check.png" alt="$i18n.getString( 'yes' )" align="absmiddle">				
+					[$completedValues.get( "$o.id:$d.id" )]
+				#end
+			#else
+				<a href='javascript:viewDataSetReport($d.id,$period.id,$o.id, "$period.name")'>
+						<img src="../images/view_report.png" title="View Data" align="absmiddle">
+				</a>
+				<img src="../images/warning.png" alt="$i18n.getString( 'no' )" align="absmiddle">
+			#end
+			</td>
+		#end
+		</tr>
+	#end
+	</tbody>
+	<tfoot>
+		<tr align="right">
+			<th></th>
+			<th colspan="$dataSets.size()-1">
+				<img src="../images/warning.png" alt="$i18n.getString( 'no' )" align="absmiddle">  Un-completed
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="../images/check.png" alt="$i18n.getString( 'yes' )" align="absmiddle">  Completed
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="../images/view_report.png" title="View Data" align="absmiddle">  View Data
+				
+			</th>				
+		</tr>		
+	</tfoot>
+</table>

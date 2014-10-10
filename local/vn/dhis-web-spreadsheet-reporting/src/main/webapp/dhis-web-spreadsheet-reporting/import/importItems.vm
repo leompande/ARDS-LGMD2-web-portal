@@ -1,0 +1,156 @@
+﻿<script>
+	jQuery(document).ready(function(){
+		tableSorter( 'listTable', [[1,0]] );
+		
+		dialog1 = setUpDialog( 'copyToImportReport', i18n_expression, 500, 170 );
+		dialog2 = setUpDialog( 'copyToExportReport', i18n_expression, 550, 190 );
+		
+		jQuery( "#targetExportReport" ).change(function(){
+			loadItemTypes( jQuery(this).val() );
+		});
+	});
+	
+	var i18n_copy_successful = '$encoder.jsEscape( $i18n.getString( "copy_successful" ) , "'")';
+	var i18n_copy_items_duplicated = '$encoder.jsEscape( $i18n.getString( "copy_items_duplicated" ) , "'")';
+	var i18n_copy_items = '$encoder.jsEscape( $i18n.getString( "copy_items" ) , "'")';
+	var i18n_no_item = '$encoder.jsEscape( $i18n.getString( "no_item" ) , "'")';
+	var i18n_input_sheet_no = '$encoder.jsEscape( $i18n.getString( "input_sheet_no" ) , "'")';
+	var i18n_choose_export_report = '$encoder.jsEscape( $i18n.getString( "choose_export_report" ) , "'")';
+	var i18n_choose_import_report = '$encoder.jsEscape( $i18n.getString( "choose_import_report" ) , "'")';
+	var i18n_expression = '$encoder.jsEscape( $i18n.getString( "expression" ) , "'")';
+	var dialog1 = null;
+	var dialog2 = null;
+</script>
+
+<span id="message" style="top:70px;right:5px;position:fixed;width:200px;z-index:100009" onclick="hideById(this.id);"></span>
+
+<input type="hidden" id="importReportId" value="$!importReport.id"/>
+<input type="hidden" id="importReportType" value="$!importReport.type"/>
+<h2>$!encoder.htmlEncode($!importReport.displayName)</h2>
+<table width="100%">
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 2)" style="width:300px;"/>
+		</td>
+		<td align="right">	
+			<input type="button" onclick="window.location.href='addImportItemForm.action?importReportId=$importReport.id' " value="$i18n.getString('add')" style="width:200px"/><br/>
+			<input type="button" onclick="copyImportItemToImportReport()" value="$i18n.getString('copy_import_item_to_importreport')" style="width:200px"/><br/>
+			<input type="button" onclick="copyImportItemToExportReport()" value="$i18n.getString('copy_import_item_to_exportreport')" style="width:200px"/><br/>
+			<input type="button" onclick="window.location='listAllImportReport.action'" value="$i18n.getString('cancel')" style="width:200px"/>
+		</td>
+	</tr>
+</table>
+<table width="100%" class="listTable" id="listTable">
+	<thead>
+		<tr>
+			<th class="{sorter: false}"><input type="checkbox" id="checkAll" name="checkAll" onclick="importItemSelect(this.checked)"/></th>
+			<th>$i18n.getString('name')</th>
+			<th>$i18n.getString('sheetNo')</th>	
+			<th>$i18n.getString('row')</th>
+			<th>$i18n.getString('column')</th>		
+			<th class="{sorter: false}">$i18n.getString('expression')</th>
+			<th width="70px" class="{sorter: false}">$i18n.getString('operations')</th>		
+		</tr>
+	</thead>	
+	<tbody id="list">	
+	#foreach($importItem in $importItems)
+		<tr id="tr${importItem.id}">
+		  	<td align="center"><input type="checkbox" importItemID="$importItem.id" importItemName="$importItem.name" id="importItemChecked" name="importItemChecked" value='$importItem.id'/></td>
+			<td>$encoder.htmlEncode( $importItem.name )</td>
+			<td>$importItem.sheetNo</td>
+			<td>$importItem.row</td>
+			<td>$importItem.column</td>
+			<td>$importItem.expression</td>
+			<td align="center" style="width:100px">				
+				<a href="updateImportItemForm.action?importReportId=$importReport.id&importItemId=$importItem.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>
+				<a href="javascript:translate( 'ImportItem', '$importItem.id' )" title="$i18n.getString( 'translation_translate' )"><img src="../images/i18n.png" alt="$i18n.getString( 'translation_translate' )"/></a>
+				<a href="javascript:removeItem( $importItem.id, '$importItem.name', '$i18n.getString( 'confirm_delete' )', 'deleteImportItem.action');" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"/></a>
+			</td>
+		</tr>	
+	 
+	#end	 
+    </tbody>
+</table>
+
+<div id="copyToImportReport">
+	<p></p>
+	<table width="100%">
+		<tr>
+			<td style="width: 150px;"><label>$i18n.getString('reports')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select id="targetImportReport" style="max-width:30em;min-width:30em;">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('sheet_no')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input id="targetSheetNo" type="text"/></td>
+		</tr>	
+	</table>
+	<p align="center">
+		<input type="button" value="$i18n.getString('ok')" onclick="validateCopyImportItemsToImportReport();" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( dialog1 );" style="width:100px"/>
+	</p>
+</div>
+
+<div id="copyToExportReport">
+	<p></p>
+	<table width="100%">
+		<tr>
+			<td style="width: 150px;"><label>$i18n.getString('reports')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select id="targetExportReport" style="max-width:30em;min-width:30em;">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 150px;"><label>$i18n.getString('item_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select id="itemType" style="max-width:30em;min-width:30em;">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 150px;"><label>$i18n.getString('period_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select id="periodType" style="max-width:30em;min-width:30em;">
+				#foreach( $type in $periodTypes )
+					<option value='$type'>$i18n.getString( $type )</option>	
+				#end
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('sheet_no')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input id="targetSheetNo" type="text"/></td>
+		</tr>	
+	</table>
+	<p align="center">
+		<input type="button" value="$i18n.getString('ok')" onclick="validateCopyImportItemsToExportReport();" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( dialog2 );" style="width:100px"/>
+	</p>
+</div>
+
+<script type="text/javascript">
+
+	var target = jQuery( '#itemType' );
+
+	function importItemSelect( checked )
+	{
+		if( checked ) checkALL( "input[type=checkbox][name=importItemChecked]" );
+		else unCheckALL( "input[type=checkbox][name=importItemChecked]" );
+	}
+	
+	function loadItemTypes( id )
+	{
+		target.children().remove();
+	
+		jQuery.postJSON( 'getExportItemTypes.action', { id: id },
+			function( json ){
+				jQuery.each( json.itemTypes, function(i, item){
+					target.append('<option value='+item.value+'>'+ item.name +'</option>');
+			});
+		});
+	}
+	
+</script>

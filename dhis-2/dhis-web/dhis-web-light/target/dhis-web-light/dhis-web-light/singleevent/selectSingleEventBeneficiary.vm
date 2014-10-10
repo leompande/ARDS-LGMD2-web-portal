@@ -1,0 +1,23 @@
+<h2>$i18n.getString( "beneficiary_list" )</h2>
+	#if( $validated)
+		<div class="header-box">
+			<h3 style="text-align: left;">$i18n.getString("successfully_saved")</h3>
+		</div>
+	#else	
+	
+	#end
+<p>
+<ul>
+#foreach( $patient in $singleEventBeneficiaryList )
+	<li><a href="showSingleEventForm.action?organisationUnitId=$organisationUnitId&patientId=$patient.id&programId=$programId">$!encoder.htmlEncode( ${patient.name} )</a></li>
+#end
+</ul>
+</p>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="selectSingleEvent.action?organisationUnitId=$organisationUnitId">$i18n.getString("single_event_list")</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

@@ -1,0 +1,176 @@
+#macro( header )
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>$encoder.htmlEncode( $applicationTitle )</title>
+    <meta name="description" content="DHIS 2">
+    <meta name="keywords" content="DHIS 2">
+    <!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"-->
+    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/font-awesome/css/font-awesome.min.css?_rev=$!{buildRevision}" />
+    <link type="text/css" rel="stylesheet" media="screen" href="../dhis-web-commons/javascripts/jQuery/ui/css/redmond/jquery-ui-1.9.1.custom.css?_rev=$!{buildRevision}" />
+    <link type="text/css" rel="stylesheet" media="screen,print" href="../dhis-web-commons/css/${stylesheet}?_rev=$!{buildRevision}" />
+    <link type="text/css" rel="stylesheet" media="screen,print" href="../dhis-web-commons/css/widgets.css?_rev=$!{buildRevision}" />
+    <link type="text/css" rel="stylesheet" media="print" href="../dhis-web-commons/css/print.css?_rev=$!{buildRevision}" />
+
+    <link href="../dhis-web-commons/bootstrap3/css/bootstrap.css" rel="stylesheet">
+    <link href="../dhis-web-commons/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../dhis-web-commons/fontawesome4/css/font-awesome.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/sliderman.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/dataTables.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/onoff.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/docs.min.css" rel="stylesheet">
+    <link href="../dhis-web-commons/cms-image-manager/css/imageManager.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/sumoselect/sumoselect.css" rel="stylesheet" />
+    <link href="../dhis-web-commons/javascripts/jquery.multiselect.css" rel="stylesheet" />
+    <link href="../dhis-web-commons/javascripts/jquery.multiselect.filter.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/css/tabstyle.css" />
+    #foreach ( $style in $stylesheets )
+        <link type="text/css" rel="stylesheet" href="${style}?_rev=$!{buildRevision}">
+    #end
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <script type="text/javascript">
+        var dateFormat = 'yy-mm-dd';
+    </script>
+
+
+
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-shim.min.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js"></script>
+
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
+    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="../dhis-web-commons/javascripts/sliderman.js"></script>
+    <script src="../dhis-web-commons/cms-image-manager/js/imageManager.js"></script>
+    <script src="../dhis-web-commons/javascripts/jquery.form.js"></script>
+    <script src="../dhis-web-commons/javascripts/sumoselect/jquery.sumoselect.min.js"></script>
+    <!--link href="styles.css" rel="stylesheet">
+      <link href="http://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .leftmenu{
+            font-size: 0.9em;
+        }
+
+        a.overwrite:focus{
+            background-color:#447148!important;
+        }
+    </style>
+
+
+
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-shim.min.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js?_rev=$!{buildRevision}"></script>
+
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.min.js?_rev=$!{buildRevision}"></script>
+    <!--[if lte IE 8]><script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/placeholders.jquery.min.js?_rev=$!{buildRevision}"></script><![endif]-->
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.utils.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.ext.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.metadata.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.tablesorter.min.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.upload-1.0.2.min.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.dhisAjaxSelect.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/ui/jquery-ui-1.9.1.custom.min.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/ui/jquery.blockUI.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.validate.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.validate.ext.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.cookie.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.glob.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.date.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.tmpl.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.autogrow.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/underscore.min.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.util.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/commons.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/commons.ajax.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/lists.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/periodType.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/date.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/json2.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/validationRules.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.array.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.select.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.comparator.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.availability.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.trigger.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.sharing.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.ss.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.ls.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.idb.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.memory.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.contextmenu.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.appcache.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../dhis-web-commons/i18nJavaScript.action?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../main.js?_rev=$!{buildRevision}"></script>
+    <script type="text/javascript" src="../request.js?_rev=$!{buildRevision}"></script>
+    #foreach( $javascript in $javascripts )
+        <script type="text/javascript" src="${javascript}?_rev=$!{buildRevision}"></script>
+    #end
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="../dhis-web-commons/security/jquery.simplePagination.js"></script>
+    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/css/simplePagination.css">
+    <link rel="stylesheet" href="../dhis-web-commons/javascripts/jQuery/jqueryUI/jquery-ui.css">
+    <!-- Tinymce -->
+    <!-- Place inside the <head> of your HTML -->
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/tinymce/tinymce.min.js"></script>
+    <script src="../dhis-web-commons/javascripts//tinymce/tinymce.js"></script>
+    <script src="../dhis-web-commons/javascripts/mult-select/js/bootstrap-transfer.js"></script>
+    <script src="../dhis-web-commons/javascripts/jquery.multiselect.js"></script>
+    <script src="../dhis-web-commons/javascripts/jquery.multiselect.filter.js"></script>
+    <script src="../dhis-web-commons/javascripts/jQuery/jqueryUI/jquery-ui.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/ckeditor/adapters/jquery.js"></script>
+    <script src="../dhis-web-commons/javascripts/chart.js"></script>
+    <script src="../dhis-web-commons/javascripts/ext-all.js"></script>
+    <script src="../dhis-web-commons/javascripts/CMSscript.js"></script>
+
+
+    <!-- Tinymce -->
+    <!-- Place inside the <head> of your HTML -->
+    <script src="../dhis-web-commons/javascripts/mult-select/js/bootstrap-transfer.js"></script>
+    <script src="../dhis-web-commons/javascripts/sumoselect/jquery.sumoselect.min.js"></script>
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.form.js"></script>
+    <script src="../dhis-web-commons/cms-image-manager/js/load-image.min.js"></script>
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.ui.widget.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.iframe-transport.js"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.fileupload.js"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.fileupload-process.js"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.fileupload-image.js"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="../dhis-web-commons/cms-image-manager/js/jquery.fileupload-validate.js"></script>
+    <script src="../dhis-web-commons/javascripts/CMSscript.js"></script>
+    <script src="../dhis-web-commons/javascripts/jquery.multiselect.js"></script>
+    <script src="../dhis-web-commons/javascripts/jquery.multiselect.filter.js"></script>
+    <script src="../dhis-web-commons/cms-image-manager/js/imageManager.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/highcharts.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/modules/exporting.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/themes/sand-signika.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Signika:400,700" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../dhis-web-commons/analysis/orgUnits.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/periods.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/data_element.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/bar.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/line.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/column.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/table.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/pie.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/spiderweb.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/combined.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/staked.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/analysis/data_analysis1.js"></script>
+    <script src="../dhis-web-commons/assets/js/jquery.dataTables.min.js"></script>
+    <script src="../dhis-web-commons/assets/js/dataTables.bootstrap.min.js"></script>
+    <script src="../dhis-web-commons/javascripts/favourites.js"></script>
+</head>
+#end

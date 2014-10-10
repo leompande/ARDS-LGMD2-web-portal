@@ -1,0 +1,52 @@
+
+#selectedIndicators,
+#availableIndicators{
+	width:300px;
+	height:200px;
+	border:1px solid #CCCCCC;
+	overflow:auto;		
+}
+
+#selectedIndicators tr,
+#availableIndicators tr{		
+	cursor:pointer;
+}
+
+#availableIndicators .selected{	
+	background-color:#1D689F;
+}
+
+#availableIndicators table,
+#selectedIndicators table{
+	width:100%;
+}
+
+.colorSelector{
+	background:url("../images/select.png") repeat scroll 0 0 transparent;
+	height:36px;
+	position:relative;
+	width:36px;		
+}
+
+.colorSelector div {
+	background:url("../images/select.png") repeat scroll center center transparent;
+	height:30px;
+	left:3px;
+	position:absolute;
+	top:3px;
+	width:30px;
+	background-color:#FF0000;
+}
+
+.close {
+	background:url("../images/close.png") repeat scroll center center transparent;
+	height:20px;
+	top:10px;
+	right:5px;	
+	position:absolute;	
+	width:20px;
+	cursor:pointer;
+}
+
+
+

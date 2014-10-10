@@ -1,0 +1,48 @@
+
+<script>
+
+    leftBar.hideAnimated();
+
+	function changeOrgUnit()
+	{
+		var orgUnitObj = document.getElementById("orgUnit");
+		
+		var sleOrgUnitId = orgUnitObj.options[ orgUnitObj.selectedIndex ].value;
+		document.location.href = "dashboardPage.action?drillDownOrgUnitId="+sleOrgUnitId;
+	}
+
+	function exportToWorkBook()
+	{
+		document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+		return true;
+	}
+	
+</script>
+
+<form id="form1" name="form1" action="exportToExcel.action" method="post" onsubmit="return exportToWorkBook()" target="_newtab">
+
+	<div align="right">
+		<select id="orgUnit" name="orgUnit" onchange="javascript:changeOrgUnit()">
+			#foreach( $orgUnit in $orgUnitList )
+				<option value="$orgUnit.id" #if( $selOrgUnit.id == $orgUnit.id ) selected #end>$orgUnit.name</option>
+			#end
+		</select>
+		&nbsp;&nbsp;
+		<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000" />
+	</div>
+
+	<br/><br/>
+
+	<input type="hidden" name="htmlCode" id="htmlCode" />
+	
+	<div id="formResult">
+		<div align="center">
+			<font size="3" color="blue"><u><strong>$!navigationString</strong></u></font>
+		</div>
+		<br/>
+		<div>
+			$!customDataEntryFormCode
+		</div>
+	</div>
+
+</form>	

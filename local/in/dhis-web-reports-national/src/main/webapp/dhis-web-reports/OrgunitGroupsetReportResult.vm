@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>OrgUnitGroupwise DataStatus Result</title>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+        <script>
+            var startDate = "$sDateLB"; 
+            var endDate = "$eDateLB";
+          
+            function exportDataStatusResultToWorkBook()
+            {               
+                document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+                            
+                return true;                
+            }
+        </script>   
+    </head>
+    <body>
+
+     <form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+            <input type="hidden" name="htmlCode" id="htmlCode" />
+            <div align="right" class="NormalB">
+                <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+            </div>
+            
+        <div id="formResult">               
+                <div align="center" class="NormalB">$i18n.getString( "organisation_unit_group_wise_data_entry_status_for")&nbsp; $selDataSet.name </div>
+                    <div align="right">
+                        <table width="30%">
+                                <tr class="TableDataCellStyles" >
+                                    <td bgcolor="#a0c0a0">&nbsp;</td>
+                                    <td align="left">&nbsp;Completed (75+)</td>
+                                </tr>
+                                <tr class="TableDataCellStyles">
+                                    <td bgcolor="#a0a0ff">&nbsp;</td>
+                                    <td align="left">&nbsp;Partially Completed (41 - 75)</td>
+                                </tr>
+                                <tr class="TableDataCellStyles">
+                                    <td bgcolor="#905090">&nbsp;</td>
+                                    <td align="left">&nbsp;Not Completed (1 - 40)</td>
+                                </tr>
+                                <tr class="TableDataCellStyles">
+                                    <td bgcolor="#ff0000">&nbsp;</td>
+                                    <td align="left">&nbsp;Not Entered ( 0 )</td>
+                                </tr>
+                        </table>
+                    </div>
+    
+    #foreach($selectedOrgUnitGroup in $orgUnitGroupList)         
+      <br><br>
+      <div align="left" class="NormalB">$i18n.getString( "organisation_unit_group" ) : $selectedOrgUnitGroup.getName()</div>
+            
+      <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">       
+        <tr class="TableHeadingCellStyles" align="center">
+            <th>OrgUnitGroup</th>
+            <th>GroupMember</th>
+                                  
+            #foreach($period in $periodList)
+                <th>$period.startDate To $period.endDate</th>
+            #end
+        </tr>
+        <tr class="TableHeadingCellStyles">
+            <th>$selectedOrgUnitGroup.name</th>
+            <th>&nbsp;</th>
+            #set($orgdsresultList = $ougMapDataStatusResult.get($selectedOrgUnitGroup))
+            #set($count1 = 0)
+            #foreach($period in $periodList)
+                #set($ourgresult = $orgdsresultList.get($count1))
+                #set($count1 = $count1 + 1)
+                #if($ourgresult < 0)
+                    <th  bgcolor="white">&nbsp;</td>
+                #elseif($ourgresult == 0)
+                    <th align="center" bgcolor="#ff0000"><font color="#ffffff">$ourgresult</font></th>
+                #elseif($ourgresult > 75)
+                    <th align="center" bgcolor="#a0c0a0"><font color="#ffffff">$ourgresult</font></th>
+                #elseif($ourgresult > 40 && $ourgresult <= 75 )
+                    <th align="center" bgcolor="#a0a0ff"><font color="#ffffff">$ourgresult</font></th>
+                #else
+                    <th align="center" bgcolor="#905090"><font color="#ffffff">$ourgresult</font></th>
+                #end
+            #end
+        </tr>
+        #foreach($chiildorgUnit in $selectedOrgUnitGroup.getMembers())           
+            <tr class="TableHeadingCellStyles">
+                <td>&nbsp;</td>
+                <td><a href="#" >$chiildorgUnit.name</a></td>
+                #set($dsresultList = $ouMapDataStatusResult.get($chiildorgUnit))
+                #foreach($result in $dsresultList)
+                    #if($result < 0)
+                        <td  bgcolor="white">&nbsp;</td>
+                    #elseif($result == 0)
+                        <td align="center" bgcolor="#ff0000"><font color="#ffffff">$result</font></td>
+                    #elseif($result > 75)
+                        <td align="center" bgcolor="#a0c0a0"><font color="#ffffff">$result</font></td>
+                    #elseif($result > 40 && $result <= 75 )
+                        <td align="center" bgcolor="#a0a0ff"><font color="#ffffff">$result</font></td>
+                    #else
+                        <td align="center" bgcolor="#905090"><font color="#ffffff">$result</font></td>
+                    #end
+                #end
+            </tr>
+        #end
+     </table>                 
+    #end
+         </div>
+      </form>
+   </body>
+</html>

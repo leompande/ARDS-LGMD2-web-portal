@@ -1,0 +1,123 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DataEntry Status Orgnisationunit Group Set Wise Form</title>
+<script>
+		            // Global Variables
+		            var selCategory = "";
+		            var selFacility = "";
+
+		            	var ouName="";
+            			var dsName="";
+            			var sDateIndex=0;
+            			var eDateIndex=0;
+            			var sDate="";
+            			var eDate="";
+						var curPeriodType="";
+
+            		 // OrganisationUnit ids and its Names
+						var orgUnits = new HashTable();
+						#foreach($orgUnit in $organisationUnits)
+							var orgUnitId = ""+$orgUnit.getId();
+				    		orgUnits.put(orgUnitId,"$orgUnit.getShortName()");
+						#end
+
+        		</script>
+</head>
+<body onload = "getdSetPeriods()">
+<h1> $i18n.getString( "DataStatus Orgnisationunit Group Set Wise Form" ) </h1>
+<hr />
+<!--<form id="ChartGenerationForm" name="ChartGenerationForm" action="dataStatusOrgnisationunitGroupSetWiseResult.action" method="post" onsubmit="return formValidationsForOUwiseDataStatus()" target="chartWindow1">-->
+<form id="ChartGenerationForm" name="ChartGenerationForm">
+  <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+    <tr>
+      <td class="NormalB" width="325">&nbsp;</td>
+      <td class="NormalB" width="20">&nbsp;</td>
+      <td class="NormalB" width="325">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="NormalB"><input type="checkbox" name="includeZeros" id="includeZeros" checked>
+        Include Zero</td>
+      <td class="NormalB">&nbsp;</td>
+      <td class="NormalB">&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="NormalB"> $i18n.getString( "organisationunit_group_set_list" ) <br>
+        <select name="orgUnitGroupSetListCB" id="orgUnitGroupSetListCB" style="width: 325px;" onchange="getOrgUnitGroups()">
+          <!--<option value="NA">[ Select OrganisationUnitGroupSet ]</option>-->
+
+            #foreach($organisationUnitGroupSet in $organisationUnitGroupSets)
+
+          		<option value="$organisationUnitGroupSet.id">$organisationUnitGroupSet.name</option>
+
+            #end
+
+        </select>
+      </td>
+      <td class="NormalB">&nbsp;<br/></td>
+      <td class="NormalB"> $i18n.getString( "available_data_set_list" ) <br>
+        <select id="selectedDataSets" name="selectedDataSets" style="width: 325px;" onchange="getdSetPeriods()" >
+
+    		#foreach ( $dataSet in $dataSetList )
+
+          		<option value='$dataSet.id' title='$dataSet.name'>$dataSet.name</option>
+
+            #end
+
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="NormalB">&nbsp;<br/></td>
+      <td class="NormalB">&nbsp;<br/></td>
+      <td class="NormalB">&nbsp;<br/></td>
+    </tr>
+    <tr>
+      <td class="NormalB" valign="top"> $i18n.getString( "organisationunit_group_list" ) <br>
+        <select name="orgUnitListCB" id="orgUnitListCB" multiple style="width: 325px;height: 70px" ondblclick="remOUFunction()">
+        </select>
+      </td>
+      <td class="NormalB">&nbsp;<br/></td>
+      <td><table>
+          <tr>
+            <td class="NormalB"> OrganisationUnit : <br />
+              <input type="text" name="ouNameTB" id="ouNameTB" size="20" disabled />
+            </td>
+          </tr>
+          <tr>
+            <td class="NormalB">$i18n.getString( "nr_from" )<br>
+              <select id="sDateLB" name="sDateLB" style="width:110px;" >
+              </select>
+              <br />
+              <br />
+            </td>
+            <td class="NormalB">&nbsp;<br/></td>
+            <td class="NormalB">&nbsp;<br/></td>
+            <td class="NormalB">&nbsp;<br/></td>
+            <td class="NormalB">$i18n.getString( "nr_to" )<br>
+              <select id="eDateLB" name="eDateLB" style="width:110px;" >
+              </select>
+              <br />
+              <br />
+            </td>
+          </tr>
+        </table></td>
+      <td><input type="hidden" name="ouIDTB" id="ouIDTB">
+      </td>
+    </tr>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center" colspan="4">
+      	<!--<input type="submit" name="ViewStatus" value="ViewStatus" style="width: 120; height: 25; font-family:Arial; font-weight:bold; color:#000000" >-->
+      	<input type="button" name="ViewStatus" value="ViewStatus" style="width: 120; height: 25; font-family:Arial; font-weight:bold; color:#000000" onClick="javascript:formValidationsForOUwiseDataStatus()">
+      </td>
+    </tr>
+  </table>
+</form>
+<div id="contentDiv"></div>
+<script>
+  getOrgUnitGroups();
+</script>
+</body>
+</html>

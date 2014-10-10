@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.model.ModelAttributeValue" table="modelattributevalue">
+
+    <composite-id>
+      <key-many-to-one name="model" class="org.hisp.dhis.coldchain.model.Model" column="modelid"
+        foreign-key="fk_modeldatavlaue_modelid" />
+      <key-many-to-one name="modelTypeAttribute" class="org.hisp.dhis.coldchain.model.ModelTypeAttribute" column="modeltypeattributeid"
+        foreign-key="fk_modeldatavlaue_modeltypeattributeid" />
+    </composite-id>
+
+    <property name="value" />
+
+    <!-- <many-to-one name="modelTypeAttributeOption" class="org.hisp.dhis.coldchain.model.ModelTypeAttributeOption" column="modeltypeattributeoptionid"
+      foreign-key="fk_modeldatavlaue_modeltypeattributeoptionid" /> -->
+
+  </class>
+</hibernate-mapping>

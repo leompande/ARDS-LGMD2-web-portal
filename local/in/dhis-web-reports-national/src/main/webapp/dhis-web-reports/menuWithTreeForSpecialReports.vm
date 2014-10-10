@@ -1,0 +1,39 @@
+<h2>Report Analyser</h2>
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+        <li>
+            Special Local Reports
+        </li>
+    </ul>
+</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-15px; ">
+        <a href="index.action">
+          <img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+
+    document.reportForm.ouIDTB.value = orgUnitIds;
+    
+    if(orgUnitIds == null || orgUnitIds == "" )
+    {
+        return;
+    }
+    
+    if(orgUnitIds !=null)
+       {
+         getOUDetails(orgUnitIds);
+       }
+    
+    }
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

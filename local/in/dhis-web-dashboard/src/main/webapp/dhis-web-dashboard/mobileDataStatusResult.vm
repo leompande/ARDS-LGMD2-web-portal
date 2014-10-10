@@ -1,0 +1,124 @@
+
+<html>
+    <head>
+        <title>DataStatus Result</title>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css"> 
+        <script>
+            var startDate = "$sDateLB"; 
+            var endDate = "$eDateLB";
+            var dsType = "$selectedButton";
+            
+            function getImmChildInfo(evt, dsId, selOrgUnit)
+            {
+
+                immChildOption = "yes";             
+                                if( document.getElementById('includeZeros').checked )
+                {
+                    evt.target.href = "mobileDataStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+                }
+                else
+                {
+                    evt.target.href = "mobileDataStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+                }   
+            }
+            
+        function exportDataStatusResultToWorkBook()
+        {               
+            document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+                        
+            return true;                
+        }
+        </script>   
+    </head>
+    <body>
+
+#if( "$!ouMapDataStatusResult" == "" || $ouMapDataStatusResult.isEmpty() || $ouMapDataStatusResult.size() == 0 )
+    
+    <div align="center" class="NormalB">Selected OrgUnit and its Children are Not assigned to $selDataSet.name</div>
+
+#else
+<form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+    <input type="hidden" name="htmlCode" id="htmlCode" />
+	    <div align="right" class="NormalB">
+	        <input type="checkbox" name="includeZeros" id="includeZeros" #if($includeZeros) checked #end /> Include Zero<br /> 
+	        <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+	    </div>
+            
+    <div id="formResult">               
+    <div align="center" class="NormalB">$i18n.getString( "ds_dataEntry_status_mobile" )</div>
+    <div align="right">
+        <table width="30%">
+            <tr class="TableHeadingCellStyles" >
+	            <td bgcolor="#a0c0a0">&nbsp;</td>
+	            <td align="left">&nbsp;Completed (75+)</td>
+            </tr>
+            <tr class="TableHeadingCellStyles">
+	            <td bgcolor="#a0a0ff">&nbsp;</td>
+	            <td align="left">&nbsp;Partially Completed (41 - 75)</td>
+            </tr>
+            <tr class="TableHeadingCellStyles">
+                <td bgcolor="#905090">&nbsp;</td>
+                <td align="left">&nbsp;Not Completed (1 - 40)</td>
+            </tr>
+            <tr class="TableHeadingCellStyles">
+                <td bgcolor="#ff0000">&nbsp;</td>
+                <td align="left">&nbsp;Not Entered ( 0 )</td>
+            </tr>
+            <tr class="TableHeadingCellStyles">
+                <td bgcolor="#463e41">&nbsp;</td>
+                <td align="left">&nbsp;Holidays</td>
+            </tr>
+        </table>
+    </div>
+    #set($count2 = 0)
+
+    <br/>
+    <div align="left" class="NormalB">$i18n.getString( "ds_mobile" ) : $selDataSet.name</div>
+        <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: solid" bordercolor="black" width="100%">       
+            <tr class="TableHeadingCellStyles" align="center">
+                #foreach($levelName in $levelNames)
+                    <td class="TableHeadingCellStyles"  bgcolor="#C0C0C0"><strong>$!levelName</strong></td>
+                #end
+                <td class="TableHeadingCellStyles"  bgcolor="#C0C0C0"><strong>$i18n.getString( "ds_mobile_anm_name" )</strong></td>
+                <td class="TableHeadingCellStyles"  bgcolor="#C0C0C0"><strong>$i18n.getString( "ds_mobile_anm_phone" )</strong></td>                  
+	              
+	            #foreach($periodname in $periodNameList)
+	                <td class="TableHeadingCellStyles"  bgcolor="#C0C0C0"><strong>$periodname</strong></td>
+	            #end
+           </tr>
+                              
+           #foreach($chiildorgUnit in $orgUnitList)
+	          #set($count1 = $minOULevel)
+	          #set($curOrgUnitLevel = $organisationUnitService.getLevelOfOrganisationUnit($chiildorgUnit.id))
+              <tr class="TableHeadingCellStyles">
+	              #foreach($levelName in $levelNames)
+	                  #if($count1 == $curOrgUnitLevel)
+	                      <td><a href="#" onclick="javascript:getImmChildInfo(event, '$selDataSet.id', '$chiildorgUnit.id')" target="_blank">$chiildorgUnit.name</a></td>
+	                  #else
+	                      <td>&nbsp;</td>
+	                  #end
+	                  #set($count1 = $count1 + 1)
+	              #end
+                 #set( $dsValidationPhoneNo = $ouMapUserPhoneNo.get($chiildorgUnit) )
+                 
+                 <td class="TableHeadingCellStyles">$!chiildorgUnit.comment</td>
+                 
+                 <td class="TableHeadingCellStyles">$dsValidationPhoneNo</td>
+                               
+                #set($dsresultList = $ouMapDataStatusResult.get($chiildorgUnit))
+                #set($dsColorList = $ouMapDataStatusColorList.get($chiildorgUnit))
+                #set($count2 = 0)
+                    #foreach($result in $dsresultList)	                   
+                       <td align="center" bgcolor="$dsColorList.get($count2)"><font color="#ffffff">$result</font></td>
+                       #set($count2 = $count2 + 1)
+	              #end
+            </tr>
+          #end
+       </table>
+                  
+  </div>
+</form>
+                
+#end                
+    </body>
+</html>

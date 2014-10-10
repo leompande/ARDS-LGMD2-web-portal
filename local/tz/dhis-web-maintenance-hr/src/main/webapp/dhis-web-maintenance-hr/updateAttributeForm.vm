@@ -1,0 +1,102 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for updateAttributeForm
+//-----------------------------------------------------------------------
+	jQuery(document).ready(
+			function()
+			{
+				jQuery("#updateAttributeForm").validate({
+					 meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{
+					 					    validateUpdateAttribute();
+									}
+				});
+				jQuery.validator.setMessages( validationMessage );
+				jQuery("#nameField").focus();
+				
+			}
+	);
+	var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+	var i118_at_least_2_option = '$encoder.jsEscape( $i18n.getString( "at_least_2_option" ) , "'") ';
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>	
+<h3>$i18n.getString( "update_attribute" )</h3>
+
+<form id="updateAttributeForm" name="updateAttributeForm" action="updateAttribute.action" method="post" >
+
+<div style="display:inline">
+  <input type="hidden" id="id" name="id" value="$attribute.id">
+</div>
+  
+  <table id="detailsList">
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "attribute_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="nameField" name="nameField" value="$encoder.htmlEncode( $attribute.name )" style="width:30em" class="{validate:{required:true,rangelength:[2,32]}}"></td>
+      </tr>   
+         
+      <tr>
+		<td width="20em"><label for="input_type">$i18n.getString( "input_type" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td>
+			<select id="inputTypeId" name="inputTypeId" style="min-width:20em">
+			#foreach($inputTypes in $inputType) 
+				<option value="$inputTypes.id" #if( $attribute.inputType.getId() == $inputTypes.id ) selected="selected" #end>$inputTypes.name </option>
+			#end	
+			</select>
+		</td>		
+		<td></td>				
+	</tr>
+	<tr>
+		<td width="20em"><label for="data_type">$i18n.getString( "data_type" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td>
+			<select id="dataTypeId" name="dataTypeId" style="min-width:20em">
+			#foreach($dataTypes in $dataType) 
+				<option value="$dataTypes.id" #if( $attribute.dataType.getId() == $dataTypes.id ) selected="selected" #end>$dataTypes.name </option>
+			#end
+			</select>
+		</td>		
+		<td></td>				
+	</tr>
+	 <tr>
+        <td>$i18n.getString( "caption" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><input type="text" id="caption" name="caption" value="$encoder.htmlEncode( $attribute.caption )" style="width:30em" class="{validate:{required:true,minlength:2}}"></td>
+      </tr>
+      
+        <tr>
+        <td style="width:200px">$i18n.getString( "compulsory" )</td>
+        <td><input type="checkbox" id="compulsory" name="compulsory" value="true" #if( $attribute.compulsory ) checked="checked" #end></td>
+    </tr>
+    
+      <tr>
+        <td style="width:200px">$i18n.getString( "unique" )</td>
+        <td><input type="checkbox" id="unique" name="unique" value="true" #if( $attribute.isUnique ) checked="checked" #end></td>
+    </tr>
+    
+      <tr>
+        <td style="width:200px">$i18n.getString( "history" )</td>
+        <td><input type="checkbox" id="history" name="history" value="true" #if( $attribute.history ) checked="checked" #end></td>
+    </tr>
+	<tr>
+        <td>$i18n.getString( "description" ) <em title="$i18n.getString( "required" )" class="required">*</em></td>
+        <td><textarea id="description" name="description" rows="3" style="width:30em" class="{validate:{required:true,minlength:2}}">$encoder.htmlEncode( $attribute.description )</textarea></td>
+      </tr>
+      <tr>
+        <td colspan="3" style="height:15px"></td>
+      </tr>
+    </tbody>
+  </table>  
+
+<p>
+    <input type="submit" value="$i18n.getString( "update" )" style="width:10em">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='hrAttribute.action'" style="width:10em">
+</p>
+
+</form>     
+<span id="message"></span>

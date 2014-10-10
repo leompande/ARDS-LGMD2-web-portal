@@ -1,0 +1,55 @@
+<h3>$i18n.getString('import_report') #openHelp( "excelReportingImportItems" )</h3>
+<table width="100%">
+	<tr>
+		<td>
+			$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:300px"/>
+		</td>
+		<td align="right">
+			<input type="button" onclick="window.location.href = 'addImportReportForm.action'" value="$i18n.getString('add')" style="width:100px"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location='administration.action'" style="width:100px"/>
+		</td>
+	</tr>
+</table>
+
+<table width="100%" class="listTable" id="listTable">
+	<thead>
+		<tr>
+			<th>$i18n.getString('name')</th>
+			<th>$i18n.getString('type')</th>
+			<th>$i18n.getString('period_type')</th>
+			<th width="140px" class="{sorter: false}">$i18n.getString('operations')</th>
+			<th width="25px" class="{sorter: false}">$i18n.getString('advanced')</th>
+		</tr>
+	</thead>
+	<tbody id="list">
+	#foreach($importReport in $importReports)
+		<tr id="tr${importReport.id}">
+			<td>$encoder.htmlEncode( $importReport.displayName )</td>
+			<td>$i18n.getString($importReport.type)</td>
+			<td>$encoder.htmlEncode( $importReport.periodType.name )</td>
+			<td align="left">
+				<a href="openImportReportAssociations.action?importReportId=$importReport.id" title="$i18n.getString( 'associations' )"><img src="../images/assign.png" alt="$i18n.getString( 'associations' )"/></a>
+				<a href="updateImportReportForm.action?id=$importReport.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>
+				<a href="javascript:removeItem($importReport.id, '$importReport.displayName','$i18n.getString( 'confirm_delete' )', 'deleteImportReport.action');" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"/></a>
+			</td>
+			<td>
+				<a href="listImportItems.action?importReportId=$importReport.id" title="$i18n.getString( 'import_item' )"><img src="../images/add_section.png" alt="$i18n.getString( 'import_item' )"/></a>
+				#if( $importReport.isOrgUnitGroupListing() )
+				<a href="openUpdateOrgUnitGroupForImportReport.action?id=$importReport.id" title="$i18n.getString( 'organisation_unit_group' )"><img src="images/group_1.jpg"/></a>
+				#elseif( $importReport.isCategory() )
+				<a href="listDataElementGroupOrderForImportReport.action?id=$importReport.id" title="$i18n.getString( 'dataelement_groups' )"><img src="images/group.jpg"/></a>
+				#end
+			</td>
+		</tr>
+	#end
+	</tbody>
+</table>
+
+<script language="javascript">
+	var mode = 'add';	
+	jQuery(document).ready(function(){		
+		tableSorter( 'listTable' );	
+	});
+</script>
+
+<span id="message" style="top:100px;right:5px;position:fixed;width:200px;z-index:10002" onclick="javascript:hideById(this.id);"></span>

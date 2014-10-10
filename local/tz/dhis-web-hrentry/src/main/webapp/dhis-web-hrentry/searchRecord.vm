@@ -1,0 +1,21 @@
+<h3>$hrDataSet.name </h3>
+
+<h2>$i18n.getString( "Search Record by name: " )</h2>
+
+<table class="mainPageTable" width="100%" >
+  <tr style="horizontal-align:center">
+  <td style="vertical-align:top">
+  
+  <form action="updateRecordsList.action" method="POST">
+        
+        <input type="text" id="key" name="key"/><br>
+    <div style="inline">
+        <input type="submit" value="$i18n.getString( 'search' )"/>
+        <input type="hidden" id="hrDataSetId" name="hrDataSetId" value="$hrDataSet.id"/>
+        <input type="button" value="$i18n.getString( 'clear' )" 
+        onclick="window.location.href='searchRecord.action'"/>
+    </div>
+</form>
+</td>
+  </tr>
+  </table>

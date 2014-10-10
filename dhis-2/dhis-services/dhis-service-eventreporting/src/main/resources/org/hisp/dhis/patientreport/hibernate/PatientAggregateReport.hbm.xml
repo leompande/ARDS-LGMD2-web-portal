@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+	<class name="org.hisp.dhis.patientreport.PatientAggregateReport"
+		table="patientaggregatereport">
+
+		<id name="id" column="patientaggregatereportid">
+			<generator class="native" />
+		</id>
+   
+   		&identifiableProperties;
+
+		<property name="name" column="name" not-null="true" unique="true"
+			length="230" />
+
+		<many-to-one name="program" class="org.hisp.dhis.program.Program"
+			column="programid" foreign-key="fk_patientaggregatereport_program" />
+
+		<many-to-one name="programStage" class="org.hisp.dhis.program.ProgramStage"
+			column="programstageid" foreign-key="fk_patientaggregatereport_programstage" />
+
+		<property name="startDate" />
+
+		<property name="endDate" />
+		
+		<list name="dimension" table="patientaggregatereport_dimension">
+	      <key column="patientaggregatereportid" foreign-key="fk_patientaggregatereportid_dimensions" />
+	      <list-index column="sort_order" />
+	      <element type="text" column="itemvalue" />
+	    </list>
+	    
+	    <list name="filter" table="patientaggregatereport_filters">
+	      <key column="patientaggregatereportid" foreign-key="fk_patientaggregatereportid_filters" />
+	      <list-index column="sort_order" />
+	      <element type="text" column="itemvalue" />
+	    </list>
+		
+		<property name="ouMode" />
+		
+		<property name="aggregateType" />
+		
+		<property name="limit" column="limitOption" />
+		
+		<property name="sortOrder" />
+
+		<!-- Access properties -->
+
+		<many-to-one name="user" class="org.hisp.dhis.user.User"
+			column="userid" foreign-key="fk_patientaggregatereport_userid" />
+
+		<property name="publicAccess" length="8" />
+
+		<set name="userGroupAccesses" table="patientaggregatereportusergroupaccesses">
+			<key column="patientaggregatereportid" />
+			<many-to-many class="org.hisp.dhis.user.UserGroupAccess"
+				column="usergroupaccessid" unique="true" />
+		</set>
+
+	</class>
+</hibernate-mapping>

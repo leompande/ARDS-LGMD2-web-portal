@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+#set($count1 = 0)
+<lineListElements>
+
+#foreach( $lineListElement in $llElements )
+	<lineListElement>
+		<id>$lineListElement.id</id>
+		<name>$encoder.xmlEncode( $lineListElement.name )</name>
+	</lineListElement>
+<!--	#set( $count1 = $count1 + 1 ) -->
+#end
+
+</lineListElements>

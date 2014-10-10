@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transforms>
+    <transform tag="change">
+        <xslt>changeroot.xsl</xslt>
+        <description>Simple test transformer</description>
+    </transform>
+    <transform tag="excel_0.1alpha">
+        <xslt>xl2dxf.xsl</xslt>
+        <description>Excel template import</description>
+    </transform>
+    <transform tag="SDMX_CSD">
+        <xslt>cross2dxf.xsl</xslt>
+        <description>SDMX-HD Cross Sectional Data Import</description>
+    </transform>
+</transforms>

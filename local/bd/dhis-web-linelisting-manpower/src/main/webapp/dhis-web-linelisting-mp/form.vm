@@ -1,0 +1,166 @@
+
+#parse( "/dhis-web-linelisting-mp/select.vm" )
+
+<script>
+    var rowCount = 0;
+    var sancPos = 0;
+    var dataValueMapKey;
+    function setSancPost( curSancPos )
+    {
+    	sancPos = curSancPos;
+    }
+</script>
+
+<form id="LineListDataEntryForm" action="saveValueAction.action" method="post" onsubmit="return calMaxRecords()">
+
+	#set( $count1 = 1 )
+	<table width="70%" align="center">
+		<tr align="center">
+			<th width="10%">Sr.No.</th>
+			<th width="40%">DataElement</th>
+			<th width="20%">Entry</th>
+		</tr>
+		#set( $dataValueMapKeys = $dataelementMap.keySet() )
+		#foreach( $dataValueMapKey in $dataValueMapKeys )
+			#set( $dataElementName = $dataelementMap.get( $dataValueMapKey ) )
+			#set( $dataValue = $dataValueMap.get( $dataValueMapKey ) )
+			<tr>
+				<td align="center">$count1</td>
+				<td>$dataElementName</td>
+				<td align="center"><input type="text" id="$dataValueMapKey" name="$dataValueMapKey" value="$!dataValue.value" onchange="setSancPost(this.value)"/>
+				<script>sancPos='$!dataValue.value'; dataValueMapKey='$dataValueMapKey';</script>
+				#if( $sactionedPostdataelement == $dataValueMapKey)
+					<input type="button" value="Add" onclick="validatePostVacant( '$dataValueMapKey' )">
+				#end
+				</td>
+			<tr>		
+			#set( $count1 = $count1 + 1 )
+		#end
+	</table>
+
+	<table class="listTable" id="listTable" align="centre">
+		<col>
+		<col width="20">                	
+		<col width="20">
+		<tr>
+			<td>$i18n.getString( "filter_by_name" ) : <form style="display:inline" action="none" onsubmit="return false"><div style="inline"><input type="text" onkeyup="filterValues( this.value )"></div></form></td>
+			<td></td><td></td>
+		</tr>
+		<tr>
+			<th>$i18n.getString( "name" ) - $i18n.getString( "pdscode" )</th>
+			<th colspan="2">$i18n.getString( "operations" )</th>
+		</tr>
+		<tbody id="list">
+			#set( $mark = false )
+			#foreach( $employee in $employeeList )
+				<tr id="tr${employee.pdsCode}">
+					<td#alternate( $mark )>$encoder.htmlEncode( $employee.name ) - $encoder.htmlEncode( $employee.pdsCode )</td>
+					<td style="text-align:center"#alternate( $mark )>
+						<a href="javascript:showUpdateEmployeePostForm( '$employee.pdsCode' )" title="$i18n.getString( 'edit' )">
+							<img src="../images/edit.png" alt="$i18n.getString( 'edit' )" />
+						</a>
+					</td>
+				</tr>	
+			#end	
+		</tbody>
+	</table>
+</form>
+
+<script type="text/javascript">
+
+        var counter=0;
+        var lastRow =0;
+        var curRow=0;
+        var jsllElementOptions = new Array();
+        var jsllElementPtype = new Array();
+        var jsllElementSize = $lineListElements.size();
+        var recordNos = new Array();
+
+        var i =0;
+        #foreach( $recordNo in $recordNumbers )
+            recordNos[$i] = $recordNo;
+            i++;
+        #end
+
+        #foreach( $lineListElement in $lineListElements )
+            #set($counter = 0)
+            var jsllOptions = new Array();
+            #if($lineListElement.PresentationType == 'combobox')
+               jsllElementPtype['$lineListElement.shortName'] = 'combobox';
+                #set($lineListOptions = $llElementOptionsMap.get($lineListElement.shortName))
+				#foreach( $lineListOption in $lineListOptions )
+					jsllOptions[$counter] = '$encoder.jsEscape( $lineListOption.name, "'" )';
+					#set($counter = $counter + 1)
+				#end
+            #elseif($lineListElement.PresentationType == 'text')
+               jsllElementPtype['$lineListElement.shortName'] = 'text';
+            #elseif($lineListElement.PresentationType == 'calender')
+               jsllElementPtype['$lineListElement.shortName'] = 'calender';
+            #end
+            jsllElementOptions['$lineListElement.shortName'] = jsllOptions;
+        #end
+
+        function addLLNewRow(element)
+        {
+            rowCount = document.getElementById(element).value;
+
+			if(rowCount>0)
+			{
+				if(lastRow>0)
+				   var count = lastRow;
+				else
+					var count = $srno;
+				for(var c = count; c < rowCount; c++)
+				{
+					addLLBNewRow();
+				}
+			}
+
+        }
+
+        function setReportedDate()
+        {
+            document.getElementById('reportedDate').value = document.getElementById('reportingDate').value;
+        }
+        
+		function calMaxRecords()
+        {
+            document.getElementById('totalRecords').value = lastRow;
+
+            document.getElementById('reportedDate').value = document.getElementById('reportingDate').value;
+            
+            return true;
+        }
+
+        function valueChanged( recordNumber , element )
+        {
+            var flag = 0;
+            var tempStr = element + ":"+recordNumber ;
+            var resVal = document.getElementById(tempStr).value;
+            if(resVal == null || resVal.replace(/^\s\s*/, '').replace(/\s\s*$/, '') == "" )
+            {
+                document.getElementById(tempStr).focus();
+                alert(element + " cannot be null, Please enter some value");
+            }
+            else
+            {
+                var tempVal = document.getElementById('changedValue:'+recordNumber).value;
+
+                var temparray = tempVal.split(" ");
+                for(var k=0; k < temparray.length; k++)
+                {
+                    if (element==temparray[k])
+                    {
+                        flag=1;
+                    }
+                }
+
+                if( flag == 0 )
+				{
+                    document.getElementById('changedValue:'+recordNumber).value = tempVal + element + " ";
+				}
+            }
+            return true;
+		}
+		
+</script>

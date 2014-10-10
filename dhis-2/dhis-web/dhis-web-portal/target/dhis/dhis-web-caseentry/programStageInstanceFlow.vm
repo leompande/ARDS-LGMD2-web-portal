@@ -1,0 +1,196 @@
+<table id='tb_$!programInstance.id' class="stage-container" programType='$!programInstance.program.type'>
+	<tr>
+		<td>
+			<div class="arrow-left" onclick="moveLeft('flow_$!programInstance.id')">&nbsp;</div>
+		</td>
+		<td>
+			<div id='flow_$!programInstance.id' class="stage-flow">
+				<table class="table-flow">											
+					<tr id='programStageIdTR_$!programInstance.id'>
+						#if( $programStageInstances)
+						#else
+							#set( $programStageInstances = $programInstance.programStageInstances)
+						#end
+						
+						#foreach( $programStageInstance in $programStageInstances )
+						<td id='arrow_$programStageInstance.id' style='font-size:25px;'>&rarr;</td>
+						<td>
+							#set($valueDate=$format.formatDate( $programStageInstance.dueDate ))
+							#if($!programStageInstance.executionDate)
+								#set($valueDate=$format.formatDate( $programStageInstance.executionDate ))
+							#end
+							
+							#set($reportDateToUse = "")
+							#if($programStageInstance.programStage.reportDateToUse=='dateOfIncident' )
+								#set($reportDateToUse = "$format.formatDate( $programInstance.dateOfIncident)")
+							#elseif($programStageInstance.programStage.reportDateToUse=='enrollmentDate' )
+								#set($reportDateToUse = "$format.formatDate( $programInstance.enrollmentDate)")
+							#end
+							<div class="orgunit-object" id="org_$!programStageInstance.id">&nbsp;$!programStageInstance.organisationUnit.name</div>
+							<input type="button" name="programStageBtn"
+								id="ps_$!programStageInstance.id"
+								name="ps_$!programStageInstance.id"
+								pi="$programInstance.id"
+								psid="$programStageInstance.programStage.id"
+								psuid="$programStageInstance.programStage.uid"
+								psname="$programStageInstance.programStage.displayName"
+								status="$programStageInstance.getEventStatus()"
+								programType='$programInstance.program.type'
+								reportDate="$!format.formatDate( $!programStageInstance.executionDate )"
+								reportDateDes="$programStageInstance.programStage.reportDateDescription"
+								dueDate="$format.formatDate( $programStageInstance.dueDate )"
+								openAfterEnrollment="$programStageInstance.programStage.openAfterEnrollment"
+								reportDateToUse="$reportDateToUse"
+								class="stage-object" 
+								value="$programStageInstance.programStage.displayName&#13;&#10;&nbsp;$valueDate" 
+								onclick="javascript:loadDataEntry( $programStageInstance.id );">
+							<script>	
+								var status = $programStageInstance.getEventStatus();
+								setEventColorStatus( $programStageInstance.id ,status);
+							</script>
+						</td>
+						#end
+					</tr>
+				</table>
+			</div>
+		</td>
+		<td>
+			<div class="arrow-right" onclick="moveRight('flow_$!programInstance.id')">&nbsp;</div>
+		</td>
+		<td>&nbsp;</td>
+		<td align="right">
+			#if($programInstance.followup)
+				#set($followup=$programInstance.followup)
+			#else
+				#set($followup='false')
+			#end
+			<input type="button" class='patient-object' id="newEncounterBtn_$!programInstance.id" name="newEncounterBtn" value="$i18n.getString('create_new_event')" onClick="javascript:showCreateNewEvent('$!programInstance.id');" >
+		</td>
+	</tr>			
+</table>
+
+<div id='createNewEncounterDiv_$!programInstance.id' class='hidden'>
+	<table>
+		<tr>
+			<td>$i18n.getString( 'program_stage' )</td>
+			<td>
+				<select id='repeatableProgramStage_$!programInstance.id' name='repeatableProgramStageId_$!programInstance.id' onchange="setSuggestedDueDate('$programInstance.id')">
+					#set($allowGenerateNextVisit='false')
+					#set($prevStageId='')
+					#foreach( $programStage in $programInstance.program.programStages )
+					
+						#set($reportDateToUse = "")
+						#if($programStageInstance.programStage.reportDateToUse=='registrationDate' )
+							#set($reportDateToUse = "$format.formatDate( $programInstance.patient.registrationDate)")
+						#elseif($programStageInstance.programStage.reportDateToUse=='dateOfIncident' )
+							#set($reportDateToUse = "$format.formatDate( $programInstance.dateOfIncident)")
+						#elseif($programStageInstance.programStage.reportDateToUse=='enrollmentDate' )
+							#set($reportDateToUse = "$format.formatDate( $programInstance.enrollmentDate)")
+						#end
+					
+						#if( $programStage.irregular=='true')
+							#if($!programStage.standardInterval)
+								#set($standardInterval=$!programStage.standardInterval)
+							#else
+								#set($standardInterval=0)
+							#end
+							
+							<option 
+								value="$programStage.uid" 
+								localid='$programStage.id' 
+								prevStageId='$prevStageId'
+								standardInterval='$standardInterval' 
+								selected repeatable="true"
+								allowGenerateNextVisit='$allowGenerateNextVisit' 
+								programType = '$programStage.program.type'
+								reportDateDes='$!programStage.reportDateDescription'
+								repeatable="false"
+								openAfterEnrollment="$!programStage.openAfterEnrollment"
+								reportDateToUse="$!reportDateToUse"
+							>$!programStage.displayName</option>
+						#else
+							#set($hasEvent="false")
+							#foreach( $programStageInstance in $programInstance.programStageInstances )
+								#if( $programStage.id== $programStageInstance.programStage.id)
+									#set($hasEvent="true")
+								#end
+							#end
+							
+								<option 
+								#if($hasEvent=="true") style="display:none;" #else selected #end 
+								value="$programStage.uid" localid='$programStage.id' 
+								prevStageId='$prevStageId'
+								standardInterval='$programStage.minDaysFromStart' 
+								allowGenerateNextVisit='$allowGenerateNextVisit' 
+								programType = '$programStage.program.type'
+								reportDateDes='$programStage.reportDateDescription'
+								repeatable="false"
+								openAfterEnrollment="$programStage.openAfterEnrollment"
+								reportDateToUse="$reportDateToUse"
+							>$!programStage.displayName</option>
+							
+						#end
+						
+						#if($allowGenerateNextVisit=='true')
+							#set($allowGenerateNextVisit='false')
+							#set($prevStageId='')
+						#end
+						
+						#if($programStage.allowGenerateNextVisit=='true')
+							#set($allowGenerateNextVisit='true')
+							#set($prevStageId=$programStage.uid)
+						#end
+					#end
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( 'due_date' )</td>
+			<td><input id='dueDateNewEncounter_$!programInstance.id' name='dueDateNewEncounter_$!programInstance.id' style='width:260px;'></td>
+			<script type="text/javascript">
+			   datePicker( 'dueDateNewEncounter_$!programInstance.id', false );
+			</script>
+		</tr>
+		<tr>
+			<td></td>
+			<td><span id='spanDueDateNewEncounter_$!programInstance.id' class='hidden' style='color:red' >$i18n.getString('this_field_is_required')</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input type='button' value='$i18n.getString("create")' onclick='registerIrregularEncounter( "$!programInstance.id", jQuery("#repeatableProgramStage_$!programInstance.id option:selected").attr("localid"),jQuery("#repeatableProgramStage_$!programInstance.id option:selected").val(), jQuery("#repeatableProgramStage_$!programInstance.id option:selected").text(),getFieldValue("dueDateNewEncounter_$programInstance.id" ) );' />
+				<input type='button' value='$i18n.getString("cancel")' onclick="closeDueDateDiv('$!programInstance.id');" />
+			</td>
+		</tr>
+		</tr>
+		<tr>
+			<td></td>
+			<td id='createEventMessage_$!programInstance.id' style='color:red'></td>
+		</tr>
+	</table>
+</div>
+
+<div id='enterKey'>&#13;&#10;</div>
+
+<script>
+	var i18n_create_new_event = '$encoder.jsEscape( $i18n.getString( "create_new_event" ) , "'" )';
+	var i18n_create_event_success = '$encoder.jsEscape( $i18n.getString( "create_event_success" ) , "'" )';
+	jQuery(document).ready(	function(){
+		var options = jQuery('#repeatableProgramStage_' + $programInstance.id + " option ").length;
+		if( options==0 ){
+			jQuery("[name=newEncounterBtn]").addClass("hidden");
+		}
+		else{
+			jQuery("[name=newEncounterBtn]").addClass("show-new-event");
+		}
+		resize();
+	});
+	
+	
+    $(window).bind('resize', function(e){ 
+		resize();
+	});
+	
+</script>
+
+

@@ -1,0 +1,5 @@
+<span id="message" style="display:block">$encoder.xmlEncode( $message )</span>
+
+<br/><br/>
+
+<input type="button" value="$i18n.getString( 'back' )" onclick="window.location.href='modelType.action'" />

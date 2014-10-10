@@ -1,0 +1,3 @@
+{
+    "mapDateType": "$!encoder.jsonEncode( ${mapDateType} )"
+}

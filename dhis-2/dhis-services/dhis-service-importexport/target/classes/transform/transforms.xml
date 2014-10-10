@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transforms>
+   <transform tag="{http://ogr.maptools.org/}FeatureCollection">
+       <xslt>gml2dxf.xsl</xslt>
+       <description>GML to DXF orgunits</description>
+   </transform>
+    <transform tag="{http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message}CrossSectionalData">
+        <xslt>cross2dxf2.xsl</xslt>
+        <description>SDMX-HD Cross Sectional Data Import</description>
+    </transform>
+    <transform tag="{http://www.SDMX.org/resources/SDMXML/schemas/v2_0/message}GenericMetadata">
+        <xslt>imr2dxf.xsl</xslt>
+        <description>SDMX-HD Cross Sectional Data Import</description>
+    </transform>
+</transforms>

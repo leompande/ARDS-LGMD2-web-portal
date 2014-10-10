@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSet>
+  <id>$hrDataSet.id</id>
+  <name>$encoder.xmlEncode( $hrDataSet.name )</name>
+  <description>$encoder.xmlEncode( $hrDataSet.description )</description>
+  <attributesCount>$attributes.size()</attributesCount>
+  <dataentryform>#if($dataEntryForm) $encoder.xmlEncode( $dataEntryForm.getName() ) #else $encoder.xmlEncode( $i18n.getString( "no_dataentryform" ) ) #end</dataentryform>
+</dataSet>

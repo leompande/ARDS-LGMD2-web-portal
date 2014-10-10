@@ -1,0 +1,34 @@
+
+<a href="index.action"><h2>$i18n.getString( "dataanalyser" )</h2></a>
+
+<ul>
+	<li>Data Status</li>
+	<ul>
+		<li>OrganisationUnit Groupwise DatStatus</li>
+	 </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{    
+		document.ChartGenerationForm.ouIDTB.value = orgUnitIds;
+		
+		if( orgUnitIds == null || orgUnitIds == "" )
+		{
+			return;
+		}
+		
+		if( orgUnitIds != null )
+		{
+			getOrgUDetails(orgUnitIds);
+		}
+		
+	}
+
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

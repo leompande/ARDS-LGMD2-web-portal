@@ -1,0 +1,53 @@
+
+#if( $smsServiceStatus )
+	<div class="header" style="background-color: olive">
+	    <form method="post">SMS Service: Started
+	        <input type="submit" name="statAction" value="Stop" />
+	    </form>
+	</div>
+#else
+	<div class="header">
+	    <form method="post">SMS Service: Not Started
+	        <input type="submit" name="statAction" value="Start" />
+	    </form>
+	</div>
+#end
+
+#if( $smsServiceStatus )
+	<br><br>
+	<div class="header">Inbox| Pending Messages to Process : $!pendingMsgList.size(); Pending Messages to Import : $pending
+	    <form style="float: right;" method="post"><input type="submit" name="importAction" value="Import Into DHIS" #if( !$smsServiceStatus || $pending == 0 ) disabled #end /></form>
+	    <form style="float: right;" method="post"><input type="submit" name="processPendingSMS" value="Process Pending SMS" #if( !$smsServiceStatus || $!pendingMsgList.size() == 0 ) disabled #end /></form>
+	</div>
+	#if( $!pendingMsgList.size() != 0 )
+		<br/>
+		<table width="100%" class="listTable">
+		
+		    <col width="25%">
+		    <col width="75%">
+		
+		    <tr>
+		        <th>Sender</th>
+		        <th>Message</th>
+		    </tr>
+		    
+		    <tbody id="list">
+		    #set( $mark = false )
+		    #set( $msgkeys = $pendingMsgList.keySet() )
+		    #foreach( $msgkey in $msgkeys )
+		        <tr>
+		            <td #alternate( $mark )>$msgkey</td>
+		            <td #alternate( $mark )>$pendingMsgList.get( $msgkey )</td>
+		        </tr>
+		        #if( $mark )
+                    #set( $mark = false )
+                #else
+                    #set( $mark = true )
+                #end
+		    #end
+		     </tbody>
+		</table>
+	#end
+	
+	<span id="message" style="display:#if($result.trim().equals(""))none #else block #end">$result</span>
+#end

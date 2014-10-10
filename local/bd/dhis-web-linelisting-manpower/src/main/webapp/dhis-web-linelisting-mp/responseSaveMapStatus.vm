@@ -1,0 +1,5 @@
+{ "saveMap": [
+  {
+    "statusMsg": "$!{statusMsg}",
+  },
+] }

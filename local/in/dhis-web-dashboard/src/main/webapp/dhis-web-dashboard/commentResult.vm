@@ -1,0 +1,72 @@
+<html>
+	<head>
+    	<title>Data Element Comment Result</title>
+    		<link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css"></link>
+<script>
+	function exportDataStatusResultToWorkBook()
+    	{
+        	document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+            return true;
+        }	
+</script>
+	</head>
+    <body>
+    	 #if( "$!ouPeriodDataElementOptionComboMap" == "" || $ouPeriodDataElementOptionComboMap.isEmpty() || $ouPeriodDataElementOptionComboMap.size() == 0 )
+            <div align="center" class="NormalB">There are no any Data Element's comment for selected options</div>
+        #else
+           
+    	<form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+                <input type="hidden" name="htmlCode" id="htmlCode" />
+				    <div align="right" class="NormalB">
+                    <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+                </div>
+<div id="formResult">                
+                <br>
+                    <div align="left" class="NormalB">Data Set Name : $dataSetName and DataElement Count : $dataSetMemberCount </div>
+                    <table border="1" width="100%">
+                        <tr>
+                           <td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Organisation Unit Name</strong></td>
+						    #foreach($periodname in $periodNameList)
+                            	<td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1"><strong>$periodname</strong></td>    	
+                            #end       
+                        </tr>
+						<!--<tr>
+							#foreach($periodname in $periodNameList)
+								<td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>DataElement Name ---- Comment </strong></td>
+							#end
+						</tr>-->
+                        #foreach( $orgUnit in $orgUnitList )
+                           
+                            <tr class="TableHeadingCellStyles">
+                            	<td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1"><Strong>$orgUnit.name</strong></td>
+                             #foreach( $period in $periodList )   
+                             	#set( $dataElementList = $ouPeriodDataElementOptionComboMap.get( "$orgUnit.id:$period.id" ) )
+                             	#set( $commentList = $ouPeriodCommentMap.get( "$orgUnit.id:$period.id" ) )
+                            	##set( $commentList = $ouMapComment.get( $orgUnit ) )
+                           	    ##set( $dataElementList = $ouMapDataElement.get( $orgUnit ) )      
+								<td valign="top" class="Normal">
+									<table width="100%" border="1">
+									#set( $count2 = 0 )
+                            			#foreach( $comment in $commentList )
+                            				#set( $dataElement = $dataElementList.get( $count2 ) )
+                               	    		#set( $periodCount = $periodCounts.get( $count2 ) )
+                               	    		<tr>
+                                        		<td class="NormalA" align="left">$dataElement</td>
+                                        		<td class="NormalA" align="left">$comment</td>
+                                    #set( $count2 = $count2 + 1 )     		
+                                       	   </tr>
+                                	    #end
+                                    	    
+                                	</table> 
+                                </td>
+                           #end
+                      
+                        </tr>
+                      #end
+                    
+                 </table>
+</div>               
+            </form>
+            #end
+    </body>
+</html>

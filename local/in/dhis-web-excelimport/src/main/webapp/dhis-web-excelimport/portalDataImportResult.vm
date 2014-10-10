@@ -1,0 +1,4 @@
+
+<input type="button" value="Back" onclick="window.location.href='portalDataImportForm.action'" />
+<br/><br/>
+<span id="message" style="display:block">$message</span>

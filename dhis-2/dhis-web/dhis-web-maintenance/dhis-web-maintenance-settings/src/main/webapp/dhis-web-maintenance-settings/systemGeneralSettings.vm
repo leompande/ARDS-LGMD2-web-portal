@@ -1,0 +1,107 @@
+<script>
+  jQuery(document).ready(function() {
+    jQuery("input[type=button]").click(function() {
+      jQuery.postUTF8('setSystemGeneralSettings.action', {
+        cacheStrategy: getFieldValue('cacheStrategy'),
+        infrastructuralDataElements: getFieldValue('infrastructuralDataElements'),
+        infrastructuralPeriodType: getFieldValue('infrastructuralPeriodType'),
+        feedbackRecipients: getFieldValue('feedbackRecipients'),
+        offlineOrganisationUnitLevel: getFieldValue('offlineOrganisationUnitLevel'),
+        omitIndicatorsZeroNumeratorDataMart: jQuery('#omitIndicatorsZeroNumeratorDataMart').is(':checked'),
+        factorDeviation: getFieldValue('factorDeviation'),
+        phoneNumberAreaCode: getFieldValue('phoneNumberAreaCode'),
+        googleAnalyticsUA: getFieldValue('googleAnalyticsUA'),
+        multiOrganisationUnitForms: jQuery('#multiOrganisationUnitForms').is(':checked')
+      }, function( json ) {
+        if( json.response == "success" ) {
+          setHeaderDelayMessage(json.message);
+        }
+      });
+    });
+  });
+</script>
+
+<h3>$i18n.getString( "general_settings" ) #openHelp( "systemGeneralSettings" )</h3>
+
+<div class="settingLabel">$i18n.getString( "cache_strategy" )</div>
+
+<div class="setting">
+<select id="cacheStrategy" name="cacheStrategy">
+	<option value="NO_CACHE" #if( $keyCacheStrategy == "NO_CACHE" )selected="selected"#end>$i18n.getString( "no_cache" )</option>
+	<option value="CACHE_6AM_TOMORROW" #if( $keyCacheStrategy == "CACHE_6AM_TOMORROW" )selected="selected"#end>$i18n.getString( "cache_until_6am_tomorrow" )</option>
+	<option value="CACHE_TWO_WEEKS" #if( $keyCacheStrategy == "CACHE_TWO_WEEKS" )selected="selected"#end>$i18n.getString( "cache_for_two_weeks" )</option>
+</select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "infrastructural_data_elements" )</div>
+
+<div class="setting">
+<select id="infrastructuralDataElements" name="infrastructuralDataElements">
+    #foreach ( $group in $dataElementGroups )
+    <option value="$group.id" #if( $group.id == $configuration.infrastructuralDataElements.id )selected="selected"#end>$group.name</option>
+    #end
+</select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "infrastructural_period_type" )</div>
+
+<div class="setting">
+<select id="infrastructuralPeriodType" name="infrastructuralPeriodType">
+    #foreach ( $type in $periodTypes )
+    <option value="$type.name" #if( $type.name == $configuration.infrastructuralPeriodTypeDefaultIfNull.name )selected="selected"#end>$type.name</option>
+    #end
+</select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "feedback_recipients" )</div>
+
+<div class="setting">
+<select id="feedbackRecipients" name="feedbackRecipients">
+	<option value="-1">$i18n.getString( "no_feedback_recipients" )</option>
+	#foreach ( $group in $userGroups )
+	<option value="$group.id" #if( $group.id == $!feedbackRecipients.id )selected="selected"#end>$encoder.htmlEncode( $group.name )</option>
+	#end
+</select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "max_levels_to_offline" )</div>
+
+<div class="setting">
+<select id="offlineOrganisationUnitLevel" name="offlineOrganisationUnitLevel">
+    #set( $level = 1)
+
+	#foreach ( $organisationUnitLevel in $organisationUnitLevels )
+    <option value="$organisationUnitLevel.id" #if( $organisationUnitLevel.id == $!offlineOrganisationUnitLevel.id)selected="selected"#end>Level $level</option>
+    #set( $level = $level + 1)
+	#end
+</select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "data_analysis_factor" )</div>
+<div class="setting">
+	<input type="text" id="factorDeviation" name="factorDeviation" value="$!factorDeviation"/>	
+</div>
+
+<div class="settingLabel">$i18n.getString( "phone_number_area_code" )</div>
+
+<div class="setting">
+	<input type="text" id="phoneNumberAreaCode" name="phoneNumberAreaCode" value="$!phoneNumberAreaCode"/>
+</div>
+
+<div class="settingLabel">$i18n.getString( "google_analytics_ua_key" )</div>
+
+<div class="setting">
+	<input type="text" id="googleAnalyticsUA" name="googleAnalyticsUA" value="$!googleAnalyticsUA"/>
+</div>
+
+<div class="setting">
+    <input type="checkbox" id="multiOrganisationUnitForms" name="multiOrganisationUnitForms" #if( $multiOrganisationUnitForms )checked="checked"#end>
+    <label for="multiOrganisationUnitForms">$i18n.getString( "multi_organisation_unit_forms" )</label>
+</div>
+
+<div class="setting">
+    <input type="checkbox" id="omitIndicatorsZeroNumeratorDataMart" name="omitIndicatorsZeroNumeratorDataMart" #if( $omitIndicatorsZeroNumeratorDataMart )checked="checked"#end>
+    <label for="omitIndicatorsZeroNumeratorDataMart">$i18n.getString( "omit_indicators_zero_numerator_data_mart" )</label>
+</div>
+
+<div class="setting"><input type="button" value="$i18n.getString( 'save' )" style="width:10em"/></div>

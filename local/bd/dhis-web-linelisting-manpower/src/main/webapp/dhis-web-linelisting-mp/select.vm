@@ -1,0 +1,84 @@
+<div id="currentSelection">
+	#if ( $organisationUnit ) $encoder.htmlEncode( $organisationUnit.name )#else $i18n.getString("no_organisationunit_selected") #end - 
+    #if ( $selectedLineListGroup ) $encoder.htmlEncode( $selectedLineListGroup.name )#else $i18n.getString("no_linelistgroup_selected") #end - 
+	#if ( $selectedStateManager.getSelectedLineListOption() ) $encoder.htmlEncode( $selectedStateManager.getSelectedLineListOption().name ) #else $i18n.getString("no_post_selected") #end <br> 
+</div>
+
+<form id="selectForm" name="selectForm" method="post" action="select.action">
+
+<table>
+	<tr>
+		<td><label>$i18n.getString( "organisation_unit" )</label></td>
+		<td><input type="text" readonly="readonly" #if( $organisationUnit ) value="$encoder.htmlEncode( $organisationUnit.name )" #else value="[$i18n.getString( "select" )]" #end style="width:200px"></td>
+	</tr>
+	
+	<tr>
+		<td><label for="selectedLineListGroupId">Department</label></td>
+		<td>
+			<select id="selectedLineListGroupId" name="selectedLineListGroupId" style="min-width:200px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $lineListGroups.size() == 0 ) disabled="disabled" #end>
+				<option value="null">[$i18n.getString( "select" )]</option>
+			#foreach( $lineListGroup in $lineListGroups )
+				<option value="$lineListGroup.id" #if( $selectedLineListGroupId && $lineListGroup.id == $selectedLineListGroupId ) selected="selected" #end>$encoder.htmlEncode( $lineListGroup.name )</option>
+			#end
+			</select>
+		</td>
+	</tr>
+
+    <tr>
+        <td><label for="selectedLineListOptionId">Post Name</label></td>
+        <td>
+            <select id="selectedLineListOptionId" name="selectedLineListOptionId" style="min-width:200px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $lineListOptions.size() == 0 ) disabled="disabled" #end>
+                <option value="null">[$i18n.getString( "select" )]</option>
+                #foreach( $lineListOption in $lineListOptions )
+                    <option value="$lineListOption.name" #if( $selectedLineListOptionId && $lineListOption.name == $selectedLineListOptionId ) selected="selected" #end>$encoder.htmlEncode( $lineListOption.name )</option>
+                #end
+            </select>
+        </td>
+    </tr>
+	
+	<tr style="display:none">
+		<td><label for="selectedPeriodIndex">$i18n.getString( "period" )</label></td>
+		<td>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('earlier_periods')" onclick="window.location.href='previousPeriods.action'" #if( $periods.size() == 0 ) disabled="disabled" #end>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('later_periods')" onclick="window.location.href='nextPeriods.action'" #if( $periods.size() == 0 ) disabled="disabled" #end><br>
+			<select id="selectedPeriodIndex" name="selectedPeriodIndex" style="min-width:200px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $periods.size() == 0 ) disabled="disabled" #end>
+				<option value="null">[$i18n.getString( "select" )]</option>
+			     #foreach( $period in $periods )
+				    #set( $index = $velocityCount - 1 )
+				    <option value="$index" #if( $index && $selectedPeriodIndex && $index == $selectedPeriodIndex ) selected="selected" #end>$format.formatPeriod( $period )</option>
+			     #end
+			</select>
+		</td>
+	</tr>
+	
+	<tr #if( !$selectedLineListGroup.getPeriodType().getName().equalsIgnoreCase( "OnChange" ) ) style="display:none" #end>
+		<td>
+			<label for="reportingDate">$i18n.getString( "reporting_date" )</label>
+			<br />
+			(YYYY-MM-DD)
+		</td>
+        <td>
+            <input type="text" id="reportingDate" name="reportingDate" value="$curDate" style="width:200px"  >
+        </td>
+	</tr>	
+		
+</table>
+
+</form>
+
+<hr style="clear:both;">
+
+<div id="contentDataRecord"></div>
+
+<script type="text/javascript">
+	jQuery( function(){
+		datePickerValid( 'reportingDate', false );
+	});    
+	jQuery("#contentDataRecord").dialog({
+		autoOpen:false,
+		title:"Edit Employee Post Detail",
+		modal:true,
+		width:400
+		});
+</script>
+

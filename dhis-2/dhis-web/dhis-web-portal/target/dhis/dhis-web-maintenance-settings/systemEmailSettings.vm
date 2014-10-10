@@ -1,0 +1,54 @@
+<script>
+	jQuery(document).ready(function() {
+		jQuery("input[type=button]").click(function() {
+			jQuery.postUTF8( 'setSystemEmailSettings.action', {
+				smtpHostName: getFieldValue( 'smtpHostName' ),
+				smtpPort: getFieldValue( 'smtpPort' ),
+				smtpUsername: getFieldValue( 'smtpUsername' ),
+				smtpPassword: getFieldValue( 'smtpPassword' ),
+				smtpTls: $( '#smtpTls' ).is( ':checked' )
+			}, function( json ) {
+				if ( json.response == "success" ) {
+					setHeaderDelayMessage( json.message );
+				}
+			});
+		});
+		
+		jQuery( '#smtpHostName' ).blur();
+	});
+</script>
+
+<h3>$i18n.getString( "smtp_settings" ) #openHelp( "systemEmailSettings" )</h3>
+
+<form id="emailSettingForm">
+
+<div class="settingLabel">$i18n.getString( "host_name" ) <span class="tipText">(e.g. smtp.gmail.com, localhost)</span></div>
+
+<div class="setting"><input type="text" id="smtpHostName" name="smtpHostName" value="$!smtpHostName"/></div>
+
+<div class="settingLabel">$i18n.getString( "port" )</div>
+
+<div class="setting">
+    <select id="smtpPort" name="smtpPort">
+    	<option value="587"#if( $smtpPort == 587 ) selected="selected"#end>587</option>
+    	<option value="465"#if( $smtpPort == 465 ) selected="selected"#end>465</option>
+    	<option value="25"#if( $smtpPort == 25 ) selected="selected"#end>25</option>
+    </select>
+</div>
+
+<div class="settingLabel">$i18n.getString( "username" )</div>
+
+<div class="setting"><input type="text" id="smtpUsername" name="smtpUsername" value="$!smtpUsername" autocomplete="off"/></div>
+
+<div class="settingLabel">$i18n.getString( "password" )</div>
+
+<div class="setting"><input type="password" id="smtpPassword" name="smtpPassword" value="$!smtpPassword" autocomplete="off"/></div>
+
+<div class="setting">
+	<input type="checkbox" id="smtpTls" name="smtpTls" value="true"#if( $smtpTls ) checked="checked"#end>
+	<label for="smtpTls">$i18n.getString( "tls" )</label>
+</div>
+
+<div class="setting"><input type="button" value="$i18n.getString( 'save' )" style="width:10em"/></div>
+
+</form>

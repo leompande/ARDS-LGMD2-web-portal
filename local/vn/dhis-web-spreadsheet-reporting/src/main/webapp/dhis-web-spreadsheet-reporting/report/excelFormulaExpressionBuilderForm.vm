@@ -1,0 +1,47 @@
+<script>
+
+	jQuery(document).ready(function(){
+		excelFormulaDialog = setUpDialog( 'excelformula', i18n_expression, 630, 400 );
+	});
+	
+	var excelFormulaDialog = null;
+	var i18n_expression = '$encoder.jsEscape( $i18n.getString( "expression" ) , "'")';
+</script>
+
+<div id="excelformula">
+	<textarea id="elementSelect" cols="90" rows="15"></textarea>	
+	<br/>
+	<br/>
+	<center>
+		<input type="button" value="$i18n.getString('ok')" onclick="validateFormula()" style="width:100px"/>		
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( excelFormulaDialog )" style="width:100px"/>
+	</center>
+</div>
+
+<script>		
+	
+	var expression = null;
+	
+	function validateFormula()
+	{
+		expression = getFieldValue( 'excelformula textarea[id=elementSelect]' );
+	
+		jQuery.postJSON('validationFormula.action',
+		{
+			formula: expression
+		},function( json ) {
+			if ( json.response == 'success' ) {
+				setFieldValue( 'expression', expression );
+				closeDialog( excelFormulaDialog );
+			}
+			else showErrorMessage( json.message );
+		});
+	}
+	
+	function excelFormulaExpressionBuilderForm()
+	{		
+		setFieldValue( 'excelformula textarea[id=elementSelect]', getFieldValue('expression') );
+		openDialog( excelFormulaDialog );
+	}	
+	
+</script>

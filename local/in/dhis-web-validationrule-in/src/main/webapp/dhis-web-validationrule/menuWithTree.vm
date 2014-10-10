@@ -1,0 +1,37 @@
+<h2>$i18n.getString( "validation" )</h2>
+<ul>
+    <li><a href="showValidationRuleForm.action">$i18n.getString( "validation_rule" )</a></li>
+    <li><a href="showValidationRuleGroupForm.action">$i18n.getString( "validation_rule_group" )</a></li>
+    <li><a href="showRunValidationForm.action">$i18n.getString( "run_validation" )</a></li>
+    <li><a href="showRunValidationByAverageForm.action">$i18n.getString( "run_validation_by_average" )</a></li>
+    <li>MinMax Violation</li>
+</ul>
+
+	
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-20px; ">
+        <a href="index.action">
+          <img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+	if(orgUnitIds == null || orgUnitIds == "" )
+	{
+		return;
+	}
+
+	if(orgUnitIds != null)
+		getOUDetails(orgUnitIds);	
+}
+	       
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+
+
+
+

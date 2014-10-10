@@ -1,0 +1,4 @@
+<status>
+	<code>$statusCode</code>
+</status>
+printout($attributeName)

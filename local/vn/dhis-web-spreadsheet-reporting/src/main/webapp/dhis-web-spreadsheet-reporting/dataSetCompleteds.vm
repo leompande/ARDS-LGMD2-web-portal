@@ -1,0 +1,206 @@
+<script>
+	jQuery( function(){
+		var viewByPeriodForm = validation( 'viewByPeriodForm', function( form ){ showCompletedReportByPeriod(); } );
+		var viewByDataSetForm = validation( 'viewByDataSetForm', function( form ){ showCompletedReportByDataSet(); } );
+	});
+</script>
+
+<h3>$i18n.getString( "dataset_completed_report" )</h3>
+<br>
+<div id="dataSetCompletedReport">
+	<ul>
+		 <!--<li><a href="#bookmark"><span>$i18n.getString( "bookmark" )</span></a></li>-->
+         <li><a href="#view_by_periods"><span>$i18n.getString('view_by') $i18n.getString( "period" )</span></a></li>
+         <li><a href="#view_by_datasets"><span>$i18n.getString('view_by') $i18n.getString( "dataset" )</span></a></li>
+	</ul>
+
+	<div id="view_by_periods" style="padding:0px">
+		<form id="viewByPeriodForm">
+		<table>
+			<tr>
+				<td>
+					<br/><b>$i18n.getString( "dataset" )</b><br/>
+					<select style="width:300px" id="dataSetId" name="dataSetId" onchange="getPeriodsAndOrganisationUnit( this.value );">
+					<option value="">$i18n.getString( "select" )</option>
+					#foreach( $dataSet in $dataSets )
+						<option value="$dataSet.id">$!encoder.htmlEncode( $dataSet.displayName )</option>
+					#end
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>$i18n.getString( "period" )</b><br/>
+					<table>
+						<tr>
+							<td><select id="availablePeriods" style="width:270px;" multiple size="10" ondblclick="moveSelectedById( 'availablePeriods', 'selectedPeriods' )"/></td>
+							<td style="text-align:center">
+								<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availablePeriods', 'selectedPeriods' )"><br>
+								<input type="button" value="&lt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveSelectedById( 'selectedPeriods', 'availablePeriods' )"><br>		
+								<input type="button" value="&gt;&gt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveAllById( 'availablePeriods', 'selectedPeriods' )"><br>
+								<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedPeriods', 'availablePeriods' )">
+							</td>
+							<td><select id="selectedPeriods" name="periodIds" style="width:270px;" class="{validate:{required:true}}" multiple size=10" ondblclick="moveSelectedById( 'selectedPeriods', 'availablePeriods' )"/></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>			
+				<td id="organisationUnitSelect">
+					<div style="padding-top:20px;width:400px;" id="organisationUnitContainer">
+						#organisationUnitSelectionTree( true, false, true )
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="$i18n.getString( 'view' )"/></td>
+			</tr>	
+		</table>		
+		</form>	
+	</div>
+
+	<div id="view_by_datasets" style="padding:0px">
+		<form id="viewByDataSetForm">
+		<table>
+			<tr>				
+				<td>
+					<br>
+					<b>$i18n.getString( "period_type" )</b><br>
+					<select id="periodType" style="width:300px" onchange="getPeriodsAndDataSets( this.value )">
+						<option value="">$i18n.getString( "select")</option>
+						#foreach( $periodType in $periodTypes )
+							<option value="$periodType.name">$i18n.getString( $periodType.name )</option>
+						#end
+					</select><br>					
+					<b>$i18n.getString( "period" )</b><br>
+					<select id="selectedPeriod" name="periodId" style="width:300px" class="{validate:{required:true}}" />					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>$i18n.getString( "dataset" )</b><br>
+					<table>
+						<tr>
+							<td><select id="availableDataSets" style="width:270px;" multiple size=10" ondblclick="moveSelectedById( 'availableDataSets', 'selectedDataSets' )"/></td>
+							<td style="text-align:center">
+								<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availableDataSets', 'selectedDataSets' )"><br>
+								<input type="button" value="&lt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveSelectedById( 'selectedDataSets', 'availableDataSets' )"><br>		
+								<input type="button" value="&gt;&gt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveAllById( 'availableDataSets', 'selectedDataSets' )"><br>
+								<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedDataSets', 'availableDataSets' )">
+							</td>
+							<td><select id="selectedDataSets" name="dataSetIds" style="width:270px;" class="{validate:{required:true}}" multiple size=10" ondblclick="moveSelectedById( 'selectedDataSets', 'availableDataSets' )"/></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>				
+				<td id="organisationUnitSelect"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="$i18n.getString( 'view' )"/></td>
+			</tr>	
+		</table>
+		</form>
+	</div>
+</div>
+
+<div id="contentDiv"></div>
+
+<script>
+
+jQuery(function(){
+	jQuery("#dataSetCompletedReport").tabs();
+	
+	jQuery("a[href=#view_by_periods]").click( function(){
+		jQuery("#view_by_periods #organisationUnitSelect").append( jQuery("#organisationUnitContainer") );
+		selectionTreeSelection.setMultipleSelectionAllowed( true );
+	});
+	jQuery("a[href=#view_by_datasets]").click( function(){
+		jQuery("#view_by_datasets #organisationUnitSelect").append( jQuery("#organisationUnitContainer") );
+		selectionTreeSelection.setMultipleSelectionAllowed( true );		
+	});	
+	
+});
+
+function getPeriodsAndOrganisationUnit( id )
+{	
+	if( id )
+	{
+		jQuery.postJSON("viewByPeriodForm.action",{ id:id }, function( json ){
+			var availablePeriods = jQuery( "#view_by_periods #availablePeriods" );
+			availablePeriods.empty();
+			jQuery( "#view_by_periods #selectedPeriods" ).empty();
+			jQuery.each( json.periods, function (i, item){
+				availablePeriods.append( "<option value='" + item.id + "'>" + item.name + "</option>");
+			});
+			selectionTree.buildSelectionTree();	
+		});
+	}
+}
+
+function getPeriodsAndDataSets( name )
+{
+	if( name != '' )
+	{
+		jQuery.postJSON("../dhis-web-commons-ajax-json/getPeriods.action",{name:name},function( json ){
+			var selectedPeriod = jQuery( "#view_by_datasets #selectedPeriod" );
+			selectedPeriod.empty();			
+			jQuery.each( json.periods, function (i, item){
+				selectedPeriod.append( "<option value='" + item.id + "'>" + item.name + "</option>");
+			});			
+		});
+		
+		jQuery.postJSON("../dhis-web-commons-ajax-json/getDataSets.action",{name:name},function( json ){
+			var availableDataSets = jQuery( "#view_by_datasets #availableDataSets" );
+			availableDataSets.empty();
+			jQuery( "#view_by_datasets #selectedDataSets" ).empty();		
+			jQuery.each( json.dataSets, function (i, item){
+				availableDataSets.append( "<option value='" + item.id + "'>" + item.name + "</option>");
+			});			
+		});
+	}
+}
+
+function showCompletedReportByPeriod()
+{
+	lockScreen();
+
+	var url = "viewCompleteReportByPeriod.action?" + getParamString( 'selectedPeriods', 'periodIds' );
+
+	jQuery( "#contentDiv" ).load( url, {
+		dataSetId : getFieldValue( "dataSetId" )
+	}, function ( data ) {
+		unLockScreen();
+		showDialog( 'completed_reports_by_period' );
+	} );
+}
+
+function showCompletedReportByDataSet()
+{
+	lockScreen();
+
+	var url = "viewCompleteReportByDataSet.action?" + getParamString( 'selectedDataSets', 'dataSetIds' );
+
+	jQuery( "#contentDiv" ).load( url, {
+		periodId : getFieldValue( "selectedPeriod" )
+	}, function( data ) {
+		unLockScreen();
+		showDialog( 'completed_reports_by_dataset' );
+	} );
+}
+
+function showDialog( title )
+{
+	jQuery( "#contentDiv" ).dialog
+	( {
+		title: title,
+		maximize: true, 
+		closable: true,
+		modal:false,
+		overlay:{ background:'#000000', opacity:0.1 },
+		width: 1200,
+		height: 500
+	} )
+}
+
+</script>

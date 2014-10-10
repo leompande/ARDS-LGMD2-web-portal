@@ -1,0 +1,18 @@
+{ "dataElementGroupOrder":
+  {
+    "name": "$!encoder.jsonEncode( ${dataElementGroupOrder.name} )",
+	"code": "$!encoder.jsonEncode( ${dataElementGroupOrder.code} )",
+	
+	#set( $size = ${dataElementGroupOrder.dataElements.size()} )
+	"memberCount": "${size}",
+	
+	"dataElements": [
+	#foreach( $de in $!dataElementGroupOrder.dataElements )
+	{
+	  "id": "${de.id}",
+	  "name": "$!encoder.jsonEncode( ${de.displayName} )"
+	}#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

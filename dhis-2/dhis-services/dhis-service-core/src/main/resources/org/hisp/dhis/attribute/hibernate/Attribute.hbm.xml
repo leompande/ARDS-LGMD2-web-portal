@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+    [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+    >
+
+<hibernate-mapping package="org.hisp.dhis.attribute">
+  <class name="Attribute" table="attribute">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="attributeid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <property name="valueType" not-null="true" />
+
+    <property name="mandatory" not-null="true" />
+
+    <property name="dataElementAttribute" not-null="true" />
+
+    <property name="dataElementGroupAttribute" not-null="false" />
+
+    <property name="indicatorAttribute" not-null="true" />
+
+    <property name="indicatorGroupAttribute" not-null="false" />
+
+    <property name="organisationUnitAttribute" not-null="true" />
+
+    <property name="organisationUnitGroupAttribute" not-null="false" />
+
+    <property name="userAttribute" not-null="true" />
+
+    <property name="userGroupAttribute" not-null="false" />
+
+    <property name="sortOrder" />
+
+    <set name="attributeValues" inverse="true" lazy="true">
+      <cache usage="read-write" />
+      <key column="attributeid" />
+      <one-to-many class="AttributeValue" />
+    </set>
+
+  </class>
+</hibernate-mapping>

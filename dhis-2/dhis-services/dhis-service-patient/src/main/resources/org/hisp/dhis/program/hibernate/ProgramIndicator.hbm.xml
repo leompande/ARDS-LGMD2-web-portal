@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.program.ProgramIndicator" table="programindicator">
+
+    <id name="id" column="programindicatorid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+	
+    <property name="shortName" />
+    
+    <property name="description" />
+
+    <many-to-one name="program" class="org.hisp.dhis.program.Program" column="programid" foreign-key="fk_programindicator_program" />
+
+    <property name="valueType" />
+    
+    <property name="expression" />
+    
+    <property name="rootDate" />
+    
+  </class>
+</hibernate-mapping>

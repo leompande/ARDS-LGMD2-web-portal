@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.hisp.dhis.linelisting.llaggregation.LinelistAggregationMapping" table="llaggregation">
+
+      <composite-id>
+        <key-many-to-one name="dataElement" class="org.hisp.dhis.dataelement.DataElement"
+          column="dataelementid" foreign-key="fk_caseaggregation_dataelementid"/>
+        <key-many-to-one name="optionCombo" class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" 
+          column="optioncomboid" foreign-key="fk_caseaggregation_optioncomboid"/>       
+      </composite-id>
+      
+      <property name="expression" type="text"/>
+
+      <property name="onchange" column="onchange" not-null="true"/>
+      
+    </class>
+</hibernate-mapping>

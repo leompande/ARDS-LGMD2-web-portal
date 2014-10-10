@@ -1,0 +1,76 @@
+<style type='text/css'>
+    .hidden{ display: none; }
+</style>
+
+<script>
+    // Global Variables
+    var selCategory = "";
+    var selFacility = "";
+    var ouName = "";
+    var dsName = "";
+    var sDateIndex = 0;
+    var eDateIndex = 0;
+    var sDate = "";
+    var eDate = "";
+    var curPeriodType = "";
+</script>
+
+<h3>DataStatus Form</h3>
+<hr />
+
+<!--<form id="ChartGenerationForm" name="ChartGenerationForm" method="get" target="chartWindow1">-->
+<form id="ChartGenerationForm" name="ChartGenerationForm">
+    <table align="center" style="border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="80%" border="0">
+        <tr>
+            <td class="NormalB">
+                1. $i18n.getString( "ds_dataset_list" ) : <br/>
+                <select id="selectedDataSets" name="selectedDataSets" onchange="getdSetPeriods()" style="width:300px">
+                    #foreach ( $dataSet in $dataSetList )
+                        <option value='$dataSet.id' title='$dataSet.name'>$dataSet.name</option>
+                    #end
+                </select>
+                <br/><br/>
+                2. $i18n.getString( "ga_facilityby" )<br/>
+                <select id="facilityLB" name="facilityLB" onchange="facilityChangeFunction(event)" style="width:300px">
+                    <option value="random" >Selected</option>
+                    <option value="immChildren" selected>Immediate Children</option>
+                    <option value="children" >Child Tree</option>
+                </select>
+                <br/>
+                <select class='hidden' id="categoryLB" name="categoryLB" onchange="categoryChangeFunction(event)" disabled>
+                    <option value="period">Period</option>
+                    <option value="facility" selected>Facility</option>
+                </select>
+                <br/>
+                3. $i18n.getString( "ga_orgunit" )<br />
+                <select name="orgUnitListCB" id="orgUnitListCB" multiple style="width:300px;height:80px" ondblclick="remOUFunction()">
+                </select>
+                <br/><br/>
+                4. $i18n.getString( "ga_from" )<br />
+                <select id="sDateLB" name="sDateLB" style="width:300px"></select>
+                <br/><br/>
+                5. $i18n.getString( "ga_to" )<br />
+                <select id="eDateLB" name="eDateLB" style="width:300px"></select>
+            </td>
+            <td class="NormalB">
+                <input type="checkbox" name="includeZeros" id="includeZeros" checked> Include Zero &nbsp;&nbsp; <input type="checkbox" name="usingDataEntryStatus" id="usingDataEntryStatus" > Data Entry Status
+                <br/><br/>
+                <input type="button" name="ViewSummary" value="View DataSummary - Data Set" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('SummaryStatus')"/><br/><br/>
+                <input type="button" name="ViewStatus" value="View DataStatus - Data Set" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('DataStatus')"/><br/><br/>
+                <input type="button" name="ViewGroupWise" value="View DataStatus - Data Element Group" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('GroupWiseStatus')"/><br/><br/>
+               <!--<input type="button" name="ViewSummary" value="View DataSummary - Data Set" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('SummaryStatus')"/><br/><br/>-->
+                <input type="button" name="LastUpdatedStatus" value="User Details" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('LastUpdatedStatus')"/><br/><br/>
+                <input type="button" name="ValidationStatus" value="Validation Status" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('ValidationStatus')"/><br/><br/>
+                <input type="button" name="ViewComment" value="View Comments" style="width:250px;height:30px;font-family: Arial; font-weight: bold; color: rgb(0, 0, 0);" onclick="textvalue('ViewComment')"/>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="selectedButton" id="selectedButton"/>
+</form>
+<div id="contentDiv"></div>
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script>
+    getdSetPeriods();
+</script>

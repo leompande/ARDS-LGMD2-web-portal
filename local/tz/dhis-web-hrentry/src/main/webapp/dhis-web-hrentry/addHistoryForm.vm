@@ -1,0 +1,63 @@
+	<script>
+	jQuery(document).ready(	function(){	
+		datePickerValid( 'startDate', false );
+		jQuery("#addHistoryForm").validate({
+					 meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{
+									    validateAddHistory();
+									}
+				});
+				
+		jQuery("#nameField").focus();			
+	});
+</script>
+<h3>$i18n.getString( "new_history" )</h3>
+
+<form id="addHistoryForm" name="addHistory" action="addHistory.action" method="post">	
+
+<table>
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "history_type" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><select id="historyType" name="historyType" style="min-width:20em" onchange="historyTypeSelected()" class="{validate:{required:true}}">
+				<option value="" >[ $i18n.getString( "select" ) ]</option> 
+				#foreach( $attribute in $attributes )
+				#if ( $attribute.history )
+				<option value="$attribute.id" >$encoder.htmlEncode( $attribute.caption )</option>
+				#end
+				#end
+			</select></td></td>
+	</tr>
+	<tr>
+		<td><label for="hrDataSetId">$i18n.getString( "history" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+		<select id="history" name="history" style="min-width:20em">
+			<option value="">[ $i18n.getString( "select" ) ]</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td><label for="startDate">$i18n.getString( "start_date" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="startDate" name="startDate" style="width:20em" class="{validate:{required:true}}"/></td>
+	</tr>
+	<tr>
+		<td><label for="startDate">$i18n.getString( "reason" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+		<input type="text" id="reason" name="reason" style="width:20em" class="{validate:{required:true}}"/>
+		<input type="hidden" id="personId" name="personId" value="$person.id" style="width:20em"/>
+		</td>
+	</tr>
+	<tr>
+		<td><label for="startDate">$i18n.getString( "keep_current" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="checkbox" id="currentRecord" name="currentRecord" style="width:20em" /></td>
+	</tr>	
+  <tr>
+  	<td></td>  
+	<td><input type="submit" value="$i18n.getString( "add" )" style="width:115px">
+	<input type="button" value="$i18n.getString( "cancel" )" style="width:115px" onclick="javascript:window.location.href='history.action?hrDataSetId=$hrDataSet.id&personId=$person.id'">
+	</td>		
+  </tr>  
+</table>
+</form>
+<span id="message">$!message</span>

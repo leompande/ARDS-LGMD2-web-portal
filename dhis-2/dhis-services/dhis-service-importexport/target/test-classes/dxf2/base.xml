@@ -1,0 +1,178 @@
+<?xml version='1.0'?>
+<dxf xmlns="http://dhis2.org/schema/dxf/1.0" minorVersion="1.2" exported="2011-02-14">
+  <concepts>
+    <concept>
+      <id>9</id>
+      <name>default</name>
+    </concept>
+  </concepts>
+
+  <categoryOptions>
+    <categoryOption>
+      <id>10</id>
+      <name>default</name>
+    </categoryOption>
+  </categoryOptions>
+
+  <categories>
+    <category>
+      <id>11</id>
+      <name>default</name>
+      <conceptid>9</conceptid>
+    </category>
+  </categories>
+
+  <categoryCombos>
+    <categoryCombo>
+      <id>12</id>
+      <name>default</name>
+    </categoryCombo>
+  </categoryCombos>
+
+  <categoryOptionCombos>
+    <categoryOptionCombo>
+      <id>13</id>
+      <uuid>AAB2299E-ECD6-46CF-A61F-817D350C180D</uuid>
+      <categoryCombo>
+        <id>12</id>
+        <name>default</name>
+      </categoryCombo>
+      <categoryOptions>
+        <categoryOption>
+          <id>10</id>
+          <name>default</name>
+        </categoryOption>
+      </categoryOptions>
+    </categoryOptionCombo>
+  </categoryOptionCombos>
+
+  <categoryCategoryOptionAssociations>
+    <categoryCategoryOptionAssociation>
+      <category>11</category>
+      <categoryOption>10</categoryOption>
+      <sortOrder>1</sortOrder>
+    </categoryCategoryOptionAssociation>
+  </categoryCategoryOptionAssociations>
+
+  <categoryComboCategoryAssociations>
+    <categoryComboCategoryAssociation>
+      <categoryCombo>12</categoryCombo>
+      <category>11</category>
+      <sortOrder>1</sortOrder>
+    </categoryComboCategoryAssociation>
+  </categoryComboCategoryAssociations>
+
+  <dataElements>
+    <dataElement>
+      <id>21</id>
+      <uuid>56B2299E-ECD6-46CF-A61F-817D350C180D</uuid>
+      <name>Data element 1</name>
+      <alternativeName></alternativeName>
+      <shortName>data element 1</shortName>
+      <code>ELEM1</code>
+      <description></description>
+      <active>true</active>
+      <type>int</type>
+      <aggregationOperator>sum</aggregationOperator>
+      <categoryCombo>12</categoryCombo>
+      <lastUpdated>2011-02-14</lastUpdated>
+    </dataElement>
+    <dataElement>
+      <id>99</id>
+      <uuid>96B2299E-ECD6-46CF-A61F-817D350C180D</uuid>
+      <name>Not in data set</name>
+      <shortName>not in</shortName>
+      <code>ELEM2</code>
+      <description></description>
+      <active>true</active>
+      <type>int</type>
+      <aggregationOperator>sum</aggregationOperator>
+      <categoryCombo>12</categoryCombo>
+      <lastUpdated>2011-02-14</lastUpdated>
+    </dataElement>
+  </dataElements>
+
+  <dataSets>
+    <dataSet>
+      <id>20</id>
+      <uuid>16B2299E-ECD6-46CF-A61F-817D350C180D</uuid>
+      <name><![CDATA[DataSet1]]></name>
+      <shortName><![CDATA[shortname1]]></shortName>
+      <code>DATASET1</code>
+      <periodType>Weekly</periodType>
+    </dataSet>
+  </dataSets>
+
+  <dataSetMembers>
+    <dataSetMember>
+      <dataSet>20</dataSet>
+      <dataElement>21</dataElement>
+    </dataSetMember>
+  </dataSetMembers>
+
+  <organisationUnits>
+    <organisationUnit>
+      <id>22</id>
+      <uuid>9C1B1B5E-3D65-48F2-8D1D-D36C60DD7344</uuid>
+      <name>OrgUnit1</name>
+      <shortName>OrgUnit1</shortName>
+      <code>UNIT1</code>
+      <openingDate>1990-01-01</openingDate>
+      <closedDate></closedDate>
+      <active>true</active>
+      <comment></comment>
+      <geoCode></geoCode>
+      <feature type="">
+      </feature>
+      <lastUpdated>2011-02-14</lastUpdated>
+    </organisationUnit>
+    <organisationUnit>
+      <id>99</id>
+      <uuid>9C1B1B5E-3D65-48F2-8D1D-D36C60DD7345</uuid>
+      <name>Not reporting data set</name>
+      <shortName>OrgUnit1</shortName>
+      <code>UNIT1</code>
+      <openingDate>1990-01-01</openingDate>
+      <closedDate></closedDate>
+      <active>true</active>
+      <comment></comment>
+      <geoCode></geoCode>
+      <feature type="">
+      </feature>
+      <lastUpdated>2011-02-14</lastUpdated>
+    </organisationUnit>
+  </organisationUnits>
+
+  <organisationUnitRelationships>
+  </organisationUnitRelationships>
+
+  <groupSets>
+    <groupSet>
+      <id>14</id>
+      <name>Type</name>
+      <description>Type of organisation unit, examples are PHU, chiefdom and district</description>
+      <compulsory>false</compulsory>
+    </groupSet>
+    <groupSet>
+      <id>15</id>
+      <name>Ownership</name>
+      <description>Ownership of organisation unit, examples are private and public</description>
+      <compulsory>false</compulsory>
+    </groupSet>
+  </groupSets>
+
+  <organisationUnitLevels>
+    <organisationUnitLevel>
+      <id>0</id>
+      <level>1</level>
+      <name>Level 1</name>
+    </organisationUnitLevel>
+  </organisationUnitLevels>
+
+  <dataSetSourceAssociations>
+    <dataSetSourceAssociation>
+      <dataSet>20</dataSet>
+      <source>22</source>
+    </dataSetSourceAssociation>
+  </dataSetSourceAssociations>
+</dxf>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.hisp.dhis.reportsheet.ExportItem" table="reportexcel_items">
+	
+		<id name="id" column="reportexcelitemid">
+			<generator class="native" />
+		</id>
+		
+		<properties name="name" unique="true">
+			<property name="name" not-null="true"/>		
+			<property name="sheetNo" column="sheetno" not-null="true"/>
+			<many-to-one name="exportReport" column="reportexcelid" 
+			class="org.hisp.dhis.reportsheet.ExportReport" foreign-key="pk_reportitem_report"
+			lazy="false"/>			
+		</properties>		
+		
+		<property name="itemType" column="itemtype" not-null="true"/>
+		<property name="row" column="excelrow" not-null="true"/>
+		<property name="column" column="excelcolumn" not-null="true"/>
+		<property name="expression" column="itemexpression" not-null="true"/>
+		<property name="extraExpression" column="itemextraexpression"/>
+		<property name="periodType" column="periodtype" not-null="true"/>
+	
+	</class>
+</hibernate-mapping>

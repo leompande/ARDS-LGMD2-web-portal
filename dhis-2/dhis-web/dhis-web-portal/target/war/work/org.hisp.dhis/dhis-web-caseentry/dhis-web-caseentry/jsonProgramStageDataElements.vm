@@ -1,0 +1,19 @@
+#set( $size = ${programStageDataElements.size()} )
+{ "programStageDataElements": [
+  #foreach( ${programStageDataElement} in $!{programStageDataElements} )
+  {
+	"id": "${programStageDataElement.dataElement.id}",
+	"uid": "${programStageDataElement.dataElement.uid}",
+	"name": "$!encoder.jsonEncode( ${programStageDataElement.dataElement.getFormNameFallback()} )",
+	"type": 
+		#if( $!programStageDataElement.dataElement.optionSet )
+			"optionset",
+		#else
+			"${programStageDataElement.dataElement.type}",
+		#end
+	"compulsory": "${programStageDataElement.compulsory}",
+	"displayInReports": "${programStageDataElement.displayInReports}"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

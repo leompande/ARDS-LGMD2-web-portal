@@ -1,0 +1,111 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for uploadfile
+//-----------------------------------------------------------------------
+	jQuery(document).ready( function() {
+		tableSorter( 'listTable' );				
+	});
+
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+
+<h3>$i18n.getString('excel_template_management') #openHelp( "excelReportingExcelTemplateManagement" )</h3>
+
+<form id="uploadForm" action="uploadExcelTemplate.action" method="post" enctype="multipart/form-data">
+	<table width="100%">
+		<tr>
+			<td width="18%" style=" width:25% ">$i18n.getString( 'select_excel_file' ):</td>
+			<td width="82%">
+				<input type="file" id="upload" name="upload" onChange="enable('uploadButton');" />
+				<input name="uploadButton" id="uploadButton" type="button" value="$i18n.getString( 'upload_file' )" onclick="validateUploadExcelTemplate()" disabled />
+			</td>  
+			<td></td>			
+		</tr>
+		<tr>
+			<td>
+				$i18n.getString( "filter_by_name" ): 
+			</td>
+			<td>
+				<input type="text" onkeyup="filterValues(this.value , 1)" style="width:300px"/>
+			</td>	
+			<td align=right>				
+				<input type="button" value="$i18n.getString( 'cancel' )" onclick="window.location='administration.action'" style="width:100px"/>
+			</td>
+		</tr>
+	</table>
+</form>
+
+<table width="100%" class="listTable" id="listTable">
+	<thead>
+		<tr>
+			<th>$i18n.getString('name')</th>
+			<th>$i18n.getString('template_status')</th>
+			<th width="110px" class="{sorter: false}">$i18n.getString('operations')</th>
+		</tr>
+	</thead>
+	<tbody id="list">	
+	#foreach( $templateFileName in $mapTemplateFiles.keySet() )
+		#set( $value = $mapTemplateFiles.get($templateFileName) )
+		<tr id="tr${templateFileName}" >
+			<td>$encoder.htmlEncode( $templateFileName )</td>
+			<td axis='$value'>
+				#if( $value )
+					$i18n.getString( 'template_using' ) 
+				#else
+					$i18n.getString( 'template_pending' ) 
+				#end
+			</td>			
+			<td align="left">
+				<a href="javascript: mode='edit'; openEditExcelTemplate( '$templateFileName' );" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>
+				<a href="downloadFile.action?fileName=$templateFileName" title="$i18n.getString( 'download' )"><img src="images/download.png" alt="$i18n.getString( 'download' )"></a>
+				#if( !$value )
+				<a href="javascript:deleteExcelTemplate('$templateFileName');" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+				#end
+			</td>
+		</tr>	
+	#end
+	</tbody>
+</table>
+
+<div id="editExcelTemplateDiv">
+	<input type="hidden" value="" id="currentFileNameHidden"/>
+	<table>
+		<tr>
+			<td><label>$i18n.getString('name')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="newName" style="width:20em" name="T1" size="20" onkeyup="javascript: validateRenamingExcelTemplate(this.value ,1);"/></td>
+			<td><input type="button" value="$i18n.getString('rename')" id="excelTemplateButtonRename" disabled="disabled" onclick="javascript: checkingStatusExcelTemplate(document.getElementById('newName').value, 1, 2);"/></td>
+			<td><input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( dialog );hideMessage();"/></td>
+		</tr>
+	</table>
+</div>
+
+<span id="message" style="top:100px;right:5px;position:fixed;width:300px;z-index:10002" onclick="javascript:hideById(this.id);"></span>
+
+<script language="javascript">
+
+	var mode = '';
+	var i18n_confirm_rename = '$encoder.jsEscape($i18n.getString( 'confirm_rename' ) , "'")';
+	var i18n_confirm_delete = '$encoder.jsEscape($i18n.getString( 'confirm_delete' ) , "'")';
+	var i18n_confirm_override = '$encoder.jsEscape($i18n.getString( 'override_confirm' ) , "'")';
+	var i18n_confirm_update_system = '$encoder.jsEscape($i18n.getString( 'confirm_update_system' ) , "'")';
+	var i18n_file_exists = '$encoder.jsEscape($i18n.getString( 'file_exists' ) , "'")';
+	var i18n_file_used_system = '$encoder.jsEscape($i18n.getString( 'file_used_system' ) , "'")';
+	var i18n_rename_successful = '$encoder.jsEscape($i18n.getString( 'rename_successful' ) , "'")';
+	var i18n_filename_wellformed = '$encoder.jsEscape($i18n.getString( 'filename_wellformed' ) , "'")';
+	var i18n_length_filename_min5_max30 = '$encoder.jsEscape($i18n.getString( 'length_filename_min5_max30' ) , "'")';
+	var i18n_use_only_letters_numbers_dot_only = '$encoder.jsEscape($i18n.getString( 'use_only_letters_numbers_dot_only' ) , "'")';
+	
+	var confirmRenamingMessage = i18n_file_used_system + '\n' + i18n_confirm_rename;
+	var confirmUpdateSysMessage = i18n_rename_successful + '\n' + i18n_confirm_update_system;
+	
+	var dialog = setUpDialog( 'editExcelTemplateDiv', '$i18n.getString( "edit_excel_template" )', 444, 60 );
+	
+	#if ( $message )
+		#if ( $newFileUploadedOrRenamed )
+			$(document).ready( function() {
+				setMessage( '<b>' + '$!newFileUploadedOrRenamed' + '</b><br/>' + '$i18n.getString( "$message" )' );
+			});
+		#end
+	#end
+
+</script>

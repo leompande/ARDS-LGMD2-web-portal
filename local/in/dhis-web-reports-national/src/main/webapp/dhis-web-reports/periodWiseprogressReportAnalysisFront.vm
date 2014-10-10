@@ -1,0 +1,116 @@
+
+<script>
+    function formValidations()
+    {                       
+        var reportList = document.getElementById("reportList");
+        var reportListIndex = reportList.selectedIndex;
+        var periodList = document.getElementById("availablePeriods");
+        var periodIndex = periodList.selectedIndex;
+        var ouIdTb = document.getElementById("ouIDTB");
+        var orgunitIdValue = ouIdTb.value;
+        
+        var startPeriodObj = document.getElementById('availablePeriods');
+        var endPeriodObj = document.getElementById('availablePeriodsto');
+    
+        sDateTxt = startPeriodObj.options[startPeriodObj.selectedIndex].text;
+        sDate = formatDate(new Date(getDateFromFormat(sDateTxt,"MMM-y")),"yyyy-MM-dd");
+        eDateTxt = endPeriodObj.options[endPeriodObj.selectedIndex].text;
+        eDate = formatDate(new Date(getDateFromFormat(eDateTxt,"MMM-y")),"yyyy-MM-dd");
+        
+        if( orgunitIdValue == null || orgunitIdValue == "" || orgunitIdValue == " " ) { alert("Please Select OrganisationUnit"); return false; }
+        else if( periodList.options[periodIndex].text == null || periodList.options[periodIndex].text== "" ) { alert("Please Select Period"); return false; }
+        else if( reportListIndex < 0 || reportList.options[reportListIndex].text == null ) { alert("Please Select Report"); return false; }
+        if( sDate > eDate ) { alert( "Starting Date is Greater" );return false; }
+        return true;
+    }
+</script>
+
+<h1>$i18n.getString( "periodwise_progress_ra" )</h1>
+<hr /><br />
+
+<form id="reportForm" name="reportForm" action="generatePeriodWiseProgressReport.action" method="post" onsubmit="return formValidations()" target="_blank">        
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                      
+        <tr>
+            <td class="NormalB">
+                1. $i18n.getString( "periodtype" ) : <br />
+                <select id="periodTypeId" name="periodTypeId" style="width:200px" onchange="getPeriodsForPeriodWiseProgressReport()">
+                    <option value="NA">[ $i18n.getString( "select_periodtype" ) ]</option>
+                    #foreach ( $type in $periodTypes )
+                        <option value="$type.name">$type.name</option>
+                    #end
+                </select>
+            </td>
+            <td class="NormalB">                            
+                4. $i18n.getString( "organisationunit" ) : <br />
+                <input type="text" name="ouNameTB" id="ouNameTB" style="width:200px" disabled>         
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                2. $i18n.getString( "period_from" ) : <br />
+                <select id="availablePeriods" name="availablePeriods" style="width:200px"></select>
+            </td>
+            <td class="NormalB">
+                5. $i18n.getString( "reports" ) :<br />
+                <select id="reportList" name="reportList" style="width:200px"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>       
+        <tr>
+            <td class="NormalB">
+                3. $i18n.getString( "period_to" ) : <br />
+                <select id="availablePeriodsto" name="availablePeriodsto" style="width:200px"></select>
+            </td>
+            <td class="NormalB">
+                6. $i18n.getString( "generated_data_type" ) :<br />
+                <select id="aggData" name="aggData" style="width:200px">
+                    <option value="generateaggdata">$i18n.getString( "generate_agg_data" )</option>
+                    <option value="useexistingaggdata">$i18n.getString( "use_existing_agg_data" )</option>
+                    <option value="usecaptureddata">$i18n.getString( "use_captured_data" )</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <!--<input type="checkbox" id="aggCB" name="aggCB" checked> $i18n.getString( "aggregated_data" )-->
+                <!--<input type="radio" id="aggRadio" name="aggRadio" value="generateaggdata" checked >
+                $i18n.getString( "generate_agg_data" )
+                <br/>-->
+                <!--<input type="radio" id="aggRadio" name="aggRadio" value="useexistingaggdata"  >
+                $i18n.getString( "use_existing_agg_data" )
+                <br/>-->
+                <!--<input type="radio" id="aggRadio" name="aggRadio" value="usecaptureddata"  >
+                $i18n.getString( "use_captured_data" )
+                <br/>-->
+                
+                <br><br>                              
+                <input type="submit" name="generate" value='$i18n.getString( "generate_report" )' style="width:200px" disabled="disabled"/>
+                <input type="hidden" name="autogen" id="autogen" value="0" >
+                <input type="hidden" name="ouIDTB" id="ouIDTB">
+                <input type="hidden" name="reportTypeNameTB" id="reportTypeNameTB" value="$reportTypeName">
+            </td>
+        </tr>
+    </table>
+</form>
+ 

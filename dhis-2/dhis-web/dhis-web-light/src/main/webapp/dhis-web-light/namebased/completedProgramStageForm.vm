@@ -1,0 +1,130 @@
+<h2>$encoder.htmlEncode( $programStage.name )</h2>
+
+#set( $typeViolationsSize = $typeViolations.size() )
+
+#if( $typeViolationsSize > 0 )
+<div class="header-box" align="center">
+	<h3 style="text-align: left; background-color: #990000; color: white;">$i18n.getString("warnings_and_errors")</h3>
+	<p style="text-align: left;">
+		$typeViolationsSize $i18n.getString("type_violation_errors"). <br />
+	</p>
+</div>	
+#end
+
+<form action="showProgramStageForm.action" method="POST">
+
+<input type="hidden" value=$programStageInstanceId name="programStageInstanceId"/>
+<input type="hidden" value=$programStageId name="programStageId"/>
+<input type="hidden" value=$orgUnitId name="orgUnitId"/>
+<input type="hidden" value=$programId name="programId" />
+<input type="hidden" value=$patientId name="patientId" />
+<input type="hidden" id="current" name="current" value=$current />
+
+<div class="header-box" align="center">
+	<p style="text-align: left;">
+		#foreach( $programStageDataElement in $dataElements)
+			#set( $dataElement = $programStageDataElement.getDataElement())
+			#set( $key = "DE${dataElement.id}" )
+			#set( $dataElementName = $dataElement.getFormNameFallback() )
+			
+				#if (! $dataElement.getOptionSet())			
+					#set( $key = "DE${dataElement.id}" )
+
+					<label>$encoder.htmlEncode( $dataElementName ) 
+					#if($dataElement.type=="date") [yyyy-MM-dd] #end
+					</label>
+					
+					#if( $typeViolations.get( $key ) )
+                		#set( $typeViolation = $typeViolations.get( $key ) )
+            			<br /><span style="color: #990000;">$prevDataValues.get($key) $i18n.getString($typeViolation)</span>
+            		#end
+					
+					#if($dataElement.type=="bool")
+						<select name="$key" DISABLED>
+							<option value="">$i18n.getString("please_select")</option>
+							<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+							<option #if( $prevDataValues.get( $key ) == "false" ) selected="selected" #end value="false">$i18n.getString("no")</option>
+						</select>
+					#elseif($dataElement.type=="trueOnly")
+						<select name="$key" DISABLED>
+							<option value="">$i18n.getString("please_select")</option>
+							<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+						</select>	
+					#else
+						<input type=
+						#if($dataElement.type=="string") 
+							"text"
+						#elseif ($dataElement.type=="int" ) 
+							"text" 
+						#else 
+							"$dataElement.type" 
+						#end 
+						name="$key" value="$!prevDataValues.get($key)" DISABLED/>
+					#end
+				
+				#elseif ($dataElement.getOptionSet())
+					
+					#set( $options = $dataElement.getOptionSet().getOptions() )
+					#set( $key = "DE${dataElement.id}")
+
+					$dataElementName
+
+					#if( $typeViolations.get( $key ) )
+                    	#set( $typeViolation = $typeViolations.get( $key ) )
+                		<br /><span style="color: #990000;"> $prevDataValues.get($key) $i18n.getString($typeViolation)</span>
+                	#end
+                
+					<select type=
+					#if($dataElement.type=="string") 
+						"text"
+					#elseif($dataElement.type=="int" ) 
+						"text"
+					#else 
+						"$dataElement.type"
+					#end 
+					name="$key" DISABLED>
+				
+					#set( $selected=false )
+
+					#foreach ($option in $options)
+						<option value="$option"
+						#if( $prevDataValues.get( $key ) == $option ) 
+							selected
+							#set( $selected=true )
+						#end
+						> $option </option>
+					#end
+
+					#if( !$selected ) 
+						<option selected > $i18n.getString("select_option") </option>
+					#end
+					
+					</select>
+				#end
+
+				#if( $programStage.program.displayProvidedOtherFacility == 'true' && $programStageDataElement.allowProvidedElsewhere == 'true')
+				#set( $providedKey = "CB${dataElement.id}" )
+					<label>$i18n.getString( "allow_provided_elsewhere" ) $prevDataValues.get($providedKey)</label>
+					<input class='provided-elsewhere' name="CB$dataElement.id" value="true" type="checkbox" #if($prevDataValues.get($providedKey) == 'true') checked #end disabled />
+				#end
+				
+				
+		#end
+				
+	</p>
+</div>
+
+<div class="header-box" align="center">
+	<p>
+		<input type="submit" style="width: 100%;" value="Incomplete" /> 	
+	</p>
+</div>
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="showPatientProgramStageList.action?patientId=$patientId&programInstanceId=$programInstanceId&programId=$programId&validated=false">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

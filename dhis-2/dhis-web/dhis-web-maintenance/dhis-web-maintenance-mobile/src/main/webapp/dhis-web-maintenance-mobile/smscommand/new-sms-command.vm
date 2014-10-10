@@ -1,0 +1,81 @@
+#parse("/dhis-web-maintenance-mobile/smscommand/validate_javascript.vm")
+<script type="text/javascript">
+		
+	jQuery(document).ready(function() {
+		changeParserType( getFieldValue( 'parserType' ) );
+		validation( "newSMSCommandForm" );
+	});
+</script>
+<h3>Add command</h3>
+<form id="newSMSCommandForm" name="newSMSCommandForm" action="createSMSCommandForm.action" method="post">
+   
+	<table>
+	 <col/> ## Labels
+    <col/> ## Input
+    <thead>
+		<tr><th colspan="2">$i18n.getString( "command_details" )</th></tr>
+    </thead>
+		<tr>
+			<td>$i18n.getString( "name" )</td>
+			<td>
+				<input type="text" value="" id="name" name="name" style="width:20em" class="{validate:{required:true}}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( "parser" )</td>
+            <td>
+				<select id="parserType" name="parserType" style="width:100%;" onchange="changeParserType( this.value )">
+				#foreach( $type in $parserType )
+					<option value="$type">$i18n.getString( "$type" )</option>
+				#end
+				</select>	  
+            </td>
+        </tr>
+		<tbody id="dataSetParser">
+			<tr>
+				<td>$i18n.getString( "dataset" )</td>
+				<td>
+					<select name="selectedDataSetID" >
+					#foreach( $dataSet in $dataSets )
+						<option value="$dataSet.id" #if ($SMSCommand.dataset.id == $dataSet.id) selected #end >$dataSet.displayName</option>
+					#end
+					</select> 
+				</td>
+			</tr>
+		</tbody>
+		
+		<tbody id="alertParser">
+			<tr>
+				<td>$i18n.getString( "userGroup" )</td>
+				<td>
+					<select name="userGroupID" >
+					#foreach( $userGroup in $userGroupList )
+						<option value="$userGroup.id">$userGroup.name</option>
+					#end
+					</select>
+				</td>
+			</tr>
+		</tbody>
+		
+		<tbody id="anonymousProgramParser">
+			<tr>
+				<td>$i18n.getString( "program" )</td>
+				<td>
+					<select name="programId" >
+					#foreach( $anonymousProgram in $anonymousProgramList )
+						<option value="$userGroup.id">$anonymousProgram.name</option>
+					#end
+					</select>
+				</td>
+			</tr>
+		</tbody>
+		
+		<tr>
+			<td colspan="2">
+			     <input id="save" type="submit"  style="width: 100px" value="$i18n.getString( "save" )" />
+			     <input type="button" id ="btnBack" name ="btnBack" value="Back" style="width:8em" onclick="window.location.href='SMSCommands.action'"/>
+			</td>
+		</tr>
+	</table>
+
+</form>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.surveydatavalue.SurveyDataValue" table="surveydatavalue">
+    <composite-id>
+      <key-many-to-one name="survey" class="org.hisp.dhis.survey.Survey" column="surveyid" foreign-key="fk_surveydatavalue_surveyid"/>      
+      <key-many-to-one name="indicator" class="org.hisp.dhis.indicator.Indicator" column="indicatorid" foreign-key="fk_surveydatavalue_indicatorid"/>
+	  <key-many-to-one name="source" class="org.hisp.dhis.organisationunit.OrganisationUnit" lazy="false" column="sourceid" foreign-key="fk_surveydatavalue_organisationunitid" />       
+    </composite-id>
+    <property name="value"/>
+    <property name="storedBy" column="storedby" length="50"/>
+    <property name="timestamp" column="lastupdated" type="date"/>  
+  </class>
+</hibernate-mapping>

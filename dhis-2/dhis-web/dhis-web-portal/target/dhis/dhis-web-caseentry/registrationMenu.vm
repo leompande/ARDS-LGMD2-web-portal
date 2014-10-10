@@ -1,0 +1,18 @@
+
+<a href="index.action"><h2>$i18n.getString( "patient" )&nbsp;</h2></a>
+
+<ul>
+	#if( $auth.hasAccess( "dhis-web-caseentry", "patient" ) )
+	<li><a href="patient.action">$i18n.getString( "find_and_add_person" )</a></li>
+	#end
+	#if( $auth.hasAccess( "dhis-web-caseentry", "activityPlanSelect" ) )
+		<li><a href="activityPlanSelect.action">$i18n.getString( "activity_plan" )</a></li>  
+	#end
+	#if( $auth.hasAccess( "dhis-web-caseentry", "smsReminderSelect" ) )
+		<li><a href="smsReminderSelect.action">$i18n.getString( "program_tracking" )</a></li>     
+	#end
+</ul>
+
+<br>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<route xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://camel.apache.org/schema/spring camel-spring-2.9.2.xsd"
+    xmlns="http://camel.apache.org/schema/spring" id="mfl2dxf2">
+
+  <description>Synch with MFL every 5 second</description>
+
+  <!-- <from uri="file:/Users/mortenoh/GDrive/HISP/ke/mfl/data/inbox?consumer.initialDelay=10000&amp;consumer.delay=5000" /> -->
+  <from uri="quartz://every1minute?cron=0+0/1+*+*+*+%3F" />
+  <to uri="http://api.ehealth.or.ke/api/facilities?lastDays=720&amp;paging=off&amp;scheme=code" />
+  <to uri="xslt:transform/mfl2dxf2.xsl" />
+  <convertBodyTo type="java.io.InputStream"/>
+  <inOut uri="dhis2:metadata" />
+  <to uri="log:org.hisp.dhis.camel?level=INFO" />
+</route>

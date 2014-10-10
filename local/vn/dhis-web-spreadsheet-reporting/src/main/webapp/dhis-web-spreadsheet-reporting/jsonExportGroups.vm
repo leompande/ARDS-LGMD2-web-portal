@@ -1,0 +1,10 @@
+[
+#set( $size = $groups.size() )
+#foreach($g in $groups)
+  {
+    "id" : "$!encoder.jsonEncode( ${g} )",
+    "label" : "$!encoder.jsonEncode( ${g} )",
+    "value" : "$!encoder.jsonEncode( ${g} )"
+  }#if( $velocityCount < $size ),#end
+#end
+]

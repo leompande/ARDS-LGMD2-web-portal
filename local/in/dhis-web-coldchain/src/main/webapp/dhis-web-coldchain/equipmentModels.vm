@@ -1,0 +1,61 @@
+<div id='selectDiv'>
+    
+<h3><strong>$i18n.getString( "equipment_models" )</strong></h3>
+
+<table width="100%">
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<select id="modelType" onchange="getModelTypeChange()">
+						#foreach( $modelType in $modelTypes )
+							<option value="$modelType.id">$modelType.name</option>
+						#end
+						</select>
+					</td>
+					<td id='filterModelDiv'><a href="javascript:hideModelFilter()" >Filter</a></td>
+					<td id='searchingModelAttributeTD' style='display:none'>
+						<select id="searchingModelAttributeId" name="searchingModelAttributeId" #if( $modelTypeAttributes.size() == 0 ) disabled="disabled" #end onchange="searchingModelAttributeOnChange( this.value )">
+						</select>	
+					</td>
+					<td id='searchingModelTextTD' style='display:none'>
+						<input type="text" id="searchModelText" name="searchModelText" maxlength="30" style="width:12.5em" value="$!searchModelText" onkeypress="isModelEnter( event )">
+					</td>
+					<td id='searchModelDiv' style='display:none'><a href="javascript:loadModelsByFilter()" title="$i18n.getString( 'go' )"><img src="images/go.jpg" alt="$i18n.getString( 'go' )"></a></td>
+					<td id='clearModelDiv' style='display:none'><a href="javascript:hideModelClear()">Clear</a></td>	
+				</tr>
+			</table>
+			
+		</td>
+
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td>&nbsp;&nbsp;</td>
+		<td align="right"><input type="button" value='$i18n.getString( "Add new item" )' onclick="showAddModelForm();" style="width:100px"/></td>
+	</tr>
+</table>
+
+</div>
+
+
+
+<div id='listModelDiv'></div> <!-- List All/Filtered Models -->
+<div id='addEditModelFormDiv'></div> <!-- Add Model Form -->
+<div id='modelDetailsDiv'></div> <!-- Add Model Form -->
+<div id='uploadModelImageDiv'></div> <!-- Upload model Image -->
+
+#parse( "/dhis-web-commons/loader/loader.vm" )
+
+<script type="text/javascript">
+jQuery( document ).ready( function()
+{
+	getModelTypeChange();
+	
+	loadAllModels();
+});
+</script>
+<script>
+	var i18n_confirm_delete_model = '$encoder.jsEscape( $i18n.getString( "confirm_delete_model" ) , "'" )';
+</script>

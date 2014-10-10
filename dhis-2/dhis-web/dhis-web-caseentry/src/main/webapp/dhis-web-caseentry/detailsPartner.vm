@@ -1,0 +1,63 @@
+<table>
+	<tr>
+		<td colspan='2'><label class="bold">$i18n.getString( "demographics" )</label></td>
+	</tr>
+	
+	#if($partner.name)
+	<tr>
+		<td>$i18n.getString( "full_name" )</td>
+		<td>: $!encoder.htmlEncode($partner.name)</td>
+	</tr>
+	#end
+	
+	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td><label class="bold">$i18n.getString( "identifiers" )</td>
+	</td> 
+	#foreach( $patientIdentifier in $partner.identifiers )
+	<tr>
+		<td>
+			#if($!patientIdentifier.identifierType)  $!patientIdentifier.identifierType.displayName
+			#else $i18n.getString( "patient_system_id") #end 
+		</td>
+		<td>: $patientIdentifier.identifier</td>
+	</tr>
+	#end
+	
+	#if($partner.attributes.size() > 0 )
+		<tr><td>&nbsp;</td></tr>
+		<tr>
+			<td><label class="bold">$i18n.getString( "attributes" )</label></td>
+		</tr>
+		#foreach( $attribute in $partner.attributes )
+			#if( $patientAttributeValueMap.get( $attribute.id ) != " " )
+			<tr>
+				<td>$attribute.displayName</td>
+				<td>: $!encoder.htmlEncode($patientAttributeValueMap.get( $attribute.id ))</td>
+			</tr>
+			#end
+		#end
+	#end
+	
+	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td valign='top'><label class="bold">$i18n.getString( "enrolled_in_program" )</label></td>
+		<td>: 
+		#foreach( $program in $partner.programs )
+			- $encoder.htmlEncode($program.displayName)<br>
+		#end
+		</td>
+	</tr>
+	
+	<tr><td></td></tr>
+	<tr>
+		<td colspan='2'>
+			#if( $partnerIsRepresentative == 'true' )
+				<input type="button" value="$i18n.getString('is_not_representative')" onclick="javascript:removeRepresentative( getFieldValue('id'), $partner.id );" style='width:150px;' >
+			#else
+				<input type="button" value="$i18n.getString('save')" title="$i18n.getString('set_as_representative')" onclick="javascript:saveRepresentative( getFieldValue('id'), $partner.id, false )" style='width:150px;' >
+				<input type="button" value="$i18n.getString('save_all')" title="$i18n.getString('set_as_representative_and_copy_attributes_for_the_person')" onclick="javascript:saveRepresentative( getFieldValue('id'), $partner.id, true )" style='width:150px;' >
+			#end
+		</td> 
+	</tr>                      
+</table>

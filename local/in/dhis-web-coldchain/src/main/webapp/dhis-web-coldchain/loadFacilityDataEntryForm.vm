@@ -1,0 +1,132 @@
+
+## Macro for generating the jQuery validation rules 
+#macro( validate $type $require )
+  #if( $type == "NUMBER" || $type == "number" )
+    {validate:{ number:true #if($require), required:true #end }}
+  
+	#elseif( $type == "int" )
+  	{validate:{ integer:true #if($require), required:true #end }}
+  	
+  	#elseif( $type == "positiveNumber" )
+  	{validate:{ positive_integer:true #if($require), required:true #end }}
+  	
+	#elseif( $type == "negativeNumber" )
+  	{validate:{ negative_integer:true #if($require), required:true #end }}
+  
+  
+  #elseif( $require )
+    {validate:{required:true}}
+  #end
+#end
+<!-- DATAELEMENTS WITH SECTIONS-->
+#set( $tabIndex = 1 )
+#if( $sections.size() > 0 )
+	#foreach( $section in $sections )
+		<table class="formSection" width="100%">
+			<tr><td>&nbsp;</td><td>&nbsp;</td></tr>	
+			<tr bgcolor="#285C91">
+				<td width="75%"><font color="#FFFFFF"><strong>$encoder.htmlEncode( $section.name )</strong></font></td>
+				<td width="25%"><font color="#FFFFFF"><strong>Value</strong></font></td>
+			</tr><br />
+		
+		#if ( $section.dataElements.size() > 0 )
+			
+			#set( $mark = false )
+			#foreach($dataElement in $section.dataElements )
+			#set( $valueMapId = $organisationUnit.id + ':' + $period.id + ':' + $dataElement.id )
+			#set( $dataValue = "" )
+			#set( $dataValue = $!dataValueMap.get( $valueMapId ) )
+				<tr #alternate($mark)>
+					<!--#set( $dataEntryId = "${dataElement.id}" )-->
+					<td width="75%"><label>$dataElement.getFormNameFallback() </label></td>
+					<td>
+						#if( $dataElement.type == "bool" )
+							<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+								<option value="">[$i18n.getString( "please_select" )]</option>            
+								<option value="Yes" #if( $dataValue  == "Yes" ) selected="selected" #end >$i18n.getString( "yes" )</option>
+								<option value="No" #if( $dataValue == "No") selected="selected" #end >$i18n.getString( "no" )</option>
+							</select>                
+						#elseif( $dataElement.type == "date" )
+							<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%"> 
+								<script type="text/javascript">
+						  	 		datePickerValid( 'dataelement${dataElement.id}' );
+								</script>                    
+						
+						#elseif( $!dataElement.optionSet )
+							<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+								<option value="">[$i18n.getString( "please_select" )]</option> 
+								#foreach ($option in $dataElement.optionSet.options )
+									<option value="$option" #if($dataValue == $option ) selected="selected" #end>$option</option>
+								#end	
+							</select>                						
+						
+						#else 
+						<!--<input type="text" id="dataelement$dataElement.id"  name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%" class="{validate:{required: #if($dataElement.type =='int') number:true #end }}"/>-->
+						<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%" #if($dataElement.type =='number') class="{validate:{number:true}}" #elseif($dataElement.type =='int') class="{validate:{integer:true}}" #elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}" #elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}" #end/>
+			<!--<input type="text" id="attr$attribute.id" name="attr$attribute.id" class="{validate:{required: #if($dataElement.type=='int'),number:true #end }}" />-->			
+						
+						#end
+					</td>		
+				</tr>
+			#set( $tabIndex = $tabIndex + 1 )
+			#set( $mark = !$mark)	
+			#end
+		#end
+	</table>		
+	<br>	
+#end
+	
+#else	
+<!-- DATAELEMENTS WITH NO SECTIONS-->
+<table class="formSection" width="100%">
+
+	<tr bgcolor="#285C91">
+		<td width="75%"><font color="#FFFFFF"><strong>$encoder.htmlEncode( $dataSet.getShortName() )</strong></font></td>
+		<td width="25%"><font color="#FFFFFF"><strong>Value</strong></font></td>
+	</tr>	
+<br />
+#set( $tabIndex = 1 )
+#if ( $dataElements.size() > 0)
+	#set( $mark = false )
+	#foreach($dataElement in $dataElements )
+	#set( $valueMapId = $organisationUnit.id + ':' + $period.id + ':' + $dataElement.id )
+	#set( $dataValue = "" )
+	#set( $dataValue = $!dataValueMap.get( $valueMapId ) )
+		<tr #alternate($mark)>
+			<!--#set( $dataEntryId = "${dataElement.id}" )-->
+			<td width="75%"><label>$dataElement.getFormNameFallback()</label></td>
+			<td>
+				#if( $dataElement.type == "bool" )
+					<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+						<option value="">[$i18n.getString( "please_select" )]</option>            
+						<option value="Yes" #if( $dataValue  == "Yes" ) selected="selected" #end >$i18n.getString( "yes" )</option>
+						<option value="No" #if( $dataValue == "No") selected="selected" #end >$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $dataElement.type == "date" )
+						<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%"> 
+						<script type="text/javascript">
+						   datePickerValid( 'dataelement${dataElement.id}' );
+						</script>                    
+				
+				#elseif( $!dataElement.optionSet )
+					<select name="dataelement$dataElement.id"  id="dataelement$dataElement.id"  tabindex="$tabIndex" width="25%">  
+						<option value="">[$i18n.getString( "please_select" )]</option> 
+						#foreach ($option in $dataElement.optionSet.options )
+							<option value="$option" #if($dataValue == $option ) selected="selected" #end>$option</option>
+						#end	
+					</select>				
+				
+				#else 
+					<!--<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%">--> 
+					<input type="text" id="dataelement$dataElement.id" name="dataelement$dataElement.id" value="$!dataValue" tabindex="$tabIndex" width="25%" #if($dataElement.type =='number') class="{validate:{number:true}}" #elseif($dataElement.type =='int') class="{validate:{integer:true}}" #elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}" #elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}" #end/>
+				#end
+			</td>		
+		</tr>
+	#set( $tabIndex = $tabIndex + 1 )
+	#set( $mark = !$mark)	
+	#end
+#end
+</table>
+	
+#end
+

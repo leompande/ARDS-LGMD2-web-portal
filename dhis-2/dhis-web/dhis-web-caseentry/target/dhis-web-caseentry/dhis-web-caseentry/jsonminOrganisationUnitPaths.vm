@@ -1,0 +1,2 @@
+#set( $size = $object.size() )
+{"organisationUnits":[#foreach($unit in $object){"id":"$!{unit.uid}","localid": "$unit.id","name":"$!encoder.jsonEncode(${unit.name})","path":"#foreach($anc in $unit.getAncestors())/${anc.uid}#end"}#if($velocityCount < $size),#end#end]}

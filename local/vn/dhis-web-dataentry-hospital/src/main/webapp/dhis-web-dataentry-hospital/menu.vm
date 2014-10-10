@@ -1,0 +1,17 @@
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	
+	currentOrganisationUnitId = '$!unit.id';
+	currentOrganisationUnitName = '$!unit.name';
+	loadDataSets( currentOrganisationUnitName );
+});
+</script>
+
+<style type="text/css">
+#leftBarContents div#orgUnitTree {
+	height: 430px;
+}
+</style>
+
+<br>
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.hisp.dhis.reportsheet.PeriodColumn" table="reportexcel_periodcolumns">
+		<id name="id" column="periodcolumnid">
+			<generator class="native" />
+		</id>
+		<property name="periodType" not-null="true" column="periodtype"/>
+		<property name="column" column="periodcolumn" not-null="true" />
+		<property name="startdate" type="date" not-null="true"/>
+		<property name="enddate" type="date" not-null="true"/>		
+		
+	</class>
+</hibernate-mapping>

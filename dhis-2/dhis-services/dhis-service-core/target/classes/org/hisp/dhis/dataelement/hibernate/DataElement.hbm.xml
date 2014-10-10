@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+<hibernate-mapping>
+  <class name="org.hisp.dhis.dataelement.DataElement" table="dataelement">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="dataelementid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <property name="name" column="name" not-null="true" unique="true" length="230" />
+
+    <property name="shortName" column="shortname" not-null="true" unique="true" length="50" />
+
+    <property name="description" type="text" />
+
+    <property name="formName" length="230" />
+
+    <property name="active" not-null="true" />
+
+    <property name="type" column="valuetype" length="16" not-null="true" />
+
+    <property name="numberType" column="numbertype" length="16" />
+
+    <property name="textType" column="textType" length="16" />
+
+    <property name="domainType" not-null="true" column="domaintype" length="16" />
+
+    <property name="aggregationOperator" not-null="true" column="aggregationtype" length="16" />
+
+    <many-to-one name="categoryCombo" class="org.hisp.dhis.dataelement.DataElementCategoryCombo"
+      column="categorycomboid"
+      foreign-key="fk_dataelement_categorycomboid" />
+
+    <property name="sortOrder" />
+
+    <property name="url" />
+
+    <set name="groups" table="dataelementgroupmembers" inverse="true">
+      <cache usage="read-write" />
+      <key column="dataelementid" />
+      <many-to-many class="org.hisp.dhis.dataelement.DataElementGroup" column="dataelementgroupid" />
+    </set>
+
+    <set name="dataSets" table="datasetmembers" inverse="true">
+      <cache usage="read-write" />
+      <key column="dataelementid" />
+      <many-to-many class="org.hisp.dhis.dataset.DataSet" column="datasetid" />
+    </set>
+
+    <list name="aggregationLevels" table="dataelementaggregationlevels">
+      <key column="dataelementid" foreign-key="fk_dataelementaggregationlevels_dataelementid" />
+      <list-index column="sort_order" base="0" />
+      <element column="aggregationlevel" type="integer" />
+    </list>
+
+    <property name="zeroIsSignificant" not-null="true" />
+
+    <!-- Access properties -->
+    <many-to-one name="user" class="org.hisp.dhis.user.User" column="userid" foreign-key="fk_indicator_userid" />
+
+    <property name="publicAccess" length="8" />
+
+    <set name="userGroupAccesses" table="dataelementusergroupaccesses">
+      <cache usage="read-write" />
+      <key column="dataelementid" />
+      <many-to-many class="org.hisp.dhis.user.UserGroupAccess" column="usergroupaccessid" unique="true" />
+    </set>
+
+    <!-- Dynamic attribute values -->
+
+    <set name="attributeValues" table="dataelementattributevalues">
+      <cache usage="read-write" />
+      <key column="dataelementid" />
+      <many-to-many class="org.hisp.dhis.attribute.AttributeValue" column="attributevalueid" unique="true" />
+    </set>
+
+    <many-to-one name="optionSet" class="org.hisp.dhis.option.OptionSet" column="optionsetid"
+      foreign-key="fk_dataelement_optionsetid" />
+
+    <many-to-one name="legendSet" class="org.hisp.dhis.mapping.MapLegendSet" column="legendsetid"
+      foreign-key="fk_dataelement_legendset" />
+
+  </class>
+</hibernate-mapping>

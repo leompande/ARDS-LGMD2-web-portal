@@ -1,0 +1,132 @@
+{
+	"id": "${tabularReport.id}",
+	"name": "$!encoder.jsonEncode( ${tabularReport.name} )",
+	"lastUpdated": "$!format.formatDate( ${tabularReport.lastUpdated} )",
+	"programId": "${tabularReport.program.uid}",
+	"singleEvent": 
+		#if($tabularReport.program.programStages.size() == 1 )
+			"true",
+		#else
+			"false",
+		#end
+	#if( $tabularReport.programStage)
+		#set($programStage = $tabularReport.programStage)
+	#end
+	
+	"type": "$!{programStage.program.type}",
+	"programStageId": "$!{tabularReport.programStage.uid}",
+	"programStages": [
+		#set( $programStages = $tabularReport.program.programStages )
+		#set( $size = $programStages.size() )
+		#foreach( ${programStage} in $!{programStages} )
+			{
+				"id": "$programStage.uid",
+				"name": "$programStage.name"
+			}
+			#if( $velocityCount < $size ),#end
+		#end
+	],
+	"startDate": "$!format.formatDate( $tabularReport.startDate )",
+	"endDate": "$!format.formatDate( ${tabularReport.endDate} )",
+	"ouMode": "${tabularReport.ouMode}",
+	"userOrgunits": "$!userOrgunits",
+	"userOrgunitChildren": "$!userOrgunitChildren",
+	"orgunitIds": [
+		#set( $size = $orgunits.size() )
+		#foreach( $orgunit in $!orgunits )
+			{
+				"id": "$orgunit.uid",
+				"localid": "$orgunit.id",
+				"path":"#foreach($anc in $orgunit.getAncestors())/${anc.uid}#end"
+			}
+			#if( $velocityCount < $size ),#end
+		#end
+	],
+	"items": [
+		#foreach( $item in $dimensionIdentifierTypes )
+			{
+				"id": "$item.uid",
+				"name": "",
+				"compulsory": "",
+				"valueType": #if( $iden.optionSet )
+								"list"
+							 #else
+								"${iden.type}"
+							 #end,
+				"dimension": "true"
+			},
+		#end
+		
+		
+		#foreach( $attr in $dimensionAttributes )
+		{
+			"id": "$attr.uid",
+			"name": "$encoder.xmlEncode(${attr.displayName} )",
+			"valueType": #if( $attr.optionSet )
+							"list"
+						 #else
+							"${attr.type}"
+						 #end,
+			"dimension": "true"
+		},
+		#end
+		
+		#foreach( $de in $dimensionDataElements )
+		{
+			"id": "$de.uid",
+			"name": "$encoder.xmlEncode(${de.getFormNameFallback()} )",
+			"valueType": #if( $de.optionSet )
+							"list_$de.optionSet.uid"
+						 #else
+							"$de.type"
+						 #end,
+			"dimension": "true"
+		},
+		#end
+		
+		#foreach( $item in $filterIdentifierTypes )
+			{
+				"id": "$item.uid",
+				"name": "",
+				"compulsory": "",
+				"valueType": #if( $iden.optionSet )
+								"list"
+							 #else
+								"${iden.type}"
+							 #end,
+			"dimension": "false"
+			},
+		#end
+		
+		#foreach( $attr in $filterAttributes )
+		{
+			"id": "$attr.uid",
+			"name": "$encoder.xmlEncode(${attr.displayName} )",
+			"valueType": #if( $attr.optionSet )
+							"list"
+						 #else
+							"${attr.type}"
+						 #end,
+			"dimension": "false"
+		},
+		#end
+		
+		#foreach( $de in $filterDataElements )
+		{
+			"id": "$de.uid",
+			"name": "$encoder.xmlEncode(${de.getFormNameFallback()} )",
+			"valueType": #if( $de.optionSet )
+							"list_$de.optionSet.uid"
+						 #else
+							"$de.type"
+						 #end,
+			"dimension": "false"
+		}#if( $velocityCount < $filterDataElements.size() ),#end
+		#end
+	],
+	filters:{
+		#foreach( $de in $mapFilters.keySet() )
+			"$de": "$mapFilters.get($de)" #if( $velocityCount < $mapFilters.keySet().size() ),#end
+		#end
+	}
+}

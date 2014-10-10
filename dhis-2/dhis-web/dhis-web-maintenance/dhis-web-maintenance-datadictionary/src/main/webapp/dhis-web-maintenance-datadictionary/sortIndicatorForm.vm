@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    function submitForm()
+    {
+        selectAllById( "indicators" );
+        document.getElementById( "sortOrderForm" ).submit();
+    }
+</script>
+
+<h3>$i18n.getString( "indicator_sort_order" )</h3>
+
+<form id="sortOrderForm" action="saveIndicatorSortOrder.action" method="post">
+<p>
+<input type="button" value="$i18n.getString( 'move_up' )" style="width:130px" onclick="moveUpSelectedOption( 'indicators' )"/><input 
+type="button" value="$i18n.getString( 'move_down' )" style="width:130px" onclick="moveDownSelectedOption( 'indicators' )"/><input
+type="button" value="$i18n.getString( 'move_to_top' )" style="width:130px" onclick="moveSelectedOptionToTop( 'indicators' )"/><input
+type="button" value="$i18n.getString( 'move_to_bottom' )" style="width:130px" onclick="moveSelectedOptionToBottom( 'indicators' )"/>
+</p>
+
+<p>
+<select multiple id="indicators" name="indicators" size="25" style="width:680px">
+#foreach ( $indicator in $indicators )
+    <option value="$indicator.id">$indicator.name</option>
+#end
+</select>
+</p>
+
+<p>
+	<input type="button" value="$i18n.getString( 'save' )" style="width:130px" onclick="submitForm()"/>
+	<input type="button" value="$i18n.getString( 'cancel' )" style="width:130px" onclick="window.location.href='indicator.action'"/>
+</p>
+
+</form>

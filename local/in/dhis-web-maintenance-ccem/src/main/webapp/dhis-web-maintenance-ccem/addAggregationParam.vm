@@ -1,0 +1,16 @@
+
+<table style="width:100%" cellpadding="5" cellspacing="5">	
+    #foreach($lookupParamKey in $lookUpParamMap.keySet() )
+        <tr>
+            #set( $parameterList = $lookUpParamMap.get($lookupParamKey) )
+            <td style="width:40%">$lookupParamKey</td>
+            <td style="width:60%">
+                <select id="$lookupParamKey" name="$lookupParamKey" style="width:100%" multiple>
+                #foreach($param in $parameterList)
+				    <option value="$param">$param</option>
+                #end
+                </select>
+            </td>
+        </tr>
+    #end
+</table>

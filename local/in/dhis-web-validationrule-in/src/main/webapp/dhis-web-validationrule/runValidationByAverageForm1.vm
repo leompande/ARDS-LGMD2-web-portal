@@ -1,0 +1,73 @@
+
+<h3>$encoder.htmlEncode( $i18n.getString( "run_validation" ) )</h3>
+
+<!--<form id="runValidationForm_IN" class="form" action="validationAnalysisByAverageAction.action" method="post" onsubmit="return validateRunValidation()" target="chartWindow1">-->
+<form id="runValidationByAverageForm1.vm" class="form"  action= "runValidationByAverageAction" method="post" onsubmit="return validateRunValidation()" target="chartWindow1">
+
+<table>
+    <tr>
+    	<td>
+        	<label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label>
+        </td>
+        <td>
+        	<input type="text" id="startDate" name="startDate" style="width:20em">
+        	<img src="../images/calendar_icon.gif" width="16" height="16" id="getStartDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+    	</td>
+    </tr>
+    <tr>    	
+        <td>
+        	<label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label>
+        </td>
+        <td>
+        	<input type="text" id="endDate" name="endDate" style="width:20em">
+        	<img src="../images/calendar_icon.gif" width="16" height="16" id="getEndDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+    	</td>
+    </tr>
+    <tr>
+    	<td></td>
+    	<td>
+    		<select id="includeChildren" name="includeChildren" style="width:20em">
+    			<option value="false" selected="selected">$i18n.getString( "organisation_unit_only" )</option>
+    			<option value="immChild">Imm Children</option>
+    			<option value="true">$i18n.getString( "organisation_unit_with_children" )</option>
+    	    </select>
+    	</td>
+    </tr>
+    <tr>
+    	<td colspan="2" height="10"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+    		<div id="selectionTree" style="width:35em;height:350px;overflow:auto;border:1px solid #cccccc"></div>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    		<!--<input type="submit" value="$i18n.getString( 'validate' )" name="validate" style="width:10em" onClick="document.pressed=this.name">-->
+    	</td>
+    	<td>
+    		<input type="submit" value="$i18n.getString( 'validate_by_average' )" name="validatebyaverage" style="width:10em" onClick="document.pressed=this.name">
+		</td>
+    </tr>
+</table>
+	
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+	selectionTreeSelection.setMultipleSelectionAllowed( true );
+	selectionTree.buildSelectionTree();
+	
+	Calendar.setup({
+        inputField     :    "startDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getStartDate"   // trigger for the calendar (button ID)
+    });
+	
+	Calendar.setup({
+        inputField     :    "endDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getEndDate"   // trigger for the calendar (button ID)
+    });
+</script>

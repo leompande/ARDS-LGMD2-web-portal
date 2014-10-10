@@ -1,0 +1,214 @@
+<script type="text/javascript">
+
+	var i18n_no_constant_to_select = '$encoder.jsEscape( $i18n.getString( "no_constant_to_select" ) , "'")';
+	var i18n_no_dataelement_to_select = '$encoder.jsEscape( $i18n.getString( "no_dataelement_to_select" ) , "'")';
+
+	jQuery( document ).ready( function(){
+		validator = validation( 'indicator-expression-form', insertExpression );
+
+		dialog = jQuery("#indicator-expression-container").dialog({
+			modal: true,
+			autoOpen: false,
+			minWidth: 840,
+			minHeight: 560,
+			width: 840,
+			height: 560
+		});
+		
+		getConstantsPage();
+		getOperandsPage();
+	});	
+
+	var numerator = false;	
+	var validator = null;
+	var dialog = null;
+	
+	function indicatorNumeratorForm()
+	{
+		numerator = true;
+		
+		validator.resetForm();
+		
+		var expression = getFieldValue( 'numerator' );
+		var description = getFieldValue( 'numeratorDescription' );
+		setFieldValue( 'indicator-expression-container textarea[id=expression]', expression );
+		setFieldValue( 'indicator-expression-container input[id=description]', description );
+		
+		getExpressionText();
+		
+		dialog.dialog("option", "title", "$i18n.getString( 'edit_numerator' )");
+		dialog.dialog("open");		
+	}
+	
+	function indicatorDenominatorForm()
+	{
+		numerator = false;
+		
+		validator.resetForm();
+		
+		var expression = getFieldValue( 'denominator' );
+		var description = getFieldValue( 'denominatorDescription' );
+		setFieldValue( 'indicator-expression-container textarea[id=expression]', expression );
+		setFieldValue( 'indicator-expression-container input[id=description]', description );
+		
+		getExpressionText();
+		
+		dialog.dialog("option", "title", "$i18n.getString( 'edit_denominator' )");
+		dialog.dialog( "open");
+	}
+	
+	function getConstantsPage()
+	{
+		var target = jQuery( "#indicator-expression-container select[id=constantId]" );
+		target.children().remove();
+		
+		jQuery.get( '../api/constants.json?paging=false&links=false', {},
+			function( json ) {
+				jQuery.each( json.constants, function(i, item) {
+					target.append( '<option value="C{'+item.id+'}">' + item.name + '</option>' );
+				});
+			});
+	}
+	
+	function getOperandsPage()
+	{	
+		var key = getFieldValue( "indicator-expression-container input[id=filter]");
+
+		dataDictionary.loadOperands( "#indicator-expression-container select[id=dataElementId]", {usePaging: true, key: key, includeTotals: true} );
+	}
+
+	function clearSearchText()
+	{
+		jQuery( "#indicator-expression-container input[id=filter]").val("");
+		getOperandsPage();
+	}	
+	
+	function getExpressionText()
+	{
+		if ( hasText('expression') ){
+			jQuery.postJSON( '../dhis-web-commons-ajax-json/getExpressionText.action', {
+				expression: getFieldValue('expression')
+			}, function( json ){
+				if( json.response == 'success' || json.response == 'error' )
+				{
+					jQuery( "#formulaText").html( json.message );
+				}else{
+					jQuery( "#formulaText").html( '' );
+				}
+			});
+		} else{
+			jQuery( "#formulaText").html( '' );
+		}
+	}
+	
+	function insertText( inputAreaName, inputText )
+	{
+		insertTextCommon( inputAreaName, inputText );
+		
+		getExpressionText();
+	}
+	
+	function cleanExpression()
+	{		
+		getExpressionText();
+	}
+	
+	function closeExpressionBuilder()
+	{
+		dialog.dialog( "close" );
+	}
+	
+	function insertExpression()
+	{
+		var expression = getFieldValue( 'indicator-expression-container textarea[id=expression]' );
+		var description = getFieldValue( 'indicator-expression-container input[id=description]' );
+		
+		jQuery.postJSON( '../dhis-web-commons-ajax-json/getExpressionText.action',
+			{expression: expression},
+			function( json ) {
+				if( json.response == 'error') markInvalid( 'indicator-expression-container textarea[id=expression]', json.message );
+				else {
+					if( numerator ){
+						setFieldValue( 'numerator', expression );
+						setFieldValue( 'numeratorDescription', description );
+					}else{
+						setFieldValue( 'denominator', expression );
+						setFieldValue( 'denominatorDescription', description );
+					}
+					
+					closeExpressionBuilder();
+				}
+			}
+		);
+	}
+</script>
+
+<div id="indicator-expression-container" class="page">
+<form id="indicator-expression-form">
+<table style="width:100%;text-align:left">
+	<colgroup>
+		<col width="250"/>
+		<col width="10"/>
+		<col/>
+	</colgroup>
+	<tr>
+		<th colspan="2">$i18n.getString( "description" )</th>
+		<th>$i18n.getString( "constants" )</th>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" id="description" name="description" style="width:250px" class="{validate:{required:true}}"/>
+			<div class="tipText" style="margin-top: 4px">$i18n.getString( "tip" ): $i18n.getString( "use" ) abs(x) sin(x) cos(x) tan(x) ln(x) log(x) sqrt(x) mod(x,y)</div>
+		</td>
+		<td></td>
+		<td>
+			<select id="constantId" name="constantId" size="3" style="width:500px" ondblclick="insertText( 'expression', this.value )">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+	</tr>
+	<tr>
+		<th colspan="2">$i18n.getString( "formula" )</th>
+		<th style="width:100%">$i18n.getString( "list_of_data_elements" )</th>
+	</tr>
+	<tr>
+		<td valign="top">
+		<textarea id="expression" name="expression" style="width:250px; height:150px" wrap="virtual" onchange="cleanExpression()" class="{validate:{required:true}}"></textarea><br/>
+		<a href="javascript:insertText( 'expression', '(' )"><img src="../images/left_parent.png" title="$i18n.getString( 'left_brackets' )"/></a>
+		<a href="javascript:insertText( 'expression', ')' )"><img src="../images/right_parent.png" title="$i18n.getString( 'right_brackets' )"/></a>
+		<a href="javascript:insertText( 'expression', '*' )"><img src="../images/multiply.png" title="$i18n.getString( 'multiply' )"/></a>
+		<a href="javascript:insertText( 'expression', '/' )"><img src="../images/divide.png" title="$i18n.getString( 'divide' )"/></a>
+		<a href="javascript:insertText( 'expression', '+' )"><img src="../images/plus.png" title="$i18n.getString( 'plus' )"/></a>
+		<a href="javascript:insertText( 'expression', '-' )"><img src="../images/minus.png" title="$i18n.getString( 'minus' )"/></a>
+		<a href="javascript:insertText( 'expression', '[days]' )"><img src="../images/no_of_days.png" title="$i18n.getString( 'no_of_days' )"/></a>
+		</td>
+		<td></td>
+		<td valign="top" style="width:100%">
+			<input type="text" id="filter" name="filter" style="width:370px">
+			<input type="button" value="$i18n.getString( 'filter' )" onclick="getOperandsPage()" style="width:60px">
+			<input type="button" value="$i18n.getString( 'clear' )" onclick="clearSearchText();" style="width:60px"><br/>
+
+			<select id="dataElementId" name="dataElementId" size="8"  style="width:100%" ondblclick="insertText( 'expression', this.value )">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="3" style="width:100%">$i18n.getString( "description" )</th>		
+	</tr>
+	<tr>
+		<td colspan="3" style="width:100%"><div id="formulaText" style="width:740px;height:100px;overflow:auto"></div></td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<input type="submit" value="$i18n.getString( 'save' )" style="width:125px"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" style="width:125px" onclick="closeExpressionBuilder()"/>
+		</td>
+	</tr>	
+</table>
+</form>
+</div>

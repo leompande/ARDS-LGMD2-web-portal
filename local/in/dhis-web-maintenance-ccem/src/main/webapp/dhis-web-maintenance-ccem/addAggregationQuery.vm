@@ -1,0 +1,64 @@
+<script >
+function getParameters()
+{
+	if($("#aggType").val() != '-1')
+	{
+		$("#loadParameters").load("loadAggregationParam.action", 
+            				{
+            					aggTypeId : $('#aggType').val()
+            				}
+            				, function( ){            										
+        				});
+	}
+}
+</script>
+<form id="addAggregationForm" action="addAggregationQuery.action" method="post" >
+
+<table style="width:50%" cellpadding="5" cellspacing="5"> 
+	<thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "aggregation_query_builder_detail" )</th>
+      </tr>
+    </thead>
+	
+    <tbody>
+    	<tr>
+        	<td style="width:40%"><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        	<td style="width:60%"><input type="text" id="name" name="name" class="{validate:{required:true,minlength:2}}" style='width:100%; margin-bottom:-5px;'></td>
+    	</tr>    
+    	<tr>
+			<td style="width:40%"><label for="dataElement">$i18n.getString( "dataelement" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td style="width:60%">			
+				<select style='width:100%; margin-bottom:-5px;' id="dataElementId" name="dataElementId" >
+					#foreach( $dataElement in $dataElementList )
+						<option value="$dataElement.id">$dataElement.name</option>
+					#end
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:40%"><label for="operator">$i18n.getString( "type" )</label></td>
+			<td style="width:60%">			
+				<select style='width:100%; margin-bottom:-5px;' id="aggType" name="aggType" onchange="getParameters()">
+                    <option value="-1" >Please Select</option>
+					#foreach( $lookup in $lookups )
+						<option value="$lookup.name">$lookup.value</option>
+					#end
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div id="loadParameters" style="width:100%"></div>
+            </td>
+		</tr>
+		
+    </tbody>
+</table>
+
+<p>	
+	<input type="submit" value="$i18n.getString( 'add' )" />	
+	<input type="button" value="$i18n.getString( 'cancel' )" onClick="cancelOnClick();" />
+</p>
+
+</form>

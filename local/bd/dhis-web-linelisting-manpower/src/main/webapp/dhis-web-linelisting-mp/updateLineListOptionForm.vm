@@ -1,0 +1,42 @@
+
+<h3>Edit Line List Option</h3>
+
+<form id="updateLineListOptionForm" action="updateLineListOption.action" method="post" onsubmit="return validateUpdateLineListOption()">
+
+<div>
+	<input type="hidden" id="id" name="id" value="$lineListOption.id">
+</div>
+
+<table>
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" value="$encoder.htmlEncode( $lineListOption.name )" onchange="nameChanged()" style="width:20em"></td>
+	</tr>
+	<tr>
+		<td><label for="shortName">$i18n.getString( "short_name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td><input type="text" id="shortName" name="shortName" value="$encoder.htmlEncode( $lineListOption.shortName )" maxlength="20" style="width:20em"></td>
+	</tr>
+	<tr>
+		<td><label for="description">$i18n.getString( "description" )</label></td>
+		<td><textarea id="description" name="description" style="width:20em; height:8em">$!encoder.htmlEncode( $lineListOption.description )</textarea></td>
+	</tr>
+</table>
+
+<p><input type="submit" value="$i18n.getString( "save" )" style="width:10em"><input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='getLineListOptions.action'" style="width:10em"></p>
+
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+	var previousName = '$encoder.jsEscape( $lineListOption.name, "'" )';
+	
+	var nameField = document.getElementById( 'name' );
+	nameField.select();
+	nameField.focus();
+
+</script>

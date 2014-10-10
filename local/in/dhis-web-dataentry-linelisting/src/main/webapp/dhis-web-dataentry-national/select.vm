@@ -1,0 +1,100 @@
+<style>
+#overlay {
+z-index:9998;
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+width:100%;
+background:#000;
+opacity:0.45;
+-moz-opacity:0.45;
+filter:alpha(opacity=45);
+visibility:hidden;
+}
+#overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+<div id="overlay">
+<div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" /></div>
+</div>
+
+
+<div id="currentSelection"><span style="float:left;cursor:pointer;margin-right:5px;"><img src="../images/hide.png" title="$i18n.getString( 'close' )" onclick="closeCurrentSelection()"></span>
+	#if ( $organisationUnit ) $encoder.htmlEncode( $organisationUnit.name )#else $i18n.getString("no_organisationunit_selected") #end - 
+	#set( $period = $selectedStateManager.getSelectedPeriod() )
+	#if ( $period ) $format.formatPeriod( $period ) #else $i18n.getString("no_period_selected") #end <br> 
+	<span id="currentDataElement"></span> <br>
+	<span id="currentOptionCombo">Please Fill All Fields.</span>
+    <br>
+    #set( $dataset = $selectedStateManager.getSelectedDataSet() )
+    #if ($dataset.name == "Line listing Births" ) $i18n.getString("select_DOB_for_selected_month") #end
+    
+</div>
+
+<form id="selectForm" name="selectForm" method="post" action="select.action">
+
+
+<div id="actions" style="width:200px text-align:right; display : none;">
+
+<br>
+
+<br><br><br><br><br>
+<input type="button" value="SAVE" onclick="saveLineListingAggData()" #if( $isLineListing.equals("no") ) disabled="disabled" #end>
+</div>
+
+<table>
+	<!--
+	<col width="140">
+	<col width="200">
+	-->
+	<tr>
+		<td><label>$i18n.getString( "organisation_unit" )</label></td>
+		<td><input type="text" readonly="readonly" #if( $organisationUnit ) value="$encoder.htmlEncode( $organisationUnit.name )" #else value="[$i18n.getString( "select" )]" #end style="width:200px"></td>
+	</tr>
+	
+	<tr>
+		<td><label for="selectedDataSetId">$i18n.getString( "data_set" )</label></td>
+		<td>
+			<select id="selectedDataSetId" name="selectedDataSetId" style="min-width:200px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $dataSets.size() == 0 ) disabled="disabled" #end>
+				<option value="null">[$i18n.getString( "select_ds" )]</option>
+			#foreach( $dataSet in $dataSets )
+				<option value="$dataSet.id" #if( $selectedDataSetId && $dataSet.id == $selectedDataSetId ) selected="selected" #end>$encoder.htmlEncode( $dataSet.name )</option>
+			#end
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><label for="selectedPeriodIndex">$i18n.getString( "period" )</label></td>
+		<td>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('earlier_periods')" onclick="window.location.href='previousPeriods.action'" #if( $periods.size() == 0 ) disabled="disabled" #end>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('later_periods')" onclick="window.location.href='nextPeriods.action'" #if( $periods.size() == 0 ) disabled="disabled" #end><br>
+			<select id="selectedPeriodIndex" name="selectedPeriodIndex" style="min-width:200px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $periods.size() == 0 ) disabled="disabled" #end>
+				<option value="null">[$i18n.getString( "select_period" )]</option>
+			#foreach( $period in $periods )
+				#set( $index = $velocityCount - 1 )
+				<option value="$index" #if( $index && $selectedPeriodIndex && $index == $selectedPeriodIndex ) selected="selected" #end>$format.formatPeriod( $period )</option>
+			#end
+			</select>
+		</td>
+	</tr>
+<!--	
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input type="button" value="Save/Next" onclick="saveLineListingAggData()" #if( $isLineListing.equals("no") ) disabled="disabled" #end>
+		</td>
+	</tr>	
+-->		
+</table>
+
+</form>
+
+<hr style="clear:both;">
+
+<script>
+	function closeCurrentSelection()
+	{
+    	$( '#currentSelection' ).fadeOut();
+	}
+</script>

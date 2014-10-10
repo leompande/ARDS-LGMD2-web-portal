@@ -1,0 +1,22 @@
+
+<h2>$i18n.getString( "data_entry" )&nbsp;</h2>
+<ul>
+    <li><a href="viewDataSet.action">$i18n.getString( "data_entry" )&nbsp;</a></li>
+    <li><a href="viewDataSets.action">$i18n.getString( "update_data" )&nbsp;</a></li>
+</ul>
+
+<h2>$i18n.getString( "reports" )&nbsp;</h2>
+<ul>
+    <li><a href="showRecordsReportForm.action">$i18n.getString( "record_data" )&nbsp;</a></li>     
+    <li><a href="showAggregatedReportForm.action">$i18n.getString( "aggregate_report" )&nbsp;</a></li>
+</ul>
+
+<h2>$i18n.getString( "hr_import" )&nbsp;</h2>
+<ul>
+    <li><a href="hrimport.action">$i18n.getString( "hr_import" )&nbsp;</a></li>
+</ul>
+<h2>$i18n.getString( "hr_export")&nbsp;</h2>
+<ul>
+    <li><a href="hrexport.action">$i18n.getString( "hr_export" )&nbsp;</a></li>    
+    <li><a href="hrmetadata.action">$i18n.getString( "hr_metadata_export" )&nbsp;</a></li>
+</ul>

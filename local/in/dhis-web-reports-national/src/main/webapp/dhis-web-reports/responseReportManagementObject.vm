@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+  <id>$report.id</id>
+  <name>$encoder.xmlEncode( $report.name )</name>
+  <model>$encoder.xmlEncode( $report.model )</model>
+  <frequency>$i18n.getString( $report.periodType.name )</frequency>
+  <reportType>$report.reportType</reportType>
+  <exceltemplate>$report.excelTemplateName</exceltemplate>
+  <xmltemplate>$report.xmlTemplateName</xmltemplate>
+<!--<orgGroupName>$ouGroupname</orgGroupName>
+  <dataSetName>$datasetName</dataSetName>-->  
+</report>

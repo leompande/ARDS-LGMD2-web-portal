@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgunits>
+	<orgunit>
+		<id>$orgUnit.id</id>
+		<name>$encoder.xmlEncode( $orgUnit.getShortName() )</name>
+		<parentid>$parentOrgUnit.id</parentid>
+		<parentname>$encoder.xmlEncode( $parentOrgUnit.getShortName() )</parentname>
+		<trcnumber>$encoder.xmlEncode( $trcNumber )</trcnumber>>
+	</orgunit>
+</orgunits>

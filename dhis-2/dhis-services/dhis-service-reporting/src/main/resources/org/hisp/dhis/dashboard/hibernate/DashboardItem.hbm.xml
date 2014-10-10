@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.dashboard.DashboardItem" table="dashboarditem">
+
+    <cache usage="read-write" />
+
+    <id name="id" column="dashboarditemid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <many-to-one name="chart" class="org.hisp.dhis.chart.Chart" column="chartid" foreign-key="fk_dashboarditem_chartid" />
+    
+    <many-to-one name="map" class="org.hisp.dhis.mapping.Map" column="mapid" foreign-key="fk_dashboarditem_mapid" />
+    
+    <many-to-one name="reportTable" class="org.hisp.dhis.reporttable.ReportTable" foreign-key="fk_dashboarditem_reporttableid" />
+    
+    <list name="users" table="dashboarditem_users">
+      <key column="dashboarditemid" foreign-key="fk_dashboarditem_users_dashboardid" />
+      <list-index column="sort_order" base="0" />
+      <many-to-many column="userid" class="org.hisp.dhis.user.User" foreign-key="fk_dashboarditem_users_userinfoid" />
+    </list>
+    
+    <list name="reportTables" table="dashboarditem_reporttables">
+      <key column="dashboarditemid" foreign-key="fk_dashboarditem_reporttables_dashboardid" />
+      <list-index column="sort_order" base="0" />
+      <many-to-many column="reporttableid" class="org.hisp.dhis.reporttable.ReportTable" foreign-key="fk_dashboarditem_reporttables_reporttableid" />
+    </list>
+    
+    <list name="reports" table="dashboarditem_reports">
+      <key column="dashboarditemid" foreign-key="fk_dashboarditem_reports_dashboardid" />
+      <list-index column="sort_order" base="0" />
+      <many-to-many column="reportid" class="org.hisp.dhis.report.Report" foreign-key="fk_dashboarditem_reports_reportid" />
+    </list>
+ 	
+    <list name="resources" table="dashboarditem_resources">
+      <key column="dashboarditemid" foreign-key="fk_dashboarditem_resources_dashboardid" />
+      <list-index column="sort_order" base="0" />
+      <many-to-many column="resourceid" class="org.hisp.dhis.document.Document" foreign-key="fk_dashboarditem_resources_resourceid" />
+    </list>
+    
+    <list name="patientTabularReports" table="dashboarditem_patienttabularreports">
+      <key column="dashboarditemid" foreign-key="fk_dashboarditem_patienttabularreports_dashboardid" />
+      <list-index column="sort_order" base="0" />
+      <many-to-many column="patienttabularreportid" class="org.hisp.dhis.patientreport.PatientTabularReport" foreign-key="fk_dashboarditem_patienttabularreports_patienttabularreportid" />
+    </list>
+    
+    <property name="messages" />
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<style type="text/css">
+h4 {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    margin: 15px 0 5px 0;
+    }
+</style>
+
+<h3>$i18n.getString( "manage_custom_values" )</h3>
+
+<table>
+	<col> ## selectdataelement
+
+<thead>
+  <tr>
+    <th>$i18n.getString( "selectdataelement" )</th>
+  </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            <select name="dataElementSelector" id="dataElementSelector" onchange="getOptionCombos()" style="min-width:25em" size="10">            
+                #foreach($attribute in $attributes)
+                    <option  value="$attribute.id">$attribute.name</option>
+                #end 
+            </select>
+                
+        </td>
+        <td>
+        </td>
+    </tr>                       
+    <tr>
+        <td><input type="text" name="newCustomValue" id="newCustomValue" onkeydown="findSimilar()" maxlength="160" style="min-width:25em" size="60"/>&nbsp;&nbsp;
+        </td>
+        <td>
+            <button type="button" onclick="addNew()">$i18n.getString( "add_new_custom_value" )</button>
+        </td>
+    </tr>
+ </tbody>
+ </table> 
+      
+<table>
+<tbody>        
+    <tr>
+        <td>
+            <input type="button" onclick="remove()" value="$i18n.getString( "delete_custom_value" )" style="width:10em">
+            <input type="button" onclick="window.location.href='dataSet.action'" value="$i18n.getString( "done_custom_value" )" style="width:10em">                
+        </td>
+    </tr> 
+</tbody>
+</table>                                  
+
+<span id="message"></span>
+<input type="hidden" name="dataSetIdField" id="dataSetIdField" value="$dataSet.id">

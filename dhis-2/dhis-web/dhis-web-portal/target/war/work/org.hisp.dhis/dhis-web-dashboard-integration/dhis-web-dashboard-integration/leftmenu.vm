@@ -1,0 +1,78 @@
+<div id="eft-Menu">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="parent_menu">
+                        Data Analyisis
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="panel-group" id="accordion1"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="parent_menu">
+                        Documents
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+
+                    #if($docs)
+                        <ul class="nav nav-pills nav-stacked">
+                            #foreach( $document in $docs)
+
+                                <li style="padding: 8px 4px">
+                                    <a title="View Document(Download)" target="_blank" href="slideshowImages/$document.get(1)" class="text-success">
+                                        <i class="fa fa-cloud-download"></i>&nbsp;&nbsp;$document.get(1)<i class="fa fa-chevron-right pull-right"></i>
+                                    </a>
+                                </li>
+
+
+                            #end
+                        </ul>
+                    #end
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="parent_menu">
+                        Links
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        #if($otherLinks)
+                            <ul class="nav nav-pills nav-stacked">
+                                #foreach( $links in $otherLinks)
+                                    <li style="padding: 3px 4px">
+                                        <a  href="$links.get(2)" target="_blank" class="text-success">
+                                            <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a>
+
+                                    </li>
+                                #end
+                            </ul>
+                        #end
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

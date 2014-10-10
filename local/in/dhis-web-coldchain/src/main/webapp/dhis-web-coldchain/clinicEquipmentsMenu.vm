@@ -1,0 +1,9 @@
+
+<a href="index.action"><h2>$i18n.getString( "equipment_manager" )&nbsp;</h2></a>
+<ul>
+    <!--<li>$i18n.getString( "cold_chain_equipment" )</li>-->
+    <!--<li><a href="enquipmentSelect.action">$i18n.getString( "equipment_management" )</a></li>-->
+</ul>
+<br>
+##parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )

@@ -1,0 +1,45 @@
+
+<style type="text/css">
+    .statusBar{
+        color: white;
+        padding: 5px 5px;
+        margin: -16px 0 20px -20px;
+        font-weight: bold;
+        background-color: #8FABC7;
+    }
+</style>
+
+<form id="formDueDate" name="formDueDate" method="post">
+<h3>Sending Due Dates</h3>
+<div>
+
+Program
+<select size="1" name="programName" id="programName">
+#foreach($program in $allPrograms)
+<option value=$program.id>$program.name</option>
+#end
+</select>
+
+Period
+<select type="multiple" id="selectDates" name="selectDates">
+<option value="today">Today</option>
+<option value="tomorrow">Tomorrow</option>
+<option value="nweek">Next week</option>
+<option value="nmonth">Next month</option>
+</select>
+</div>
+<br><br>
+<div>
+<tr>
+	#parse( "/dhis-web-commons/oust/selectionTreeMultipleSelect.vm" )
+</tr>
+<div>
+
+<button type="submit" name="send" >send messages</button>
+</form
+<br>
+<p>
+<span id="result" style="#if($result.trim().equals("")) none#else background-color:yellow;
+border:3px; padding:.3em;#end">  $result
+</span>
+</p>

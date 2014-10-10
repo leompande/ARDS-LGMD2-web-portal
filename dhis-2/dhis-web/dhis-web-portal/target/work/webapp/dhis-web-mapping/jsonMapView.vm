@@ -1,0 +1,33 @@
+{ "mapView": 
+  [{
+    "id": "$!{object.id}",
+    "name": "$!encoder.jsonEncode( ${object.name} )",
+    "userId": "$!{object.user.id}",
+    "featureType": "$!encoder.jsonEncode( ${object.featureType} )",
+    "mapValueType": "$!encoder.jsonEncode( ${object.mapValueType} )",
+    "indicatorGroupId": "$!{object.indicatorGroup.id}",
+    "indicatorId": "$!{object.indicator.id}",
+    "dataElementGroupId": "$!{object.dataElementGroup.id}",
+    "dataElementId": "$!{object.dataElement.id}",
+    "mapDateType": "$!encoder.jsonEncode( ${object.mapDateTypeNullSafe} )",
+    "periodTypeId": "$!encoder.jsonEncode( ${object.periodType.name} )",
+    "periodId": "$!{object.period.id}",
+    "parentOrganisationUnitId": "$!{object.parentOrganisationUnit.id}",
+    "parentOrganisationUnitName": "$!encoder.jsonEncode( ${object.parentOrganisationUnit.name} )",
+    "parentOrganisationUnitLevel": "$!{object.parentOrganisationUnit.level}",
+    "organisationUnitLevel": "$!{object.organisationUnitLevel.level}",
+    "organisationUnitLevelName": "$!{object.organisationUnitLevel.displayName}",
+    "mapLegendType": "$!encoder.jsonEncode( ${object.mapLegendType} )",
+    "method": "$!{object.method}",
+    "classes": "$!{object.classes}",
+    "bounds": "$!{object.bounds}",
+    "colorLow": "$!encoder.jsonEncode( ${object.colorLow} )",
+    "colorHigh": "$!encoder.jsonEncode( ${object.colorHigh} )",
+    "mapLegendSetId": "$!{object.mapLegendSet.id}",
+    "radiusLow": "$!{object.radiusLow}",
+    "radiusHigh": "$!{object.radiusHigh}",
+    "longitude": "$!encoder.jsonEncode( ${object.longitude} )",
+    "latitude": "$!encoder.jsonEncode( ${object.latitude} )",
+    "zoom": "$!{object.zoom}"
+  }]
+}

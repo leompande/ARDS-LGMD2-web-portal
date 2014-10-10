@@ -1,0 +1,175 @@
+
+#sharingDialog()
+
+<script type="text/javascript">
+    var i18n_share_your_interpretation_of = '$encoder.jsEscape( $i18n.getString( "share_your_interpretation_of" ), "'")';
+    var i18n_interpretation_was_shared = '$encoder.jsEscape( $i18n.getString( "interpretation_was_shared" ), "'")';
+    var i18n_viewing = '$encoder.jsEscape( $i18n.getString( "viewing" ), "'")';
+    var i18n_click_add_new_to_get_started = '$encoder.jsEscape( $i18n.getString( "click_add_new_to_get_started" ), "'")';
+    var i18n_add_stuff_by_searching = '$encoder.jsEscape( $i18n.getString( "add_stuff_by_searching" ), "'")';
+    var i18n_arrange_dashboard_by_dragging_and_dropping = '$encoder.jsEscape( $i18n.getString( "arrange_dashboard_by_dragging_and_dropping" ), "'")';
+    var i18n_remove = '$encoder.jsEscape( $i18n.getString( "remove" ), "'")';
+    var i18n_view_full_size = '$encoder.jsEscape( $i18n.getString( "view_full_size" ), "'")';
+    var i18n_click_to_explore_drag_to_new_position = '$encoder.jsEscape( $i18n.getString( "click_to_explore_drag_to_new_position" ), "'")';
+    var i18n_drag_to_new_position = '$encoder.jsEscape( $i18n.getString( "drag_to_new_position" ), "'")';
+    var i18n_manage = '$encoder.jsEscape( $i18n.getString( "manage" ), "'")';
+    var i18n_share = '$encoder.jsEscape( $i18n.getString( "share" ), "'")';
+    var i18n_share_interpretation = '$encoder.jsEscape( $i18n.getString( "share_interpretation" ), "'")';
+    var i18n_see_more_hits = '$encoder.jsEscape( $i18n.getString( "see_more_hits" ), "'")';
+    var i18n_see_fewer_hits = '$encoder.jsEscape( $i18n.getString( "see_fewer_hits" ), "'")';
+    var i18n_add = '$encoder.jsEscape( $i18n.getString( "add" ), "'")';
+</script>
+
+<div class="row ">
+    #parse( "ardsMacros.vm" )
+    #leftMenu()
+    <div class="col-md-10">
+        <div class="analysis-wraper">
+            <div class="alert alert-danger fade in" role="alert" style="padding: 4px">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+                <strong>Empty Value!</strong> Please select at least one Administrative unit, period and data.
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    Administrative units <br>
+                    <div class="btn-group btn-group-xs unitfilter">
+                        <button type="button" class="btn btn-default" id="allunits">all</button>
+                        <button type="button" class="btn btn-default" id="regions">Regions</button>
+                        <button type="button" class="btn btn-default" id="district">disticts</button>
+                    </div>
+                    <br>
+                    <select name="adminUnit" multiple="multiple" class="adminUnit">
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    Periods <br>
+                    <div class="btn-group btn-group-xs periodfilter" >
+                        <button type="button" class="btn btn-default" id="years">Yearly</button>
+                        <button type="button" class="btn btn-default" id="quarters">quarterly</button>
+                        <button type="button" class="btn btn-default" id="mounths">monthly</button>
+                    </div>
+                    <br>
+                    <select name="periods" multiple="multiple" class="periods">
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    Data<br><br>
+                    <select name="data" multiple="multiple" class="data-element">
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    Category<br><br>
+                    <select name="category" class="category">
+                        <option value="ou">administrative units</option>
+                        <option value="pe">period</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px">
+                <div class="col-sm-12">
+                    <div class="btn-group btn-group-xs reports">
+                        <button class="btn btn-default" id="draw_table"><img src='../dhis-web-commons/analysis/table.png' style='height:20px;width:20px'> Table</button>
+                        <button class="btn btn-default" id="draw_bar"><img src='../dhis-web-commons/analysis/bar.png' style='height:20px;width:20px'> Bar Chart</button>
+                        <button class="btn btn-default" id="draw_column"><img src='../dhis-web-commons/analysis/column.png' style='height:20px;width:20px'> Column Chart</button>
+                        <button class="btn btn-default" id="draw_line"><img src='../dhis-web-commons/analysis/line.png' style='height:20px;width:20px'> Line Chart</button>
+                        <button class="btn btn-default" id="draw_pie"><img src='../dhis-web-commons/analysis/pie.png' style='height:20px;width:20px'> Pie Chart</button>
+                        <button class="btn btn-default" id="draw_staked"><img src='../dhis-web-commons/analysis/stacked.png' style='height:20px;width:20px'> Stacked Chart</button>
+                        <button class="btn btn-default" id="draw_spider"><img src='../dhis-web-commons/analysis/spider.jpg' style='height:20px;width:20px'> Spider Chart</button>
+                        <button class="btn btn-default" id="draw_combined"><img src='../dhis-web-commons/analysis/combined.jpg' style='height:20px;width:20px'> Combined Chart</button>
+                        <button class="btn btn-default" id="export_cvs"  style="margin-left: 5px"><img src='../dhis-web-commons/analysis/cvs.jpg' style='height:20px;width:20px'> Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="mainarea" style="margin-top: 15px">
+
+            </div>
+        </div>
+
+
+        <div class="row" id="content_to_hide">
+            <div class="col-md-10">
+                <div id="contents" class="">
+                    <div id="default_home">
+                        <div id="page_switcher">
+                            <div class="onoffswitch pull-right" ><input type="checkbox" class="toggleBtn onoffswitch-checkbox" checked="" id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner" style=""></div><div class="onoffswitch-switch" style=""></div></label></div>
+
+                        </div>
+                        <div class="row">
+                            <div class="row" style="font-family: LiberationSansRegular, arial, sans-serif">
+                                <div class="col-md-10 col-md-offset-1" id="title_pages">
+                                    <h3>List Of Available  Pages </h3>
+                                </div>
+                            </div>
+                            <div class="row"  id="article_conteiner_pages">
+                                #if($article)
+                                    #foreach( $pages in $article )
+                                        <div class="col-md-12 available_articles_pages " id="article_$pages.get(0)_pages">
+                                            <div class=" row">
+                                            <div class=" col-md-12">
+                                                $pages.get(1)
+                                            </div>
+                                            </div>
+                                            <div class="row ">
+                                            <div class="col-md-12 ">
+                                                $pages.get(2)
+                                            </div>
+                                            </div>
+
+                                        </div>
+                                    #end
+                                #end
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12 bs-docs-sidebar" id="bs-docs-pages">
+                                    <ul id="article_list_pages" class="nav nav-list bs-docs-sidenav affix-top" style="width:100%!important">
+
+                                        #if($article)
+                                            #foreach( $heads in $article )
+                                                <li title="click to view"><a redirect_to="article_$heads.get(0)_pages" href="#" ><i class="icon-chevron-right"></i> $heads.get(1)</a></li>
+                                            #end
+                                        #end
+                                    </ul>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row" id="pagination-docs">
+                                <div class="col-md-10 "><div id="ArticlePaginataionDiv_pages"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        ##              </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12 pull-left">
+                        <!-- Image Slide show-->
+
+                        <div id="slider_container_3">
+
+                            <div id="SliderName_3" class="SliderName_3">
+                            </div>
+
+                            <div class="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="row" style="width:210px;margin-left:-30px;">
+                    #chartStatistics()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,140 @@
+<style>
+    #overlay {
+        z-index: 9998;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #000;
+        opacity: 0.45;
+        -moz-opacity: 0.45;
+        filter: alpha(opacity = 45);
+        visibility: hidden;
+    }
+
+    #overlayImg {
+        width: 50px;
+        height: 50px;
+        z-index: 9999;
+        position: absolute;
+        left: 50%
+    }
+</style>
+
+<div id="overlay">
+    <div id="overlayImg"><img width="50" height="50" src="images/ajax-loader.gif"/></div>
+</div>
+
+<script>
+
+    //Global Variables
+    var checkTemplateNames = new HashTable();
+    var checkRangeForHeaders = new HashTable();
+    var checkRangeForData = new HashTable();
+    var periodicityTable = new HashTable();
+
+        #foreach ( $excelImportSheet in $excelImportSheetList )
+        var excelImportSheetId = "" + "$excelImportSheet.xmlTemplateName";
+        checkTemplateNames.put(excelImportSheetId, "$excelImportSheet.checkTemplateName");
+        checkRangeForHeaders.put(excelImportSheetId, "$excelImportSheet.checkRangeForHeader");
+        checkRangeForData.put(excelImportSheetId, "$excelImportSheet.checkRangeForData");
+        periodicityTable.put(excelImportSheetId, "$excelImportSheet.periodicity");
+        #end
+
+    function formValidations() {
+        var importSheetList = document.getElementById("importSheetId");
+        var importSheetListSelectedIndex = importSheetList.selectedIndex;
+
+        if (importSheetListSelectedIndex < 0 || importSheetList.options[importSheetListSelectedIndex].text == null) {
+            alert("Please Select Import Sheet");
+            return false;
+        }
+
+        document.dataImportForm.checkTemplateName.value = checkTemplateNames.get(importSheetList.options[importSheetListSelectedIndex].value);
+        document.dataImportForm.checkRangeForHeader.value = checkRangeForHeaders.get(importSheetList.options[importSheetListSelectedIndex].value);
+        document.dataImportForm.checkRangeForData.value = checkRangeForData.get(importSheetList.options[importSheetListSelectedIndex].value);
+        document.dataImportForm.selectedPeriodicity.value = periodicityTable.get(importSheetList.options[importSheetListSelectedIndex].value);
+
+        showOverlay();
+
+        return true;
+    }
+
+    function showOverlay() {
+        var o = document.getElementById('overlay');
+        o.style.visibility = 'visible';
+        jQuery("#overlay").css({
+            "height":jQuery(document).height()
+        });
+        jQuery("#overlayImg").css({
+            "top":jQuery(window).height() / 2
+        });
+    }
+    function hideOverlay() {
+        var o = document.getElementById('overlay');
+        o.style.visibility = 'hidden';
+    }
+
+</script>
+<div>
+    <h3>Bangladesh Data Import Form</h3>
+</div>
+<hr/><br/>
+
+<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="10" cellspacing="100" border="0">
+    <tr>
+        <td>
+            <img width="200" height="200" src="images/bangladesh-flag-map.gif"/>
+        </td>
+        <td>
+            <form id="dataImportForm" name="dataImportForm" method="post" enctype="multipart/form-data"
+                  action="BDExcelImportResult.action" onsubmit="formValidations()">
+                <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0"
+                       width="730"
+                       border="0">
+                    <tr>
+                        <td class="NormalB">
+                            Import Sheets :<br/>
+                            <select id="importSheetId" name="importSheetId" style="width:325px"
+                                    class="{validate:{required:true}}">
+
+                                #foreach ( $excelImportSheet in $excelImportSheetList )
+                                    <option value="$excelImportSheet.xmlTemplateName">$excelImportSheet.displayName</option>
+                                #end
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">
+                            Upload/Import (XLS) File :<br/>
+                            <input type="file" id="upload" name="upload" size="45" class="{validate:{required:true}}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="NormalB">
+                            <input type="submit" name="importReport" value='Import Data' style="width:325px"/>
+                            <input type="hidden" name="checkTemplateName" id="checkTemplateName"/>
+                            <input type="hidden" name="checkRangeForHeader" id="checkRangeForHeader"/>
+                            <input type="hidden" name="checkRangeForData" id="checkRangeForData"/>
+                            <input type="hidden" name="selectedPeriodicity" id="selectedPeriodicity"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<include file="dhis-web-commons.xml" />
+
+	<package name="dhis-web-hrentry" extends="dhis-web-commons"
+		namespace="/dhis-web-hrentry">
+		
+	  <action name="index" class="org.hisp.dhis.hrentry.action.NoAction">  
+      <!-- <interceptor-ref name="organisationUnitTreeStack"/> -->    
+      <result name="success" type="velocity">/main.vm</result>     
+      <param name="page">/dhis-web-hrentry/index.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>             
+      <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js</param>
+    </action>
+    
+        <!-- Records Report -->
+    
+    <action name="showRecordsReportForm" class="org.hisp.dhis.hrentry.records.action.GetReportOptionsAction">      
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="menuTreeHeight">420</param>	  
+      <param name="page">/dhis-web-hrentry/recordsReportForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>      
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/recordsReport.js</param>
+      <interceptor-ref name="organisationUnitTreeStack"/>       
+    </action>	
+    
+    <action name="generateRecordsReport" class="org.hisp.dhis.hrentry.records.action.GenerateRecordsReportAction">
+      <result name="success" type="velocity">/popup.vm</result>
+      <result name="error" type="chain">showRecordsReportForm</result>
+      <param name="page">/dhis-web-hrentry/previewRecordsReportForm.vm</param>
+      <param name="javascripts">../dhis-web-commons/util/jquery.jqprint.0.3.js,javascript/exportReport.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+      <interceptor-ref name="organisationUnitTreeStack"/>
+    </action>    
+    
+     <action name="exportTable" class="org.hisp.dhis.hrentry.records.action.ExportTableAction">
+      <result name="csv" type="gridCsvResult"/>
+      <result name="xls" type="gridXlsResult"/>
+      <result name="pdf" type="gridPdfResult"/>
+      <result name="jasper" type="gridJasperResult"/>
+      <result name="jrxml" type="gridJrxmlResult"/>
+      <result name="html" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/previewRecordsReportForm.vm</param> 
+      <param name="javascripts">../dhis-web-commons/util/jquery.jqprint.0.3.js,javascript/exportReport.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action> 
+	
+		<!-- Data Entry -->
+    
+    <action name="dataEntrySelect" class="org.hisp.dhis.hrentry.action.dataentry.DataEntrySelectAction">
+      <interceptor-ref name="organisationUnitTreeStack"/>
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/select.vm</param>
+      <param name="menu">/dhis-web-hrentry/dataEntryMenu.vm</param>   
+      <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/dataEntry.js, ../dhis-web-commons/javascripts/date.js, javascript/entry.js, javascript/form.js</param>      
+    </action>  
+	
+	<action name="dataEditSelect" class="org.hisp.dhis.hrentry.action.dataentry.DataEditSelectAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/editDataRecords.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>   
+      <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/dataEntry.js, ../dhis-web-commons/javascripts/date.js, javascript/entry.js, javascript/form.js</param>      
+    </action>
+	
+	<action name="viewDataSet" class="org.hisp.dhis.hrentry.action.dataentry.GetHrDataSetListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/dataSetList.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/dataSet.js</param>
+    </action>
+	   
+ 	<action name="getUpdatePersonnelInfo" class="org.hisp.dhis.hrentry.action.dataentry.GetHrPersonnelListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/personnelList.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+    </action> 
+
+	<action name="saveValue" class="org.hisp.dhis.hrentry.action.dataentry.SaveValueAction">
+      <result name="success" type="velocity">status.vm</result>
+	  <result name="input" type="velocity-xml">/dhis-web-hrentry/responseInput.vm</result>
+	  <param name="onExceptionReturn">plainTextError</param>
+	  <param name="requiredAuthorities">F_DATAVALUE_ADD,F_DATAVALUE_UPDATE,F_DATAVALUE_DELETE</param>
+	  <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/dataEntry.js, ../dhis-web-commons/javascripts/date.js, javascript/entry.js</param>
+	</action>
+	
+	<action name="completeRegistration" class="org.hisp.dhis.hrentry.action.dataentry.CompleteRegistrationAction">
+      <result name="success" type="velocity">completeStatus.vm</result>
+	  <result name="input" type="velocity-xml">/dhis-web-hrentry/responseInput.vm</result>
+	  <param name="onExceptionReturn">plainTextError</param>
+	  <param name="requiredAuthorities">F_DATAVALUE_ADD,F_DATAVALUE_UPDATE,F_DATAVALUE_DELETE</param>
+	  <param name="javascripts">../dhis-web-commons/ouwt/ouwt.js,javascript/dataEntry.js, ../dhis-web-commons/javascripts/date.js, javascript/entry.js</param>
+	</action>
+	
+	<action name="loadAttributeOption" class="org.hisp.dhis.hrentry.action.dataentry.LoadAttributeOptionAction">
+			<result name="success" type="velocity-json">/dhis-web-hrentry/responseAttributesOptions.vm</result>
+	</action>	
+	
+	<action name="viewDataSets" class="org.hisp.dhis.hrentry.action.dataentry.GetHrDataSetListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/dataSetLists.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/dataSet.js</param>
+    </action>
+    
+    <action name="updateRecordsList" class="org.hisp.dhis.hrentry.action.dataentry.UpdateRecordListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/recordsList.vm</param>
+      <param name="javascripts">javascript/jquery.qtip-1.0.0.min.js,javascript/updateRecordsList.js,../dhis-web-commons/util/jquery.jqprint.0.3.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action> 
+	<action name="removePerson"
+			class="org.hisp.dhis.hrentry.action.dataentry.RemovePersonAction">
+			<result name="success" type="redirect">updateRecordsList.action</result>
+	</action>
+    
+    <action name="searchRecord" class="org.hisp.dhis.hrentry.action.dataentry.SearchRecordAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/searchRecord.vm</param>
+    </action> 
+    
+    <action name="history" class="org.hisp.dhis.hrentry.action.dataentry.UpdateRecordListAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/history.vm</param>
+      <param name="javascripts">../dhis-web-commons/util/jquery.jqprint.0.3.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action> 
+    
+    
+    <!-- In Service Training -->
+    
+    <action name="inServiceTraining" class="org.hisp.dhis.hrentry.action.dataentry.PersonTraining">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/training.vm</param>
+      <param name="javascripts">javascript/training.js
+      							,../dhis-web-commons/util/jquery.jqprint.0.3.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action>
+    
+    <action name="addTraining"
+			class="org.hisp.dhis.hrentry.action.dataentry.AddTrainingAction">
+			<result name="success" type="redirect">inServiceTraining.action</result>
+	</action>
+	
+	<action name="updateTraining"
+			class="org.hisp.dhis.hrentry.action.dataentry.UpdateTrainingAction">
+			<result name="success" type="redirect">inServiceTraining.action</result>
+	</action>
+	
+	<action name="removeTraining"
+			class="org.hisp.dhis.hrentry.action.dataentry.RemoveTrainingAction">
+			<result name="success" type="redirect">inServiceTraining.action</result>
+	</action>
+    
+    <action name="showAddTrainingForm" class="org.hisp.dhis.hrentry.action.dataentry.PersonTraining">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/addTrainingForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/training.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js
+				.../dhis-web-commons/util/jquery.jqprint.0.3.js</param>     
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action>
+    
+    <action name="showUpdateTrainingForm" class="org.hisp.dhis.hrentry.action.dataentry.GetTrainingAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/updateTrainingForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/training.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js
+				.../dhis-web-commons/util/jquery.jqprint.0.3.js</param>     
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action>
+    
+    <action name="validateTraining"
+			class="org.hisp.dhis.hrentry.action.dataentry.ValidateTrainingAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-hrentry/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-hrentry/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-hrentry/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-hrentry/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+	</action>
+	
+	<!-- History -->
+	
+	<action name="history" class="org.hisp.dhis.hrentry.action.history.PersonHistory">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/history.vm</param>
+      <param name="javascripts">javascript/history.js
+      							,../dhis-web-commons/util/jquery.jqprint.0.3.js</param>      
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action>
+    
+    <action name="showAddHistoryForm" class="org.hisp.dhis.hrentry.action.history.PersonHistory">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/addHistoryForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/history.js
+				,../dhis-web-commons/util/validate/jquery.validate.js
+				,../dhis-web-commons/util/validate/additional-methods.js
+				.../dhis-web-commons/util/jquery.jqprint.0.3.js</param>     
+      <param name="stylesheets">../dhis-web-commons/paging/paging.css</param>
+    </action>
+    
+    <action name="addHistory"
+			class="org.hisp.dhis.hrentry.action.history.AddHistoryAction">
+			<result name="success" type="redirect">history.action</result>
+	</action>
+	
+	<action name="removeHistory"
+			class="org.hisp.dhis.hrentry.action.history.RemoveHistoryAction">
+			<result name="success" type="redirect">history.action</result>
+	</action>
+    
+    <action name="validateHistory"
+			class="org.hisp.dhis.hrentry.action.history.ValidateHistoryAction">
+			<result name="success" type="velocity-xml">
+				/dhis-web-hrentry/responseSuccess.vm</result>
+			<result name="error" type="velocity-xml">
+				/dhis-web-hrentry/responseError.vm</result>
+			<result name="input" type="velocity-xml">
+				/dhis-web-hrentry/responseInput.vm</result>
+			<result name="duplicate" type="velocity-xml">
+				/dhis-web-hrentry/responseDuplicate.vm</result>
+			<param name="onExceptionReturn">plainTextError</param>
+	</action>
+    
+    <!-- Aggregated Report -->
+    
+    <action name="showAggregatedReportForm" class="org.hisp.dhis.hrentry.records.action.GetReportOptionsAction">      
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="menuTreeHeight">420</param>	  
+      <param name="page">/dhis-web-hrentry/aggregatedReportForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>      
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/aggregatedReport.js,javascript/form.js</param>
+      <interceptor-ref name="organisationUnitTreeStack"/>       
+    </action>	
+    
+    <action name="loadAttributes" class="org.hisp.dhis.hrentry.records.action.LoadAttributesAction">
+            <result name="success" type="velocity-json">/dhis-web-hrentry/response.vm</result>
+    </action>   
+    
+    <action name="generateChart" class="org.hisp.dhis.hrentry.records.action.GenerateChartAction">
+             <result name="success" type="chart"></result>     
+    </action>
+    
+    <action name="ShowAggregatedReport" class="org.hisp.dhis.hrentry.records.action.GenerateAggregatedReportAction">
+      <result name="success" type="velocity">/main.vm</result>   
+      <param name="page">/dhis-web-hrentry/previewAggregatedReportForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>         
+    </action>
+	
+	<action name="showProfile" class="org.hisp.dhis.hrentry.action.dataentry.ShowProfileAction">
+      <result name="success" type="velocity">/dhis-web-hrentry/showProfile.vm</result>
+    </action>
+	
+	<!-- HR Import Export -->
+	<action name="displayHrImportForm" class="org.hisp.dhis.importexport.action.imp.GetHrImportOptionsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-hrentry/importForm.vm</param>
+      <param name="menu">/dhis-web-hrentry/menu.vm</param>
+      <param name="javascripts">javascript/import.js,javascript/process.js</param>
+    </action>
+	<action name="import" class="org.hisp.dhis.importexport.action.imp.ImportAction">
+      <result name="success" type="chain">displayImportForm</result>
+      <interceptor-ref name="fileUploadStack"/>
+    </action>
+    
+    <action name="getImportStatus" class="org.hisp.dhis.importexport.action.imp.GetImportStatusAction">
+      <result name="success" type="velocity-xml">/dhis-web-importexport/responseImportStatus.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	
+	<action name="displayDataValueExportForm" class="org.hisp.dhis.importexport.action.exp.GetExportOptionsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-importexport/exportDataValueForm.vm</param>
+      <param name="menu">/dhis-web-importexport/mainMenu.vm</param>
+      <param name="javascripts">../dhis-web-commons/oust/oust.js,javascript/export.js</param>
+    </action>
+	<action name="displayMetaDataExportForm" class="org.hisp.dhis.importexport.action.exp.GetExportOptionsAction">
+      <result name="success" type="velocity">/main.vm</result>
+      <param name="page">/dhis-web-importexport/exportMetaDataForm.vm</param>
+      <param name="menu">/dhis-web-importexport/mainMenu.vm</param>
+      <param name="javascripts">javascript/export.js</param>
+    </action>
+	<action name="exportMetaData" class="org.hisp.dhis.importexport.action.exp.MetaDataExportAction">
+      <result name="success" type="stream">
+        <param name="contentType">application/zip</param>
+        <param name="inputName">inputStream</param>
+        <param name="contentDisposition">filename="${fileName}"</param>
+        <param name="bufferSize">10240</param>
+      </result>
+    </action>
+	<action name="exportDataValue" class="org.hisp.dhis.importexport.action.exp.DataValueExportAction">
+      <result name="success" type="stream">
+        <param name="contentType">application/zip</param>
+        <param name="inputName">inputStream</param>
+        <param name="contentDisposition">filename="${fileName}"</param>
+        <param name="bufferSize">10240</param>				
+      </result>
+	  <result name="error" type="velocity-xml">/dhis-web-importexport/responseError.vm</result>
+    </action>
+	<action name="getExportStatus" class="org.hisp.dhis.importexport.action.exp.GetExportStatusAction">
+      <result name="success" type="velocity-xml">/dhis-web-importexport/responseExportStatus.vm</result>
+      <param name="onExceptionReturn">plainTextError</param>
+    </action>
+	
+	</package>
+ 
+</struts>

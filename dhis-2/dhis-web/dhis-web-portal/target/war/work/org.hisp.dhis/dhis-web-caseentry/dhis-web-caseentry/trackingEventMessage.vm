@@ -1,0 +1,62 @@
+<table class="mainPageTable" id='messageList'>
+	<colgroup>
+		<col width="160px"/>
+		<col width="160px"/>
+		<col width="100px"/>
+		<col/>
+	</colgroup>
+	<tr>
+		<th class="{sorter: false}">$i18n.getString( "date" )</th>
+		<th class="{sorter: false}">$i18n.getString( "program_stage" )</th>
+		<th class="{sorter: false}">$i18n.getString( "sender" )</th>
+		<th class="{sorter: false}">$i18n.getString( "type" )</th>
+		<th class="{sorter: false}">$i18n.getString( "status" )</th>
+		<th class="{sorter: false}">$i18n.getString( "message" )</th>
+		<th class="{sorter: false}">$i18n.getString( "operation" )</th>
+	</tr>
+	<tbody id='commentTB' name='commentTB'>
+		#set( $mark = false )
+		#foreach( $comment in $programStageInstance.patientComments )
+			<tr id="comment_$comment.id" #alternate( $mark )>
+				<td>$format.formatDateTime($comment.createdDate)</td>
+				<td>$encoder.htmlEncode($programStageInstance.programStage.displayName)</td>
+				<td>$encoder.htmlEncode($comment.creator)</td>
+				<td>$i18n.getString('comment')</td>
+				<td></td>
+				<td>$encoder.htmlEncode($comment.commentText)</td>
+				<td>
+					<a href="javascript:removeComment( '$programStageInstance.id', '$comment.id' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+				</td>
+			</tr>
+			#set( $mark = !$mark )
+		#end
+		#foreach( $sms in $programStageInstance.outboundSms )
+			<tr id="tr${sms.id}" #alternate( $mark )>
+				<td>$format.formatDateTime($!sms.date)</td>
+				<td>$encoder.htmlEncode($programStageInstance.programStage.displayName)</td>
+				<td>$encoder.htmlEncode($sms.sender)</td>
+				<td>$i18n.getString('message')</td>
+				<td #if( $sms.status=='ERROR') style="color:red" #end >$sms.status</td>
+				<td>$encoder.htmlEncode($sms.message)</td>
+				<td>
+					<a href="javascript:removeMessage('', $programStageInstance.id, $sms.id )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+				</td>
+			</tr>
+			#set( $mark = !$mark )
+		#end
+		#foreach( $messageConversation in $programStageInstance.messageConversations )
+		<tr id="tr${sms.id}" #alternate( $mark )>
+			<td>$format.formatDateTime($!messageConversation.lastMessage)</td>
+			<td>$programStageInstance.programStage.displayName</td>
+			<td>$messageConversation.lastSender.username</td>
+			<td>$i18n.getString('message')</td>
+			<td></td>
+			<td>$messageConversation.messages.get(0)</td>
+			<td>
+				<a href="javascript:removeMessage( $programInstances.id, '', $sms.id )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png" alt="$i18n.getString( 'remove' )"></a>
+			</td>
+		</tr>
+		#set( $mark = !$mark )
+		#end
+	</tbody>
+</table>

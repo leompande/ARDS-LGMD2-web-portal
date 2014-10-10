@@ -1,0 +1,42 @@
+<p></p>
+<div style="margin-bottom:15px">
+<input type="button" value="$i18n.getString( 'get_report_as_xls' )" onclick="exportPatientHistory( '$patient.id', 'xls' )" >
+<input type="button" value="$i18n.getString( 'get_report_as_pdf' )" onclick="exportPatientHistory( '$patient.id', 'pdf' )" >
+</div>
+<div>
+#foreach( $grid in $grids )
+	#if( $grid.getHeaders().size() == 3 )
+		</div><div class="formSection" style="margin-bottom:30px">
+	#end
+	
+	<div class="cent">
+		<h3>$!encoder.htmlEncode( $grid.title )</h3>
+		<h4>$!encoder.htmlEncode( $!grid.subtitle )</h4>
+	</div>
+	<table class="listTable">
+		<thead>
+			<tr>
+			#foreach( $header in $grid.getVisibleHeaders() )
+				<th #if( $header.meta )style="text-align:left"#end>$!encoder.htmlEncode( $header.name )</th>
+			#end
+			</tr>
+		</thead>
+
+		<tbody>  
+			#set( $mark = false )
+			#foreach( $row in $grid.getVisibleRows() )
+			<tr #alternate($mark)>
+				#foreach( $col in $row )
+					#set( $index = ( $velocityCount - 1 ) )
+					#if( $grid.getVisibleHeaders().get( $index ).meta )
+						<td >$!encoder.htmlEncode( $col )</td>
+					#else 
+						<td>$!col</td>
+					#end
+				#end
+			</tr>
+			#end
+			#set( $mark = !$mark)
+		</tbody>
+	</table>
+#end

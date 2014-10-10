@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+  <!-- Line List Option -->
+
+    <bean id="org.hisp.dhis.ll.action.llOption.GetLineListOptionListAction"
+    class="org.hisp.dhis.ll.action.llOption.GetLineListOptionListAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    
+    <bean id="org.hisp.dhis.ll.action.llOption.AddLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.AddLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llOption.GetLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.GetLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llOption.RemoveLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.RemoveLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llOption.ShowAddLineListOptionForm"
+    class="org.hisp.dhis.ll.action.llOption.ShowAddLineListOptionForm" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llOption.ShowUpdateLineListOptionFormAction"
+    class="org.hisp.dhis.ll.action.llOption.ShowUpdateLineListOptionFormAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llOption.UpdateLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.UpdateLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llOption.ValidateLineListOptionAction"
+    class="org.hisp.dhis.ll.action.llOption.ValidateLineListOptionAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+  <!-- Line List Element -->
+
+    <bean id="org.hisp.dhis.ll.action.llelements.ValidateLineListElementAction"
+    class="org.hisp.dhis.ll.action.llelements.ValidateLineListElementAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+  <!-- Overview -->
+
+    <bean id="org.hisp.dhis.ll.action.llelements.LineListElementListAction"
+    class="org.hisp.dhis.ll.action.llelements.LineListElementListAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.LineListOptionListAction"
+    class="org.hisp.dhis.ll.action.llelements.LineListOptionListAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.SaveLineListElementSortOrderAction"
+    class="org.hisp.dhis.ll.action.llelements.SaveLineListElementSortOrderAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.AddLineListElementAction"
+    class="org.hisp.dhis.ll.action.llelements.AddLineListElementAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.UpdateLineListElementAction"
+    class="org.hisp.dhis.ll.action.llelements.UpdateLineListElementAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.GetLineListElementAction"
+    class="org.hisp.dhis.ll.action.llelements.GetLineListElementAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.GetLineListElementOptionsAction"
+    class="org.hisp.dhis.ll.action.llelements.GetLineListElementOptionsAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llelements.RemoveLineListElementAction"
+    class="org.hisp.dhis.ll.action.llelements.RemoveLineListElementAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <!-- Line List Group -->
+
+    <bean
+    id="org.hisp.dhis.ll.action.llgroup.GetLineListGroupListAction"
+    class="org.hisp.dhis.ll.action.llgroup.GetLineListGroupListAction"
+    scope="prototype">
+
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llgroup.AddLineListGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.AddLineListGroupAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="periodStore">
+            <ref bean="org.hisp.dhis.period.PeriodStore"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.GetLineListGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.GetLineListGroupAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llgroup.RemoveLineListGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.RemoveLineListGroupAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.ShowAddLineListGroupForm"
+    class="org.hisp.dhis.ll.action.llgroup.ShowAddLineListGroupForm" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.ShowUpdateLineListGroupFormAction"
+    class="org.hisp.dhis.ll.action.llgroup.ShowUpdateLineListGroupFormAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="periodStore">
+            <ref bean="org.hisp.dhis.period.PeriodStore"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.UpdateLineListGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.UpdateLineListGroupAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.ValidateLineListGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.ValidateLineListGroupAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+    </bean>
+
+	    <bean id="org.hisp.dhis.ll.action.llgroup.ValidateLineListGroupAddAction"
+    class="org.hisp.dhis.ll.action.llgroup.ValidateLineListGroupAddAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+<!--    <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>-->
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.LineListGroupElementListAction"
+    class="org.hisp.dhis.ll.action.llgroup.LineListGroupElementListAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="periodStore">
+            <ref bean="org.hisp.dhis.period.PeriodStore"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.LineListElementListFilteredByGroup"
+    class="org.hisp.dhis.ll.action.llgroup.LineListElementListFilteredByGroup" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="periodStore">
+            <ref bean="org.hisp.dhis.period.PeriodStore"/>
+        </property>
+    </bean>
+
+    <!-- Line List source assign -->
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.GetNumberOfLevelsAction"
+    class="org.hisp.dhis.ll.action.llgroup.GetNumberOfLevelsAction"
+    scope="prototype">
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.SetupAssociationsTreeAction"
+    class="org.hisp.dhis.ll.action.llgroup.SetupAssociationsTreeAction"
+    scope="prototype">
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.DefineLLGroupAssociationsAction"
+    class="org.hisp.dhis.ll.action.llgroup.DefineLLGroupAssociationsAction"
+    scope="prototype">
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.SelectLevelAction"
+    class="org.hisp.dhis.ll.action.llgroup.SelectLevelAction"
+    scope="prototype">
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.UnselectLevelAction"
+    class="org.hisp.dhis.ll.action.llgroup.UnselectLevelAction"
+    scope="prototype">
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.UnselectAllAction"
+    class="org.hisp.dhis.ll.action.llgroup.UnselectAllAction"
+    scope="prototype">
+        <property name="selectionTreeManager">
+            <ref bean="org.hisp.dhis.oust.manager.SelectionTreeManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llgroup.GetLLGroupAction"
+    class="org.hisp.dhis.ll.action.llgroup.GetLLGroupAction"
+    scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+<!--        <property name="dataEntryFormService">
+            <ref bean="org.hisp.dhis.dataset.DataEntryFormService"/>
+        </property>-->
+    </bean>
+
+
+    <!-- Line List Data Entry -->
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"
+    class="org.hisp.dhis.ll.action.lldataentry.DefaultSelectedStateManager">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="selectionManager">
+            <ref bean="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.SelectAction"
+    class="org.hisp.dhis.ll.action.lldataentry.SelectAction" scope="prototype">
+        <property name="selectedStateManager">
+            <ref bean="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+        </property>
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+<!--        <property name="dataEntryFormService">
+            <ref bean="org.hisp.dhis.dataset.DataEntryFormService"/>
+        </property>-->
+        <property name="sectionService">
+            <ref bean="org.hisp.dhis.dataset.SectionService"/>
+        </property>
+<!--    <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>-->
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.NextPeriodsAction"
+    class="org.hisp.dhis.ll.action.lldataentry.NextPeriodsAction">
+        <property name="selectedStateManager">
+            <ref bean="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.PreviousPeriodsAction"
+    class="org.hisp.dhis.ll.action.lldataentry.PreviousPeriodsAction">
+        <property name="selectedStateManager">
+            <ref bean="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.FormAction"
+    class="org.hisp.dhis.ll.action.lldataentry.FormAction" scope="prototype">
+        <property name="selectedStateManager">
+            <ref bean="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+        </property>
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataentry.SaveValueAction"
+    class="org.hisp.dhis.ll.action.lldataentry.SaveValueAction" scope="prototype">
+        <property name="currentUserService"
+            ref="org.hisp.dhis.user.CurrentUserService"/>
+
+        <property name="dataBaseManagerInterface">
+            <ref bean="org.hisp.dhis.dbmanager.DataBaseManagerInterface"/>
+        </property>
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="selectedStateManager"
+            ref="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+
+    </bean>
+
+
+    <bean id="org.hisp.dhis.ll.action.llValidation.GetLineListValidationRuleListAction"
+    class="org.hisp.dhis.ll.action.llValidation.GetLineListValidationRuleListAction">
+        <property name="validationRuleService">
+            <ref bean="org.hisp.dhis.linelisting.LineListValidationRuleService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llValidation.ShowAddLineListValidationForm"
+		class="org.hisp.dhis.ll.action.llValidation.ShowAddLineListValidationForm" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="selectedStateManager"
+            ref="org.hisp.dhis.ll.action.lldataentry.SelectedStateManager"/>
+
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llValidation.AddLineListValidationRuleAction"
+    class="org.hisp.dhis.ll.action.llValidation.AddLineListValidationRuleAction">
+        <property name="lineListValidationRuleService">
+            <ref bean="org.hisp.dhis.linelisting.LineListValidationRuleService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llValidation.GetFilteredLineListElementsAction"
+		class="org.hisp.dhis.ll.action.llValidation.GetFilteredLineListElementsAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+	<!-- Line List and Data Element Mapping-->
+
+    <bean id="org.hisp.dhis.ll.action.lldataelementmapping.GetOptionCombosAction"
+		class="org.hisp.dhis.ll.action.lldataelementmapping.GetOptionCombosAction" scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryOptionComboService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService;"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataelementmapping.LineListElementListAction"
+		class="org.hisp.dhis.ll.action.lldataelementmapping.LineListElementListAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+	
+    <bean id="org.hisp.dhis.ll.action.lldataelementmapping.LineListOptionListAction"
+		class="org.hisp.dhis.ll.action.lldataelementmapping.LineListOptionListAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+	
+    <bean id="org.hisp.dhis.ll.action.lldataelementmapping.LineListGroupListAction"
+		class="org.hisp.dhis.ll.action.lldataelementmapping.LineListGroupListAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.lldataelementmapping.AddLineListDataElementMapping"
+		class="org.hisp.dhis.ll.action.lldataelementmapping.AddLineListDataElementMapping" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="expressionService">
+            <ref bean="org.hisp.dhis.expression.ExpressionService"/>
+        </property>
+        <property name="lineListDataElementMappingService">
+            <ref bean="org.hisp.dhis.linelisting.linelistdataelementmapping.LineListDataElementMappingService"/>
+        </property>
+    </bean>
+
+<!-- Linelisting Aggregation Query Builder -->
+    <bean id="org.hisp.dhis.ll.action.llagg.LinelistingAggQueryBuilderFormAction"
+        class="org.hisp.dhis.ll.action.llagg.LinelistingAggQueryBuilderFormAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>		
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llagg.SaveLLAggQueryAction"
+        class="org.hisp.dhis.ll.action.llagg.SaveLLAggQueryAction" scope="prototype">
+        <property name="linelistAggMapService">
+            <ref bean="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryOptionComboService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llagg.GetAggDataElementsAction"
+        class="org.hisp.dhis.ll.action.llagg.GetAggDataElementsAction" scope="prototype">
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llagg.GetLinelistGroupDataElementsAction"
+        class="org.hisp.dhis.ll.action.llagg.GetLinelistGroupDataElementsAction" scope="prototype">
+        <property name="lineListService">
+            <ref bean="org.hisp.dhis.linelisting.LineListService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llagg.GetLinelistAggExpressionAction"
+        class="org.hisp.dhis.ll.action.llagg.GetLinelistAggExpressionAction" scope="prototype">
+        <property name="linelistAggMapService">
+            <ref bean="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapService"/>
+        </property>
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="dataElementCategoryOptionComboService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+    </bean>
+
+<!-- Linelisting Aggregation -->
+    <bean id="org.hisp.dhis.ll.action.llagg.LinelistingAggregationFormAction"
+        class="org.hisp.dhis.ll.action.llagg.LinelistingAggregationFormAction" scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.llagg.LinelistingAggregationResultAction"
+        class="org.hisp.dhis.ll.action.llagg.LinelistingAggregationResultAction" scope="prototype">
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="linelistAggregationService">
+            <ref bean="org.hisp.dhis.linelisting.llaggregation.LinelistAggMapService"/>
+        </property>
+        <property name="dataValueService">
+            <ref bean="org.hisp.dhis.datavalue.DataValueService"/>
+        </property>
+        <property name="currentUserService">
+            <ref bean="org.hisp.dhis.user.CurrentUserService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.ll.action.llagg.GetDataSetPeriodsAction"
+        class="org.hisp.dhis.ll.action.llagg.GetDataSetPeriodsAction" scope="prototype">
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+    </bean>
+    <bean id="org.hisp.dhis.ll.action.lldataentry.GetOrgUnitsAction"
+        class="org.hisp.dhis.ll.action.lldataentry.GetOrgUnitsAction" scope="prototype">
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+    </bean>
+
+	
+</beans>

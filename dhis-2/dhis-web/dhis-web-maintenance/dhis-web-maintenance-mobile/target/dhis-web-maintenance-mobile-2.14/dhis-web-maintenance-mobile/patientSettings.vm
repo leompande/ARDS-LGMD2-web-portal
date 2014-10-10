@@ -1,0 +1,86 @@
+<script>
+	jQuery(document).ready(	function()
+	{		
+		validation( 'editPatientMobileSetting', function( form ){ form.submit() }, function(){ selectAllById('selectedList') });
+	});
+</script>
+<h3>$i18n.getString( "patient_mobile_setting" ) #openHelp( "patient_mobile_setting" )</h3>
+<form id="editPatientMobileSetting" name="editPatientMobileSetting" action="editPatientMobileSetting.action" method="post" >
+	<table>
+		<tr>
+			<td>$i18n.getString( "gender" )</td>
+			<td><input type="checkbox" id="gender" name="gender" value="true" #if( $setting.gender == 'true' ) checked #end/></td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( "dob_type" )</td>
+			<td><input type="checkbox" id="dobtype" name="dobtype" value="true" #if( $setting.dobtype == 'true' ) checked #end/></td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( "date_of_birth" )</td>
+			<td><input type="checkbox" id="birthdate" name="birthdate" value="true" #if( $setting.birthdate == 'true' ) checked #end/></td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( "registration_date" )</td>
+			<td><input type="checkbox" id="registrationdate" name="registrationdate" value="true" #if( $setting.registrationdate == 'true' ) checked #end/></td>
+		</tr>
+		<tr>
+			<td>$i18n.getString( "activity_grouping_attribute" )</td>
+			<td>
+				<select id="groupingAttributeId" name="groupingAttributeId">
+						<option value="0">$i18n.getString( "please_select" )</option>
+					#foreach( $att in $allAttributes )
+              			<option value="$att.id" #if($att.isGroupBy()) selected="selected" #end>$encoder.htmlEncode( $att.name )</option>
+          			#end
+				</select>
+			</td>
+		</tr>
+	</table>
+  <br/>
+  <table id="dataElementSelectionArea">
+    <col/> ## Available DataElements
+    <col/> ## Filter
+    <col/> ## Selected DataElements
+    <thead>
+      <tr>
+        <th>$i18n.getString( "available_patient_attributes" )</th>
+		<th>$i18n.getString( "filter" )</th>
+        <th>$i18n.getString( "selected_patient_attributes" )</th>
+      </tr>
+    </thead>
+    <tbody>
+		<tr>
+		  <td>
+	      <!-- List of all available PatientAttribute -->
+          <select size="15" id="availableList" name="availableList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'availableList', 'selectedList');">
+              	#foreach( $att in $attributes )
+              		<option value="$att.id">$encoder.htmlEncode( $att.name )</option>
+          		#end
+          </select>
+          </td>
+		  <td>
+            <input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="moveSelectedById( 'availableList', 'selectedList');"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="moveSelectedById( 'selectedList', 'availableList');"/><br/>
+            <input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveAllById( 'availableList', 'selectedList' );"/><br/>
+            <input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedList', 'availableList' );"/>
+          </td>
+          <td>
+		  <!-- List of all selected PatientAttribute -->
+          <select size="15" id="selectedList" name="selectedList" multiple="multiple" style="min-width:20em;height:20em" ondblclick="moveSelectedById( 'selectedList', 'availableList');">
+              	#foreach( $selectedAtt in $patientAtts )
+              		<option value="$selectedAtt.id">$encoder.htmlEncode( $selectedAtt.name )</option>
+          		#end
+          </select>
+          </td>
+          <td style="width:30px; text-align:center">
+            <a href="javascript:moveUpSelectedOption( 'selectedList' )"><img src="../images/move_up.png"/></a><br/><br/>
+            <a href="javascript:moveDownSelectedOption( 'selectedList' )"><img src="../images/move_down.png"/></a><br/><br/>
+          </td>
+		</tr>
+		<tr>
+        <td colspan="3">
+          <input type="submit" value="$i18n.getString( 'save' )" style="width:20em"/>
+        </td>
+      </tr>
+	</tbody>
+  </table>
+</form>

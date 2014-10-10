@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    
+    <!-- Static Excel Import -->
+    <bean id="org.hisp.dhis.excelimport.action.ExcelImportFormAction"
+        class="org.hisp.dhis.excelimport.action.ExcelImportFormAction"
+        scope="prototype">
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+    <bean id="org.hisp.dhis.excelimport.action.ExcelImportResultAction"
+        class="org.hisp.dhis.excelimport.action.ExcelImportResultAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager" />
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+        <!--<property name="dataSetLockService" ref="org.hisp.dhis.datalock.DataSetLockService" />-->
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Portal Data Import -->
+    <bean id="org.hisp.dhis.excelimport.portal.action.PortalExcelImportFormAction"
+        class="org.hisp.dhis.excelimport.portal.action.PortalExcelImportFormAction"
+        scope="prototype">
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+    </bean>
+    <bean id="org.hisp.dhis.excelimport.portal.action.PortalExcelImportResultAction"
+        class="org.hisp.dhis.excelimport.portal.action.PortalExcelImportResultAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager" />
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>
+
+    <!-- BD Data Import -->
+
+    <bean id="org.hisp.dhis.excelimport.bddataimport.action.BDExcelImportFormAction"
+          class="org.hisp.dhis.excelimport.bddataimport.action.BDExcelImportFormAction"
+          scope="prototype">
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.excelimport.bddataimport.action.BDExcelImportResultAction"
+          class="org.hisp.dhis.excelimport.bddataimport.action.BDExcelImportResultAction"
+          scope="prototype">
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="databaseInfoProvider" ref="databaseInfoProvider" />
+    </bean>
+    
+    <!-- TCS Data Import -->
+    <bean id="org.hisp.dhis.excelimport.tcs.action.TCSXmlImportFormAction"
+        class="org.hisp.dhis.excelimport.tcs.action.TCSXmlImportFormAction"
+        scope="prototype">
+    </bean>
+    <bean id="org.hisp.dhis.excelimport.tcs.action.TCSXmlImportResultAction"
+        class="org.hisp.dhis.excelimport.tcs.action.TCSXmlImportResultAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager" />
+        <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>
+    
+    <!-- Get Data Elements -->
+    <bean id="org.hisp.dhis.excelimport.action.GetDataElementsAction"
+        class="org.hisp.dhis.excelimport.action.GetDataElementsAction"
+        scope="prototype">      
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    </bean>
+    
+    <!-- Get Periods -->
+    <bean id="org.hisp.dhis.excelimport.action.GetPeriodsAction"
+        class="org.hisp.dhis.excelimport.action.GetPeriodsAction"
+        scope="prototype">
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    </bean>
+    
+    <!-- Get Organisation Units -->
+    <bean id="org.hisp.dhis.excelimport.action.GetOrgUnitsAction"
+        class="org.hisp.dhis.excelimport.action.GetOrgUnitsAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+    
+    <!-- reports home page Form -->
+    <bean id="org.hisp.dhis.excelimport.action.ReportsHomePageAction"
+        class="org.hisp.dhis.excelimport.action.ReportsHomePageAction"
+        scope="prototype">
+        <property name="reportService">
+            <ref bean="org.hisp.dhis.excelimport.util.ReportService"/>
+        </property>     
+    </bean>
+    
+    <!-- Get Reports -->
+    <bean id="org.hisp.dhis.excelimport.action.GetReportsAction"
+        class="org.hisp.dhis.excelimport.action.GetReportsAction"
+        scope="prototype">
+        <property name="reportService">
+            <ref bean="org.hisp.dhis.excelimport.util.ReportService"/>
+        </property>
+        <property name="organisationUnitService">
+            <ref bean="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+    </bean>
+
+    <bean id="org.hisp.dhis.excelimport.emaildataimport.importEmailAttachmentData"
+          class="org.hisp.dhis.excelimport.emaildataimport.importEmailAttachmentData">
+         <property name="reportService" ref="org.hisp.dhis.excelimport.util.ReportService" />
+         <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+         <property name="jdbcTemplate" ref="jdbcTemplate" />
+         <property name="databaseInfoProvider" ref="databaseInfoProvider" />
+    </bean>
+
+    <!-- Task Scheduling -->
+
+    <bean id="schedulerTask"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="org.hisp.dhis.excelimport.emaildataimport.importEmailAttachmentData"/>
+        <property name="targetMethod" value="extractXLSToImport"/>
+    </bean>
+
+
+    <!-- Simple Trigger, run every 60 seconds -->
+
+    <bean id="simpleTrigger"
+          class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+
+        <property name="jobDetail" ref="schedulerTask"/>
+        <property name="repeatInterval" value="60000"/>
+        <property name="startDelay" value="1000"/>
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="schedulerTask"/>
+            </list>
+        </property>
+
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger"/>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Report Service -->
+    <bean id="org.hisp.dhis.excelimport.util.ReportService"
+        class="org.hisp.dhis.excelimport.util.ReportService" scope="prototype">     
+        <property name="periodService">
+            <ref bean="org.hisp.dhis.period.PeriodService"/>
+        </property>
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>    
+        <property name="dataElementService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementService"/>
+        </property>
+        <property name="indicatorService">
+            <ref bean="org.hisp.dhis.indicator.IndicatorService"/>
+        </property>
+        <property name="dataSetService">
+            <ref bean="org.hisp.dhis.dataset.DataSetService"/>
+        </property>
+        <property name="aggregationService">
+            <ref bean="org.hisp.dhis.aggregation.AggregationService"/>
+        </property>
+        <property name="dataValueService">
+            <ref bean="org.hisp.dhis.datavalue.DataValueService"/>
+        </property>
+        <property name="dataElementCategoryService">
+            <ref bean="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        </property>
+        <property name="configurationService">
+            <ref bean="org.hisp.dhis.config.ConfigurationService"/>
+        </property>
+    </bean>
+    
+</beans>

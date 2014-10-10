@@ -1,0 +1,87 @@
+
+<h3>$i18n.getString( "hr_person_management" )</h3>
+
+<table class="mainPageTable">
+  <tr>
+    <td style="vertical-align:top">
+    
+      <table class="listTable">        
+  <tr>
+  <td colspan="3"></td>
+<td colspan="3" style="text-align:right"><input type="button" value="$i18n.getString( "add_new" )" onclick="window.location.href='showAddPersonForm.action'" style="width:70px"></td>
+  </tr>
+          <tr>
+            <th>$i18n.getString( "name" )</th>
+            <th colspan="5" style="width:75px;">$i18n.getString( "operations" )</th>
+          </tr>
+
+          <tbody id="list">
+            #set( $mark = false )
+            #foreach( $person in $persons )
+              <tr id="tr${person.id}">
+                <td #alternate( $mark ) onclick="showPersonDetails( $person.id )">$encoder.htmlEncode( $person.name )</td>
+                <td style="text-align:center;width:25px;"#alternate( $mark )>
+                  <a href="showUpdatePersonForm.action?id=$person.id" title="$i18n.getString( "edit" )"><img src="../images/edit.png" alt="$i18n.getString( "edit" )"></a>
+                </td>
+                <td style="text-align:center;width:25px;"#alternate( $mark )>
+                  <a href="showHistory.action?id=$person.id" title="$i18n.getString( "history" )"><img src="../images/history.png" alt="$i18n.getString( "history" )"></a>
+                </td>
+                <td style="text-align:center;width:25px;"#alternate( $mark )>
+                  <a href="showTraining.action?id=$person.id" title="$i18n.getString( "training" )"><img src="../images/training.png" alt="$i18n.getString( "training" )"></a>
+                </td>
+                <td style="text-align:center;width:25px;"#alternate( $mark )>
+                  <a href="javascript:removePerson( '$person.id', '$encoder.jsEncode( $person.name )' )" title="$i18n.getString( "remove" )"><img src="../images/delete.png" alt="$i18n.getString( "remove" )"></a>
+                </td>            
+                
+                <td style="text-align:center;width:25px;"#alternate( $mark )>
+                  <a href="javascript:showPersonDetails( $person.id )" title="$i18n.getString( "show_details" )"><img src="../images/information.png" alt="$i18n.getString( "show_details" )"></a>
+                </td>
+                
+              </tr>
+  #if( $mark )
+#set( $mark = false )
+  #else
+#set( $mark = true )
+  #end
+            #end
+
+          </tbody>
+
+        </table>
+    </td>
+<td style="width:20em; padding-left:2em; vertical-align:top">
+
+<div id="detailsArea" style="display:none">
+<div style="float:right">
+<a href="javascript:hideDetails()" title="$i18n.getString( "hide_details" )"><img src="../images/close.png" alt="$i18n.getString( "hide_details" )"></a>
+</div>
+<p><label>$i18n.getString( "id" ):</label><br><span id="idField"></span></p>
+                <p><label>$i18n.getString( "first_name" ):</label><br><span id="firstNameField"></span></p>
+                <p><label>$i18n.getString( "middle_name" ):</label><br><span id="middleNameField"></span></p>
+                <p><label>$i18n.getString( "last_name" ):</label><br><span id="lastNameField"></span></p>
+                <p><label>$i18n.getString( "birth_date" ):</label><br><span id="birthdDateField"></span></p>
+                <p><label>$i18n.getString( "gender" ):</label><br><span id="genderField"></span></p>
+                <p><label>$i18n.getString( "nationality" ):</label><br><span id="nationalityField"></span></p>
+                <p><label>$i18n.getString( "dataset" ):</label><br><span id="hrDataSetField"></span></p>
+                <p><label>$i18n.getString( "number_of_data_values" ):</label><br><span id="valuesCountField"></span></p>
+                <p><label>$i18n.getString( "number_of_histories" ):</label><br><span id="historyCountField"></span></p>
+                <p><label>$i18n.getString( "number_of_trainings" ):</label><br><span id="trainingCountField"></span></p>
+</div>
+
+</td>
+  </tr>
+</table>
+<script type="text/javascript">
+var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_person" ) , "'" )';
+var i18n_adding_person_failed = '$encoder.jsEscape( $i18n.getString( "adding_person_failed" ), "'")';
+var i18n_saving_person_failed = '$encoder.jsEscape( $i18n.getString( "saving_person_failed" ) , "'" )';
+var i18n_updating_house_hold_failed = '$encoder.jsEscape( $i18n.getString( "updating_person_failed" ), "'")';
+var i18n_none = '$encoder.jsEscape( $i18n.getString( "none" ), "'")';
+    var i18n_yes = '$encoder.jsEscape( $i18n.getString( "yes" ) , "'")';
+    var i18n_no = '$encoder.jsEscape( $i18n.getString( "no" ) , "'")';
+    var i18n_number = '$encoder.jsEscape( $i18n.getString( "number" ) , "'")';
+    var i18n_yes_no = '$encoder.jsEscape( $i18n.getString( "yes_no" ) , "'")';
+    var i18n_text = '$encoder.jsEscape( $i18n.getString( "text" ) , "'")';
+    var i18n_date = '$encoder.jsEscape( $i18n.getString( "date" ) , "'")';
+    var i18n_combo = '$encoder.jsEscape( $i18n.getString( "combo" ) , "'")';
+</script>

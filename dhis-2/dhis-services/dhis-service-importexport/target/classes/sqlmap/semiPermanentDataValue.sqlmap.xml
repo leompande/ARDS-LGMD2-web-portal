@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="semiPermanentDataValue">
+	
+	<!-- TypeAlias -->
+
+  <typeAlias alias="semiPermanentDataValue" type="org.hisp.dhis.importexport.dhis14.object.Dhis14SemiPermanentDataValue"/>
+	
+	<!-- ResultMap -->
+	
+	<resultMap class="semiPermanentDataValue" id="semiPermanentDataValueResultMap">
+		<result property="dataElementId" column="DataElementID"/>
+		<result property="periodType" column="DataPeriodTypeID" typeHandler="periodTypeTypeHandler"/>
+        <result property="startDate" column="ValidFrom" typeHandler="dateTypeHandler"/>
+        <result property="endDate" column="ValidTo" typeHandler="dateTypeHandler"/>
+		<result property="organisationUnitId" column="OrgUnitID"/>
+		<result property="value" column="EntryNumber"/>
+		<result property="yesNo" column="EntryYesNo"/>
+    </resultMap>
+	
+	<!-- Statement -->
+	
+	<select id="getSemiPermanentDataValues" resultMap="semiPermanentDataValueResultMap">
+		SELECT SPD.DataElementID, SPD.ValidFrom, SPD.ValidTo, 
+		SPD.OrgUnitID, SPD.EntryNumber, SPD.EntryYesNo, DataElement.DataPeriodTypeID 
+		FROM SemiPermanentData AS SPD, DataElement 
+        WHERE SPD.DataElementID = DataElement.DataElementID
+        UNION
+        SELECT SPD.DataElementID, SPD.ValidFrom, SPD.ValidTo, 
+        SPD.OrgUnitID, SPD.EntryNumber, SPD.EntryYesNo, DataElement.DataPeriodTypeID 
+        FROM SemiPermanentDataArchive AS SPD, DataElement 
+        WHERE SPD.DataElementID = DataElement.DataElementID
+	</select>
+  
+    <select id="getSemiPermanentDataValuesLastUpdated" parameterClass="java.util.Date" resultMap="semiPermanentDataValueResultMap">
+        SELECT SPD.DataElementID, SPD.ValidFrom, SPD.ValidTo, 
+        SPD.OrgUnitID, SPD.EntryNumber, SPD.EntryYesNo, DataElement.DataPeriodTypeID 
+        FROM SemiPermanentData AS SPD, DataElement 
+        WHERE SPD.DataElementID = DataElement.DataElementID 
+        AND SPD.LastUpdated > #value#
+        UNION
+        SELECT SPD.DataElementID, SPD.ValidFrom, SPD.ValidTo, 
+        SPD.OrgUnitID, SPD.EntryNumber, SPD.EntryYesNo, DataElement.DataPeriodTypeID 
+        FROM SemiPermanentDataArchive AS SPD, DataElement 
+        WHERE SPD.DataElementID = DataElement.DataElementID 
+        AND SPD.LastUpdated > #value#
+    </select>
+  
+    <select id="getSemiPermanentDataValuesOutOfRange" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM SemiPermanentData WHERE EntryNumber > 2147483647 UNION
+		SELECT COUNT(*) FROM SemiPermanentDataArchive WHERE EntryNumber > 2147483647
+	</select>
+  
+</sqlMap>

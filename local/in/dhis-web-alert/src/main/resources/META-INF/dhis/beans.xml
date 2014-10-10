@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Service  -->
+	
+	<bean id="org.hisp.dhis.alert.util.AlertUtility"
+		class="org.hisp.dhis.alert.util.AlertUtility" scope="prototype">
+		<property name="reportService" ref="org.hisp.dhis.reports.ReportService"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		
+	</bean>
+	
+	<!-- Common Action  -->
+	
+	<bean id="org.hisp.dhis.alert.action.HomePageAction"
+        class="org.hisp.dhis.alert.action.HomePageAction"
+        scope="prototype">
+    </bean>
+    
+	<bean id="org.hisp.dhis.alert.action.ExportToExcelAction"
+        class="org.hisp.dhis.alert.action.ExportToExcelAction"
+        scope="prototype">		
+    </bean>
+	
+	<!-- Dashboard Action  -->
+	
+    <bean id="org.hisp.dhis.alert.db.action.DashBoardAction"
+        class="org.hisp.dhis.alert.db.action.DashBoardAction"
+        scope="prototype">
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="alertUtility" ref="org.hisp.dhis.alert.util.AlertUtility" />
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>
+ 
+    <!-- Tracker Dashboard Action  -->    
+	
+	<bean id="org.hisp.dhis.alert.tdb.action.TrackerDashBoardAction"
+        class="org.hisp.dhis.alert.tdb.action.TrackerDashBoardAction"
+        scope="prototype">
+        <property name="statementManager" ref="statementManager" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+        <property name="aggregationService" ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="alertUtility" ref="org.hisp.dhis.alert.util.AlertUtility" />
+        <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+    </bean>
+	
+	<bean id="org.hisp.dhis.alert.tdb.action.GetPatientDataRecordsAction" class="org.hisp.dhis.alert.tdb.action.GetPatientDataRecordsAction"
+		scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+		<property name="programStageInstanceService" ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="patientAttributeService" ref="org.hisp.dhis.patient.PatientAttributeService" />
+		<property name="patientAttributeValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+  </bean>
+	
+	<bean id="org.hisp.dhis.alert.tdb.action.GetPatientDetailsAction" class="org.hisp.dhis.alert.tdb.action.GetPatientDetailsAction"
+		scope="prototype">
+		<property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+		<property name="patientIdentifierService" ref="org.hisp.dhis.patient.PatientIdentifierService" />
+		<property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+		<property name="patientAttributeValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+  </bean>
+	
+	<!-- IDSP Outbreak Action  -->
+	
+	<bean id="org.hisp.dhis.alert.idsp.action.IDSPOutbreakAction"
+        class="org.hisp.dhis.alert.idsp.action.IDSPOutbreakAction"
+        scope="prototype">       
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="userService" ref="org.hisp.dhis.user.UserService" /> 
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="alertUtility" ref="org.hisp.dhis.alert.util.AlertUtility" />        
+        <!--<property name="statementManager" ref="statementManager"/>-->
+        <property name="orgUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>	
+	
+	
+</beans>

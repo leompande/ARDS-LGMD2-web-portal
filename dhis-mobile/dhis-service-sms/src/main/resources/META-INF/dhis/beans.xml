@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--Version 2 Beans-->
+    <bean id="org.hisp.dhis.mobile.sms.api.SmsInboundStore"
+        class="org.hisp.dhis.mobile.sms.HibernateSmsInboundStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.mobile.sms.api.SmsInboundStoreService"
+        class="org.hisp.dhis.mobile.sms.DefaultSmsInboundStoreService">
+		<property name="smsInboundStore" ref="org.hisp.dhis.mobile.sms.api.SmsInboundStore"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.mobile.sms.SmsService"
+        class="org.hisp.dhis.mobile.sms.SmsService">
+		<property name="smsInboundStoreService" ref="org.hisp.dhis.mobile.sms.api.SmsInboundStoreService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.mobile.sms.api.SmsImportService"
+		class="org.hisp.dhis.mobile.sms.DefaultSmsImportService"
+        scope="prototype">
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService"/>
+        <property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+        <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService"/>
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService"/>
+        <property name="userStore" ref="org.hisp.dhis.user.UserStore"/>
+        <property name="smsInboundStoreService" ref="org.hisp.dhis.mobile.sms.api.SmsInboundStoreService" />
+    </bean>
+
+</beans>

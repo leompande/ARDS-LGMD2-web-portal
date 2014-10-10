@@ -1,0 +1,47 @@
+<style>
+		.x-column-header-inner .x-column-header-text {
+		white-space: normal;
+		z-index:0;
+	}
+
+	.x-column-header-inner {
+		line-height: normal;
+	}	
+	.x-grid-row .x-grid-cell-inner {
+		white-space: normal;		
+	}
+    .x-grid-row-over .x-grid-cell-inner {
+        font-weight: bold;
+		white-space: normal;		
+    }	
+	
+</style>
+<script >
+
+function organisationUnitSelected( orgUnits, orgUnitNames )
+{
+		setFieldValue("orgUnit", orgUnitNames[0]);
+		setFieldValue("orgUnitUid", orgUnits[0]);
+		loadBankDetails();
+}
+
+function loadBankDetails()
+{
+	$('#loadBankDetails').load("loadbankDetails.action", 
+            				{
+            					dataElementName : $('#dataElementName').val(),
+								orgUnitUid : $("#orgUnitUid").val()
+            				}
+            				, function( ){            										
+        				});  	
+}
+selection.setListenerFunction( organisationUnitSelected );
+</script>
+<input type="hidden" name="orgUnitUid" id="orgUnitUid">
+<h3>Bank Detail Management</h3>
+<div style="width:100%">
+	Orgainsation Unit: &nbsp; <input type="text" id="orgUnit" name="orgUnit" readonly size="40"/>
+</div>
+<br/><br/>
+<div id="loadBankDetails" style="width:92%;margin:auto;">
+</div>

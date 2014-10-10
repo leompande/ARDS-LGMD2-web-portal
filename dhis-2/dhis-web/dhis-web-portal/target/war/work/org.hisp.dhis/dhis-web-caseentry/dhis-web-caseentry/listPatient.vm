@@ -1,0 +1,191 @@
+<div id='listPatientDiv'>
+<table>
+	<tr>
+		<td class='text-column' >$i18n.getString( "search_result_matching_the_search_criteria" ):</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td id='searchInforTD'>
+			#if($!listAll)
+				$i18n.getString( "list_all_patients" )
+			#else
+				$i18n.getString( "search_patients" )
+			#end
+		</td>
+	</tr>	
+	
+	<tr>
+		<td class='text-column' >$i18n.getString( "total_result" ):</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>$!total</td>
+	</tr>
+</table>
+
+<br> 
+<table class="mainPageTable">
+<tr><td>
+	<table class="listTable" id="patientList" width='100%'>               
+          <col width="30"/>
+			#if($program)
+				#foreach( $programIdentifierType in $program.programPatientIdentifierTypes)
+					#if($programIdentifierType.displayedInList=='true')
+						<col/>
+					#end
+				#end
+
+				#foreach( $programAttribute in $program.programPatientAttributes )
+					#if($programAttribute.displayedInList=='true')
+						<col/>
+					#end
+				#end
+			#else
+				#foreach( $identifierType in $identifierTypes)
+					<col/>
+				#end
+				#foreach( $attribute in $attributes)
+					<col/>
+				#end
+			#end
+
+		  #if($mapPatientOrgunit.size()!=0)
+		  <col/>
+		  #end
+		  <col width="200"/>    
+		  
+		  <thead>
+			<tr>
+				<th>#</th>
+				#if($program)
+					#foreach( $programIdentifierType in $program.programPatientIdentifierTypes)
+						#if($programIdentifierType.displayedInList=='true')
+							<th>$encoder.htmlEncode($programIdentifierType.patientIdentifierType.displayName)</th>
+						#end
+					#end
+
+					#foreach( $programAttribute in $program.programPatientAttributes )
+						#if($programAttribute.displayedInList=='true')
+							<th id="patientAttributeName">$encoder.htmlEncode($programAttribute.patientAttribute.displayName)</th>
+						#end
+					#end
+				#else
+					#foreach( $identifierType in $identifierTypes)
+						<th>$encoder.htmlEncode($identifierType.displayName)</th>
+					#end
+					#foreach( $attribute in $attributes)
+						<th id="patientAttributeName">$encoder.htmlEncode($attribute.displayName)</th>
+					#end
+				#end
+				
+				#if($mapPatientOrgunit.size()!=0)
+					<th>$i18n.getString( "hierachy_orgunit" )</th>
+				#end
+				
+				<th style="text-align:center">$i18n.getString( "operations" )</th>
+			  </tr>
+          </thead>
+		  
+          <tbody id="list">	
+          #foreach( $patient in $patients )
+          	<tr id="tr${patient.id}">
+				
+				<td>
+					#set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+					$nr
+				</td>
+				#if($program)
+					#foreach( $programIdentifierType in $program.programPatientIdentifierTypes)
+						#set($value="")
+						#if($programIdentifierType.displayedInList=='true')
+							<td style="cursor:pointer;" onclick="javascript:isDashboard=true;showPatientDashboardForm( '$patient.uid' )">
+								#foreach( $identifier in $patient.identifiers)
+									#if($!identifier.identifierType.id==$programIdentifierType.patientIdentifierType.id)
+										#set($value=$identifier.identifier)
+									#end
+								#end 
+							<a>$encoder.htmlEncode($value)</a>
+						</td>
+						#end
+					#end
+					
+					#foreach( $programAttribute in $program.programPatientAttributes )
+						#if($programAttribute.displayedInList=='true')
+							<td style="cursor:pointer;" onclick="javascript:isDashboard=true;showPatientDashboardForm( '$patient.uid' )">
+								#foreach( $attributeValue in $patient.attributeValues)
+									#if($!attributeValue.patientAttribute.id==$programAttribute.patientAttribute.id)
+										#set($value=$attributeValue.value)
+										#if( $programAttribute.patientAttribute.valueType == 'bool')
+											#set($value=$i18n.getString($attributeValue.value))
+										#end
+									#end
+								#end 
+								<a>$encoder.htmlEncode($value)</a>
+							</td>
+						#end
+					#end
+				#else
+					#foreach( $identifierType in $identifierTypes)
+						#set($value="")
+						<td style="cursor:pointer;" onclick="javascript:isDashboard=true;showPatientDashboardForm( '$patient.uid' )">
+							#foreach( $identifier in $patient.identifiers)
+								#if($!identifier.identifierType.id==$identifierType.id)
+									#set($value=$identifier.identifier)
+								#end
+							#end 
+							<a>$encoder.htmlEncode($value)</a>
+						</td>
+					#end
+					
+					#foreach( $attribute in $attributes)
+						#set($value="")
+						<td style="cursor:pointer;" onclick="javascript:isDashboard=true;showPatientDashboardForm( '$patient.uid' )">
+							#foreach( $attributeValue in $patient.attributeValues)
+								#if($!attributeValue.patientAttribute.id==$attribute.id)
+									#set($value=$attributeValue.value)
+									#if( $attribute.valueType == 'bool')
+										#set($value=$i18n.getString($attributeValue.value))
+									#end
+								#end
+							#end 
+							<a>$encoder.htmlEncode($value)</a>
+						</td>
+					#end
+				#end
+				<td>
+				  <a href="javascript:isDashboard=true;showPatientDashboardForm( '$patient.uid' )" title='$i18n.getString( "patient_dashboard" )'><img src="../images/enroll.png" alt='$i18n.getString( "patient_dashboard" )'></a>
+				  <a href="javascript:isDashboard=false;showUpdatePatientForm( '$patient.id' )" title='$i18n.getString( "edit_profile" )'><img src="../images/edit.png" alt='$i18n.getString( "edit_profile" )'></a>
+				  <a href="javascript:setFieldValue( 'isShowPatientList', 'false' ); showRelationshipList('$patient.id')" title='$i18n.getString( "manage_relationship" )'><img src="../images/relationship.png" alt='$i18n.getString( "manage_relationship" )'></a>
+                  #if( $auth.hasAccess( "dhis-web-caseentry", "getPatientLocation" ) )
+				  <a href="javascript:isDashboard=false;getPatientLocation( '$patient.id' );" title='$i18n.getString( "change_location" )'><img src="../icons/dataentry.png" alt='$i18n.getString( "change_patient_location" )' style='width:25px; height:25px'></a>
+				  #end
+				  <a href="javascript:removePatient( '$patient.id', '', i18n_confirm_delete_patient )" title='$i18n.getString( "remove" )'><img src="../images/delete.png" alt='$i18n.getString( "remove" )'></a>
+				  <a href="javascript:showPatientHistory( '$patient.id' )" title='$i18n.getString( "patient_details_and_history" )'><img src="../images/information.png" alt='$i18n.getString( "patient_details_and_history" )'></a>
+				</td>
+				
+			</tr>
+    	#end
+    	</tbody>
+    
+	 </table>
+</td></tr>
+<tr><td colspan="6">
+			<p></p>
+			<div class="paging-container">
+				#parse( "/dhis-web-commons/paging/paging.vm" )
+			</div>
+		</td>
+		<td></td>
+	</tr>
+</table>
+
+	<div id="detailsInfo"></div>
+	<span id="message"></span>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		setTableStyles();	
+	});
+	var i18n_patient_details_and_history = '$encoder.jsEscape( $i18n.getString( "patient_details_and_history" ) , "'" )';
+	var i18n_list_all_patients = '$encoder.jsEscape( $i18n.getString( "list_all_patients" ) , "'" )';
+	var i18n_search_patients = '$encoder.jsEscape( $i18n.getString( "search_patients" ) , "'" )';
+</script>

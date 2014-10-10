@@ -1,0 +1,5 @@
+
+<label><input type="checkbox" name="selectall" id="selectall" value="0" onclick="selectAll(this)" /><b>SELECT ALL TYPES</b></label>
+#foreach( $organisationUnitGroup in $organisationUnitGroups )
+	<label><input type="checkbox" name="option" value="$organisationUnitGroup.id" />$organisationUnitGroup.name</label>
+#end

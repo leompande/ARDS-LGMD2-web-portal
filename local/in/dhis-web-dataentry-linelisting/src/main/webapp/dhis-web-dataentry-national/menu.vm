@@ -1,0 +1,17 @@
+
+<h2>Linelisting</h2>
+
+<ul>
+    <li><a href="index.action">$i18n.getString( "linelisting_dataentry" )</a></li>
+    <br>
+    <li><a href="autoLLdataAggForm.action">$i18n.getString( "ll_data_aggregation" )</a></li>
+    <!--
+    <li>Data Import</li>	
+    <ul>
+        <li><a href="lldataImport.action?llImportFlag=1">Overwrite Existing Data</a></li>    
+        <li><a href="lldataImport.action?llImportFlag=2">Append to Existing Data</a></li>
+    </ul>
+    -->    
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )

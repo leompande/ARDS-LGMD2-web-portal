@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attributeOptionGroup>
+  <id>$attributeOptionGroup.id</id>
+  <name>$encoder.xmlEncode( $attributeOptionGroup.name )</name>
+  <attributeOptionsCount>$attributeOptions.size()</attributeOptionsCount>
+</attributeOptionGroup>

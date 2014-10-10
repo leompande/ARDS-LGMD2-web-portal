@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weeklyPeriodList>
+#foreach( $weeklyPeriodName in $weeklyPeriodList )
+    <weeklyPeriod>
+        <name>$weeklyPeriodName</name>
+    </weeklyPeriod>
+#end
+</weeklyPeriodList>

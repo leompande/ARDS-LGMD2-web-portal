@@ -1,0 +1,23 @@
+#set( $noRows = $grid.getRows().size() )
+{
+"message": "$!message",
+"title": "$!encoder.jsonEncode(${grid.subtitle})",
+#set( $noHeader = $grid.getHeaders().size() )
+"columns":[
+  #foreach( $col in $grid.getHeaders() )
+  {
+    "name": "$!encoder.jsonEncode($!col.name)",
+    "hidden": "$!col.hidden"
+  }#if( $velocityCount < $noHeader ),#end
+  #end
+],
+"items":[
+  #foreach( $row in $grid.getRows() )
+  [
+  #foreach( $col in $row )
+	"$!col"#if( $velocityCount < $noHeader ),#end
+  #end
+  ]#if( $velocityCount < $noRows ),#end
+  #end
+ ]
+}

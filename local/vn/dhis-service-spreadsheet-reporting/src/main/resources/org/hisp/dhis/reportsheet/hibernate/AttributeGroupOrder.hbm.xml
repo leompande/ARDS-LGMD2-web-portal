@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="org.hisp.dhis.reportsheet.AttributeValueGroupOrder" table="attributevaluegrouporder">
+  	    <id name="id" column="attributevaluegrouporderid">
+			<generator class="native" />
+		</id>
+
+		<property name="name" column="name" />
+
+		<property name="sortOrder" />
+		
+		<many-to-one name="attribute" class="org.hisp.dhis.attribute.Attribute" column="attributeid"
+			foreign-key="fk_attributevalue_attributeid" not-null="true" />
+
+		<list name="attributeValues" table="attributevaluegrouporder_attributevalues" lazy="false">
+			<key column="attributevaluegrouporderid" foreign-key="fk_attributevalueorders_attributevaluegrouporderid" />
+			<list-index column="attributevalueindex" base="0"/>
+			<element type="string" column="attributevalue" />
+		</list>
+		
+		<set name="reports" table="attributevaluegrouporder_reportexcels" inverse="true">
+			<key column="attributevaluegrouporderid" />
+			<many-to-many class="org.hisp.dhis.reportsheet.ExportReportAttribute" column="reportexcelid" />
+		</set>
+  </class>
+</hibernate-mapping>

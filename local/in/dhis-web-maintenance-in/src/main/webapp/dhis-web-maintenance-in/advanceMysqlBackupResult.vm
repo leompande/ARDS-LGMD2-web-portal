@@ -1,0 +1,15 @@
+
+
+<br /><br />
+
+<h3>$statusMessage
+	#if( $!status == "SUCCESS" ) 
+		<a href="streamMySQLBackup.action?backupFilePath=$backupFilePath"><img  width="60" height="50" src="images/download-icon.jpg" /></a>
+	#else
+		<h4><strong>No of Selected Tables :&nbsp;$selectedTables.size()</strong></h4>	
+	#end
+</h3>
+
+<p>
+	<input type="button" value="BACK" onclick="window.location.href='advanceMysqlBackupForm.action'" style="width:100px" />
+</p>

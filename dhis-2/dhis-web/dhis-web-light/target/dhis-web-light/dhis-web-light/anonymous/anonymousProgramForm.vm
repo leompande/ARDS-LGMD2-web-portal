@@ -1,0 +1,94 @@
+
+<h2>$encoder.htmlEncode( $program.name )</h2>
+
+#set( $typeViolationsSize = $typeViolations.size() )
+#if( $typeViolationsSize > 0 )
+<div class="header-box" align="center">
+	<h3 style="text-align: left; background-color: #990000; color: white;">$i18n.getString("warnings_and_errors")</h3>
+	<p style="text-align: left;">
+		$typeViolationsSize $i18n.getString("type_violation_errors"). <br />
+	</p>
+</div>	
+#end
+
+<form action="saveAnonymousForm.action" method="POST">
+<input type="hidden" value="$programId" name="programId" />
+<input type="hidden" value="$orgUnitId" name="orgUnitId"/>
+<div class="header-box" align="center">
+	<p style="text-align: left;">
+
+	#foreach( $programStageDataElement in $programStageDataElements)
+		#set($dataElement = $programStageDataElement.getDataElement())
+		#set( $key = "DE${dataElement.id}" )
+			
+		#if( $dataElement.shortName )
+			#set( $dataElementName = $dataElement.shortName )
+		#else
+			#set( $dataElementName = $dataElement.name )
+		#end
+		
+		<label>$encoder.htmlEncode( $dataElementName ) 
+			#if($dataElement.type=="date") [yyyy-MM-dd] #end
+			#if($programStageDataElement.isCompulsory())*#end 
+		</label>
+		
+		#if( $typeViolations.get( $key ) )
+                #set( $typeViolation = $typeViolations.get( $key ) )
+            	<br /><span style="color: #990000;">$prevDataValues.get($key) $i18n.getString($typeViolation)</span>
+        #end
+            		
+		#if (! $dataElement.getOptionSet())
+			#if($dataElement.type=="bool")
+				<select name="$key">
+					<option value="">$i18n.getString("please_select")</option>
+					<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+					<option #if( $prevDataValues.get( $key ) == "false" ) selected="selected" #end value="false">$i18n.getString("no")</option>
+				</select>
+			#elseif($dataElement.type=="username")
+					<select name="$key">
+						<option value="">$i18n.getString("please_select")</option>
+						#foreach ($userName in  $userService.getAllUsers())
+							<option value="$userName.getUsername()"
+							#if( $prevDataValues.get( $key ) == $userName ) 
+								selected
+								#set( $selected=true )
+							#end
+							> $userName.getUsername() </option>
+						#end
+					</select>
+			#elseif($dataElement.type=="trueOnly")
+				<select name="$key">
+					<option value="">$i18n.getString("please_select")</option>
+					<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+				</select>			
+			#else
+				<input type="text" name="$key" value="$!prevDataValues.get($key)" />
+			#end	
+		#elseif ($dataElement.getOptionSet())
+			#set( $options = $dataElement.getOptionSet().getOptions() )
+			<select type="text" name="$key" />
+				<option selected > $i18n.getString("select_option") </option>
+			#foreach ($option in $options)
+				<option value="$option" #if($prevDataValues.get($key) == $option) selected #end> $option </option>
+			#end
+			</select>
+		#end
+	#end
+	</p>
+</div>
+
+<div class="header-box" align="center">
+	<p>
+		<input type="submit" style="width: 100%;" value="$i18n.getString('save')"/>
+	</p>
+</div>
+
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+    <li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>
+

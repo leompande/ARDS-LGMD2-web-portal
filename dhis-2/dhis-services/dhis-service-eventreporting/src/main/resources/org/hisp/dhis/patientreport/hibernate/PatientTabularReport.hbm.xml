@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+	<class name="org.hisp.dhis.patientreport.PatientTabularReport"
+		table="patienttabularreport">
+
+		<id name="id" column="patienttabularreportid">
+			<generator class="native" />
+		</id>
+   
+   		&identifiableProperties;
+
+		<property name="name" column="name" not-null="true" unique="true"
+			length="230" />
+
+		<many-to-one name="program" class="org.hisp.dhis.program.Program"
+			column="programid" foreign-key="fk_patienttabularreport_program" />
+
+		<many-to-one name="programStage" class="org.hisp.dhis.program.ProgramStage"
+			column="programstageid" foreign-key="fk_patienttabularreport_programstage" />
+
+		<property name="startDate" />
+
+		<property name="endDate" />
+		
+		<list name="dimension" table="patienttabularreport_dimensions">
+	      <key column="patienttabularreportid" foreign-key="fk_patienttabularreportidid_dimensions" />
+	      <list-index column="sort_order" />
+	      <element type="text" column="itemvalue" />
+	    </list>
+		
+	    <list name="filter" table="patienttabularreport_filters">
+	      <key column="patienttabularreportid" foreign-key="fk_patienttabularreportid_filters" />
+	      <list-index column="sort_order" />
+	      <element type="text" column="itemvalue" />
+	    </list>
+	    
+		<property name="ouMode" />
+
+		<!-- Access properties -->
+
+		<many-to-one name="user" class="org.hisp.dhis.user.User"
+			column="userid" foreign-key="fk_patienttabularreport_userid" />
+
+		<property name="publicAccess" length="8" />
+
+		<set name="userGroupAccesses" table="patienttabularreportusergroupaccesses">
+			<key column="patienttabularreportid" />
+			<many-to-many class="org.hisp.dhis.user.UserGroupAccess"
+				column="usergroupaccessid" unique="true" />
+		</set>
+
+	</class>
+</hibernate-mapping>

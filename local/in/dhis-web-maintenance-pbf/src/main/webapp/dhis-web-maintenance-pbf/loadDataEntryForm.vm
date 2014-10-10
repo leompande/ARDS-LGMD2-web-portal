@@ -1,0 +1,183 @@
+
+
+## Macro for generating the jQuery validation rules 
+
+#macro( validate $type $require )
+  #if( $type == "NUMBER" || $type == "number" )
+    {validate:{ number:true #if($require), required:true #end }}
+  
+	#elseif( $type == "int" )
+  	{validate:{ integer:true #if($require), required:true #end }}
+  	
+  	#elseif( $type == "positiveNumber" )
+  	{validate:{ positive_integer:true #if($require), required:true #end }}
+  	
+	#elseif( $type == "negativeNumber" )
+  	{validate:{ negative_integer:true #if($require), required:true #end }}
+  
+  
+	#elseif( $require )
+    {validate:{required:true}}
+  #end
+#end
+
+#set( $tabIndex = 1 )
+#if ( $dataElements.size() > 0)
+
+<table class="formSection" id="dataEntryTable">
+	<tr bgcolor="#CBDDEB">
+		<th>$i18n.getString( "dataelement" )</th>
+		<th style="text-align: center;">$i18n.getString( "qty_reported" )</th>
+		<th style="text-align: center;">$i18n.getString( "qty_validated" )</th>
+		<th style="text-align: center;">$i18n.getString( "tariff_amount" )</th>
+		<th style="text-align: center;">$i18n.getString( "total" )</th>
+	</tr>
+	
+	#set( $mark = false )
+	#foreach($dataElement in $dataElements )
+		<tr #alternate($mark)>
+			<td><label>$dataElement.getFormNameFallback()</label></td>
+			#set( $count = 1)
+			#set( $pbfDataValue = $!pbfDataValueMap.get( $dataElement ) )
+			<td>
+				<input onblur="savePBFDataValue('$dataElement.id', 1 )" type="text" name="pbfdv_qty_reported_$dataElement.id" id="pbfdv_qty_reported_$dataElement.id" 
+						value="$!pbfDataValue.quantityReported" tabindex="$tabIndex" style="text-align: center;" 
+						#if($dataElement.type =='number') class="{validate:{number:true}}" 
+						#elseif($dataElement.type =='int') class="{validate:{integer:true}}"
+						#elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}"
+						#elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}"
+						#end  />
+			</td>
+			<td>
+				<input onblur="savePBFDataValue('$dataElement.id', 2 )" type="text" name="pbfdv_qty_validated_$dataElement.id" id="pbfdv_qty_validated_$dataElement.id" 
+						value="$!pbfDataValue.quantityValidated" tabindex="$tabIndex" style="text-align: center;" 
+						#if($dataElement.type =='number') class="{validate:{number:true}}" 
+						#elseif($dataElement.type =='int') class="{validate:{integer:true}}"
+						#elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}"
+						#elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}"
+						#end class="quantity$count" onkeyup="calVal()" />
+				</td>
+			<td>
+				<input type="text" name="pbfdv_tariff_amt_$dataElement.id" id="pbfdv_tariff_amt_$dataElement.id" 
+						value="$!pbfDataValue.tariffAmount" tabindex="$tabIndex" style="text-align: center;" 
+						#if($dataElement.type =='number') class="{validate:{number:true}}" 
+						#elseif($dataElement.type =='int') class="{validate:{integer:true}}"
+						#elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}"
+						#elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}"
+						#end class="tariff$count" readonly />
+			</td>
+
+			<script >
+                function calVal() {
+					var total = 0;
+                 	var quantity = $('.quantity'+$count).val();
+					var tariff = $('.tariff'+$count).val();
+					
+					total = quantity * tariff;
+					
+					$('.row-total'+$count).val(total);
+                }
+                
+                calVal();
+                
+                $('input').on('keyup', function() {
+                  calVal();
+                });
+            </script>			
+			#end
+			#set( $count = $count + 1)
+			<td >
+				<input type="text" class="row-total$count"/>
+            </td>
+			
+		</tr>
+		#set( $tabIndex = $tabIndex + 1 )
+		#set( $mark = !$mark)	
+	#end
+		<tr>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >
+				<input type="text" class="all-total"/>
+            </td>
+		</tr>
+	
+</table
+	
+#end
+
+<!--
+#set( $tabIndex = 1 )
+#if ( $dataElements.size() > 0)
+
+<table class="formSection" id="dataEntryTable">
+	<tr bgcolor="#CBDDEB">
+		<th>$i18n.getString( "dataelement" )</th>
+		
+		#foreach($optionCombo in $optionCombos )
+			<th style="text-align: center;">$encoder.htmlEncode( $optionCombo.name )</th>
+		#end	
+			<th style="text-align: center;">$i18n.getString( "total" )</th>
+	</tr>
+	
+	#set( $mark = false )
+	#foreach($dataElement in $dataElements )
+		<tr #alternate($mark)>
+			<td><label>$dataElement.getFormNameFallback()</label></td>
+			#set( $count = 1)
+			#foreach($optionCombo in $optionCombos )
+				#set( $valueMapId =  $dataElement.id + ':' + $optionCombo.id )
+				#set( $dataValue = "" )
+				#set( $dataValue = $!dataValueMap.get( $valueMapId ) )
+				<td>
+					<input onblur="saveValue('$dataElement.id','$optionCombo.id')" type="text" name="dataelement$valueMapId" id="dataelement$valueMapId" 
+						value="$!dataValue" tabindex="$tabIndex" style="text-align: center;" 
+						#if($dataElement.type =='number') class="{validate:{number:true}}" 
+						#elseif($dataElement.type =='int') class="{validate:{integer:true}}"
+						#elseif($dataElement.type =='positiveNumber') class="{validate:{positive_integer:true}}"
+						#elseif($dataElement.type =='negativeNumber') class="{validate:{negative_integer:true}}"
+						#end #if($tariffOptCombo.id == $optionCombo.id) class="tariff$count" readonly #elseif($qValOptCombo.id ==$optionCombo.id) class="quantity$count" onkeyup="calVal()" #end/>
+				</td>
+				<script >
+                function calVal() {
+					var total = 0;
+                 	var quantity = $('.quantity'+$count).val();
+					var tariff = $('.tariff'+$count).val();
+					
+					total = quantity * tariff;
+					
+					$('.row-total'+$count).val(total);
+                }
+                
+                calVal();
+                
+                $('input').on('keyup', function() {
+                  calVal();
+                });
+            </script>			
+			#end
+			#set( $count = $count + 1)
+			<td >
+				<input type="text" class="row-total$count"/>
+            </td>
+			
+		</tr>
+		#set( $tabIndex = $tabIndex + 1 )
+		#set( $mark = !$mark)	
+	#end
+		<tr>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >&nbsp;</td>
+			<td >
+				<input type="text" class="all-total"/>
+            </td>
+		</tr>
+	
+</table
+	
+#end
+-->

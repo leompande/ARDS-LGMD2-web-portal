@@ -1,0 +1,63 @@
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'equipmentList' );
+    });
+    
+</script>
+##if( $equipmentList.size() > 0 )
+<table class="mainPageTable">
+<table class="listTable" id="equipmentList">
+	
+		<tr bgcolor="#285C91">
+			<td><font color="#FFFFFF"><strong>#</strong></font></td>
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "orgunit_hierarchy" )</strong></font></td>
+			<td><font color="#FFFFFF"><strong>$i18n.getString( "health_facility_name" )</strong></font></td>
+			#if( $!equipmentType.getModelType() )
+				<td><font color="#FFFFFF"><strong>$i18n.getString( "model_name" )</strong></font></td>
+	 		#end
+		 	#foreach( $equipmentTypeAttribute in $equipmentTypeAttributeList )
+		 		<td><font color="#FFFFFF"><strong>$equipmentTypeAttribute.equipmentTypeAttribute.name</strong></font></td>
+			#end
+	 		<td class="{sorter: false}">&nbsp;&nbsp;</td>
+	 		<td class="{sorter: false}">&nbsp;&nbsp;</td>
+		</tr>
+	
+	#if( $equipmentList.size() > 0 )
+	<tbody id="list">
+		#set( $mark = false )
+		#foreach( $equipment in $equipmentList )
+			<tr id="tr${equipment.id}" #alternate($mark)>
+				##set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+				<td>
+                    #set( $nr = ( ( $paging.getCurrentPage() - 1  ) * $paging.pageSize ) + $velocityCount )
+                    $nr
+                </td>
+			 	<td>$!equipmentOrgUnitHierarchyMap.get( $equipment.getOrganisationUnit().getId() )</td>
+			 	<td>$encoder.htmlEncode( $equipment.getOrganisationUnit().getName() )</td>
+			 	#if( $!equipmentType.getModelType() )
+			 		<td>$!equipment.model.name</td>
+	 			#end
+			 	#foreach( $equipmentTypeAttribute in $equipmentTypeAttributeList )
+			 		#set( $mapId = $equipment.id + ':' + $equipmentTypeAttribute.equipmentTypeAttribute.id )
+			 			#if( $equipmentType.tracking && $equipmentTypeAttribute.equipmentTypeAttribute.getDescription().equalsIgnoreCase("WorkingStatus"))
+			 				<td><a href="javascript:showEquipmentStatusHistoryForm( '$equipment.id','$equipment.getOrganisationUnit().getName()','$!equipment.model.name' ); " title='$i18n.getString( "equipment_tracking_history" )'>$!equipmentDetailsMap.get( $mapId )</a></td>
+			 			#else
+			 			<td>$!equipmentDetailsMap.get( $mapId )</td>
+		 				#end
+		 		#end	
+		 		#if( $equipmentType.getDataSets().size() > 0 )
+		 			<td><a href="javascript:showEquipmentDataEntryForm( '$equipment.id','$equipment.getOrganisationUnit().getName()','$!equipment.model.name' ); " title='$i18n.getString( "equipment_dataentry" )'>Dataentry</a></td>
+		 		#end
+			 	<!--<td>Dataentry</td>-->
+			 	<td><a href="javascript:showEquipmentDetails( '$equipment.id','$equipment.getOrganisationUnit().getName()','$!equipment.model.name', '$equipment.getEquipmentType().getName()' ); " title='$i18n.getString( "equipment_details" )'>Details</a></td>
+			 	<!--<td>Details</td>-->
+			</tr>
+			#set( $mark = !$mark)
+		#end
+	</tbody>
+	#end
+</table>
+</table>	
+<p></p>
+	#parse( "/dhis-web-commons/paging/paging.vm" )	
+	

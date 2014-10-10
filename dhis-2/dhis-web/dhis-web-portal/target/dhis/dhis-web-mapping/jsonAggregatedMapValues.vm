@@ -1,0 +1,15 @@
+#set( $size = $object.size() )
+{ "mapValues": [
+#foreach( $value in $object )
+  {
+    "orgUnitId": "$!{value.organisationUnitId}",
+    "orgUnitName": "$!{value.organisationUnitName}",
+    "featureId": "$!{value.featureId}",
+    "periodId": "$!{value.periodId}",
+    "value": "$!{value.value}",
+    "factor": "$!{value.factor}",
+    "numeratorValue": "$!{value.numeratorValue}",
+    "denominatorValue": "$!{value.denominatorValue}"    
+  }#if( $velocityCount < $size ),#end
+#end
+] }

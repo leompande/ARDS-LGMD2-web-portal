@@ -1,0 +1,10 @@
+{ "bookmark":
+	{
+		"id": $bookmark.id,
+		"description": "$bookmark.description",
+		"contain": $bookmark.contain
+		#if($!bookmark.extraContain && $!bookmark.extraContain!="")
+			,"extraContain": $bookmark.extraContain
+		#end
+	}
+}

@@ -1,0 +1,29 @@
+#set( $size = $identifierTypes.size() )
+{ 
+"identifierTypes": [
+	#foreach( $identifierType in $identifierTypes )
+	  {
+		"id":  ${identifierType.id} ,
+		"name": "$!encoder.jsonEncode( ${identifierType.displayName} )"
+	  }#if( $velocityCount < $size ),#end
+	#end],
+	
+#set( $size = $attributes.size() )
+"patientAttributes": [
+	#foreach( $attribute in $attributes )
+	  {
+		"id":  ${attribute.id} ,
+		"name": "$!encoder.jsonEncode( ${attribute.displayName} )"
+	  }#if( $velocityCount < $size ),#end
+	#end],
+	
+#set( $size = $programStages.size() )
+"programStages": [
+	#foreach( $programStage in $programStages )
+	  {
+		"id":  ${programStage.id} ,
+		"name": "$!encoder.jsonEncode( ${programStage.displayName} )",
+		"irregular":${programStage.irregular}
+	  }#if( $velocityCount < $size ),#end
+	#end]
+}

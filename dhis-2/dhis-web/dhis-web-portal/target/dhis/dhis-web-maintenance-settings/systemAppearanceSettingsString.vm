@@ -1,0 +1,6 @@
+{
+"applicationTitle": "$!encoder.jsonEncode( $!translations.get( "applicationTitle" ) )",
+"keyApplicationIntro": "$!encoder.jsonEncode( $translations.get( "keyApplicationIntro" ) )",
+"keyApplicationNotification": "$!encoder.jsonEncode( $translations.get( "keyApplicationNotification" ) )",
+"keyApplicationFooter": "$!encoder.jsonEncode( $translations.get( "keyApplicationFooter" ) )"
+}

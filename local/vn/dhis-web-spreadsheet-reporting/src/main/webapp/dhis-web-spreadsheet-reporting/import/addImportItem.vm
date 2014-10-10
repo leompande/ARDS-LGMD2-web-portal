@@ -1,0 +1,80 @@
+<script>
+	jQuery(document).ready(function(){	
+		validation( 'addImportItemForm', function( form ){ 			
+			form.submit();			
+		});	
+		checkValueIsExist( "name", "validateImportItem.action" );
+		changeItemType();
+	});
+</script>
+
+<h3>$i18n.getString('import_item') : $i18n.getString('add')</h3>
+
+<form id="addImportItemForm" name="addImportItemForm" method="POST" action="addImportItem.action">
+	<input type="hidden" id="importReportId" name="importReportId" value="$!importReport.id"/>
+	<input type="hidden" id="importReportType" name="importReportType" value="$!importReport.type"/>
+	<table>
+		<tr>
+			<th colspan='2'>$i18n.getString('import_report')</th>
+		</tr>
+		<tr>
+			<td>$i18n.getString( 'name' ):</td>
+			<td>$importReport.displayName</td>
+		</tr>
+		<tr>
+			<td>$i18n.getString('import_type')</td>
+			<td>:$importReport.type</td>
+		</tr>
+		<tr>
+			<td colspan="2" height="20px"></td>
+		</tr>
+		<tr>
+			<th colspan='2'>$i18n.getString('import_item')</th>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('name')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="name" name="name" style="width:20em" class="{validate:{required:true,minlength:2,maxlength:160}}"/></td>
+		</tr>		
+		<tr>
+			<td><label>$i18n.getString('expression')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<input type="text" id="expression" name="expression" style="width:20em" class="{validate:{required:true,minlength:5,maxlength:160}}"/>
+				<input type="button" id="expression-button" value="..."/>											
+			</td>
+		</tr>	
+		<tr>
+			<td><label>$i18n.getString('sheet_no')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="sheetNo" name="sheetNo"  style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('row')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="row" name="row"  style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('column')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="column" name="column" style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>	
+	<tr>
+		<td></td>
+		<td><input type="submit" value="$i18n.getString('ok')" id="okButton"/>
+			<input type="button" value="$i18n.getString('cancel')" onclick="window.location.href = 'listImportItems.action?importReportId=$importReport.id'"/>
+		</td>
+	</tr>		
+</table>
+
+</form>
+
+<!-- EXPRESSION FORM -->
+
+#parse( "/dhis-web-spreadsheet-reporting/import/excelFormulaBuilder.vm" )
+
+<script>
+	
+	var dataElementGroups = new Object();
+	#foreach( $dataElementGroup in $dataElementGroups )
+		dataElementGroups['$dataElementGroup.id'] = '$encoder.jsEscape( $dataElementGroup.displayName, "'" )';
+	#end
+
+	var no_item = '$encoder.jsEscape( $i18n.getString( "no_item" ), "'" )';
+	
+</script>

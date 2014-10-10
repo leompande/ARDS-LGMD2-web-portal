@@ -1,0 +1,28 @@
+=== modified file 'dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/addDataElementForm.vm'
+--- dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/addDataElementForm.vm	2011-04-24 15:50:02 +0000
++++ dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/addDataElementForm.vm	2011-07-05 07:10:24 +0000
+@@ -37,7 +37,8 @@
+ 		<td>
+ 			<select id="domainType" name="domainType" style="min-width:20em">
+ 				<option value="aggregate" selected="selected">$i18n.getString( "aggregate" )</option>
+-				<option value="patient">$i18n.getString( "patient" )</option>				
++				<option value="patient">$i18n.getString( "patient" )</option>
++				<option value="humanresource">$i18n.getString( "humanresource" )</option>				
+ 			</select>
+ 		</td>
+ 	</tr>
+
+=== modified file 'dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/updateDataElementForm.vm'
+--- dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/updateDataElementForm.vm	2011-04-24 15:50:02 +0000
++++ dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/dhis-web-maintenance-datadictionary/updateDataElementForm.vm	2011-07-05 07:10:24 +0000
+@@ -55,7 +55,8 @@
+ 		<td>
+ 			<select id="domainType" name="domainType" style="min-width:20em">
+ 				<option value="aggregate" #if( $dataElement.getDomainTypeNullSafe() == 'aggregate' ) selected="selected" #end>$i18n.getString( "aggregate" )</option>
+-				<option value="patient" #if( $dataElement.getDomainTypeNullSafe() == 'patient' ) selected="selected" #end>$i18n.getString( "patient" )</option>				
++				<option value="patient" #if( $dataElement.getDomainTypeNullSafe() == 'patient' ) selected="selected" #end>$i18n.getString( "patient" )</option>
++				<option value="humanresource" #if( $dataElement.getDomainTypeNullSafe() == 'humanresource' ) selected="selected" #end>$i18n.getString( "humanresource" )</option>				
+ 			</select>
+ 		</td>
+ 	</tr>
+

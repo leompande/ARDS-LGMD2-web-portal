@@ -1,0 +1,127 @@
+
+<html>
+	<head>
+		<title>Summary Status Result</title>
+		<link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+		<script>
+			var startDate = "$sDateLB";
+			var endDate = "$eDateLB";
+			var dsType = "$selectedButton";
+
+			function getImmChildInfo(evt, dsId, selOrgUnit)
+			{
+				immChildOption = "yes";
+
+				if( document.getElementById('includeZeros').checked )
+				{
+					evt.target.href = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+				}
+				else
+				{
+					evt.target.href = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+				}
+			}
+
+			function exportDataStatusResultToWorkBook()
+			{
+				document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+
+				return true;
+			}
+		</script>
+	</head>
+
+	<body>
+		<form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+			<input type="hidden" name="htmlCode" id="htmlCode" />
+			<div align="right" class="NormalB">
+			    <input type="checkbox" name="includeZeros" id="includeZeros" #if($includeZeros) checked #end /> Include Zero<br />
+				<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+			</div>
+
+			<div id="formResult">
+
+				<div align="center" class="NormalB">Dataset wise Summary Status</div>
+				<div align="right">
+					<table width="15%" border="1">
+						<tr class="TableHeadingCellStyles" >
+							<td bgcolor="#a0c0a0">&nbsp;&nbsp;</td>
+							<td align="left">&nbsp;Entered ( 1 )</td>
+						</tr>
+						<tr class="TableHeadingCellStyles">
+							<td bgcolor="#ff0000">&nbsp;&nbsp;</td>
+							<td align="left">&nbsp;Not Entered ( 0 )</td>
+						</tr>
+						<tr class="TableHeadingCellStyles">
+							<td bgcolor="white">&nbsp;&nbsp;</td>
+							<td align="left">&nbsp;Not Assigned</td>
+						</tr>
+					</table>
+        		</div>
+				<br /><br />
+
+				<div id="headingInfoId">
+				<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: solid" bordercolor="black" width="100%">
+					
+					<tr class="TableHeadingCellStyles" align="center">
+						#foreach($levelName in $levelNames)
+							<td bgcolor="#C0C0C0"  rowspan="2"><strong>$!levelName</strong></td>
+						#end
+						#foreach($dataSet in $dataSetList)
+							<td align="center" bgcolor="#C0C0C0" colspan="$periodNameList.size()"><strong>$dataSet.name</strong></td>
+						#end						
+					</tr>
+  				    <tr class="TableHeadingCellStyles" align="center">
+  				    	#foreach($dataSet in $dataSetList)
+	  				    	#foreach($periodname in $periodNameList)
+	  				    		<td bgcolor="#C0C0C0"><strong>$periodname</strong></td>
+		    				  #end
+	    				  #end
+    				 </tr>
+						#foreach($chiildorgUnit in $orgUnitList)
+						#set( $count1 = $minOULevel )
+						#set( $curOrgUnitLevel = $organisationUnitService.getLevelOfOrganisationUnit( $chiildorgUnit.id ) )
+						##set( $orgunitCount = $ouMapForChildDSAssociation.get( $chiildorgUnit ) )
+						#set( $orgunitChildCount = $ouMaporgChildCount.get( $chiildorgUnit ) )
+						##set( $orgunitColor = $ouDataSetMapColor.get( $chiildorgUnit ) )
+						
+						<tr class="TableHeadingCellStyles">
+							#foreach( $levelName in $levelNames )
+								#if( $count1 == $curOrgUnitLevel )
+									<!--<td>$chiildorgUnit.name #if( $orgunitCount !=-1 ) ( $orgunitCount ) #end</td>-->
+									<td>$chiildorgUnit.name  ( $orgunitChildCount ) </td>
+								#else
+									<td>&nbsp;</td>
+								#end
+								#set($count1 = $count1 + 1)
+							#end
+							
+							#set( $dsSummaryResults = $ouMapSummaryStatusResult.get( $chiildorgUnit ) )
+							#set( $dsStatusResults = $ouMapStatusResult.get( $chiildorgUnit ) )
+							#set( $orgunitColors = $ouDataSetMapColor.get( $chiildorgUnit ) )
+							#set( $count2 = 0 )
+							
+							#foreach( $result in $dsSummaryResults )  					                          
+								
+								#set( $dsStatusResult = $dsStatusResults.get( $count2 ) )
+								#set( $orgunitColor = $orgunitColors.get( $count2 ) )
+								
+								#if($result < 0)
+									<td  bgcolor="white">&nbsp;</td>
+								#elseif( $result == 0 )
+									<td align="center" #if( $orgunitColor == 1 ) bgcolor="#ff0000" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>0 #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end</font></td>
+								#elseif( $result == 1 )
+									<td align="center" #if( $orgunitColor == 1 ) bgcolor="#a0c0a0" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>1 #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end</font></td>
+								#elseif( $result > 1 )
+									<td align="center" #if( $orgunitColor == 1 ) bgcolor="#a0c0a0" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>$result #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end </font></td>
+								#end
+								#set($count2 = $count2 + 1)
+							#end
+						</tr>
+					#end	
+				</table>
+			</div>
+			</div>
+		</form>
+    </body>
+</html>

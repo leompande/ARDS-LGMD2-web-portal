@@ -1,0 +1,106 @@
+<tr>
+	<th colspan="2" class="heading-column">$i18n.getString( "demographics" )</th>
+</tr>
+
+#if($patientRegistrationForm.fixedAttributes.contains( 'healthWorker' ))
+	<tr>
+		<td class='text-column'><label for="healthWorker">$i18n.getString( "health_worker" )</label></td>
+		<td class="input-column">
+			<select id="healthWorker" name="healthWorker">
+				<option value="">[$i18n.getString("please_select")]</option>
+				#foreach( $healthWorker in $healthWorkers)
+					<option value="$healthWorker.id" #if($patient.associate.id == $healthWorker.id) selected #end>$healthWorker.name</option>
+				#end
+			</select>
+		</td>
+	</tr>
+#end
+
+<tr>
+	<td></td>
+	<td><input type="button" class='button' id='checkDuplicateBtn' name='checkDuplicateBtn' value="$i18n.getString('check_duplicate')" /></td>
+</tr>
+
+<tr><td>&nbsp;</td></tr>
+#set($identifierTypes = $patientRegistrationForm.identifierTypes)
+#if( $identifierTypes.size() > 0)
+	<!--IDENTIFIERS -->
+	<tr><th colspan="2" class="heading-column">$i18n.getString("patient_details")</th></tr>
+	#foreach ($identifierType in $identifierTypes)
+		#if( $identifierType.program )
+		#else
+			#set( $identifier = '' )
+			#set( $identifier = $identiferMap.get( $identifierType.id ) )
+			<tr> 
+				<td class='text-column'><label>$encoder.htmlEncode($identifierType.displayName) #if($identifierType.mandatory) <em title="$i18n.getString( "required" )" class="required">*</em> #end</label></td>
+				<td class="input-column">
+					<input type="text" id="iden$identifierType.id" name="iden$identifierType.id" value="$!identifier" data="{related:$identifierType.related}" #if($identifierType.related) disabled="disabled" #end class="{validate:{required:$identifierType.mandatory, #if($!identifierType.noChars) maxlength:$identifierType.noChars, #end #if($identifierType.type=='number') number:true #elseif($!identifierType.type=='letter') lettersonly:true #end }}" />
+				</td>	
+			</tr>
+		#end
+	#end
+#end
+
+<!-- ATTRIBUTES IN GROUPS -->
+
+#foreach($attribute in $$patientRegistrationForm.dynamicAttributes )
+	#if( $attribute )
+		#set($value = "")
+		#set($value = $patientAttributeValueMap.get($attribute.id))
+		<tr>
+			<td class='text-column'><label>$encoder.htmlEncode($attribute.displayName) #if($attribute.mandatory) <em title="$i18n.getString( 'required' )" class="required">*</em> #end</label></td>
+			<td class="input-column">
+				#if( $attribute.valueType == "bool" )
+					<select id="attr$attribute.id" name="attr$attribute.id" inherit="$!attribute.inherit"> 
+						<option value="" selected="selected">[$i18n.getString( "please_select" )]</option>
+						<option value="true" #if($value=='true') selected #end>$i18n.getString( "yes" )</option>
+						<option value="false" #if($value=='false') selected #end>$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $attribute.valueType == "trueOnly" )
+					<input type='checkbox' value="true" id="attr$attribute.id" name="attr$attribute.id" inherit="$!attribute.inherit" #if($value=='true') checked #end> 
+				#elseif( $attribute.valueType == "date" )
+					<input type="text" id="attr$attribute.id" name="attr$attribute.id" inherit="$!attribute.inherit" value='$value' class=' #validate( "default"  $attribute.mandatory )'/>
+					<script type="text/javascript">
+						datePickerValid( 'attr$attribute.id', false, false );
+					</script>                    
+				#elseif( $attribute.valueType == "combo" )  
+					<select  id="attr$attribute.id"  name="attr$attribute.id" inherit="$!attribute.inherit" class='#validate( "default"  $attribute.mandatory )'>
+						<option value="">[$i18n.getString( "please_select" )]</option>
+						#foreach ($option in $attribute.attributeOptions )
+							<option value="$option.id" #if("$value"=="$option.name") selected #end>$option.name</option>
+						#end
+					</select>
+				#else
+					<input type="text" id="attr$attribute.id" name="attr$attribute.id" inherit="$!attribute.inherit" value='$value' class="{validate:{required:$attribute.mandatory #if($attribute.valueType=='NUMBER'),number:true #end }}" />
+				#end
+			</td>		
+		</tr>
+	#end
+#end
+	
+<!-- PROGRAM ENROLLMENT -->
+
+#if($!program)
+	<tr><td>&nbsp;</td></tr>
+	<tr><th colspan="2" class="heading-column">$i18n.getString( "program_enrollment" )</th></tr>
+	<tr>
+		<tr>
+		<td class='text-column'><label for="enrollmentDate">$encoder.htmlEncode($program.dateOfEnrollmentDescription) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td colspan='2' class='input-column'><input type="text" id="enrollmentDate" name="enrollmentDate" class="{validate:{required:true}}"></td>
+	</tr>
+	#if($!program.displayIncidentDate=='true')
+		<tr>
+			<td class='text-column'><label for="dateOfIncident">$encoder.htmlEncode($program.dateOfIncidentDescription) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+			<td colspan='2' class='input-column'><input type="text" id="dateOfIncident" name="dateOfIncident"  class="{validate:{required:true}}"></td>
+		</tr>
+		<script>
+			#if($program.selectEnrollmentDatesInFuture=='true' || $program.selectIncidentDatesInFuture=='true'  )
+				datePickerInRange( 'dateOfIncident' , 'enrollmentDate', false, true );
+			#else
+				datePickerInRangeValid( 'dateOfIncident' , 'enrollmentDate', false, true );
+			#end
+		</script>
+	#else
+		<script>datePickerValid( 'enrollmentDate', true );</script>
+	#end
+#end

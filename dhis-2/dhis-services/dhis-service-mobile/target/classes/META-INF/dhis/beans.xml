@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+  <!-- Services -->
+
+  <bean id="org.hisp.dhis.mobile.api.FacilityReportingService" class="org.hisp.dhis.mobile.service.FacilityReportingServiceImpl">
+    <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    <property name="i18nService" ref="org.hisp.dhis.i18n.I18nService" />
+    <property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+    <property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+    <property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+    <property name="registrationService" ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+    <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    <property name="oUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.mobile.api.ActivityReportingService" class="org.hisp.dhis.mobile.service.ActivityReportingServiceImpl">
+    <property name="patientAttValueService" ref="org.hisp.dhis.patientattributevalue.PatientAttributeValueService" />
+    <property name="patientAttService" ref="org.hisp.dhis.patient.PatientAttributeService" />
+    <property name="programStageInstanceService" ref="org.hisp.dhis.program.ProgramStageInstanceService" />
+    <property name="dataValueService" ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+    <property name="patientMobileSettingService" ref="org.hisp.dhis.mobile.service.PatientMobileSettingService" />
+    <property name="programStageSectionService" ref="org.hisp.dhis.program.ProgramStageSectionService" />
+    <property name="patientService" ref="org.hisp.dhis.patient.PatientService" />
+    <property name="programInstanceService" ref="org.hisp.dhis.program.ProgramInstanceService" />
+    <property name="relationshipService" ref="org.hisp.dhis.relationship.RelationshipService" />
+    <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    <property name="patientDataValueService" ref="org.hisp.dhis.patientdatavalue.PatientDataValueService" />
+    <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+    <property name="patientAttributeService" ref="org.hisp.dhis.patient.PatientAttributeService" />
+    <property name="relationshipTypeService" ref="org.hisp.dhis.relationship.RelationshipTypeService" />
+    <property name="programStageService" ref="org.hisp.dhis.program.ProgramStageService" />
+    <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    <property name="messageService" ref="org.hisp.dhis.message.MessageService" />
+    <property name="smsSender" ref="org.hisp.dhis.sms.SmsSender" />
+  </bean>
+
+  <bean id="org.hisp.dhis.mobile.api.IProgramService" class="org.hisp.dhis.mobile.service.DefaultProgramService">
+    <property name="programService" ref="org.hisp.dhis.program.ProgramService" />
+  </bean>
+
+  <bean id="org.hisp.dhis.mobile.service.PatientMobileSettingService"
+    class="org.hisp.dhis.mobile.service.DefaultPatientMobileSettingService">
+    <property name="patientMobileSettingStore" ref="org.hisp.dhis.mobile.service.PatientMobileSettingStore" />
+  </bean>
+
+  <bean id="org.hisp.dhis.mobile.service.PatientMobileSettingStore" class="org.hisp.dhis.mobile.service.HibernatePatientMobileSettingStore">
+    <property name="clazz" value="org.hisp.dhis.patient.PatientMobileSetting" />
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
+</beans>

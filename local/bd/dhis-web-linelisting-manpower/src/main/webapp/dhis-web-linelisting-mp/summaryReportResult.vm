@@ -1,0 +1,37 @@
+
+#if( $selOrgUnitName == "NONE" )
+	<h1>Please select OrganisationUnit</h1>	
+#else
+	<h3>Summary Report Result for : $selOrgUnitName</h3>
+	<table align="center">
+		<tr>
+			<th>Department Name - Post Name</th>
+			<th>Sanctioned - Filled - Vacant</th>
+		</tr>
+		#foreach( $resultKey in $resultKeys )
+			<tr>
+				<td>$resultKey</td>
+				<td align="center"><a href="#" onclick="javascript:showEmployeePostDetails('$resultIdMap.get( $resultKey )')">$resultMap.get( $resultKey )</a></td>
+			</tr>
+		#end
+	</table>
+#end
+
+<script>
+	
+	function showEmployeePostDetails( deptAndPostIds ) 
+	{
+		var url = "showEmployeePostDetails.action?deptAndPostIds=" + deptAndPostIds;
+		$('#contentDataRecord').dialog('destroy').remove();
+		$('<div id="contentDataRecord" style="z-index: 1;">' ).load(url).dialog({
+		title: 'Employee Post Details',
+		maximize: true, 
+		closable: true,
+		modal:true,
+		overlay:{background:'#000000', opacity:0.1},
+		width: 850,
+		height: 380
+		});
+	}
+	
+</script>

@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+
+<dataValueSet xmlns="http://dhis2.org/schema/dxf/2.0-SNAPSHOT"
+  dataSet="16B2299E-ECD6-46CF-A61F-817D350C180D" period="2011W5"
+  orgUnit="9C1B1B5E-3D65-48F2-8D1D-D36C60DD7344" >
+
+ <dataValue dataElement="56B2299E-ECD6-46CF-A61F-817D350C180D" value="11" />
+
+</dataValueSet>

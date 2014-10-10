@@ -1,0 +1,18 @@
+{ "attributeValueGroupOrder":
+  {
+    "name": "$!encoder.jsonEncode( ${attributeValueGroupOrder.name} )",
+	
+	"attributeId": "$!{attributeValueGroupOrder.attribute.id}",
+	
+	#set( $size = ${attributeValueGroupOrder.attributeValues.size()} )
+	"memberCount": "${size}",
+	
+	"attributeValues": [
+	#foreach( $value in $!attributeValueGroupOrder.attributeValues )
+	{
+	  "value": "$!encoder.jsonEncode( ${value} )"
+	}#if( $velocityCount < $size ),#end
+	#end
+	]
+  }
+}

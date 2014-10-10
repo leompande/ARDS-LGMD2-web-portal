@@ -1,0 +1,16 @@
+
+<br />
+<form id="maintenanceForm" name="maintenanceForm" action="#">
+    <table align="center">
+        <tr align="center"><th>$i18n.getString( "maintenance" )</th></tr>
+        <tr align="center"><td><input type="button" id="clearoutput" value="Clear Output Folder" onclick="clearFolder( this.id )" style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(255, 0, 0);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="clearbounced" value="Clear Bounced Folder" onclick="clearFolder( this.id )" style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(255, 0, 0);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="clearpending" value="Clear Pending Folder" onclick="clearFolder( this.id )" style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(255, 0, 0);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="clearcompleted" value="Clear Completed Folder" onclick="clearFolder( this.id )"  style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(255, 0, 0);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="clearmi" value="Clear mi Folder" onclick="clearFolder( this.id )"  style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(255, 0, 0);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="downloadmi" value="Download mi Folder" onclick="downloadFolder( this.id )" style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(0, 0, 255);" /><br/><br/></td></tr>
+		<tr align="center"><td><input type="button" id="downlaodra" value="Download ra Folder" onclick="downloadFolder( this.id )"  style="width: 200px; height:35px; font-family: Arial; font-weight: bold; color: rgb(0, 0, 255);" /><br/><br/></td></tr>
+    </table>
+</form>
+
+<span id="message"></span>

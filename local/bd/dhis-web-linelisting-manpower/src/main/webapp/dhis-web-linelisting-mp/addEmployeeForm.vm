@@ -1,0 +1,77 @@
+
+<script type="text/javascript">
+	var lpr_Period = $lprPeriod;
+</script>
+
+<script>
+	jQuery(document).ready(	function(){
+	
+	validation( 'addEmployeeForm' );	
+		
+	checkValueIsExist( "pdscode", "validateEmployee.action");
+		
+	datePickerValid( 'dob', false );
+	datePickerValid( 'lprDate', false );
+	datePickerValid( 'govtSerJoinDate', false );
+	
+	});
+</script>
+
+<h3>Add Employee</h3>
+
+<form id="addEmployeeForm" action="addEmployee.action" method="post">
+	
+	<table>
+		<tr>
+			<th colspan="2"> Employee Detail </th>
+		</tr>
+			<tr>
+				<td><label for="pdscode"> $i18n.getString( "pdscode" ) <em title="$i18n.getString("required")" class="required">*</em></label></td>
+				<td><input type="text" id="pdscode" name ="pdscode" style="width:20em" class="{validate:{required:true,minlength:2}}"></td>
+			</tr>
+			<tr>
+				<td><label for="name"> $i18n.getString( "name" ) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="name" name="name" style="width:20em" class="{validate:{required:true,minlength:2}}"></td>
+			</tr>
+			<tr>
+				<td><label for="DOB"> $i18n.getString( "dob" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="dob" name="dob" onchange="lprChanged()" style="width:20em"></td>
+			</tr>
+			<tr>
+				<td><label for="lprDate"> $i18n.getString( "lprDate" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="lprDate" name="lprDate" style="width:20em" onchange="validateDate( this )"></td>
+			</tr>
+			<tr>
+				<td><label for="sex"> $i18n.getString( "sex" ) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><select id="sex" name="sex" style="width:20em">
+					<option selected>Select</option>
+                	<option>Male</option>
+                	<option>Female</option>
+                	<option>Others</option>
+              	</select></td>
+			</tr>
+			<tr>
+				<td><label for="govtserjoindate"> $i18n.getString( "joinDate" ) ($i18n.getString( "format.date.label" )) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="govtSerJoinDate" name="govtSerJoinDate" style="width:20em" onchange="validateDate( this )"></td>
+			</tr>
+			<tr>
+				<td><label for="resAdd"> $i18n.getString( "res_Add" ) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="resAdd" name="resAdd" style="width:20em" class="{validate:{required:true,minlength:1}}"></td>
+			</tr>
+			<tr>
+				<td><label for="contactNo"> $i18n.getString( "contact_no" ) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="contactNo" name="contactNo" style="width:20em" class="{validate:{required:true,number:true,minlength:6}}"></td>
+			</tr>
+			<tr>
+				<td><label for="emerContactNo"> $i18n.getString( "emer_cont_no" ) <em title="$i18n.getString("required")"class="required">*</em></label></td>
+				<td><input type="text" id="emerContactNo" name="emerContactNo" style="width:20em" class="{validate:{required:true,number:true,minlength:6}}"></td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td><input type="submit" value="$i18n.getString("add")" style="width:10em">
+					<input type="button" value="$i18n.getString("cancel")" style="width:10em" onclick="window.location.href='getEmployeeList.action'">
+				</td>
+			</tr>
+	</table>
+</form>

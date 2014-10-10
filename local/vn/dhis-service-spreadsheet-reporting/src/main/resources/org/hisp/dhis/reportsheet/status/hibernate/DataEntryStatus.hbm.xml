@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.hisp.dhis.reportsheet.status.DataEntryStatus" table="dataentrystatus">
+	
+		<id name="id" column="datastatusid">
+			<generator class="native" />
+		</id>
+		
+		<property name="makeDefault" column="makedefault" />
+		
+		<properties name="dataset_periodtype_unique_key" unique="true">
+			<many-to-one name="dataSet" class="org.hisp.dhis.dataset.DataSet" column="datasetid" foreign-key="pk_dataset_dataentrystatus" />
+			<many-to-one name="periodType" class="org.hisp.dhis.period.PeriodType" column="periodtype" foreign-key="pk_periodtype_dataentrystatus" />
+		</properties>
+		
+	</class>
+</hibernate-mapping>

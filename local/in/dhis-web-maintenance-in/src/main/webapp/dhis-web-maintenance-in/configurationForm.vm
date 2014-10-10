@@ -1,0 +1,56 @@
+
+<h3>$i18n.getString( "Configuration" )</h3>
+<hr />
+<br /><br />
+<form id="configurationForm" name="configurationForm" action="configurationResult.action" method="post">
+    <table>
+        <tr>
+            <td><label>$i18n.getString( "MySQL Path" )</label><br /></td>
+            <td>
+                <input type="text" id="mysqlPath" name="mysqlPath" size="60" value="$!mySqlPathConfig.value" onchange="javscript:formatPath(this);" onload="javscript:formatPath(this);" />
+                <br />
+                (eg:- C:/Program Files/MySQL/MySQL Server 5.0/bin/)
+            </td>       
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>     
+        </tr>
+        <tr>
+            <td><label>$i18n.getString( "Backup Data Path" )</label><br /></td>
+            <td>
+                <input type="text" id="backupDataPath" name="backupDataPath" size="60" value="$!backupPathConfig.value" onchange="javscript:formatPath(this);" onload="javscript:formatPath(this);" />
+                <br />
+                (eg:- D:/dhisdata/)
+            </td>       
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>     
+        </tr>
+        <tr>
+            <td><label>$i18n.getString( "Report Folder" )</label><br /></td>
+            <td>
+                <input type="text" id="reportFolder" name="reportFolder" size="60" value="$!reportFolderConfig.value" onchange="javscript:formatPath(this);" onload="javscript:formatPath(this);" />
+                <br />
+                (eg:- ra_national)
+            </td>       
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="SAVE"/></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+    function formatPath(text)
+    {
+        var value = text.value;     
+        text.value = value.replace(/\\/g,"/");      
+    }
+</script>

@@ -1,0 +1,141 @@
+
+		<script>
+			//Global Variables
+		            
+			var reportModels = new HashTable();
+			var reportFileNames = new HashTable();
+						
+		    // Report ids and its Models
+			#foreach($report in $reportList)
+				var reportId = ""+"$report.id";
+			    reportModels.put(reportId,"$report.model");
+				reportFileNames.put(reportId,"$report.fileName");
+			#end
+
+			 // OrganisationUnit ids and its Names
+			var orgUnits = new HashTable();
+			#foreach($orgUnit in $organisationUnits)
+				var orgUnitId = ""+$orgUnit.getId();
+			    orgUnits.put(orgUnitId,"$orgUnit.getShortName()");
+			#end
+			            
+			// OrganisationUnit ids and its Level
+			var orgUnitLevels = new HashTable();
+			#foreach($orgUnit in $organisationUnits)
+				var orgUnitId = ""+$orgUnit.getId();
+			    orgUnitLevels.put(orgUnitId,"$organisationUnitService.getLevelOfOrganisationUnit( $orgUnit )");
+			#end
+			            					
+			function formValidations()
+			{			            
+				var reportListIndex = document.reportForm.reportList.selectedIndex;
+			    var startDateValue = document.reportForm.startDate.value;
+				var endDateValue = document.reportForm.endDate.value;
+				var orgunitIdValue = document.reportForm.ouIDTB.value;
+			               			            
+			    if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+			    else if(startDateValue == null || startDateValue== "" || endDateValue == null || endDateValue=="") {alert("Please Select Period"); return false;}
+				else if(startDateValue > endDateValue) {alert("Starte Date is Greaterthan End Date"); return false;}
+				else if(orgunitIdValue == null || orgunitIdValue == "") {alert("Please Select OrganisationUnit"); return false;}
+
+				//document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+				//document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+
+                document.forms['reportForm'].submit();
+			    //return true;
+			}
+
+//-----------------------------------------------------------------------
+//init jQuery validation for reportForm
+//@added validation for all fields and additional rules alphanumericwithbasicpuncspaces, date and url.
+//-----------------------------------------------------------------------
+	jQuery(document).ready(
+			function()
+			{
+				jQuery("#reportForm").validate({
+					  meta:"validate"
+					,errorElement:"td"
+					,submitHandler: function(form)
+									{
+										formValidations();
+									}
+				});
+				jQuery("#name").focus();
+			}
+	);
+	
+		</script>
+		<h1>AdvancedReport Analyser</h1><hr /><br />
+	        
+		<form id="reportForm" name="reportForm" action="generateAdvancedReport.action" method="post" target="_blank">
+            <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>		                
+				<tr>
+					<td class="NormalB">
+						Reports :<br />
+                    	<select id="reportList" name="reportList" style="width:200px">
+							#foreach($report in $reportList)
+								<option value="$report.id">$report.name</option>
+							#end
+                        </select>
+    			    </td>
+                    <td class="NormalB">
+						<label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+						<input type="text" id="startDate" name="startDate" style="width:20em" class="{validate:{required:true,dateISO:true}}">
+						<img src="../images/calendar_icon.gif" width="16" height="16" id="getStartDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+					</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>			
+                <tr>
+					<td class="NormalB">                          
+                    OrganisationUnit : <br />
+                    <input type="text" name="ouNameTB" id="ouNameTB" size="20" disabled>         
+                    </td>
+          	        <td class="NormalB">
+						<label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+						<input type="text" id="endDate" name="endDate" style="width:20em" class="{validate:{required:true,dateISO:true}}">
+						<img src="../images/calendar_icon.gif" width="16" height="16" id="getEndDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+					</td>
+                </tr>
+				<tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+   	            <tr>
+                <td>&nbsp;</td>
+                <td>
+                        <input type="submit" name="generate" value='Generate Report'/>
+                        <input type="hidden" name="ouIDTB" id="ouIDTB">
+      <!--              <input type="hidden" name="ouLevelTB" id="ouLevelTB">
+                        <input type="hidden" name="reportModelTB" id="reportModelTB">
+                        <input type="hidden" name="reportFileNameTB" id="reportFileNameTB"> -->
+                    </td>
+                </tr>
+            </table>
+		</form>
+
+<script type="text/javascript">
+	
+	Calendar.setup({
+        inputField     :    "startDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getStartDate"   // trigger for the calendar (button ID)
+    });
+	
+	Calendar.setup({
+        inputField     :    "endDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getEndDate"   // trigger for the calendar (button ID)
+    });
+</script>
+

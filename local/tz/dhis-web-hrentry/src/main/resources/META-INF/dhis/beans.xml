@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Custom Records Report -->  
+  
+  <bean id="org.hisp.dhis.hrentry.records.action.GenerateRecordsReportAction" 
+    class="org.hisp.dhis.hrentry.records.action.GenerateRecordsReportAction" 
+    scope="prototype">  
+    <property name="personService"
+      ref="org.hisp.dhis.hr.PersonService"/>
+    <property name="hrDataSetService"
+      ref="org.hisp.dhis.hr.HrDataSetService"/>
+    <property name="selectionTreeManager"
+      ref="org.hisp.dhis.oust.manager.SelectionTreeManager"/>       
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.records.action.ExportTableAction"
+    class="org.hisp.dhis.hrentry.records.action.ExportTableAction"
+    scope="prototype">
+    <property name="organisationUnitService" 
+      ref="org.hisp.dhis.organisationunit.OrganisationUnitService" /> 
+    <property name="personService"
+      ref="org.hisp.dhis.hr.PersonService"/>
+    <property name="hrDataSetService"
+      ref="org.hisp.dhis.hr.HrDataSetService"/>    
+  </bean>
+  
+  <!-- Custom Data Entry -->  
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.DataEntrySelectAction"
+	class="org.hisp.dhis.hrentry.action.dataentry.DataEntrySelectAction">
+	  <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	  <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+	  <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.DataEditSelectAction"
+	class="org.hisp.dhis.hrentry.action.dataentry.DataEditSelectAction">
+	  <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	  <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+	  <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+	  <property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService" />
+	  <property name="completenessService" ref="org.hisp.dhis.hr.CompletenessService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.CompleteRegistrationAction"
+	class="org.hisp.dhis.hrentry.action.dataentry.CompleteRegistrationAction">
+	  <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+	  <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+	  <property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService" />
+	  <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+	  <property name="completenessService" ref="org.hisp.dhis.hr.CompletenessService" />
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.SaveValueAction" class="org.hisp.dhis.hrentry.action.dataentry.SaveValueAction">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+		<property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService" />
+		<property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService" />
+		<property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+		<property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.GetHrDataSetListAction"
+	class="org.hisp.dhis.hrentry.action.dataentry.GetHrDataSetListAction">
+	  <property name="hrDataSetService"
+	  ref="org.hisp.dhis.hr.HrDataSetService"/>
+  </bean>  
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.UpdateRecordListAction" class="org.hisp.dhis.hrentry.action.dataentry.UpdateRecordListAction">
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+        <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+	<bean id="org.hisp.dhis.hrentry.action.dataentry.RemovePersonAction" class="org.hisp.dhis.hrentry.action.dataentry.RemovePersonAction">
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+		<property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService"/>
+    </bean>
+    
+     <bean id="org.hisp.dhis.hrentry.action.dataentry.SearchRecordAction" class="org.hisp.dhis.hrentry.action.dataentry.SearchRecordAction">
+        <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.LoadAttributeOptionAction" 
+    class="org.hisp.dhis.hrentry.action.dataentry.LoadAttributeOptionAction" 
+    scope="prototype">
+    <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />    
+  </bean> 
+  
+  	<!-- In-Service Training --> 
+  
+  <bean id="org.hisp.dhis.hrentry.action.dataentry.PersonTraining" class="org.hisp.dhis.hrentry.action.dataentry.PersonTraining">
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+        <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.GetTrainingAction" class="org.hisp.dhis.hrentry.action.dataentry.GetTrainingAction">
+        <property name="trainingService" ref="org.hisp.dhis.hr.TrainingService"/>
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+        <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.AddTrainingAction" class="org.hisp.dhis.hrentry.action.dataentry.AddTrainingAction">
+        <property name="trainingService" ref="org.hisp.dhis.hr.TrainingService"/>
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.UpdateTrainingAction" class="org.hisp.dhis.hrentry.action.dataentry.UpdateTrainingAction">
+        <property name="trainingService" ref="org.hisp.dhis.hr.TrainingService"/>
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.RemoveTrainingAction" class="org.hisp.dhis.hrentry.action.dataentry.RemoveTrainingAction">
+        <property name="trainingService" ref="org.hisp.dhis.hr.TrainingService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.dataentry.ValidateTrainingAction" class="org.hisp.dhis.hrentry.action.dataentry.ValidateTrainingAction">
+        <property name="trainingService" ref="org.hisp.dhis.hr.TrainingService"/>
+    </bean>
+    
+    <!-- History -->
+    
+    <bean id="org.hisp.dhis.hrentry.action.history.PersonHistory" class="org.hisp.dhis.hrentry.action.history.PersonHistory">
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+        <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.history.AddHistoryAction" class="org.hisp.dhis.hrentry.action.history.AddHistoryAction">
+        <property name="historyService" ref="org.hisp.dhis.hr.HistoryService"/>
+        <property name="personService" ref="org.hisp.dhis.hr.PersonService"/>
+        <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService"/>
+        <property name="attributeOptionsService" ref="org.hisp.dhis.hr.AttributeOptionsService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.history.RemoveHistoryAction" class="org.hisp.dhis.hrentry.action.history.RemoveHistoryAction">
+        <property name="historyService" ref="org.hisp.dhis.hr.HistoryService"/>
+    </bean>
+    
+    <bean id="org.hisp.dhis.hrentry.action.history.ValidateHistoryAction" class="org.hisp.dhis.hrentry.action.history.ValidateHistoryAction">
+        <property name="historyService" ref="org.hisp.dhis.hr.HistoryService"/>
+    </bean>
+
+    <!-- Custom aggregated Reports -->    
+    
+  <bean id="org.hisp.dhis.hrentry.records.action.GetReportOptionsAction"
+    class="org.hisp.dhis.hrentry.records.action.GetReportOptionsAction">
+    <property name="hrDataSetService"
+      ref="org.hisp.dhis.hr.HrDataSetService"/>
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.records.action.LoadAttributesAction" 
+    class="org.hisp.dhis.hrentry.records.action.LoadAttributesAction" 
+    scope="prototype">
+    <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>    
+  </bean>
+  
+  <bean id="org.hisp.dhis.hrentry.records.action.GenerateAggregatedReportAction" 
+        class="org.hisp.dhis.hrentry.records.action.GenerateAggregatedReportAction"
+   scope="prototype">
+   <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+   <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+   <property name="selectionTreeManager" ref="org.hisp.dhis.oust.manager.SelectionTreeManager"/> 
+   </bean>
+
+  <bean id="org.hisp.dhis.hrentry.records.action.GenerateChartAction" 
+        class="org.hisp.dhis.hrentry.records.action.GenerateChartAction"
+   scope="prototype">
+   <property name="aggregatedReportService" ref="org.hisp.dhis.hr.AggregatedReportService" />
+   <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+   <property name="attributeService" ref="org.hisp.dhis.hr.AttributeService" />
+   <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+   </bean>
+
+   <bean id="org.hisp.dhis.hrentry.action.dataentry.ShowProfileAction"
+	class="org.hisp.dhis.hrentry.action.dataentry.ShowProfileAction">
+	  <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	  <property name="hrDataSetService" ref="org.hisp.dhis.hr.HrDataSetService"/>
+	  <property name="personService" ref="org.hisp.dhis.hr.PersonService" />
+	  <property name="dataValuesService" ref="org.hisp.dhis.hr.DataValuesService" />
+  </bean> 
+	
+</beans>

@@ -1,0 +1,7 @@
+[
+#set( $size1 = $fav.size() )
+#foreach( $afav in $fav )
+
+{"json_url":"$encoder.jsonEncode( ${afav[0]})"}#if( $velocityCount < $size1 ),#end
+
+#end ]

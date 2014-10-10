@@ -1,0 +1,81 @@
+<style>
+    #overlay {
+    z-index:9998;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#000;
+    opacity:0.45;
+    -moz-opacity:0.45;
+    filter:alpha(opacity=45);
+    visibility:hidden;   
+    }
+    #overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+<div id="overlay">
+    <div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" style="margin:auto;position:fixed;top: 50%;left: 50%;"/></div>
+</div>
+
+
+<input type="hidden" id='selectedOrgunitID' value="$!organisationUnit.id" />
+<input type="hidden" id='selectedOrgunitName' value="$!organisationUnit.name" />
+
+<!--
+<input type="hidden" id='selOrgunitID' value="$!organisationUnit.id" />
+<input type="hidden" id='selOrgunitName' value="$!organisationUnit.name" />
+-->
+<div id='selectOrgUnitDiv'>
+	<h3>$i18n.getString( "organisationunit_select" )</h3>	
+</div>
+
+<div id='orgUnitDetailsDiv'></div>
+
+<div id='filterOrgUnitDetailsDiv'></div>
+<div id='filterOrgUnitListDiv'></div>
+
+<div id='listEquipmentDiv'></div>
+<div id='editEquipmentDiv'></div> <!-- Add / Edit EquipmentAttributeValue Form -->
+<div id='equipmentStatusHistoryDiv'></div> <!-- List EquipmentAttributeValue Status History -->
+<div id='editEquipmentStatusDiv'></div> <!-- Add / Edit EquipmentAttributeValue Status -->
+<div id='equipmentDataEntryDiv'></div> <!-- DataEntry screen of EquipmentAttributeValue -->
+<div id='equipmentDetailsDiv'></div> <!-- Details screen of EquipmentAttributeValue -->
+<div id='fullOrgUnitDetailsDiv'></div> <!-- Details screen of OrganisationUnit -->
+<div id='updateOrgUnitDetailsDiv'></div> <!-- Update screen of OrganisationUnit -->
+<div id='facilityDataEntryDiv'></div> <!-- Facility DataEntry screen -->
+<!--<div id='orgUnitDetailsDiv' style='display:none'>-->
+
+<!--
+<div id='orgUnitDetailsDiv' style='display:none'>
+	<h3>Vaccine EquipmentAttributeValue in  $organisationUnit.name</h3>
+	<table>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<table>
+					<tr>
+						
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<th>Orgunit Hierarchy</th>
+			<th>Orgunit Name</th>
+			 #foreach( $attribute in $attributes )
+			 	<th>$attribute.name</th>
+ 			#end
+		</tr>
+		<tr>
+			
+		</tr>
+	</table>
+</div>
+-->
+<script>
+	var i18n_equipment_status_history = '$encoder.jsEscape( $i18n.getString( "equipment_status_history" ) , "'")';
+	var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_equipment" ) , "'" )';
+</script>	

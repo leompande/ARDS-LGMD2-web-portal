@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+ >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttribute" table="equipmenttypeattribute">
+    <id name="id" column="equipmenttypeattributeid">
+      <generator class="native"/>
+    </id>
+	
+	&identifiableProperties;
+	
+    <property name="name" not-null="true" unique="true" length="160"/>
+    
+    <property name="description" not-null="false" length="250"/>
+	
+	<property name="valueType" column="valuetype" not-null="true" />
+
+    <property name="mandatory" column="mandatory" not-null="true" />
+	  
+	<!--<property name="display" column="display" not-null="true" /> -->  
+
+    <property name="noChars" />
+	
+	<!--  
+	<set name="attributeOptions">
+      <key column="equipmenttypeattributeid" />
+      <one-to-many class="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOption" />
+    </set>
+    -->
+    
+    <many-to-one name="optionSet" class="org.hisp.dhis.option.OptionSet" column="optionsetid"
+      foreign-key="fk_equipmenttypeattribute_optionsetid" /> 
+	
+  </class>
+</hibernate-mapping>

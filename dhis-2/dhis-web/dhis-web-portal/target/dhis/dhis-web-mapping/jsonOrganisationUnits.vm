@@ -1,0 +1,19 @@
+#set( $size = $object.size() )
+{ "organisationUnits": [
+#foreach ( $unit in $object )
+  {
+    "id": "$!{unit.id}",
+    "name": "$!encoder.jsonEncode( ${unit.name} )",
+    "shortName": "$!encoder.jsonEncode( ${unit.shortName} )",
+    "code": "$!encoder.jsonEncode( ${unit.code} )",
+    "openingDate": "$!{unit.openingDate}",
+    "closedDate": "$!{unit.closedDate}",
+    "active": "$!{unit.active}",
+    "comment": "$!encoder.jsonEncode( ${unit.comment} )",
+    "geoCode": "$!{unit.geoCode}",
+    "latitude": "$!{unit.latitude}",
+    "longitude": "$!{unit.longitude}"
+  }#if( $velocityCount < $size ),#end
+#end
+] }
+ 

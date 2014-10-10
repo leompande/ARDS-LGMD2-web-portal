@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean id="org.hisp.dhis.organisationunit.OrganisationUnitService" class="org.hisp.dhis.organisationunit.DefaultOrganisationUnitService">
+        <property name="organisationUnitStore" ref="org.hisp.dhis.organisationunit.OrganisationUnitStore" />
+        <property name="organisationUnitLevelStore" ref="org.hisp.dhis.organisationunit.OrganisationUnitLevelStore" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+        <property name="versionService" ref="org.hisp.dhis.version.VersionService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.action.DeleteAggDataElementAction"
+          class="org.hisp.dhis.ihrissyncmanager.action.DeleteAggDataElementAction"
+          scope="prototype">
+        <property name="deleteAggDataService" ref="org.hisp.dhis.ihrissyncmanager.AggDataService"/>
+    </bean>
+
+    <bean id="org.hisp.dhis.ihrissyncmanager.action.RecordAggDataElementAction"
+          class="org.hisp.dhis.ihrissyncmanager.action.RecordAggDataElementAction"
+          scope="prototype">
+        <property name="recordAggDataService" ref="org.hisp.dhis.ihrissyncmanager.AggDataService"/>
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+        <property name="periodService" ref="org.hisp.dhis.period.PeriodService"/>
+    </bean>
+
+</beans>

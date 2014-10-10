@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.AttributeOptions" table="hr_attribute_options">
+		<id name="id" column="attributeOptionId">
+			<generator class="native" />
+		</id>
+		
+		<property name="value" type="text" column="value" />
+		<many-to-one name="attribute" column="attributeId" class="org.hisp.dhis.hr.Attribute"/>
+		
+	</class>
+</hibernate-mapping>

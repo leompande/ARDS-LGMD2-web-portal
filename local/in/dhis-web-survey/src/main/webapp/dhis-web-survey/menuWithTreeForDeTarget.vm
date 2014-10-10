@@ -1,0 +1,22 @@
+
+<h2>$i18n.getString( "de_target" )</h2>
+
+<ul>
+    <li>$i18n.getString( "detarget_dataentry" )</a></li>
+</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-20px; ">
+    <a href="deTargetManagement.action"><img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+##parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!--
+<script>
+	function organisationUnitSelected( orgUnits )
+	{
+  	  window.location.href = 'selectTarget.action';
+	}
+
+	selection.setListenerFunction( organisationUnitSelected );
+</script>
+-->

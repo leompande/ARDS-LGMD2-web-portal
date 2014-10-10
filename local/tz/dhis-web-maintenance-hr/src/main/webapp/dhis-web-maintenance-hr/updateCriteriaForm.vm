@@ -1,0 +1,100 @@
+<script>
+//-----------------------------------------------------------------------
+//init jQuery validation for addAttributeGroupForm
+//-----------------------------------------------------------------------
+jQuery(document).ready(
+  function()
+  {
+     jQuery("#updateCriteriaForm").validate({
+       meta:"validate",
+       errorElement:"td",
+       submitHandler: function(form){
+         validateUpdateCriteria();
+       }
+     });
+     jQuery.validator.setMessages( validationMessage );
+     jQuery("#nameField").focus();
+}
+);
+var i18n_remove_option = '$encoder.jsEscape( $i18n.getString( "remove_option" ) , "'") ';
+</script>
+<input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+<h3>$i18n.getString( "update_criteria" )</h3>
+<div id="tooltip"></div>
+<form id="updateCriteriaForm" action="updateCriteria.action" method="post" >
+<div style="display:inline">
+  <input type="hidden" id="id" name="id" value="$criteria.id">
+</div>
+<table> 
+    <tr>
+      <th colspan="4">$i18n.getString( "criteria_details" ) </th>
+    </tr>
+    <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+        <td><input type="text" id="nameField" name="nameField" value="$encoder.htmlEncode($criteria.name)"  style="width:20em" class="{validate:{required:true,rangelength:[2,32]}}"></td>
+        </td>
+        <tr>
+        <td width="20em"><label for="attributeId">$i18n.getString( "attribute" )<em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+	<td>
+		<select id="attributeId" name="attributeId" style="min-width:20em">
+		#foreach($attribute in $attributes) 
+			<option value="$attribute.id"  #if( $attribute.id == $criteria.attribute.getId() ) selected="selected" #end >$attribute.caption </option>
+		#end	
+		</select>
+	</td>
+    </tr>
+    </tr>  
+    
+    <tr>
+      <td colspan="2">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th colspan="2">$i18n.getString( "available_attribute_options" ) </th>
+      <th>$i18n.getString( "filter" ) </th>
+      <th>$i18n.getString( "selected_attribute_options" )</th>
+    </tr>
+    <tr>
+        <td colspan="2">
+              <select multiple id="availableAttributeOptions" name="availableAttributeOptions" size="15" style="width:25em " ondblclick="moveSelectedById( 'availableAttributeOptions', 'selectedAttributeOptions' )" >
+                #foreach($attributeOption in $attributeOptions)
+                <option value='$attributeOption.id' >$attributeOption.value</option>
+                #end
+              </select>
+        </em></label>        </td>
+        <td>
+          <input type="button" value="&gt;" title="$i18n.getString('move_selected')" onclick="moveSelectedById( 'availableAttributeOptions', 'selectedAttributeOptions' )">
+          <br>
+          <input type="button" value="&lt;" title="$i18n.getString('remove_selected')" onclick="moveSelectedById( 'selectedAttributeOptions', 'availableAttributeOptions' )">
+        </td>
+        <td><select multiple id="selectedAttributeOptions" name="selectedAttributeOptions" size="15" style="width:25em " ondblclick="moveSelectedById( 'selectedAttributeOptions', 'availableAttributeOptions' )"
+             class="{validate:{required:true}}" >
+             #foreach($selectedAttributeOption in $criteria.attributeOptions )
+                <option value='$selectedAttributeOption.id' >$encoder.htmlEncode( $selectedAttributeOption.value )</option>
+             #end
+            </select>
+        </td>
+        
+        <td>
+          <a href="javascript:moveUpSelectedOption( 'selectedAttributeOptions')" title="$i18n.getString( "move_up" )"><img src="../images/move_up.png" alt="$i18n.getString( "move_up" )"></a>
+          <br><br>
+          <a href="javascript:moveDownSelectedOption( 'selectedAttributeOptions' )" title="$i18n.getString( "move_down" )"><img src="../images/move_down.png" alt="$i18n.getString( "move_up" )"></a>
+        </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+</table>
+
+<p>
+    <input type="submit" value="$i18n.getString( "add" )" style="width:10em" onclick="javascript:selectAllElementsById( 'selectedAttributeOptions');">
+    <input type="button" value="$i18n.getString( "cancel" )" onclick="window.location.href='criteria.action'" style="width:10em">
+</p>
+
+</form>     
+
+<span id="message"></span>

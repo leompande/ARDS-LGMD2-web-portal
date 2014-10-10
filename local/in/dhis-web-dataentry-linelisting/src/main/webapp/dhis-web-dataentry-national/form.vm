@@ -1,0 +1,25 @@
+
+
+#parse( "/dhis-web-dataentry-national/select.vm" )
+
+
+#if($selDSName.equals($llbirth))
+	#parse( "/dhis-web-dataentry-national/llbirthForm.vm" )
+#elseif($selDSName.equals($lldeath))
+	#parse( "/dhis-web-dataentry-national/lldeathForm.vm" )
+#elseif($selDSName.equals($llmdeath))
+	#parse( "/dhis-web-dataentry-national/llmdeathForm.vm" )
+#elseif($selDSName.equals($lluuidspe))
+	#parse( "/dhis-web-dataentry-national/lluidspe.vm" )
+#elseif($selDSName.equals($lluuidspep))
+	#parse( "/dhis-web-dataentry-national/lluuidspep.vm" )
+#elseif($selDSName.equals($lldidsp))
+	#parse( "/dhis-web-dataentry-national/lldidsp.vm" )
+#elseif($selDSName.equals($llidspl))
+	#parse( "/dhis-web-dataentry-national/llidspl.vm" )
+#elseif($selDSName.equals($llcoldchain))
+    #parse( "/dhis-web-dataentry-national/llcoldchain.vm" )	
+	
+#else
+  <h3>No Dataentry form available for selected DataSet/DataSet not assign to selected Organisation Unit</h3>
+#end

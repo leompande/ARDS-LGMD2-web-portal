@@ -1,0 +1,10 @@
+<h3>$i18n.getString( "define_associations" )</h3>
+<h4>$encoder.htmlEncode( $importReport.getName() )</h4>
+<form name="importReportAssociation" action="updateImportReportAssociations.action" method="POST">
+
+	<input type="hidden" name="importReportId" value="$importReport.id"/>
+	#organisationUnitSelectionTree( false, true, true )
+	<input type="submit" id="submitButton" value="$i18n.getString( 'save' )" style="width:10em"/>
+	<input type="button" onclick="window.location.href='listAllImportReport.action'" value="$i18n.getString( 'cancel' )" style="width:10em"/></p>
+	
+</form>

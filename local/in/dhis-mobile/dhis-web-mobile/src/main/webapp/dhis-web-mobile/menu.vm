@@ -1,0 +1,14 @@
+<h2>DHIS Mobile</h2>
+<ul>
+    <!--<li><a href = "createMobileApp.action">Create Mobile Application</a></li>-->
+    <li><a href = "receiveImport.action">Receive Data and Import</a></li>
+    <li><a href = "sendSMS.action">Send SMS</a></li>
+    <li><a href = "sendBulkSMS.action">Send Bulk SMS</a></li>
+	<li><a href = "sendBulkSMSThirdParty.action">Send Bulk SMS through third party</a></li>   
+	<li><a href = "sendOta.action">Send Application via OTA</a></li>
+    <li><a href = "mobileSettings.action">Settings</a></li>
+    <li><a href = "receiveAllMessages.action">Inbox</a></li>
+    <li><a href = "getAllDraftMessages.action">Draft</a></li>
+    
+    <li><a href = "testSendSMSPage.action">TestSendSMSData</a></li>
+</ul>

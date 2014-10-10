@@ -1,0 +1,64 @@
+
+<table class="mainPageTable">
+	<tr>
+		<td align="right">
+			<input type="button" value="$i18n.getString( 'Update Status' )" style="width:100px" onclick="showEquipmentStatusForm( '$equipment.id' );"/>
+		</td>
+	</tr>
+	<tr>
+		<td> 
+			<table class="listTable" id="equipmentList" width='100%'>
+				<col/>
+				<col/>
+				<col/>
+				<col/>
+				<col/>
+				
+				<tr bgcolor="#285C91">
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "date_status_changed" )</strong></font></td>
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "date_record_updated" )</strong></font></td>
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "status" )</strong></font></td>
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "notes" )</strong></font></td>
+					<td><font color="#FFFFFF"><strong>$i18n.getString( "updated_by" )</strong></font></td>
+				</tr>
+				<!--
+				<thead>
+						<tr>
+							<th>$i18n.getString( "date_status_changed" )</th>
+							<th>$i18n.getString( "date_record_updated" )</th>
+							<th>$i18n.getString( "status" )</th>
+							<th>$i18n.getString( "notes" )</th>
+							<th>$i18n.getString( "updated_by" )</th>
+						</tr>
+					
+				</thead>
+				-->
+	<!--value='$format.formatDate($!patient.birthDate)'-->
+				<tbody id="list"> 
+					#foreach( $equimentStatus in $equipmentStatusHistory )
+					<tr>
+						<td>$!format.formatDate($!equimentStatus.updationDate)</td>
+						<td>$!format.formatDate($!equimentStatus.reportingDate)</td>
+						<td>$equimentStatus.status</td>
+						<td>$equimentStatus.description</td>
+						<td>$equimentStatus.storedBy</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			<!--<asp:button id="btncancel" runat="server" CssClass="button1" OnClick="javascript:window.close();"></asp:button>-->
+			<p>
+				<div align="right"><input type="button" value="$i18n.getString( 'close' )" style="width:100px" onclick="closewindow();"/></div>
+			</p>
+			
+		</td>
+	</tr>	
+</table>
+#parse( "/dhis-web-commons/loader/loader.vm" )
+<script type="text/javascript">
+    jQuery(document).ready(function(){  
+        tableSorter( 'equipmentList' );
+    });
+    
+ 
+</script>

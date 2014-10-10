@@ -1,0 +1,101 @@
+<link type="text/css" rel="stylesheet" media="screen" href="../dhis-web-commons/util/css/redmond/jquery-ui.css">
+<script type="text/javascript" src="../dhis-web-commons/util/jquery-ui.js"></script>
+<script type="text/javascript" src="javascript/jquery-form.js"></script>
+<script type="text/javascript" src="javascript/createMobileApp.js"></script>
+<table width="100%">
+    <tr>
+        <td>
+            <h1>Create Mobile Application</h1>
+            <div id="mvnStatusDiv">
+                #set ($path = "$!mvnPath")
+                #if($path != "")
+                #set ($status = "$!mvnStatus")
+                #if($status != "")
+                <span style="color:red">$status</span> <br/>
+                #end
+                <img src="../images/check.png" alt="" /> Using mvn found in PATH at $path (<a href="javascript: showPathField()">Change</a>)<br/><br/>
+                <div id="mvnDiv">
+                    <form id="mvnForm" method="post">
+                        Enter mvn Folder Path: <input name="mvnPath" type="text" value="$!mvnPath" size="40" />
+                        <input type="button" value="Set mvn Path" onclick="submitMvnForm()" />
+                    </form>
+                </div>
+                #else
+                #set ($status = "$!mvnStatus")
+                #if($status != "")
+                <span style="color:red">$status</span>
+                #end
+                mvn not found... Please configure mvn location <br/>
+                <form id="mvnForm" method="post">
+                    Enter mvn Folder Path: <input name="mvnPath" type="text" value="$!mvnPath" size="40" />
+                    <input type="button" value="Set mvn Path" onclick="submitMvnForm()" />
+                </form>
+                #end
+            </div>
+        </td>
+        <td align="right">
+            #if ($mobileAppFilename)
+            <a href="javame_src/target/$mobileAppFilename">Download $mobileAppFilename</a>
+            #end
+        </td>
+    </tr>
+</table>
+
+<input id="mvnBin" style=" visibility: hidden" name="mvnBin" value="$path"/>
+<div id="accordion">
+    <h3><a href="#">Step 1: Splash Screen Selection</a></h3>
+    <div id="splashDesigner" style="height: 180px">
+        <div id="splashUpdate">
+            <table>
+                <tr>
+                    #foreach($var in $splashImg)
+                    <td>
+                        <div style=" width: 96px; height: 120px; border: dotted; text-align: center;">
+                            <img style="margin-top: 30px" alt="" src="javame_src/src/main/resources/splash/$var" width="60" height="60"/> <br/>
+                            <input style="bottom: 5px" type="radio" name="splash" value="$var" />
+                        </div>
+                    </td>
+                    #end
+                </tr>
+            </table>
+        </div> <br/>
+        <div>
+            <form id="splashForm" method="post" enctype="multipart/form-data">
+                Splash Image: <input type="file" name="upload" size="40" />
+                <input type="submit" value="Upload Image" />
+            </form>
+        </div>
+    </div>
+    <h3><a href="#">Step 2: Dataset Selection</a></h3>
+    <div id="dataSetSelector">
+        <form id="dataSetForm">
+            <select name="dataSetName" style="vertical-align: top" >
+                #foreach($var in $availableDatasets)
+                <option>$var</option>
+                #end
+            </select>
+            <a href="#" onclick="addDataSet()"><img src="../images/add.png" alt="" align="top" width="16" /></a>
+            <span id="dataElementsListDiv"></span>
+        </form>
+    </div>
+    <h3><a href="#">Step 3: Set Pages</a></h3>
+    <div id="pageSelector">
+        <p>
+
+        </p>
+    </div>
+    <h3><a href="#">Step 4: Select Language Or Translate Data Elements</a></h3>
+    <div id="languageSelector">
+        <table>
+            <tr>
+                <td>English<input type="checkbox" name="langEng" value="English" /></td>
+                <td>Gujarati<input type="checkbox" name="langGuj" value="Gujarati" /></td>
+                <td>Punjabi<input type="checkbox" name="langPun" value="Punjabi" /></td>
+            </tr>
+        </table>
+    </div>
+    <h3><a href="#">Step 5: Generate Application</a></h3>
+    <div id="jarGenerator">
+        <input id="genButton" type="button" value="Generate Mobile Application" onclick="submitJarGenerator()" />
+    </div>
+</div>

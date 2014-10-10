@@ -1,0 +1,115 @@
+<h3>Take Advance MySQL Backup</h3>
+<style>
+	#overlay 
+	{
+		z-index:19998;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		width:100%;
+		background:#000;
+		opacity:0.45;
+		-moz-opacity:0.45;
+		filter:alpha(opacity=45);
+		visibility:hidden;
+	}
+
+	#overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+
+<script>
+	function formValidationsForAdvanceBackup()
+	{
+	
+		 var selectedTablesSize = document.advanceMySQLBackupForm.selectedTables.options.length;
+		 alert( " No of Selected Table(s) " + selectedTablesSize );	
+		 if(  selectedTablesSize <= 0 ) 
+		 {
+	        alert( "Please Select Table(s)" );
+	        return false;
+		 }
+		  
+		 if( selectedTablesSize > 0 )
+		 {
+			for( k=0;k<document.advanceMySQLBackupForm.selectedTables.options.length;k++ )
+    		{
+    			document.advanceMySQLBackupForm.selectedTables.options[k].selected = true;
+        	} 
+		 }
+		  showOverlay()
+  		  return true;
+	} 
+
+</script>
+
+<script>
+    
+	function showOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'visible';
+		jQuery("#overlay").css({
+			"position":"fixed",
+            "top":0+"px",
+            "left":0+"px",
+			"height": jQuery(document).height(),
+			"width": jQuery(document).width()
+		});
+		jQuery("#overlayImg").css({
+			"top":jQuery(window).height()/2
+		});
+	}
+	
+	function hideOverlay() 
+	{
+		var o = document.getElementById('overlay');
+		o.style.visibility = 'hidden';
+	}
+
+</script>
+
+	
+<form id="advanceMySQLBackupForm" name="advanceMySQLBackupForm" action="advanceMySQLBackupResult.action" method="POST" onsubmit="return formValidationsForAdvanceBackup()">
+	<table>
+		<tr>
+			<td valign="top">
+				<table valign="top">
+
+					<tr><td>&nbsp;</td></tr>
+					
+					<tr><th>Available Tables</th><td></td><th>Selected Tables</th></tr>
+					
+					<tr>	
+						<td>	
+							<select id="availableTables" name="availableTables" multiple="multiple" style="min-width:325px;height:11.25em" ondblclick="moveSelectedById( this.id, 'selectedTables' )">
+								#foreach( $table in $availableTables )
+    								<option value="$table" title="$table">$table</option>
+	    						#end
+							</select>
+						</td>
+						<td style="text-align:center">			
+							<input type="button" value="&gt;" title="$i18n.getString('move_selected')" style="width:50px" onclick="moveSelectedById( 'availableTables', 'selectedTables' )" /><br/>
+							<input type="button" value="&lt;" title="$i18n.getString('remove_selected')" style="width:50px" onclick="moveSelectedById( 'selectedTables', 'availableTables' )" /><br/>
+							<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="moveAllById( 'availableTables', 'selectedTables' )"/><br/>
+							<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="moveAllById( 'selectedTables', 'availableTables' )"/>			
+						</td>	
+						<td>
+							<select id="selectedTables" name="selectedTables" size="2" multiple="multiple" style="min-width:325px;height:11.25em" ondblclick="moveSelectedById( this.id, 'availableTables' )"></select>
+						</td>
+					</tr>
+					<tr><td><h4><strong>No of Available Tables :&nbsp;$availableTables.size()</strong></h4></td></tr>
+					<tr>
+						<td>
+							<input type="submit" id="takeBackup" name="takeBackup" value="Take Backup" style="width:10em"  />
+				   		</td>
+			  		 </tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</form>
+<div id="overlay">
+	<div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" /></div>
+</div>
+

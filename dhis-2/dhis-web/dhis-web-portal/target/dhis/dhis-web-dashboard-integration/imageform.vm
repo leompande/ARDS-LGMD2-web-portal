@@ -1,0 +1,27 @@
+<form id="documentForm" action="uploadImage.action" method="post" enctype="multipart/form-data" class="inputForm">
+    <input type="hidden" id="id" name="id" value="">
+
+    <div class="form-group">
+        <!--label for="image_name">Picture Discription <em title="Required" class="required"></em></label-->
+        <input type="hidden" id="document_name" style="width:100% !important;" name="name" value="image" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
+    </div>
+    <div class="form-group">
+        <label for="add-link">Image File <em title="Required" class="required">*</em></label>
+        <input type="file" id="upload" name="upload"  class="{validate:{required:true}} form-control">
+    </div>
+    <div class="form-group">
+        <input type="hidden" id="upload" name="external" value="false" >
+    </div>
+
+    <input id="image_upload" type="submit" value="Add Image" class="btn btn-success btn-sm" >
+
+</form>
+
+<script>
+    $(document).ready(function(){
+        $("#documentForm").submit(function(e){
+
+        });
+    });
+
+</script>

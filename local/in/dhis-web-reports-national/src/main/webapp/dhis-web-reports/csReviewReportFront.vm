@@ -1,0 +1,147 @@
+
+    <script>
+  
+      //Global Variables
+              
+    //  var reportModels = new HashTable();
+    //  var reportFileNames = new HashTable();
+      /*      
+        // Report ids and its Models
+      #foreach($report in $reportList)
+        var reportId = ""+"$report.id";
+          reportModels.put(reportId,"$report.model");
+        reportFileNames.put(reportId,"$report.fileName");
+      #end
+      */
+       // OrganisationUnit ids and its Names
+       /* 
+      var orgUnits = new HashTable();
+      #foreach($orgUnit in $organisationUnits)
+        var orgUnitId = ""+$orgUnit.getId();
+          orgUnits.put(orgUnitId,"$orgUnit.getShortName()");
+      #end
+             
+      // OrganisationUnit ids and its Level
+    
+      var orgUnitLevels = new HashTable();
+      #foreach($orgUnit in $organisationUnits)
+        var orgUnitId = ""+$orgUnit.getId();
+          orgUnitLevels.put(orgUnitId,"$organisationUnitService.getLevelOfOrganisationUnit( $orgUnit )");
+      #end
+      */                      
+      function formValidations()
+      {                 
+        
+      
+        var reportListIndex = document.reportForm.reportList.selectedIndex;
+          var startDateValue = document.reportForm.startDate.value;
+        var endDateValue = document.reportForm.endDate.value;
+       // alert(startDateValue);
+       // alert(endDateValue);
+      //  var orgunitIdValue = document.reportForm.ouIDTB.value;
+                                  
+          if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+        else if(startDateValue == null || startDateValue== "" || endDateValue == null || endDateValue=="") {alert("Please Select Period"); return false;}
+          else if(startDateValue > endDateValue) {alert("Start Date is Greater than End Date"); return false;}
+      //  else if(orgunitIdValue == null || orgunitIdValue == "") {alert("Please Select OrganisationUnit"); return false;}
+
+      //  document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+      //  document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+                document.forms['reportForm'].submit();
+          //return true;
+      }
+
+
+//-----------------------------------------------------------------------
+//init jQuery validation for reportForm
+//@added validation for all fields and additional rules alphanumericwithbasicpuncspaces, date and url.
+//-----------------------------------------------------------------------
+  jQuery(document).ready(
+      function()
+      {
+        jQuery("#reportForm").validate({
+            meta:"validate"
+          ,errorElement:"td"
+          ,submitHandler: function(form)
+                  {
+                    formValidations();
+                  }
+        });
+        ///jQuery.validator.loadLocaled( jQuery("#curLocaleCode").val() );
+        jQuery("#name").focus();
+      }
+  );
+    </script>
+    <h1>CS Review Report</h1><hr /><br />
+          
+<form id="reportForm" name="reportForm" action="generateCSReviewReportResult.action" method="post" target="_blank">
+           <input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>                    
+        <tr>
+          <td class="NormalB">
+                        <label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+                        <input type="text" id="startDate" name="startDate" onchange="if(!checkStartDate( this.value )) this.value='';" style="width:15em" class="{validate:{required:true,dateISO:true}}">
+                        
+                    </td>
+           <td class="NormalB">
+                        <label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+                        <input type="text" id="endDate" name="endDate" onchange="if(!checkEndDate( this.value )) this.value='';"  style="width:15em" class="{validate:{required:true,dateISO:true}}">
+                        
+                    </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>            
+          <td class="NormalB">
+            Reports :<br />
+                      <select id="reportList" name="reportList" style="width:200px">
+              #foreach($report in $reportList)
+                <option value="$report.id">$report.name</option>
+              #end
+                      </select>
+              </td>
+          <td class="NormalB">
+                 $i18n.getString( "generated_data_type" ) :<br />
+                <select id="aggData" name="aggData" style="width:200px">
+                    <option value="generateaggdata">$i18n.getString( "generate_agg_data" )</option>
+                    <option value="useexistingaggdata">$i18n.getString( "use_existing_agg_data" )</option>
+                    <option value="usecaptureddata">$i18n.getString( "use_captured_data" )</option>
+                </select>
+         </td>      
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr> 
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>         
+ 
+        <tr>
+            <td><input type="submit" id= "generate" name="generate" title= "Generate report" value="$i18n.getString( "generate" )"  style="width:6em" #if( $!reportList.size() == 0 ) disabled #end > </td>
+            <!--  <td><input type="submit" name="generate" value='Generate Report'/></td> -->
+            <td>
+                <!-- <input type="submit" name="generate" value='Generate Report'/>
+                <input type="hidden" name="autogen" id="autogen" value="0" >
+                <input type="hidden" name="ouIDTB" id="ouIDTB">
+                <input type="hidden" name="ouLevelTB" id="ouLevelTB">
+                <input type="hidden" name="reportModelTB" id="reportModelTB">
+                <input type="hidden" name="reportFileNameTB" id="reportFileNameTB">-->
+                <input type="hidden" name="reportTypeNameTB" id="reportTypeNameTB" value="$reportTypeName">
+            </td>
+        </tr>
+    </table>
+</form>
+<script type="text/javascript">
+    jQuery( function(){
+            datePickerInRange( "startDate", "endDate", false, false );
+    });     
+</script>
+

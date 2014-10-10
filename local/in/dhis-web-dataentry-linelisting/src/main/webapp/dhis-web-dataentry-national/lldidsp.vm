@@ -1,0 +1,161 @@
+#set($recordNo = $maxRecordNo + 1)
+
+<script>
+	var nextRecordNo = $recordNo;
+	var nextFlag = 0;
+	
+	function addLLDIDSPNewRow()
+	{
+		if(nextFlag == 0)
+		{
+		   nextFlag = 1;
+		}
+		else
+		{
+		    return;
+		}
+		
+		nextRecordNo++;
+			
+		var tbl = document.getElementById("tblGrid");
+		var lastRow = tbl.rows.length;
+		var newRow = tbl.insertRow(lastRow);		
+            
+    	var oCell = newRow.insertCell(0);
+    	oCell.innerHTML = "<input name='entryfield' id='value[1048].value:value["+nextRecordNo+"].value' type='text' value=' ' onchange='saveLLbirthValue(1048,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' onblur='addLLDIDSPNewRow()' style='width:100% text-align:center'>";
+    
+    	oCell = newRow.insertCell(1);
+    	oCell.innerHTML = "<input name='entryfield' id='value[1049].value:value["+nextRecordNo+"].value' type='text' value=' ' onchange='saveLLbirthValue(1049,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:100% text-align:center'>";
+    
+    	oCell = newRow.insertCell(2);
+    	oCell.innerHTML = "<select name='entryfield' id='value[1050].value:value["+nextRecordNo+"].value' onchange='saveLLbirthValue(1050,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:100% text-align:center'><option value='NONE' selected>---</option><option value='M'>Male</option><option value='F'>Female</option></select>";    	
+
+    	oCell = newRow.insertCell(3);
+    	oCell.innerHTML = "<select name='entryfield' id='value[1051].value:value["+nextRecordNo+"].value' onchange='saveLLbirthValue(1051,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:100% text-align:center'><option value='NONE' selected>---</option><option value='B1DAY'>BELOW 1 DAY</option><option value='B1WEEK'>1 DAY - 1 WEEK</option><option value='B1MONTH'>1 WEEK - 1 MONTH</option><option value='B1YEAR'>1 MONTH - 1 YEAR</option><option value='B5YEAR'>1 YEAR - 5 YEARS</option><option value='O5YEAR'>OVER 5 YEARS</option></select>";
+    		    	        	
+    	oCell = newRow.insertCell(4);
+    	oCell.innerHTML = "<select name='entryfield' id='value[1052].value:value["+nextRecordNo+"].value' onchange='saveLLbirthValue(1052,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:100% text-align:center'><option value='NONE' selected>---</option><option value='MALARIA'>MALARIA</option><option value='MEASLES'>MEASLES</option><option value='CHICKENPOX'>CHICKEN POX</option><option value='DENGUE'>DENGUE/DHF/DSS</option><option value='CHIKUNGYNYA'>CHIKUNGYNYA</option><option value='MENINGITIS'>MENINGITIS</option><option value='AES'>ACUTE ENCEPHALITIS SYNDROME</option><option value='ENTERICFEVER'>ENTERIC FEVER</option><option value='FOUKO'>FEVER OF UNKNOWN ORIGIN</option><option value='DIPHETHERIA'>DIPHETHERIA</option><option value='PERTUSIS'>PERTUSIS</option><option value='ARIILI'>ARI/ILI</option><option value='PNEUMONIA'>PNEUMONIA</option><option value='ADD'>ACUTE DIARRHOEAL DISEASE</option><option value='BD'>BACILLARY DYSENTERY</option><option value='VIRALHEPATITIS'>VIRAL HEPATITIS</option><option value='LEPTOSPIROSIS'>LEPTOSPIROSIS</option><option value='AFP'>ACUTE FLACCID PARALYSIS</option><option value='NK'>NOT KNOWN</option></select>";    	    	
+	}
+</script>
+
+
+
+<div align="center"><h3><u>Line listing of Death - IDSP</u></h3></div>
+
+
+<table id="tblGrid" width="100%">
+	<tr>
+		<th width="25%">Name of Child<br>(If under 5 Mother/Father Name)</th>
+		<th width="25%">Village</th>
+		<th width="10%">Sex</th>
+		<th width="20%">Age Category</th>
+		<th width="20%">Probable Cause of death</th>		
+	<tr>
+
+#set($calInfo = "")
+#set( $mapKeys = $recordNos )
+#foreach( $mapKey in $mapKeys)
+	<tr>
+	#set($llDataValues = $lldataValueMap.get($mapKey))
+	#set($count1 = 1)
+	
+	#foreach( $llDataValue in $llDataValues)
+		#if($count1 == 3)
+			<td>
+				<select name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+					<option value="NONE" #if(!$llDataValue.getValue() || $llDataValue.getValue()=="NONE") selected #end>---</option>
+					<option value="M" #if($llDataValue.getValue() && $llDataValue.getValue()=="M") selected #end>Male</option>
+					<option value="F" #if($llDataValue.getValue() && $llDataValue.getValue()=="F") selected #end>Female</option>
+				</select>
+			</td>			
+		#elseif($count1 == 4)
+			<td>
+				<select name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+					<option value="NONE" #if(!$llDataValue.getValue() || $llDataValue.getValue()=="NONE") selected #end>---</option>
+					<option value="B1DAY" #if($llDataValue.getValue() && $llDataValue.getValue()=="B1DAY") selected #end>BELOW 1 DAY</option>
+					<option value="B1WEEK" #if($llDataValue.getValue() && $llDataValue.getValue()=="B1WEEK") selected #end>1 DAY - 1 WEEK</option>
+					<option value="B1MONTH" #if($llDataValue.getValue() && $llDataValue.getValue()=="B1MONTH") selected #end>1 WEEK - 1 MONTH</option>
+					<option value="B1YEAR" #if($llDataValue.getValue() && $llDataValue.getValue()=="B1YEAR") selected #end>1 MONTH - 1 YEAR</option>
+					<option value="B5YEAR" #if($llDataValue.getValue() && $llDataValue.getValue()=="B5YEAR") selected #end>1 YEAR - 5 YEARS</option>
+					<option value="O5YEAR" #if($llDataValue.getValue() && $llDataValue.getValue()=="O5YEAR") selected #end>OVER 5 YEARS</option>
+				</select>
+			</td>
+		#elseif($count1 == 5)
+			<td>
+				<select name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+					<option value="NONE" #if(!$llDataValue.getValue() || $llDataValue.getValue()=="NONE") selected #end>---</option>
+					<option value="MALARIA" #if($llDataValue.getValue() && $llDataValue.getValue()=="MALARIA") selected #end>MALARIA</option>
+					<option value="MEASLES" #if($llDataValue.getValue() && $llDataValue.getValue()=="MEASLES") selected #end>MEASLES</option>
+					<option value="CHICKENPOX" #if($llDataValue.getValue() && $llDataValue.getValue()=="CHICKENPOX") selected #end>CHICKEN POX</option>
+					<option value="DENGUE" #if($llDataValue.getValue() && $llDataValue.getValue()=="DENGUE") selected #end>DENGUE/DHF/DSS</option>					
+					<option value="CHIKUNGYNYA" #if($llDataValue.getValue() && $llDataValue.getValue()=="CHIKUNGYNYA") selected #end>CHIKUNGYNYA</option>
+					<option value="MENINGITIS" #if($llDataValue.getValue() && $llDataValue.getValue()=="MENINGITIS") selected #end>MENINGITIS</option>
+					<option value="AES" #if($llDataValue.getValue() && $llDataValue.getValue()=="AES") selected #end>ACUTE ENCEPHALITIS SYNDROME</option>
+					<option value="ENTERICFEVER" #if($llDataValue.getValue() && $llDataValue.getValue()=="ENTERICFEVER") selected #end>ENTERIC FEVER</option>
+					<option value="FOUKO" #if($llDataValue.getValue() && $llDataValue.getValue()=="FOUKO") selected #end>FEVER OF UNKNOWN ORIGIN</option>
+					<option value="DIPHETHERIA" #if($llDataValue.getValue() && $llDataValue.getValue()=="DIPHETHERIA") selected #end>DIPHETHERIA</option>
+					<option value="PERTUSIS" #if($llDataValue.getValue() && $llDataValue.getValue()=="PERTUSIS") selected #end>PERTUSIS</option>
+					<option value="ARIILI" #if($llDataValue.getValue() && $llDataValue.getValue()=="ARIILI") selected #end>ARI/ILI</option>
+					<option value="PNEUMONIA" #if($llDataValue.getValue() && $llDataValue.getValue()=="PNEUMONIA") selected #end>PNEUMONIA</option>
+					<option value="ADD" #if($llDataValue.getValue() && $llDataValue.getValue()=="ADD") selected #end>ACUTE DIARRHOEAL DISEASE</option>
+					<option value="BD" #if($llDataValue.getValue() && $llDataValue.getValue()=="BD") selected #end>BACILLARY DYSENTERY</option>
+					<option value="VIRALHEPATITIS" #if($llDataValue.getValue() && $llDataValue.getValue()=="VIRALHEPATITIS") selected #end>VIRAL HEPATITIS</option>
+					<option value="LEPTOSPIROSIS" #if($llDataValue.getValue() && $llDataValue.getValue()=="LEPTOSPIROSIS") selected #end>LEPTOSPIROSIS</option>
+					<option value="AFP" #if($llDataValue.getValue() && $llDataValue.getValue()=="AFP") selected #end>ACUTE FLACCID PARALYSIS</option>															
+					<option value="NK" #if($llDataValue.getValue() && $llDataValue.getValue()=="NK") selected #end>NOT KNOWN</option>
+				</select>
+			</td>
+		#else
+			<td><input name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" type="text" value="#if($llDataValue.getValue()) $llDataValue.getValue() #end" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:100% text-align:center"></td>		
+		#end
+		#set($count1 = $count1+1)
+	#end
+	</tr>	
+#end
+<tr>
+	<td><input name="entryfield" id="value[1048].value:value[$recordNo].value" type="text" value=" " onchange="saveLLbirthValue(1048,$recordNo )" onkeypress="return keyPress(event, this)" onblur="addLLDIDSPNewRow()" style="width:100% text-align:center"></td>
+	<td><input name="entryfield" id="value[1049].value:value[$recordNo].value" type="text" value=" " onchange="saveLLbirthValue(1049,$recordNo )" onkeypress="return keyPress(event, this)" style="width:100% text-align:center"></td>
+	<td>
+		<select name="entryfield" id="value[1050].value:value[$recordNo].value" onchange="saveLLbirthValue(1050,$recordNo)" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+			<option value="NONE" selected>---</option>
+			<option value="M">Male</option>
+			<option value="F">Female</option>
+		</select>		
+	</td>	
+	<td>
+		<select name="entryfield" id="value[1051].value:value[$recordNo].value" onchange="saveLLbirthValue(1051,$recordNo)" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+			<option value="NONE" selected>---</option>
+			<option value="B1DAY">BELOW 1 DAY</option>
+			<option value="B1WEEK">1 DAY - 1 WEEK</option>
+			<option value="B1MONTH">1 WEEK - 1 MONTH</option>
+			<option value="B1YEAR">1 MONTH - 1 YEAR</option>
+			<option value="B5YEAR">1 YEAR - 5 YEARS</option>
+			<option value="O5YEAR">OVER 5 YEARS</option>
+		</select>	
+	</td>	
+	<td>
+		<select name="entryfield" id="value[1052].value:value[$recordNo].value" onchange="saveLLbirthValue(1052,$recordNo)" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+			<option value="NONE" selected>---</option>
+			<option value="MALARIA">MALARIA</option>
+			<option value="MEASLES">MEASLES</option>
+			<option value="CHICKENPOX">CHICKEN POX</option>
+			<option value="DENGUE">DENGUE/DHF/DSS</option>					
+			<option value="CHIKUNGYNYA">CHIKUNGYNYA</option>
+			<option value="MENINGITIS">MENINGITIS</option>
+			<option value="AES">ACUTE ENCEPHALITIS SYNDROME</option>
+			<option value="ENTERICFEVER">ENTERIC FEVER</option>
+			<option value="FOUKO">FEVER OF UNKNOWN ORIGIN</option>
+			<option value="DIPHETHERIA">DIPHETHERIA</option>
+			<option value="PERTUSIS">PERTUSIS</option>
+			<option value="ARIILI">ARI/ILI</option>
+			<option value="PNEUMONIA">PNEUMONIA</option>
+			<option value="ADD">ACUTE DIARRHOEAL DISEASE</option>
+			<option value="BD">BACILLARY DYSENTERY</option>
+			<option value="VIRALHEPATITIS">VIRAL HEPATITIS</option>
+			<option value="LEPTOSPIROSIS">LEPTOSPIROSIS</option>
+			<option value="AFP">ACUTE FLACCID PARALYSIS</option>															
+			<option value="NK">NOT KNOWN</option>
+		</select>	
+	</td>
+</tr>		
+</table>

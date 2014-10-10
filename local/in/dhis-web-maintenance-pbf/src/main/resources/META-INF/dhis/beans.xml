@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!--  PBF API -->
+    
+    <bean id="org.hisp.dhis.pbf.api.TariffDataValueStore" class="org.hisp.dhis.pbf.impl.HibernateTariffDataValueStore">
+        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="org.hisp.dhis.pbf.api.PBFDataValueStore" class="org.hisp.dhis.pbf.impl.HibernatePBFDataValueStore">
+        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="periodStore" ref="org.hisp.dhis.period.PeriodStore" />
+    </bean>
+    
+    <bean id="org.hisp.dhis.pbf.api.TariffDataValueService" class="org.hisp.dhis.pbf.impl.DefaultTariffDataValueService">
+        <property name="tariffDataValueStore" ref="org.hisp.dhis.pbf.api.TariffDataValueStore" />
+    </bean>
+
+    <bean id="org.hisp.dhis.pbf.api.PBFDataValueService" class="org.hisp.dhis.pbf.impl.DefaultPBFDataValueService">
+        <property name="pbfDataValueStore" ref="org.hisp.dhis.pbf.api.PBFDataValueStore" />
+    </bean>
+
+    <bean id="org.hisp.dhis.pbf.api.LookupStore" class="org.hisp.dhis.pbf.impl.HibernateLookupStore">
+        <property name="clazz" value="org.hisp.dhis.pbf.api.Lookup"/>
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="org.hisp.dhis.pbf.api.LookupService" class="org.hisp.dhis.pbf.impl.DefaultLookupService">
+        <property name="lookupStore" ref="org.hisp.dhis.pbf.api.LookupStore" />
+    </bean>
+
+    <bean id="org.hisp.dhis.pbf.api.BankDetailsStore" class="org.hisp.dhis.pbf.impl.HibernateBankDetailsStore">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="org.hisp.dhis.pbf.api.BankDetailsService" class="org.hisp.dhis.pbf.impl.DefaultBankDetailsService">
+        <property name="bankDetailsStore" ref="org.hisp.dhis.pbf.api.BankDetailsStore" />
+    </bean>
+    
+	<!-- Home page -->
+	<bean id="org.hisp.dhis.pbf.action.NoAction" class="org.hisp.dhis.pbf.action.NoAction" scope="prototype">
+    </bean>
+	
+	<!-- Data Element for Tariff -->
+	<bean id="org.hisp.dhis.pbf.action.GetDataElementforTariffAction" class="org.hisp.dhis.pbf.action.GetDataElementforTariffAction" scope="prototype">
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+    
+    <!-- Get Tariff Data -->
+    <bean id="org.hisp.dhis.pbf.action.LoadTariffDetailsAction" class="org.hisp.dhis.pbf.action.LoadTariffDetailsAction" scope="prototype">
+		<property name="tariffDataValueService" ref="org.hisp.dhis.pbf.api.TariffDataValueService" />	
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="lookupService" ref="org.hisp.dhis.pbf.api.LookupService" />
+    </bean>
+    
+    <!-- Add Tariff -->
+	<bean id="org.hisp.dhis.pbf.action.AddTariffDataAction" class="org.hisp.dhis.pbf.action.AddTariffDataAction" scope="prototype">
+		<property name="tariffDataValueService" ref="org.hisp.dhis.pbf.api.TariffDataValueService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    </bean>
+    
+    <!-- Delete Tariff -->
+    <bean id="org.hisp.dhis.pbf.action.DeleteTariffDataAction" class="org.hisp.dhis.pbf.action.DeleteTariffDataAction" scope="prototype">
+		<property name="tariffDataValueService" ref="org.hisp.dhis.pbf.api.TariffDataValueService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>
+    
+    <!-- Validate Tariff  -->
+    <bean id="org.hisp.dhis.pbf.action.ValidateTariffDataAction" class="org.hisp.dhis.pbf.action.ValidateTariffDataAction" scope="prototype">
+		<property name="tariffDataValueService" ref="org.hisp.dhis.pbf.api.TariffDataValueService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+    </bean>
+
+    <!-- Load Bank Details -->
+    <bean id="org.hisp.dhis.pbf.action.LoadBankDetailsAction" class="org.hisp.dhis.pbf.action.LoadBankDetailsAction" scope="prototype">
+        <property name="bankDetailsService" ref="org.hisp.dhis.pbf.api.BankDetailsService" />   
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+        <property name="lookupService" ref="org.hisp.dhis.pbf.api.LookupService" />
+    </bean>
+    
+    <!-- Add Bank Detail -->
+	<bean id="org.hisp.dhis.pbf.action.AddBankDataAction" class="org.hisp.dhis.pbf.action.AddBankDataAction" scope="prototype">
+		<property name="bankDetailsService" ref="org.hisp.dhis.pbf.api.BankDetailsService" />		
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />		
+    </bean>
+    
+    <!-- Add Bank Detail -->
+	<bean id="org.hisp.dhis.pbf.action.DeleteBankDataAction" class="org.hisp.dhis.pbf.action.DeleteBankDataAction" scope="prototype">
+		<property name="bankDetailsService" ref="org.hisp.dhis.pbf.api.BankDetailsService" />		
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />		
+    </bean>
+    
+    
+<!--  PBF Data Entry -->
+
+	<bean id="org.hisp.dhis.pbf.dataentry.PageInitAction" class="org.hisp.dhis.pbf.dataentry.PageInitAction" scope="prototype">
+		<property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />	
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="lookupService" ref="org.hisp.dhis.pbf.api.LookupService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>    
+    
+  	<!-- Get OrganisationUnit Unit name -->
+    <bean id="org.hisp.dhis.pbf.dataentry.GetOrganisationUnitAction" class="org.hisp.dhis.pbf.dataentry.GetOrganisationUnitAction" scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="lookupService" ref="org.hisp.dhis.pbf.api.LookupService" />
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean> 
+ 
+	<!-- Get Periods -->
+	 <bean id="org.hisp.dhis.pbf.dataentry.LoadPeriodsAction" class="org.hisp.dhis.pbf.dataentry.LoadPeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	 </bean>		
+	
+	<!-- Get Next and Previous Periods -->
+	 <bean id="org.hisp.dhis.pbf.dataentry.LoadNextPrePeriodsAction" class="org.hisp.dhis.pbf.dataentry.LoadNextPrePeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	 </bean>	 
+    
+    
+	<!-- Load DataEntry Form -->
+	 <bean id="org.hisp.dhis.pbf.dataentry.LoadDataEntryFormAction" class="org.hisp.dhis.pbf.dataentry.LoadDataEntryFormAction" scope="prototype">   
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService"/>
+		<property name="lookupService" ref="org.hisp.dhis.pbf.api.LookupService" />		
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService"/>
+		<property name="tariffDataValueService" ref="org.hisp.dhis.pbf.api.TariffDataValueService"/>
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+		<property name="pbfDataValueService" ref="org.hisp.dhis.pbf.api.PBFDataValueService" />
+	 </bean>    
+    
+    <!-- Save Value -->
+    
+    <bean id="org.hisp.dhis.pbf.dataentry.SaveValueAction"  class="org.hisp.dhis.pbf.dataentry.SaveValueAction" scope="prototype">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="pbfDataValueService" ref="org.hisp.dhis.pbf.api.PBFDataValueService" />			
+	</bean>
+    
+</beans>

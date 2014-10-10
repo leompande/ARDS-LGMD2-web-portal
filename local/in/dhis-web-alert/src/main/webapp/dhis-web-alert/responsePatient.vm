@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patient>
+  <id>$patient.id</id>  
+  <fullName>$encoder.xmlEncode( $patient.getFullName() )</fullName>
+  <gender>$encoder.xmlEncode( $patient.gender )</gender>
+  <dobType>#if($!patient.dobType)$!patient.dobType#else $i18n.getString('none') #end</dobType>
+  <dateOfBirth>$format.formatDate( $!patient.birthDate )</dateOfBirth>
+  <age>$encoder.xmlEncode( $patient.getAge() )</age>
+  <bloodGroup>#if($!patient.bloodGroup) $patient.bloodGroup #else $i18n.getString('none') #end</bloodGroup>
+  #foreach( $patientIdentifier in $patient.identifiers )
+    <identifier>        
+        <identifierText>$encoder.xmlEncode( $patientIdentifier.identifier )</identifierText>
+     </identifier>
+  #end
+  #foreach( $attribute in $patient.attributes )
+    #set( $attributeValue = false )
+    #set( $attributeValue = $patientAttributeValueMap.get( $attribute.id ) )             
+    <attribute>
+        <name>$encoder.xmlEncode( $attribute.name )</name>
+        <value>$encoder.xmlEncode( $attributeValue )</value>
+    </attribute> 
+  #end  
+  #foreach( $program in $patient.programs )
+    <program>
+        <name>$encoder.xmlEncode( $program.name )</name>
+    </program> 
+  #end         
+</patient>

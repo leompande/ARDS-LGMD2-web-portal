@@ -1,0 +1,9 @@
+#set( $size = $attributesOptions.size() )
+{ "attributesOptions": [
+#foreach( $attributeOption in $attributesOptions )
+  {
+    "id": $!{attributeOption.id},
+    "value": "$!encoder.jsonEncode( ${attributeOption.value} )"
+  }#if( $velocityCount < $size ),#end
+#end ]
+}

@@ -1,0 +1,99 @@
+<script type="text/javascript" src="javascript/updateIndicatorGroupSet.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(	function() {
+		jQuery("#availableIndicatorGroupsList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getIndicatorGroups.action",
+			iterator: "indicatorGroups",
+			connectedTo: 'groupMembers',
+			handler: function(item) {
+				var option = jQuery("<option />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			},
+			params: {
+				filterNoGroupSet: true
+			}
+		});
+
+		// checkValueIsExist( "name", "validateIndicatorGroupSet.action", {id: $indicatorGroupSet.id});
+	});
+</script>
+
+<h3>$i18n.getString( "update_indicatorgroupset" )</h3>
+
+<form id="updateIndicatorGroupSet" action="updateIndicatorGroupSet.action" method="post" class="inputForm">
+<input type=hidden id="id" name="id" value="$indicatorGroupSet.id"/>
+<table>
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" value="$encoder.htmlEncode( $indicatorGroupSet.name )"/></td>
+	</tr>
+
+	<tr>
+		<td><label for="description">$i18n.getString( "description" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td><input type="text" id="description" name="description" value="#if( $indicatorGroupSet.description)$encoder.htmlEncode( $indicatorGroupSet.description )#end"></td>
+	</tr>
+
+	<tr>
+		<td><label for="compulsory">$i18n.getString( "compulsory" ) <em title="$i18n.getString( "required" )" class="required">*</em></label></td>
+		<td>
+			<select id="compulsory" name="compulsory" onchange="changeCompulsory( this.value )">
+				<option value="true" #if( $indicatorGroupSet.compulsory ) selected="selected" #end>$i18n.getString( "yes" )</option>
+				<option value="false" #if( !$indicatorGroupSet.compulsory ) selected="selected" #end>$i18n.getString( "no" )</option>
+			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" height="15px"></td>
+	</tr>
+</table>
+
+<table>
+    <colgroup>
+      <col style="width: 500px;"/>
+      <col/>
+      <col style="width: 500px;"/>
+    </colgroup>
+
+	<tr>
+		<th>$i18n.getString( "available_indicatorgroup" )</th>
+		<th></th>
+		<th>$i18n.getString( "group_members" )
+			<select id="memberValidator" class="{validate:{required:true}}" style="display:none"/>
+		</th>
+	</tr>
+
+	<tr>
+		<td>
+			<select id="availableIndicatorGroupsList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+		</td>
+
+        <td style="text-align:center">          
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableIndicatorGroupsList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'groupMembers' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableIndicatorGroupsList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'groupMembers' );"/>
+        </td>
+
+		<td>
+			<select id="groupMembers" name="groupMembers" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;" class="{validate:{required:true}}">
+				#foreach( $indicatorGroup in $selectedGroups )
+                    <option value="$indicatorGroup.id">$encoder.htmlEncode( $indicatorGroup.displayName )</option>
+                #end
+			</select>
+		</td>
+	</tr>
+</table>
+
+<p>
+	<input type="submit" value="$i18n.getString( 'update' )" style="width:10em"/>
+	<input type="button" value="$i18n.getString( 'cancel' )" onclick="dhis2.commons.redirectCurrentPage( 'indicatorGroupSet.action' )" style="width:10em"/>
+</p>
+
+</form>

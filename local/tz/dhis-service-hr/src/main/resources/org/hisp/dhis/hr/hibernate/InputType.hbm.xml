@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.InputType" table="hr_input_type">
+		<id name="id" column="inputTypeId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="32" />	
+		
+		<set name="attribute" inverse="true" cascade="all">
+			<key column="inputTypeId" />
+			<one-to-many class="org.hisp.dhis.hr.Attribute" />
+		</set>	
+		
+	</class>
+</hibernate-mapping>

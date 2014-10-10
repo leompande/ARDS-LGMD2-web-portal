@@ -1,0 +1,323 @@
+<script type="text/javascript" src="javascript/editDataSet.js"></script>
+<script type="text/javascript">
+	jQuery(function() {
+		jQuery("#availableDataElementsList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getDataElements.action?domain=aggregate",
+			iterator: "dataElements",
+			connectedTo: 'dataElementsSelectedList',
+			handler: function(item) {
+				var option = jQuery("<option data-id='" + item.groups + "' />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			},
+			filter: {
+				source: "../dhis-web-commons-ajax-json/getDataElementGroups.action",
+				label: 'dataelement group',
+				iterator: "dataElementGroups",
+				handler: function(item) {
+					return "<option data-key='id' data-value='" + item.id + "'>" + item.name + "</option>";
+				}
+			}
+		});
+
+		jQuery("#availableIndicatorsList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getIndicators.action",
+			iterator: "indicators",
+			connectedTo: 'indicatorsSelectedList',
+			handler: function(item) {
+				var option = jQuery("<option data-id='" + item.groups + "' />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			},
+			filter: {
+				source: "../dhis-web-commons-ajax-json/getIndicatorGroups.action",
+				iterator: "indicatorGroups",
+				label: 'indicator group',
+				handler: function(item) {
+					return "<option data-key='id' data-value='" + item.id + "'>" + item.name + "</option>";
+				}
+			}
+		});
+	});
+
+	var previousName = '';
+</script>
+
+<h3>$i18n.getString( "edit_dataset" )</h3>
+
+<form id="editDataSetForm" name="editDataSetForm" action="updateDataSet.action" method="post" class="inputForm">
+  <input type="hidden" id="dataSetId" name="dataSetId" value="$dataSet.id"/>
+
+  <table style="width: 600px">
+    <col style="width: 400px"/>
+    <col>
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "dataset_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" id="name" name="name" value="$!encoder.htmlEncode( $dataSet.name )"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "short_name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td><input type="text" id="shortName" name="shortName" value="$!encoder.htmlEncode( $dataSet.shortName )"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "code" )</label></td>
+        <td><input type="text" id="code" name="code" value="$!encoder.htmlEncode( $dataSet.code )"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "description" )</label></td>
+        <td><textarea id="description" name="description">$!encoder.htmlEncode( $dataSet.description )</textarea></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "expiry_days" )</label></td>
+        <td><input type="text" id="expiryDays" name="expiryDays" value="$!encoder.htmlEncode( $dataSet.expiryDays )"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "timely_days" )</label></td>
+        <td><input type="text" id="timelyDays" name="timelyDays" value="$!encoder.htmlEncode( $dataSet.timelyDays )"/></td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "frequency" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+        <td>
+          <select id="frequencySelect" name="frequencySelect">
+            #foreach ( $periodType in $periodTypes )
+              <option value="$periodType.name" #if( $dataSet.periodType.name.equals( $periodType.name ) ) selected="selected" #end>$i18n.getString( $periodType.name )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "category_combo" )</label></td>
+        <td>
+          <select id="categoryComboId" name="categoryComboId">
+            #foreach( $categoryCombo in $categoryCombos )
+              <option value="$categoryCombo.id"#if( $dataSet.categoryCombo.id == $categoryCombo.id ) selected="selected"#end>$encoder.htmlEncode( $categoryCombo.displayName )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "notification_recipients" )</label></td>
+        <td>
+          <select id="notificationRecipients" name="notificationRecipients">
+          	<option value="-1">[ $i18n.getString( "none" ) ]</option>
+            #foreach( $group in $userGroups )
+              <option value="$group.id"#if( $dataSet.notificationRecipients && $dataSet.notificationRecipients.equals( $group ) ) selected="selected"#end>$encoder.htmlEncode( $group.name )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "notify_completing_user" )</label></td>
+        <td>
+          <select id="notifyCompletingUser" name="notifyCompletingUser">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.notifyCompletingUser == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+          <td><label>$i18n.getString( "approve_data" )</label></td>
+          <td>
+              <select id="approveData" name="approveData">
+                  <option value="false">$i18n.getString( "no" )</option>
+                  <option value="true"#if( $dataSet.approveData == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+              </select>
+          </td>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "skip_aggregation" )</label></td>
+        <td>
+          <select id="skipAggregation" name="skipAggregation">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.skipAggregation == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>      
+    </tbody>
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "form_details" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td><label for="allowFuturePeriods">$i18n.getString( "allow_future_periods" )</label></td>
+      	<td>
+      	  <select id="allowFuturePeriods" name="allowFuturePeriods">
+      	  	<option value="false">$i18n.getString( "no" )</option>
+      	  	<option value="true"#if( $dataSet.allowFuturePeriods == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+  	      </select>
+	    </td>
+      </tr>
+      <tr>
+      	<td><label for="fieldCombinationRequired">$i18n.getString( "all_fields_for_data_element_required" )</label></td>
+      	<td>
+      	  <select id="fieldCombinationRequired" name="fieldCombinationRequired">
+      	  	<option value="false">$i18n.getString( "no" )</option>
+      	  	<option value="true"#if( $dataSet.fieldCombinationRequired == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+  	      </select>
+	    </td>
+      </tr>
+      <tr>
+        <td><label for="validCompleteOnly">$i18n.getString( "complete_allowed_only_if_validation_passes" )</label></td>
+        <td>
+          <select id="validCompleteOnly" name="validCompleteOnly">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.validCompleteOnly == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>$i18n.getString( 'legend_set' )</td>
+        <td>
+          <select id="selectedLegendSetId" name="selectedLegendSetId">
+            <option value="0">[$i18n.getString('please_select')]</option>
+            #foreach ( $legendSet in $legendSets )
+              <option value="$legendSet.id" #if( $dataSet.legendSet && $dataSet.legendSet.id == "$legendSet.id" )selected #end>$encoder.htmlEncode( $legendSet.name )</option>
+            #end
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="skipOffline">$i18n.getString( "skip_offline" )</label></td>
+        <td>
+          <select id="skipOffline" name="skipOffline">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.skipOffline == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="dataElementDecoration">$i18n.getString( "dataelementdecoration" )</label></td>
+        <td>
+          <select id="dataElementDecoration" name="dataElementDecoration">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.dataElementDecoration == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>      
+      <tr>
+        <td><label for="renderAsTabs">$i18n.getString( "render_as_tabs" )</label></td>
+        <td>
+          <select id="renderAsTabs" name="renderAsTabs">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.renderAsTabs == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="multiOrgDetailsList" style="width: 600px; padding-bottom: 15px;">
+    <col style="width: 400px;"/> ## Labels
+    <col/> ## Input
+    <thead>
+      <tr>
+        <th colspan="2">$i18n.getString( "multiorg_dataset_details" )</th>
+      </tr>
+      <tr>
+        <td><label>$i18n.getString( "render_horizontally" )</label></td>
+        <td>
+          <select id="renderHorizontally" name="renderHorizontally">
+            <option value="false">$i18n.getString( "no" )</option>
+            <option value="true"#if( $dataSet.renderHorizontally == true ) selected="selected"#end>$i18n.getString( "yes" )</option>
+          </select>
+        </td>
+      </tr>
+    </thead>
+  </table>
+
+  <table id="dataElementSelectionArea">
+      <colgroup>
+        <col style="width: 500px;"/>
+        <col/>
+        <col style="width: 500px;"/>
+      </colgroup>
+    <thead>
+      <tr>
+        <th>$i18n.getString( "available_data_elements" )</th>
+		<th>$i18n.getString( "filter" )</th>
+        <th>$i18n.getString( "selected_data_elements" )</th>
+      </tr>
+    </thead>
+    <tbody>
+    	
+      <tr>
+        <td>
+          <select id="availableDataElementsList" name="availableDataElementsList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+
+        <td>
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableDataElementsList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'dataElementsSelectedList' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableDataElementsList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'dataElementsSelectedList' );"/>
+        </td>       
+
+        <td>
+          <select id="dataElementsSelectedList" name="dataElementsSelectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 45px;">
+              #foreach ( $availableDataElement in $dataElements )
+                  <option value="$availableDataElement.id">$encoder.htmlEncode( $availableDataElement.displayName )</option>
+              #end   
+          </select>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  <br/>
+
+  <table id="indicatorSelectionArea">
+      <colgroup>
+        <col style="width: 500px;"/>
+        <col/>
+        <col style="width: 500px;"/>
+      </colgroup>
+      <thead>
+      <tr>
+        <th>$i18n.getString( "available_indicators" )</th>
+		<th>$i18n.getString( "filter" )</th>
+        <th>$i18n.getString( "selected_indicators" )</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <select id="availableIndicatorsList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+        <td>
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableIndicatorsList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'indicatorsSelectedList' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableIndicatorsList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'indicatorsSelectedList' );"/>
+        </td>
+        <td>
+          <select id="indicatorsSelectedList" name="indicatorsSelectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 45px;">
+              #foreach ( $availableIndicator in $indicators )
+                  <option value="$availableIndicator.id">$encoder.htmlEncode( $availableIndicator.displayName )</option>
+              #end
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3">
+          <input type="submit" value="$i18n.getString( 'save' )" style="width:120px" />
+          <input type="button" onclick="dhis2.commons.redirectCurrentPage( 'dataSet.action' )" value="$i18n.getString( 'cancel' )" style="width:120px" />
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</form>

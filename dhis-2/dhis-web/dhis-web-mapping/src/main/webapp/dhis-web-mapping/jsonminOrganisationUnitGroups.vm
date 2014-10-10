@@ -1,0 +1,1 @@
+#set( $size = $object.size() ){"organisationUnitGroups":[#foreach ( $group in $object ){"id":"$!{group.uid}","name":"$!encoder.jsonEncode( ${group.name} )","symbol":"$!encoder.jsonEncode( ${group.symbol} )"}#if( $velocityCount < $size ),#end#end]}

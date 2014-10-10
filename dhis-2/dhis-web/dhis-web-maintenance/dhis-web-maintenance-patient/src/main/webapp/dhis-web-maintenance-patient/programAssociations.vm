@@ -1,0 +1,70 @@
+
+<h3>$i18n.getString( "assign_program_to_orgunits_for_registering" )</h3>
+
+<h4>$encoder.htmlEncode( $program.displayName )</h4>
+
+
+<form id="defineProgramAssociationsForm" action="defineProgramAssociations.action" method="post">
+  
+  <div id="tabs">
+	<ul>
+		<li><a href="#tab-1">$i18n.getString("orgunit")</a></li>
+		<li><a href="#tab-2">$i18n.getString( "orgunit_group" )</a></li>
+	</ul>	
+	<div id="tab-1">
+	  <div style="display:inline">
+		<input type="hidden" name="id" value="$program.id">
+	  </div>
+	  <table id="selectionTable">
+		<tr>
+		  <td>
+			#organisationUnitSelectionTree( false, true, false )
+		  </td>
+		</tr>
+	  </table>
+	</div>
+	<div id="tab-2">
+		<table>
+			<thead>
+				<tr>
+					<th>$i18n.getString( "available" )</th>
+					<th>$i18n.getString( "filter" )</th>
+					<th>$i18n.getString( "selected" )</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					<select multiple id='orgunitGroupAvailable' size='10' ondblclick="moveSelectedById( 'orgunitGroupAvailable', 'orgunitGroupIds' )">
+					#foreach($group in $availableOrgunitGroups)
+						<option value='$group.id'>$encoder.htmlEncode($group.name)</option>
+					#end
+					</select>
+				</td>
+				<td>
+					<input type="button" style="width:40px" value="&gt;" title="$i18n.getString( 'add_selected' )" style="width:120px" onclick="moveSelectedById( 'orgunitGroupAvailable', 'orgunitGroupIds' )" /><br>
+					<input type="button" style="width:40px" value="&gt;&gt;" title="$i18n.getString( 'add_all' )" style="width:120px" onclick="moveAllById( 'orgunitGroupAvailable', 'orgunitGroupIds' )" /><br>
+					<input type="button" style="width:40px" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:120px" onclick="moveSelectedById( 'orgunitGroupIds', 'orgunitGroupAvailable' )" /><br>
+					<input type="button" style="width:40px" value="&lt;&lt;" title="$i18n.getString( 'remove_all' )" style="width:120px" onclick="moveAllById( 'orgunitGroupIds', 'orgunitGroupAvailable' )" />
+				</td>
+				<td>
+					<select multiple id='orgunitGroupIds' name='orgunitGroupIds' size='10' ondblclick="moveSelectedById( 'orgunitGroupIds', 'orgunitGroupAvailable' )">
+					#foreach($group in $program.organisationUnitGroups)
+						<option value='$group.id'>$encoder.htmlEncode($group.name)</option>
+					#end
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<p style='padding-left:20px'>
+		<input type="submit" id="submitButton" value="$i18n.getString( "save" )" style="width:10em">
+		<input type="button" onclick="window.location.href='program.action'" value="$i18n.getString( "cancel" )" style="width:10em">
+	</p>
+</form>
+
+<script type="text/javascript">
+  var levelMustBeInt = '$encoder.jsEncode( $i18n.getString( "level_must_be_int" ) )';
+  var i18n_loading = '$encoder.jsEncode( $i18n.getString( "loading" ) )';
+  $('#tabs').tabs();
+</script>

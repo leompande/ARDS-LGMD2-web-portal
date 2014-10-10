@@ -1,0 +1,83 @@
+
+		        <script>
+		            // Global Variables
+		            var selriRadioButton = "indicatorsRadio";
+		            var selCategory = "";
+		            var selFacility = "";
+		            			            			            			            
+			    </script>
+	        <h1>Target Mapping</h1>
+	        <hr />	        
+	        <form id="GenerateTargetForm" name="GenerateTargetForm" action="generateTarget.action" method="post" onsubmit="return formValidations()" target="chartWindow1">	
+	            	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+		                <colgroup>
+                    		<col width="325">
+							<col width="80">
+							<col width="325">
+						</colgroup>
+		                	<tr>
+    			                <td class="NormalB">&nbsp;</td>   
+                    			<td class="NormalB">&nbsp;</td>
+                    			<td class="NormalB">&nbsp;</td>
+                			</tr>
+                			<tr>
+    			                <td class="NormalB">Filtered By DataElement Group<br>
+                    				    <select id="dataElementGroupId" name="dataElementGroupId" style="width:325px" onchange="getDataElements()" >
+											<option value="$ALL">[ Select DataElementGroup / All ]</option>				
+                            				#foreach ( $group in $dataElementGroups )
+            					                    <option value="$group.id" title="$group.name">$group.name</option>
+        				                    #end
+										</select>
+								</td>   
+                    			<td class="NormalB">&nbsp;</td>
+                    			<td class="NormalB">&nbsp;</td>
+                    			<!-- <td class="NormalB">Filtered By DataElement Group For Targets<br>
+                    				<select id="dataElementTargetGroupId" name="dataElementTargetGroupId" style="width:325px" onchange="getDataElementTargets()" >
+									<option value="$ALL">[ Select DataElementGroup / All ]</option>				
+                            				#foreach ( $group in $dataElementGroups )
+            					                    <option value="$group.id" title="$group.name">$group.name</option>
+        				                    #end
+									</select>
+                    			</td>-->
+                			</tr>
+                			<tr>
+    			                <td class="NormalB">&nbsp;</td>   
+                    			<td class="NormalB">&nbsp;</td>
+                    			<td class="NormalB">&nbsp;</td>
+                			</tr>
+                			<tr>
+    			                <td class="NormalB">Available DataElement List &nbsp;  &nbsp;&nbsp;
+    			                <input type="checkbox" id="deopcombo" name="deopcombo" value="optioncombo" onchange="getDataElements()" checked disabled> OptionCombo
+                        			<select size="15" id="availableDataElements" name="availableDataElements" style="width:325px;" onchange="getmsg()">
+				                    	
+			                        </select>
+			                        <br><br>
+			                        <div id="message"></div>
+				                </td>   			                
+    			                <td class="NormalB">&nbsp;</td>
+    			                <td class="NormalB">Available DataElements and Selected Targets <br />    			                
+    				                    <select size="23" id="availableDataElementTarget" name="availableDataElementTarget" style="width:325px;" >
+				                    	  #set($count=0)
+				                    	  #foreach ( $optionComboName in $optionComboNames )
+				                    	    <option value="$optionComboIds.get($count)" title="$optionComboName">$optionComboName</option>
+				                    	    #set( $count = $count+1 )
+				                    	  #end
+			                        </select>
+                    			</td>
+                    			<td class="NormalB">&nbsp;</td>
+                    			<td class="NormalB">&nbsp;</td>
+                    			<td class="NormalB" align="center"><input type="button" name="remMappingButton" id="remMappingButton" value=" > " onclick="remMappingFunction()" /></td>
+							</tr>
+							<tr>
+    			                <td class="NormalB">&nbsp;<br/></td>   
+                    			<td class="NormalB">&nbsp;<br/></td>
+                    			<td class="NormalB">&nbsp;<br/></td>
+							</tr>
+                			<tr>
+    			                <td colspan="3">
+                                <input type="button" onclick="getsave()" value="Save" style="width:10em">
+                                <input type="button" onclick="window.location.href='index.action'" value="Cancel" style="width:10em">
+                                </td>
+							</tr>
+                    </table>							
+        </form>

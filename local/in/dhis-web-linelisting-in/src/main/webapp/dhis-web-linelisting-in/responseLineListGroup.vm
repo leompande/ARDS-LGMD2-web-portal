@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lineListGroup>
+	<id>$lineListGroup.id</id>
+	<name>$encoder.xmlEncode( $lineListGroup.name )</name>
+        <shortName>$encoder.xmlEncode( $lineListGroup.shortName )</shortName>
+        <description>$!encoder.xmlEncode( $lineListGroup.description )</description>
+        <periodType>$encoder.xmlEncode( $lineListGroup.periodType.name )</periodType>
+	<memberCount>$memberCount</memberCount>
+</lineListGroup>

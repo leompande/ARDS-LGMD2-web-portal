@@ -1,0 +1,212 @@
+
+
+	
+<script>
+	function generateReport()
+	{
+	   if(document.getElementById("hiddenNum").value=='$encoder.htmlEncode($!drillDownOrgUnitId)')
+	   {
+	       window.location.href = "exportToExcel.action";
+	   }
+	   else
+	   {	
+	       window.location.href = "exportToExcel.action?drillDownOrgUnitId="+document.getElementById("hiddenNum").value;
+	   } 
+	}
+	
+	function exportToWorkBook()
+    {
+        document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+        return true;
+    }
+    
+</script>
+
+<form id="form1" name="form1" action="exportToExcel.action" method="post" onsubmit="return exportToWorkBook()" target="_newtab">
+
+
+
+<script>
+    leftBar.hideAnimated();
+</script>
+
+<div align="right">
+       
+        <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000" />
+</div>
+
+#set( $mark = 0 )
+<br/>
+
+    <input type="hidden" name="htmlCode" id="htmlCode" />
+    
+<div id="formResult">
+    	<div>$navigationString</div>
+<table valign="top" width="95%" border="1" cellspacing="0" cellpadding="5" >
+	<tr bgcolor="#c0c0c0" style="height:23px">
+		<td align="center" rowspan="2"><strong>$rootOrgUnitName</strong></td>
+		<input type="hidden" value="$rootOrgUnitName" id="hiddenOrg"/>
+		<td align="center" colspan="2"><strong>Registered</strong></td>
+		#foreach( $program in $programList )
+		<td align="center" colspan="2"><strong>$program.name</strong></td>
+		#end
+	</tr>
+	<tr bgcolor="#c0c0c0" align="center" style="height:25px">
+		<td><strong>Total</strong></td>
+		<td><strong>$toDaysDate</strong></td>
+		#foreach( $program in $programList )
+		<td><strong>Total</strong></td>
+		<td><strong>$toDaysDate</strong></td>
+		#end
+	</tr>	
+
+	#set( $count1 = 0 )
+	#foreach( $orgUnit in $immChildrenList )
+	<tr style="#if( $mark == 1 )background-color:#e0e0e0;#end height:23px" >
+		<td><a href="trackerDashboardPage.action?drillDownOrgUnitId=$orgUnit.id">$orgUnit.shortName</a></td>
+		<td align="center">$totalRegCountList.get( $count1 )</td>
+		<td align="center">$totalRegCountListForSelDate.get( $count1 )</td>
+		#foreach( $program in $programList )
+			#if( $orgUnit_ProgramMap.get( "$program.id:$orgUnit.id" ) == 1 )
+				<td align="center"><a href="javascript:viewPatientDataRecords( $program.id, $orgUnit.id, 'ALL' )">$totalEnrollCountMap.get( "$program.id:$orgUnit.id" )</a></td>
+				<td align="center"><a href="javascript:viewPatientDataRecords( $program.id, $orgUnit.id, '$toDaysDate' )">$totalEnrollCountForSelDateMap.get( "$program.id:$orgUnit.id" )</a></td>
+			#else
+                <td align="center">$totalEnrollCountMap.get( "$program.id:$orgUnit.id" )</td>
+                <td align="center">$totalEnrollCountForSelDateMap.get( "$program.id:$orgUnit.id" )</td>
+			#end	
+		#end
+	</tr>
+	#set( $count1 = $count1 + 1 )
+	#if( $mark == 1 )
+		#set( $mark = 0 )
+	#else
+		#set( $mark = 1 )
+	#end    
+	#end
+	<tr bgcolor="#c0c0c0" style="height:23px">
+		<td align="center"><strong>Total :</strong></td>
+		<td align="center"><strong>$totalRegCount</strong></td>
+		<td align="center"><strong>$totalRegCountForSelDate</strong></td>
+		#foreach( $program in $programList )
+		<td align="center"><strong>$!totalEnrollCountMap.get( "$rootOrgUnitName:$program.id" )</strong></td>
+		<td align="center"><strong>$!totalEnrollCountForSelDateMap.get( "$rootOrgUnitName:$program.id" )</strong></td>
+		#end                    
+	</tr>
+</table>
+</div>
+<br/>
+<div id="myChart"></div>
+</form>
+<script>
+
+    Ext.require('Ext.chart.*');
+    Ext.require('Ext.layout.container.Fit');
+    
+    Ext.onReady(function () 
+    {
+        var store = Ext.create('Ext.data.JsonStore', {
+                        fields: ['facility', 
+                                  #foreach( $program in $programList )
+									'$program.name.replace(" ","")',
+                                  #end
+                                ],
+                        data: [
+                                #foreach( $orgUnit in $immChildrenList )
+                                {facility: '$orgUnit.shortName', 
+                                    #foreach( $program in $programList )
+                                      $program.name.replace(" ",""): $totalEnrollCountMap.get( "$program.id:$orgUnit.id" ),
+                                    #end
+                                },
+                                #end
+                              ]
+                    });
+					
+		Ext.define('Ext.chart.theme.Fancy', {
+        extend: 'Ext.chart.theme.Base',
+
+        constructor: function(config) {
+            this.callParent([Ext.apply({
+                axis: {
+                    fill: "#789",
+                    stroke: "#789"
+                },
+                axisLabelLeft: {
+                    fill: "#789"
+                },
+                axisLabelBottom: {
+                    fill: "#789"
+                },
+                axisTitleLeft: {
+                    fill: "#789"
+                },
+                axisTitleBottom: {
+                    fill: "#789"
+                },
+                colors: ["#307D7E", "#800000", "#347C2C", "#750B6A", "#806517"]
+            }, config)]);
+        }
+    });			
+
+        var panel1 = Ext.create('widget.panel', {
+                        width: 750,
+                        height: 500,
+                        title: 'Total Enrolled By Facility',
+                        renderTo: 'myChart',
+                        layout: 'fit',
+                        items: {
+                                xtype: 'chart',
+								theme: 'Fancy',
+                                animate: true,
+                                shadow: true,
+                                store: store,
+                                legend: {
+                                    position: 'bottom'
+                                },
+                        axes: [{
+                                type: 'Numeric',
+                                position: 'bottom',
+                                fields: [
+                                            #foreach( $program in $programList )
+                                                '$program.name.replace(" ","")',
+                                            #end                            
+                                    ],
+                                title: false,
+                                grid: true,
+                                label: {
+                                        renderer: function(v) {
+                                        return String(v).replace(/000000$/, 'M');
+                                        }
+                                },
+                                roundToDecimal: false
+                                }, 
+                                {
+                                type: 'Category',
+                                position: 'left',
+                                fields: ['facility'],
+                                title: false
+                            }],
+            series: [{
+                type: 'bar',
+                axis: 'bottom',
+                gutter: 80,
+                xField: 'facility',
+                yField: [
+                            #foreach( $program in $programList )
+                                '$program.name.replace(" ","")',
+                            #end
+                        ],
+                stacked: true,
+                tips: {
+                    trackMouse: true,
+                    width: 65,
+                    height: 28,
+                    renderer: function(storeItem, item) {
+                        this.setTitle(String(item.value[1]));
+                    }
+                }
+            }]
+        }
+    });
+});
+
+</script>

@@ -1,0 +1,10 @@
+#set( $size = ${patientAttributeGroups.size} )
+{ "patientAttributeGroups": [
+  #foreach( ${group} in $!{patientAttributeGroups} )
+  {
+	"id": "${group.id}",
+	"name": "$!encoder.jsonEncode( ${group.name} )"
+  }#if( $velocityCount < $size ),#end
+  #end
+  ]
+}

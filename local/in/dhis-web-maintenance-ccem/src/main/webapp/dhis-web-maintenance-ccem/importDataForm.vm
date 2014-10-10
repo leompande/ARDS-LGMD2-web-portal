@@ -1,0 +1,47 @@
+<script >
+function Checkfiles()
+{
+    var fup = document.getElementById('importData');
+    var fileName = fup.value;
+    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+    if(ext == "csv")
+    {
+    return true;
+    } 
+    else
+    {
+    alert("Upload csv file only");
+    fup.focus();
+    return false;
+    }
+}
+</script>
+<h3>$i18n.getString( "Import Data" )</h3>
+<form id="dataImportForm" name="dataImportForm" method="post" enctype="multipart/form-data" action="importCSVData.action" >
+	<table style="width:60%">
+		<tr >
+			<td >
+				Upload CSV File :<br><br>
+                <input type="file" id="upload" name="upload" size="45" class="{validate:{required:true}}">
+            </td>
+			<td>
+				<div class="ui-widget-content ui-corner-all" style="padding:10px 10px 10px 30px;">
+					<b>Upload zip compress csv file for:</b><br/>
+					RefrigeratorCatalog <br/>
+					Refrigerators <br/>
+					Facility<br />
+					Coldrooms<br/>
+					AssetList<br />
+					AdministrativeHierarchy
+                </div>
+			</td>
+        </tr>
+		<tr>
+            <td class="NormalB">
+                <input type="submit" name="importReport" value="Upload Data" style="width:325px">
+            </td>
+			<td>&nbsp;</td>
+        </tr>		
+    </table>
+</form>
+

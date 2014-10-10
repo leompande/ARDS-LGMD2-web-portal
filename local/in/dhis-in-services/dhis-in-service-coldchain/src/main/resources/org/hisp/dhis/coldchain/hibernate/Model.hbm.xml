@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.model.Model" table="model">
+    <id name="id" column="modelid">
+      <generator class="native"/>
+    </id>
+
+    <property name="name" not-null="true" unique="true" length="160"/>
+    
+    <property name="description" not-null="false" length="250"/>
+	  
+	<property name="modelImage" not-null="false" column="imageName" length="160"/>
+	  
+	  
+	<!--<property name="image" type="binary" column="IMAGE" />-->
+	  
+	<!--<property name="image" column="IMAGE" />-->
+	
+	<!--<property name="image" type="blob" column="IMAGE" />-->     
+
+    <many-to-one name="modelType" class="org.hisp.dhis.coldchain.model.ModelType" 
+        column="modeltypeid" not-null="true" foreign-key="fk_coldchain_model_modeltypeid"/>
+        
+  </class>
+</hibernate-mapping>

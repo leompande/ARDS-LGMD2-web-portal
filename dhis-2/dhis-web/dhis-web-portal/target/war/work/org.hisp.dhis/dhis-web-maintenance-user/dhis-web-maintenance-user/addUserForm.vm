@@ -1,0 +1,160 @@
+<script type="text/javascript">
+	jQuery(function() {
+	    validation2( 'addUserForm', function( form )
+	    {
+	        jQuery( "#selectedList" ).children().attr( "selected", true );
+
+            if( $('#selectionTree').find('.selected').size() == 0 ) {
+                setHeaderDelayMessage('$encoder.jsEncode( $i18n.getString( "organisation_unit_required_for_user" ) )');
+            } else {
+                form.submit();
+            }
+        }, {
+	        'beforeValidateHandler' : function()
+	        {
+	            listValidator( 'roleValidator', 'selectedList' );
+	            #tblDynamicAttributesJavascript()
+	        },
+	        'rules' : getValidationRules( "user" )
+	    } );
+	
+	    checkValueIsExist( "username", "validateUser.action" );
+	
+	    jQuery( "#cancel" ).click( function()
+	    {
+            dhis2.commons.redirectCurrentPage( 'alluser.action' );
+	    } );
+	
+		jQuery("#availableList").dhisAjaxSelect({
+			source: "../dhis-web-commons-ajax-json/getUserRoles.action",
+			iterator: 'userRoles',
+			connectedTo: 'selectedList',
+			handler: function(item) {
+				var option = jQuery("<option />");
+				option.text( item.name );
+				option.attr( "value", item.id );
+
+				return option;
+			}
+		});
+	});
+</script>
+
+<h3>$i18n.getString( "create_new_user" )</h3>
+<form id="addUserForm" action="addUser.action" method="post" class="inputForm">
+
+<table>
+    <col style="width: 120px"/>
+
+	<tr>
+		<th colspan="4">$i18n.getString( "details" )</th>
+	</tr>
+
+	<tr>
+		<td><label for="username">$i18n.getString( "username" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="text" id="username" name="username" autocomplete="off"></td>
+	</tr>
+
+	<tr>
+		<td><label for="rawPassword">$i18n.getString( "password" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="password" id="rawPassword" name="rawPassword" autocomplete="off"></td>			
+	</tr>
+
+	<tr>
+		<td><label for="retypePassword">$i18n.getString( "retype_password" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="password" id="retypePassword" name="retypePassword" autocomplete="off"></td>		
+	</tr>
+
+	<tr>
+		<td><label for="surname">$i18n.getString( "surname" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="text" id="surname" name="surname"></td>
+	</tr>
+
+	<tr>
+		<td><label for="firstName">$i18n.getString( "firstName" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td colspan="3"><input type="text" id="firstName" name="firstName"></td>		
+	</tr>
+
+	<tr>
+		<td><label for="email">$i18n.getString( "email" )</label></td>
+		<td colspan="3"><input type="text" id="email" name="email" ></td>			
+	</tr>
+
+    <tr>
+        <td><label for="phoneNumber">$i18n.getString( "phone_number" )</label></td>
+        <td colspan="3"><input type="text" id="phoneNumber" name="phoneNumber"></td>
+    </tr>
+    
+    <tr>
+        <td><label>$i18n.getString( "language" )</label></td>
+        <td>
+            <select id="localeUi" name="localeUi">
+            #foreach( $locale in $availableLocales )
+                <option value="$locale.toString()" #if( $locale == $currentLocale )selected="selected"#end>$locale.getDisplayName()</option>
+            #end
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+        <td><label>$i18n.getString( "db_language" )</label></td>
+        <td>
+            <select id="localeDb" name="localeDb">
+            <option value="">[$i18n.getString( "use_db_locale_no_translation" )]</option>
+            #foreach( $locale in $availableLocalesDb )
+                <option value="$locale.toString()">$locale.getDisplayName()</option>
+            #end
+            </select>
+        </td>
+    </tr>
+    
+</table>
+
+#tblDynamicAttributes( { "attributes": $attributes } )
+
+<table>
+    <colgroup>
+      <col style="width: 500px;"/>
+      <col/>
+      <col style="width: 500px;"/>
+    </colgroup>
+
+	<tr>
+		<th>$i18n.getString( "available_roles" )</th>
+		<th></th>
+		<th>$i18n.getString( "selected_roles" )
+			<select id="roleValidator" style="display:none"/>
+		</th>
+	</tr>
+
+	<tr style="margin-bottom: 15px;">
+        <td>
+            <select id="availableList" name="availableList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+
+        <td style="text-align:center">
+        	<input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'selectedList' );"/><br/>
+			<input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableList' );"/><br/>
+			<input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'selectedList' );"/>
+        </td>
+
+		<td>
+            <select id="selectedList" name="selectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;"></select>
+        </td>
+	</tr>
+
+	<tr>
+		<td colspan="3">
+			#organisationUnitSelectionTree( true, true, false )
+		</td>
+
+	</tr>
+</table>
+
+<p>
+	<input type="submit" value="$i18n.getString( 'add' )" style="width:10em" />
+	<input type="button" id="cancel" value="$i18n.getString( 'cancel' )" style="width:10em" />
+</p>
+
+</form>

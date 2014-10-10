@@ -1,0 +1,93 @@
+<h2>$i18n.getString( "beneficiary_registration" )</h2>
+
+	#if( $validated )
+		<div class="header-box">
+			<h3 style="text-align: left;">$i18n.getString("successfully_saved")</h3>
+		</div>
+	#else
+	
+	#end
+
+<form action="saveBeneficiary.action" method="POST">
+<div class="header-box" align="center">
+<input type="hidden" name="orgUnitId" value="$orgUnitId"/>
+#if ($originalPatientId)
+	<input type="hidden" name="originalPatientId" value="$originalPatientId"/>	
+#end
+
+#if ($relationshipTypeId)
+	<input type="hidden" name="relationshipTypeId" value="$relationshipTypeId"/>
+#end
+
+	
+	<p style="text-align: left;">
+		<label>$i18n.getString( "full_name" )*</label>
+
+		#if( $validationMap.get( "fullName" ) )
+           	<br /><span style="color: #990000;"> $i18n.getString($validationMap.get( "fullName" ))</span>
+     	#end
+
+		<input type="text" name="patientFullName" value="$!previousValues.get("fullName")" />
+		
+		#foreach($patientIdentifierType in $patientIdentifierTypes)
+			#if(! $patientIdentifierType.program)
+				#set($key = "IDT${patientIdentifierType.id}")
+				<label>$patientIdentifierType.getName()#if( $patientIdentifierType.isMandatory() )*#end </label>
+				#if( $validationMap.get( $key ) )
+		           	<br /><span style="color: #990000;"> $i18n.getString($validationMap.get( $key ))</span>
+		     	#end
+				<input type="text" name="$key" value="$!previousValues.get($key)" />
+			#end
+		#end
+
+		#foreach($patientAttribute in $patientAttributes)
+			#if(! $patientAttribute.program)
+				#set($key = "AT${patientAttribute.id}")
+				<label>$patientAttribute.getName()#if( $patientAttribute.isMandatory() )*#end  #if( $patientAttribute.getValueType() == "date" )[yyyy-mm-dd] #end</label>
+				#if( $validationMap.get( $key ) )
+		           	<br /><span style="color: #990000;"> $i18n.getString($validationMap.get( $key ))</span>
+		     	#end
+				#if($patientAttribute.getValueType() == "combo")
+					<select type="text" name="$key">
+					#foreach($option in $patientAttribute.getAttributeOptions())
+						<option value="$option.id" 
+							#if( $previousValues.get( $key ) == $option.id ) 
+								selected="selected"
+							#end
+							> $option.getName() </option>
+					#end
+					</select>
+				#elseif( $patientAttribute.getValueType() == "bool" )
+					<select name="$key">
+							<option value="">$i18n.getString("select")</option>
+							<option #if( $previousValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+							<option #if( $previousValues.get( $key ) == "false" ) selected="selected" #end value="false">$i18n.getString("no")</option>
+					</select>
+				#elseif( $patientAttribute.getValueType() == "trueOnly" )
+					<select name="$key">
+							<option value="">$i18n.getString("select")</option>
+							<option #if( $previousValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+					</select>
+				#else
+					<input type="text" name="$key" value="$!previousValues.get($key)" />
+				#end
+			#end
+		#end
+	</p>
+</div>
+
+<div class="header-box" align="center">
+	<p>
+		<input type="submit" style="width: 100%;" value="$i18n.getString("save")" />
+	</p>
+</div>
+
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li> <a href="selectRegistrationOrganisationUnit.action"> $i18n.getString("organisation_unit")</a> </li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

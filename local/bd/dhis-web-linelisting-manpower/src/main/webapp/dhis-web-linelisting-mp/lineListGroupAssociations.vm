@@ -1,0 +1,33 @@
+
+<h3>$i18n.getString( "define_linelist_group_associations" )</h3>
+
+<h4>$encoder.htmlEncode( $lineListGroup.name )</h4>
+
+<form id="defineLLGroupAssociationsFormChain" action="defineLLGroupAssociations.action" method="post">
+  <div style="display:inline">
+    <input type="hidden" name="id" value="$id">
+  </div>
+  <table id="selectionTable">
+    <tr>
+      <td>
+        #organisationUnitSelectionTree( false, true, false )
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" id="submitButton" value="$i18n.getString( "save" )" style="width:10em">
+        <input type="button" onclick="window.location.href='getLineListGroups.action'"  value="$i18n.getString( "cancel" )" style="width:10em">
+      </td>
+    </tr>
+  </table>
+
+</form>
+
+<span id="message"></span>
+
+<script type="text/javascript">
+
+  var levelMustBeInt = '$encoder.jsEncode( $i18n.getString( "level_must_be_int" ) )';
+  var i18n_loading = '$encoder.jsEncode( $i18n.getString( "loading" ) )';
+
+</script>

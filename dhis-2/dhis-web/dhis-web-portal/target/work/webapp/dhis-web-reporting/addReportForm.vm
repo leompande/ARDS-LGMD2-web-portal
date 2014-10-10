@@ -1,0 +1,106 @@
+<script type="text/javascript">
+	var i18n_please_specify_file = '$encoder.jsEscape( $i18n.getString( "please_specify_file" ) , "'")';
+	var i18n_specify_name = '$encoder.jsEscape( $i18n.getString( "specify_name" ) , "'")';
+
+	jQuery( document ).ready( function() {
+        setReportType();
+	} );
+</script>
+
+<h3>$i18n.getString( 'create_new_report' )</h3>
+
+#sharingCreateNotification( "report" )
+
+<form id="reportForm" action="addReport.action" method="post" enctype="multipart/form-data" class="inputForm">
+
+<input type="hidden" id="id" name="id" value="$!report.id" />
+<input type="hidden" id="currentDesign" name="currentDesign" value="$!report.design" />
+
+<table>
+	<col width="120"/>
+	<col width="400"/>
+    <tr>
+        <th colspan="2">$i18n.getString( "details" )</th>
+    </tr>
+    <tr>
+        <td><label for="name">$i18n.getString( "name" )</label></td>
+        <td><input type="text" id="name" name="name" value="$!{report.name}"></td>
+    </tr>
+    <tr>
+    	<td><label for="type">$i18n.getString( "type" )</label></td>
+    	<td>
+    		<select id="type" name="type" onchange="setReportType()">
+    			<option value="jasperReportTable"#if( ${report.type} == "jasperReportTable" ) selected="selected"#end>$i18n.getString( "jasper_report_report_table_data_source" )</option>
+    			<option value="jasperJdbc"#if( ${report.type} == "jasperJdbc" ) selected="selected"#end>$i18n.getString( "jasper_report_jdbc_data_source" )</option>
+    			<option value="html"#if( ${report.type} == "html" ) selected="selected"#end>$i18n.getString( "html_report" )</option>
+		    </select>
+	    </td>
+    </tr>
+	<tr>
+		<td><label for="upload">$i18n.getString( "design_file" )</label></td>
+		<td><input type="file" id="upload" name="upload" size="30" /></td>
+	</tr>
+	#if( $report )
+	<tr>
+		<td></td>
+		<td>		
+			<input type="button" value="$i18n.getString( 'get_current_design' )" onclick="window.location.href='../api/reports/${report.uid}/design'">
+		</td>
+	</tr>
+	#else
+	<tr class="jasperReportTableDataSource jasperJdbcDataSource">
+		<td></td>
+		<td>
+			<input type="button" value="$i18n.getString( 'get_jasper_report_template' )" onclick="window.location.href='getReportTemplate.action?type=jasper'">
+		</td>
+	</tr>
+    <tr class="htmlDataSource">
+        <td></td>
+        <td>
+            <input type="button" value="$i18n.getString( 'get_html_report_template' )" onclick="window.location.href='getReportTemplate.action?type=html'">
+        </td>
+    </tr>
+    #end
+	<tr class="jasperReportTableDataSource">
+		<td>$i18n.getString( "report_table" )</td>
+		<td>
+			<select id="reportTableId" name="reportTableId">
+			<option value="0">[ $i18n.getString( "none" ) ]</option>
+			#foreach( $table in $reportTables )
+				<option value="$table.id"#if( $!report.reportTable.id == $table.id ) selected="selected"#end>$table.name</option>
+			#end
+			</select>
+		</td>
+	</tr>
+	<tr class="jasperJdbcDataSource htmlDataSource">
+		<th colspan="2">$i18n.getString( "relative_periods" )</th>
+	</tr>
+	<tr class="jasperJdbcDataSource htmlDataSource">
+        <td colspan="2">#parse( "/dhis-web-reporting/relativePeriodsInput.vm" )</td>
+    </tr>
+    <tr class="jasperJdbcDataSource htmlDataSource">
+        <td colspan="2" style="height:15px"></td>
+    </tr>
+    <tr class="jasperJdbcDataSource htmlDataSource">
+        <th colspan="2">$i18n.getString( "report_parameters" )</th>
+    </tr>
+    <tr class="jasperJdbcDataSource htmlDataSource">
+        <td colspan="2">
+            <label for="paramReportingMonth">$i18n.getString( "reporting_period" )</label>
+            <input type="checkbox" id="paramReportingMonth" name="paramReportingMonth" value="true"#if( $report.reportParams.isParamReportingMonth() ) checked#end>&nbsp;
+            <label for="paramOrganisationUnit">#*$i18n.getString( "organisation_unit" )*#Administrative Unit</label>
+            <input type="checkbox" id="paramOrganisationUnit" name="paramOrganisationUnit" value="true"#if( $report.reportParams.isParamOrganisationUnit() ) checked#end>
+        <td>
+    </tr>
+    <tr>
+        <td colspan="2" style="height:15px"></td>
+    </tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="$i18n.getString( 'save' )" style="width:10em" onclick="addReport()" />
+			<input type="button" value="$i18n.getString( 'cancel' )" style="width:10em" onclick="window.location.href='displayViewReportForm.action'" />
+		</td>
+	</tr>
+</table>
+	
+</form>

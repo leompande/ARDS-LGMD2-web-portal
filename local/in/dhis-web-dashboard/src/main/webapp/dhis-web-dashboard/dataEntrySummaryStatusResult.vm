@@ -1,0 +1,177 @@
+<html>
+    <head>
+    <title>DataStatus Result</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+    </link>
+      <script>
+            var startDate = "$sDateLB";
+            var endDate = "$eDateLB";
+            var dsType = "$selectedButton";
+			var includeZeros = "$includeZeros";
+		
+            function getImmChildInfo( evt, dsId, selOrgUnit )
+            {
+                //alert("Data Entry Status : " + dsId + ":" + selOrgUnit + ":" + includeZeros );
+                immChildOption = "yes";
+                if( document.getElementById('includeZeros').checked )
+                {
+                    //alert("inside include zero : " + immChildOption );
+                   // var urlForImmChild = "dataEntrySummaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+                    //alert( urlForImmChild );
+                    /*
+                    evt.target.href = "dataEntrySummaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+                	*/
+ 			   		var url = "dataEntrySummaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+					$('#contentDataRecord').dialog('destroy').remove();
+			   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+			        title: 'Data Entry Status Result',
+					maximize: true, 
+					closable: true,
+					modal:true,
+					overlay:{background:'#000000', opacity:0.1},
+					width: 1000,
+			        height: 800
+			    	});                                     
+                
+                
+                }
+                else
+                {
+               	    //alert("inside include zero null");
+               	    /*
+                    evt.target.href = "dataEntrySummaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+ 			   		*/
+ 			   		var url = "dataEntrySummaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+					$('#contentDataRecord').dialog('destroy').remove();
+			   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+			        title: 'Data Entry Status Result',
+					maximize: true, 
+					closable: true,
+					modal:true,
+					overlay:{background:'#000000', opacity:0.1},
+					width: 1000,
+			        height: 800
+			    	});                                             
+                
+                
+                
+                
+                }
+            }
+            function exportDataStatusResultToWorkBook()
+            {
+                document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+                return true;
+            }
+        /*    
+		  function getNullReportInfo( dsId, periodId, selOrgUnit )
+		  {	
+			var url = "nullReportResult.action?dsId="+dsId+"&periodId="+periodId+"&ouId="+selOrgUnit;
+			$('#contentDataRecord').dialog('destroy').remove();
+	   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+	        title: 'Null Report',
+			maximize: true, 
+			closable: true,
+			modal:true,
+			overlay:{background:'#000000', opacity:0.1},
+			width: 800,
+	        height: 600
+	    	});
+		 }
+        */    
+    </script>
+    </head>
+    <body>
+
+        #if( "$!ouPeriodMapForResult" == "" || $ouPeriodMapForResult.isEmpty() || $ouPeriodMapForResult.size() == 0 )
+            <div align="center" class="NormalB">Data Entry Status Mart is not Generated for the Selected Options</div>
+        #else
+            <form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+                <input type="hidden" name="htmlCode" id="htmlCode" />
+
+                <div align="right" class="NormalB">
+                    <input type="checkbox" name="includeZeros" id="includeZeros" #if($includeZeros) checked #end /> Include Zero<br />
+                    <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+                </div>
+
+            <div id="formResult">               
+                <div align="center" class="NormalB">Summary Status Using Data Mart</div>
+                <div align="right">
+                    <table width="30%">
+                        <tr class="TableDataCellStyles" >
+                            <td bgcolor="#a0c0a0">&nbsp;</td>
+                            <td align="left">&nbsp;Entered</td>
+                        </tr>
+                                
+                        <tr class="TableDataCellStyles">
+                            <td bgcolor="#ff0000">&nbsp;</td>
+                            <td align="left">&nbsp;Not Entered</td>
+                        </tr>
+                        <tr class="TableDataCellStyles">
+                        	<td bgcolor="green">&nbsp;</td>
+                       		<td align="left">&nbsp;Data Not Mart</td>
+                        </tr>                                        
+                    </table>
+                </div>
+                    <br>
+                    <div align="left" class="NormalB">DataSet : $dataSetName ( $totalDataElementCount )</div>
+                    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+                        <tr class="TableHeadingCellStyles" align="center">
+                            #foreach($levelName in $levelNames)
+                                <th>$!levelName</th>
+                            #end
+
+                            #foreach($periodname in $periodNameList)
+                                <th>$periodname</th>
+                            #end
+                        </tr>
+
+                        #foreach( $chiildorgUnit in $orgUnitList )
+                            #set( $count1 = $minOULevel )
+                            #set( $curOrgUnitLevel = $organisationUnitService.getLevelOfOrganisationUnit( $chiildorgUnit.id ) )
+                            #set( $orgunitCount = $ouMapForChildDSAssociation.get( $chiildorgUnit ) )
+                            <tr class="TableHeadingCellStyles">
+                                #foreach( $levelName in $levelNames )
+                                    #if( $count1 == $curOrgUnitLevel )
+                                        <td><a href="#" onclick="javascript:getImmChildInfo(event, '$selDataSet.id', '$chiildorgUnit.id')" target="_blank">$chiildorgUnit.name #if( $orgunitCount !=-1 ) ( $orgunitCount ) #end</a></td>
+                                    #else
+                                        <td>&nbsp;</td>
+                                    #end
+                                    #set($count1 = $count1 + 1)
+                                #end
+
+                                ##set( $dsresultList = $ouMapDataStatusResult.get( $chiildorgUnit ) )
+                                ##set( $dataElementCounts = $ouMapDataElementCount.get( $chiildorgUnit ) )
+                                ##set( $periodCounts = $periodList )
+                                
+                                #set( $count2 = 0 )
+                                #foreach( $period in $periodList )
+                                	#set( $result = -1 )
+                                	#set( $result = $ouMapDataEntryStatusResult.get( "$chiildorgUnit.id:$period.id" ) )
+                                	#set( $percentageResult = $ouPeriodMapForPercentageResult.get( "$chiildorgUnit.id:$period.id" ) )
+                                	
+                                	##set( $deCount = $ouMapDataElementCount.get( "$chiildorgUnit.id:$period.id" ) )
+                                	
+                                    ##if( !$dataSetSources.contains( $chiildorgUnit ) )
+                                         <!--<td  bgcolor="white">&nbsp;</td>-->
+                                    #if( $result < 0 )
+                                    	<td  bgcolor="green">&nbsp;</td>
+                                    #elseif( $result == 0 && !$dataSetSources.contains( $chiildorgUnit ) )
+                                        <td align="center" bgcolor="green">&nbsp;</td>
+                                    #elseif( $result == 0 )
+                                        <td align="center" bgcolor="#ff0000"><font color="#000000">0 #if( $percentageResult != -1 ) ( $percentageResult % )#end</font></td>                                    
+                                    #elseif( $result == 1 )
+                                        <td align="center" bgcolor="#a0c0a0"><font color="#000000">1 #if( $percentageResult != -1 ) ( $percentageResult % )#end </font></td>
+                                    #elseif( $result > 1 )
+                                        <td align="center"  bgcolor="white" ><font color="#000000">$result #if( $percentageResult != -1 ) ( $percentageResult % )#end </font></td>
+                                    #end
+                                    #set( $count2 = $count2 + 1 )
+                                #end
+                            </tr>
+                        #end
+                    </table>
+                </div>
+            </form>
+        #end
+    </body>
+</html>

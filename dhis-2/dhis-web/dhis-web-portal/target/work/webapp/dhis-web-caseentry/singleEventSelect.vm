@@ -1,0 +1,155 @@
+<script>
+	jQuery(document).ready(	function(){
+		jQuery("#programIdAddPatient option").each(function() {
+            var item = jQuery(this);
+            if( item.attr('type') != 2 ) {
+                item.remove();
+            }
+        });
+		jQuery("#programIdAddPatient [value=]").remove();
+	
+		if(jQuery("#programIdAddPatient option").length==0)
+		{
+			jQuery( '#programIdAddPatient').append( '<option value="" type="">' + i18n_none_program + '</option>' );
+			disable('listPatientBtn');
+			disable('addPatientBtn');
+		}
+		else{
+			enable('listPatientBtn');
+			enable('addPatientBtn');
+		}
+		
+		showById('advancedSearchBtn');
+		disable('advancedSearchBtn');
+		hideById('removeEventLink');
+		setFieldValue('isSearchByProgram', true);
+		registration = false;
+		$("#searchObjectId option[value='prg']").remove();
+		setFieldValue('startDueDate','');
+		setFieldValue('endDueDate','');
+	});
+</script>
+
+<h3>$i18n.getString( "single_event_with_registration_management" ) #openHelp('single_event_with_registration')</h3>
+<h4 id='singleProgramName' name='singleProgramName'></h4>
+
+<input type='hidden' id='isRegistration' name= 'isRegistration' value='true'>
+<input type='hidden' id='listAll' name='listAll'>
+<select class='hidden' id='repeatableProgramStageId' name='repeatableProgramStageId'></select>
+<input type='hidden' id='patientId' name= 'patientId'>
+<input type='hidden' id='programStageInstanceId' name= 'programStageInstanceId' value='0'>
+
+<div id='searchDiv'>
+	#parse( "dhis-web-caseentry/searchPatientCriteria.vm" )	
+</div>
+
+<p><input type="button" class='button' value="$i18n.getString( 'back_to_search' )" id='backBtnFromEntry' onclick='backEventList();' style='display:none;'></p>
+
+<div class='hidden' id='selectForm' name='selectForm'>
+	<input id='executionDateNewEvent' name='executionDateNewEvent'>
+	<input type='hidden' class='stage-object-selected stage-object' id='programStageId' name='programStageId'>
+</div>
+
+#parse( "dhis-web-commons/loader/loader.vm" )
+
+<div id='contentDiv'></div>
+<div id='addNewDiv'></div>
+<div id='dataRecordingSelectDiv'></div>
+<div id='dataEntryFormDiv'></div>
+<div id='patientDashboard'></div> <!-- Patient dashboard -->
+<div id='editPatientDiv'></div> <!-- Add Patient Form -->
+<div id='resultSearchDiv' style='font-size:13px'></div> <!-- List searching patients -->
+<div id='enrollmentDiv'></div> <!-- Program Enrollment Form -->
+<div id='listRelationshipDiv'></div> <!-- List relationship -->
+<div id='addRelationshipDiv'></div> <!-- Add relationship -->
+<div id='migrationPatientDiv'></div> <!-- Migration Patient -->
+
+<script type="text/javascript">
+	var i18n_none = '$encoder.jsEscape( $i18n.getString( "none" ) , "'")';
+	var i18n_please_select_village = '[' + '$encoder.jsEscape( $i18n.getString( "please_select_village" ), "'")' + ']';
+	var i18n_select_program = '[' + '$encoder.jsEscape( $i18n.getString( "select_program" ), "'")' + ']';
+	var i18n_save_success = '$encoder.jsEscape( $i18n.getString( "save_success" ) , "'")';
+	var i18n_list_all_patient = '$encoder.jsEscape( $i18n.getString( "list_all_patient" ) , "'")';	
+	var i18n_enrol_success = '$encoder.jsEscape( $i18n.getString( "enrol_success" ) , "'")';
+	var i18n_unenrol_success = '$encoder.jsEscape( $i18n.getString( "unenrol_success" ) , "'")';
+	var i18n_reenrol_success = '$encoder.jsEscape( $i18n.getString( "reenrol_success" ) , "'")';
+	var i18n_list_patients_by_program = '$encoder.jsEscape( $i18n.getString( "list_patients_by_program" ) , "'" )';
+	var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_patient" ) , "'" )';
+	var i18n_adding_patient_failed = '$encoder.jsEscape( $i18n.getString( "adding_patient_failed" ), "'")';
+	var i18n_updating_patient_failed = '$encoder.jsEscape( $i18n.getString( "updating_patient_failed" ), "'")';	
+	var i18n_program_enrollment_failed = '$encoder.jsEscape( $i18n.getString( "program_enrollment_failed" ) , "'")';
+    var i18n_saving_value_failed_status_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_status_code" ) , "'")';
+    var i18n_saving_value_failed_error_code = '$encoder.jsEscape( $i18n.getString( "saving_value_failed_error_code" ) , "'")';
+	var i18n_searching_patient_failed = '$encoder.jsEscape( $i18n.getString( "searching_patient_failed" ) , "'")'; 
+	var i18n_date_invalid = '$encoder.jsEscape( $i18n.getString( "date_invalid" ) , "'")';
+	var i18n_date_less_incident = '$encoder.jsEscape( $i18n.getString( "date_less_incident" ) , "'")';
+	var i18n_scheduled_in_future = '$encoder.jsEscape( $i18n.getString( "scheduled_in_future" ) , "'")';
+	var i18n_enroll = '$encoder.jsEscape( $i18n.getString( "enroll" ) , "'")';
+	var i18n_update = '$encoder.jsEscape( $i18n.getString( "update" ) , "'")';
+	var i18n_oucode_must_have_9_digits = '$encoder.jsEscape( $i18n.getString( "oucode_must_be_valid" ) , "'")';
+	var i18n_patient_identifiers = '$encoder.jsEscape( $i18n.getString( "patient_identifiers" ) , "'")';
+	var i18n_patient_attributes = '$encoder.jsEscape( $i18n.getString( "patient_attributes" ) , "'")';
+	var i18n_patient_id = '$encoder.jsEscape( $i18n.getString( "id" ) , "'")';
+	var i18n_patient_full_name = '$encoder.jsEscape( $i18n.getString( "full_name" ) , "'")';
+	var i18n_patient_demographics = '$encoder.jsEscape( $i18n.getString( "demographics" ) , "'")';
+	var i18n_edit_this_patient = '$encoder.jsEscape( $i18n.getString( "edit_this_patient" ) , "'")';
+	var i18n_no_duplicate_found = '$encoder.jsEscape( $i18n.getString( "no_duplicate_found" ) , "'")';
+	var i18n_patient_system_id = '$encoder.jsEscape( $i18n.getString( "patient_system_id" ) , "'")';
+	var i18n_tracker_associate = '$encoder.jsEscape( $i18n.getString( "tracker_associate" ) , "'")';
+	var i18n_no_patients_found = '$encoder.jsEscape( $i18n.getString( "no_patients_found" ) , "'")';
+	var i18n_search_result = '$encoder.jsEscape( $i18n.getString( "search_result" ) , "'")';
+	var i18n_duplicated_patient_list = '$encoder.jsEscape( $i18n.getString( "duplicated_patient_list" ) , "'")';
+	var i18n_duplicate_warning = '$encoder.jsEscape( $i18n.getString( "duplicate_warning" ) , "'")';
+	var i18n_search_by_identifier = '$encoder.jsEscape( $i18n.getString( "search_by_identifier" ) , "'")';
+	var i18n_search_by_program = '$encoder.jsEscape( $i18n.getString( "search_by_program" ) , "'")';
+	var i18n_create_new_patient = '$encoder.jsEscape( $i18n.getString( "create_new_patient" ) , "'")';
+	var i18n_choose_this_person = '$encoder.jsEscape( $i18n.getString( "choose_this_person" ) , "'")';
+	var i18n_representative_info = '$encoder.jsEscape( $i18n.getString( "representative_info" ) , "'")';
+	var i18n_select = '[' + '$encoder.jsEscape( $i18n.getString( "select" ), "'")' + ']';
+	var i18n_program_stages_history_plan = '$encoder.jsEscape( $i18n.getString( "program_stages_history_plan" ) , "'")';
+	var i18n_please_select_program_stage = '$encoder.jsEscape( $i18n.getString( "please_select_program_stage" ) , "'")';
+	var i18n_value_must_integer = '$encoder.jsEscape( $i18n.getString( "value_must_integer" ) , "'")';
+	var i18n_value_must_number = '$encoder.jsEscape( $i18n.getString( "value_must_number" ) , "'")';
+	var i18n_value_must_positive_integer = '$encoder.jsEscape( $i18n.getString( "value_must_positive_integer" ) , "'")';
+	var i18n_value_must_zero_or_positive_integer = '$encoder.jsEscape( $i18n.getString( "value_must_zero_or_positive_integer" ) , "'")';
+	var i18n_value_must_negative_integer = '$encoder.jsEscape( $i18n.getString( "value_must_negative_integer" ) , "'")';
+    var i18n_invalid_date =   '$encoder.jsEscape( $i18n.getString( "invalid_date" ) , "'")' + ".\n " 
+	var i18n_reenrollment_confirm_message = '$encoder.jsEscape( $i18n.getString( "reenrollment_confirm_message" ) , "'")';
+    
+    var i18n_complete_success = '$encoder.jsEscape( $i18n.getString( "complete_success" ) , "'")';
+	var i18n_program_active_success = '$encoder.jsEscape( $i18n.getString( "program_active_success" ) , "'")';
+	var i18n_program_cancelled_success = '$encoder.jsEscape( $i18n.getString( "program_cancelled_success" ) , "'")';
+    var i18n_complete_confirm_message = '$encoder.jsEscape( $i18n.getString( "complete_confirm_message" ) , "'")';
+    var i18n_quit_confirm_message = '$encoder.jsEscape( $i18n.getString( "quit_confirm_message" ) , "'")';
+    var i18n_date_is_greater_then_or_equals_due_date = '$encoder.jsEscape( $i18n.getString( "date_is_greater_then_or_equals_due_date" ) , "'")';
+	
+	var i18n_violate_validation = '$encoder.jsEscape( $i18n.getString( "violate_validation" ) , "'")';
+	var i18n_show_all_items = '$encoder.jsEscape( $i18n.getString( "show_all_items" ) , "'")';
+	
+    var i18n_error_required_field = '$encoder.jsEscape( $i18n.getString( "error_required_field" ) , "'")';
+	var i18n_program_stage = '$encoder.jsEscape( $i18n.getString( "program_stage" ) , "'")';
+	var i18n_create_new_event = '$encoder.jsEscape( $i18n.getString( "create_new_event" ) , "'")';
+	var i18n_events = '$encoder.jsEscape( $i18n.getString( "events" ) , "'")';
+	var i18n_specify_search_criteria = '$encoder.jsEscape( $i18n.getString( "specify_search_criteria" ) , "'")';
+	var i18n_please_select = '$encoder.jsEscape( $i18n.getString( "please_select" ) , "'")';
+	var i18n_search_result = '$encoder.jsEscape( $i18n.getString( "search_result" ) , "'")';
+	var i18n_show_data_entry = '$encoder.jsEscape( $i18n.getString( "show_data_entry" ) , "'")';
+	var i18n_color_quick_help = '$encoder.jsEscape( $i18n.getString( "color_quick_help" ) , "'")';
+	var i18n_add_person_successfully = '$encoder.jsEscape( $i18n.getString( "add_person_successfully" ) , "'")';
+	
+	var i18n_please_select_relationship_type = '$encoder.jsEscape( $i18n.getString( "please_select_relationship_type" ) , "'")';
+	var i18n_please_select_a_patient_for_setting_relationship = '$encoder.jsEscape( $i18n.getString( "please_select_a_patient_for_setting_relationship" ) , "'")';
+	var i18n_update_patient = '$encoder.jsEscape( $i18n.getString( "update_patient" ) , "'")';
+	var i18n_enroll_program = '$encoder.jsEscape( $i18n.getString( "enroll_program" ) , "'")';
+	var i18n_comfirm_delete_event = '$encoder.jsEscape( $i18n.getString( "comfirm_delete_event" ) , "'")';
+	var i18n_the_date_is_scheduled = '$encoder.jsEscape( $i18n.getString( "the_date_is_scheduled" ) , "'")';
+	var i18n_overdue = '$encoder.jsEscape( $i18n.getString( "overdue" ) , "'")';
+	var i18n_scheduled_in_future = '$encoder.jsEscape( $i18n.getString( "scheduled_in_future" ) , "'")';
+	var i18n_main_form_link = '$encoder.jsEscape( $i18n.getString( "patient_management" ) , "'")';
+	var i18n_comment_added = '$encoder.jsEscape( $i18n.getString( "comment_added" ) , "'")';
+	var i18n_main_form_link = '$encoder.jsEscape( $i18n.getString( "single_event_with_registration" ) , "'")';
+	var i18n_insert_a_report_date = '$encoder.jsEscape( $i18n.getString( "insert_a_report_date" ) , "'")';
+	var i18n_list_all_patients = '$encoder.jsEscape( $i18n.getString( "list_all_patients" ), "'")';
+	
+	datePickerValid( 'executionDateNewEvent', true );
+</script>

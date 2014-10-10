@@ -1,0 +1,9 @@
+{
+	"ty":"$!encoder.jsonEncode(${object.type})",
+	"co":"$!encoder.jsonEncode(${object.code})",
+	"cp":"$!encoder.jsonEncode(${object.contactPerson})",
+	"ad":"$!encoder.jsonEncode(${object.address})",
+	"em":"$!encoder.jsonEncode(${object.email})",
+	"pn":"$!encoder.jsonEncode(${object.phoneNumber})",
+	"pa":"$!encoder.jsonEncode(${object.parent.name})"
+}

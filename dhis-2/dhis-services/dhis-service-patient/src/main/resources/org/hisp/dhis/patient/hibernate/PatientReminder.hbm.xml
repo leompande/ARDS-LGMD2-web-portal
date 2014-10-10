@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.patient.PatientReminder" table="patientreminder">
+
+    <id name="id" column="patientreminderid">
+      <generator class="native" />
+    </id>
+    
+    <property name="name" />
+
+    <property name="daysAllowedSendMessage" />
+     
+    <property name="templateMessage" />
+    
+ 	<property name="dateToCompare" />
+ 	
+ 	<property name="sendTo" />
+ 	
+ 	<property name="whenToSend" />
+ 	
+ 	<property name="messageType" />
+ 	
+ 	<many-to-one name="userGroup" class="org.hisp.dhis.user.UserGroup" column="usergroupid" foreign-key="fk_patientreminder_usergroup"/>
+  </class>
+</hibernate-mapping>

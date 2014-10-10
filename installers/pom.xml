@@ -1,0 +1,37 @@
+<project>  
+<modelVersion>4.0.0</modelVersion>
+  <groupId>org.hisp.dhis</groupId>
+  <artifactId>dhis2-installer</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>DHIS2 Installer</name>
+  <description>This project will build a set of installers for DHIS2.</description>
+  <packaging>pom</packaging>
+  <url>http://dhis2.com</url>  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+		  <execution>
+             <id>DHIS 2 Postgresql Windows Installer</id>
+             <phase>package</phase>
+               <configuration>
+                <executable>${env.BITROCK_HOME}</executable>
+                <arguments>
+                <argument>build</argument>
+                <argument>${basedir}/src/bitrock/DHIS2_pginstaller.xml</argument>
+                <argument>windows</argument>
+                </arguments>
+               </configuration>
+             <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution> 
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+

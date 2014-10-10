@@ -1,0 +1,36 @@
+
+<a href="index.action"><h2>$i18n.getString( "dataanalyser" )</h2></a>
+<ul>
+	<li>$i18n.getString( "ga" )</li>
+	<ul>
+		<li>$i18n.getString( "regular" )</li>
+	 </ul>
+</ul>
+
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+
+<script type="text/javascript">
+
+	selection.setListenerFunction( orgUnitHasBeenSelected );
+	
+	function orgUnitHasBeenSelected( orgUnitIds )
+	{
+		if( document.getElementById( 'ougSetCB' ).checked )
+		{
+			return;
+		}
+		if( orgUnitIds == null || orgUnitIds == "" )
+		{
+			return;
+		}
+		if( orgUnitIds != null )
+		{
+			getOUDeatilsForGA(orgUnitIds);
+		}		
+	}
+
+</script>
+
+
+
+

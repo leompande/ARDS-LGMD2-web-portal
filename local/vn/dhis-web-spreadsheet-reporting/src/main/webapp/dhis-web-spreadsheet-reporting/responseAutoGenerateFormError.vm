@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<message type="error">$encoder.xmlEncode( $message )</message>
+	<exportReport id="$exportReportId" />
+	<dataSet id="$dataSetId" />
+	<dataElements>
+	#foreach( $id in $dataElementIds )
+		<id>$id</id>
+	#end
+	</dataElements>
+	<indicators>
+	#foreach( $id in $indicatorIds )
+		<id>$id</id>
+	#end
+	</indicators>
+	<validationRules>
+	#foreach( $id in $validationRuleIds )
+		<id>$id</id>
+	#end
+	</validationRules>
+</data>

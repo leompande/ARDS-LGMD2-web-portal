@@ -1,0 +1,10 @@
+
+<a href="index.action"><h2>$i18n.getString( "ccem_reports_page" )&nbsp;</h2></a>
+<ul>
+    <li><a href="ccemReportsPage.action">$i18n.getString( "ccem_reports_page" )</a></li>
+    <li><a href="jrxmlReportsPage.action">$i18n.getString( "jrxml_reports" )</a></li>
+</ul>
+
+<br>
+##parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )

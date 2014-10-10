@@ -1,0 +1,155 @@
+<table cellspacing="0" cellpadding="0" border="1" style="border-collapse:collapse;border:none;mso-border-top-alt:solid #4F81BD 1.0pt;
+    mso-border-top-themecolor:accent1;mso-border-bottom-alt:solid #4F81BD 1.0pt;
+    mso-border-bottom-themecolor:accent1;mso-yfti-tbllook:1184;mso-padding-alt:
+    0in 5.4pt 0in 5.4pt" class="MsoTableLightShadingAccent1">
+    <tbody>
+        <tr style="mso-yfti-irow:-1;mso-yfti-firstrow:yes">
+            <td width="481" valign="top" style="width:360.9pt;border-top:solid #4F81BD 1.0pt;
+            mso-border-top-themecolor:accent1;border-left:none;border-bottom:solid #4F81BD 1.0pt;
+            mso-border-bottom-themecolor:accent1;border-right:none;padding:0in 5.4pt 0in 5.4pt" colspan="3">
+            <p align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
+            text-align:center;line-height:normal;mso-yfti-cnfc:5" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191">$hrDataSets.name - $organisationUnit.name<o:p></o:p></span></strong></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:0">
+            <td width="43" valign="top" style="width:.45in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:68" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">1.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span class="SpellE"><span style="color:#365F91;
+            mso-themecolor:accent1;mso-themeshade:191">Firstname</span></span><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191"><o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191"><o:p>$person.firstName&nbsp;</o:p></span></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:1">
+            <td width="43" valign="top" style="width:.45in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:4" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">2.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span class="SpellE"><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">Middlename</span></span><span style="color:#365F91;
+            mso-themecolor:accent1;mso-themeshade:191"><o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:
+            191"><o:p>&nbsp;$person.middleName</o:p></span></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:2">
+            <td width="43" valign="top" style="width:.45in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:68" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">3.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span class="SpellE"><span style="color:#365F91;
+            mso-themecolor:accent1;mso-themeshade:191">Lastname</span></span><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:191"><o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191"><o:p>&nbsp;$person.lastName</o:p></span></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:3">
+            <td width="43" valign="top" style="width:.45in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:4" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">4.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:
+            191">Date of Birth<o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:
+            191"><o:p>&nbsp;$person.birthDate</o:p></span></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:4">
+            <td width="43" valign="top" style="width:.45in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:68" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">5.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">Gender<o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;background:#D3DFEE;
+            mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191"><o:p>&nbsp;$person.gender</o:p></span></p>
+            </td>
+        </tr>
+        <tr style="mso-yfti-irow:5">
+            <td width="43" valign="top" style="width:.45in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal;mso-yfti-cnfc:4" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+            mso-themeshade:191">6.<o:p></o:p></span></strong></p>
+            </td>
+            <td width="216" valign="top" style="width:2.25in;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:
+            191">Nationality<o:p></o:p></span></p>
+            </td>
+            <td width="222" valign="top" style="width:166.5pt;border:none;padding:0in 5.4pt 0in 5.4pt">
+            <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+            normal" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;mso-themeshade:
+            191"><o:p>&nbsp;$person.nationality</o:p></span></p>
+            </td>
+        </tr>
+    #{if} ( $dataValues )
+	    #set ( $count = 7 )
+	    #{foreach}( $dataValue in $dataValues )
+	    #set( $output = $count % 2 )
+	    <tr style="#{if}( $output == 0 ) background:#D3DFEE; #{end} mso-yfti-irow:6">
+               <td width="43" valign="top" style="width:.45in;border:none;
+                  mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+                  <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                  normal;mso-yfti-cnfc:68" class="MsoNormal"><strong><span style="color:#365F91;mso-themecolor:accent1;
+                  mso-themeshade:191">${count}.<o:p></o:p></span></strong></p>
+               </td>
+               <td width="216" valign="top" style="width:2.25in;border:none;
+                  mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+                  <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                  normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+                  mso-themeshade:191"><o:p>$!dataValue.attribute.caption</o:p></span></p>
+               </td>
+               <td width="222" valign="top" style="width:166.5pt;border:none;
+                  mso-background-themecolor:accent1;mso-background-themetint:63;padding:0in 5.4pt 0in 5.4pt">
+                  <p style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                  normal;mso-yfti-cnfc:64" class="MsoNormal"><span style="color:#365F91;mso-themecolor:accent1;
+                  mso-themeshade:191"><o:p>&nbsp;$!dataValue.value</o:p></span></p>
+               </td>
+           </tr>
+	    #set( $count = $count + 1 )
+	    #{end}
+	  #{end}
+    
+  </tbody>
+</table>

@@ -1,0 +1,7 @@
+
+#if( $programList.size() <= 0 )
+    <h3><a href="index.action">$i18n.getString( "tracker_dashboard" )</a></h3>
+    <p>$i18n.getString( "welcome_tdb" )</p>
+#else
+    #parse( "/dhis-web-alert/welcomeTracker.vm" )
+#end

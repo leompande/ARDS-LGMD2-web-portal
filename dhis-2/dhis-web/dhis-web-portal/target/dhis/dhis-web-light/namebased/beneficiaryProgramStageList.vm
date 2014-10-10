@@ -1,0 +1,54 @@
+<h2>$!encoder.htmlEncode( ${patient.name} )</h2>
+
+#if( $validated == true)
+    <div class="header-box">
+        <h3 style="text-align: left;">$i18n.getString("successfully_saved")</h3>
+    </div>
+#end
+
+<p>
+<ul>
+#set($i = 0)
+
+#foreach( $programStageInstance in $programStageInstances )
+	#set($programInstanceId = $programStageInstance.getProgramInstance().getId())
+	#set($i = $i + 1)
+	#set($blockEntryForm = $programInstance.getProgram().getBlockEntryForm())
+	#if ($i == $programStageInstances.size() - 1)
+		#set($currentProgramStageInstanceId = $programStageInstance.getId())
+	#end
+	<li>
+		
+		#if ($programStageInstance.executionDate) 
+			#set($displayDate = ${dateFormat.format( $programStageInstance.executionDate )})
+		#else
+			#set($displayDate = ${dateFormat.format( $programStageInstance.dueDate)})	
+		#end
+		
+		#if($programInstance.isCompleted() && $programInstance.getProgram().getBlockEntryForm())
+			$programStageInstance.getProgramStage().getName() ($displayDate) #if ($programStageInstance.isCompleted() == true) <img src="../dhis-web-light/images/checkmark.jpg" /> #end
+		#else
+			<a href="showProgramStageSection.action?programId=$programId&programStageId=$programStageInstance.getProgramStage().getId()&programStageInstanceId=$programStageInstance.getId()&patientId=$patient.getId()&programInstanceId=$programStageInstance.getProgramInstance().getId()&orgUnitId=0&validated=false">
+			$programStageInstance.getProgramStage().getName() ($displayDate) #if ($programStageInstance.isCompleted() == true) <img src="../dhis-web-light/images/checkmark.jpg" /> #end </a>
+		#end 
+		
+	</li>
+#end
+<br/>
+#foreach($programStage in $repeatableStages)
+	#set($exclusedStage = $exclusedRepeatableStages.get( $programStage.getId() ))
+	#if(!$exclusedStage)
+		<li><a href="showRepeatableEventRegistrationForm.action?programInstanceId=$programInstanceId&programStageId=$programStage.getId()&currentProgramStageInstanceId=$currentProgramStageInstanceId">[+] $i18n.getString("add") $programStage.getName()</a></li>
+	#end
+#end
+
+</ul>
+</p>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="showPatientProgramList.action?patientId=$patient.getId()">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

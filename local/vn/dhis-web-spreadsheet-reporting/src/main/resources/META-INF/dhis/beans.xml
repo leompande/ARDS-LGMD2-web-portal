@@ -1,0 +1,1880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="org.hisp.dhis.reportsheet.state.SelectionManager"
+		class="org.hisp.dhis.reportsheet.state.DefaultSelectionManager"
+		scope="singleton">
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.action.CheckDefaultFrameAction"
+		class="org.hisp.dhis.reportsheet.action.CheckDefaultFrameAction"
+		scope="prototype">
+		<property name="userSettingService"
+			ref="org.hisp.dhis.user.UserSettingService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.GetUserSettingFrameAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.GetUserSettingFrameAction"
+		scope="prototype">
+		<property name="userSettingService"
+			ref="org.hisp.dhis.user.UserSettingService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.SaveUserSettingFrameAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.SaveUserSettingFrameAction"
+		scope="prototype">
+		<property name="userSettingService"
+			ref="org.hisp.dhis.user.UserSettingService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.DownloadFileAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.DownloadFileAction"
+		scope="prototype">
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<!-- PERIOD SELECT MANAGER -->
+
+	<bean id="org.hisp.dhis.reportsheet.period.db.PeriodDatabaseService"
+		class="org.hisp.dhis.reportsheet.period.db.DefaultPeriodDatabaseManager"
+		scope="singleton">
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.db.action.GetPeriodsByPeriodTypeAction"
+		class="org.hisp.dhis.reportsheet.period.db.action.GetPeriodsByPeriodTypeAction"
+		scope="prototype">
+		<property name="periodDatabaseService"
+			ref="org.hisp.dhis.reportsheet.period.db.PeriodDatabaseService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.db.action.NextPeriodsAction"
+		class="org.hisp.dhis.reportsheet.period.db.action.NextPeriodsAction"
+		scope="prototype">
+		<property name="periodDatabaseService"
+			ref="org.hisp.dhis.reportsheet.period.db.PeriodDatabaseService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.db.action.PreviousPeriodsAction"
+		class="org.hisp.dhis.reportsheet.period.db.action.PreviousPeriodsAction"
+		scope="prototype">
+		<property name="periodDatabaseService"
+			ref="org.hisp.dhis.reportsheet.period.db.PeriodDatabaseService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager"
+		class="org.hisp.dhis.reportsheet.period.generic.DefaultPeriodGenericManager"
+		scope="singleton">
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.generic.action.GetPeriodsByPeriodTypeAction"
+		class="org.hisp.dhis.reportsheet.period.generic.action.GetPeriodsByPeriodTypeAction"
+		scope="prototype">
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.generic.action.NextPeriodsAction"
+		class="org.hisp.dhis.reportsheet.period.generic.action.NextPeriodsAction"
+		scope="prototype">
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.period.generic.action.PreviousPeriodsAction"
+		class="org.hisp.dhis.reportsheet.period.generic.action.PreviousPeriodsAction"
+		scope="prototype">
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+	</bean>
+
+
+	<!-- SYSTEM CONFIGURATION BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.GetReportConfigurationAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.GetReportConfigurationAction"
+		scope="prototype">
+		<property name="systemSettingManager"
+			ref="org.hisp.dhis.setting.SystemSettingManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.SetReportConfigurationAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.SetReportConfigurationAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="systemSettingManager"
+			ref="org.hisp.dhis.setting.SystemSettingManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.CheckReportConfigurationAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.CheckReportConfigurationAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.configuration.action.BackUpTemplateFilesAction"
+		class="org.hisp.dhis.reportsheet.configuration.action.BackUpTemplateFilesAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<!-- REPORT EXCEL CORE BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.CheckPermissionAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.CheckPermissionAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.AddExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.AddExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.DeleteExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.DeleteExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportGroupsAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.GetExportReportGroupsAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportByReportTypeAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.ListExportReportByReportTypeAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.ValidateExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.ValidateExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<!-- REPORT EXCEL ASSOCIATION BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportAssociationsAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportAssociationsAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAssociationsAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportAssociationsAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+
+
+	<!-- REPORT EXCEL USER ROLE BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportUserRoleAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.OpenExportReportUserRoleAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportUserRoleAction"
+		class="org.hisp.dhis.reportsheet.exportreport.action.UpdateExportReportUserRoleAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<!-- REPORT EXCEL CATEGORY BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.ValidateDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.ValidateDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.SaveDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.SaveDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.UpdateDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.UpdateDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.DeleteDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.DeleteDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrdersByReportAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.GetDataElementGroupOrdersByReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementGroupOrderAction"
+		scope="prototype">
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementAction"
+		class="org.hisp.dhis.reportsheet.degroup.action.UpdateSortedDataElementAction"
+		scope="prototype">
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="dataElementGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderService" />
+	</bean>
+
+	<!-- REPORT EXCEL CATEGORY-VERTICAL BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.ValidateCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.ValidateCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.SaveCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.SaveCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.DeleteCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.DeleteCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionGroupOrderAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.UpdateSortedCategoryOptionAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionsByCategoryAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.GetCategoryOptionsByCategoryAction"
+		scope="prototype" />
+
+	<!-- CATEGORY-OPTION-ASSOCIATION -->
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineCategoryOptionAssociationsAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineCategoryOptionAssociationsAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionAssociationsAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.UpdateCategoryOptionAssociationsAction"
+		scope="prototype" />
+
+	<!-- CATEGORY-OPTION-COMBO-ASSOCIATION -->
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineOptionComboAssociationsAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.ShowDefineOptionComboAssociationsAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.cogroup.action.UpdateOptionComboAssociationsAction"
+		class="org.hisp.dhis.reportsheet.cogroup.action.UpdateOptionComboAssociationsAction"
+		scope="prototype" />
+
+	<!-- REPORT EXCEL ATTRIBUTE BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.ValidateAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.ValidateAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.SaveAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.SaveAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeService"
+			ref="org.hisp.dhis.attribute.AttributeService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeService"
+			ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.DeleteAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.DeleteAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueGroupOrderAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueGroupOrderAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.UpdateSortedAttributeValueAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByAttributeAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByAttributeAction"
+		scope="prototype">
+		<property name="attributeService"
+			ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="localAttributeValueService"
+			ref="org.hisp.dhis.attribute.LocalAttributeValueService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByChapterAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.GetAttributeValuesByChapterAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.ListAttributeValueGroupOrdersAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.ListAttributeValueGroupOrdersAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderForReportAction"
+		class="org.hisp.dhis.reportsheet.avgroup.action.UpdateAttributeValueGroupOrderForReportAction"
+		scope="prototype">
+		<property name="attributeValueGroupOrderService"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<!-- REPORT ORGANISATION UNIT GROUP LISTING BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.OpenUpdateOrgUnitGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.OpenUpdateOrgUnitGroupAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.ListOrgUnitGroupAtLevelAction"
+		class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.ListOrgUnitGroupAtLevelAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAtLevelAction"
+		class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAtLevelAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitgrouplisting.action.UpdateOrgUnitGroupAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+
+	<!-- EXPORT ITEM BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.ListExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.ListExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.SetupExportItemFormAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.SetupExportItemFormAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="expressionService"
+			ref="org.hisp.dhis.expression.ExpressionService" />
+		<property name="dataElementCategoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.AddExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.AddExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.UpdateExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.UpdateExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.GetDataElementCategoryOptionCombosAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.GetDataElementCategoryOptionCombosAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.ValidationExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.ValidationExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.ValidationFormulaAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.ValidationFormulaAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.DeleteExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.DeleteExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.DeleteMultiExportItemAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.DeleteMultiExportItemAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemsBySheetAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemsBySheetAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemTypesAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.GetExportItemTypesAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToExportReportAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="statementManager" ref="statementManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToImportReportAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.CopyExportItemToImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="statementManager" ref="statementManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exportitem.action.GetListSheetAction"
+		class="org.hisp.dhis.reportsheet.exportitem.action.GetListSheetAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<!-- EXPORT REPORT EXCEL -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.SelectFormAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.SelectFormAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GetExportReportsByGroupAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GetExportReportsByGroupAction"
+		scope="prototype">
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.ValidateGenerateExportReportAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.ValidateGenerateExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="dataSetRegistrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateExcelReportFlowAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportOrgGroupListingAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportOrgGroupListingAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportNormalAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportNormalAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportCategoryAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportCategoryAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportVerticalCategoryAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportVerticalCategoryAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportAttributeAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportAttributeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateReportPeriodColumnListingAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateReportPeriodColumnListingAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.action.GenerateMultiReportAction"
+		class="org.hisp.dhis.reportsheet.exporting.action.GenerateMultiReportAction"
+		scope="prototype" />
+
+	<!-- DATA ENTRY STATUS BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.ListDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.ListDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.AddDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.AddDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDefaultForDataStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.UpdateDefaultForDataStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.DeleteDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.DeleteDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.DefaultDataEntryStatusAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.DefaultDataEntryStatusAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="completeDataSetRegistrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataSetsAction"
+		class="org.hisp.dhis.reportsheet.dataentrystatus.action.GetDataSetsAction"
+		scope="prototype">
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<!-- DATA SET COMPLETED BEAN -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByPeriodsAction"
+		class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByPeriodsAction"
+		scope="prototype">
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+		<property name="completeDataSetRegistrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="dataValueService"
+			ref="org.hisp.dhis.datavalue.DataValueService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByDataSetAction"
+		class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCompletedReportByDataSetAction"
+		scope="prototype">
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+		<property name="completeDataSetRegistrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCustomDataSetReportAction"
+		class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewCustomDataSetReportAction"
+		scope="prototype">
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="dataValueService"
+			ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+
+	<!-- PREVIEW REPORT BEANS -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.preview.manager.InitializePOIStylesManager"
+		class="org.hisp.dhis.reportsheet.preview.manager.DefaultInitializePOIStylesManager" />
+
+	<bean id="org.hisp.dhis.reportsheet.preview.action.ExportXMLAction"
+		class="org.hisp.dhis.reportsheet.preview.action.ExportXMLAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<!--  GERERATE ADVANCE -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.SelectAdvancedExportFormAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.SelectAdvancedExportFormAction"
+		scope="prototype">
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.GetExportReportsByGroupAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.GetExportReportsByGroupAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportNormalAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportNormalAction"
+		scope="prototype">
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="aggregationService"
+			ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="statementManager" ref="statementManager" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+		<property name="initPOIStylesManager"
+			ref="org.hisp.dhis.reportsheet.preview.manager.InitializePOIStylesManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportOrgGroupListingAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportOrgGroupListingAction"
+		scope="prototype">
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="aggregationService"
+			ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="statementManager" ref="statementManager" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+		<property name="initPOIStylesManager"
+			ref="org.hisp.dhis.reportsheet.preview.manager.InitializePOIStylesManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportPeriodColumnListingAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportPeriodColumnListingAction"
+		scope="prototype">
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="aggregationService"
+			ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="statementManager" ref="statementManager" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+		<property name="initPOIStylesManager"
+			ref="org.hisp.dhis.reportsheet.preview.manager.InitializePOIStylesManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportCategoryAction"
+		class="org.hisp.dhis.reportsheet.exporting.advance.action.GenerateAdvancedReportCategoryAction"
+		scope="prototype">
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="aggregationService"
+			ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="statementManager" ref="statementManager" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+		<property name="initPOIStylesManager"
+			ref="org.hisp.dhis.reportsheet.preview.manager.InitializePOIStylesManager" />
+	</bean>
+
+	<!-- Clean up Report Excel module -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.CleanUpDraftFilesAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.CleanUpDraftFilesAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- IMPORT REPORT												   -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.AddImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.AddImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.DeleteImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.DeleteImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportByTypeAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.ListAllImportReportByTypeAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.SetupImportReportFormAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.SetupImportReportFormAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.ValidateImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.ValidateImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.GetImportReportAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.GetImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAssociationsAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.UpdateImportReportAssociationsAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.OpenImportReportAssociationsAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.OpenImportReportAssociationsAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.UpdateOrgUnitGroupAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.UpdateOrgUnitGroupAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importreport.action.OpenUpdateOrgUnitGroupForCategoryAction"
+		class="org.hisp.dhis.reportsheet.importreport.action.OpenUpdateOrgUnitGroupForCategoryAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="organisationUnitGroupService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+	</bean>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- EXCEL ITEM                                                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.SetupImportItemFormAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.SetupImportItemFormAction"
+		scope="prototype">
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.AddImportItemAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.AddImportItemAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.DeleteImportItemAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.DeleteImportItemAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.GetSelectedDataElementsAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.GetSelectedDataElementsAction"
+		scope="prototype">
+		<property name="dataSetService">
+			<ref bean="org.hisp.dhis.dataset.DataSetService" />
+		</property>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.GetImportItemParamAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.GetImportItemParamAction"
+		scope="prototype">
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.ListImportItemAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.ListImportItemAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.UpdateImportItemAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.UpdateImportItemAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.ShowUpdateImportItemFormAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.ShowUpdateImportItemFormAction"
+		scope="prototype">
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.ValidateImportItemAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.ValidateImportItemAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.GetImportItemByIdAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.GetImportItemByIdAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.UpdateImportItemFormAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.UpdateImportItemFormAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="expressionService"
+			ref="org.hisp.dhis.expression.ExpressionService" />
+		<property name="dataElementService"
+			ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="categoryService"
+			ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+	</bean>
+
+	<!-- IMPORT DATA -->
+
+	<!-- GUI - Import param form -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.GetPeriodsByImportReportAction"
+		class="org.hisp.dhis.reportsheet.importing.action.GetPeriodsByImportReportAction">
+		<property name="periodGenericManager"
+			ref="org.hisp.dhis.reportsheet.period.generic.PeriodGenericManager" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.GetImportingParamsAction"
+		class="org.hisp.dhis.reportsheet.importing.action.GetImportingParamsAction"
+		scope="prototype">
+		<property name="organisationUnitSelectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<!--  function - Prewiew Data  flow from excel file  -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ViewDataFlowAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ViewDataFlowAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<!--  function - Prewiew Data - NORMAL  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ViewDataNormalAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ViewDataNormalAction"
+		scope="prototype" />
+
+	<!--  function - Prewiew Data - CATEGORY  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ViewDataCategoryAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ViewDataCategoryAction"
+		scope="prototype" />
+
+	<!--  function - Prewiew Data - ORGANISATION GROUP  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ViewDataOrganizationGroupAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ViewDataOrganizationGroupAction"
+		scope="prototype" />
+
+	<!--  function - Import data flow -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ImportDataFlowAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ImportDataFlowAction"
+		scope="prototype" />
+
+	<!--  function - Import data - NORMAL  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ImportDataNormalAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ImportDataNormalAction"
+		scope="prototype" />
+
+	<!--  function - Import data - CATEGORY  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ImportDataCategoryAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ImportDataCategoryAction"
+		scope="prototype" />
+
+	<!--  function - Import data - ORGANISATION UNIT  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.ImportDataOrganizationGroupAction"
+		class="org.hisp.dhis.reportsheet.importing.action.ImportDataOrganizationGroupAction"
+		scope="prototype" />
+
+	<!--  function - Rollback Import data  -->
+	<bean
+		id="org.hisp.dhis.reportsheet.importing.action.RollbackImportingAction"
+		class="org.hisp.dhis.reportsheet.importing.action.RollbackImportingAction"
+		scope="prototype" />
+
+	<!-- Period Column -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.periodcolumn.action.GetPeriodColumnAction"
+		class="org.hisp.dhis.reportsheet.periodcolumn.action.GetPeriodColumnAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.periodcolumn.action.SavePeriodColumnAction"
+		class="org.hisp.dhis.reportsheet.periodcolumn.action.SavePeriodColumnAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.periodcolumn.action.UpdatePeriodColumnAction"
+		class="org.hisp.dhis.reportsheet.periodcolumn.action.UpdatePeriodColumnAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.periodcolumn.action.DeletePeriodColumnAction"
+		class="org.hisp.dhis.reportsheet.periodcolumn.action.DeletePeriodColumnAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToImportReportAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToImportReportAction"
+		scope="prototype">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="statementManager" ref="statementManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToExportReportAction"
+		class="org.hisp.dhis.reportsheet.importitem.action.CopyImportItemToExportReportAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+		<property name="statementManager" ref="statementManager" />
+	</bean>
+
+	<!-- Excel Templates Management -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.ExcelTemplateListAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.ExcelTemplateListAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.DeleteExcelTemplateAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.DeleteExcelTemplateAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.RenameExcelTemplateAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.RenameExcelTemplateAction"
+		scope="prototype">
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.UpdateExportReportByTemplateAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.UpdateExportReportByTemplateAction"
+		scope="prototype">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.ValidateUploadExcelFile"
+		class="org.hisp.dhis.reportsheet.filemanager.action.ValidateUploadExcelFile"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.filemanager.action.UploadExcelFileAction"
+		class="org.hisp.dhis.reportsheet.filemanager.action.UploadExcelFileAction"
+		scope="prototype">
+		<property name="reportLocationManager"
+			ref="org.hisp.dhis.reportsheet.ReportLocationManager" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.SaveBookmarkAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.SaveBookmarkAction"
+		scope="prototype">
+		<property name="bookmarkService"
+			ref="org.hisp.dhis.reportsheet.BookmarkService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.GetAllBookmarkAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.GetAllBookmarkAction"
+		scope="prototype">
+		<property name="bookmarkService"
+			ref="org.hisp.dhis.reportsheet.BookmarkService" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.DeleteBookmarkAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.DeleteBookmarkAction"
+		scope="prototype">
+		<property name="bookmarkService"
+			ref="org.hisp.dhis.reportsheet.BookmarkService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.GetBookmarkAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.GetBookmarkAction"
+		scope="prototype">
+		<property name="bookmarkService"
+			ref="org.hisp.dhis.reportsheet.BookmarkService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.SetBookmarkTypeCompleteReportAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.SetBookmarkTypeCompleteReportAction"
+		scope="prototype">
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.bookmark.action.SetBookmarkTypeChartAction"
+		class="org.hisp.dhis.reportsheet.bookmark.action.SetBookmarkTypeChartAction"
+		scope="prototype">
+		<property name="selectionManager"
+			ref="org.hisp.dhis.reportsheet.state.SelectionManager" />
+	</bean>
+
+	<!-- Data Set Completed Report -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.datasetcompleted.action.DataSetCompletedReportFormAction"
+		class="org.hisp.dhis.reportsheet.datasetcompleted.action.DataSetCompletedReportFormAction"
+		scope="prototype">
+		<property name="bookmarkService"
+			ref="org.hisp.dhis.reportsheet.BookmarkService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewByPeriodFormAction"
+		class="org.hisp.dhis.reportsheet.datasetcompleted.action.ViewByPeriodFormAction"
+		scope="prototype">
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<!-- jChart -->
+
+	<bean id="org.hisp.dhis.jchart.data.JChartDataService"
+		class="org.hisp.dhis.jchart.data.DefaultJChartDataService">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="selectionTreeManager"
+			ref="org.hisp.dhis.oust.manager.SelectionTreeManager" />
+		<property name="aggregationService"
+			ref="org.hisp.dhis.aggregation.AggregationService" />
+		<property name="i18nManager"
+			ref="org.hisp.dhis.i18n.I18nManager" />
+		<property name="statementManager" ref="statementManager" />
+		<property name="periodDatabaseService"
+			ref="org.hisp.dhis.reportsheet.period.db.PeriodDatabaseService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.GetALLJchartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.GetALLJchartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.jchart.action.AddJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.AddJChartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="currentUserService"
+			ref="org.hisp.dhis.user.CurrentUserService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.jchart.action.GetJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.GetJChartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.PrepareDataForAddOrUpdateJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.PrepareDataForAddOrUpdateJChartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="periodService"
+			ref="org.hisp.dhis.period.PeriodService" />
+		<property name="indicatorService"
+			ref="org.hisp.dhis.indicator.IndicatorService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.DeleteJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.DeleteJChartAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleFormAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.UpdateJChartUserRoleFormAction"
+		scope="prototype">
+		<property name="jchartService"
+			ref="org.hisp.dhis.jchart.JChartService" />
+		<property name="userService"
+			ref="org.hisp.dhis.user.UserService" />
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.jchart.action.draw.DrawJChartAction"
+		class="org.hisp.dhis.reportsheet.jchart.action.draw.DrawJChartAction"
+		scope="prototype">
+		<property name="jchartDataService"
+			ref="org.hisp.dhis.jchart.data.JChartDataService" />
+	</bean>
+
+	<!-- OrganisationUnitPrototype -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.AddOrgUnitPrototypeAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.AddOrgUnitPrototypeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeListAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.GetOrgUnitPrototypeListAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.RemoveOrgUnitPrototypeAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.RemoveOrgUnitPrototypeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.UpdateOrgUnitPrototypeAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.UpdateOrgUnitPrototypeAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototype.action.ValidateOrgUnitPrototypeAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototype.action.ValidateOrgUnitPrototypeAction"
+		scope="prototype" />
+
+	<!-- OrganisationUnitPrototypeGroup -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.AddOrgUnitPrototypeGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.AddOrgUnitPrototypeGroupAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupListAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.GetOrgUnitPrototypeGroupListAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.RemoveOrgUnitPrototypeGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.RemoveOrgUnitPrototypeGroupAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.UpdateOrgUnitPrototypeGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.UpdateOrgUnitPrototypeGroupAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.ValidateOrgUnitPrototypeGroupAction"
+		class="org.hisp.dhis.reportsheet.orgunitprototypegroup.action.ValidateOrgUnitPrototypeGroupAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.ShowAddOrganisationUnitFormAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.ShowAddOrganisationUnitFormAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.AddMultiOrganisationUnitAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.AddMultiOrganisationUnitAction"
+		scope="prototype" />
+
+	<bean
+		id="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormByTemplate"
+		class="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormByTemplate"
+		scope="prototype">
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormRollBack"
+		class="org.hisp.dhis.reportsheet.preview.action.AutoGenerateFormRollBack"
+		scope="prototype">
+	</bean>
+
+	<!-- OrganisationUnit -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentAction"
+		scope="prototype">
+		<property name="organisationUnitService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		</property>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentListAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.GetDepartmentListAction"
+		scope="prototype">
+		<property name="organisationUnitService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		</property>
+		<property name="organisationUnitGroupService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		</property>
+		<property name="selectionManager">
+			<ref
+				bean="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		</property>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.AddDepartmentAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.AddDepartmentAction"
+		scope="prototype">
+		<property name="organisationUnitService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		</property>
+		<property name="organisationUnitGroupService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		</property>
+		<property name="selectionManager">
+			<ref
+				bean="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		</property>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.RenameOrganisationUnitAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.RenameOrganisationUnitAction"
+		scope="prototype">
+		<property name="organisationUnitService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		</property>
+	</bean>
+
+	<bean
+		id="org.hisp.dhis.reportsheet.organisationunit.action.RemoveDepartmentAction"
+		class="org.hisp.dhis.reportsheet.organisationunit.action.RemoveDepartmentAction"
+		scope="prototype">
+		<property name="organisationUnitService">
+			<ref
+				bean="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		</property>
+	</bean>
+
+	<!-- Data Entry module -->
+
+	<bean
+		id="org.hisp.dhis.reportsheet.de.action.GetDataValuesForDataSetAction"
+		class="org.hisp.dhis.reportsheet.de.action.GetDataValuesForDataSetAction"
+		scope="prototype">
+		<property name="dataValueService"
+			ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="minMaxDataElementService"
+			ref="org.hisp.dhis.minmax.MinMaxDataElementService" />
+		<property name="dataSetService"
+			ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="registrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="localPeriodService"
+			ref="org.hisp.dhis.period.LocalPeriodService" />
+		<property name="localDataValueService"
+			ref="org.hisp.dhis.datavalue.LocalDataValueService" />
+	</bean>
+
+</beans>

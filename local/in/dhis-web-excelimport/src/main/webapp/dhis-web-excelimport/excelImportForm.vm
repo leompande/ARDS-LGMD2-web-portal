@@ -1,0 +1,158 @@
+
+<script>
+
+    //Global Variables
+    var selriRadioButton = "overWrite";
+    var reportModels = new HashTable();
+    var reportFileNames = new HashTable();
+    var checkerFileNames = new HashTable();
+    var reportDatasets = new HashTable();
+
+    function formValidations()
+    {                       
+        var reportListIndex = document.reportForm.reportList.selectedIndex;
+        var periodIndex = document.reportForm.availablePeriods.selectedIndex;
+        var periodIDIndex = document.reportForm.periodTypeId.selectedIndex;
+        var orgunitIdValue = document.reportForm.ouIDTB.value;
+
+        if(reportListIndex < 0 || document.reportForm.reportList.options[reportListIndex].text == null) {alert("Please Select Report"); return false;}
+        else if(document.reportForm.availablePeriods.options[periodIndex].text == null || document.reportForm.availablePeriods.options[periodIndex].text== "") {alert("Please Select Period"); return false;}
+        else if(document.reportForm.periodTypeId.options[periodIDIndex].value == "NA") {alert("Please Select Period Type"); return false;}
+        else if(orgunitIdValue == null || orgunitIdValue=="" || orgunitIdValue==" ") {alert("Please Select OrganisationUnit"); return false;}
+
+        document.reportForm.reportModelTB.value = reportModels.get(document.reportForm.reportList.options[reportListIndex].value);
+        document.reportForm.reportFileNameTB.value = reportFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+        document.reportForm.checkerFileNameTB.value = checkerFileNames.get(document.reportForm.reportList.options[reportListIndex].value);
+        document.reportForm.dataSetId.value = reportDatasets.get(document.reportForm.reportList.options[reportListIndex].value);
+
+        return true;
+    }
+
+    //-----------------------------------------------------------------------
+    //init jQuery validation for reportForm
+    //-----------------------------------------------------------------------
+    jQuery(document).ready(
+            function()
+            {
+                jQuery("#reportForm").validate({
+                     meta:"validate"
+                    ,errorElement:"td"
+                    ,submitHandler: function(form)
+                    {
+                        submitImportForm();
+                    }
+                });
+                jQuery("#name").focus();
+            }
+    );
+    
+
+</script>
+
+<h1>Excel Import Form</h1>
+<hr /><br />
+    
+<form id="reportForm" name="reportForm" method="post" enctype="multipart/form-data" action="excelResultForm.action">
+    <input type="hidden" id="curLocaleCode" value="$locale.getLanguage()_$locale.getCountry()"/>
+    <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+        <tr>
+            <td class="NormalB">
+                1. PeriodType : <br />
+                <select id="periodTypeId" name="periodTypeId" style="width:200px" onchange="getPeriods()">
+                    <option value="NA">[ Select PeriodType ]</option>
+                    #foreach ( $type in $periodTypes )
+                        <option value="$type.name">$type.name</option>
+                    #end
+                </select>
+            </td>
+            <td class="NormalB">                            
+                4. Import Sheets :<br />
+                <select id="reportList" name="reportList" style="width:250px" class="{validate:{required:true}}">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="NormalB">
+                2. Periods : <br />
+                <select id="availablePeriods" name="availablePeriods" style="width:200px" class="{validate:{required:true}}">
+                    <option value="EMPTY_PLACEHOLDER_VALUE"></option>
+                </select>
+            </td>
+            <td class="NormalB">
+                5. Upload/Import (XLS) File : <br/>
+                <input type="file" id="upload" name="upload" size="31" class="{validate:{required:true}}">
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td class="NormalB">
+                3. OrganisationUnit : <br />
+                <input type="text" name="ouNameTB" id="ouNameTB" style="width:200px" class="{validate:{required:true}}" disabled >
+            </td>
+            <td class="NormalB">
+                <input type="radio" id="riRadio" name="riRadio" value="overWrite" checked> New And Updates
+                <input type="radio" id="riRadio" name="riRadio" value="reject" > New (No Updates)
+                <br />
+                <input type="submit" name="importReport" value='Import Data' style="width:250px">
+            </td>
+        </tr>                   
+        
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="hidden" name="autogen" id="autogen" value="0" >
+                <input type="hidden" name="ouIDTB" id="ouIDTB" />
+                <input type="hidden" name="reportModelTB" id="reportModelTB">
+                <input type="hidden" name="reportFileNameTB" id="reportFileNameTB">
+                <input type="hidden" name="checkerFileNameTB" id="checkerFileNameTB">
+                <input type="hidden" name="dataSetId" id="dataSetId">
+                <input type="hidden" name="reportListFileNameTB" id="reportListFileNameTB" value="excelImportReportsList.xml">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><span id="message"></span></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+
+    function onloadFun()
+    {
+        #if($message)
+            document.getElementById( 'message' ).innerHTML = '$message';
+            document.getElementById( 'message' ).style.display = 'block';
+            setTimeout(
+                function()
+                {
+                    document.getElementById( 'message' ).style.display = 'none';
+                },
+                4000
+            );  
+        #end
+    }
+    
+    onloadFun();
+    
+</script>

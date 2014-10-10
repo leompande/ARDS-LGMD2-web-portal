@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.patient.PatientIdentifier" table="patientidentifier">
+
+    <id name="id" column="patientidentifierid">
+      <generator class="native" />
+    </id>
+    &identifiableProperties;
+
+    <many-to-one name="identifierType" class="org.hisp.dhis.patient.PatientIdentifierType" column="patientidentifiertypeid"
+      foreign-key="fk_patientidentifier_patientidentifiertypeid" />
+
+    <many-to-one name="patient" class="org.hisp.dhis.patient.Patient" column="patientid" not-null="true"
+      foreign-key="fk_patientidentifier_patient" />
+
+    <property name="identifier" length="31" not-null="true" />
+
+  </class>
+</hibernate-mapping>

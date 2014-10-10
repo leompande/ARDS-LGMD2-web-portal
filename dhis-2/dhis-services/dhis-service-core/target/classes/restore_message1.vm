@@ -1,0 +1,12 @@
+Someone, probably you, have asked us to restore your user account at ${object.rootPath}. 
+You have been sent two emails, where this is the first one. Please follow the 
+link below. In the next step you will be asked to enter a code which has been 
+sent to you in the other email.
+
+
+${object.restorePath}?username=${object.username}&token=${object.token}
+
+
+You must complete the restore process within 1 hour. If you take no action, your
+account will not be restored. If you did not request this restore, please disregard
+this message.

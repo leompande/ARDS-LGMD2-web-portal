@@ -1,0 +1,81 @@
+<script type="text/javascript">
+	jQuery(document).ready(function(){	
+		tableSorter( 'listTable' );
+		leftBar.showAnimated();
+	});
+
+	var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete" ) , "'" )';
+
+</script>
+
+<h3>$i18n.getString( "modelType_management" ) #openHelp( "modelType" )</h3>
+
+<table class="mainPageTable">
+  <tr>
+    <td style="vertical-align:top">
+		<table width="100%">
+			<tr>
+				<td>#filterDiv( "modelType" )</td>
+				<!--<td>$i18n.getString( "filter_by_name" ): <input type="text" onkeyup="filterValues( this.value , 1)" style="width:250px"/></td>-->
+				<td colspan="9" style="text-align:right"><br/>
+					<input type="button" value="$i18n.getString( 'add_new' )" onclick="window.location.href='addModelTypeForm.action'" style="width:80px"/></a>
+				</td>
+			</tr>
+		</table>
+      <table class="listTable" id="listTable">
+          <col/>          
+          <col width="200"/>     
+          <thead>
+          <tr>
+            <th>$i18n.getString( "name" )</th>
+            <th style="text-align:center" class="{sorter: false}">$i18n.getString( "operations" )</th>
+          </tr>
+          </thead>
+          <tbody id="list">
+            #foreach( $modelType in $modelTypes )
+              <tr id="tr${modelType.id}">
+                <td onclick="showCalatogTypeDetails( $modelType.id )">$encoder.htmlEncode( $modelType.name )</td>
+                <td style="text-align:right">
+                  <a href="showUploadModelTypeImageForm.action?id=$modelType.id" title="$i18n.getString( 'upload_image_default' )"><img src="images/upload.png" alt="$i18n.getString( 'upload_image' )"></a>		
+                  <a href="editModelTypeForm.action?id=$modelType.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"/></a>
+                  <a href="javascript:removeItem( '$modelType.id', '$encoder.jsEncode( $modelType.name )', i18n_confirm_delete , 'removeModelType.action' )" title="$i18n.getString( "remove" )"><img src="../images/delete.png" alt="$i18n.getString( "remove" )"></a>
+				  <a href="viewModelDataEntryForm.action?modelTypeId=$modelType.id" title="$i18n.getString( 'design_data_entry_form' )"><img src="../images/edit_layout.png" alt="$i18n.getString( 'design_data_entry_form' )"></a>					
+                  <a href="javascript:showCalatogTypeDetails( $modelType.id )" title="$i18n.getString( 'show_details' )"><img src="../images/information.png" alt="$i18n.getString( 'show_details' )"/></a>
+                </td>
+              </tr>
+            #end
+
+          </tbody>
+
+        </table>
+		<p></p>
+  		#parse( "/dhis-web-commons/paging/paging.vm" )
+  		
+    </td>
+		<td style="width:20em; padding-left:2em; vertical-align:top">
+
+			<div id="detailsArea" style="display:none">
+				<div style="float:right">
+					<a href="javascript:hideDetails()" title="$i18n.getString( 'hide_details' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_details' )"/></a>
+				</div>
+				<p><label class="bold">$i18n.getString( "name" ):</label><br/><span id="nameField"></span></p>
+				<p><label class="bold">$i18n.getString( "description" ):</label><br/><span id="descriptionField"></span></p>
+				<p><label class="bold">$i18n.getString( "no_of_modelTypeAttributes" ):</label><br><span id="modelTypeattributesCountField"></span></p>
+				<p><label class="bold">$i18n.getString( "data_entry_form" ):</label><br><span id="dataEntryFormNameField"></span></p>
+			</div>
+			
+            <div id="warningArea" style="position:fixed;right:10px;top:200px;display:none">
+                <div style="float:right">
+                    <a href="javascript:hideWarning()" title="$i18n.getString( 'hide_warning' )"><img src="../images/close.png" alt="$i18n.getString( 'hide_warning' )"/></a>
+                </div>
+                <p><span id="warningField"></span></p>
+            </div>
+
+		</td>
+  </tr>
+</table>
+<script type="text/javascript">
+	var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_model_type" ) , "'" )';
+	var i18n_none = '$encoder.jsEscape( $i18n.getString( "none" ), "'")';
+	
+</script>

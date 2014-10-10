@@ -1,0 +1,87 @@
+<table>
+	<tr>
+		<td>
+			<label class="bold">$i18n.getString('full_name') : </label>
+		</td>
+		<td>
+			$patient.getFullName()
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label class="bold">$i18n.getString('gender') : </label>
+		</td>
+		<td>
+			$i18n.getString($patient.gender)
+		</td>
+	</tr>
+	<tr>
+		<td><label class="bold">$i18n.getString('dob_type') : </label>
+		</td>
+		<td>
+			$!patient.dobType
+		</td>
+	</tr>
+	<tr>
+		<td><label class="bold">$i18n.getString('date_of_birth') : </label>
+		</td>
+		<td>
+			$format.formatDate( $!patient.birthDate )
+		</td>
+	</tr>
+	<tr>
+		<td><label class="bold">$i18n.getString('blood_group') : </label>
+		</td>
+		<td>
+			#if($!patient.bloodGroup && !$patient.bloodGroup.equals("")) $patient.bloodGroup #else $i18n.getString('none') #end
+		</td>
+	</tr>
+	
+	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td><label class="bold">$i18n.getString( "identifiers" )</label></td>
+	</tr>
+	#foreach( $patientIdentifier in $patient.identifiers )
+	<tr>
+		<td>
+			<label class="bold">
+				#if($!patientIdentifier.identifierType)  $!patientIdentifier.identifierType.name
+				#else $i18n.getString( "patient_system_id") #end :
+			</label>
+		</td>
+		<td>
+			  $patientIdentifier.identifier
+		</td>
+	</tr>
+	#end
+	
+	<tr><td colspan='2'>&nbsp;</td></tr>
+	<tr>
+		<td colspan='2'><label class="bold">$i18n.getString( "attributes" )</label></td>
+	</tr>
+	#foreach( $attribute in $patient.attributes )
+		#if( $patientAttributeValueMap.get( $attribute.id ) != " " )
+		<tr>
+			<td><label class="bold">$attribute.name : </label>
+			</td>
+			<td>
+				#if($attribute.valueType=="YES/NO")
+					$attribute.id   $i18n.getString( $patientAttributeValueMap.get( $attribute.id ) )
+				#else
+					$attribute.id   $patientAttributeValueMap.get( $attribute.id )
+				#end
+			</td>
+		</tr>
+		#end
+	#end
+	
+	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td><label class="bold">$i18n.getString( "enrolled_in_program" )</label></td>
+		<td>
+			#foreach( $program in $patient.programs )
+				$program.name<br>
+			#end
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+	<class name="org.hisp.dhis.hr.HrDataSet" table="hr_dataset">
+		<id name="id" column="datasetId">
+			<generator class="native" />
+		</id>
+		
+		<property name="name" column="name" length="32" />
+		
+		<property name="description" column="description" length="250" />
+		
+		<property name="hypertext" type="text" column="hypertext" />
+		
+		<set name="attribute" table="hr_dataset_members">
+			<key column="datasetId" />
+			<many-to-many class="org.hisp.dhis.hr.Attribute"
+				column="attributeId" foreign-key="fk_dataset_attributeId"/>
+		</set>
+		
+		<set name="person" inverse="true" cascade="all">
+			<key column="datasetId" />
+			<one-to-many class="org.hisp.dhis.hr.Person" />
+		</set>	
+		
+		
+		
+	</class>
+</hibernate-mapping>

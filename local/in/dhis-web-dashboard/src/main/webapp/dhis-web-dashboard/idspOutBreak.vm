@@ -1,0 +1,33 @@
+
+<div>$navigationString</div>
+
+<script>
+    leftBar.hideAnimated();
+</script>
+
+#set( $mark = 0 )
+
+<table valign="top" width="95%" border="1" cellspacing="0" cellpadding="5" >
+    <tr bgcolor="#c0c0c0" style="height:23px">
+        <td align="center"><strong>$rootOrgUnitName</strong></td>
+        #foreach( $normName in $normNames )
+        <td align="center" ><strong>$normName</strong></td>
+        #end
+    </tr>
+
+    #set( $count1 = 0 )
+    #foreach( $orgUnit in $immChildrenList )
+		<tr style="#if( $mark == 1 )background-color:#e0e0e0;#end height:23px" >
+			<td><a href="index1.action?drillDownOrgUnitId=$orgUnit.id">$orgUnit.shortName</a></td>
+			#foreach( $normName in $normNames )
+				<td align="center" style='background-color:$outBreakAlertColorMap.get("$normName:$orgUnit.id");'>$outBreakAlertMap.get( "$normName:$orgUnit.id" )</td>
+			#end
+		</tr>
+		#set( $count1 = $count1 + 1 )
+		#if( $mark == 1 )
+			#set( $mark = 0 )
+		#else
+			#set( $mark = 1 )
+		#end    
+    #end
+</table>

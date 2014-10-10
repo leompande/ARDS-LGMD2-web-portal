@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reports>
+    #foreach( $report in $reportList )
+    	<report>
+        	<id>$report.id</id>
+        	<name>$report.name</name>
+			<ouName>$encoder.xmlEncode( $ouName )</ouName>
+    	</report>
+    #end
+</reports>

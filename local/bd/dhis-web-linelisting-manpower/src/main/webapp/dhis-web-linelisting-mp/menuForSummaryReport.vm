@@ -1,0 +1,18 @@
+
+<a href="index.action"><h2>Linelisting Reports</h2></a>
+<ul>
+    <li>Summary Report</li>
+</ul>
+
+<br />
+
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<script>    
+    function organisationUnitSelected( orgUnits )
+    {
+        window.location.href = 'summaryReport.action';
+    }
+
+    selection.setListenerFunction( organisationUnitSelected );    
+</script>

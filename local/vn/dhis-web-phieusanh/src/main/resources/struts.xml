@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<include file="dhis-web-commons.xml" />
+
+	<package name="dhis-web-phieusanh" extends="dhis-web-commons"
+		namespace="/dhis-web-phieusanh">
+
+		<action name="getPureChildren"
+			class="org.hisp.dhis.phieusanh.action.GetPureChildrenAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonOrganisationUnits.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+
+		<action name="registerPatientLocation"
+			class="org.hisp.dhis.phieusanh.action.ReregisterPatientLocationAction">
+			<result name="success" type="velocity-json">
+				../dhis-web-commons/ajax/jsonResponseSuccess.vm
+			</result>
+			<param name="onExceptionReturn">plainTextError</param>
+		</action>
+		
+	</package>
+</struts>

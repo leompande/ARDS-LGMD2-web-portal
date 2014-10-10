@@ -1,0 +1,123 @@
+<script type="text/javascript" src="javascript/attribute.ajax.js"></script>
+<script>
+	jQuery(document).ready(function(){	
+		validation( 'exportItem', function( form ){
+			validateAddExportItem( form );
+		});
+	});
+	
+	var attribute = $!exportReport.isAttribute();
+	var category = $!exportReport.isCategory();
+	var categoryVertical = $!exportReport.isCategoryVertical();
+	var i18n_expression = '$encoder.jsEscape( $i18n.getString( "expression" ) , "'")';
+</script>
+
+<h3>$i18n.getString( 'add_export_item' )</h3>
+<br/>
+<form id="exportItem" name="exportItem" method="post" action="addExportItem.action">
+	<input type="hidden" id="exportReportId" name="exportReportId" value="$!exportReport.id"/>	
+	<table>
+		<tr>
+			<th colspan="2">$i18n.getString( 'export_report' )</th>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('name')</label></td>
+			<td>: $!encoder.htmlEncode( $!exportReport.displayName )</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('export_report_type')</label></td>
+			<td>: $i18n.getString( $!exportReport.getReportType() )</td>
+		</tr>
+		<tr>
+			<td colspan="2" height="20px"></td>
+		</tr>
+		<tr>
+			<th colspan="2">$i18n.getString( 'export_item' )</th>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('name')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="name" name="name" style="width:20em" class="{validate:{required:true}}"/></td>
+		</tr>		
+		<tr>
+			<td><label>$i18n.getString('item_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select type="text" id="itemType" name="itemType" style="min-width:20em" onchange="changeItemType()">					
+					#foreach( $type in $exportReport.getItemTypes() )
+					<option value='$type'>$i18n.getString( $type )</option>	
+					#end	
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('period_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<select type="text" id="periodType" name="periodType" style="min-width:20em">
+					#foreach( $type in $periodTypes )
+						<option value='$type'>$i18n.getString( $type )</option>	
+					#end				
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('expression')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td>
+				<input type="button" id="expression-button" value="$i18n.getString('expression')" style="width:20em"/>
+				<input type="hidden" id="expression" name="expression" style="width:15em" class="{validate:{required:true}}"/>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('extra_expression')</label></td>
+			<td>
+				<input type="text" id="extraExpression" name="extraExpression" style="width:20em"/>
+			</td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('sheet_no')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="sheetNo" name="sheetNo" style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('row')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="row" name="row"  style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>
+		<tr>
+			<td><label>$i18n.getString('column')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+			<td><input type="text" id="column" name="column" style="width:20em" class="{validate:{required:true,number:true}}"/></td>
+		</tr>
+		<tr>
+			<td height="20px"></td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td></td>
+			<td>
+				<input type="submit" value="$i18n.getString('ok')" id="exportItemButton" style="width:100px"/>
+				<input type="button" value="$i18n.getString('cancel')" onclick="window.location='listExportItemAction.action?exportReportId=$exportReport.id'" style="width:100px"/>
+			</td>
+		</tr>
+		
+	</table>
+</form>
+
+<!-- EXPRESSION FORM -->
+
+
+#if ( $!exportReport.isAttribute() )
+	#parse( "/dhis-web-spreadsheet-reporting/report/attributeValueExpressionBuilderForm.vm" )
+
+#elseif ( $!exportReport.isCategory() )
+	#parse( "/dhis-web-spreadsheet-reporting/report/dataelementExpressionBuilderForm.vm" )
+	#parse( "/dhis-web-spreadsheet-reporting/report/excelFormulaExpressionBuilderForm.vm" )
+
+#elseif ( $!exportReport.isCategoryVertical() )
+	#parse( "/dhis-web-spreadsheet-reporting/report/categoryVerticalExpressionBuilderForm.vm" )
+	#parse( "/dhis-web-spreadsheet-reporting/report/excelFormulaExpressionBuilderForm.vm" )
+
+#elseif ( $!exportReport.isPeriodColumnListing() )
+	#parse( "/dhis-web-spreadsheet-reporting/report/dataelementExpressionBuilderForm.vm" )
+	#parse( "/dhis-web-spreadsheet-reporting/report/indicatorExpressionBuilderForm.vm" )
+
+#elseif ( $!exportReport.isNormal() || $!exportReport.isOrgUnitGroupListing() )
+	#parse( "/dhis-web-spreadsheet-reporting/report/dataelementExpressionBuilderForm.vm" )
+	#parse( "/dhis-web-spreadsheet-reporting/report/indicatorExpressionBuilderForm.vm" )
+	#parse( "/dhis-web-spreadsheet-reporting/report/excelFormulaExpressionBuilderForm.vm" )
+#end

@@ -1,0 +1,170 @@
+<h2>$!encoder.htmlEncode( ${patient.name} )</h2>
+	#if( $validated)
+		<div class="header-box">
+			<h3 style="text-align: left;">$i18n.getString("successfully_saved")</h3>
+		</div>
+	#else	
+	
+	#end
+<p>
+	<ul>
+        #if( $programInstances.size() > 0)
+            #foreach( $programInstance in $programInstances )
+            	#set($authorized = false)
+		    	#foreach($orgUnit in $user.getOrganisationUnits())
+		    		#if($programInstance.getProgram().getOrganisationUnits().contains($orgUnit))
+		    			#set($authorized = true)
+					#end
+				#end
+            	
+				#if($programInstance.getProgram().isSingleEvent())
+					<li>
+					#if ($authorized)
+					<a href="showSingleEventForm.action?programId=$programInstance.getProgram().getId()&patientId=$patientId&organisationUnitId=$patient.getOrganisationUnit().getId()&isEditing=true">$programInstance.getProgram().getName()</a>
+					#else
+					$programInstance.getProgram().getName()
+					#end
+					</li>
+				#else
+					    <li>
+					    	#if ($authorized)
+	          				<a href="showPatientProgramStageList.action?patientId=$patientId&programInstanceId=$programInstance.getId()&programId=$programInstance.getProgram().getId()&validated=false">
+	          					 $programInstance.getProgram().getName()
+	          				</a>
+	          				#else
+	          					$programInstance.getProgram().getName()
+	          				#end
+          				</li>
+
+	                    #set($nextStage = false)
+	          			#set($nextStage = $util.getNextStage( $programInstance.getProgramStageInstances()))
+	
+	          			#if($nextStage)
+	          				<li>
+	          					#if ($authorized)
+	          						<a href="showProgramStageSection.action?programId=$programInstance.getProgram().getId()&programStageId=$nextStage.getProgramStage().getId()&programStageInstanceId=$nextStage.getId()&patientId=$patient.getId()&programInstanceId=$programInstance.getId()&orgUnitId=0"> - Next: $nextStage.getProgramStage().getName()</a>
+	          					#else
+	          						- Next: $nextStage.getProgramStage().getName()	
+					          	#end
+	          				</li>
+	          			#end	
+				#end
+            #end		
+        #else
+            <li>$i18n.getString("no_enrolled_programs")</li>
+        #end
+	</ul>
+</p>
+<h2>$i18n.getString("complete_programs")</h2>
+<p>
+	<ul>
+		#if( $listOfCompletedProgram.size() != 0 )
+			#foreach( $programInstance in $listOfCompletedProgram )
+					#set($authorized = false)
+			    	#foreach($orgUnit in $user.getOrganisationUnits())
+			    		#if($programInstance.getProgram().getOrganisationUnits().contains($orgUnit))
+			    			#set($authorized = true)
+						#end
+					#end
+					
+					#if($programInstance.getProgram().isSingleEvent())
+						<li>
+						#if ($authorized)
+							<a href="showSingleEventForm.action?programId=$programInstance.getProgram().getId()&patientId=$patientId&organisationUnitId=$patient.getOrganisationUnit().getId()&isEditing=true">$programInstance.getProgram().getName()</a>
+						#else
+							$programInstance.getProgram().getName()	
+						#end
+						</li>
+					#else
+						<li>
+						#if ($authorized)
+							<a href="showPatientProgramStageList.action?patientId=$patientId&programInstanceId=$programInstance.getId()&programId=$programInstance.getProgram().getId()&validated=false">
+          					 $programInstance.getProgram().getName()</a>
+						
+						#else
+							$programInstance.getProgram().getName()
+						#end
+						</li>
+					#end
+
+			#end
+		#else
+			<li>$i18n.getString("no_completed_programs")</li>
+		#end
+	</ul>
+</p>
+<h2>$i18n.getString("details")</h2>
+<p>
+	<ul>
+		<li><strong>$i18n.getString("gender"):</strong>  #if ($patient.gender == "F") Female #else Male #end</li>
+		<li><strong>$i18n.getString("orgunit"):</strong>  $patient.getOrganisationUnit().getName() <a href="showPatientLocationForm.action?patientId=$patient.id">[$i18n.getString("change")]</a></li>
+        #if($patient.getIsDead() == true) <li><strong>$i18n.getString("status"):</strong> $i18n.getString("dead")</li> #end
+		#foreach($patientIdentifier in $patientIdentifiers)
+			#if($patientIdentifier.getIdentifierType())
+				<li><strong>$patientIdentifier.getIdentifierType().getName():</strong>  $patientIdentifier.getIdentifier()</li>
+			#end
+		#end
+		
+		#foreach($pav in $patientAttributeValues)
+			#if($pav.getValue())
+				<li><strong>$pav.getPatientAttribute().getName():</strong>  $pav.getValue()</li>
+			#end
+		#end
+					
+	</ul>
+</p>
+
+#if( $enrollmentProgramList.size() > 0)
+<h2>$i18n.getString("enroll_in_program")</h2>
+<form action="showProgramEnrollmentForm.action">
+<div class="header-box" align="center">
+    <input type="hidden" name="patientId" value="$patient.id" />
+
+    <p style="text-align: left;border: none; background-color: white; width: 97%;">
+
+    <select name="programId">
+		#foreach( $program in $enrollmentProgramList )
+		    <option value="$program.id">$program.getName()</option>
+		#end
+	</select>
+
+    <input type="submit" style="width: 100%;" value="$i18n.getString("enroll")" />
+    </p>
+</div>
+</form>
+#end
+<!-- <option><a href="showProgramEnrollmentForm.action?patientId=$patient.Id&programId=$program.Id">$program.getName()</a></li> -->
+
+<h2>$i18n.getString("relationships")</h2>
+<p>
+	<ul>
+        #if( $relatedPeople.size() > 0)
+            #foreach( $key in $relatedPeople.keySet() )
+				#set ( $person = $relatedPeople.get($key))
+          		<li><a href="showPatientProgramList.action?patientId=$person.id">$!encoder.htmlEncode( $person.fullName ) ($key.getRelationshipType().getbIsToA())</a> -
+				<a href="deleteRelationship.action?currentPatientId=$patient.id&relationshipTypeId=$key.id">Remove</a></li>
+          	#end
+        #else
+            <li>$i18n.getString("no_relationships")</li>
+        #end
+	</ul>
+</p>
+
+#if( $relationshipTypes.size() > 0)
+<h2>$i18n.getString("add_relationships")</h2>
+<p>
+	<ul>
+		#foreach( $relationshipType in $relationshipTypes )
+			<li><a href="showFindRelatedPatientForm.action?originalPatientId=$patient.id&relationshipTypeId=$relationshipType.id&orgUnitId=$patient.getOrganisationUnit().getId()">Add $relationshipType.getName()</a></li>
+		#end
+	</ul>
+</p>
+#end
+
+<div id="footer">
+	<h2>$i18n.getString( "navigate_to" )</h2>
+	<ul>
+		<li> <a href="showFindBeneficiaryForm.action"> $i18n.getString("find_beneficiary")</a></li>
+		<li><a href="index.action">$i18n.getString("home")</a></li>
+	</ul>
+</div>

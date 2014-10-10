@@ -1,0 +1,173 @@
+## Macro for generating the jQuery validation rules 
+#macro( validate $type $require )
+  #if( $type == "NUMBER" )
+  	{validate:{ number:true #if($require), required:true #end }}
+  #elseif( $require )
+  	{validate:{required:true}}
+  #end
+#end
+
+<tr>
+	<td class='text-column'><label for="registration_date">$i18n.getString( "registration_date" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	<td class="input-column" colspan='2'>
+		<input type="text" id="registrationDate" name="registrationDate" class="{validate:{required:true}}"/>
+		<script type="text/javascript">
+			datePickerValid( 'registrationDate', true );
+		</script>    
+	</td>		
+</tr>
+
+<tr>
+	<th colspan="2" class="heading-column">$i18n.getString( "demographics" )</th>
+</tr>
+<tr>
+	<td class='text-column'><label for="fullName">$i18n.getString( "full_name" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	<td class="input-column">
+		<input type="text" id="fullName" name="fullName" class="{validate:{required:true, unicodechars:true, rangelength:[7,50]}}"/>
+	</td>
+</tr>
+	
+<tr>
+	<td class='text-column'><label for="gender">$i18n.getString( "gender" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	<td class="input-column">
+		<select id="gender" name="gender" class="{validate:{required:true}}">
+			<option value="" selected="selected">[$i18n.getString( "please_select" )]</option>
+			<option value="M" >$i18n.getString( "male" )</option>
+			<option value="F">$i18n.getString( "female" )</option>
+			<option value="T">$i18n.getString( "transgender" )</option>
+		</select>
+	</td>		
+</tr>
+
+<tr>
+	<td class='text-column'><label for="birthDate">$i18n.getString( "date_of_birth" )<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	<td class="input-column">	
+		<select id='dobType' name="dobType" style='width:120px' onchange='dobTypeOnChange("patientForm")' >
+			<option value="V" selected>$i18n.getString( "verified" )</option>
+			<option value="D" >$i18n.getString( "declared" )</option>
+			<option value="A" >$i18n.getString( "approximated" )</option>
+		</select>
+		<input type="text" id="age" name="age" placeholder="$i18n.getString('please_enter_age_in_year')" class="{validate:{number:true}}" style="width:136px;display:none;" />
+		<input type="text" id="birthDate" name="birthDate" style='width:136px;' />
+		<input id="memberValidator" class="hidden {validate:{required:true}}"/>
+	</td>
+</tr>
+
+<tr>
+	<td class='text-column'><label for="address">$i18n.getString( "address" )</label></td>
+	<td>
+		#parse ( "dhis-web-caseentry/secondUnitForPhieuSanh.vm" )
+	</td>
+</tr>
+
+<tr>
+	<td class='text-column'><label for="phoneNumber">$i18n.getString( "phone_number" )</label></td>
+	<td class="input-column">
+		<input type="text" id="phoneNumber" name="phoneNumber" />
+	</td>
+</tr>
+
+<!-- UNDERAGE -->
+<tr id='underAgeDiv'>
+	<td class='text-column'>$i18n.getString("has_guardian")</td>
+	<td>
+		<input type="checkbox" name="underAge" id="underAge" onclick="toggleUnderAge(this);" value="true"/>
+	</td>
+</tr>
+
+<tr>
+	<td></td>
+	<td><input type="button" class='button' id='checkDuplicateBtn' name='checkDuplicateBtn' value="$i18n.getString('check_duplicate')" /></td>
+</tr>
+
+<!--IDENTIFIERS -->
+#if( $identifierTypes.size() > 0)
+	<tr><td colspan="2">&nbsp;</td></tr>	
+	<tr><th colspan="2" class="heading-column">$i18n.getString( "patient_identifiers" )</th></tr>
+	#foreach ($identifierType in $identifierTypes)
+		#if( $identifierType && $identifierType.program )
+		#else
+		<tr>
+			<td class='text-column'><label>$identifierType.name #if($identifierType.mandatory == true )<em title="$i18n.getString( 'required' )" class="required">*</em> #end</label></td>       
+			<td class="input-column">
+				<input type="text" id="iden$identifierType.id" name="iden$identifierType.id" data="{related:$identifierType.related}" class="{validate:{required:$identifierType.mandatory, #if($!identifierType.noChars) maxlength:$identifierType.noChars, #end #if($identifierType.type=='number') number:true #elseif($!identifierType.type=='letter') lettersonly:true #end }}" />
+			</td>
+		</tr>
+		#end
+	#end
+#end
+
+<!-- ATTRIBUTES IN GROUPS -->
+#foreach ($attributeGroup in $attributeGroups )
+	<tr><td>&nbsp;</td></tr>
+	<tr><th colspan="2" class="heading-column">$attributeGroup.name</th></tr>
+	#foreach($attribute in $attributeGroup.attributes )
+		#if( $!attribute && $attribute.program )
+		#elseif( $!attribute)
+		<tr>
+			<td class='text-column'><label>$attribute.name #if($attribute.mandatory)<em title="$i18n.getString( 'required' )" class="required">*</em> #end</label></td>
+			<td class="input-column">
+				#if( $attribute.valueType == "YES/NO" )
+					<select id="attr$attribute.id" name="attr$attribute.id"> 
+						<option value="" selected="selected">[$i18n.getString( "please_select" )]</option>
+						<option value="true">$i18n.getString( "yes" )</option>
+						<option value="false">$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $attribute.valueType == "DATE" )
+					<input type="text" id="attr$attribute.id" name="attr$attribute.id" class=' #validate( "default"  $attribute.mandatory )'/>
+					<script type="text/javascript">
+						datePickerValid( 'attr$attribute.id' );
+					</script>                    
+				#elseif( $attribute.valueType == "COMBO" )
+					<select  id="attr$attribute.id"  name="attr$attribute.id" class='#validate( "default"  $attribute.mandatory )'>
+						<option value="">[$i18n.getString( "please_select" )]</option>
+						#foreach ($option in $attribute.attributeOptions )
+							<option value="$option.id" >$option.name</option>
+						#end
+					</select>
+				#else 
+					<input type="text" id="attr$attribute.id" name="attr$attribute.id" class="{validate:{required:$attribute.mandatory #if($attribute.valueType=='NUMBER'),number:true #end }}" />
+				#end
+			</td>		
+		</tr>
+		#end
+	#end
+#end
+
+<!-- ATTRIBUTES NOT IN GROUPS -->
+
+<tr><td>&nbsp;</td></tr>
+#if ( $noGroupAttributes && $noGroupAttributes.size() > 0) 	
+	<tr><th colspan="2" class="heading-column">$i18n.getString( "other_details" )</th></tr>
+	#foreach($attribute in $noGroupAttributes )
+		#if( $!attribute && $attribute.program )
+		#elseif( $!attribute)
+		<tr>
+			<td class='text-column'><label>$attribute.name #if($attribute.mandatory)<em title="$i18n.getString( 'required' )" class="required">*</em> #end</label></td>
+			<td class="input-column" >
+				#if( $attribute.valueType == "YES/NO" )
+					<select id="attr$attribute.id"  name="attr$attribute.id" colspan='2' >
+						<option value="" >[$i18n.getString( "please_select" )]</option>             
+						<option value="true">$i18n.getString( "yes" )</option>
+						<option value="false" >$i18n.getString( "no" )</option>
+					</select>                
+				#elseif( $attribute.valueType == "DATE" )
+						<input type="text" id="attr$attribute.id" name="attr$attribute.id" class='#validate( "default"  $attribute.mandatory )' />
+						<script type="text/javascript">
+						   datePickerValid( 'attr$attribute.id' );
+						</script>                    
+				#elseif( $attribute.valueType == "COMBO" )
+					<select  id="attr$attribute.id" name="attr$attribute.id" class='#validate( "default"  $attribute.mandatory )'>
+						<option value="">[$i18n.getString( "please_select" )]</option>
+						#foreach ($option in $attribute.attributeOptions )
+							<option value="$option.id" >$option.name</option>
+						#end
+					</select>
+				#else 
+					<input type="text" id="attr$attribute.id" name="attr$attribute.id" class="{validate:{required:$attribute.mandatory #if($attribute.valueType=='NUMBER'),number:true #end }}" />
+				#end
+			</td>		
+		</tr>
+		#end
+	#end
+#end

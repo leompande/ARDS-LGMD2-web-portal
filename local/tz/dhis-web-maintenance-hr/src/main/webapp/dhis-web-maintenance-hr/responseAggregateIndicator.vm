@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attribute>
+  <id>$aggregateAttribute.id</id>
+  <name>$encoder.xmlEncode( $aggregateAttribute.name )</name>
+  <dataElement>$encoder.xmlEncode( $aggregateAttribute.dataelement.name )</dataElement>
+  <criterias>$encoder.xmlEncode( $aggregateAttribute.criteria.size() )</criterias>
+  <attributeOptions>$encoder.xmlEncode( $aggregateAttribute.attributeOptions.size() )</attributeOptions>
+</attribute>

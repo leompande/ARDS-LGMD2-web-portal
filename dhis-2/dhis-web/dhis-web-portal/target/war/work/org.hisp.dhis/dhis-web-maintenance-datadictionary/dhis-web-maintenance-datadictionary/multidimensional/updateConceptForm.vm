@@ -1,0 +1,37 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function(){
+		var rules = getValidationRules("concept");
+		rules["name"].custome_regex = [/^[a-zA-Z][a-zA-Z0-9_]{0,9}$/,'$i18n.getString( 'regex_add_edit_concept' )']; 
+
+		validation2( 'updateConceptForm', function( form ) { form.submit() }, {
+			'rules': rules
+		} );		
+
+		checkValueIsExist( "name", "validateAddUpdateConcept.action", {id: $concept.id});				
+	});
+</script>
+
+<h3>$i18n.getString( "edit_concept" )</h3>
+
+<form id="updateConceptForm" action="updateConceptInstance.action" method="post" >
+
+<div>
+	<input type="hidden" id="id" name="id" value="$concept.id"/>
+</div>
+
+<table>
+	<tr>
+		<th colspan="2">$i18n.getString( "details" )</th>
+	</tr>
+	<tr>
+		<td><label for="name">$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name" value="$encoder.htmlEncode( $concept.name )" style="width:20em"/></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit" value="$i18n.getString( 'save' )" style="width:10em"/>
+		<input type="button" value="$i18n.getString( 'cancel' )" onclick="dhis2.commons.redirectCurrentPage( 'concept.action' )" style="width:10em"/></td>
+	</tr>
+</table>
+
+</form>

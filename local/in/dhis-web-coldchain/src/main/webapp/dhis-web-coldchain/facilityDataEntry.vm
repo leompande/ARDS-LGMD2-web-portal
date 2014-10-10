@@ -1,0 +1,94 @@
+<!--<script type="text/javascript" src="javascript/facilityDataEntry.js"></script>-->
+
+<script type="text/javascript" src="javascript/equipmentDataEntry.js"></script>
+<script type="text/javascript">
+	var i18n_select_period = '$encoder.jsEscape( $i18n.getString( "select_period" ) , "'")';
+</script>
+
+
+## Macro for generating the jQuery validation rules 
+#macro( validate $type $require )
+  #if( $type == "NUMBER" )
+    {validate:{ number:true #if($require), required:true #end }}
+  #elseif( $require )
+    {validate:{required:true}}
+  #end
+#end
+
+
+<script>
+    
+	jQuery(document).ready( function(){
+	
+	currentDiv = 'facilityDataEntryForm';
+	isSubmit = true;
+	
+    jQuery("#facilityDataEntryForm").validate({
+		
+		meta:"validate"
+		,errorElement:"span"
+		,submitHandler: function(form)
+		{
+        	if( isSubmit ) 
+            {
+            	//alert("pppp");
+            	updateFacilityDataEntryForm();
+            }
+		}
+    	});
+    }); 
+    
+</script>
+
+
+<form id="facilityDataEntryForm" name="facilityDataEntryForm" method="post" >	
+<div>
+	<input type="hidden" id="organisationUnitId" name="organisationUnitId" value="$organisationUnit.id">
+	<input type="hidden" id="organisationUnitName" name="organisationUnitName" value="$organisationUnit.name">
+	<input type="hidden" id="dataSetId" name="dataSetId" value="$dataSet.id">
+</div>
+<!--
+##if( $isDataSetAssign )
+-->	
+<table>
+	<tr>
+		<td><label for="selectedDataSetId">$i18n.getString( "dataset" )</label></td>
+		<td><input type="text" id="dataSetName" name="dataSetName" value="$!dataSet.name" style="width:371px" readonly /></td>
+	</tr>
+	<tr>
+		<td><label for="selPeriodId">$i18n.getString( "period" )</label></td>
+		<td>
+			<select id="selPeriodId" name="selPeriodId" style="width:220px" onchange="loadFacilityDataEntryForm()">
+				<!--<option value="-1">[$i18n.getString( "select" )]</option>-->
+				#foreach( $period in $periods )
+				    <option value="$period.id">$encoder.htmlEncode( $period.name )</option>
+			    #end
+			</select>
+			<input type="button" id="prevButton" style="width:75px" value="$i18n.getString( 'prev_year' )" title="$i18n.getString('earlier_periods')" onclick="getFacilityAvailablePeriodsTemp( 'selPeriodId', 'selPeriodId', '-1' )" >
+			<input type="button" id="nextButton" style="width:75px" value="$i18n.getString( 'next_year' )" title="$i18n.getString('later_periods')" onclick="getFacilityAvailablePeriodsTemp( 'selPeriodId', 'selPeriodId', '1' )">
+		</td>
+	</tr>			
+</table>
+#parse( "/dhis-web-commons/loader/loader.vm" )	
+<div id='facilityDataEntryFormDiv'></div> <!-- Facility DataEntry Form -->  	
+
+<p>
+	<input type="button"  value="$i18n.getString( 'Cancel' )" style="width:100px" onclick="closeFacilityDataEntryWindow();"/>&nbsp;&nbsp;
+	&nbsp;&nbsp;<input type="submit"  id="saveButton" name="saveButton" value="$i18n.getString( 'save' )" disabled="disabled" style="width:100px"/>
+</p>
+
+<!--		
+##else	
+	No data set assign
+##end
+-->
+
+</form>
+
+<script type="text/javascript">
+jQuery( document ).ready( function()
+{
+	getFacilityDataSetPeriods();
+	//loadFacilityDataEntryForm();
+});
+</script>

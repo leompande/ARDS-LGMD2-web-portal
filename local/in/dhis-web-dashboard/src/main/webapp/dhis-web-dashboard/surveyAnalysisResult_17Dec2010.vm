@@ -1,0 +1,317 @@
+
+
+<html>
+<head>
+<title>Chart Result Screen</title>
+<link type="text/css" rel="stylesheet" href="css/StylesForTags.css">
+<script type="text/javascript" src="../dhis-web-commons/request.js"></script>
+<script type="text/javascript" src="javascript/lists.js"></script>
+<script type="text/javascript" src="javascript/ga.js"></script>
+<script type="text/javascript" src="javascript/hashtable.js"></script>
+
+<script>
+ 
+   
+   function chartDisplayOptionChange(evt)
+   {
+     
+     var chartType = 0;
+     var tempICount = $selectedServiceList.size();
+     if(tempICount==0)  chartType=0;
+     else if(tempICount==1) chartType=1;
+     else chartType=2;
+
+     var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+     var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+ 
+     iframeForChart.location.href = "generateChart.action?currentChart="+chartNamesToView[chartType][indexForChart]+"&chartDisplayOption="+chartDisplayOptionValue;
+    // iframeForChart.location.href = "generateChart1.action?currentChart="+chartNamesToView[chartType][indexForChart]+"&chartDisplayOption="+chartDisplayOptionValue;
+    
+     getSortedList(chartDisplayOptionValue);     
+   }
+
+
+function exportToExcelFunction1( summaryOption )
+{
+    //var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+    //var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+    
+    document.getElementById("exportExcelAnchor1").href="exportSurveyDataToExcel.action?viewSummary="+summaryOption+"&chartDisplayOption=none";
+    
+    //document.getElementById("exportExcelAnchor1").href="exportToExcel.action?viewSummary="+summaryOption+"&chartDisplayOption=none";
+
+}
+ 
+function exportDataStatusResultToWorkBook()
+{               
+    document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;                                
+
+    return true;                
+}
+
+</script>
+
+<script>
+
+
+// -----------------------------------------------------------------------------
+// Author:   Torgeir Lorange Ostby, torgeilo@gmail.com
+// Version:  $Id: request.js 2644 2007-01-03 13:24:56Z torgeilo $
+// -----------------------------------------------------------------------------
+
+/*
+ * Usage:
+ *
+ * function processResponse( response ) { ... }             // Text or XML
+ * function requestFailed( httpStatusCode ) { ... }
+ *
+ * var request = new Request();
+ * request.setResponseTypeXML( 'rootElement' );             // Optional
+ * request.sendAsPost( 'value=1&value=2' );                 // Optional
+ * request.setCallbackSuccess( processResponse );           // Optional
+ * request.setCallbackError( requestFailed );               // Optional
+ * request.send( 'url.action?value=1' );
+ */
+
+function Request()
+{
+    var request;
+    var responseType = 'TEXT';
+    var requestMethod = 'GET';
+    var requestParameters = null;
+    var rootElementName;
+    var callbackSuccess;
+    var callbackError;
+
+    this.setResponseTypeXML = function( rootElementName_ )
+    {
+        responseType = 'XML';
+        rootElementName = rootElementName_;
+    };
+    
+    this.sendAsPost = function( requestParameters_ )
+    {
+        requestMethod = 'POST';
+        requestParameters = requestParameters_;
+    };
+
+    this.setCallbackSuccess = function( callbackSuccess_ )
+    {
+        callbackSuccess = callbackSuccess_;
+    };
+    
+    this.setCallbackError = function( callbackError_ )
+    {
+        callbackError = callbackError_;
+    };
+
+    this.send = function( url )
+    {
+        request = newXMLHttpRequest();
+
+        if ( !request )
+        {
+            window.alert( "Your browser doesn't support XMLHttpRequest" );
+            return;
+        }
+
+        request.onreadystatechange = responseReceived;
+        request.open( requestMethod, url, true );
+        request.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );         
+        request.send( requestParameters );
+    };
+    
+    function newXMLHttpRequest()
+    {
+        if ( window.XMLHttpRequest )
+        {
+            try
+            {
+                return new XMLHttpRequest();
+            }
+            catch ( e )
+            {
+                return false;
+            }
+        }
+        else if ( window.ActiveXObject )
+        {
+            try
+            {
+                return new ActiveXObject( 'Msxml2.XMLHTTP' );
+            }
+            catch ( e )
+            {
+                try
+                {
+                    return new ActiveXObject( 'Microsoft.XMLHTTP' );
+                }
+                catch ( ee )
+                {
+                    return false;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    function responseReceived()
+    {
+        if ( request.readyState == 4 )
+        {
+            switch( request.status )
+            {
+            case 200:
+                if ( callbackSuccess )
+                {
+                    if ( responseType == 'TEXT' )
+                    {
+                        callbackSuccess( request.responseText );
+                    }
+                    else
+                    {
+                        var xml = textToXML( request.responseText, rootElementName );
+
+                        callbackSuccess( xml );
+                    }
+                }
+                break;
+            case 204:
+                if ( callbackSuccess )
+                {
+                    callbackSuccess( null );
+                }
+                break;
+            case 500:
+                var message = 'Operation failed - internal server error';
+                
+                var serverMessage = request.responseText;
+
+                if ( serverMessage )
+                {
+                    var maxLength = 512;
+                    
+                    if ( serverMessage.length > maxLength )
+                    {
+                        serverMessage = serverMessage.substring( 0, maxLength - 3 ) + '...';
+                    }
+                    
+                    if ( serverMessage.length > 0 )
+                    {
+                        message += '\n\n' + serverMessage;
+                    }
+                }
+
+                message += '\n\nThe error details are logged';
+
+                window.alert( message );
+
+                break;
+            default:
+                if ( callbackError )
+                {
+                    callbackError( request.status );
+                }
+            }
+        }
+    }
+
+    function textToXML( text, rootElementName )
+    {
+        var docImpl = document.implementation;
+        var parser, dom;
+
+        // For standards compliant browsers
+        if ( docImpl && docImpl.createLSParser )
+        {
+            parser = docImpl.createLSParser( docImpl.MODE_SYNCHRONOUS, null );
+            var input = docImpl.createLSInput();
+            input.stringData = text;
+            return parser.parse( input ).documentElement;
+        }
+
+        // For IE
+        else if ( window.ActiveXObject )
+        {
+            dom = new ActiveXObject( 'Microsoft.XMLDOM' );
+            dom.async = "false";
+            dom.loadXML( text );
+            return dom.getElementsByTagName( rootElementName )[0];
+        }
+
+        // For Mozilla
+        else if ( window.DOMParser )
+        {
+            parser = new DOMParser();
+            dom = parser.parseFromString( text, 'application\/xml' );
+            return dom.documentElement;
+        }
+
+        // No parsing abilities
+        return null;
+    }
+}
+
+</script>
+
+</head>
+<body >
+    <div align="right">
+       <a id="exportExcelAnchor1" name="exportExcelAnchor1" href="#" onclick="javascript:exportToExcelFunction1('no')" target="_blank">Export To Excel</a>
+                            
+    </div> 
+    <br>
+    <form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+                    <input type="hidden" name="htmlCode" id="htmlCode" />
+            <div align="right" class="NormalB">
+                <!--<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">-->
+            </div>                  
+ <div id="formResult">
+    
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: solid" bordercolor="black" width="100%">                
+        <tr>
+            <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" >Indicator Name</td>
+            #foreach( $survey in $surveyChartResult.series2 )
+                <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center" style="border-style: dotted; border-width: 1" >$survey</td>
+            #end    
+              
+                      
+            #foreach($xaxisvalue in $surveyChartResult.categories )
+                <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center" style="border-style: dotted; border-width: 1" >$xaxisvalue</td>                  
+            #end
+        </tr>
+        #set($count1 = 0)
+        #set( $surveyDataValueResult = $surveyChartResult.data2 )                      
+        #foreach($onedataList in $surveyChartResult.data )
+            <tr>
+                <td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1" rowspan="3" >$yseriesList.get($count1)</td>
+                #foreach( $surveyDV in $surveyDataValueList )
+                  <td class="TableHeadingCellStyles" align="center" style="border-style: dotted; border-width: 1" rowspan="3" >$!surveyDV.value</td>
+                #end 
+           </tr><tr>       
+            <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Num</strong></td>
+            <td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Den</strong></td>
+           
+           
+        
+                #set($count2 = 0)
+                #foreach($data in $onedataList)                         
+                    <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1">$data</td>
+                    #set($count2 = $count2 + 1)                                  
+                #end
+                #set($count1 = $count1 + 1)
+            </tr>    
+        #end    
+    </table>
+         <div align="center">
+             <iframe name="iframeForChart" id="iframeForChart" src="generateChart.action?currentChart=SurveyChart" width="850px" height="550px" scrolling=auto frameborder="0"></iframe>
+         </div>    
+         <br>
+    
+</div> 
+                <textarea id="testId" rows="10" cols="70" style="display:none">&nbsp;</textarea>                                                                        
+                </form>
+
+ </body>
+ </html>   

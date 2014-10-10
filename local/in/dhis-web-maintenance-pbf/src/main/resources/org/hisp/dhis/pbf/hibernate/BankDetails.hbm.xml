@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.pbf.api.BankDetails" table="bankdetails">
+
+    <composite-id>
+      <key-many-to-one name="organisationUnit" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="organisationunitid" foreign-key="fk_bankdetails_organisationunitid" />      
+      <key-many-to-one name="dataSet" class="org.hisp.dhis.dataset.DataSet" column="datasetid" foreign-key="fk_bankdetails_datasetid" />
+    </composite-id>
+
+    <property name="bank" column="bank" length="100" />
+
+    <property name="branchName" column="branch" length="100" />
+
+    <property name="accountName" column="accountname" length="100" />
+
+    <property name="accountNumber" column="accountnumber" length="100" />
+
+  </class>
+</hibernate-mapping>

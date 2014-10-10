@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.equipment.EquipmentType_Attribute" table="equipmenttype_attributes">
+
+    <composite-id>
+      <key-many-to-one name="equipmentType" class="org.hisp.dhis.coldchain.equipment.EquipmentType" column="equipmenttypeid"
+        foreign-key="fk_equipmenttype_attribute_display_equipmenttypeid" />
+      <key-many-to-one name="equipmentTypeAttribute" class="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttribute" column="equipmenttypeattributeid"
+        foreign-key="fk_fk_equipmenttype_attribute_display_equipmenttypeattributeid" />
+    </composite-id>
+
+    <property name="display" column="display" not-null="true" />
+	  
+	<property name="sortOrder" column="sort_order" /> 
+
+  </class>
+</hibernate-mapping>

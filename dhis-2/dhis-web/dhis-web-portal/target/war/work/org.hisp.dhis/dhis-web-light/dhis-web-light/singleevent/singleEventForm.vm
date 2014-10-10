@@ -1,0 +1,87 @@
+<h2>Single Event: $eventName</h2>
+
+<form method="post" action="saveSingleEvent.action">
+	<div class="header-box" align="center">
+		<p style="text-align: left;">
+	#foreach( $programStageDataElement in $programStageDataElements)
+		#set($dataElement = $programStageDataElement.getDataElement())
+		#set( $key = "DE${dataElement.id}" )
+			
+		#if( $dataElement.shortName )
+			#set( $dataElementName = $dataElement.shortName )
+		#else
+			#set( $dataElementName = $dataElement.name )
+		#end
+		
+		<label>$encoder.htmlEncode( $dataElementName ) 
+			#if($dataElement.type=="date") [yyyy-MM-dd] #end
+			#if($programStageDataElement.isCompulsory())*#end 
+		</label>
+		
+		#if( $typeViolations.get( $key ) )
+                #set( $typeViolation = $typeViolations.get( $key ) )
+            	<br /><span style="color: #990000;">$prevDataValues.get($key) $i18n.getString($typeViolation)</span>
+        #end
+            		
+		#if (! $dataElement.getOptionSet())
+			#if($dataElement.type=="bool")
+				<select name="$key">
+					<option value="">$i18n.getString("please_select")</option>
+					<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+					<option #if( $prevDataValues.get( $key ) == "false" ) selected="selected" #end value="false">$i18n.getString("no")</option>
+				</select>
+			#elseif($dataElement.type=="username")
+				<select name="$key">
+					<option value="">$i18n.getString("please_select")</option>
+					#foreach ($userName in  $userService.getAllUsers())
+						<option value="$userName.getUsername()"
+						#if( $prevDataValues.get( $key ) == $userName ) 
+							selected
+							#set( $selected=true )
+						#end
+						> $userName.getUsername() </option>
+					#end
+				</select>
+			#elseif($dataElement.type=="trueOnly")
+				<select name="$key">
+					<option value="">$i18n.getString("please_select")</option>
+					<option #if( $prevDataValues.get( $key ) == "true" ) selected="selected" #end value="true">$i18n.getString("yes")</option>
+				</select>		
+			#else
+				<input type="text" name="$key" value="$!prevDataValues.get($key)" />
+			#end	
+		#elseif ($dataElement.getOptionSet())
+				#set( $options = $dataElement.getOptionSet().getOptions() )
+				
+				#if( $options.size() > 15 )
+					<input type="hidden" name="pre$key" style="height:20px" value="$!prevDataValues.get($key)"/>
+					<input type="text" name="$key" style="height:20px" value="$!prevDataValues.get($key)"/>
+					<input type="submit" style="width:100%" value="$i18n.getString('search')"/>
+				#else
+					<select type="text" name="$key" />
+						<option selected > $i18n.getString("select_option") </option>	
+					#foreach ($option in $options)
+						<option value="$option" #if($prevDataValues.get($key) == $option) selected #end> $option </option>
+					#end
+					</select>
+				#end
+			#end
+	#end
+		<input type="hidden" name="organisationUnitId" value="$organisationUnitId" />
+		<input type="hidden" name="programId" value="$programId" />
+		<input type="hidden" name="patientId" value="$patientId" />
+		<input type="hidden" name="isEditing" value="$isEditing" />
+		<input type="hidden" name="programStageInstanceId" value="$programStageInstanceId" />	
+		<input type="submit" value=$i18n.getString("Submit") />
+	    </p>
+	</div>
+</form>
+
+<div id="footer">
+<h2>$i18n.getString( "navigate_to" )</h2>
+<ul>
+	<li><a href="selectSingleEventBeneficiary.action?organisationUnitId=$organisationUnitId&programId=$programId">$i18n.getString("beneficiary_list")</a></li>
+	<li><a href="showPatientProgramList.action?patientId=$patientId">$!encoder.htmlEncode( ${patient.name} )</a></li>
+	<li><a href="index.action">$i18n.getString("home")</a></li>
+</ul>
+</div>

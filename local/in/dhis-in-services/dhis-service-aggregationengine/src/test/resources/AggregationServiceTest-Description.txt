@@ -1,0 +1,26 @@
+TEST DESCRIPTION AGGREGATIONSERVICETEST
+
+CAPITAL LETTERS ARE ORGANISATION UNITS
+DATA ELEMENT A IS INT, DATA ELEMENT B IS BOOLEAN
+VALUES ARE FOR PERIOD A, B, C
+
+Period A = March
+Period B = April
+Period C = May
+
+
+					A				I
+
+
+
+			B				C
+							90,70,95
+							T,T,F
+
+D			E			F	
+10,40,40	35,65,45	25,55,30
+T,F,T		F,T,F		T,T,T
+
+				G				H
+				20,20,50		60,15,70
+				F,F,T			T,T,T

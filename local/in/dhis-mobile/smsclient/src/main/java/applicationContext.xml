@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:oxm="http://www.springframework.org/schema/oxm"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/oxm 
+    http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+
+  <bean name="webserviceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    <property name="defaultUri" value="http://localhost:8081/dhis/services/Data.wsdl" />
+    <property name="marshaller" ref="marshaller" />
+    <property name="unmarshaller" ref="unmarshaller" />
+  <!--   <property name="interceptors">
+		<list>
+			<ref local="wsSecurityInterceptor" />
+		</list>
+	</property>
+	 -->
+  </bean>
+
+  <oxm:jaxb2-marshaller id="marshaller" contextPath="org.hisp.dhis.ws" />
+  <oxm:jaxb2-marshaller id="unmarshaller" contextPath="org.hisp.dhis.ws" />
+
+  <bean id="client" class="org.hisp.dhis.ws.client.DataClientImpl">
+    <property name="webServiceTemplate" ref="webserviceTemplate" />
+  </bean>
+  <!-- 
+   <bean id="wsSecurityInterceptor"
+		class="org.springframework.ws.soap.security.wss4j.Wss4jSecurityInterceptor">
+		<property name="securementActions" value="UsernameToken"/>
+	</bean>  -->
+</beans>

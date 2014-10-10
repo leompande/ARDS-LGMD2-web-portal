@@ -1,0 +1,43 @@
+<script>
+	jQuery(document).ready(	function(){
+		validation( 'addImportReportForm', function( form ){ form.submit() } );
+		checkValueIsExist( "name", "validateImportReport.action" );
+	});	
+</script>
+<h3>$i18n.getString('import_report') : $i18n.getString('add')</h3>
+
+<form id="addImportReportForm" method="POST" action="addImportReport.action">
+<table>
+	<tr>
+		<td><label>$i18n.getString('name')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td><input type="text" id="name" name="name"  style="width:20em" class="{validate:{required:true,minlength:2,maxlength:160}}"/></td>
+	</tr>
+	<tr>
+		<td><label>$i18n.getString('import_report_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="type" name="type" style="min-width:20em">
+			#foreach( $type in $importTypes )
+				<option value='$type'>$i18n.getString($type)</option>
+			#end
+			</select>
+		</td>
+	</tr>	
+	<tr>
+		<td><label>$i18n.getString('period_type')<em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+		<td>
+			<select type="text" id="periodTypeName" name="periodTypeName" style="min-width:20em">
+			#foreach( $periodType in $periodTypes )
+            	 <option value="$periodType.name">$i18n.getString( $periodType.name )</option>
+           	#end						
+			</select>
+		</td>
+	</tr>	
+	<tr>
+		<td></td>
+		<td>
+			<input type="submit" value="$i18n.getString('ok')" style="width:120px"/>
+			<input type="button" value="$i18n.getString('cancel')" style="width:120px" onclick="window.location.href='listAllImportReport.action'"/>
+		</td>
+	</tr>
+</table>
+</form>

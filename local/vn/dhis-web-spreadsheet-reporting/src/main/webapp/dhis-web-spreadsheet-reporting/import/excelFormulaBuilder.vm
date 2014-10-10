@@ -1,0 +1,83 @@
+<script>
+
+	jQuery(document).ready(function(){
+		divExpressionDialog = setUpDialog( 'divExpression', i18n_expression, 650, 350 );
+		divCategoryDialog = setUpDialog( 'divCategory', i18n_expression, 650, 350 );
+	});
+	
+	var i18n_expression = '$encoder.jsEscape( $i18n.getString( "expression" ) , "'")';
+	var divExpressionDialog = null;
+	var divCategoryDialog = null;
+</script>
+
+<!-- Expression -->
+
+<div id="divExpression">
+	<table width="100%">
+		<tr>
+			<th>$i18n.getString( "formula" )</th>
+			<th></th>
+			<th>$i18n.getString( "dataelement" )</th>
+		<tr>
+		<tr valign="top">
+			<td>
+				<textarea id="formula" cols="15" rows="11" style="width:250px; height:180px" wrap="virtual">$encoder.htmlEncode( $formula )</textarea><br>
+				<a href="#" onclick="insertOperation( 'formula','(' )"><img src="images/left_parent.png" alt="$i18n.getString( 'left_brackets' )"></a>
+				<a href="#" onclick="insertOperation( 'formula',')' )"><img src="images/right_parent.png" alt="$i18n.getString( 'right_brackets' )"></a>
+				<a href="#" onclick="insertOperation( 'formula','*' )"><img src="images/multiply.png" alt="$i18n.getString( 'multiply' )"></a>
+				<a href="#" onclick="insertOperation( 'formula','/' )"><img src="images/divide.png" alt="$i18n.getString( 'divide' )"></a>
+				<a href="#" onclick="insertOperation( 'formula','+' )"><img src="images/plus.png" alt="$i18n.getString( 'plus' )"></a>
+				<a href="#" onclick="insertOperation( 'formula','-' )"><img src="images/minus.png" alt="$i18n.getString( 'minus' )"></a>
+			</td>
+			<td valign="bottom">
+				<input type="button" id="insertExpression" value="<" onclick="insertDataElementId()" disabled />
+			</td>
+			<td>	
+				<select id="dataElementGroup" style="width:280px" onchange="getDataElements(this.value, '#divExpression select[id=availableDataElements]')"></select>				
+                <select id="availableDataElements" size="11" style="width:280px" onchange="getOptionCombos(this.value, '#divExpression select[id=optionCombos]', 'divExpression input[id=insertExpression]')"></select>
+				<select id="optionCombos" size="4" style="width:280px" onchange="enable( 'divExpression input[id=insertExpression]' );" ondblclick="insertDataElementId()"></select>
+			</td>
+		</tr>	
+	</table>	
+	<p>
+		<input type="button" value="$i18n.getString('ok')" onclick="updateNormalExpression();"/>
+		<input type="button" value="$i18n.getString('clean')" onclick="byId('formula').value = ''"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( divExpressionDialog )" style="width:100px"/>
+	</p>
+</div>
+
+<!--  Buil formula for Category Report -->
+<div id="divCategory">
+	<table width="100%">
+		<tr>
+			<th>$i18n.getString( "formula" )</th>
+			<th></th>
+			<th>$i18n.getString( "dataelement" )</th>
+		<tr>
+		<tr valign="top">
+			<td>
+				<textarea id="formula" cols="15" rows="11" style="width:250px; height:180px" wrap="virtual"></textarea><br>
+				<a href="#" onclick="insertOperation( '(' )"><img src="images/left_parent.png" alt="$i18n.getString( 'left_brackets' )"></a>
+				<a href="#" onclick="insertOperation( ')' )"><img src="images/right_parent.png" alt="$i18n.getString( 'right_brackets' )"></a>
+				<a href="#" onclick="insertOperation( '*' )"><img src="images/multiply.png" alt="$i18n.getString( 'multiply' )"></a>
+				<a href="#" onclick="insertOperation( '/' )"><img src="images/divide.png" alt="$i18n.getString( 'divide' )"></a>
+				<a href="#" onclick="insertOperation( '+' )"><img src="images/plus.png" alt="$i18n.getString( 'plus' )"></a>
+				<a href="#" onclick="insertOperation( '-' )"><img src="images/minus.png" alt="$i18n.getString( 'minus' )"></a></td>
+			<td rowspan="3" valign="bottom">
+				<input type="button" id="insertExpression" value="<" onclick="insertExpression()" disabled />
+			</td>
+			<td rowspan="3">	
+				<select id="dataElementGroup" style="width:280px" onchange="getDataElements(this.value, '#divCategory select[id=availableDataElements]')"></select>												
+				<select id="availableDataElements" size="10" style="width:280px;" onchange="getOptionCombos(this.value, '#divCategory select[id=optionCombos]', 'divCategory input[id=insertExpression]')"></select>
+				<select id="optionCombos" size=4 style="width:280px" onchange="enable( 'divCategory input[id=insertExpression]' );" ondblclick="insertExpression()"></select>
+			</td>			
+		</tr>	
+	</table>
+	<br>
+	<br>
+	<center>
+		<input type="button" value="$i18n.getString('ok')" onclick="updateCaExpression()" style="width:100px"/>
+		<input type="button" value="$i18n.getString('clean')" onclick="cleanFormula()" style="width:100px"/>
+		<input type="button" value="$i18n.getString('cancel')" onclick="closeDialog( divCategoryDialog )" style="width:100px"/>
+	</center>
+</div>

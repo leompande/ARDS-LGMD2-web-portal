@@ -1,0 +1,12 @@
+dhis2_install.jar
+dhis2-2.0.3.war
+*.war
+*.pdf
+dhis2-live.jar
+dhis2_user_manual_en.pdf
+webapps/dhis
+webapps/birt
+*.db
+
+
+

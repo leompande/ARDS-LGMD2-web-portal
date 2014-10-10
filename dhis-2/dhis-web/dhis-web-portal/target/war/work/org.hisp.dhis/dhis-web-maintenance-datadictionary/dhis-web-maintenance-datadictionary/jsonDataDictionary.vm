@@ -1,0 +1,8 @@
+{ "dataDictionary":
+	{
+	  "id": "$!{dataDictionary.id}",
+	  "name": "$!encoder.jsonEncode( ${dataDictionary.name} )",
+	  "description": "$!encoder.jsonEncode( ${dataDictionary.description} )",
+	  "region": "$!encoder.jsonEncode( ${dataDictionary.region} )"
+	}
+}

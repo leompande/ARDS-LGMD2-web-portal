@@ -1,0 +1,41 @@
+<h2>$i18n.getString( "data_status" )</h2>
+<table width="100%">
+	<tr><td align="right">
+		<input type="button" value="$i18n.getString( 'add' )" style="width:100px" onclick="window.location='openAddDataStatus.action'"/>
+	</td></tr>
+</table>
+<table width="100%">
+	<tr>
+		<th>$i18n.getString( 'dataset' )</th>
+		<th>$i18n.getString( 'make_default' )</th>
+		<th></th>
+	</tr>
+	#set( $mark = false )
+	#foreach($ds in $dataStatus)
+		<tr #alternate( $mark )>
+			<td>$ds.dataSet.name</td>
+			<td>
+				<input type="checkbox" #if($ds.frontPage) checked=true #end disabled=true/>
+			</td>
+			<td>
+				<a href="javascript:deleteDataStatus('$ds.id');" title="$i18n.getString( 'delete' )"><img src="../images/delete.png" alt="$i18n.getString( 'delete' )"></a>
+				<a href="openUpdateDataStatus.action?id=$ds.id" title="$i18n.getString( 'edit' )"><img src="../images/edit.png" alt="$i18n.getString( 'edit' )"></a>
+			</td>
+		</tr>
+		#if( $mark )
+			#set( $mark = false )
+		#else
+			#set( $mark = true )
+		#end
+	#end
+</table>
+
+<script language="javascript">
+	var i18n_confirm_delete = '$encoder.jsEscape($i18n.getString( 'confirm_delete' ) , "'")';
+	
+	function deleteDataStatus( id ){
+		if(window.confirm(i18n_confirm_delete)){
+			window.location = "deleteDataStatus.action?dataStatusId=" + id;
+		}
+	}
+</script>

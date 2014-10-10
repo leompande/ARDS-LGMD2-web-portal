@@ -1,0 +1,98 @@
+
+<h3>Survey Analyser</h3>
+<hr /><br />
+<!--<form id="ChartGenerationForm" name="ChartGenerationForm" action="generateChartSurvey.action" method="post" onsubmit="return formValidationsForSurvey()" target="chartWindow1">-->	        
+<form id="ChartGenerationForm" name="ChartGenerationForm">
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="100%" border=0>
+		<tr>
+			<td class="NormalB">
+				$i18n.getString( "ga_filter_by_indicatorgroup" )<br />
+				<select id="indicatorGroupId" name="indicatorGroupId" style="width:325px" onchange="getSurveyIndicators()">
+					<option value="$ALL">[ Select IndicatorGroup / All ]</option>
+					#foreach ( $group in $indicatorGroups )
+						<option value="$group.id">$group.name</option>
+					#end
+				</select>			
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+		</tr>
+		
+		<tr>
+			<td class="NormalB">
+				$i18n.getString( "ga_available_indicatorlist" )<br />
+				<select id="availableIndicators" name="availableIndicators" style="width:325px;" >
+					#foreach ( $indicator in $indicators )
+						<option value="$indicator.id">$indicator.name</option>
+					#end
+				</select>
+				<br />
+				<select multiple id="selectedIndicators" name="selectedIndicators" style="width:325px; height:0px; display:none" ondblclick="moveSelectedById( 'selectedIndicators', 'availableIndicators' )">
+				</select>    			                    
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+		</tr>
+		
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+		</tr>
+
+		<tr>
+			<td class="NormalB">
+				<table style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" border=0>	
+					<tr>
+						<td class="NormalB">	
+							$i18n.getString( "ga_from" )<br/>
+							<select id="sDateLB" name="sDateLB" style="width:150px;">												
+								#foreach($period in $monthlyPeriods)
+									<option value="$period.id">$simpleDateFormat.format($period.startDate)</option>
+								#end
+							</select>
+						</td>
+						<td class="NormalB" style="width:25px;">&nbsp;</td>         
+                        <td class="NormalB">    
+                            $i18n.getString( "aa_orgunit" ) : <br />
+                            <input type="text" name="ouNameTB" id="ouNameTB" disabled style="width:150px;" />
+                        </td>
+
+					</tr>
+
+					<tr>
+						<td class="NormalB">&nbsp;</td>             
+	                    <td class="NormalB">&nbsp;</td>
+	                    <td class="NormalB">&nbsp;</td>    
+					</tr>
+
+					<tr>
+						<td class="NormalB">&nbsp;</td>             
+	                    <td class="NormalB">&nbsp;</td>
+	                    <td class="NormalB">&nbsp;</td>    
+					</tr>
+                			    		
+					<tr>
+                        <td class="NormalB">    
+                            $i18n.getString( "ga_to" )<br />
+                            <select id="eDateLB" name="eDateLB" style="width:150px;">
+                                #foreach($period in $monthlyPeriods)
+                                    <option value="$period.id">$simpleDateFormat.format($period.endDate)</option>
+                                #end                                        
+                            </select>
+                        </td>    
+	                   	<td class="NormalB" style="width:25px;">&nbsp;</td>
+	                    <td class="NormalB">   
+							<br /><input type="button" name="SurveyAnalysis" value="SurveyAnalysis" style="width:175px; height: 25; font-family:Arial; font-weight:bold; color:#000000" onClick="javascript:formValidationsForSurvey()">
+							<!--<input type="submit" name="SurveyAnalysis" value="SurveyAnalysis" style="width:150px;height:25px; font-family:Arial; font-weight:bold; color:#000000;" >-->
+						</td>    
+					</tr>
+				</table>
+			</td>   
+		</tr>
+        <input type="hidden" name="ouIDTB" id="ouIDTB" />                    			                			
+	</table>
+</form>
+<div id="contentDiv"></div>

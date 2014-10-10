@@ -1,0 +1,134 @@
+<script type="text/javascript">
+	jQuery(document).ready(	function() {
+	    jQuery("#availableList").dhisAjaxSelect({
+            source: "../dhis-web-commons-ajax-json/getDataElementCategoryOptions.action",
+            iterator: 'dataElementCategoryOptions',
+            sortSelected: false,
+            connectedTo: 'selectedList',
+            handler: function(item) {
+                var option = jQuery("<option />");
+                option.text( item.name );
+                option.attr( "value", item.id );
+
+                return option;
+            }
+        });
+	
+		validation2( 'editDataElementCategoryForm', function( form ){ form.submit()}, 
+		{
+			'beforeValidateHandler': function() { 
+			    jQuery("#selectedList option").each(function() { jQuery(this).attr("selected", "true"); });
+			    listValidator( 'memberValidator', 'categoryOptions' ); 
+			},
+			'rules': getValidationRules("dateElementCategory")
+		}); 
+
+		checkValueIsExist( "name", "validateDataElementCategory.action", {id: $dataElementCategory.id});		
+	});
+
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "confirm_delete_data_element_category_option" ) , "'")';
+    var i18n_specify_category_option_name = '$encoder.jsEscape( $i18n.getString( "specify_category_option_name" ) , "'")';
+    var i18n_category_option_name_already_exists = '$encoder.jsEscape( $i18n.getString( "category_option_name_already_exists" ) , "'")';
+	var i18n_option_rename_successfully = '$encoder.jsEscape( $i18n.getString( "option_rename_successfully" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "edit_data_element_category" )</h3>
+
+<form id="editDataElementCategoryForm" name="editDataElementCategoryForm" action="updateDataElementCategory.action" method="post" class="inputForm">
+  
+  <input type="hidden" id="id" name="id" value="$dataElementCategory.id"/>
+  
+  <table>
+    <tr>
+      <th colspan="2">$i18n.getString( "details" )</th>      
+    </tr>
+    <tr>
+      <td><label>$i18n.getString( "name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+      <td><input type="text" id="name" name="name" value="$!encoder.htmlEncode( $dataElementCategory.name )"/></td>
+    </tr>
+    <tr>
+      <td><label for="dataDimension">$i18n.getString( "use_as_data_dimension" )</label></td>
+      <td><input type="checkbox" id="dataDimension" name="dataDimension" value="true"#if( $dataElementCategory.dataDimension ) checked="checked"#end/></td>
+    </tr>     
+    <tr>
+      <td><label>$i18n.getString( "concept_name" ) <em title="$i18n.getString( 'required' )" class="required">*</em></label></td>
+	  <td>
+		<div style="inline">
+			#set ( $conceptId = $!dataElementCategory.concept.id )
+			<select id="conceptId" name="conceptId">				
+				#foreach( $concept in $concepts )
+				<option value="$concept.id" #if ( $concept.id == $conceptId ) selected #end>$concept.name</option>
+				#end
+			</select>
+		</div>
+	  </td>
+    </tr>  
+    <tr>
+      <td><label>$i18n.getString( "dimension_type" )</td>
+      <td>
+        <select id="dimensionType" name="dimensionType" disabled="disabled">
+          <option value="disaggregation"#if( "disaggregation" == $dataElementCategory.dimensionType ) selected="selected"#end>$i18n.getString( "disaggregation" )</option>
+          <option value="attribute"#if( "attribute" == $dataElementCategory.dimensionType ) selected="selected"#end>$i18n.getString( "attribute" )</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="height:15px"></td>
+    </tr>
+  </table>
+  
+  
+  <table id="dataElementCategoryOptionSelectionArea">
+     <colgroup>
+       <col style="width: 500px;"/>
+       <col/>
+       <col style="width: 500px;"/>
+       <col/>
+     </colgroup>
+
+    <thead>
+        <tr>        
+        <th>$i18n.getString( "available_category_options" )</th>
+        <th></th>        
+        <th>$i18n.getString( "selected_category_options" )</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <tr>       
+        <td>
+          <select id="availableList" name="availableList" multiple="multiple" style="height: 200px; width: 100%;"></select>
+        </td>
+       </td>
+
+        <td style="text-align:center">
+            <input type="button" value="&gt;" title="$i18n.getString( 'move_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'availableList' );"/><br/>
+            <input type="button" value="&lt;" title="$i18n.getString( 'remove_selected' )" style="width:50px" onclick="dhisAjaxSelect_moveAllSelected( 'selectedList' );"/><br/>
+            <input type="button" value="&gt;&gt;" title="$i18n.getString('move_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'availableList' );"/><br/>
+            <input type="button" value="&lt;&lt;" title="$i18n.getString('remove_all')" style="width:50px" onclick="dhisAjaxSelect_moveAll( 'selectedList' );"/>
+        </td>
+
+        <td>
+          <select id="selectedList" name="selectedList" multiple="multiple" style="height: 200px; width: 100%; margin-top: 22px;">
+            #foreach ( $categoryOption in $dataElementCategory.categoryOptions )
+              <option value="$categoryOption.id">$encoder.htmlEncode( $categoryOption.name )</option>
+            #end
+          </select>
+        </td>
+        
+        <td>
+          <a onclick="moveUpSelectedOption('selectedList')" title="$i18n.getString( 'move_up' )"><img src="../images/move_up.png" style="border:0;cursor:pointer" alt="$i18n.getString( 'move_up' )"/></a><br/><br/>
+          <a onclick="moveDownSelectedOption('selectedList')" title="$i18n.getString( 'move_down' )"><img src="../images/move_down.png" style="border:0;cursor:pointer" alt="$i18n.getString( 'move_down' )"/></a>        
+        </td> 
+            
+      </tr>
+
+    </tbody>
+  </table>
+  
+  <p>
+    <input type="submit" value="$i18n.getString( 'save' )" style="width:100px"/>
+    <input type="button" onclick="dhis2.commons.redirectCurrentPage( 'category.action' )" value="$i18n.getString( 'cancel' )" style="width:100px"/></p>
+  </p>
+        
+</form>

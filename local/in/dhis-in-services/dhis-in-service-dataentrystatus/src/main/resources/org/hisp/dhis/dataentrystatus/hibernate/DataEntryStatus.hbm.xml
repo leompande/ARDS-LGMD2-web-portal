@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.dataentrystatus.DataEntryStatus" table="dataentrystatus">
+	
+    <composite-id>
+	  <key-many-to-one name="dataset" class="org.hisp.dhis.dataset.DataSet" column="datasetid" foreign-key="fk_dataentrystatus_datasetid" />
+      <key-many-to-one name="organisationunit" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="organisationunitid" foreign-key="fk_dataentrystatus_organisationunitid" />
+      <key-many-to-one name="period" class="org.hisp.dhis.period.Period" column="periodid" foreign-key="fk_dataentrystatus_periodid" />
+	  <key-property name="includeZero" column="includezero" length="1" />
+    </composite-id>
+	
+    <property name="value" />
+
+    <property name="storedBy" column="storedby" length="50" />
+
+    <property name="timestamp" column="lastupdated" type="date" />
+	
+  </class>
+</hibernate-mapping>

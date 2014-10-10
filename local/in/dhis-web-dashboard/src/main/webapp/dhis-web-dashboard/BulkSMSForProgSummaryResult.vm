@@ -1,0 +1,5 @@
+
+<input type="button" value="Back" onclick="location.href='prgwiseSummaryBulkSMSForm.action'" />
+<br/>
+
+<h4>$resultMessage</h4>

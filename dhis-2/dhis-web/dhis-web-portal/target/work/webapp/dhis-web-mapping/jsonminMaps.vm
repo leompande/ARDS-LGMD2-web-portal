@@ -1,0 +1,12 @@
+#set( $size = $object.size() )
+{ "maps": [
+#foreach( $map in $object )
+  {
+    "id": "$!{map.id}",
+    "name": "$!encoder.jsonEncode( ${map.name} )",
+    "mapLayerPath": "$!encoder.jsonEncode( ${map.mapLayerPath} )",
+    "organisationUnitLevel": "$!{map.organisationUnitLevel.level}",
+    "nameColumn": "$!{map.nameColumn}"
+  }#if( $velocityCount < $size ),#end
+#end
+] }

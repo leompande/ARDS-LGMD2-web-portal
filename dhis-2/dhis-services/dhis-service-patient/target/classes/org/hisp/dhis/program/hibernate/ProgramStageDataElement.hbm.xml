@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.program.ProgramStageDataElement" table="programstage_dataelements">
+
+    <composite-id>
+      <key-many-to-one name="programStage" class="org.hisp.dhis.program.ProgramStage" column="programstageid"
+        foreign-key="fk_programstagedataelement_programstageid" />
+      <key-many-to-one name="dataElement" class="org.hisp.dhis.dataelement.DataElement" column="dataelementid"
+        foreign-key="fk_programstagedataelement_dataelementid" />
+    </composite-id>
+
+    <property name="compulsory" column="compulsory" not-null="true" />
+    
+	<property name="allowProvidedElsewhere" column="allowprovidedelsewhere" />
+	  
+	<property name="sortOrder" column="sort_order" />
+	
+	<property name="displayInReports"/>
+	
+	<property name="allowDateInFuture"/>
+
+  </class>
+</hibernate-mapping>

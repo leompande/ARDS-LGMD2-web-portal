@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.linelisting.LineListElement" table="linelistelement">
+    <id name="id" column="llelementid">
+      <generator class="native"/>
+    </id>
+
+    <property name="name" not-null="true" unique="true" length="25"/>
+
+    <property name="shortName">
+      <column name="shortname" not-null="true" unique="true" length="25"/>
+    </property>
+    
+    <property name="description" unique="false" length="256"/>
+    
+    <property name="dataType" column="datatype" unique="false" length="25"/>
+    
+    <property name="presentationType" column="presentationtype" unique="false" length="25"/>
+    
+    <list name="lineListElementOptions" table="linelistelementoptions">
+      <key column="llelementid"/>
+      <list-index column="sort_order" base="0"/>
+      <many-to-many class="org.hisp.dhis.linelisting.LineListOption" 
+          column="lloptionid" foreign-key="fk_linelistoption_lloptionid"/>
+    </list>
+    
+    <property name="sortOrder"/>
+    
+  </class>
+</hibernate-mapping>

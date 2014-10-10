@@ -1,0 +1,45 @@
+#set($program = '')
+#foreach( $psDataElement in $psDataElements )
+	#set($program = $psDataElement.programStage.program )
+#end
+
+{ "items": [
+	#if( $auth.hasAccess( "dhis-web-caseentry", "accessPatientAttributes" ) && $program!='' )
+		#foreach( $iden in $identifierTypes )
+		{
+			"id": "$iden.uid",
+			"name": "$encoder.xmlEncode(${iden.displayName} )",
+			"valueType": #if( $iden.optionSet )
+							"list"
+						 #else
+							"${iden.type}"
+						 #end
+		},
+		#end
+		
+		#foreach( $attr in $patientAttributes )
+		{
+			"id": "$attr.uid",
+			"name": "$encoder.xmlEncode(${attr.displayName} )",
+			"valueType": #if( $attr.optionSet )
+							"list"
+						 #else
+							"${attr.type}"
+						 #end
+		},
+		#end
+	#end
+	
+	#foreach( $psDataElement in $psDataElements )
+	{
+		"id": "$psDataElement.dataElement.uid",
+		"name": "$encoder.xmlEncode(${psDataElement.dataElement.getFormNameFallback()} )",
+		"valueType": #if( $psDataElement.dataElement.optionSet )
+						"list_$psDataElement.dataElement.optionSet.uid"
+					 #else
+						"${psDataElement.dataElement.type}"
+					 #end
+	}#if( $velocityCount < $psDataElements.size() ),#end
+	#end
+  ]
+}

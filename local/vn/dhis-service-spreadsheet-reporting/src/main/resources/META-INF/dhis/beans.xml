@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- ExportReport STORE / SERVICE								   -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.ExportReportStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateExportReportStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.ExportReportService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultExportReportService">
+		<property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="categoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="expressionService" ref="org.hisp.dhis.expression.ExpressionService" />
+		<property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+		<property name="exportReportStore" ref="org.hisp.dhis.reportsheet.ExportReportStore" />
+		<property name="userService" ref="org.hisp.dhis.user.UserService" />
+		<property name="i18nService" ref="org.hisp.dhis.i18n.I18nService" />
+	</bean>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- IMPORTITEM STORE / SERVICE                                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.importitem.ImportReportStore"
+		class="org.hisp.dhis.reportsheet.importitem.hibernate.HibernateImportReportStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.importitem.ImportReportService"
+		class="org.hisp.dhis.reportsheet.importitem.impl.DefaultImportReportService">
+		<property name="importReportStore"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportStore" />
+		<property name="i18nService" ref="org.hisp.dhis.i18n.I18nService" />
+	</bean>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- DATAELEMENT-GROUP-ORDER STORE / SERVICE                         -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.DataElementGroupOrderStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateDataElementGroupOrderStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.DataElementGroupOrderService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultDataElementGroupOrderService">
+		<property name="dataElementGroupOrderStore"
+			ref="org.hisp.dhis.reportsheet.DataElementGroupOrderStore" />
+	</bean>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- ATTRIBUTEVALUE-GROUP-ORDER STORE / SERVICE                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.AttributeValueGroupOrderStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateAttributeValueGroupOrderStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.AttributeValueGroupOrderService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultAttributeValueGroupOrderService">
+		<property name="attributeValueGroupOrderStore"
+			ref="org.hisp.dhis.reportsheet.AttributeValueGroupOrderStore" />
+	</bean>
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- CATEGORYOPTION-GROUP-ORDER STORE / SERVICE                    -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.CategoryOptionGroupOrderStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateCategoryOptionGroupOrderStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.CategoryOptionGroupOrderService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultCategoryOptionGroupOrderService">
+		<property name="categoryOptionGroupOrderStore"
+			ref="org.hisp.dhis.reportsheet.CategoryOptionGroupOrderStore" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.CategoryOptionAssociationStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateCategoryOptionAssociationStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.CategoryOptionAssociationService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultCategoryOptionAssociationService">
+		<property name="categoryOptionAssociationStore"
+			ref="org.hisp.dhis.reportsheet.CategoryOptionAssociationStore" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.OptionComboAssociationStore"
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateOptionComboAssociationStore">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.OptionComboAssociationService"
+		class="org.hisp.dhis.reportsheet.impl.DefaultOptionComboAssociationService">
+		<property name="optionComboAssociationStore"
+			ref="org.hisp.dhis.reportsheet.OptionComboAssociationStore" />
+	</bean>
+	
+	<!-- Report Location Manager -->
+
+	<bean id="org.hisp.dhis.reportsheet.ReportLocationManager"
+		class="org.hisp.dhis.reportsheet.impl.DefaultReportLocationManager"
+		init-method="init">
+		<property name="locationManager" ref="locationManager"/>
+		<property name="systemSettingManager" ref="org.hisp.dhis.setting.SystemSettingManager" />
+	</bean>
+	
+	<!-- DeletionHandlers -->
+
+	<bean id="org.hisp.dhis.reportsheet.ExportReportDeletionHandler"
+		class="org.hisp.dhis.reportsheet.ExportReportDeletionHandler">
+		<property name="exportReportService"
+			ref="org.hisp.dhis.reportsheet.ExportReportService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.importitem.ImportItemDeletionHandler"
+		class="org.hisp.dhis.reportsheet.importitem.ImportItemDeletionHandler">
+		<property name="importReportService"
+			ref="org.hisp.dhis.reportsheet.importitem.ImportReportService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.CategoryOptionAssociationDeletionHandler"
+		class="org.hisp.dhis.reportsheet.CategoryOptionAssociationDeletionHandler">
+		<property name="categoryOptionAssociationService"
+			ref="org.hisp.dhis.reportsheet.CategoryOptionAssociationService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.reportsheet.OptionComboAssociationDeletionHandler"
+		class="org.hisp.dhis.reportsheet.OptionComboAssociationDeletionHandler">
+		<property name="optionComboAssociationService"
+			ref="org.hisp.dhis.reportsheet.OptionComboAssociationService" />
+	</bean>
+
+	<!-- DeletionManager -->
+
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="deletionManager" />
+		<property name="targetMethod" value="addDeletionHandlers" />
+		<property name="arguments">
+			<list>
+				<list>
+					<ref local="org.hisp.dhis.reportsheet.ExportReportDeletionHandler" />
+					<ref local="org.hisp.dhis.reportsheet.importitem.ImportItemDeletionHandler" />
+				</list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!-- BOOKMARK STORE / SERVICE                         			   -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
+	<bean id="org.hisp.dhis.reportsheet.BookmarkStore" 
+		class="org.hisp.dhis.reportsheet.hibernate.HibernateBookmarkStore">			
+		<property name="clazz" value="org.hisp.dhis.reportsheet.Bookmark" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.reportsheet.BookmarkService" 
+		class="org.hisp.dhis.reportsheet.impl.DefaultBookmarkService">
+		<property name="bookmarkStore" ref="org.hisp.dhis.reportsheet.BookmarkStore" />	
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />	
+	</bean>
+	
+	<!-- JChart -->
+	
+	<bean id="org.hisp.dhis.jchart.JChartStore" 
+		class="org.hisp.dhis.jchart.hibernate.HibernateJChartStore">		
+		<property name="clazz" value="org.hisp.dhis.jchart.JChart" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.jchart.JChartService" 
+		class="org.hisp.dhis.reportsheet.impl.DefaultJChartService">		
+		<property name="jchartStore" ref="org.hisp.dhis.jchart.JChartStore" />
+		<property name="periodStore" ref="org.hisp.dhis.period.PeriodStore" />	
+	</bean>
+	
+</beans>

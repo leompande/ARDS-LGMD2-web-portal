@@ -1,0 +1,220 @@
+
+<style type="text/css">
+
+.pivot td
+{
+  border: 1px solid #d0d0d0;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+div#criteria
+{
+  position: relative;
+  left: 2px;
+  width: 230px;
+  height: 280px;
+  border: 1px solid #b0b0b0;
+  background-color: #d9ece1;
+  padding-left: 20px;
+  margin-bottom: 6px;
+}
+
+div#pivot
+{
+  position: relative;
+  left: 2px;
+  width: 230px;
+  height: 130px;
+  border: 1px solid #b0b0b0;
+  background-color: #d9ece1;
+  padding-left: 20px;
+  margin-bottom: 6px;
+}
+
+td.column
+{
+  background-color: #dae6f8;
+  min-width: 60px;
+  text-align: center;
+}
+
+td.row
+{
+  background-color: #dae6f8;
+  min-width: 120px;
+}
+
+td.cell
+{
+  text-align: center;
+  cursor: pointer;
+}
+
+div#pivotMenu
+{
+  position: absolute;
+  display: none;
+}
+
+</style>
+
+<script>
+	
+	function exportPivotTableResultToExcel()
+		{			    
+			document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+		    
+			return true;				
+		}
+	
+</script>
+
+<form id="form1" name="form1" action="exportPivotTableResultToExcel.action" method="post" onsubmit="return exportPivotTableResultToExcel()" target="_blank">
+
+<input type="hidden" name="htmlCode" id="htmlCode" />
+			<div align="right" class="NormalB">
+				
+			</div>
+			
+<!-- Control panel -->
+
+<input type="button" value='$i18n.getString( "data" )' style="width:80px" onclick="showCriteria()">
+<input type="button" value='$i18n.getString( "pivot" )' style="width:80px" onclick="showPivot()">&nbsp;
+<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width:150px">
+
+
+	
+
+<!--<label id="dataLabel" style="color:#606060"></label> -->
+<hr style="height:1px; color:#d9ece1">
+
+<!-- Criteria -->
+
+<div id="criteria" style="display:none">
+
+<p>
+<label>$i18n.getString( "indicator_group" )</label>
+<select id="indicatorGroup" style="width:200px">
+  <option value="null">[ Select indicator group... ]</option>
+  <option value="-1">[ All ]</option>
+</select>
+</p>
+
+<p>
+<label>$i18n.getString( "start_date" ) ($i18n.getString( "format.date.label" ))</label><br>
+<input type="text" id="startDate" style="width:180px">
+<img src="../images/calendar_icon.gif" width="16" height="16" id="getStartDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+</p>
+
+<p>
+<label>$i18n.getString( "end_date" ) ($i18n.getString( "format.date.label" ))</label><br>
+<input type="text" id="endDate" style="width:180px">
+<img src="../images/calendar_icon.gif" width="16" height="16" id="getEndDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+</p>
+
+<p>
+<label>$i18n.getString( "period_type" )</label>
+<select id="periodType" style="width:200px">
+  <option value="null">[ $i18n.getString( "select_period_type" )... ]</option>
+</select>
+</p>
+
+<p>
+<label>$i18n.getString( "organisation_unit_level" )</label>
+<select id="level" style="width:200px">
+  <option value="-1">[ $i18n.getString( "select_level" )... ]</option>
+</select>
+</p>
+
+<p>
+<input type="button" value='$i18n.getString( "get_data" )' style="width:80px" onclick="getData()">
+<input type="button" value='$i18n.getString( "cancel" )' style="width:80px" onclick="hideDivs()">
+</p>
+
+</div>
+ 
+<!-- Pivot -->
+
+<div id="pivot" style="display:none">
+
+<p>
+<table>
+  <tr>
+    <td><label>$i18n.getString( "indicators" )</label></td>
+    <td><input type="checkbox" id="indicatorBox" checked="checked"></td>
+  </tr>
+  <tr>
+    <td><label>$i18n.getString( "periods" )</label></td>
+    <td><input type="checkbox" id="periodBox"></td>
+  </tr>
+  <tr>
+    <td><label>$i18n.getString( "org_units" )</label></td>
+    <td><input type="checkbox" id="orgunitBox"></td>
+  </tr>
+</table>
+</p>
+
+<p>
+<input type="button" value='$i18n.getString( "pivot" )' style="width:80px" onclick="pivotData()">
+<input type="button" value='$i18n.getString( "cancel" )' style="width:80px" onclick="hideDivs()">
+</p>
+
+</div>
+
+<!-- Pivot menu -->
+
+<div id="pivotMenu" class="menuDropDownArea" onmouseover="cancelHideDropDownTimeout()" onmouseout="hideDropDownTimeout()">
+  <ul class="menuDropDownBox">
+    <li class="menuDropDownItem" onclick='viewChart( "single", "period" )'>$i18n.getString( "this_indicator_and_periods" )&nbsp;</li>
+    <li class="menuDropDownItem" onclick='viewChart( "single", "orgunit" )'>$i18n.getString( "this_indicator_and_orgunits" )&nbsp;</li>
+    <li class="menuDropDownItem" onclick='viewChart( "all", "period" )'>$i18n.getString( "all_indicator_and_periods" )&nbsp;</li>
+    <li class="menuDropDownItem" onclick='viewChart( "all", "orgunit" )'>$i18n.getString( "all_indicator_and_orgunits" )&nbsp;</li>
+  </ul>
+</div>
+
+<!-- Pivot table -->
+<div id="formResult">
+	<div align="center"><label id="dataLabel1" style="color:#606060"></label></div>
+<div>
+    
+<table id="pivotTable" class="pivot"></table>
+
+</div>
+</div>
+</form>
+
+<!-- I18n variables -->
+
+<script type="text/javascript">
+    var i18n_indicator_group = '$encoder.jsEscape( $i18n.getString( "indicator_group" ) , "'")';
+    var i18n_start_date = '$encoder.jsEscape( $i18n.getString( "start_date" ) , "'")';
+    var i18n_end_date = '$encoder.jsEscape( $i18n.getString( "end_date" ) , "'")';
+    var i18n_period_type = '$encoder.jsEscape( $i18n.getString( "period_type" ) , "'")';
+    var i18n_organisation_unit_level = '$encoder.jsEscape( $i18n.getString( "organisation_unit_level" ) , "'")';
+</script>
+
+<!-- Init page -->
+
+<script type="text/javascript">
+  loadIndicatorGroups();
+  loadPeriodTypes();
+  loadOrgunitLevels();
+  loadListeners();
+</script>
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "startDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getStartDate"   // trigger for the calendar (button ID)
+    });
+
+    Calendar.setup({
+        inputField     :    "endDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getEndDate"   // trigger for the calendar (button ID)
+    });
+</script>

@@ -1,0 +1,30 @@
+<h3>$i18n.getString( "Survey Data Entry" )</h3>
+
+<br>
+
+<form id="selectForm" name="selectForm" method="post" action="select.action">
+
+    <table>	
+	   <tr>
+    		<td><label>$i18n.getString( "organisation_unit" )</label></td>
+    		<td><input type="text" readonly="readonly" #if( $organisationUnit ) value="$encoder.htmlEncode( $organisationUnit.name )" #else value="[$i18n.getString( "select" )]" #end style="min-width:350px"></td>
+	   </tr>
+	   <tr>
+            <td class="NormalB">&nbsp;</td>
+            <td class="NormalB">&nbsp;</td>
+       </tr>
+	   <tr>
+    		<td><label for="selectedSurveyId">$i18n.getString( "survey" )</label></td>
+    		<td>
+    		    <select id="selectedSurveyId" name="selectedSurveyId" style="min-width:350px" onchange="document.getElementById( 'selectForm' ).submit();" #if( $surveys.size() == 0 ) disabled="disabled" #end style="min-width:350px">
+    				<option value="null">[$i18n.getString( "select" )]</option>
+    			    #foreach( $survey in $surveys )
+    				    <option value="$survey.id" #if( $selectedSurveyId && $survey.id == $selectedSurveyId ) selected="selected" #end>$encoder.htmlEncode( $survey.name )</option>
+    			    #end
+    			</select>
+    		</td>
+	   </tr>	
+    </table>
+</form>
+
+<hr style="clear:both">

@@ -1,0 +1,7 @@
+
+<h1>$i18n.getString( "ll_bulk_ra" )</h1>
+
+<h3>Corresponding Organisation Units unavailable for Selected Report</h3>
+<p>
+	<input type="button" value="$i18n.getString( 'back' )" onclick="window.location.href='lineListingBulkReportAnalyser.action'" style="width:100px" />
+</p>

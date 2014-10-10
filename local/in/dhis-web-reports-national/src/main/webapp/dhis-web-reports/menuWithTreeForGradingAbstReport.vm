@@ -1,0 +1,65 @@
+<h2>Report Analyser</h2>
+<ul>
+    <li>Report Analysis</li>
+    <ul>
+    	<li>
+            Grading Reports - Abstraction
+        </li>
+    </ul>
+</ul>
+<div style=" float:right; font-size:6pt; cursor:pointer; margin-top:-15px; ">
+        <a href="index.action">
+          <img src="images/goback.png" width="36" height="30" alt="$i18n.getString( "go_back" )"></a>
+</div>
+#parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+
+<!-- The script that registeres selctions in the orgunit tree -->
+<script type="text/javascript">
+
+function orgUnitHasBeenSelected( orgUnitIds )
+{    
+    var orgUnitid = ""+orgUnitIds;
+    var orgUnitName = orgUnits.get(orgUnitid);
+	if(orgUnitName == null) return;
+	
+    var orgUnitLevel = orgUnitLevels.get(orgUnitid);	
+	
+	var summaryBy = document.getElementById("summaryByCB");
+	var orgUnitListCB = document.getElementById("orgUnitListCB");
+	
+	var ouListLen = document.reportForm.orgUnitListCB.options.length;
+    for(i=0;i<ouListLen;i++)
+  	{
+   		document.reportForm.orgUnitListCB.options[0] = null;
+   	}		
+    document.reportForm.orgUnitListCB.options[0] = new Option(orgUnitName,orgUnitIds,false,false);
+	
+	var summaryByLen = document.reportForm.summaryByCB.options.length;
+    for(i=0;i<summaryByLen;i++)
+  	{
+   		document.reportForm.summaryByCB.options[0] = null;
+   	}		
+	
+	var levelNames = new Array();
+	levelNames[0] = "State";
+	levelNames[1] = "District";
+	levelNames[2] = "Block";
+	levelNames[3] = "PHC";
+	levelNames[4] = "Subcentre";
+		
+	var k = parseInt(orgUnitLevel);
+	var j=0;
+
+	for(i=k; i<levelNames.length; i++)
+	{
+		var temp1 = "level-"+i;
+		document.reportForm.summaryByCB.options[j] = new Option(levelNames[i],temp1,false,false);
+		j++;
+	}
+	
+}
+
+selection.setListenerFunction( orgUnitHasBeenSelected );
+
+</script>
+

@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    function submitForm()
+    {
+        selectAllById( "sections" );
+        document.getElementById( "sortOrderForm" ).submit();
+    }
+</script>
+
+<h3>$i18n.getString( "section_sort_order" )</h3>
+
+<form id="sortOrderForm" action="saveSectionSortOrder.action" method="post">
+
+<input type="hidden" name="dataSetId" value="${dataSetId}">
+
+<p>
+<input type="button" value="$i18n.getString( 'move_up' )" style="width:130px" onclick="moveUpSelectedOption( 'sections' )"><input 
+type="button" value="$i18n.getString( 'move_down' )" style="width:130px" onclick="moveDownSelectedOption( 'sections' )"><input
+type="button" value="$i18n.getString( 'move_to_top' )" style="width:130px" onclick="moveSelectedOptionToTop( 'sections' )"><input
+type="button" value="$i18n.getString( 'move_to_bottom' )" style="width:130px" onclick="moveSelectedOptionToBottom( 'sections' )">
+</p>
+
+<p>
+<select multiple id="sections" name="sections" size="25" style="width:680px">
+#foreach ( $section in $sections )
+    <option value="$section.id">$section.displayName</option>
+#end
+</select>
+</p>
+
+<p>
+<input type="button" value="$i18n.getString( 'save' )" style="width:130px" onclick="submitForm()"><input 
+type="button" value="$i18n.getString( 'cancel' )" style="width:130px" onclick="window.location.href='section.action'">
+</p>
+
+</form>

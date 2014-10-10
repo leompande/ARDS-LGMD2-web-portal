@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  
+<!-- Survey Store definitions -->
+
+  <bean id="org.hisp.dhis.survey.SurveyStore"
+    class="org.hisp.dhis.survey.hibernate.HibernateSurveyStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="surveyDataValueService"
+      ref="org.hisp.dhis.surveydatavalue.SurveyDataValueService"/>	      
+  </bean>
+  
+  <bean id="org.hisp.dhis.surveydatavalue.SurveyDataValueStore"
+    class="org.hisp.dhis.surveydatavalue.hibernate.HibernateSurveyDataValueStore">
+      <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+	
+  <bean id="org.hisp.dhis.target.DeTargetMappingStore"
+    class="org.hisp.dhis.target.HibernateDeTargetMappingStore">
+    <property name="sessionFactory" ref="sessionFactory"/>    
+  </bean>
+	
+	  
+<!-- Survey Service definitions -->
+
+  <bean id="org.hisp.dhis.survey.SurveyService"
+    class="org.hisp.dhis.survey.DefaultSurveyService">
+    <property name="surveyStore"
+      ref="org.hisp.dhis.survey.SurveyStore"/>
+  </bean>
+  
+  <bean id="org.hisp.dhis.surveydatavalue.SurveyDataValueService"
+    class="org.hisp.dhis.surveydatavalue.DefaultSurveyDataValueService">
+    <property name="surveyDataValueStore"
+      ref="org.hisp.dhis.surveydatavalue.SurveyDataValueStore"/>
+  </bean>	
+  
+  <bean id="org.hisp.dhis.target.DeTargetMappingService"
+    class="org.hisp.dhis.target.DefaultDeTargetMappingService">
+    <property name="deTargetMappingStore"
+      ref="org.hisp.dhis.target.DeTargetMappingStore"/>
+  </bean>
+	
+	
+<!-- DeTarget Service definitions -->
+
+  <bean id="org.hisp.dhis.detarget.DeTargetService"
+    class="org.hisp.dhis.detarget.DefaultDeTargetService">
+    <property name="deTargetStore"
+      ref="org.hisp.dhis.detarget.DeTargetStore"/>
+  </bean>
+ 
+  <bean id="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService"
+    class="org.hisp.dhis.detargetdatavalue.DefaultDeTargetDataValueService">
+    <property name="deTargetDataValueStore"
+      ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueStore"/>
+	  <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService">
+	  </property>
+  </bean>   
+
+<!-- DeTarget Store definitions -->
+
+  <bean id="org.hisp.dhis.detarget.DeTargetStore"
+    class="org.hisp.dhis.detarget.hibernate.HibernateDeTargetStore">
+    <property name="sessionFactory" ref="sessionFactory"/>
+    <property name="deTargetDataValueService"
+      ref="org.hisp.dhis.detargetdatavalue.DeTargetDataValueService"/>        
+  </bean>
+ 
+  <bean id="org.hisp.dhis.detargetdatavalue.DeTargetDataValueStore"
+    class="org.hisp.dhis.detargetdatavalue.hibernate.HibernateDeTargetDataValueStore">
+      <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+</beans>

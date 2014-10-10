@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.reportsheet.CategoryOptionAssociation" table="reportexcel_categoryoptionassociations">
+
+    <id name="id" column="categoryoptionassociationid">
+      <generator class="native" />
+    </id>
+
+    <properties name="source_categoryoption_unique_key" unique="true">
+      <many-to-one name="source" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="sourceid"
+		foreign-key="fk_categoryoptionassociation_organisationunitid" />
+      <many-to-one name="categoryOption" class="org.hisp.dhis.dataelement.DataElementCategoryOption" column="categoryoptionid"
+		foreign-key="fk_categoryoptionassociation_categoryoptionid" />
+    </properties>
+
+  </class>
+</hibernate-mapping>

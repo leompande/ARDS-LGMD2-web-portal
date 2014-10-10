@@ -1,0 +1,14 @@
+
+<h3>$i18n.getString( "dhis_web_hrentry_title" )</h3>
+
+<ul id="introList">
+    #introListImgItem( "viewDataSet.action" "hr_data_entry" "dataentry" )
+    #introListImgItem( "viewDataSets.action" "update_data" "dataentry" )
+    #introListImgItem( "showRecordsReportForm.action" "record_data" "summaryreport" )
+    #introListImgItem( "showAggregatedReportForm.action" "aggregate_report" "summaryreport" )
+    #introListImgItem( "reportSelect.action" "aggregate_data" "summaryreport" )
+    
+    #introListImgItem( "setImportFormat.action?importFormat=DXF" "import" "import" )
+    #introListImgItem( "displayDataValueExportForm.action?exportFormat=DXF" "data_export" "export" )
+    #introListImgItem( "displayMetaDataExportForm.action?exportFormat=DXF" "metadata_export" "export" )
+</ul>

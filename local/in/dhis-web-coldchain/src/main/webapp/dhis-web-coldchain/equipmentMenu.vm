@@ -1,0 +1,10 @@
+
+<a href="index.action"><h2>$i18n.getString( "ccem_entry" )&nbsp;</h2></a>
+<ul>
+    <li><a href="enquipmentSelect.action">$i18n.getString( "equipment_management" )</a></li>
+</ul>
+
+<br>
+##parse( "/dhis-web-commons/ouwt/orgunittree.vm" )
+#parse( "/dhis-web-commons/ouwt/orgunittreesearch.vm" )
+

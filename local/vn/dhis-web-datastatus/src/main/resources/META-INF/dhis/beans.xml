@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="org.hisp.dhis.status.action.ListDataStatusAction" class="org.hisp.dhis.status.action.ListDataStatusAction"
+		scope="prototype">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.AddDataStatusAction" class="org.hisp.dhis.status.action.AddDataStatusAction"
+		scope="prototype">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.UpdateDataStatusAction"
+		class="org.hisp.dhis.status.action.UpdateDataStatusAction" scope="prototype">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.DeleteDataStatusAction"
+		class="org.hisp.dhis.status.action.DeleteDataStatusAction">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.GetDataStatusAction" class="org.hisp.dhis.status.action.GetDataStatusAction">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.DefaultDataStatusAction"
+		class="org.hisp.dhis.status.action.DefaultDataStatusAction" scope="prototype">
+		<property name="dataStatusService" ref="org.hisp.dhis.status.DataStatusService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="completeDataSetRegistrationService"
+			ref="org.hisp.dhis.dataset.CompleteDataSetRegistrationService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.status.action.GetDataSetAction" class="org.hisp.dhis.status.action.GetDataSetAction">
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="userStore" ref="org.hisp.dhis.user.UserStore" />
+		<property name="selectionManager"
+			ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+
+
+
+</beans>
+
+
+
+

@@ -1,0 +1,59 @@
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#appSettingsForm').ajaxForm({
+            dataType:  'json',
+            success: function(data){
+                setHeaderDelayMessage(data.message);
+            }
+        });
+    }); 
+    var i18n_confirm_delete = '$encoder.jsEscape( $i18n.getString( "appmanager_confirm_delete" ) , "'")';
+</script>
+
+<h3>$i18n.getString( "appmanager_settings" )</h3>
+
+<form id="appSettingsForm" action="appSettings.action" method="post">
+<div class="settingLabel">$i18n.getString( "appmanager_installation_folder" ) <span class="tipText">($i18n.getString( "appmanager_absolute_server_path" ))</span></div>
+<div class="setting"><input type="text" id="appFolderPath" name="appFolderPath" style="width:40em" value="$!appFolderPath"/></div>
+<div class="settingLabel">$i18n.getString( "appmanager_baseurl" ) <span class="tipText">($i18n.getString( "appmanager_where_apps_can_be_found" ))</span></div>
+<div class="setting"><input type="text" id="appBaseUrl" name="appBaseUrl" style="width:40em" value="$!appBaseUrl"/></div>
+<div><input type="submit" value="Save" style="width:120px" /></div>
+</form>
+
+<h3>$i18n.getString( "appmanager_management" )</h3>
+
+<table style="width:80%">
+  <tr>
+    <td style="vertical-align:top">
+      <table class="listTable" id="userList" width='100%'>
+        <col/>
+        <col/>				
+        <thead>				
+          <tr>
+            <th>$i18n.getString( "appmanager_appname" )</th>
+            <th>$i18n.getString( "version" )</th>
+            <th class="{sorter: false}" style="width:75px;">$i18n.getString( "operations" )</th>
+          </tr>
+        </thead>
+        <tbody id="list">
+          #set( $mark = false )
+          #foreach( $app in $appList )
+          <tr id="tr${app.name.replace(' ','_')}" #alternate( $mark )>
+            <td>$encoder.htmlEncode( $app.name )</td>
+            <td>$encoder.htmlEncode( $app.version )</td>
+            <td>
+              <a href="javascript:deleteApp( '$encoder.jsEncode( $app.name.replace(' ','_') )', '$encoder.jsEncode( $app.name )' )" title="$i18n.getString( 'remove' )"><img src="../images/delete.png"></a>
+            </td>
+          </tr>
+          #if( $mark )
+            #set( $mark = false )
+          #else
+            #set( $mark = true )
+          #end
+          #end
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
+

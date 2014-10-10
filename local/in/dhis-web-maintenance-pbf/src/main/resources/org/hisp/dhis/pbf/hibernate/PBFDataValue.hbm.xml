@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.pbf.api.PBFDataValue" table="pbfdatavalue">
+
+    <composite-id>
+      <key-many-to-one name="organisationUnit" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="organisationunitid" foreign-key="fk_pbfdatavalue_organisationunitid" />      
+      <key-many-to-one name="dataSet" class="org.hisp.dhis.dataset.DataSet" column="datasetid" foreign-key="fk_pbfdatavalue_datasetid" />
+      <key-many-to-one name="period" class="org.hisp.dhis.period.Period" column="periodid" foreign-key="fk_pbfdatavalue_periodid" />
+      <key-many-to-one name="dataElement" class="org.hisp.dhis.dataelement.DataElement" column="dataelementid" foreign-key="fk_tariffdatavalue_dataelementid" />
+    </composite-id>
+
+    <property name="quantityReported" column="qtyreported" />
+    
+    <property name="quantityValidated" column="qtyValidated" />
+    
+    <property name="tariffAmount" column="tariffamount" />
+
+    <property name="storedBy" column="storedby" length="100" />
+
+    <property name="timestamp" column="lastupdated" type="timestamp" />
+
+    <property name="comment" length="360" />
+
+  </class>
+</hibernate-mapping>

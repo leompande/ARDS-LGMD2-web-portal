@@ -1,0 +1,13 @@
+#set( $size = $units.size() )
+[
+#foreach( $unit in $units )
+{
+  "id": "${unit.uid}",
+  "level": ${unit.level},
+  "text": "$encoder.jsonEncode( ${unit.name} )",
+  "hasChildrenWithCoordinates": $!{unit.hasChildrenWithCoordinates()},
+  "path":"#foreach($anc in $unit.getAncestors())/${anc.uid}#end/${unit.uid}",
+  "leaf":#if( $unit.hasChild() ) false#else true#end
+}#if( $velocityCount < $size ),#end
+#end
+]

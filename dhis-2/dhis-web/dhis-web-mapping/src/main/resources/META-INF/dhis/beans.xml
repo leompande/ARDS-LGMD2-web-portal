@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- No -->
+
+	<bean id="org.hisp.dhis.mapping.action.NoAction" class="org.hisp.dhis.mapping.action.NoAction"
+		scope="prototype" />
+
+    <!-- Initialize -->
+
+    <bean id="org.hisp.dhis.mapping.action.InitializeAction"
+        class="org.hisp.dhis.mapping.action.InitializeAction"
+        scope="prototype">
+        <property name="configurationService" ref="org.hisp.dhis.configuration.ConfigurationService" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="indicatorService" ref="org.hisp.dhis.indicator.IndicatorService" />
+        <property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+    </bean>
+
+	<!-- OrganisationUnit -->
+
+	<bean id="org.hisp.dhis.mapping.action.GetOrganisationUnitChildrenAction"
+		class="org.hisp.dhis.mapping.action.GetOrganisationUnitChildrenAction"
+		scope="prototype">
+		<property name="organisationUnitService"
+			ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>
+			
+	<bean id="org.hisp.dhis.mapping.action.UpdateOrganisationUnitCoordinatesAction"
+        class="org.hisp.dhis.mapping.action.UpdateOrganisationUnitCoordinatesAction"
+        scope="prototype">
+        <property name="organisationUnitService"
+            ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+			
+	<bean id="org.hisp.dhis.mapping.action.GetOrganisationUnitInfoFacilityAction"
+        class="org.hisp.dhis.mapping.action.GetOrganisationUnitInfoFacilityAction"
+        scope="prototype">
+        <property name="organisationUnitService"
+            ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+			
+	<bean id="org.hisp.dhis.mapping.action.GetOrganisationUnitGroupsByGroupSetAction"
+        class="org.hisp.dhis.mapping.action.GetOrganisationUnitGroupsByGroupSetAction"
+        scope="prototype">
+        <property name="organisationUnitGroupService"
+            ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+
+    <!-- Map -->
+
+    <bean id="org.hisp.dhis.mapping.action.RenameMapAction" class="org.hisp.dhis.mapping.action.RenameMapAction"
+        scope="prototype"/>
+
+    <!-- MapValues -->	  
+
+    <bean id="org.hisp.dhis.mapping.action.GetInfrastructuralDataElementMapValuesAction"
+        class="org.hisp.dhis.mapping.action.GetInfrastructuralDataElementMapValuesAction" scope="prototype">
+    </bean>
+
+    <!-- Period -->
+
+	<bean id="org.hisp.dhis.mapping.action.GetAllPeriodTypesAction"
+		class="org.hisp.dhis.mapping.action.GetAllPeriodTypesAction" scope="prototype">
+		<property name="periodStore" ref="org.hisp.dhis.period.PeriodStore" />
+	</bean>
+
+	<bean id="org.hisp.dhis.mapping.action.GetPeriodsByPeriodTypeAction"
+		class="org.hisp.dhis.mapping.action.GetPeriodsByPeriodTypeAction"
+		scope="prototype">
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+	</bean>
+
+	<!-- GeoJson -->
+
+    <bean id="org.hisp.dhis.mapping.action.GetGeoJsonAction"
+        class="org.hisp.dhis.mapping.action.GetGeoJsonAction"
+        scope="prototype">
+        <property name="analyticsService"
+            ref="org.hisp.dhis.analytics.AnalyticsService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.mapping.action.GetGeoJsonFacilitiesAction"
+        class="org.hisp.dhis.mapping.action.GetGeoJsonFacilitiesAction"
+        scope="prototype">
+        <property name="analyticsService"
+            ref="org.hisp.dhis.analytics.AnalyticsService" />
+        <property name="organisationUnitGroupService"
+            ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+
+	<bean id="org.hisp.dhis.mapping.action.GetGeoJsonFromFileAction" class="org.hisp.dhis.mapping.action.GetGeoJsonFromFileAction"
+		scope="prototype">
+		<property name="locationManager" ref="locationManager"/>
+	</bean>
+
+	<bean id="org.hisp.dhis.mapping.action.GetGeoJsonFilesAction"
+		class="org.hisp.dhis.mapping.action.GetGeoJsonFilesAction" scope="prototype">
+		<property name="locationManager" ref="locationManager"/>
+	</bean>
+
+	<!-- Export Map -->
+
+	<bean id="org.hisp.dhis.mapping.action.ExportImageAction" class="org.hisp.dhis.mapping.action.ExportImageAction"
+		scope="prototype"/>
+
+</beans>

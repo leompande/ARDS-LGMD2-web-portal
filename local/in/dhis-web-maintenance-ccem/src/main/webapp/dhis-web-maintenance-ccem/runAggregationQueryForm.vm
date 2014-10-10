@@ -1,0 +1,18 @@
+<h3>$i18n.getString( "manual_aggregation" )</h3>
+
+<form id="runAggregationQueryForm" action="runAggregationQuery.action" method="post">
+  
+  <table id="selectionTable">
+	<tr>
+	  <td>
+		#organisationUnitSelectionTree( false, true, false )
+	  </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" id="submitButton" value="$i18n.getString( 'aggregate_values' )" style="width:10em"/>
+	  </td>
+    </tr>
+  </table>
+
+</form>

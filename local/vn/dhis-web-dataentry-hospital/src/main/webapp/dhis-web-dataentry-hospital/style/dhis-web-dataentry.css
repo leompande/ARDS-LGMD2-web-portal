@@ -1,0 +1,33 @@
+
+#currentSelection
+{
+  padding: 6px;
+  background-color: #e0e0e0;
+  border: 1px solid #a0a0a0;
+  font-size: 14px;
+  text-align: right;
+  position: fixed;
+  top: 55px;
+  right: 10px;
+  filter: alpha(opacity=85);
+  opacity: 0.85;
+  border-radius: 3px;
+}
+
+.currentRow
+{
+  background-color: #d5ffc5;
+  padding-right: 50px;
+}
+
+#actions
+{
+  float: right;
+  width: 160px;
+  text-align: right;
+}
+
+.hidden 
+{
+  display: none;
+}

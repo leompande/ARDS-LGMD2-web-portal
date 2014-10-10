@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgunits>
+	<orgunit>
+		<id>$!orgUnit.id</id>
+		<name>$encoder.xmlEncode( $!orgUnit.shortName )</name>
+		<level>$!orgUnitLevel</level>
+	</orgunit>
+</orgunits>

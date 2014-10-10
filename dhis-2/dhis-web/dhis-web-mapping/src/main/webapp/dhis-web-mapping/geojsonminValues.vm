@@ -1,0 +1,1 @@
+#set($size=$object.size())[#foreach($unit in $object){"t":#if(${unit.featureType}=="Point")"2"#else"1"#end,"c":$!encoder.jsonEncode($!{unit.validCoordinates}),"i":"$!{unit.id}","n":"$!encoder.jsonEncode(${unit.name})","v":"$!{unit.value}","h":$!{unit.hasChildrenWithCoordinates()}}#if($velocityCount<$size),#end#end]

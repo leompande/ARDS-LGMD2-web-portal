@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+  [<!ENTITY identifiableProperties SYSTEM "classpath://org/hisp/dhis/common/identifiableProperties.hbm">]
+  >
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.patient.PatientRegistrationForm" table="patientregistrationform">
+
+    <id name="id" column="patientregistrationformid">
+      <generator class="native" />
+    </id>
+    
+    <property name="name" column="name" length="230" />
+    
+ 	&identifiableProperties;
+ 
+    <many-to-one name="program" class="org.hisp.dhis.program.Program" column="programid"
+      foreign-key="fk_patientregistrationform_programid" />
+
+    <many-to-one name="dataEntryForm" class="org.hisp.dhis.dataentryform.DataEntryForm"
+      foreign-key="fk_patientregistrationform_dataentryformid" cascade="all" />
+    
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Detailed ValidationAnalysis Result Screen</title>
+<link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+        <script>
+        	var startDate = "$startDate"; 
+        	var endDate = "$endDate";
+        	
+        	function getAvgInfo(evt, vRule, selOrgUnit)
+        	{
+        		detailOption = "yes";        		
+        		
+        		evt.target.href = "detailedValidationAnalysisResultAction.action?detailOption="+detailOption+"&vRule="+vRule+"&startDate="+startDate+"&endDate="+endDate+"&selOrgUnit="+selOrgUnit;
+        	}
+			
+			function exportValidationResultToWorkBook()
+			{			    
+				document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+			    
+				return true;				
+			}
+
+        </script>	
+
+<body>
+	<form id="form1" name="form1" action="exportValidationResultToWorkBook.action" method="post" onsubmit="return exportValidationResultToWorkBook()" target="_newtab">
+			<input type="hidden" name="htmlCode" id="htmlCode" />
+			<div align="right" class="NormalB">
+				<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+			</div>
+			
+			<div id="formResult">			    
+
+<div class="NormalB">Detailed Validation Analysis</div>
+<!-- <div class="TableHeadingCellStyles" align="right"><a href="exportToExcelDetailedVA.action" target="_blank">Export To Excel</a></div> -->
+<br /><br />
+#foreach($orgUnit in $selOrgUnitList)
+	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+		<tr class="TableHeadingCellStyles">		
+			<th>$orgUnit.shortName</th>
+			#foreach( $period in $selPeriodList )
+				<th align="center">$period.startDate - $period.endDate</th>			
+			#end
+		</tr>
+		#set($vrResultMap = $orgUnitResultMap.get($orgUnit))
+		#set($vrColorMap = $orgUnitColorMap.get($orgUnit))
+		#foreach($validationRule in $validationRuleList)
+			#set($vrResultList = $vrResultMap.get($validationRule))
+			#set($vrColorList = $vrColorMap.get($validationRule))
+			#if($vrColorList.contains("red"))
+				<tr>
+					<td class="TableHeadingCellStyles">
+						<a href="#" onclick="javascript:getAvgInfo(event, '$validationRule.id', '$orgUnit.id')" target="_blank">$validationRule.name</a>
+					</td>
+					#set( $count1 = 0)
+					#foreach( $vrResult in $vrResultList )
+						#if($vrColorList.get($count1) == "red")
+							<td align="center" class="TableDataCellStyles"><font color="$vrColorList.get($count1)">$vrResult</font></td>
+						#else
+							<td align="center" class="TableDataCellStyles"><font color="$vrColorList.get($count1)">&nbsp;</font></td>	
+						#end	
+						#set($count1 = $count1 + 1)			
+					#end
+				</tr>
+			#end		
+		#end		
+	</table>
+	<br />
+#end
+				</div>
+</body>
+</html>

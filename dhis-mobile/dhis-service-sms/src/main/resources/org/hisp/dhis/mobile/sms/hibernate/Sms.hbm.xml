@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="org.hisp.dhis.mobile.sms.api.SmsInbound" table="sms_inbound">
+    <id column="id" name="id">
+      <generator class="native"/>
+    </id>
+    <property name="process">
+      <column default="0" name="process" not-null="true"/>
+    </property>
+    <property name="originator">
+      <column index="originator_index" name="originator" not-null="true"/>
+    </property>
+    <property name="type">
+      <column name="type" not-null="true"/>
+    </property>
+    <property name="encoding">
+      <column name="encoding" not-null="true"/>
+    </property>
+    <property name="messageDate">
+      <column name="message_date" not-null="true"/>
+    </property>
+    <property name="receiveDate">
+      <column name="receive_date" not-null="true"/>
+    </property>
+    <property column="text" name="text"/>
+    <property column="original_ref_no" name="originalRefNo"/>
+    <property column="original_receive_date" name="originalReceiveDate"/>
+    <property name="gatewayId">
+      <column name="gateway_id" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

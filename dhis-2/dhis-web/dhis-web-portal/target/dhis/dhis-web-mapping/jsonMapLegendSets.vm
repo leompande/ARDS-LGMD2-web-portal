@@ -1,0 +1,12 @@
+#set( $size = $object.size() )
+{ "mapLegendSets": [
+#foreach( $legendSet in $object )
+  {
+    "id": "$!{legendSet.id}",
+    "name": "$!encoder.jsonEncode( ${legendSet.name} )",
+    "symbolizer": "$!encoder.jsonEncode( ${legendSet.symbolizer} )",
+    "indicators": [#foreach( $indicator in $legendSet.indicators )$!{indicator.id}#if( $velocityCount < $legendSet.indicators.size() ),#end#end],
+    "dataElements": [#foreach( $dataElement in $legendSet.dataElements )$!{dataElement.id}#if( $velocityCount < $legendSet.dataElements.size() ),#end#end]
+  }#if( $velocityCount < $size ),#end
+#end
+] }

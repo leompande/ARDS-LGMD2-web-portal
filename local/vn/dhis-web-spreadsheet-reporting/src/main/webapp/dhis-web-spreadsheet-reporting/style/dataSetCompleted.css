@@ -1,0 +1,43 @@
+
+#container #period-tab,
+#container #dataset-tab{	
+	padding:5px;
+}
+
+#container td{
+	padding:5px;
+}
+
+#completed-table{
+	width:100%;
+}
+#completed-table td{
+	padding:3px;
+}
+#completed-table thead tr,
+#completed-table tfoot tr{
+	background-image:none;
+	background-color:#CCD8E7;
+}
+#completed-table tfoot th{
+	border-top:1px solid #CCD8E7;	
+	padding:5px;
+}
+
+#completed-table tbody td{
+	border-top:1px solid #CCD8E7;	
+	border-right:1px solid #CCD8E7;
+}
+#completed-table tbody tr:hover{
+	border-top:1px solid #CFE5FF;
+}
+.bookmark-tab {
+    background-image:url( ../images/favorite_star.gif ) !important;
+}
+
+.x-mask-loading2 div{
+	padding:10px 20px 10px 50px;
+	background:#fbfbfb url(../../images/loader2.gif) no-repeat 5px 2px;
+	line-height:20px;
+	
+}

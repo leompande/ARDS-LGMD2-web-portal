@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+  <class name="org.hisp.dhis.coldchain.equipment.EquipmentType" table="equipmenttype">
+    <id name="id" column="equipmenttypeid">
+      <generator class="native"/>
+    </id>
+
+    <property name="name" not-null="true" unique="true" length="160"/>
+    
+    <property name="description" not-null="false" length="250"/>
+	
+	<many-to-one name="modelType" class="org.hisp.dhis.coldchain.model.ModelType" column="modeltypeid"
+      foreign-key="fk_equipmenttype_modelypeid" />
+
+    <property name="tracking" column="tracking" />
+
+	<set name="dataSets" table="equipmenttype_datasets">
+      <key column="equipmenttypeid" foreign-key="fk_equipmenttype_datasets_equipmenttypeid" />
+      <many-to-many class="org.hisp.dhis.dataset.DataSet" column="datasetid"
+          foreign-key="equipmenttype_datasets_datasetid" />
+    </set>
+
+	  
+    <set name="equipmentType_Attributes" order-by="sort_order" >
+      <key column="equipmenttypeid" foreign-key="fk_equipmenttype_equipmentType_Attributes_equipmenttypeid" />
+      <one-to-many class="org.hisp.dhis.coldchain.equipment.EquipmentType_Attribute" />
+    </set>	  
+	  	  
+	  	
+<!--	
+	<set name="equipmentTypeAttributes" table="equipmenttype_attributes">
+      <key column="equipmenttypeid" foreign-key="fk_equipmenttype_attributes_equipmenttypeid" />
+      <many-to-many class="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttribute" column="equipmenttypeattributeid"
+          foreign-key="fk_equipmenttype_attributes_equipmenttypeattributeid" />
+    </set>
+-->	
+
+<!--
+	<list name="equipmentTypeAttributes" table="equipmenttype_attributes">
+		<key column="equipmenttypeid" foreign-key="fk_equipmenttype_attributes_equipmenttypeid" />					 
+        <list-index column="sort_order" base="0" />
+        <many-to-many class="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttribute" column="equipmenttypeattributeid"
+			foreign-key="fk_equipmenttype_attributes_equipmenttypeattributeid" />
+	</list>
+-->
+
+    <many-to-one name="dataEntryForm" class="org.hisp.dhis.dataentryform.DataEntryForm"
+      foreign-key="fk_equipmenttype_dataentryform" />		  
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,145 @@
+
+<html>
+    <head>
+        <title>SummaryStatus Result</title>
+        <link type="text/css" rel="stylesheet" media="screen" href="css/StylesForTags.css">
+        <script>
+            var startDate = "$sDateLB"; 
+            var endDate = "$eDateLB";
+            var dsType = "$selectedButton";
+            var includeZeros = "$includeZeros";
+    
+            function getImmChildInfo(evt, dsId, selOrgUnit)
+            {
+                immChildOption = "yes";             
+                      
+                if( document.getElementById('includeZeros').checked )
+                {
+                    /*
+                    evt.target.href = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+                	*/
+ 			   		
+ 			   		var url = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType+"&includeZeros="+includeZeros;
+					$('#contentDataRecord').dialog('destroy').remove();
+			   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+			        title: 'Data Entry Status Result',
+					maximize: true, 
+					closable: true,
+					modal:true,
+					overlay:{background:'#000000', opacity:0.1},
+					width: 1000,
+			        height: 800
+			    	});                                                   
+                
+                
+                }
+                else
+                {
+                    /*
+                    evt.target.href = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+                	*/
+                	
+ 			   		var url = "summaryStatusResult.action?immChildOption="+immChildOption+"&dsId="+dsId+"&sDateLB="+startDate+"&eDateLB="+endDate+"&ouId="+selOrgUnit+"&selectedButton="+dsType;
+					$('#contentDataRecord').dialog('destroy').remove();
+			   	    $('<div id="contentDataRecord">' ).load(url).dialog({
+			        title: 'Data Entry Status Result',
+					maximize: true, 
+					closable: true,
+					modal:true,
+					overlay:{background:'#000000', opacity:0.1},
+					width: 1000,
+			        height: 800
+			    	});                
+                
+                
+                
+                }           
+            }
+                
+            function exportDataStatusResultToWorkBook()
+            {               
+                document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;
+                            
+                return true;                
+            }
+        </script>   
+    </head>
+
+    <body>
+        <form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+            <input type="hidden" name="htmlCode" id="htmlCode" />
+            <div align="right" class="NormalB">
+                <input type="checkbox" name="includeZeros" id="includeZeros" #if($includeZeros) checked #end /> Include Zero<br />
+                <input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+            </div>
+            
+            <div id="formResult">               
+                <div align="center" class="NormalB">Summary Status</div>
+                <div align="right">
+                    <table width="30%">
+                        <tr class="TableDataCellStyles" >
+                            <td bgcolor="#a0c0a0">&nbsp;</td>
+                            <td align="left">&nbsp;Entered</td>
+                        </tr>
+                                
+                        <tr class="TableDataCellStyles">
+                            <td bgcolor="#ff0000">&nbsp;</td>
+                            <td align="left">&nbsp;Not Entered ( 0-5 )</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <div align="left" class="NormalB">DataSet : $selDataSet.name</div>
+                <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">       
+                    <tr class="TableHeadingCellStyles" align="center">
+                        #foreach($levelName in $levelNames)
+                            <th>$!levelName</th>
+                        #end
+                        #foreach($periodname in $periodNameList)
+                            <th>$periodname</th>
+                        #end
+                    </tr>
+                              
+                    #foreach($chiildorgUnit in $orgUnitList)
+                        #set( $count1 = $minOULevel )
+                        #set( $curOrgUnitLevel = $organisationUnitService.getLevelOfOrganisationUnit( $chiildorgUnit.id ) )
+                        #set( $orgunitCount = $ouMapForChildDSAssociation.get( $chiildorgUnit ) )
+                        #set( $orgunitColor = $ouMapForColor.get( $chiildorgUnit ) )
+                        
+                        <tr class="TableHeadingCellStyles">
+                            #foreach( $levelName in $levelNames )
+                                #if( $count1 == $curOrgUnitLevel )
+                                    <td><a href="#" onclick="javascript:getImmChildInfo(event, '$selDataSet.id', '$chiildorgUnit.id')" target="_blank">$chiildorgUnit.name #if( $orgunitCount !=-1 ) ( $orgunitCount ) #end</a></td>
+                                #else
+                                    <td>&nbsp;</td>
+                                #end
+                                #set($count1 = $count1 + 1)
+                            #end
+
+                            #set( $dsSummaryResults = $ouMapSummaryStatusResult.get( $chiildorgUnit ) )
+                            #set( $dsStatusResults = $ouMapStatusResult.get( $chiildorgUnit ) )
+                            #set( $count2 = 0 )
+                            
+                            #foreach( $result in $dsSummaryResults )                                              
+                                
+                                #set( $dsStatusResult = $dsStatusResults.get( $count2 ) )
+                                
+                                #if($result < 0)
+                                    <td  bgcolor="white">&nbsp;</td>
+                                #elseif( $result == 0 )
+                                    <td align="center" #if( $orgunitColor == 1 ) bgcolor="#ff0000" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>0 #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end</font></td>
+                                #elseif( $result == 1 )
+                                    <td align="center" #if( $orgunitColor == 1 ) bgcolor="#a0c0a0" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>1 #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end</font></td>
+                                #elseif( $result > 1 )
+                                    <td align="center" #if( $orgunitColor == 1 ) bgcolor="#a0c0a0" #end><font #if( $orgunitColor == 1 ) color="#ffffff" #end>$result #if( $dsStatusResult != -1 ) ( $dsStatusResult % )#end </font></td>
+                                #end
+                                
+                                #set($count2 = $count2 + 1)
+                            #end
+                        </tr>
+                    #end
+                </table>                  
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+#set($recordNo = $maxRecordNo + 1)
+
+<script>
+	var nextRecordNo = $recordNo;
+	var nextFlag = 0;
+			
+	function addLLUUIDSPEPNewRow()
+	{
+		if(nextFlag == 0)
+		{
+		   nextFlag = 1;
+		}
+		else
+		{
+		    return;
+		}
+		
+		nextRecordNo++;
+			
+		var tbl = document.getElementById("tblGrid");
+		var lastRow = tbl.rows.length;
+		var newRow = tbl.insertRow(lastRow);		
+            
+    	var oCell = newRow.insertCell(0);
+    	oCell.innerHTML = "<input name='entryfield' id='value[1044].value:value["+nextRecordNo+"].value' type='text' value=' ' onchange='saveLLbirthValue(1044,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' onblur='addLLUUIDSPEPNewRow()' style='width:20em text-align:center'>";    	
+    
+    	oCell = newRow.insertCell(1);
+    	oCell.innerHTML = "<input name='entryfield' id='value[1045].value:value["+nextRecordNo+"].value' type='text' value='' onchange='saveLLbirthValue(1045,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:10em text-align:center'> <img src='../images/calendar_icon.gif' width='16' height='16' id='getvalue[1045].value:value["+nextRecordNo+"].value' cursor: pointer;' title='$i18n.getString( 'date_selector' )' onmouseover='this.style.background='orange';' onmouseout='this.style.background='''>";
+    		    	        	
+    	oCell = newRow.insertCell(2);
+    	oCell.innerHTML = "<select name='entryfield' id='value[1046].value:value["+nextRecordNo+"].value' onchange='saveLLbirthValue(1046,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:100% text-align:center'><option value='NONE' selected>---</option><option value='Y'>YES</option><option value='N'>NO</option><option value='NK'>NOT KNOWN</option></select>";
+
+    	oCell = newRow.insertCell(3);
+    	oCell.innerHTML = "<input name='entryfield' id='value[1047].value:value["+nextRecordNo+"].value' type='text' value=' ' onchange='saveLLbirthValue(1047,"+nextRecordNo+")' onkeypress='return keyPress(event, this)' style='width:20em text-align:center'>";
+
+		var inputFieldVal1 = "value[1045].value:value["+nextRecordNo+"].value";
+		var butVal1 = "getvalue[1045].value:value["+nextRecordNo+"].value";
+    	Calendar.setup({inputField:inputFieldVal1,ifFormat:"$i18n.getString('format.date.label')",button:butVal1});
+    	    	
+	}
+</script>
+
+
+
+<div align="center"><h3><u>Line Listing of Unusual IDSP events (FORM-P)</u></h3></div>
+
+
+<table id="tblGrid" width="100%">
+	<tr>
+		<th width="30%">Unusual Event Reported</th>
+		<th width="25%">Date of Event</th>
+		<th width="30%">Was Investigated</th>
+		<th width="15%">Action Taken</th>
+	<tr>
+
+#set($calInfo = "")
+#set( $mapKeys = $recordNos )
+#foreach( $mapKey in $mapKeys)
+	<tr>
+	#set($llDataValues = $lldataValueMap.get($mapKey))
+	#set($count1 = 1)
+	
+	#foreach( $llDataValue in $llDataValues)
+		#if($count1 == 3)
+			<td>
+				<select name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+					<option value="NONE" #if(!$llDataValue.getValue() || $llDataValue.getValue()=="NONE") selected #end>---</option>
+					<option value="Y" #if($llDataValue.getValue() && $llDataValue.getValue()=="Y") selected #end>YES</option>
+					<option value="N" #if($llDataValue.getValue() && $llDataValue.getValue()=="N") selected #end>NO</option>
+					<option value="NK" #if($llDataValue.getValue() && $llDataValue.getValue()=="NK") selected #end>NOT KNOWN</option>
+				</select>
+			</td>
+		#elseif($count1 == 2)
+			<td>
+				<input name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" type="text" value="#if($llDataValue.getValue()) $llDataValue.getValue() #end" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:10em text-align:center">
+				<img src="../images/calendar_icon.gif" width="16" height="16" id="getvalue[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+			</td>
+			#set($calInfo = $calInfo + "Calendar.setup({inputField:'value["+$llDataValue.getDataElement().getId()+"].value:value["+$llDataValue.getRecordNo()+"].value',ifFormat:'$i18n.getString('format.date.label')',button:'getvalue["+$llDataValue.getDataElement().getId()+"].value:value["+$llDataValue.getRecordNo()+"].value'});")			
+		#else
+			<td><input name="entryfield" id="value[$llDataValue.getDataElement().getId()].value:value[$llDataValue.getRecordNo()].value" type="text" value="#if($llDataValue.getValue()) $llDataValue.getValue() #end" onchange="saveLLbirthValue($llDataValue.getDataElement().getId(),$llDataValue.getRecordNo())" onkeypress="return keyPress(event, this)" style="width:20em text-align:center"></td>		
+		#end
+		#set($count1 = $count1+1)
+	#end
+	</tr>	
+#end
+<tr>
+	<td><input name="entryfield" id="value[1044].value:value[$recordNo].value" type="text" value=" " onchange="saveLLbirthValue(1044,$recordNo )" onkeypress="return keyPress(event, this)" onblur='addLLUUIDSPEPNewRow()' style="width:20em text-align:center"></td>
+	<td>
+		<input name="entryfield" id="value[1045].value:value[$recordNo].value" type="text" value="" onchange="saveLLbirthValue(1045,$recordNo)" onkeypress="return keyPress(event, this)" style="width:10em text-align:center">
+		<img src="../images/calendar_icon.gif" width="16" height="16" id="getvalue[1045].value:value[$recordNo].value" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+		#set($calInfo = $calInfo + "Calendar.setup({inputField:'value[1045].value:value["+$recordNo+"].value',ifFormat:'$i18n.getString('format.date.label')',button:'getvalue[1045].value:value["+$recordNo+"].value'});")
+	</td>	
+	<td>
+		<select name="entryfield" id="value[1046].value:value[$recordNo].value" onchange="saveLLbirthValue(1046,$recordNo)" onkeypress="return keyPress(event, this)" style="width:100% text-align:center">
+			<option value="NONE" selected>---</option>
+			<option value="Y">YES</option>
+			<option value="N">NO</option>
+			<option value="NK">NOT KNOWN</option>
+		</select>	
+	</td>
+	<td><input name="entryfield" id="value[1047].value:value[$recordNo].value" type="text" value=" " onchange="saveLLbirthValue(1047,$recordNo )" onkeypress="return keyPress(event, this)" style="width:20em text-align:center"></td>
+</tr>		
+</table>
+
+
+<script type="text/javascript">
+	$calInfo
+</script>
+
+<script type="text/javascript">
+	<div id="caleninfo" name="caleninfo">aaa</div>
+</script>

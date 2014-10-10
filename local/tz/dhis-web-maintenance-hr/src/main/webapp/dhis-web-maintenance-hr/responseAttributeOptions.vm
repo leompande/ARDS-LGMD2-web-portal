@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attributeOptions>
+  <id>$attributeOptions.id</id>
+  <value>$encoder.xmlEncode( $attributeOptions.value )</value>   
+</attributeOptions>

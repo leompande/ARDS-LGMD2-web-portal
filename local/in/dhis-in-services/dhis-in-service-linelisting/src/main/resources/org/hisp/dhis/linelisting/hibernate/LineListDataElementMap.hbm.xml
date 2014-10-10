@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  
+  <class name="org.hisp.dhis.linelisting.LineListDataElementMap" table="linelist_de_map">
+<!--<id name="id" column="id" />-->
+	   <composite-id>   
+    <key-many-to-one name="linelistElement" class="org.hisp.dhis.linelisting.LineListElement"
+          column="llelementid" foreign-key="fk_linelistdemap_llelementid"/>
+
+    <key-many-to-one name="linelistOption" class="org.hisp.dhis.linelisting.LineListOption"
+          column="lloptionid" foreign-key="fk_linelistdemap_lloptionid"/>
+
+    <key-many-to-one name="dataElement" class="org.hisp.dhis.dataelement.DataElement" 
+        column="dataelementid" foreign-key="fk_linelistdemap_dataelementid"/>
+
+    <key-many-to-one name="dataElementOptionCombo" class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" 
+        column="deoptioncomboid" foreign-key="fk_linelistdemap_categoryoptioncomboid"/>
+
+</composite-id> 
+  </class>
+  
+</hibernate-mapping>
+
+

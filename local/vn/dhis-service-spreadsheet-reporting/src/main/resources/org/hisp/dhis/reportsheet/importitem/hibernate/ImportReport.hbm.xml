@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.hisp.dhis.reportsheet.importitem.ImportReport"
+		table="excelitemgroup">
+
+		<id name="id" column="excelitemgroupid">
+			<generator class="native" />
+		</id>
+
+		<property name="name" />
+
+		<property name="type" />
+
+		<many-to-one name="periodType" class="org.hisp.dhis.period.PeriodType"
+			lazy="false" column="periodtypeid" not-null="true"
+			foreign-key="fk_excelitemgroup_periodtypeid" />
+
+		<set name="importItems" lazy="false" cascade="delete">
+			<key column="excelitemgroupid" />
+			<one-to-many class="org.hisp.dhis.reportsheet.importitem.ImportItem" />
+		</set>
+
+		<set name="organisationAssocitions" table="excelgroup_associations"
+			lazy="false">
+			<key column="excelitemgroupid" />
+			<many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnit"
+				column="organisationid" foreign-key="fk_excelitemgroup_organisation" />
+		</set>
+
+		<list name="organisationUnitGroups" table="excelitemgroup_organisationgroup">
+			<key column="excelitemgroupid" />
+			<list-index column="grouporder" base="0" />
+			<many-to-many class="org.hisp.dhis.organisationunit.OrganisationUnitGroup"
+				column="oganisationunitgroupid" foreign-key="fk_excelitemgroup_organisationgroup" />
+		</list>
+
+		<list name="dataElementOrders" table="excelitemgroup_dataelementgrouporders" cascade="all" lazy="false">
+			<key column="excelitemgroupid" />
+			<list-index base="0" column="dataelementgrouporder" />
+			<one-to-many class="org.hisp.dhis.reportsheet.DataElementGroupOrder" />
+		</list>
+
+	</class>
+</hibernate-mapping>

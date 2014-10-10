@@ -1,0 +1,9 @@
+#set( $size = $!values.size() )
+{ "values": [
+	#foreach( $value in $!values )
+	{
+	  "value": "$!encoder.jsonEncode( ${value} )"
+	}#if( $velocityCount < $size ),#end
+	#end
+  ]
+}

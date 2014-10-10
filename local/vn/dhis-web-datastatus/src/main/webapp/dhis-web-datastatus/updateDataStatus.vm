@@ -1,0 +1,51 @@
+<table>
+	<tr>
+		<td>$i18n.getString( 'dataset' )</td>
+		<td>
+			<select id="dataSetId" name="dataSetId">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>$i18n.getString( 'make_default' )</td>
+		<td><input type="checkbox" id="makeDefault" name="makeDefault" #if($dataStatus.frontPage) checked=true #end/></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan=2 align=center>
+			<input type="button" value="$i18n.getString( 'ok' )" style="width:100px" onclick="updateDataStatus()"/>
+			<input type="button" value="$i18n.getString( 'cancel' )" style="width:100px" onclick="window.location = 'listDataStatus.action'"/>
+		</td>
+	</tr>
+</table>
+<script language="javascript">
+	function updateDataStatus(){
+		window.location = "updateDataStatus.action?dataStatusId=" + $dataStatus.id + "&dataSetId=" + getFieldValue('dataSetId') + "&makeDefault=" + document.getElementById('makeDefault').checked;
+	}
+
+	var request = new Request();
+	request.setCallbackSuccess( dataSetResponse );	
+	request.setResponseTypeXML( 'xmlObject' );
+	request.send( 'getDataSets.action' );
+	
+	function dataSetResponse( xmlObject ){
+		var listDataSet = xmlObject.getElementsByTagName("dataset");
+		var dataSets = document.getElementById("dataSetId");
+		dataSets.options.length = 0;
+		for(var i=0;i<listDataSet.length;i++){
+			var id = listDataSet.item(i).getElementsByTagName('id')[0].firstChild.nodeValue;
+			var name = listDataSet.item(i).getElementsByTagName('name')[0].firstChild.nodeValue;	
+			var option = new Option(name, id);							
+			if(id == $dataStatus.dataSet.id){
+				option.selected = true;				
+			}
+			dataSets.options.add(option,null);
+			
+		}
+		
+		
+	}
+</script>

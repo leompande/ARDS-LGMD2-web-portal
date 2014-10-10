@@ -1,0 +1,7 @@
+{ "i18nLocale":
+  {
+    "id": "${i18nLocale.id}",
+	"name": "$!encoder.jsonEncode( ${i18nLocale.name} )",
+	"locale": "$!encoder.jsonEncode( ${i18nLocale.locale} )"
+  }
+}

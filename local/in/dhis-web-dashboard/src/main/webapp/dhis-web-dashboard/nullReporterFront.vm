@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		        <title>Null Reporter</title>
+
+
+		        <script>
+		            // Global Variables
+		            var selriRadioButton = "indicatorsRadio";
+		            var selCategory = "";
+		            var selFacility = "";
+                    var selOrgUnitId="NONE";
+                    var dsName = "";
+    				var sDateIndex = 0;
+   				    var eDateIndex = 0;
+    				var sDate = "";
+   				    var eDate = "";
+    				var curPeriodType = "";
+
+			    </script>
+	</head>
+	<body>
+            <h1>$i18n.getString( "nr_null_reporter" )</h1>
+	    <hr />
+	    <!--<form id="ChartGenerationForm" name="ChartGenerationForm" action="NullReporterResult.action" method="post" onsubmit="return formValidations()" target="chartWindow1">-->
+        <form id="ChartGenerationForm" name="ChartGenerationForm">
+                <table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+                    <colgroup>
+                    	<col width="325">
+  		        <col width="80">
+ 		        <col width="325">
+  	            </colgroup>
+                    <tr>
+                        <td class="NormalB" width="325">&nbsp;</td>
+                    	<td class="NormalB" width="80">&nbsp;</td>
+                    	<td class="NormalB" width="325">&nbsp;</td>
+                    </tr>
+                    <tr>
+
+    			<td class="NormalB">1. $i18n.getString( "ds_dataset_list" ) : <br/>
+                            <select id="selectedDataSet" name="selectedDataSet" onchange="getdSetPeriods()" style="width:300px">
+                           	<!--<option value="$ALL">[ Select DataElementGroup / All ]</option> -->
+                            #foreach ( $dataSet in $dataSetList )
+            					<option value='$dataSet.id' title='$dataSet.name'>$dataSet.name</option>
+                            #end
+     		            </select>
+                    	</td>
+                        <td class="NormalB">&nbsp;</td>
+                    	<td class="NormalB"><input type="checkbox" name="includeZeros" id="includeZeros" checked> Count Zero as NULL</td>
+                    </tr>
+                    <tr>
+    					<td class="NormalB">&nbsp;</td>
+                    	<td class="NormalB">&nbsp;</td>
+                    	<td class="NormalB">&nbsp;</td>
+                    </tr>
+                    <tr>
+    						<td class="NormalB">2. $i18n.getString( "ga_from" )<br />
+                            <select id="sDateLB" name="sDateLB" style="width:200px"></select>
+							</td>
+							<td class="NormalB">&nbsp;</td>
+    						<td class="NormalB">3. $i18n.getString( "ga_to" )<br />
+    						<select id="eDateLB" name="eDateLB" style="width:200px"></select>
+                    		</td>
+  		         </tr>
+  		   <tr>
+    		       	    <td class="NormalB">&nbsp;<br/></td>
+                    	<td class="NormalB">&nbsp;<br/></td>
+                    	<td class="NormalB">&nbsp;<br/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                   	   <td class="NormalB">
+                                       `	<input type="checkbox" id="ouSelCB" name="ouSelCB" onchange="ouSelCBChange()" value="ON" > Selected<br />
+                                       </td>
+                                </tr>
+                                <tr>
+                                    	<td class="NormalB">
+                                        $i18n.getString( "ga_orgunit" ) <br>
+                                        	<select name="orgUnitListCB" id="orgUnitListCB" multiple size="7" style="width: 175px;" ondblclick="remOUFunction()" disabled >
+                                        	</select>
+                                       </td>
+                                    <td class="NormalB">&nbsp;</td>
+                                    <td class="NormalB">
+                                        OrgUnit Levels:<br>
+                                        <select name="orgUnitLevelCB" id="orgUnitLevelCB" size="7" style="width: 150px;">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td class="NormalB">
+                        <table>
+                            <tr>
+ 								<td class="NormalB">
+ 									<!--<input type="submit" name="View Null Reporter" value="$i18n.getString( 'nr_viewnullreporter' )" style="width: 120; height: 25; font-family:Arial; font-weight:bold; color:#000000">-->
+ 							   		<input type="button" name="View Null Reporter" value="$i18n.getString( 'nr_viewnullreporter' )" style="width: 120; height: 25; font-family:Arial; font-weight:bold; color:#000000" onClick="javascript:formValidations()">
+ 							    </td>
+                            </tr>
+							
+                        </table>
+                       </td>
+                    </tr>
+                    <tr>
+                    	<td class="NormalB" align="center" colspan="3" >
+                            <input type="hidden" name="ouIDTB" id="ouIDTB">
+                    	</td>
+                    </tr>
+            </table>
+        </form>
+<div id="contentDiv"></div>        
+    </body>
+</body>
+</html>
+<script>
+	getdSetPeriods();
+</script>

@@ -1,0 +1,177 @@
+
+<h1>Motion Chart Form</h1>
+<hr />	        
+
+<form id="ChartGenerationForm" name="ChartGenerationForm" action="generateMotionChart.action" method="post" onsubmit="return formValidations()" target="chartWindow1">	
+	<table align="center" style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" width="730" border=0>
+		
+		<colgroup>
+			<col width="300">
+			<col width="130">
+			<col width="300">
+		</colgroup>
+		
+        <tr>
+			<td class="NormalB">&nbsp;</td>   
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>
+        
+        <tr>
+			<td class="NormalB">Filter By IndicatorGroup:<br>
+				<select id="xaxisindicatorGroupId" name="xaxisindicatorGroupId" style="width:325px" onchange="getXAxisIndicators()">
+					<option value="$ALL">[ Select IndicatorGroup / All ]</option>
+                    #foreach ( $group in $indicatorGroups )
+						<option value="$group.id">$group.name</option>
+					#end
+				</select>			    
+            </td>   
+            <td class="NormalB">&nbsp;</td>
+            <td class="NormalB">Filter By IndicatorGroup:<br>
+				<select id="yaxisindicatorGroupId" name="yaxisindicatorGroupId" style="width:325px" onchange="getYAxisIndicators()">
+					<option value="$ALL">[ Select IndicatorGroup / All ]</option>
+						#foreach ( $group in $indicatorGroups )
+							<option value="$group.id">$group.name</option>
+						#end
+				</select>
+			</td>
+		</tr>
+                			
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>
+		
+		<tr>
+			<td class="NormalB">X-Axis Indicator:<br>
+				<select id="xaxisIndicator" name="xaxisIndicator" style="width:325px"></select>
+			</td>
+			<td class="NormalB" align="center">&nbsp;</td>
+			<td class="NormalB">Y-Axis Indicator:<br>
+				<select id="yaxisIndicator" name="yaxisIndicator" style="width:325px"></select>
+			</td>
+		</tr>
+  			              
+		<tr>
+			<td class="NormalB">&nbsp;<br/></td>   
+			<td class="NormalB">&nbsp;<br/></td>
+			<td class="NormalB">&nbsp;<br/></td>
+		</tr>
+                			
+		<tr>
+			<td class="NormalB">Filter By DataElementGroup:<br>
+				<select id="dataElementGroupId" name="dataElementGroupId" style="width:325px" onchange="getZAxisDataElements()">
+					<option value="$ALL">[ Select DataElementGroup / All ]</option>				
+					#foreach ( $group in $dataElementGroups )
+						<option value="$group.id" title="$group.name">$group.name</option>
+					#end
+				</select>
+			</td>   
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>
+                
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>
+                			
+		<tr>
+			<td class="NormalB">Z-Axis DataElement<br>
+				<select id="zaxisDataelements" name="zaxisDataelements" style="width:325px"></select>
+			</td>
+			<td class="NormalB" align="center">&nbsp;</td>
+			<td class="NormalB"><input type="checkbox" id="ougSetCB" name="ougSetCB" onchange="orgUnitGroupSetCB()"> OrgunitGroupwise Analysis</td>
+		</tr>
+  			              
+		<tr>
+			<td class="NormalB">&nbsp;</td>   
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>
+                			
+		<tr>
+			<td class="NormalB">$i18n.getString( "ga_orgunitgroupset" )<br>
+				<select name="orgUnitGroupSetListCB" id="orgUnitGroupSetListCB" style="width: 325px;" onchange="getOrgUnitGroups()" disabled>
+					#foreach($organisationUnitGroupSet in $orgUnitGroupSets )
+						<option value="$organisationUnitGroupSet.id">$organisationUnitGroupSet.name</option>
+					#end
+				</select>
+				<br>$i18n.getString( "ga_orgunit" )<br>    			                    	
+				<select name="orgUnitListCB" id="orgUnitListCB" multiple style="width: 325px;height: 100px" ondblclick="remOUFunction()">
+				</select>                    				                                                
+			</td>   
+			<td class="NormalB" align="center">&nbsp;</td>
+			<td class="NormalB" align="center">
+				<table>
+					<tr>
+						<td class="NormalB">PeriodType:<br>
+							<select id="periodTypeLB" name="periodTypeLB">
+								#foreach($periodType in $periodTypes)
+									<option value="$periodType.name" #if($periodType.name.equalsIgnoreCase("Monthly")) selected #end>$periodType.name</option>
+								#end    
+							</select>
+						</td>
+						<td>&nbsp;</td>
+						<td align="right" class="NormalB">$i18n.getString( "ga_facilityby" )<br>
+							<select id="facilityLB" name="facilityLB" onchange="facilityChangeFunction(event)" >
+								<option value="children" selected>Children</option>
+								<option value="random">Selected</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="NormalB">&nbsp;</td>   
+						<td class="NormalB">&nbsp;</td>
+						<td class="NormalB">&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="NormalB">
+							<label for="startDate">$i18n.getString( 'start_date' ) ($i18n.getString( "format.date.label" ))</label><br/>
+							<input type="text" id="startDate" name="startDate" style="width:10em">
+							<img src="../images/calendar_icon.gif" width="16" height="16" id="getStartDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">        
+   			            </td>
+						<td>&nbsp;</td>
+						<td align="right" class="NormalB">
+							<label for="endDate">$i18n.getString( 'end_date' ) ($i18n.getString( "format.date.label" ))</label><br />
+							<input type="text" id="endDate" name="endDate" style="width:10em">
+							<img src="../images/calendar_icon.gif" width="16" height="16" id="getEndDate" cursor: pointer;" title="$i18n.getString( "date_selector" )" onmouseover="this.style.background='orange';" onmouseout="this.style.background=''">
+						</td>
+					</tr>
+					<tr>
+						<td class="NormalB">&nbsp;</td>   
+						<td class="NormalB">&nbsp;</td>
+						<td class="NormalB">&nbsp;</td>
+					</tr>					                    			                   			        
+					<tr>
+						<td>
+							<input type="submit" name="ViewChart" value="$i18n.getString( 'ga_viewchart' )" style="width: 120; height: 25; font-family:Arial; font-weight:bold; color:#000000">
+						</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>                            
+					<input type="hidden" name="ouIdTB" id="ouIdTB">
+				</table>    
+			</td>
+		</tr>
+	</table>							
+</form>
+    
+    
+<script type="text/javascript">
+	
+	Calendar.setup({
+        inputField     :    "startDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getStartDate"   // trigger for the calendar (button ID)
+    });
+	
+	Calendar.setup({
+        inputField     :    "endDate",      // id of the input field
+        ifFormat       :    "$i18n.getString("format.date.label")",       // format of the input field
+        button         :    "getEndDate"   // trigger for the calendar (button ID)
+    });
+</script>
+              

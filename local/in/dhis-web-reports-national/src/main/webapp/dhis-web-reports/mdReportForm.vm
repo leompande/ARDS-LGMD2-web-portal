@@ -1,0 +1,132 @@
+<style>
+    #overlay {
+    z-index:9998;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#000;
+    opacity:0.45;
+    -moz-opacity:0.45;
+    filter:alpha(opacity=45);
+    visibility:hidden;
+    }
+    #overlayImg{ width: 50px; height: 50px; z-index: 9999; position: absolute; left:50%}
+</style>
+<div id="overlay">
+    <div id="overlayImg"><img  width="50" height="50" src="images/ajax-loader.gif" /></div>
+</div>
+<h1>$i18n.getString( "md_report_ra" )</h1>
+<hr /><br />
+<form id="reportForm" name="reportForm" action="generateMDReport.action" method="post" onSubmit="return formValidationsForMDReport()" target="_blank">
+	
+	<table style=" border-collapse: collapse; margin-top: 0;" cellpadding="0" cellspacing="0" border=0 width="75%" align="center">
+		<tr>
+			<td width="37%" class="NormalB">
+				$i18n.getString( "filter" ):&nbsp;
+				<input type="text" id="availableDataElementsFilter" onKeyUp="filterAvailableDataElements()" style="min-width:24em">
+		  </td>
+			<td width="11%" class="NormalB">&nbsp;</td>
+			<td width="52%" class="NormalB">&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+			<td class="NormalB">&nbsp;</td>
+		</tr>    
+		
+		<tr>
+			<td class="NormalB">$i18n.getString( "available_delist" )<br>
+				<select multiple size="7" id="availableDataElements" name="availableDataElements"  style="width:325px; height:100px" ondblclick="moveSelectedById( 'availableDataElements', 'selectedDataElements' )">
+					#foreach ( $reportOption in $reportOptionList )
+					<option value="$reportOption.optionValue" title="$reportOption.optionText">$reportOption.optionText</option>
+					#end
+				</select>
+			</td>
+			<td class="NormalB" align="center"><br />
+				&nbsp;&nbsp;<input type="button" value="&gt;" style="width:40px" onClick="moveSelectedById( 'availableDataElements', 'selectedDataElements' )">&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;<input type="button" value="&lt;" style="width:40px" onClick="moveSelectedById( 'selectedDataElements', 'availableDataElements' )">&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;<input type="button" value="&gt;&gt;" style="width:40px" onClick="moveAllById( 'availableDataElements', 'selectedDataElements' )">&nbsp;&nbsp;<br />
+				&nbsp;&nbsp;<input type="button" value="&lt;&lt;" style="width:40px" onClick="moveAllById( 'selectedDataElements', 'availableDataElements' )">&nbsp;&nbsp;
+			</td>
+			<td class="NormalB"> $i18n.getString( "selected_delist" )<br />
+				<select multiple size="7" id="selectedDataElements" name="selectedDataElements" style="width:350px; height:100px" ondblclick="moveSelectedById( 'selectedDataElements', 'availableDataElements' )">
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+            <td class="NormalB">
+                $i18n.getString( "organisationunit" ) :<br />
+                <input type="text" name="ouNameTB" id="ouNameTB" style="width:320px" disabled>
+				<br/>
+				<select name="orgUnitLevelCB" id="orgUnitLevelCB" size="7" style="width: 325px;"></select>					
+            </td>
+			<td>&nbsp;</td>
+            <td class="NormalB">
+                <table>
+					<tr>
+						<td>
+							From Date : <br />
+							<select id="selectedStartPeriodId" name="selectedStartPeriodId" style="width:175px">
+							#foreach ( $mperiod in $periods )
+								<option value="$mperiod.id">$simpleDateFormat.format( $mperiod.startDate )</option>
+							#end
+							</select>
+						</td>
+						<td class="NormalB">
+							To Date : <br />
+							<select id="selectedEndPeriodId" name="selectedEndPeriodId" style="width:145px">
+							#foreach ( $mperiod in $periods )
+								<option value="$mperiod.id">$simpleDateFormat.format( $mperiod.startDate )</option>
+							#end
+							</select>
+						</td>						
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>
+							$i18n.getString( "generated_data_type" ) :<br />
+							<select id="aggData" name="aggData" style="width:200px" onChange="enableCheckBox();">
+								<option value="generateaggdata" selected>$i18n.getString( "generate_agg_data" )</option>
+								<option value="useexistingaggdata">$i18n.getString( "use_existing_agg_data" )</option>
+								<option value="usecaptureddata">$i18n.getString( "use_captured_data" )</option>
+							</select>							
+						</td>
+						<td>
+							<br />
+							<input type="checkbox" id="excludeZeroData" name="excludeZeroData" disabled="disabled" /> Exclude Zero Data
+						</td>	
+					</tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" id="ViewReport" name="generate" value="$i18n.getString( "generate_report" )" />
+							<input type="hidden" name="autogen" id="autogen" value="0" />
+							<input type="hidden" name="ouIDTB" id="ouIDTB" />
+							<input type="hidden" name="ouLevelTB" id="ouLevelTB" />
+							<input type="hidden" name="reportTypeNameTB" id="reportTypeNameTB" value="$reportTypeName" />
+						</td>
+					</tr>
+				</table>
+            </td>
+        </tr>		
+	</table>
+ </form>
+
+
+<script type="text/javascript">
+
+    var availableDataElements = new Object();   
+    #foreach ( $reportOption in $reportOptionList )
+        availableDataElements['$reportOption.optionValue'] = '$encoder.jsEscape( $reportOption.optionText, "'" )';
+    #end
+    
+</script>

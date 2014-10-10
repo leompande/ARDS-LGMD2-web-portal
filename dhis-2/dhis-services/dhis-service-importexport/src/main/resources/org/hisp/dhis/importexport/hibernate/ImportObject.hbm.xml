@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="org.hisp.dhis.importexport.ImportObject" table="importobject">
+    <id column="importobjectid" name="id">
+      <generator class="native"/>
+    </id>
+    <property column="status" name="status"/>
+    <property column="classname" name="className"/>
+    <property column="groupmembertype" name="groupMemberType"/>
+    <property column="object" length="65535" name="object" type="serializable"/>
+    <property column="compareobject" length="65535" name="compareObject" type="serializable"/>
+  </class>
+</hibernate-mapping>

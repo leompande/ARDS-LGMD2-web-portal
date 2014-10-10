@@ -1,0 +1,8 @@
+<h3>$i18n.getString( "dhis-web-maintenance-user" ) #openHelp( "users" )</h3>
+
+<ul class="introList">
+    #introListImgItem( "user.action" "user_by_orgunit" "user" )
+    #introListImgItem( "alluser.action" "user" "user" )
+    #introListImgItem( "alluser.action?selfRegistered=true" "self_registered_user" "user" )
+    #introListImgItem( "allRole.action" "user_role" "user" )
+</ul>

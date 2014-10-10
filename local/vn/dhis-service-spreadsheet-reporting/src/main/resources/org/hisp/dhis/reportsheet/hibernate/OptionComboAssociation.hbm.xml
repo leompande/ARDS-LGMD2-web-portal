@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="org.hisp.dhis.reportsheet.OptionComboAssociation" table="reportexcel_optioncomboassociations">
+
+    <id name="id" column="optioncomboassociationid">
+      <generator class="native" />
+    </id>
+
+    <properties name="source_optioncombo_unique_key" unique="true">
+      <many-to-one name="source" class="org.hisp.dhis.organisationunit.OrganisationUnit" column="sourceid"
+		foreign-key="fk_optioncomboassociation_organisationunitid" />
+      <many-to-one name="optionCombo" class="org.hisp.dhis.dataelement.DataElementCategoryOptionCombo" column="optionComboid"
+		foreign-key="fk_optioncomboassociation_optioncomboid" />
+    </properties>
+
+  </class>
+</hibernate-mapping>

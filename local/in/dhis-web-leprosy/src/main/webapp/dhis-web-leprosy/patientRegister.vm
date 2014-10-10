@@ -1,0 +1,414 @@
+<script language="javascript" src="/dhis-web-commons/util/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" media="screen" href="/dhis-web-commons/util/css/redmond/jquery-ui.css">
+
+<style>
+    .form_heading{
+        text-align:center;
+    }
+    #formTable td{ border-bottom:solid thin;}
+    #nameTable td{ border:none;}
+    #addressTable td{ border:none;}
+    #doseTable td{ border:none;}
+    #deformityTable td{ border:none;}
+    #reactionTable td{ border:none;}
+    #socioTable td{ border:none;}
+</style>
+<form id="indexForm" name="indexForm" method="post" action="patientRegister.action">
+    <div style="margin-left:20px">
+        <table id="headingTable" align="center" style="text-align:center;">
+            <tr>
+                <td><h2>Basic Record of each Leprosy case to be kept at Field Level (PHC, CHC, District Hospital)</h2>
+                    <h2>NATIONAL LEPROSY ERADICATION PROGRAMME, Maharashtra State</h2>
+                    <h2>PATIENT'S TREATMENT RECORD CARD</h2>
+            </tr>
+        </table>
+        <table id="orgUnitTable" align="center">
+            <tr>
+                <td>Name of Subcenter:</td>
+                <td><input id="sc_name" name="sc_name" type="text" disabled="disabled"/></td>
+                <td width="50px;"></td>
+                <td>Name of PHC/RH/UHP:</td>
+                <td><input id="phc" name="phc" type="text" disabled="disabled"/></td>
+            </tr>
+            <tr>
+                <td>Name of Taluka:</td>
+                <td><input id="taluka_name" name="taluka_name" type="text" disabled="disabled"/></td>
+                <td></td>
+                <td>Name of District:</td>
+                <td><input id="district" name="district" type="text" disabled="disabled"/></td>
+            </tr>
+        </table>
+        <table id="IdTable">
+            <tr>
+                <td>Patient TRC Number:</td>
+                <td><div id="patientId1"><input type="text" id="patientId" name="patientId" /></div></td>
+            </tr>
+        </table>
+        <table cellpadding="5" cellspacing="1" id="formTable"  style="border-left:solid thin; border-right:solid thin;">
+            <tr>
+                <td width="20%" style="border-top:solid thin;">1.) Name of Patient:</td>
+                <td colspan="3" style="border-top:solid thin;">
+                    <table id="nameTable">
+                        <tr>
+                            <td>Given name</td>
+                            <td>Middle name</td>
+                            <td>Family name</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="givenName" name="givenName"/></td>
+                            <td><input type="text" id="middleName" name="middleName"/></td>
+                            <td><input type="text" id="familyName" name="familyName"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">2.) Residential Address: </td>
+                <td colspan="3">
+                    <table id="addressTable">
+                        <tr><td>Address Line 1: </td><td><input type="text" id="resAddress1" name="resAddress1" size="50" /></td></tr>
+                        <tr><td>Address Line 2: </td><td><input type="text" id="resAddress2" name="resAddress2" size="50" /></td></tr>
+                        <tr><td>City/Village: </td><td><input type="text" id="cityVillage" name="cityVillage" /></td></tr>
+                        <tr><td>Pincode: </td><td><input type="text" id="zipCode" name="zipCode" /></td></tr>
+                    </table>
+                </td>
+
+            </tr>
+            <tr id="regionRow">
+                <td valign="top" style="border:none">3.) Residential Status</td>
+                <td colspan="3" style="border:none">
+                    <label><input type="radio" value="rural" id="region" name="region" onclick="showRural()" />Rural</label>
+                    <label><input type="radio" value="urban" id="region" name="region" onclick="showUrban()" />Urban</label>
+                </td>
+            </tr>
+            <tr id="subRegionRow">
+                <td style="border:none"></td>
+                <td colspan="3" style="border:none">
+                    <label><input type="radio" value="tribal" id="subRegion" name="subRegion" onclick="showFacility()" />Tribal</label>
+                    <label><input type="radio" value="non-tribal" id="subRegion" name="subRegion" onclick="showFacility()" />Non-Tribal</label>
+                </td>
+            </tr>
+            <tr id="divisionRow">
+                <td></td>
+                <td colspan="3">
+                    <label><input type="radio" value="muncipal_council" id="division" name="division" />Mun. Counc.</label>
+                    <label><input type="radio" value="hospital" id="division" name="division" />Hospital</label>
+                    <label><input type="radio" value="phc" id="division" name="division" />PHC</label>
+                </td>
+            </tr>
+            <tr id="urbanRow">
+                <td></td>
+                <td colspan="3">
+                    <label><input type="radio" value="muncipality" id="division" name="division" />Municipal Corporation</label>
+                </td>
+            </tr>
+            <tr>
+                <td>4.) Date of Birth:</td>
+                <td><input type="text" id="dob" name="dob" onchange="calcIfAdult()" /></td>
+                <td colspan="2" style="color:#F00; font-weight:bold" id="adultOrChild"></td>
+            </tr>
+            <tr>
+                <td>5.) Sex</td>
+                <td colspan="3">
+                    <select id="gender" name="gender">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>6.) Category of Patient</td>
+                <td colspan="3"><select id="category" name="category">
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="GENERAL">General</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>7.) Type of Disease</td>
+                <td colspan="3"><select id="diseaseType" name="diseaseType" onchange="showMBDoses()">
+                        <option value="PB">PB</option>
+                        <option value="MB">MB</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>8.) Mode of Detection</td>
+                <td colspan="3"><select id="detectionMode" name="detectionMode">
+                        <option value="MPW">MPW/HW</option>
+                        <option value="ASHA">ASHA</option>
+                        <option value="USHA">Usha</option>
+                        <option value="SELF">Self Reporting</option>
+                        <option value="OPD">OPD</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>9.) NEW CASE DETECTION</td>
+                <td colspan="3">
+                    <select id="caseDetection" name="caseDetection" onchange="showRelapse()">
+                        <option value="NEW">New Case</option>
+                        <option value="RELAPSE">Relapse</option>
+                        <option value="RE-ENTERED">Re-entered</option>
+                        <option value="REFERRED">Referred</option>
+                        <option value="RE-CLASSIFIED">Re-Classified</option>
+                        <option value="OTHER-STATE">From other State</option>
+                    </select>
+                    <div id="relapse">If, RELAPSE, Confirmed at District Hospital/Skin Specialist
+                        <select id="relapseSelect" name="relapseSelect">
+                            <option value="YES">Yes</option>
+                            <option value="NO">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>10.) Date of registration <br/> (DD/MM/YYYY)</td>
+                <td colspan="3"><input type="text" name="regDate" id="regDate"/></td>
+            </tr>
+            <tr>
+                <td>11.) Date of First Dose</td>
+                <td colspan="3"><input type="text" name="firstDose" id="firstDose" /></td>
+            </tr>
+            <tr>
+                <td>12.) Date of Subsequent Doses</td>
+                <td colspan="3">
+                    <table id="doseTable">
+                        <tr>
+                            <td>Dose 1:</td>
+                            <td><input type="text" id="dose1" name="dose1" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 2:</td>
+                            <td><input type="text" id="dose2" name="dose2" /></td>
+                        </tr>
+                        <tr>
+                            <td>Dose 3:</td>
+                            <td><input type="text" id="dose3" name="dose3" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 4:</td>
+                            <td><input type="text" id="dose4" name="dose4" /></td>
+                        </tr>
+                        <tr>
+                            <td>Dose 5:</td>
+                            <td><input type="text" id="dose5" name="dose5" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 6:</td>
+                            <td><input type="text" id="dose6" name="dose6" /></td>
+                        </tr>
+                        <tr class="mbRows">
+                            <td>Dose 7:</td>
+                            <td><input type="text" id="dose7" name="dose7" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 8:</td>
+                            <td><input type="text" id="dose8" name="dose8" /></td>
+                        </tr>
+                        <tr class="mbRows">
+                            <td>Dose 9:</td>
+                            <td><input type="text" id="dose9" name="dose9" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 10:</td>
+                            <td><input type="text" id="dose10" name="dose10" /></td>
+                        </tr>
+                        <tr class="mbRows">
+                            <td>Dose 11:</td>
+                            <td><input type="text" id="dose11" name="dose11" /></td>
+                            <td>&nbsp;</td>
+                            <td>Dose 12:</td>
+                            <td><input type="text" id="dose12" name="dose12" /></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>13.) Contacts</td>
+                <td colspan="3"><label>
+                        <input type="radio" name="contacts" value="ENUMERATED" id="contacts" />
+                        Enumerated</label>
+                    <label>
+                        <input type="radio" name="contacts" value="EXAMINED" id="contacts" />
+                        Examined</label></td>
+            </tr>
+            <tr>
+                <td colspan="1">14.) Date of RFT/ Completion of Treatment (DD/MM/YYYY)</td>
+                <td colspan="3"><input type="text" name="dateRFT" id="dateRFT" /></td>
+            </tr>
+            <tr>
+                <td colspan="1">15.) Deleted for other Reason (Death, Left the Area, Refused Treatment etc.)</td>
+                <td colspan="3"><input type="text" name="voidedReason" id="voidedReason"  /></td>
+            </tr>
+            <tr>
+                <td>16.) Deformity</td>
+                <td colspan="3">
+                    <table id="deformityTable">
+                        <tr>
+                            <td><label><input type="radio" name="deformity" value="Grade1" id="deformity" onclick="showDeformityTime()" />Grade I</label></td>
+                            <td><label><input type="radio" name="deformity" value="Grade2" id="deformity" onclick="showDeformityTime()" />Grade II</label></td>
+                        </tr>
+                        <tr id="deformityTimeRow">
+                            <td><label><input type="radio" name="deformityTime" value="NCD" id="deformityTime" />NCD</label></td>
+                            <td><label><input type="radio" name="deformityTime" value="DURING_TREATMENT" id="deformityTime" />During Treatment</label></td>
+                            <td><label><input type="radio" name="deformityTime" value="AFTER_TREATMENT" id="deformityTime" />After Treatment</label></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>17.) Type of Deformity</td>
+                <td colspan="3">
+                    <label><input type="checkbox" name="deformityType" id="deformityType" value="EYE" />Eye</label>
+                    <label><input type="checkbox" name="deformityType" id="deformityType" value="FOOT"  />Foot</label>
+                    <label><input type="checkbox" name="deformityType" id="deformityType" value="HAND" />Hand</label>
+                    <label><input type="checkbox" name="deformityType" id="deformityType" value="NOSE" />Nose</label>
+                    <label><input type="checkbox" name="deformityType" id="deformityType" value="OTHER" />Other</label>
+                </td>
+            </tr>
+            <tr>
+                <td>18.) Eligible for RCS</td>
+                <td colspan="3">
+                    <select id="rcsEligible" name="rcsEligible">
+                        <option value="YES">Yes</option>
+                        <option value="NO">No</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;Referred for RCS:&nbsp;
+                    <select id="rcsReferred" name="rcsReferred">
+                        <option value="YES">Yes</option>
+                        <option value="NO">No</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td  style="border:none">19.) Patient Undergone RCS</td>
+                <td colspan="3"  style="border:none">
+                    <label><input type="checkbox" name="rcsPart" id="rcsPart" value="EYE" />Eye</label>
+                    <label><input type="checkbox" name="rcsPart" id="rcsPart" value="FOOT" />Foot</label>
+                    <label><input type="checkbox" name="rcsPart" id="rcsPart" value="HAND" />Hand</label>
+                    <label><input type="checkbox" name="rcsPart" id="rcsPart" value="NOSE" />Nose</label>
+                    <label><input type="checkbox" name="rcsPart" id="rcsPart" value="OTHER" />Other</label>
+                </td>
+            </tr>
+            <tr id="rcsDateRow">
+                <td></td>
+                <td colspan="3">Date of RCS Done: <input type="text" name="rcsDate" id="rcsDate" /></td>
+            </tr>
+            <tr>
+                <td>20.) Name of RCS Center</td>
+                <td colspan="3"><input name="rcsCenterName" type="text" /></td>
+            </tr>
+            <tr>
+                <td>21.) Repeat RCS</td>
+                <td colspan="3">
+                    <label><input type="checkbox" name="rcsRepeat" id="rcsRepeat" value="EYE" />Eye</label>
+                    <label><input type="checkbox" name="rcsRepeat" id="rcsRepeat" value="FOOT" />Foot</label>
+                    <label><input type="checkbox" name="rcsRepeat" id="rcsRepeat" value="HAND" />Hand</label>
+                    <label><input type="checkbox" name="rcsRepeat" id="rcsRepeat" value="NOSE" />Nose</label>
+                    <label><input type="checkbox" name="rcsRepeat" id="rcsRepeat" value="OTHER" />Other</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1"  style="border:none"> 22.) RCS Patient Belonging to Below Poverty Level (BPL)</td>
+                <td style="border:none" colspan="3">
+                    <select name="rcsPatientBPL">
+                        <option value="YES">Yes</option>
+                        <option value="NO">No</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" >RCS Reimbursement Amount (Rs.): <input type="text" name="rcsReimbursementAmt" /></td>
+            </tr>
+            <tr>
+                <td rowspan="2">23.) Whether developed New Disability after MDT</td>
+                <td colspan="2" rowspan="2">
+                    <label><input type="checkbox" name="disabilityMDT" id="disabilityMDT" value="EYE" />Eye</label>
+                    <label><input type="checkbox" name="disabilityMDT" id="disabilityMDT" value="FOOT" />Foot</label>
+                    <label><input type="checkbox" name="disabilityMDT" id="disabilityMDT" value="HAND" />Hand</label>
+                    <label><input type="checkbox" name="disabilityMDT" id="disabilityMDT" value="NOSE" />Nose</label>
+                    <label><input type="checkbox" name="disabilityMDT" id="disabilityMDT" value="OTHER" />Other</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>24.) Reaction occurred</td>
+                <td colspan="3">
+                    <table id="reactionTable">
+                        <tr>
+                            <td><label><input type="radio" name="reactionTime" value="NCD" id="reactionTime" />NCD</label></td>
+                            <td><label><input type="radio" name="reactionTime" value="DURING_TREATMENT" id="reactionTime" />During Treatment</label></td>
+                            <td><label><input type="radio" name="reactionTime" value="AFTER_TREATMENT" id="reactionTime" />After Treatment</label></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border:none">25.) Reaction Managed at:</td>
+                <td style="border:none" colspan="2">
+                    <select name="reactionMgmtAt" id="reactionMgmtAt">
+                        <option value="CENTER">Centre</option>
+                        <option value="REFERRED_TO_DIST_HOSPITAL">Referred to District Hospital</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="border:none"></td>
+                <td style="border:none">Date of Treatment Started: <input type="text" name="treatmentStartDate" id="treatmentStartDate" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">Date of Treatment Completed: <input type="text" name="treatmentEndDate" id="treatmentEndDate" /> </td>
+            </tr>
+            <tr>
+                <td>26.) Medical services given to patient</td>
+                <td colspan="3">
+                    <select name="servicesGiven" id="servicesGiven">
+                        <option value="MCR_CHAPPAL">MCR Chappal</option>
+                        <option value="GOGGLE">Goggle</option>
+                        <option value="SPLINTS">Splints</option>
+                        <option value="SELF_CARE_KIT">Self Care Kit</option>
+                        <option value="PHYSIOTHERAPHY">Physiotherapy</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>27.) Socioeconomic Services provided </td>
+                <td colspan="3">
+                    <table id="socioTable">
+                        <tr>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Antyoday Anna(Food) Yojna" />Antyoday Anna(Food) Yojna</label></td>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Sanjay Gandhi Niradhar Anudan Yojna" />Sanjay Gandhi Niradhar Anudan Yojna</label></td>
+                        </tr>
+                        <tr>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Indira Awas Yojna" />Indira Awas Yojna</label></td>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Disability Certificate" />Disability Certificate</label></td>
+                        </tr>
+                        <tr>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Vocational Training" />Vocational Training</label></td>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Self Employment" />Self Employment</label></td>
+                        </tr>
+                        <tr>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="Bank/Patpedhi Loan" />Bank/Patpedhi Loan</label></td>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="socioEconomicServices" value="ST/Railway Concession" />ST/Railway Concession</label></td>
+                        </tr>
+                        <tr>
+                            <td><label><input type="checkbox" name="socioEconomicServices" id="jobServices" value="Job" onclick="showJobType()" />Job</label>
+                                &nbsp;&nbsp;
+                                <select name="jobType" id="jobType">
+                                    <option value="GOVT">Govt.</option>
+                                    <option value="PRIVATE">Private</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" align="center" border="0">
+                        <tr> <td style="border:none"> &nbsp;</td></tr>
+                        <tr>
+                            <td style="border:none"><input type="submit" name="Add" value="Submit"  /></td>
+                        </tr>
+                    </table>
+                </td>
+        </table>
+    </div>
+    <input type="hidden" name="ouIDTB" id="ouIDTB">
+    <input type="hidden" name="parentouIDTB" id="parentouIDTB">
+	<input type="hidden" name="flagTB" id="flagTB" value="1" />	
+</form>

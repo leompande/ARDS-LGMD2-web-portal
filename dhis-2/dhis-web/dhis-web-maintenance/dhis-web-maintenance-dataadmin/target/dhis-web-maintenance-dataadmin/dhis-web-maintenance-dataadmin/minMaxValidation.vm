@@ -1,0 +1,33 @@
+<script type="text/javascript">
+	var i18n_not_choose_dataset = '$encoder.jsEncode( $i18n.getString( "not_choose_dataset" ) )';
+	var i18n_not_choose_organisation = '$encoder.jsEncode( $i18n.getString( "not_choose_organisation" ) )';
+	var i18n_generating_min_max_values = '$encoder.jsEncode( $i18n.getString( "generating_min_max_values" ) )';
+	var i18n_removing_min_max_values = '$encoder.jsEncode( $i18n.getString( "removing_min_max_values" ) )';
+</script>
+
+<h3>$i18n.getString( "min_max_value_generation" ) #openHelp( "minMaxValueGeneration" )</h3>
+
+<form id="minMaxGeneratingForm" method="post">
+<table>
+  <tr>
+    <th colspan="2">$i18n.getString('available_dataset')</th>
+    <td rowspan="2">#organisationUnitSelectionTree( false, false, true ) </td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="2">
+		<select size="26px" multiple="multiple" style="width:30em" id="dataSetIds" name="dataSetIds">
+			#foreach( $dataSet in $dataSets )
+			  <option value="$dataSet.id">$encoder.htmlEncode( $dataSet.displayName )</option>
+			#end
+		</select>
+	</td>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+	  	<input type="button" onclick="javascipt:modifyMinMaxValues( false )" style="width:10em" value="$i18n.getString( 'generate' )">
+		<input type="button" onclick="javascipt:modifyMinMaxValues( true )" style="width:10em" value="$i18n.getString( 'remove' )"/>
+	</td>
+  </tr>
+</table>
+</form>

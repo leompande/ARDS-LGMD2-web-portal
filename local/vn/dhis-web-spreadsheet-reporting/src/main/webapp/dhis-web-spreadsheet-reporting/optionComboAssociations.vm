@@ -1,0 +1,120 @@
+<script type="text/javascript">
+	var validator = null;
+
+	jQuery(document).ready( function()
+	{
+		validator = validation( "optionComboAssociationsForm", function( form ) { validateOptionComboAssociations( form ); });
+		
+		categoryLib.loadCategories( "categoryId" );
+	} );
+	
+	var i18n_label = '$encoder.jsEscape($i18n.getString( 'select_category_option' ) , "'")';
+	var i18n_verify_category_option = '$encoder.jsEscape($i18n.getString( 'please_select_category_option' ) , "'")';
+	var i18n_verify_category_option_combo = '$encoder.jsEscape($i18n.getString( 'please_select_category_option_combo' ) , "'")';
+</script>
+
+<h3>$i18n.getString( "define_categoryoptioncombo_associations" )</h3>
+
+<form id="optionComboAssociationsForm" action="updateOptionComboAssociations.action">  
+	<table>
+		<tbody>
+			<tr><th>$i18n.getString( "categories" )</th></tr>
+			<tr>
+				<td>
+					<select id="categoryId" style="width:220px" onchange="getCategoryOptions();" class="{validate:{required:true}}">
+					</select>
+				</td>
+			</tr>
+			<tr><th>$i18n.getString( "category_options" )</th></tr>
+			<tr>
+				<td>
+					<select id="categoryOptionId" style="width:220px" onchange="getOptionCombosByCategoryOption( this.value )" class="{validate:{required:true}}">
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+  
+	<table id="selectionTable">
+		<tr>
+			<td>
+				<select id="optionComboId" style="width:400px" size="27" onclick="getAssociationsByOptionCombo( this.value )" class="{validate:{required:true}}">
+				</select>
+			</td>
+			<td>
+			#organisationUnitSelectionTree( true, true, false )
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" id="submitButton" value="$i18n.getString( 'save' )" style="width:10em"/>
+				<input type="button" onclick="window.location.href='openAdministrator.action'" value="$i18n.getString( 'back' )" style="width:10em"/>
+			</td>
+		</tr>
+	</table>
+
+</form>
+
+<script type="text/javascript">
+
+	function getCategoryOptions()
+	{
+		categoryLib.loadCategoryOptionsByCategory( getFieldValue( 'categoryId' ), null, 'categoryOptionId' );
+		getOptionCombosByCategoryOption( getFieldValue( "categoryOptionId" ) );
+	}
+
+	function getOptionCombosByCategoryOption( value )
+	{
+		var optionComboTarget = jQuery( "#optionComboId" );
+		optionComboTarget.empty();
+	
+		if ( value && value != "" )
+		{
+			jQuery.each( optionComboMap[value], function( i, item )
+			{
+				optionComboTarget.append( '<option value="' + item.id + '">' + item.name + '</option>' );
+			} );
+		}
+	}
+	
+	function getAssociationsByOptionCombo( value )
+	{
+		if ( value && value != "" )
+		{
+			jQuery.get( "showAssociationsByOptionCombo.action",
+			{
+				optionComboId: value
+			}, function( json )
+			{
+				if ( json.response == "success" ) {
+					selectionTree.buildSelectionTree();
+				}
+			} );
+		} else {
+			selectionTree.clearSelectedOrganisationUnits();
+			selectionTree.buildSelectionTree();
+		}
+	}
+	
+	function validateOptionComboAssociations( _form )
+	{
+		var optionComboId = getFieldValue( "optionComboId" );
+	
+		if ( optionComboId == null || optionComboId == "" )
+		{
+			markInvalid( "optionComboId", i18n_verify_category_option_combo );
+			return;
+		}
+	
+		jQuery.get( _form.action,
+		{
+			optionComboId: optionComboId
+		}, function ( json ) {
+			if ( json.response == "success" ) {
+				showSuccessMessage( json.message );
+			} else {
+				showErrorMessage( json.message );
+			}
+		} );
+	}
+</script>

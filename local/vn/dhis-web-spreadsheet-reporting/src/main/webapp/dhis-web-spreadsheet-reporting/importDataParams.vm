@@ -1,0 +1,69 @@
+<body>
+#if($!fileExcel)
+	<div id="messageUpload">
+		$i18n.getString( "upload_file" ) $i18n.getString( "success" )<br>$fileExcel.getName()
+	</div>
+#end
+<span id="message" style="top:70px;right:5px;position:fixed;width:200px;z-index:100009" onclick="hideById(this.id);"></span>
+
+<table width="82%">
+	<h3>$i18n.getString('import_data') #openHelp( "excelReportingImportData" )</h3>
+	<form name="importingParam" id="importingParam" action="uploadExcelImport.action" method="POST" enctype="multipart/form-data">   
+		<tr>
+			<td width="18%" style=" width:25% ">$i18n.getString( 'select_excel_file' )</td>
+			<td width="82%">
+				<input type="file" id="upload" name="upload" onChange="enable('uploadButton');">
+				<input name="uploadButton" id="uploadButton" type="button" value="$i18n.getString( 'upload_file' )" onclick="validateUploadExcelImportByJSON();" disabled />
+			</td>   
+		</tr>
+	</form>
+	<tr>
+		<td>$i18n.getString( 'import_report' )</td>
+		<td>
+			<select type="text" id="importReportId" name="importReportId" #if(!$!fileExcel || !$!organisationUnit) disabled #end style="min-width:20em;" onchange="getPeriodsByImportReport(this.value)">					
+			#foreach($importReport in $importReports)
+				<option value="$!importReport.id">$!encoder.htmlEncode( $!importReport.displayName )</option>
+			#end
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>$i18n.getString( 'period' )</td>
+		<td>					
+			<select name="period" id="period" style="min-width:20em;" type="text" #if(!$!fileExcel || !$!organisationUnit) disabled #end>
+			</select>
+			<input type="button" value="&lt;&lt;" id="lastYear" name="lastYear" onclick="getImportingPeriod( 'previousPeriodsGeneric.action' );"  #if(!$!fileExcel || !$!organisationUnit) disabled #end/>
+			<input type="button" value="&gt;&gt;" id="nextYear" name="nextYear" onclick="getImportingPeriod( 'nextPeriodsGeneric.action' )" #if(!$!fileExcel || !$!organisationUnit) disabled #end />
+		</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>  
+</table>
+	 
+<hr/>
+<input type="button" onClick="javascript: getPreviewImportData();" style="width:100px" value="$i18n.getString('preview')" #if(!$!fileExcel || !$!organisationUnit) disabled #end/>
+<input type="button" onClick="javascript: selectAllData( this );" style="width:100px" value="$i18n.getString('select_all')" #if(!$!fileExcel || !$!organisationUnit) disabled #end/>
+<input type="button" onClick="javascript: importData();" style="width:100px" value="$i18n.getString('import')" #if(!$!fileExcel || !$!organisationUnit) disabled #end/>
+<input type="button" onClick="javascript: rollbackImporting();" style="width:150px" value="$i18n.getString('roll_back_import')" #if(!$!fileExcel || !$!organisationUnit) disabled #end/>
+
+<br/><br/>
+
+<div id="previewDiv">
+</div>
+
+<script language="javascript">
+	
+	var i18n_choose_import_item = '$encoder.jsEscape( $i18n.getString( "choose_import_item" ) , "'")';
+	var i18n_select_all = '$encoder.jsEscape( $i18n.getString( "select_all" ) , "'")';
+	var i18n_unselect_all = '$encoder.jsEscape( $i18n.getString( "unselect_all" ) , "'")';
+	var i18n_data_value = '$encoder.jsEscape( $i18n.getString( "data_value" ) , "'")';
+	var i18n_no_value_rollbacked = '$encoder.jsEscape( $i18n.getString( "no_value_rollbacked" ) , "'")';
+
+	#if ( $!fileExcel && $!organisationUnit )
+		getPeriodsByImportReport( jQuery("#importReportId").val() );
+	#end		
+</script>
+
+</body>

@@ -1,0 +1,138 @@
+
+<script>
+
+    var selectedOrgUnitId = $selectedOrgId;
+    var selctedIndicatorId = $selectedIndicatorId;
+    
+    
+    //alert( selctedIndicatorId );
+    
+function chartDisplayOptionChange(evt)
+{
+     var chartType = 0;
+     var tempICount = $selectedServiceList.size();
+     if(tempICount==0)  chartType=0;
+     else if(tempICount==1) chartType=1;
+     else chartType=2;
+
+     var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+     var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+ 
+     iframeForChart.location.href = "generateChart.action?currentChart="+chartNamesToView[chartType][indexForChart]+"&chartDisplayOption="+chartDisplayOptionValue;
+    // iframeForChart.location.href = "generateChart1.action?currentChart="+chartNamesToView[chartType][indexForChart]+"&chartDisplayOption="+chartDisplayOptionValue;
+    
+     getSortedList(chartDisplayOptionValue);     
+}
+
+function exportToExcelFunction1( summaryOption )
+{
+    //alert( "inside export excel function" );
+    //var chartDisplayOptionList = document.getElementById("chartDisplayOption");
+    //var chartDisplayOptionValue = chartDisplayOptionList.options[ chartDisplayOptionList.selectedIndex ].value;
+    
+    document.getElementById("exportExcelAnchor1").href="exportSurveyDataToExcel.action?viewSummary="+summaryOption+"&selectedOrgUnitId="+selectedOrgUnitId+"&selctedIndicatorId="+selctedIndicatorId+"&chartDisplayOption=none";
+    
+    //document.getElementById("exportExcelAnchor1").href="exportToExcel.action?viewSummary="+summaryOption+"&chartDisplayOption=none";
+
+}
+ 
+function exportDataStatusResultToWorkBook()
+{               
+    document.getElementById('htmlCode').value = document.getElementById('formResult').innerHTML;                                
+
+    return true;                
+}
+</script>
+
+</head>
+<body >
+<div align="right">
+    <a id="exportExcelAnchor1" name="exportExcelAnchor1" href="#" onclick="javascript:exportToExcelFunction1('no')" target="_blank">Export To Excel</a>
+</div> 
+<br>
+<form id="form1" name="form1" action="exportDataStatusToExcel.action" method="post" onsubmit="return exportDataStatusResultToWorkBook()" target="_newtab">
+<input type="hidden" name="htmlCode" id="htmlCode" />
+<div align="right" class="NormalB">
+    <!--<input type="submit" name="ExportToWorkBook" value="Export To WorkBook" style="width: 160; height: 25; font-family:Arial; font-weight:bold; color:#000000">-->
+</div>                  
+<div id="formResult">
+    
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: solid" bordercolor="black" width="100%">                
+   <tr>
+        <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" >Indicator Name</td>
+        #foreach( $survey in $surveyChartResult.series2 )
+            <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center" style="border-style: dotted; border-width: 1" >$survey</td>
+        #end    
+        <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center" style="border-style: dotted; border-width: 1"><strong>&nbsp;</strong></td>    
+        #foreach($xaxisvalue in $surveyChartResult.categories )
+            <td class="TableHeadingCellStyles" bgcolor="#C0C0C0" align="center" style="border-style: dotted; border-width: 1" >$xaxisvalue</td>                  
+        #end
+    </tr>
+        #set($count1 = 0)
+        #set( $surveyDataValueResult = $surveyChartResult.data2 )                      
+        #foreach($onedataList in $surveyChartResult.data )
+     <tr>
+        #set( $numValCimpleteResult = $surveyChartResult.numDataArray )
+        #set( $denumValCimpleteResult = $surveyChartResult.denumDataArray )
+        
+        #set( $numValList = $listTool.get($numValCimpleteResult, $count1) )
+        #set( $denumValList = $listTool.get($denumValCimpleteResult, $count1) )
+        #set( $count2 = 0 ) 
+             
+        <td class="TableHeadingCellStyles" style="border-style: dotted; border-width: 1" rowspan="3" >$yseriesList.get($count1)</td>
+        #foreach( $surveyDV in $surveyDataValueList ) 
+            <td class="TableHeadingCellStyles" align="center" style="border-style: dotted; border-width: 1" rowspan="3" >$!surveyDV.value</td>
+        #end 
+        <td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Num</strong></td>
+        #foreach($data in $onedataList) 
+           <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1">$listTool.get($numValList, $count2)</td>
+           #set( $count2 = $count2 + 1 )
+        #end
+       </tr>
+       <tr>           
+          <td class="TableHeadingCellStyles" align="center" bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Den</strong></td>
+           #set( $count2 = 0 )
+            #foreach($data in $onedataList) 
+          <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1">$listTool.get($denumValList, $count2)</td>
+            #set( $count2 = $count2 + 1 )
+           #end
+       </tr> 
+       <tr>           
+         <td class="TableHeadingCellStyles" align="center"  bgcolor="#C0C0C0" style="border-style: dotted; border-width: 1" ><strong>Val</strong></td> 
+         #set( $count2 = 0 )
+         #foreach($data in $onedataList) 
+         <td class="TableDataCellStyles" align="center" style="border-style: dotted; border-width: 1"><strong>$data</strong></td>
+         #set( $count2 = $count2 + 1 )
+         #end 
+      </tr>  
+      #set( $count1 = $count1 + 1 )
+              
+      #end 
+</table>
+<div align="center">
+     <iframe name="iframeForChart" id="iframeForChart" src="generateChart.action?currentChart=SurveyChart" width="850px" height="550px" scrolling=auto frameborder="0"></iframe>
+</div>    
+ <br>
+</div>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: solid" bordercolor="black" width="100%" WRAP="HARD">
+      <tr>
+              <td class="TableHeadingCellStyles" width="30%"  align="center" bgcolor="#C0C0C0" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1"><strong>Indicator Names</strong></td>
+              <td class="TableHeadingCellStyles" width="30%"  align="center"  bgcolor="#C0C0C0" colspan="2" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1"><strong>Formula</strong></td>
+              <td class="TableHeadingCellStyles" width="20%"  align="center"  bgcolor="#C0C0C0" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1"><strong>Numerator DataElements</strong></td> 
+              <td class="TableHeadingCellStyles" width="20%"  align="center"  bgcolor="#C0C0C0" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1"><strong>Denominator DataElements</strong></td>                   
+     </tr>
+     <tr>
+              <td class="TableHeadingCellStyles" width="30%" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1">$selectedIndicator.getName()</td>
+              <td class="TableHeadingCellStyles" width="25%" align="center" style="border-left-style:dotted; border-left-width:1; border-right-width:0; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1"><u>$selectedIndicator.getNumeratorDescription()</u><br>$selectedIndicator.getDenominatorDescription()</td>
+              <td class="TableHeadingCellStyles" width="5%"  align="left" style="border-left-style:dotted; border-left-width:0; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1">&nbsp;X&nbsp;$selectedIndicator.getIndicatorType().getFactor()</td>
+              <td class="TableCellDataWrapStyles" width="20%" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1" >$numDataElement</td>
+              <td class="TableCellDataWrapStyles" width="20%" style="border-left-style:dotted; border-left-width:1; border-right-width:1; border-top-style:dotted; border-top-width:1; border-bottom-style:dotted; border-bottom-width:1" >$denumDataElement</td>
+     </tr>                                           
+</table>
+
+<textarea id="testId" rows="10" cols="70" style="display:none">&nbsp;</textarea>
+    <input type="hidden" name="selectedOrganisationUnit" id="selectedOrganisationUnit" value="">
+    <input type="hidden" name="selectedIndicatorId" id="selectedIndicatorId" value="">
+                                                                         
+</form>
+ </body>

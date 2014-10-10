@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Home page -->
+	<bean id="org.hisp.dhis.coldchain.action.NoAction"
+        class="org.hisp.dhis.coldchain.action.NoAction"
+        scope="prototype">
+    </bean>
+
+<!-- model Type Attribute -->
+	
+	<!-- Model Type Attribute List -->
+	<bean id="org.hisp.dhis.coldchain.model.action.GetColdChainModelTypeAttributeListAction"
+		class="org.hisp.dhis.coldchain.model.action.GetColdChainModelTypeAttributeListAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>	
+	
+	<!-- Add Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddColdChainModelTypeAttributeForm"
+		class="org.hisp.dhis.coldchain.model.action.AddColdChainModelTypeAttributeForm"
+		scope="prototype">
+	</bean>
+	
+	<!-- Add -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddModelTypeAttributeAction"
+		class="org.hisp.dhis.coldchain.model.action.AddModelTypeAttributeAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />
+		<property name="modelTypeAttributeOptionService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeOptionService" />		
+	</bean>	
+	
+	<!-- show details -->
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeDetailsAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeDetailsAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>
+	<!-- Remove/Delete -->
+	<bean id="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeAction"
+		class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>
+	
+	<!-- Remove/Delete Attrobute Option -->
+	<bean id="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeOptionAction"
+		class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAttributeOptionAction"
+		scope="prototype">
+		<property name="modelTypeAttributeOptionService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeOptionService" />		
+	</bean>
+	
+	<!-- Update Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowUpdateModelTypeAttributeFormAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowUpdateModelTypeAttributeFormAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>
+	
+	<!-- Update -->
+	<bean id="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAttributeAction"
+		class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAttributeAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />
+		<property name="modelTypeAttributeOptionService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeOptionService" />	
+	</bean>	
+
+	<!-- Validation --> 
+	<bean id="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAttributeAction"
+		class="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAttributeAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />
+	</bean>	
+
+<!-- Model Type -->
+	
+	<!-- Model Type List -->
+	<bean id="org.hisp.dhis.coldchain.model.action.ModelTypeListAction"
+		class="org.hisp.dhis.coldchain.model.action.ModelTypeListAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />		
+	</bean>
+
+	<!-- Add Model Type Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddModelTypeFormAction"
+		class="org.hisp.dhis.coldchain.model.action.AddModelTypeFormAction"
+		scope="prototype">
+	</bean>
+
+	<!-- Model Type Attributes -->
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributesAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributesAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>	
+
+	<!-- Add -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddModelTypeAction"
+		class="org.hisp.dhis.coldchain.model.action.AddModelTypeAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>	
+
+	
+	<!-- Update Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.UpdateModelTypeFormAction"
+		class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeFormAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />		
+	</bean>
+
+	<!-- Update -->
+	<bean id="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAction"
+		class="org.hisp.dhis.coldchain.model.action.UpdateModelTypeAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />		
+	</bean>
+
+	<!-- Remove/Delete -->
+	<bean id="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAction"
+		class="org.hisp.dhis.coldchain.model.action.RemoveModelTypeAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>	
+
+	<!-- Validation -->
+	<bean id="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAction"
+		class="org.hisp.dhis.coldchain.model.action.ValidateModelTypeAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>
+	
+	<!-- show details -->
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelTypeDetailsAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelTypeDetailsAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />		
+	</bean>	
+
+<!-- model -->
+
+<!-- Data Entry Form -->
+	<bean
+		id="org.hisp.dhis.coldchain.model.dataentryform.action.ViewModelDataEntryFormAction"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.ViewModelDataEntryFormAction"
+		scope="prototype">
+		<!--<property name="dataEntryFormService">
+			<ref bean="org.hisp.dhis.dataentryform.DataEntryFormService" />
+		</property>-->
+		<property name="modelTypeService">
+			<ref bean="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		</property>
+		<property name="modelDataEntryService"
+			ref="org.hisp.dhis.coldchain.model.ModelDataEntryService" />
+	</bean>	
+	
+	<!-- Validation -->
+	<bean
+		id="org.hisp.dhis.coldchain.model.dataentryform.action.ValidateModelDataEntryFormAction"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.ValidateModelDataEntryFormAction"
+		scope="prototype">
+		<property name="dataEntryFormService">
+			<ref bean="org.hisp.dhis.dataentryform.DataEntryFormService" />
+		</property>
+	</bean>	
+
+	<!-- Save Form -->
+	<bean
+		id="org.hisp.dhis.coldchain.model.dataentryform.action.SaveModelDataEntryFormAction"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.SaveModelDataEntryFormAction"
+		scope="prototype">
+		<property name="dataEntryFormService">
+			<ref bean="org.hisp.dhis.dataentryform.DataEntryFormService" />
+		</property>
+		<property name="modelTypeService">
+			<ref bean="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		</property>		
+	</bean>		
+	
+	<!-- Delete Form -->
+	<bean
+		id="org.hisp.dhis.coldchain.model.dataentryform.action.DeleteModelDataEntryFormAction"
+		class="org.hisp.dhis.coldchain.model.dataentryform.action.DeleteModelDataEntryFormAction"
+		scope="prototype">
+		<property name="dataEntryFormService">
+			<ref bean="org.hisp.dhis.dataentryform.DataEntryFormService" />
+		</property>
+		<property name="modelTypeService">
+			<ref bean="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		</property>		
+	</bean>		
+	
+	
+	<!-- Model List -->
+	
+	<bean id="org.hisp.dhis.coldchain.model.action.ModelSelectAction"
+		class="org.hisp.dhis.coldchain.model.action.ModelSelectAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>		
+
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeListAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeListAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>		
+
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeOptionListAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelTypeAttributeOptionListAction"
+		scope="prototype">
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />
+	</bean>	
+		
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelListAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelListAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelTypeAttributeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeService" />
+		<property name="modelAttributeValueService"
+			ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />						
+	</bean>	
+	
+<!--	
+	<bean id="org.hisp.dhis.coldchain.model.action.ModelListAction"
+		class="org.hisp.dhis.coldchain.model.action.ModelListAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />	
+		<property name="userSettingService"
+			ref="org.hisp.dhis.user.UserSettingService" />					
+	</bean>	
+	
+-->	
+	
+	
+	<!-- Add Model  Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddModelFormAction"
+		class="org.hisp.dhis.coldchain.model.action.AddModelFormAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />		
+	</bean>			
+
+	<!-- Show Add Model  Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowAddModelFormAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowAddModelFormAction"
+		scope="prototype">
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelDataEntryService"
+			ref="org.hisp.dhis.coldchain.model.ModelDataEntryService" />					
+	</bean>	
+
+
+	<!-- Add -->
+	<bean id="org.hisp.dhis.coldchain.model.action.AddModelAction"
+		class="org.hisp.dhis.coldchain.model.action.AddModelAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="ModelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelTypeAttributeOptionService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeOptionService" />
+		<!--<property name="modelAttributeValueService"
+			ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />-->							
+	</bean>			
+
+	<!-- Update Form -->
+	<bean id="org.hisp.dhis.coldchain.model.action.UpdateModelFormAction"
+		class="org.hisp.dhis.coldchain.model.action.UpdateModelFormAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="modelAttributeValueService"
+			ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />						
+	</bean>
+	
+	<!-- Update -->
+	<bean id="org.hisp.dhis.coldchain.model.action.UpdateModelAction"
+		class="org.hisp.dhis.coldchain.model.action.UpdateModelAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelTypeService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeService" />	
+		<property name="modelTypeAttributeOptionService"
+			ref="org.hisp.dhis.coldchain.model.ModelTypeAttributeOptionService" />
+		<property name="modelAttributeValueService"
+			ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />						
+	</bean>
+		
+	<!-- Validation -->
+	<bean id="org.hisp.dhis.coldchain.model.action.ValidateModelAction"
+		class="org.hisp.dhis.coldchain.model.action.ValidateModelAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+	</bean>		
+	
+	<!-- show details -->
+	<bean id="org.hisp.dhis.coldchain.model.action.GetModelDetailsAction"
+		class="org.hisp.dhis.coldchain.model.action.GetModelDetailsAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelAttributeValueService"
+			ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />				
+	</bean>	
+	
+	<!-- Remove/Delete -->
+	<bean id="org.hisp.dhis.coldchain.model.action.RemoveModelAction"
+		class="org.hisp.dhis.coldchain.model.action.RemoveModelAction"
+		scope="prototype">
+		<property name="modelService"
+			ref="org.hisp.dhis.coldchain.model.ModelService" />
+	</bean>	
+									
+<!-- EquipmentTypeAttribute -->
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+		<property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+		<property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeOptionAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAttributeOptionAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributesAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributesAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+    </bean>	    
+	
+<!-- EquipmentType -->
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeListAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeListAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ShowAddEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ShowAddEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+    </bean>
+
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ValidateEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+    </bean>
+	
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.AddEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+        <property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ShowUpdateEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.RemoveEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+    </bean>
+	
+	
+	
+	
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.ShowEquipmentTypeDataSetFormAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.ShowEquipmentTypeDataSetFormAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+    </bean>	
+	
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetDataSetListAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetDataSetListAction"
+        scope="prototype">
+        <property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>		
+
+    <bean id="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeDataSetAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.UpdateEquipmentTypeDataSetAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+    </bean>	
+	
+			
+		
+<!-- EquipmentDetails -->
+    <bean id="org.hisp.dhis.coldchain.equipment.action.EquipmentSelectAction"
+        class="org.hisp.dhis.coldchain.equipment.action.EquipmentSelectAction"
+        scope="prototype">
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+        <property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.action.GetOrganisationUnitAction"
+        class="org.hisp.dhis.coldchain.action.GetOrganisationUnitAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipment.action.GetEquipmentListAction"
+        class="org.hisp.dhis.coldchain.equipment.action.GetEquipmentListAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+        <property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+		<property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+	
+	<!-- add EquipmentAttributeValue Form -->
+    <bean id="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentFormAction"
+        class="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentFormAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>
+	
+	<!-- add EquipmentAttributeValue Ice Packs Form -->	
+    <bean id="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentIcePacksFormAction"
+        class="org.hisp.dhis.coldchain.equipment.action.ShowAddEquipmentIcePacksFormAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+    </bean>	
+	
+	
+	<!-- Load EquipmentAttributeValue IcePacks Form with data -->
+    <bean id="org.hisp.dhis.coldchain.equipment.action.LoadEquipmentIcePacksDataAction"
+        class="org.hisp.dhis.coldchain.equipment.action.LoadEquipmentIcePacksDataAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+    </bean>		
+	
+	
+	
+	<!-- add EquipmentAttributeValue -->
+    <bean id="org.hisp.dhis.coldchain.equipment.action.AddEquipmentAction"
+        class="org.hisp.dhis.coldchain.equipment.action.AddEquipmentAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+        <property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+    </bean>
+    
+	<!-- add/Update EquipmentAttributeValue Ice Packs -->	
+
+    <bean id="org.hisp.dhis.coldchain.equipment.action.AddUpdateEquipmentIcePacksAction"
+        class="org.hisp.dhis.coldchain.equipment.action.AddUpdateEquipmentIcePacksAction"
+        scope="prototype">
+        <property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+        <property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+        <property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="equipmentStatusService" ref="org.hisp.dhis.coldchain.equipment.EquipmentStatusService" />
+    </bean>	
+	
+		
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.action.GetEquipmentDataAction"
+        class="org.hisp.dhis.coldchain.equipment.action.GetEquipmentDataAction"
+        scope="prototype">
+        <property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+		<property name="modelAttributeValueService" ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentAction"
+        class="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentAction"
+        scope="prototype">
+        <property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+        <property name="equipmentTypeAttributeOptionService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeOptionService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="equipmentStatusService" ref="org.hisp.dhis.coldchain.equipment.EquipmentStatusService" />
+		
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusFormAction"
+        class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusFormAction"
+        scope="prototype">
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />
+		<property name="optionService" ref="org.hisp.dhis.option.OptionService" />
+		
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentStatusAction"
+        class="org.hisp.dhis.coldchain.equipment.action.UpdateEquipmentStatusAction"
+        scope="prototype">
+        <property name="equipmentStatusService" ref="org.hisp.dhis.coldchain.equipment.EquipmentStatusService" />
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+        <property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+		     
+    </bean>
+
+    <bean id="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusHistoryFormAction"
+        class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentStatusHistoryFormAction"
+        scope="prototype">
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+        <property name="equipmentStatusService" ref="org.hisp.dhis.coldchain.equipment.EquipmentStatusService" />
+    </bean>
+    <bean id="org.hisp.dhis.coldchain.equipment.action.RemoveEquipmentAction"
+        class="org.hisp.dhis.coldchain.equipment.action.RemoveEquipmentAction"
+        scope="prototype">
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+    </bean>
+
+<!-- EquipmentAttributeValue Data Entry related actions -->
+		
+    <bean id="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentDataEntryFormAction"
+        class="org.hisp.dhis.coldchain.equipment.action.ShowEquipmentDataEntryFormAction"
+        scope="prototype">
+        <property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentAttributeValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentAttributeValueService" />
+    </bean>	
+<!--
+-->	
+	  <bean id="org.hisp.dhis.coldchain.equipment.action.LoadPeriodsAction" class="org.hisp.dhis.coldchain.equipment.action.LoadPeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	  </bean>		
+		
+
+	  <bean id="org.hisp.dhis.coldchain.equipment.action.LoadNextPrePeriodsAction" class="org.hisp.dhis.coldchain.equipment.action.LoadNextPrePeriodsAction" scope="prototype">   
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+	  </bean>
+	
+	  <bean id="org.hisp.dhis.coldchain.equipment.action.LoadDataEntryFormAction"
+		class="org.hisp.dhis.coldchain.equipment.action.LoadDataEntryFormAction" scope="prototype">   
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+		<property name="equipmentDataValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentDataValueService"/>  
+	  </bean>
+
+	  <bean id="org.hisp.dhis.coldchain.equipment.action.SaveEquipmentDataValueAction"
+		class="org.hisp.dhis.coldchain.equipment.action.SaveEquipmentDataValueAction" scope="prototype">   
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService"/>
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService"/>
+		<property name="equipmentDataValueService" ref="org.hisp.dhis.coldchain.equipment.EquipmentDataValueService"/>     
+	  
+	  </bean>
+	
+		
+	<!-- Upload Image Form Model-->
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowUploadModelImageFormAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowUploadModelImageFormAction"
+		scope="prototype">
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.coldchain.model.action.UploadModelImageAction"
+		class="org.hisp.dhis.coldchain.model.action.UploadModelImageAction"
+		scope="prototype">
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+	</bean>	
+
+	
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowImageAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowImageAction"
+		scope="prototype">
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+	</bean>	
+		
+	<!-- Upload Image Form Model Type-->
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowUploadModelTypeImageFormAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowUploadModelTypeImageFormAction"
+		scope="prototype">
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>
+
+	<bean id="org.hisp.dhis.coldchain.model.action.UploadModelTypeImageAction"
+		class="org.hisp.dhis.coldchain.model.action.UploadModelTypeImageAction"
+		scope="prototype">
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>
+				
+	<bean id="org.hisp.dhis.coldchain.model.action.ShowModelTypeImageAction"
+		class="org.hisp.dhis.coldchain.model.action.ShowModelTypeImageAction"
+		scope="prototype">
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>
+
+
+
+    <!-- CCEM Reports -->
+    <bean id="org.hisp.dhis.coldchain.reports.action.CCEIReportPageAction"
+        class="org.hisp.dhis.coldchain.reports.action.CCEIReportPageAction"
+        scope="prototype">
+        <property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<!--<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />-->
+    </bean> 
+   
+    <bean id="org.hisp.dhis.coldchain.reports.action.GenerateCCEMReportAction"
+        class="org.hisp.dhis.coldchain.reports.action.GenerateCCEMReportAction"
+        scope="prototype">
+		<property name="ccemReportManager" ref="org.hisp.dhis.coldchain.reports.CCEMReportManager" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+    </bean> 
+	
+	
+	<bean id="org.hisp.dhis.coldchain.reports.action.GenerateCCEIReportAction"
+        class="org.hisp.dhis.coldchain.reports.action.GenerateCCEIReportAction"
+        scope="prototype">
+       <property name="ccemReportManager" ref="org.hisp.dhis.coldchain.reports.CCEMReportManager" />   
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="modelService" ref="org.hisp.dhis.coldchain.model.ModelService" />
+		<property name="modelAttributeValueService" ref="org.hisp.dhis.coldchain.model.ModelAttributeValueService" />		
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+		<property name="constantService" ref="org.hisp.dhis.constant.ConstantService" />
+		<property name="dataElementService" ref="org.hisp.dhis.dataelement.DataElementService" />
+		<property name="equipmentTypeAttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeAttributeService" />
+	</bean>
+	
+	<bean id="org.hisp.dhis.coldchain.action.GetOrganisationUnitGroupsAction"
+        class="org.hisp.dhis.coldchain.action.GetOrganisationUnitGroupsAction"
+        scope="prototype">
+       	<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService" /> 
+	</bean>	
+
+
+
+	
+<!-- Clinic Equipments -->
+	
+	<bean id="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListForDisplayAction"
+        class="org.hisp.dhis.coldchain.equipmenttype.action.GetEquipmentTypeAttributeListForDisplayAction"
+        scope="prototype">
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService"/>
+		
+	</bean>		
+	
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.ClinicEquipmentsAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.ClinicEquipmentsAction"
+        scope="prototype">
+		<property name="selectionManager" ref="org.hisp.dhis.ouwt.manager.OrganisationUnitSelectionManager" />
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService"/>
+		
+	</bean>	
+	
+
+	
+		
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.GetOrganisationUnitDetailsAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.GetOrganisationUnitDetailsAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+		<property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="equipmentService" ref="org.hisp.dhis.coldchain.equipment.EquipmentService" />
+	</bean>	
+	
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.GetFullOrganisationUnitDetailsAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.GetFullOrganisationUnitDetailsAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="periodService" ref="org.hisp.dhis.period.PeriodService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+		<property name="equipmentTypeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentTypeService" />
+		<property name="organisationUnitGroupService" ref="org.hisp.dhis.organisationunit.OrganisationUnitGroupService"/>
+	 </bean>
+		
+
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateOrganisationUnitFormAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateOrganisationUnitFormAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+		<property name="equipmentType_AttributeService" ref="org.hisp.dhis.coldchain.equipment.EquipmentType_AttributeService" />
+	</bean>		
+
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.ValidateOrganisationUnitCodeAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.ValidateOrganisationUnitCodeAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+	</bean>	
+			
+
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.UpdateOrganisationUnitAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.UpdateOrganisationUnitAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="attributeService" ref="org.hisp.dhis.attribute.AttributeService" />
+	</bean>	
+	
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateFacilityDataEntryFormAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.ShowUpdateFacilityDataEntryFormAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+	</bean>
+	
+	
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.LoadFacilityDataEntryFormAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.LoadFacilityDataEntryFormAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+	</bean>	
+	
+
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.SaveFacilityDataValueAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.SaveFacilityDataValueAction"
+        scope="prototype">
+		<property name="organisationUnitService" ref="org.hisp.dhis.organisationunit.OrganisationUnitService" />
+		<property name="dataSetService" ref="org.hisp.dhis.dataset.DataSetService" />
+		<property name="currentUserService" ref="org.hisp.dhis.user.CurrentUserService" />
+		<property name="dataValueService" ref="org.hisp.dhis.datavalue.DataValueService" />
+		<property name="dataElementCategoryService" ref="org.hisp.dhis.dataelement.DataElementCategoryService" />
+	</bean>	
+
+	
+<!-- EquipmentAttributeValue Models -->		
+
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.EquipmentModelsAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.EquipmentModelsAction"
+        scope="prototype">
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>		
+
+	
+<!-- Vaccines Models -->		
+
+	<bean id="org.hisp.dhis.coldchain.equipment.manager.action.VaccinesModelsAction"
+        class="org.hisp.dhis.coldchain.equipment.manager.action.VaccinesModelsAction"
+        scope="prototype">
+		<property name="modelTypeService" ref="org.hisp.dhis.coldchain.model.ModelTypeService" />
+	</bean>			
+	
+	
+								
+</beans>

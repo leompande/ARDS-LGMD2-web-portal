@@ -1,0 +1,83 @@
+
+<table width="100%">
+	<tr bgcolor="#285C91">
+		<td>
+			<table width="100%">
+				<tr bgcolor="#285C91">
+					<td><font color="#FFFFFF"><strong>Model Details</strong></font></td>
+				</tr>
+			</table>
+		</td>			
+		<td align="right"><a href="javascript:showUpdateModelForm( '$model.id','$model.getName()', '$model.getModelType().getName()' ); " title='$i18n.getString( "Update Model" )'><font color="#FFFFFF"><u>edit</u></font></a></td>
+	</tr>
+</table>
+<!--
+<table width="100%">
+	<tr>
+		<td class='text-column' width="50%"><label>$i18n.getString('name')</label></td>
+		<td class="text-column" width="50%">$model.name</td>
+	</tr>
+	<tr>
+		<td class='text-column' width="50%"><label>$i18n.getString('description')</label></td>
+		<td class="text-column" width="50%">$model.description</td>
+	</tr>
+</table>
+-->
+<!-- Model Details with Group Wise-->	
+#if( $modelTypeAttributeGroups.size() > 0 )
+<table width="100%">
+	<tr>
+		<td class='text-column' width="50%"><label>$i18n.getString('name')</label></td>
+		<td class="text-column" width="50%">$model.name</td>
+	</tr>
+	<tr>
+		<td class='text-column' width="50%"><label>$i18n.getString('description')</label></td>
+		<td class="text-column" width="50%">$model.description</td>
+	</tr>	
+	#foreach( $modelTypeAttributeGroup in $modelTypeAttributeGroups )
+		<tr bgcolor="#285C91">
+			<td colspan="2"><font color="#FFFFFF"><strong>$encoder.htmlEncode( $modelTypeAttributeGroup.name )</strong></font></td>
+				<!--<td><font color="#FFFFFF"><strong>Value</strong></font></td>-->
+		</tr>
+        <!-- ModelType Attributes  -->
+        #set( $mark = false )
+       	#foreach( $modelAttribute in $modelTypeAttributeGroup.getModelTypeAttributes() )
+        #set( $modelAttributeValue = "" )
+        #set( $modelAttributeValue = $!modelTypeAttributeValueMap.get( $modelAttribute.id ) )
+        	<tr #alternate($mark)>
+            	<td class='text-column'><label>$modelAttribute.name</label></td>
+                <td class="text-column">$!modelAttributeValue</td>
+            </tr>
+       	#set( $mark = !$mark)
+        #end
+	#end
+</table>
+
+<!-- Model Details without Group Details-->
+#else
+    <table width="100%">
+		<tr>
+			<td class='text-column' width="50%"><label>$i18n.getString('name')</label></td>
+			<td class="text-column" width="50%">$model.name</td>
+		</tr>
+		<tr>
+			<td class='text-column' width="50%"><label>$i18n.getString('description')</label></td>
+			<td class="text-column" width="50%">$model.description</td>
+		</tr>    	
+        <!-- ModelType Attributes  -->
+        #set( $mark = false )
+        #foreach( $modelAttribute in $modelTypeAttributes )
+            #set( $modelAttributeValue = "" )
+            #set( $modelAttributeValue = $!modelTypeAttributeValueMap.get( $modelAttribute.id ) )
+            <tr #alternate($mark)>
+                <td class='text-column'><label>$modelAttribute.name</label></td>
+                <td class="text-column">$!modelAttributeValue</td>
+            </tr>
+        #set( $mark = !$mark)
+        #end
+    </table>
+#end
+
+<p align="right">
+	<input type="button"  value="$i18n.getString( 'Done' )" style="width:100px" onclick="closeModelDetailsWindow();"/>
+</p>
