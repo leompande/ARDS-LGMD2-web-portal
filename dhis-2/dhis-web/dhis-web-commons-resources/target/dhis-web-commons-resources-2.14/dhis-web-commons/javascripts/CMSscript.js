@@ -224,15 +224,15 @@ $(document).ready(function(){
 
 
    ///////////// SLIDE SHOW////////////////////
-    Image_grid ='';
-    Doc_grid = '';
-    Doc_menu = '';
-    Doc_menu_cms = '';
+
     $.ajax({
         url: "../api/documents.json",
         dataType: 'json'
     }).done(function(data) {
-
+        Image_grid ='';
+        Doc_grid = '';
+        Doc_menu = '';
+        Doc_menu_cms = '';
         $.each(data.documents,function(index,val){
             if(val['name']==="image"){
                 Image_grid +='<img class="slideProperty img-rounded img-responsive" src="'+val['href']+'/data" alt="" title="" />';
@@ -241,7 +241,7 @@ $(document).ready(function(){
                 /// left menu document download
                 Doc_grid += '<li class="list-group-item">';
                 Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_grid += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
+                Doc_grid += '<span class="fa fa-globe"></span>&nbsp;&nbsp;'+ val['name']+'</a>';
                 Doc_grid += '</li>';
 
                 //navbar download
@@ -551,20 +551,24 @@ $(document).ready(function(){
 
 
     ///// process link
-    $('#addLink').on('submit', function(e) {
-
+    allowSubmit = true;
+    $('#addImportantLink').on('submit', function(e) {
         e.preventDefault();
 
-        $.post("addLink.action",$(this).serialize())
-            .done(function() {
-                location.reload(true);
-            })
-            .fail(function() {
+        if (!allowSubmit) return false;
+        allowSubmit = false;
 
+            $.ajax({
+                type: "POST",
+                url: 'addLink.action',
+                data: $(this).serialize(),
+                success: whenSucceed
             });
 
-
-
+        function whenSucceed(){
+            location.reload(true);
+        }
+        setTimeout(function(){ allowSubmit = true; }, 5000);
     });
 
     //// link operation
@@ -581,23 +585,23 @@ $(document).ready(function(){
                 }
             },
             open: function(event, ui) {
-                $("#yes").click(function(){
-
-                    $.post("removeLink.action","linkid="+ary[1])
-                        .done(function() {
-                            $( "#dialog" ).dialog( "close" );
-                            $(this).parent().parent().remove("slow");
-                            location.reload(true);
-                        })
-                        .fail(function() {
-                            alert("not deleted");
-                        });
-
+                $("#dialog #yes").on("click",function(){
+                console.log("yes clicked");
+//                    $.post("removeLink.action","linkid="+ary[1])
+//                        .done(function() {
+//                            $( "#dialog" ).dialog( "close" );
+//                            $(this).parent().parent().remove("slow");
+//                            location.reload(true);
+//                        })
+//                        .fail(function() {
+//                            alert("not deleted");
+//                        });
+//
 
 
                 });
 
-                $("#no").click(function(){
+                $("#no").on("click",function(){
                     $( "#dialog" ).dialog( "close" );
                 });
             }
@@ -623,19 +627,22 @@ $(document).ready(function(){
 
 
     ///// process docs
-    $('#addDocs').on('submit', function(e) {
+    $('#documentForm').on('submit', function(e) {
+
+
+        $.ajax({
+            type: "POST",
+            url: 'addDocs.action',
+            data: new FormData( this ),
+            success: whenSucceed
+        });
         e.preventDefault();
 
-        $("#addDocs").ajaxSubmit({
-            complete: function(xhr) {
-
-                location.reload(true);
-            }
-        });
-
+        function whenSucceed(){
+            location.reload(true);
+        }
 
     });
-
 
     //// docs operations
     //// link operation

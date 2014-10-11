@@ -296,7 +296,7 @@ public class CmsAction
         menus = new ArrayList<Collection> (  );
 
 
-        SqlRowSet menu_rows = jt.queryForRowSet("SELECT * FROM cms_tabmenus");
+        SqlRowSet menu_rows = jt.queryForRowSet("SELECT * FROM cms_tabmenus ORDER BY menu ASC");
 
         while (menu_rows.next()) {
 

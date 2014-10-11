@@ -250,7 +250,7 @@
                         </ul>
                         </br>
 
-                        <form role="form" method="post" id="addLink" action="#">
+                        <form id="addImportantLink" role="form" method="post"  action="#">
                             <div class="form-group">
                                 <label for="link-name">Link Name</label>
                                 <input type="text" name="linkName" class="form-control" id="link-name" placeholder="Link Name">
