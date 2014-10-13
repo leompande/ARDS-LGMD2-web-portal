@@ -92,7 +92,15 @@ public class AddArticleAction
     {
         jdbcTemplate = new JdbcTemplate(dataSource);
 
-
+        System.out.println("------- LETS PRINT THE ARTICLE BEFORE SAVING IT  ------");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println(this.getImposter_newpage());
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("------- NOW THE ARTICLE IS READY TO ADD  ------");
         String inserQuery = "INSERT INTO cms_articles (page_name,description,newpage) VALUES(?,?,?)";
         int[] types = {Types.VARCHAR,Types.VARCHAR,Types.VARCHAR};
 

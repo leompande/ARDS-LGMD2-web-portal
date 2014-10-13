@@ -62,7 +62,7 @@
                                     <li style="color:#ffffff!important;"><a href="${module.defaultAction}">$i18n.getString( $module.name )&nbsp;</a></li>
                                 #end
                             #end
-                            <li style="color:#ffffff!important;"><a href="../dhis-web-dashboard-integration/cms.action">CMS&nbsp;</a></li>
+                            <li style="color:#ffffff!important;"><a href="../dhis-web-dashboard-integration/cms.action" id="cms_settings_button">CMS&nbsp;</a></li>
                         </ul>
                     </li>
                 #end

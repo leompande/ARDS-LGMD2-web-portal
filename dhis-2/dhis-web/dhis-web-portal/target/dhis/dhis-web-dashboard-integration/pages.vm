@@ -111,11 +111,11 @@
                                 #if($article)
                                     #foreach( $pages in $article )
                                         <div class="col-md-12 available_articles_pages conteiner" id="article_$pages.get(0)_pages">
-                                            <div class=" row">
-                                            <div class=" col-md-12">
-                                                $pages.get(1)
-                                            </div>
-                                            </div>
+##                                            <div class=" row">
+##                                            <div class=" col-md-12 article_introduction_title" >
+##                                                $pages.get(1)
+##                                            </div>
+##                                            </div>
                                             <div class="row ">
                                             <div class="col-md-12 ">
                                                 $pages.get(2)

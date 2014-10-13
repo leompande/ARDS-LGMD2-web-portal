@@ -30,35 +30,39 @@ $(document).ready(function(){
             $("#article_menus").hide();
             $("#add_div").hide();
             $("#other_pages").show();
+            $("div.title_pages").show();
+            $("#bs-docs-pages").show();
+            $("#pagination-docs").show();
             $("#add_new_article_form").hide();
 
             $("textarea#newpage").ckeditor();
 
             $("#add_new_page").on("click",function(){
+                $("div.display_article_for_cms").hide();
                 $("form#add_new_article_form").show();
 
-                        $('#add_new_article_button').on('click', function(e) {
+                        $('#add_new_article_form').on('submit', function(e) {
+                            e.preventDefault();
                             var sendOnce = false;
                             var data = CKEDITOR.instances.newpage.getData();
-
                             $("#imposter_newpage").val(data);
-                            e.preventDefault();
+
                             if(!$("input#page_name").val()){
                                 $("#page_label").css({"color":"red","font-weight":"bold"});
                                 $('#page_label').blink();
                             }else{
 
-                                var page_name = $("input#page_name").val();
-                                var description = $("textarea#description").val();
-                                var imposter_newpage = $("input#imposter_newpage").val();
-                                var formData = "&page_name="+page_name+"&description="+description+"&imposter_newpage="+imposter_newpage;
+
                                 $("#output_article_pane").html("<h3 ><i class='fa fa-spin fa-spinner '></i><span>Making changes please wait...</span><h3>");
                                if(!sendOnce){
-                                   $.post( "addArticle.action",formData)
+                                   $.post( "addArticle.action",$(this).serialize())
                                        .done(function() {
                                            $('#add_new_article_form').find("input[type=text], textarea").val("");
                                            $("#output_article_pane").html(" ");
                                            sendOnce = true;
+//                                           $("a#cms_settings_button").trigger("click");
+//                                           $("a#manage_pages").trigger("click");
+
                                        })
                                        .fail(function() {
                                            $("#output_article_pane").html("<h3 style='color:red;'><i class='fa fa-spin fa-spinner '></i><span>Adding failure ... </span><h3>");
@@ -71,9 +75,69 @@ $(document).ready(function(){
                         $("#cancel_add_new_article_button").on("click",function(){
                             $('#add_new_article_form').find("input[type=text], textarea").val("");
                             $("#add_new_article_form").hide();
+                            $("div.display_article_for_cms").show();
                         });
 
             });
+
+
+
+                /////////////// CMS ARTICLES PAGINATION //////////
+
+
+                var items = $("ul#article_list_pages li");
+
+                var numItems = items.length;
+                var perPage = 3;
+
+                // only show the first 3 (or "first per_page") items initially
+                items.slice(perPage).hide();
+                // now setup your pagination
+                // you need that .pagination-page div before/after your table
+                $("#cmsArticlePaginataionDiv").pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    cssStyle: "compact-theme",
+                    onPageClick: function(pageNumber) { // this is where the magic happens
+                        // someone changed page, lets hide/show trs appropriately
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+
+
+
+                /// CMS ARTICLES VIEWING AND MANIPULATION
+                $("div.article_conteiner_pages").hide();
+                $("div.available_articles_pages").hide();
+                $("div#back_to_list").hide();
+                $("ul#article_list_pages li a").on("click",function(e){
+                    e.preventDefault();
+                    $("div.available_articles_pages").hide();
+                    $("div#article_title").hide();
+                    $("div.title_pages").hide();
+                    $("#bs-docs-pages").hide();
+                    $("#pagination-docs").hide();
+                    $("div.article_conteiner_pages").show();
+                    $("div#"+$(this).attr("redirect_to")).show();
+                    $("div#back_to_list").show();
+                    var prevRedirect = $(this).attr("redirect_to");
+                    $("a#back_to_list_button").on("click",function(){
+                        $("div#"+prevRedirect).hide();
+                        $("div#back_to_list").hide();
+                        $("div.article_conteiner_pages").hide();
+                        $("div.available_articles_pages").hide();
+                        $("div.title_pages").show();
+                        $("#bs-docs-pages").show();
+                        $("#pagination-docs").show();
+                    });
+                });
+
+
+
+
         }
         if(menu_name =="manage_images"){
             $("#Slide_manager_pane").show();

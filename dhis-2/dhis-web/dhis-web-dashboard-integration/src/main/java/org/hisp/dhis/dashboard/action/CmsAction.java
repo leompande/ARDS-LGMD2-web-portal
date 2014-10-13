@@ -335,7 +335,6 @@ public class CmsAction
 
             if(article_rows.getString("newpage") != null && !article_rows.getString("newpage").isEmpty()) {
                 articleRows.add(new String(article_rows.getString("newpage")));
-                System.out.println(article_rows.getString("newpage"));
             }
             article.add(articleRows);
 
