@@ -186,10 +186,10 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
-                    <div class="panel-body">
+                <div id="collapseTwo"  class="panel-collapse collapse in">
+                    <div class="panel-body" id="contextMenu">
 
-                        <ul class="nav nav-pills nav-stacked list-group cms_document">
+                        <ul id="contextMenuItems" class="nav nav-pills nav-stacked list-group cms_document">
 
 
                         </ul>
@@ -299,7 +299,7 @@
 #end
 #macro( chartStatistics )
 <div id="statistics_charts" class="col-md-12">
-    <div id="statistics_chart_1" class="row" style="width:300px; height:300px">
+    <div id="statistics_chart_1" class="row">
 
     </div>
 ##    <script>

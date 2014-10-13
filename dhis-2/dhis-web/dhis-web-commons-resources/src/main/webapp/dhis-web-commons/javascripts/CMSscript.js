@@ -252,10 +252,10 @@ $(document).ready(function(){
                 Doc_menu +=' </li>';
 
                 // cms left menu document
-                Doc_menu_cms += '<li class="list-group-item">';
+                Doc_menu_cms += '<li data-enabled="canDelete" class="list-group-item">';
                 Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
                 Doc_menu_cms += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
-                Doc_menu_cms += '<a  href="../dhis-web-reporting/removeDocument.action" class="delete_document" >';
+                Doc_menu_cms += '<a data-target-fn="removeDocument"  class="delete_document" >';//href="../dhis-web-reporting/removeDocument.action"
                 Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-times pull-right"></i>';
                 Doc_menu_cms += '</a>';
                 Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';

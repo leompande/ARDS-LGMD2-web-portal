@@ -32,6 +32,7 @@ $(document).ready(function(){
     /// CMS ARTICLES VIEWING AND MANIPULATION
     $("div.article_conteiner_pages").hide();
     $("div.available_articles_pages").hide();
+    $("div#back_to_list").hide();
     $("ul#article_list_pages li a").on("click",function(e){
         e.preventDefault();
         $("div.available_articles_pages").hide();
@@ -41,6 +42,17 @@ $(document).ready(function(){
         $("#pagination-docs").hide();
         $("div.article_conteiner_pages").show();
         $("div#"+$(this).attr("redirect_to")).show();
+        $("div#back_to_list").show();
+        var prevRedirect = $(this).attr("redirect_to");
+        $("a#back_to_list_button").on("click",function(){
+            $("div#"+prevRedirect).hide();
+            $("div#back_to_list").hide();
+            $("div.article_conteiner_pages").hide();
+            $("div.available_articles_pages").hide();
+            $("div.title_pages").show();
+            $("#bs-docs-pages").show();
+            $("#pagination-docs").show();
+        });
     });
 
 });

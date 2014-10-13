@@ -106,12 +106,8 @@
 
                         </div>
                         <div class="row">
-                            <div class="row" style="font-family: LiberationSansRegular, arial, sans-serif" id="article_title">
-                                <div class="col-md-10 col-md-offset-1" id="title_pages">
-                                    <h3>List Of Available  Pages </h3>
-                                </div>
-                            </div>
-                            <div class="col-md-12"  id="article_conteiner_pages">
+
+                            <div class=""  id="article_conteiner_pages">
                                 #if($article)
                                     #foreach( $pages in $article )
                                         <div class="col-md-12 available_articles_pages conteiner" id="article_$pages.get(0)_pages">
@@ -130,8 +126,10 @@
                                     #end
                                 #end
                             </div>
+                            <div class="row" id="back_to_list">
+                                <div class="col-md-12"><a class="btn btn-default btn-sm" id="back_to_list_button"><i class="fa fa-arrow-left"></i>&nbsp;back to list</a></div>
+                            </div>
                             <div class="row">
-
                                 <div class="col-md-12 bs-docs-sidebar" id="bs-docs-pages">
                                     <ul id="article_list_pages" class="nav nav-list bs-docs-sidenav affix-top" style="width:100%!important">
 
