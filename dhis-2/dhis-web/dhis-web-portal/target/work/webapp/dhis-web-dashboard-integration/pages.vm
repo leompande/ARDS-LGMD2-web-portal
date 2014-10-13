@@ -95,20 +95,26 @@
             <div class="col-md-10">
                 <div id="contents" class="">
                     <div id="default_home">
+                        <div id="article_main_title">
+                            <div class="col-md-10 col-md-offset-1 pull-left" style="text-align: center;">
+                                <h3>ARDS-LGMD2 ARTICLES</h3>
+                            </div>
+
+                        </div>
                         <div id="page_switcher">
                             <div class="onoffswitch pull-right" ><input type="checkbox" class="toggleBtn onoffswitch-checkbox" checked="" id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner" style=""></div><div class="onoffswitch-switch" style=""></div></label></div>
 
                         </div>
                         <div class="row">
-                            <div class="row" style="font-family: LiberationSansRegular, arial, sans-serif">
+                            <div class="row" style="font-family: LiberationSansRegular, arial, sans-serif" id="article_title">
                                 <div class="col-md-10 col-md-offset-1" id="title_pages">
                                     <h3>List Of Available  Pages </h3>
                                 </div>
                             </div>
-                            <div class="row"  id="article_conteiner_pages">
+                            <div class="col-md-12"  id="article_conteiner_pages">
                                 #if($article)
                                     #foreach( $pages in $article )
-                                        <div class="col-md-12 available_articles_pages " id="article_$pages.get(0)_pages">
+                                        <div class="col-md-12 available_articles_pages conteiner" id="article_$pages.get(0)_pages">
                                             <div class=" row">
                                             <div class=" col-md-12">
                                                 $pages.get(1)

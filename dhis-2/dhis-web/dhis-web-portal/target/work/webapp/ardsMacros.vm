@@ -299,9 +299,60 @@
 #end
 #macro( chartStatistics )
 <div id="statistics_charts" class="col-md-12">
-    <div id="statistics_chart_1" class="row">
+    <div id="statistics_chart_1" class="row" style="width:300px; height:300px">
 
     </div>
+##    <script>
+##                Ext.onReady(function() {
+##            DHIS.getChart({
+##                "type": "column",
+##                "columns": [
+##                    {
+##                        "dimension": "de",
+##                        "items": [
+##                            {
+##                                "id": "ASooesZ6GoT"
+##                            }, {
+##                                "id": "Ba9mZCFaUCV"
+##                            }, {
+##                                "id": "HW0eal57uXm"
+##                            }, {
+##                                "id": "gqJB49icYtm"
+##                            }
+##                        ]
+##                    }
+##                ],
+##                "rows": [
+##                    {
+##                        "dimension": "pe",
+##                        "items": [
+##                            {
+##                                "id": "2013July"
+##                            }
+##                        ]
+##                    }
+##                ],
+##                "filters": [
+##                    {
+##                        "dimension": "ou",
+##                        "items": [
+##                            {
+##                                "id": "GWEtuPicnbB"
+##                            },{
+##                                "id": "mBBKzZonsgl"
+##                            },{
+##                                "id": "QodXYQxhHzV"
+##                            },{
+##                                "id": "S4WbqR1P0dA"
+##                            },
+##                        ]
+##                    }
+##                ],
+##                "url": "http://localhost:8080",
+##                "el": "statistics_chart"
+##            });
+##        });
+##    </script>
     <div id="statistics_chart_2" class="row">
 
     </div>

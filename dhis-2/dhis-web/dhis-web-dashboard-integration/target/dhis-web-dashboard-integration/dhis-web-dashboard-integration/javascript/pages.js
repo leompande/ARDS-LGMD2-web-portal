@@ -35,6 +35,7 @@ $(document).ready(function(){
     $("ul#article_list_pages li a").on("click",function(e){
         e.preventDefault();
         $("div.available_articles_pages").hide();
+        $("div#article_title").hide();
         $("div.title_pages").hide();
         $("#bs-docs-pages").hide();
         $("#pagination-docs").hide();

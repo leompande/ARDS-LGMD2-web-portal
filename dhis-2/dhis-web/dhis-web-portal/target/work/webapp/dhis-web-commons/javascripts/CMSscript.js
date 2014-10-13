@@ -576,7 +576,7 @@ $(document).ready(function(){
         e.preventDefault()
         var unique_id = $(this).attr("id");
         var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success' id='yes'>yes</a><a class='btn btn-xs btn-danger' id='no'>no</a></span>");
+        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success yes' >yes</a><a class='btn btn-xs btn-danger no' >no</a></span>");
         $("#dialog").dialog({ title: "Deleting Link" ,
             show: {
                 effect: 'slide',
@@ -585,7 +585,9 @@ $(document).ready(function(){
                 }
             },
             open: function(event, ui) {
-                $("#dialog #yes").on("click",function(){
+                console.log("dialog opened");
+                console.log( $(".yes").html());
+                $(".yes").on("click",function(){
                 console.log("yes clicked");
 //                    $.post("removeLink.action","linkid="+ary[1])
 //                        .done(function() {
@@ -628,7 +630,6 @@ $(document).ready(function(){
 
     ///// process docs
     $('#documentForm').on('submit', function(e) {
-
 
         $.ajax({
             type: "POST",
