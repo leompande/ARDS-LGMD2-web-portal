@@ -88,35 +88,81 @@
 
                     </div>
                     <div class=""  id="article_conteiner_pages">
+                        <div class="col-md-12" id="editorArticleFormContainer" >
+                            <h4>&nbsp;&nbsp; Editing Selected Article</h4>
+                            <form method="post" id="edit_article_form">
+                                <div class="form-group">
+                                    <label id ="page_label" for="page_name">Page Name<span style="color:red;font-weight:bold;">*</span> ( max 16 words)</label>
+                                    <input type="text" class="form-control" id="edit_page_name" name="page_name" placeholder="Page Name ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newpage">Page Content</label>
+                                    <textarea id="article_edit" name="article_edit"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="imposter_article_edit" name="imposter_edit" />
+                                    <input type="hidden" id="imposter_article_id" name="imposter_id" />
+                                </div>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <i class="fa fa-plus-square">
+                                    </i>&nbsp;edit item</button>
+                                <button  type="button" id="cancel_article_editor" class="btn btn-danger btn-sm">
+                                <i class="fa fa-times"></i>&nbsp;cancel</button>&nbsp;<span id="output_edit"></span>
+                            </form>
+                        </div>
+
                         #if($article)
                             #foreach( $pages in $article )
                                 <div class="col-md-12 available_articles_pages conteiner" id="article_$pages.get(0)_pages">
-                                ##                                            <div class=" row">
-                                ##                                            <div class=" col-md-12 article_introduction_title" >
-                                ##                                                $pages.get(1)
-                                ##                                            </div>
-                                ##                                            </div>
+                                    <div class="row title_$pages.get(0)_pages" style="display: none;">
+                                        #if($pages.get(1))
+                                        $pages.get(1)
+                                        #else
+                                        #end
+                                    </div>
                                     <div class="row ">
-                                        <div class="col-md-12 ">
+                                        <div class="col-md-12 body_$pages.get(0)_pages">
+                                            #if($pages.get(2))
                                             $pages.get(2)
+                                            #else
+                                            #end
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="row back_to_list " id="button_group_$pages.get(0)">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-default btn-sm back_to_list_button" id="backArticle_$pages.get(0)">
+                                            <i class="fa fa-arrow-left"></i>&nbsp;back to list
+                                        </a>
+                                        <a class="btn btn-default btn-sm edit_article_button" id="editArticle_$pages.get(0)">
+                                            <i class="fa fa-edit"></i>&nbsp;Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm delete_article_button" id="deleteArticle_$pages.get(0)">
+                                            <i class="fa fa-trash-o"></i>
+                                            &nbsp;delete
+                                        </a>
+                                    </div>
+                                </div>
                             #end
                         #end
                     </div>
-                    <div class="row" id="back_to_list">
-                        <div class="col-md-12"><a class="btn btn-default btn-sm" id="back_to_list_button"><i class="fa fa-arrow-left"></i>&nbsp;back to list</a><a class="btn btn-default btn-sm" id="edit_article_button"><i class="fa fa-edit"></i>&nbsp;Edit</a><a class="btn btn-danger btn-sm" id="delete_article_button"><i class="fa fa-trash-o"></i>&nbsp;delete</a></div>
-                    </div>
+
 
                     <div class="row">
                         <div class="col-md-12 bs-docs-sidebar" id="bs-docs-pages">
                             <ul id="article_list_pages" class="nav nav-list bs-docs-sidenav affix-top" style="width:100%!important">
-
                                 #if($article)
                                     #foreach( $heads in $article )
-                                        <li title="click to view"><a redirect_to="article_$heads.get(0)_pages" href="#" ><i class="icon-chevron-right"></i> $heads.get(1)</a></li>
+                                        <li title="click to view">
+                                            <a redirect_to="article_$heads.get(0)_pages" href="#" >
+                                                <i class="icon-chevron-right"></i>
+                                        #if($heads.get(1))
+                                            $heads.get(1)
+                                        #else
+                                        #end
+                                            </a>
+                                        </li>
                                     #end
                                 #end
                             </ul>
@@ -124,7 +170,9 @@
                     </div>
                     </br>
                     <div class="row" id="pagination-docs">
-                        <div class="col-md-10 "><div id="cmsArticlePaginataionDiv"></div></div>
+                        <div class="col-md-10 ">
+                            <div id="cmsArticlePaginataionDiv"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -133,7 +181,6 @@
 </div>
 <div class="row" id="article_menus">
     <div class="col-md-12">
-
         <table id="tab_menu_table" class="table table-hover table-condenced  table-stripped">
             <caption><h4>Available Tab Menus</h4></caption>
             <thead><th>Tab Menu Name</th><th>Action</th> </thead>
@@ -146,17 +193,17 @@
                             <input type="text" class="form-control text_inputs" name="menu" />
                         </td>
                         <td>
-                                          <span class='btn-group'>
-                                              <a class="btn btn-xs edit"  id="edit_$menu.get(0)" style="color:orange;">
-                                                  <i title='edit' class='fa fa-edit '></i>
-                                              </a>
-                                              <a class="btn btn-xs save" title='save' id="save_$menu.get(0)" style="color:green;">
-                                                  <i  class='fa fa-save ' ></i>
-                                              </a>
-                                              <a class="btn btn-xs delete" title='delete' id="delete_$menu.get(0)" style="color:red;">
-                                                  <i class='fa fa-times'></i>
-                                              </a>
-                                          </span>
+                          <span class='btn-group'>
+                             <a class="btn btn-xs edit"  id="edit_$menu.get(0)" style="color:orange;">
+                                 <i title='edit' class='fa fa-edit '></i>
+                             </a>
+                             <a class="btn btn-xs save" title='save' id="save_$menu.get(0)" style="color:green;">
+                                 <i  class='fa fa-save ' ></i>
+                             </a>
+                             <a class="btn btn-xs delete" title='delete' id="delete_$menu.get(0)" style="color:red;">
+                                 <i class='fa fa-times'></i>
+                             </a>
+                           </span>
                         </td>
                     </tr>
                     #end
@@ -174,9 +221,7 @@
                     <div  class="col-sm-2 ">
                         <button class="btn btn-success btn-mini" type="submit"  id="new_tab_menu_button">add menu</button>
                     </div>
-
                 </div>
-
             </form>
             <div id="report"></div>
         </div>
@@ -189,16 +234,12 @@
             <h3>Managing Slide Show Images </h3>
         </div>
     </div>
-
     <div class="col-md-12 Image-manager well"></div>
-
 </div>
 
 <div class="row" id="add_div">
-
     <div class="col-md-12">
         <ul id="tabs">
-
             <li><a href="#" id="all" title="all available"><em>All</em></a></li>
             #if($menus)
                 #set( $counterTab=0 )
@@ -285,7 +326,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-12 conteiner" >$content.get(1)</div>
+                                    <div class="col-md-12 conteiner" >
+                                        $content.get(1)
+                                    </div>
                                 </div>
                             </div>
                         #end
