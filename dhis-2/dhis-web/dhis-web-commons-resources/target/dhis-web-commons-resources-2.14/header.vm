@@ -19,6 +19,7 @@
     <link href="../dhis-web-commons/css/sliderman.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/onoff.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/docs.min.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/style.css" rel="stylesheet">
     <link href="../dhis-web-commons/cms-image-manager/css/imageManager.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/sumoselect/sumoselect.css" rel="stylesheet" />
     <link href="../dhis-web-commons/javascripts/jquery.multiselect.css" rel="stylesheet" />

@@ -17,49 +17,21 @@
 <div class="container-fluid">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
-    <div class="page-wrap">
+    <div class="page-wraps">
         <div class="row">
             <div class="col-md-12">
-                <!--Left Bar-->
-            ##         <div id="" class="col-md-3"><!--#leftBar-->
-            ##            <div class="row">
-            ##                <div class="col-md-12">
-            ##                    #parse( $menu )
-            ##                </div>
-            ##            </div>
-            ##        </div>
-                <!--End of left Bar-->
-
                 <!-- Message body area-->
                 <div id="headerMessage" class="bold"></div>
                 <!-- end of meassage body-->
 
                 <!-- central bar-->
-                <div class="page col-md-12" id=""><!--mainPage--> <!-- Do not set style attr -->
+                <div class="page col-md-12"><!--mainPage--> <!-- Do not set style attr -->
                     #if( !$page )
                         <p>$i18n.getString( "no_page_specified" )</p>
                     #else
                         #parse( $page )
                     #end
                 </div>
-                <!-- end central bar-->
-                <script type="text/javascript">
-                        #if( $!menuState == "HIDDEN" )
-                        dhis2.leftBar.hide();
-                        #elseif ( $!menuState == "EXTENDED" )
-                        dhis2.leftBar.extend();
-                        #end
-                </script>
-
-                <!-- start right menu-->
-                <div id="rightBar" class="col-md-3">
-		  <span id="hideRightBar"><a href="javascript:hideHelpContent()" title="$i18n.getString( 'close' )">
-              <img id="hideRightBarImg" src="../images/hide.png" alt="$i18n.getString( 'close' )"/></a>
-		  </span>
-                    <div id="rightBarContents"></div>
-                </div>
-            </div>
-            <!--end right menu-->
         </div>
     </div>
     <div class="row">
@@ -107,7 +79,7 @@
                             <ul class="dropdown-menu">
                                 <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
                                 <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;<!--i18n.getString( "help" )-->Help Center</a></li>
-                                <li><a href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
+                                <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
                                 <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserAccountForm.action"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                                 <li class="divider"></li>
                                 <li><a style="color:#ffffff!important;" href="../dhis-web-commons-security/logout.action"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
@@ -121,5 +93,45 @@
         </footer>
     </div>
 </div>
+<script type="text/javascript">
+
+    var m  = 0;
+    var mx = 0;
+    function minSide(){
+        $('#min').hide('fast', function(){
+            $('#max').show();
+        });
+        if(m == 0){
+            $('#leftbarcontents').animate({
+                direction: 'left',
+                left: '-=250'
+            }, 800, function() {
+                // Animation complete.
+                $('#mainPages').css({
+                    marginLeft: -180,
+                    width:   1000
+                })
+            });
+        }
+
+    }
+
+    function maxSide(){
+
+        $('#max').hide('fast', function(){
+            $('#min').show();
+        });
+        $('#mainPages').css({
+            marginLeft: -07,
+            width:   800
+        })
+        $('#leftbarcontents').animate({
+            left: '+=250'
+        }, 800, function() {
+            // Animation complete.
+
+        });
+    }
+</script>
 </body>
 </html>

@@ -30,35 +30,39 @@ $(document).ready(function(){
             $("#article_menus").hide();
             $("#add_div").hide();
             $("#other_pages").show();
+            $("div.title_pages").show();
+            $("#bs-docs-pages").show();
+            $("#pagination-docs").show();
             $("#add_new_article_form").hide();
 
             $("textarea#newpage").ckeditor();
 
             $("#add_new_page").on("click",function(){
+                $("div.display_article_for_cms").hide();
                 $("form#add_new_article_form").show();
 
-                        $('#add_new_article_button').on('click', function(e) {
+                        $('#add_new_article_form').on('submit', function(e) {
+                            e.preventDefault();
                             var sendOnce = false;
                             var data = CKEDITOR.instances.newpage.getData();
-
                             $("#imposter_newpage").val(data);
-                            e.preventDefault();
+
                             if(!$("input#page_name").val()){
                                 $("#page_label").css({"color":"red","font-weight":"bold"});
                                 $('#page_label').blink();
                             }else{
 
-                                var page_name = $("input#page_name").val();
-                                var description = $("textarea#description").val();
-                                var imposter_newpage = $("input#imposter_newpage").val();
-                                var formData = "&page_name="+page_name+"&description="+description+"&imposter_newpage="+imposter_newpage;
+
                                 $("#output_article_pane").html("<h3 ><i class='fa fa-spin fa-spinner '></i><span>Making changes please wait...</span><h3>");
                                if(!sendOnce){
-                                   $.post( "addArticle.action",formData)
+                                   $.post( "addArticle.action",$(this).serialize())
                                        .done(function() {
                                            $('#add_new_article_form').find("input[type=text], textarea").val("");
                                            $("#output_article_pane").html(" ");
                                            sendOnce = true;
+//                                           $("a#cms_settings_button").trigger("click");
+//                                           $("a#manage_pages").trigger("click");
+
                                        })
                                        .fail(function() {
                                            $("#output_article_pane").html("<h3 style='color:red;'><i class='fa fa-spin fa-spinner '></i><span>Adding failure ... </span><h3>");
@@ -71,9 +75,69 @@ $(document).ready(function(){
                         $("#cancel_add_new_article_button").on("click",function(){
                             $('#add_new_article_form').find("input[type=text], textarea").val("");
                             $("#add_new_article_form").hide();
+                            $("div.display_article_for_cms").show();
                         });
 
             });
+
+
+
+                /////////////// CMS ARTICLES PAGINATION //////////
+
+
+                var items = $("ul#article_list_pages li");
+
+                var numItems = items.length;
+                var perPage = 3;
+
+                // only show the first 3 (or "first per_page") items initially
+                items.slice(perPage).hide();
+                // now setup your pagination
+                // you need that .pagination-page div before/after your table
+                $("#cmsArticlePaginataionDiv").pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    cssStyle: "compact-theme",
+                    onPageClick: function(pageNumber) { // this is where the magic happens
+                        // someone changed page, lets hide/show trs appropriately
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+
+
+
+                /// CMS ARTICLES VIEWING AND MANIPULATION
+                $("div.article_conteiner_pages").hide();
+                $("div.available_articles_pages").hide();
+                $("div#back_to_list").hide();
+                $("ul#article_list_pages li a").on("click",function(e){
+                    e.preventDefault();
+                    $("div.available_articles_pages").hide();
+                    $("div#article_title").hide();
+                    $("div.title_pages").hide();
+                    $("#bs-docs-pages").hide();
+                    $("#pagination-docs").hide();
+                    $("div.article_conteiner_pages").show();
+                    $("div#"+$(this).attr("redirect_to")).show();
+                    $("div#back_to_list").show();
+                    var prevRedirect = $(this).attr("redirect_to");
+                    $("a#back_to_list_button").on("click",function(){
+                        $("div#"+prevRedirect).hide();
+                        $("div#back_to_list").hide();
+                        $("div.article_conteiner_pages").hide();
+                        $("div.available_articles_pages").hide();
+                        $("div.title_pages").show();
+                        $("#bs-docs-pages").show();
+                        $("#pagination-docs").show();
+                    });
+                });
+
+
+
+
         }
         if(menu_name =="manage_images"){
             $("#Slide_manager_pane").show();
@@ -224,15 +288,15 @@ $(document).ready(function(){
 
 
    ///////////// SLIDE SHOW////////////////////
-    Image_grid ='';
-    Doc_grid = '';
-    Doc_menu = '';
-    Doc_menu_cms = '';
+
     $.ajax({
         url: "../api/documents.json",
         dataType: 'json'
     }).done(function(data) {
-
+        Image_grid ='';
+        Doc_grid = '';
+        Doc_menu = '';
+        Doc_menu_cms = '';
         $.each(data.documents,function(index,val){
             if(val['name']==="image"){
                 Image_grid +='<img class="slideProperty img-rounded img-responsive" src="'+val['href']+'/data" alt="" title="" />';
@@ -241,7 +305,7 @@ $(document).ready(function(){
                 /// left menu document download
                 Doc_grid += '<li class="list-group-item">';
                 Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_grid += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
+                Doc_grid += '<span class="fa fa-globe"></span>&nbsp;&nbsp;'+ val['name']+'</a>';
                 Doc_grid += '</li>';
 
                 //navbar download
@@ -252,10 +316,10 @@ $(document).ready(function(){
                 Doc_menu +=' </li>';
 
                 // cms left menu document
-                Doc_menu_cms += '<li class="list-group-item">';
+                Doc_menu_cms += '<li data-enabled="canDelete" class="list-group-item">';
                 Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
                 Doc_menu_cms += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
-                Doc_menu_cms += '<a  href="../dhis-web-reporting/removeDocument.action" class="delete_document" >';
+                Doc_menu_cms += '<a data-target-fn="removeDocument"  class="delete_document" >';//href="../dhis-web-reporting/removeDocument.action"
                 Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-times pull-right"></i>';
                 Doc_menu_cms += '</a>';
                 Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
@@ -551,20 +615,24 @@ $(document).ready(function(){
 
 
     ///// process link
-    $('#addLink').on('submit', function(e) {
-
+    allowSubmit = true;
+    $('#addImportantLink').on('submit', function(e) {
         e.preventDefault();
 
-        $.post("addLink.action",$(this).serialize())
-            .done(function() {
-                location.reload(true);
-            })
-            .fail(function() {
+        if (!allowSubmit) return false;
+        allowSubmit = false;
 
+            $.ajax({
+                type: "POST",
+                url: 'addLink.action',
+                data: $(this).serialize(),
+                success: whenSucceed
             });
 
-
-
+        function whenSucceed(){
+            location.reload(true);
+        }
+        setTimeout(function(){ allowSubmit = true; }, 5000);
     });
 
     //// link operation
@@ -572,7 +640,7 @@ $(document).ready(function(){
         e.preventDefault()
         var unique_id = $(this).attr("id");
         var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success' id='yes'>yes</a><a class='btn btn-xs btn-danger' id='no'>no</a></span>");
+        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success yes' >yes</a><a class='btn btn-xs btn-danger no' >no</a></span>");
         $("#dialog").dialog({ title: "Deleting Link" ,
             show: {
                 effect: 'slide',
@@ -581,23 +649,25 @@ $(document).ready(function(){
                 }
             },
             open: function(event, ui) {
-                $("#yes").click(function(){
-
-                    $.post("removeLink.action","linkid="+ary[1])
-                        .done(function() {
-                            $( "#dialog" ).dialog( "close" );
-                            $(this).parent().parent().remove("slow");
-                            location.reload(true);
-                        })
-                        .fail(function() {
-                            alert("not deleted");
-                        });
-
+                console.log("dialog opened");
+                console.log( $(".yes").html());
+                $(".yes").on("click",function(){
+                console.log("yes clicked");
+//                    $.post("removeLink.action","linkid="+ary[1])
+//                        .done(function() {
+//                            $( "#dialog" ).dialog( "close" );
+//                            $(this).parent().parent().remove("slow");
+//                            location.reload(true);
+//                        })
+//                        .fail(function() {
+//                            alert("not deleted");
+//                        });
+//
 
 
                 });
 
-                $("#no").click(function(){
+                $("#no").on("click",function(){
                     $( "#dialog" ).dialog( "close" );
                 });
             }
@@ -623,19 +693,21 @@ $(document).ready(function(){
 
 
     ///// process docs
-    $('#addDocs').on('submit', function(e) {
+    $('#documentForm').on('submit', function(e) {
+
+        $.ajax({
+            type: "POST",
+            url: 'addDocs.action',
+            data: new FormData( this ),
+            success: whenSucceed
+        });
         e.preventDefault();
 
-        $("#addDocs").ajaxSubmit({
-            complete: function(xhr) {
-
-                location.reload(true);
-            }
-        });
-
+        function whenSucceed(){
+            location.reload(true);
+        }
 
     });
-
 
     //// docs operations
     //// link operation
