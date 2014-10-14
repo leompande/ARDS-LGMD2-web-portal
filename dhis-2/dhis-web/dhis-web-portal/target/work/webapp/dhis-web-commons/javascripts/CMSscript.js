@@ -112,7 +112,8 @@ $(document).ready(function(){
                 /// CMS ARTICLES VIEWING AND MANIPULATION
                 $("div.article_conteiner_pages").hide();
                 $("div.available_articles_pages").hide();
-                $("div#back_to_list").hide();
+                $("div#editorArticleFormContainer").hide();
+                $("div.back_to_list").hide();
                 $("ul#article_list_pages li a").on("click",function(e){
                     e.preventDefault();
                     $("div.available_articles_pages").hide();
@@ -120,18 +121,69 @@ $(document).ready(function(){
                     $("div.title_pages").hide();
                     $("#bs-docs-pages").hide();
                     $("#pagination-docs").hide();
-                    $("div.article_conteiner_pages").show();
+                    $("div.back_to_list").hide();
                     $("div#"+$(this).attr("redirect_to")).show();
-                    $("div#back_to_list").show();
                     var prevRedirect = $(this).attr("redirect_to");
-                    $("a#back_to_list_button").on("click",function(){
+                    var buttonArray = prevRedirect.split("_");
+                    $("div#button_group_"+buttonArray[1]).show();
+                    $("a#backArticle_"+buttonArray[1]).on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
                         $("div#"+prevRedirect).hide();
-                        $("div#back_to_list").hide();
+                        $("div.back_to_list").hide();
                         $("div.article_conteiner_pages").hide();
                         $("div.available_articles_pages").hide();
                         $("div.title_pages").show();
                         $("#bs-docs-pages").show();
                         $("#pagination-docs").show();
+                    });
+                    $("a.edit_article_button").on("click",function(){
+                        var title   = $("div.title_"+buttonArray[1]+"_pages").html();
+                        var content = $("div.body_"+buttonArray[1]+"_pages").html();
+                        $("div#article_"+buttonArray[1]+"_pages").hide();
+                        $("input#edit_page_name").val(title.trim());
+                        $("input#imposter_article_id").val(buttonArray[1]);
+                        $("textarea#article_edit").val(content.trim());
+                        $("div#editorArticleFormContainer").show();
+                        $("div.article_conteiner_pages").hide();
+                        $("div#button_group_"+buttonArray[1]).hide();
+                        $("button#cancel_article_editor").on("click",function(){
+                            $("input#edit_page_name").val("");
+                            $("input#imposter_article_id").val("");
+//                            $("textarea#article_edit").val("");
+//                            CKEDITOR.instances.article_edit.setData("");
+                            $("input#imposter_article_edit").val("");
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#article_"+buttonArray[1]+"_pages").show();
+                            $("div#button_group_"+buttonArray[1]).show();
+//                            buttonArray[1]="";
+                        });
+
+                        ///// process article edit
+                        allowSubmit = true;
+                        $("form#edit_article_form").on("submit",function(e){
+                            $("input#imposter_article_edit").val(CKEDITOR.instances.article_edit.getData());
+                            var formValues = $(this).serialize();
+                            e.preventDefault();
+                                if (!allowSubmit) return false;
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: 'editArticle.action',
+                                    data: formValues,
+                                    success: whenSucceed
+                                });
+
+                                function whenSucceed(){
+                                    allowSubmit = false;
+//                                    location.reload(true);
+                                }
+                                setTimeout(function(){ allowSubmit = true; }, 5000);
+
+                        });
+                    });
+                    $("a.delete_article_button").on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
+                        alert($(this).attr("id"));
                     });
                 });
 
@@ -275,16 +327,16 @@ $(document).ready(function(){
         });
 
 
-    /// CMS ARTICLES VIEWING AND MANIPULATION
-    $("div.article_conteiner").hide();
-    $("div.available_articles").hide();
-    $("ul#article_list li a").on("click",function(e){
-        e.preventDefault();
-        $("div.article_conteiner").show();
-        $("div.available_articles").hide();
-        $("div.article_"+$(this).attr("id")).show();
-
-    });
+//    /// CMS ARTICLES VIEWING AND MANIPULATION
+//    $("div.article_conteiner").hide();
+//    $("div.available_articles").hide();
+//    $("ul#article_list li a").on("click",function(e){
+//        e.preventDefault();
+//        $("div.article_conteiner").show();
+//        $("div.available_articles").hide();
+//        $("div.article_"+$(this).attr("id")).show();
+//
+//    });
 
 
    ///////////// SLIDE SHOW////////////////////
@@ -441,6 +493,7 @@ $(document).ready(function(){
 
     $( 'textarea#content_new' ).ckeditor();
     $( 'textarea#content_edit' ).ckeditor();
+    $( 'textarea#article_edit' ).ckeditor();
 
     $("#editor").hide();
     $("#creator").hide();
