@@ -6,7 +6,7 @@ $(document).ready(function(){
     var items = $("ul#article_list_pages li");
 
     var numItems = items.length;
-    var perPage = 3;
+    var perPage = 10;
 
     // only show the first 2 (or "first per_page") items initially
     items.slice(perPage).hide();
