@@ -37,7 +37,9 @@
 <div class="row">
     #parse( "ardsMacros.vm" )
     #cmsLeftMenu()
-<div class="col-md-8" id="mainPages">
+<div class="col-md-10" id="mainPages">
+<div class="row">
+<div class="col-md-10">
 <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
          <p>
            <div id="min"><a href="#" onclick="javascript:minSide()" title="hide menu"><img src="../images/hide_menu.png" width="16" height="16" /></a></div>
@@ -154,8 +156,6 @@
                             #end
                         #end
                     </div>
-
-
                     <div class="row">
                         <div class="col-md-12 bs-docs-sidebar" id="bs-docs-pages">
                             <ul id="article_list_pages" class="nav nav-list bs-docs-sidenav affix-top" style="width:100%!important">
@@ -348,8 +348,6 @@
 
     </div>
 </div>
-
-
 </div>
 </div>
 <div class="col-md-2" style="margin-top: 0px">
@@ -372,3 +370,6 @@
     </div>
 </div>
 </div>
+</div>
+</div>
+
