@@ -175,7 +175,6 @@ $(document).ready(function(){
 
                                 function whenSucceed(){
                                     allowSubmit = false;
-//                                    location.reload(true);
                                 }
                                 setTimeout(function(){ allowSubmit = true; }, 5000);
 
@@ -183,7 +182,34 @@ $(document).ready(function(){
                     });
                     $("a.delete_article_button").on("click",function(){
                         $("div#editorArticleFormContainer").hide();
-                        alert($(this).attr("id"));
+//                        alert($(this).attr("id"));
+                        var deleteArray = $(this).attr("id").split("_");
+
+                        if (!allowSubmit) return false;
+
+                        $.ajax({
+                            type: "POST",
+                            url: 'removeArticle.action',
+                            data: "&item="+deleteArray[1],
+                            success: whenSucceed
+                        });
+
+                        function whenSucceed(){
+                            allowSubmit = false;
+                            $("article_"+deleteArray[1]+"_pages").hide();
+                            $("button_group_"+deleteArray[1]).hide();
+                            $("a[redirect_to='article_"+deleteArray[1]+"_pages']").hide();
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#"+prevRedirect).hide();
+                            $("div.back_to_list").hide();
+                            $("div.article_conteiner_pages").hide();
+                            $("div.available_articles_pages").hide();
+                            $("div.title_pages").show();
+                            $("#bs-docs-pages").show();
+                            $("#pagination-docs").show();
+                        }
+                        setTimeout(function(){ allowSubmit = true; }, 5000);
+
                     });
                 });
 
@@ -305,7 +331,7 @@ $(document).ready(function(){
         var items = $("ul#article_list li");
 
         var numItems = items.length;
-        var perPage = 3;
+        var perPage = 10;
 
         // only show the first 2 (or "first per_page") items initially
         items.slice(perPage).hide();

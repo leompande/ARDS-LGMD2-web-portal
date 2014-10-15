@@ -86,7 +86,7 @@
             <!--<param name="javascripts">javascript/usergroup.js</param>-->
         </action>
 
-        <action name="removeArticle" class="org.hisp.dhis.dashboard.action.RemoveArticleAction">
+        <action name="removeArticle" class="org.hisp.dhis.dashboard.action.DeleteArticleAction">
             <result name="success" type="velocity">/mainHome.vm</result>
             <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
             <!--<param name="javascripts">javascript/usergroup.js</param>-->
