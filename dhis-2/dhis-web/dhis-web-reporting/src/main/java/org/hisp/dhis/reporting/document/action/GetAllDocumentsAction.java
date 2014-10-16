@@ -86,18 +86,15 @@ public class GetAllDocumentsAction
         if ( isNotBlank( key ) )
         {
             this.paging = createPaging( documentService.getDocumentCountByName( key ) );
-
             documents = new ArrayList<Document>( documentService.getDocumentsBetweenByName( key, paging.getStartPos(),
                 paging.getPageSize() ) );
         }
         else
         {
             this.paging = createPaging( documentService.getDocumentCount() );
-
             documents = new ArrayList<Document>( documentService.getDocumentsBetween( paging.getStartPos(), paging
                 .getPageSize() ) );
         }
-
         return SUCCESS;
     }
 }

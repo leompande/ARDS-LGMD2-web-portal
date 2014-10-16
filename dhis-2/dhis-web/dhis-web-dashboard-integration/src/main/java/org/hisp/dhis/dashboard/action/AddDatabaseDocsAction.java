@@ -32,30 +32,33 @@ import com.opensymphony.xwork2.Action;
 import org.hisp.dhis.attribute.AttributeService;
 import org.hisp.dhis.system.util.AttributeUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
-import java.sql.Types;
 import javax.sql.DataSource;
+import java.sql.Types;
 
-public class DeleteDocumentAction
+
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
+
+public class AddDatabaseDocsAction
         implements Action
 {
 
-    private String docId;
+    private String docname;
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
-
-
-    public void setDocId( String docId )
-    {
-        this.docId = docId;
-    }
-    public String getDocId( )
-    {
-        return this.docId;
-    }
 
     public void setDataSource(DataSource dataSource) {
 
         this.dataSource = dataSource;
+    }
+
+    public void setDocname(String docname) {
+        this.docname = docname;
+    }
+
+    public String getDocname () {
+        return this.docname;
     }
 
     // -------------------------------------------------------------------------
@@ -65,11 +68,19 @@ public class DeleteDocumentAction
     public String execute()
             throws Exception
     {
-
-        int[] types = {Types.BIGINT};
-        String inserQuery = "DELETE FROM  cms_files  WHERE id = ? AND file_type='doc'";
         jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.update(inserQuery, new Object[] {this.getDocId()},types);
+
+        System.out.println(docname);
+        String inserQuery = "INSERT INTO cms_files (file_type,file_name,status) VALUES(?,?,?)";
+        int[] types = {Types.VARCHAR,Types.VARCHAR,Types.VARCHAR};
+
+        if (this.docname == "image") {
+            jdbcTemplate.update(inserQuery, new Object[] {this.docname,this.docname,"enabled"});
+            }else{
+                jdbcTemplate.update(inserQuery, new Object[] {"doc",this.docname,"enabled"});
+            }
+
+
         return SUCCESS;
     }
 }

@@ -191,8 +191,7 @@
                 <div id="collapseTwo"  class="panel-collapse collapse in">
                     <div class="panel-body" id="contextMenu">
 
-                        <ul id="contextMenuItems" class="nav nav-pills nav-stacked list-group cms_document">
-
+                        <ul class="nav nav-pills nav-stacked list-group cms_document">
 
                         </ul>
 
@@ -212,7 +211,6 @@
                             <div class="form-group">
                                 <input type="hidden" id="upload" name="external" value="false" >
                             </div>
-
                             <input type="submit" value="Add Document" class="btn btn-success btn-sm" >
 
                         </form>
@@ -239,13 +237,21 @@
                                        <td> <p><a target="_blank" href="$links.get(2)" class="text-success">
                                              $links.get(1)</a>
 
-                                            <a  href="#" class="remove" id="remove,$links.get(0)">
-                                                <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-times pull-right"></i>
+                                            <a  href="#" class="hides" id="hides,$links.get(0)">
+                                                <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-minus pull-right"></i>
                                             </a>
+                                            <a  href="#" class="remove" id="remove,$links.get(0)">
+                                                <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-trash-o pull-right"></i>
+                                            </a>
+<<<<<<< HEAD
+                                        </p>
+                                    </li>
+=======
                                             <a  href="#" class="hides" id="hides,$links.get(0)">
                                                 <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-times pull-right"></i>
                                             </a></p></td>
                                     </tr>
+>>>>>>> 944d538758f4106da16b73121fdba8da67bbc9c6
 
                                 #end
                             #end
@@ -301,10 +307,10 @@
 </div>
 #end
 #macro( chartStatistics )
-<div id="statistics_charts" class="col-md-12" style="font-family: LiberationSansRegular, arial, sans-serif">
+<div id="statistics_charts" class="col-md-12" style="font-family: LiberationSansRegular, arial, sans-serif;">
     <div  class="row">
-        <div style="text-align: center"><h3> Favourites Charts </h3></div>
-    </div>
+        <div style="text-align: center;font-size: 1.5em;"><b> <u>Favourites Charts</u> </b></div>
+    </div></br>
     <div id="statistics_chart_1" class="row">
     </div></br>
     <div id="statistics_chart_2" class="row">

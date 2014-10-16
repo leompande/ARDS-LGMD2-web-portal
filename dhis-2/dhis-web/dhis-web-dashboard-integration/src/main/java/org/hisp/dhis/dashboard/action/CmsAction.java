@@ -75,10 +75,6 @@ public class CmsAction
 
     }
 
-
-
-
-
     public void setMessageService( MessageService messageService )
     {
         this.messageService = messageService;
@@ -302,7 +298,6 @@ public class CmsAction
 
             menuRows = new ArrayList<String> (  );
 
-
             if(menu_rows.getString("id") != null && !menu_rows.getString("id").isEmpty()) {
                 menuRows.add(new String(menu_rows.getString("id")));
             }
@@ -324,13 +319,12 @@ public class CmsAction
 
             articleRows = new ArrayList<String> (  );
 
-
             if(article_rows.getString("id") != null && !article_rows.getString("id").isEmpty()) {
                 articleRows.add(new String(article_rows.getString("id")));
             }
+
             if(article_rows.getString("page_name") != null && !article_rows.getString("page_name").isEmpty()) {
                 articleRows.add(new String(article_rows.getString("page_name")));
-
             }
 
             if(article_rows.getString("newpage") != null && !article_rows.getString("newpage").isEmpty()) {
@@ -339,7 +333,6 @@ public class CmsAction
             article.add(articleRows);
 
         }
-
 
 
         ds.destroy();

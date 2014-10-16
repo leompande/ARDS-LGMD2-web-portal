@@ -37,6 +37,16 @@ import org.hisp.dhis.external.location.LocationManager;
 import org.hisp.dhis.user.CurrentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.Action;
+import org.hisp.dhis.attribute.AttributeService;
+import org.hisp.dhis.system.util.AttributeUtils;
+import org.springframework.jdbc.core.JdbcTemplate;
+import javax.sql.DataSource;
+import java.sql.Types;
+
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import java.io.File;
 
 /**
@@ -45,6 +55,8 @@ import java.io.File;
 public class AddDocsAction
         implements Action
 {
+
+
     private static final Log log = LogFactory.getLog( AddDocsAction.class );
 
     private static final String HTTP_PREFIX = "http://";
@@ -132,6 +144,8 @@ public class AddDocsAction
         this.contentType = contentType;
     }
 
+
+
     // -------------------------------------------------------------------------
     // Action implementation
     // -------------------------------------------------------------------------
@@ -139,6 +153,7 @@ public class AddDocsAction
     public String execute()
             throws Exception
     {
+//        jdbcTemplate = new JdbcTemplate(dataSource);
         Document document = new Document();
 
         if ( id != null )
@@ -185,8 +200,9 @@ public class AddDocsAction
         document.setExternal( external );
 
         document.setName( name );
-        System.out.println(this.fileName);
         documentService.saveDocument( document );
+
+
 
         return SUCCESS;
     }
