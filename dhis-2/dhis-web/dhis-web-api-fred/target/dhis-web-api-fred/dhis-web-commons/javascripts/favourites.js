@@ -79,22 +79,105 @@ var chartsCounting = 1;
                             if(chartType==="stackedcolumn"){
                                 chartType = "column";
                             }
-console.log(jsonString);
+
                             $.getJSON(jsonString,function( dataResponse ){
 
-//                                var options = {
+                                var options = {
+                                    chart: {
+                                        type: ""
+                                    },
+                                    title: {
+                                        text: ""
+                                    },
+                                    xAxis: {
+                                        categories:[],
+                                        title: {
+                                            text: null
+                                        },
+                                        series: []
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: '',
+                                            align: 'high'
+                                        },
+                                        labels: {
+                                            overflow: 'justify'
+                                        }
+                                    },
+                                    tooltip: {
+                                        valueSuffix: ''
+                                    },
+                                    plotOptions: {
+                                        bar: {
+                                            dataLabels: {
+                                                enabled: true
+                                            }
+                                        }
+                                    },
+                                    legend: {
+                                        layout: 'vertical',
+                                        align: 'right',
+                                        verticalAlign: 'top',
+                                        x: 150,
+                                        y: 50,
+                                        floating: true,
+                                        borderWidth: 1,
+                                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                                        shadow: true
+                                    },
+                                    credits: {
+                                        enabled: false
+                                    },
+                                    series:[]
+                                }
+
+
+
+                                var LabelingArray = [];
+                                $.each(dataResponse.metaData['names'],function(index,val){
+                                    LabelingArray[index] = val;
+                                });
+
+                                var existingCat = [];
+                                var existingDat = [];
+                                var datas = [];
+                                $.each(dataResponse.rows,function(index,val){
+
+                                    if($.inArray( LabelingArray[val[1]], existingCat )===-1){
+                                        options.xAxis.categories.push(LabelingArray[val[1]]);
+                                        existingCat.push(LabelingArray[val[1]]);
+                                    }else{
+
+                                    }
+
+                                    if($.inArray( LabelingArray[val[0]], existingDat )===-1){
+
+                                    }else{
+
+                                    }
+                                    options.series.push({'name':LabelingArray[val[0]],'data':parseInt(val[2])});
+
+                                    options.title.text = chartTitle;
+                                    options.chart.type = chartType;
+
+                                });
+                                console.log(JSON.stringify(options.xAxis.categories));
+                                console.log(JSON.stringify(options.series));
+
+//                                $('#statistics_chart_'+IdCount).highcharts({
 //                                    chart: {
-//                                        type: ""
+//                                        type: chartType
 //                                    },
 //                                    title: {
-//                                        text: ""
+//                                        text: chartTitle
 //                                    },
 //                                    xAxis: {
-//                                        categories:[],
+//                                        categories: Categories,
 //                                        title: {
 //                                            text: null
-//                                        },
-//                                        series: []
+//                                        }
 //                                    },
 //                                    yAxis: {
 //                                        min: 0,
@@ -130,93 +213,10 @@ console.log(jsonString);
 //                                    credits: {
 //                                        enabled: false
 //                                    },
-//                                    series:[]
-//                                }
-//
-//
-//
-//                                var LabelingArray = [];
-//                                $.each(dataResponse.metaData['names'],function(index,val){
-//                                    LabelingArray[index] = val;
+//                                    series:JSON.stringify(SeriesArray)
 //                                });
-//
-//                                var existingCat = [];
-//                                var existingDat = [];
-//                                var datas = [];
-//                                $.each(dataResponse.rows,function(index,val){
-//
-//                                    if($.inArray( LabelingArray[val[1]], existingCat )===-1){
-//                                        options.xAxis.categories.push(LabelingArray[val[1]]);
-//                                        existingCat.push(LabelingArray[val[1]]);
-//                                    }else{
-//
-//                                    }
-//
-//                                    if($.inArray( LabelingArray[val[0]], existingDat )===-1){
-//
-//                                    }else{
-//
-//                                    }
-//                                    options.series.push({'name':LabelingArray[val[0]],'data':parseInt(val[2])});
-//
-//                                    options.title.text = chartTitle;
-//                                    options.chart.type = chartType;
-//
-//                                });
-//                                console.log(JSON.stringify(options.xAxis.categories));
-//                                console.log(JSON.stringify(options.series));
-//
-////                                $('#statistics_chart_'+IdCount).highcharts({
-////                                    chart: {
-////                                        type: chartType
-////                                    },
-////                                    title: {
-////                                        text: chartTitle
-////                                    },
-////                                    xAxis: {
-////                                        categories: Categories,
-////                                        title: {
-////                                            text: null
-////                                        }
-////                                    },
-////                                    yAxis: {
-////                                        min: 0,
-////                                        title: {
-////                                            text: '',
-////                                            align: 'high'
-////                                        },
-////                                        labels: {
-////                                            overflow: 'justify'
-////                                        }
-////                                    },
-////                                    tooltip: {
-////                                        valueSuffix: ''
-////                                    },
-////                                    plotOptions: {
-////                                        bar: {
-////                                            dataLabels: {
-////                                                enabled: true
-////                                            }
-////                                        }
-////                                    },
-////                                    legend: {
-////                                        layout: 'vertical',
-////                                        align: 'right',
-////                                        verticalAlign: 'top',
-////                                        x: 150,
-////                                        y: 50,
-////                                        floating: true,
-////                                        borderWidth: 1,
-////                                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
-////                                        shadow: true
-////                                    },
-////                                    credits: {
-////                                        enabled: false
-////                                    },
-////                                    series:JSON.stringify(SeriesArray)
-////                                });
-//                                $('#statistics_chart_'+IdCount).highcharts(options);
-//                                IdCount++;
+                                $('#statistics_chart_'+IdCount).highcharts(options);
+                                IdCount++;
                             });
 
 //                            }

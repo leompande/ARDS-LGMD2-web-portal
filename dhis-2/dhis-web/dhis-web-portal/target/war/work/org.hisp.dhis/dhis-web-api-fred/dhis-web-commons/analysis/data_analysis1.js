@@ -83,129 +83,127 @@ $(document).ready(function(){
         var name ="";
         var first_orgunit =new Array();
         var first_period = new Array();
-
-        $(".menuitem").click(function() {
-            document.menuss = $(this);
-            var url1 = '../api/reportTables/' + $(this).find('a').attr('id') + '.json';
+        $(".menuitem").click(function(){
+            var url1 = '../api/reportTables/'+$(this).find('a').attr('id')+'.json';
             $('#mainarea').html("");
 
             //prepare data multselect from data_element.js
 
-            $.getJSON(url1, function (data) {
+            $.getJSON( url1, function( data ) {
                 name = data.name;
                 var data_element_select = "";
-                $.each(data.dataElements, function (key, value) {
-                    data_element_select += "<option value='" + value.id + "' selected='selected'>" + value.name + "</option>";
+                $.each( data.dataElements, function( key, value ) {
+                    data_element_select += "<option value='"+value.id+"' selected='selected'>" + value.name + "</option>";
                 });
-                $.each(data.organisationUnits, function (key, value) {
+                $.each( data.organisationUnits, function( key, value ) {
                     first_orgunit[key] = value.id;
                 });
                 //creating organization unit multselect from orgUnit.js
                 prepareOrganisationUnit(first_orgunit);
-                $.each(data.periods, function (key, value) {
+                $.each( data.periods, function( key, value ) {
                     first_period[key] = value.id;
                 });
                 //prepare period Multselect from periods.js
                 $('.data-element').multiselect().multiselectfilter();
                 preparePeriods(first_period);
                 $(".data-element").multiselectfilter("destroy");
-                $(".data-element").multiselect("destroy");
+				$(".data-element").multiselect("destroy");
                 $(".data-element").css('width', '180px');
                 $('.data-element').html(data_element_select).multiselect().multiselectfilter();
-//            });
+            });
 
 
             //hiding error alert
             $('.alert').hide();
 
-            $('.reports button').click(function () {
+            $('.reports button').click(function(){
                 $('#mainarea').html('<i class="fa fa-spinner fa-spin fa-3x"></i> Loading...')
                 var orgunit = $(".adminUnit").val();
                 var dataelement = $('.data-element').val();
                 var timeperiod = $(".periods").val();
-                if (!orgunit || !dataelement || !timeperiod) {
-                    $('.alert').fadeIn('slow');
-                    setTimeout(function () {
+                if(!orgunit  || !dataelement || !timeperiod){
+                  $('.alert').fadeIn('slow');
+                    setTimeout(function() {
                         $('.alert').fadeOut('slow');
                     }, 3000);
-                } else {
+                }else{
                     //identifying active report
                     $('.reports button').removeClass('btn-success').addClass('btn-default');
                     $(this).removeClass('btn-default').addClass('btn-success');
 
                     //preparing a link to send to analytics
-                    var data_dimension = 'dimension=dx:';
+                    var data_dimension ='dimension=dx:';
                     for (var i = 0; i < dataelement.length; i++) {
-                        data_dimension += (i == dataelement.length - 1) ? dataelement[i] : dataelement[i] + ';';
+                        data_dimension +=(i == dataelement.length-1)?dataelement[i]:dataelement[i]+';';
                     }
 
                     //creating column dimension
-                    var column_dimension = 'dimension=' + $('select[name=category]').val() + ':';
+                    var column_dimension = 'dimension='+$('select[name=category]').val()+':';
                     //if column will be administrative units
-                    if ($('select[name=category]').val() == 'ou') {
+                    if($('select[name=category]').val() == 'ou'){
                         for (var i = 0; i < orgunit.length; i++) {
-                            column_dimension += (i == orgunit.length - 1) ? orgunit[i] : orgunit[i] + ';';
+                            column_dimension +=(i == orgunit.length-1)?orgunit[i]:orgunit[i]+';';
                         }
                     }
-                    else { //if column will be periods
+                    else{ //if column will be periods
                         for (var i = 0; i < timeperiod.length; i++) {
-                            column_dimension += (i == timeperiod.length - 1) ? timeperiod[i] : timeperiod[i] + ';';
+                            column_dimension +=(i == timeperiod.length-1)?timeperiod[i]:timeperiod[i]+';';
                         }
                     }
 
                     //creating filter dimensions
-                    var filter = ($('select[name=category]').val() != 'ou') ? 'filter=ou:' : 'filter=pe:'
+                    var filter = ($('select[name=category]').val() != 'ou')?'filter=ou:':'filter=pe:'
                     //if filter will be administrative units
-                    if ($('select[name=category]').val() != 'ou') {
+                    if($('select[name=category]').val() != 'ou'){
                         for (var i = 0; i < orgunit.length; i++) {
-                            filter += (i == orgunit.length - 1) ? orgunit[i] : orgunit[i] + ';';
+                            filter +=(i == orgunit.length-1)?orgunit[i]:orgunit[i]+';';
                         }
                     }
-                    else { //if filter will be periods
+                    else{ //if filter will be periods
                         for (var i = 0; i < timeperiod.length; i++) {
-                            filter += (i == timeperiod.length - 1) ? timeperiod[i] : timeperiod[i] + ';';
+                            filter +=(i == timeperiod.length-1)?timeperiod[i]:timeperiod[i]+';';
                         }
                     }
 
-                    var url = '../api/analytics.json?' + data_dimension + '&' + column_dimension + '&' + filter
+                    var url = '../api/analytics.json?'+data_dimension+'&'+column_dimension+'&'+filter
 
 
                     //checking types of report needed and react accordingly
                     //drawing table
-                    if ($(this).attr('id') == 'draw_table') {
-                        drawTable(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_table'){
+                        drawTable(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing bar chart
-                    if ($(this).attr('id') == 'draw_bar') {
-                        drawBar(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_bar'){
+                        drawBar(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing column chart
-                    if ($(this).attr('id') == 'draw_column') {
-                        drawColumn(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_column'){
+                        drawColumn(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing line chart
-                    if ($(this).attr('id') == 'draw_line') {
-                        drawLine(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_line'){
+                        drawLine(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing pie chat
-                    if ($(this).attr('id') == 'draw_pie') {
-                        drawPie(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_pie'){
+                        drawPie(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing staked chat
-                    if ($(this).attr('id') == 'draw_staked') {
-                        drawStaked(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_staked'){
+                        drawStaked(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing spider chat
-                    if ($(this).attr('id') == 'draw_spider') {
-                        drawSpider(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_spider'){
+                        drawSpider(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //drawing combined chat
-                    if ($(this).attr('id') == 'draw_combined') {
-                        drawCombined(name, url, $('select[name=category]').val(), $('.data-element').val());
+                    if($(this).attr('id') == 'draw_combined'){
+                        drawCombined(name,url,$('select[name=category]').val(),$('.data-element').val());
                     }
                     //exporting data to excel
-                    if ($(this).attr('id') == 'export_cvs') {
-                        window.location = '../api/analytics.xls?' + data_dimension + '&' + column_dimension + '&' + filter;
+                    if($(this).attr('id') == 'export_cvs'){
+                         window.location = '../api/analytics.xls?'+data_dimension+'&'+column_dimension+'&'+filter;
                     }
                 }
             })
@@ -218,11 +216,9 @@ $(document).ready(function(){
             $(".category").css('width', '180px');
             $('#content_to_hide').hide();
             $('.analysis-wraper').fadeIn();
-                $('#draw_table').trigger("click");
+            $('#draw_table').trigger("click").trigger("click");
 
-        });
-            $('#draw_table').trigger("click");
+    });
 
-        });
  });
 })

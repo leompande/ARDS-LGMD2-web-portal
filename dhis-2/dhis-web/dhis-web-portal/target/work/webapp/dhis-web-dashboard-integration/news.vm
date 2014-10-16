@@ -21,12 +21,11 @@
 
 </script>
 
-<div class="row">
+<div class="row" id="body">
     #parse( "ardsMacros.vm" )
     #leftMenu()
-<div class="col-md-10" id="mainPages">
+<div class="col-md-10">
 <div class="analysis-wraper">
-
     <div class="alert alert-danger fade in" role="alert" style="padding: 4px">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
         <strong>Empty Value!</strong> Please select at least one Administrative unit, period and data.
@@ -92,7 +91,6 @@
     </div>
 </div>
 <div class="row" id="content_to_hide">
-
 <div class="col-md-10">
 <div id="contents" class="image">
 
@@ -134,13 +132,7 @@
 
 <div class="row">
 <div class="col-md-12 ">
-<span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
-         <p>
-           <div id="min"><a href="#" onclick="javascript:minSide()" title="hide menu"><img src="../images/hide_menu.png" width="16" height="16" /></a></div>
-           <div id="max" style="display:none"><a href="#" onclick="javascript:maxSide()" title="show menu"><img src="../images/extend_menu.png" width="16" height="16" /></a></div>
-    </p>
-</span>
-<div class=""><p style="font-size:16px;font-weight:bolder;padding-left: 20px;">Current News</p></div>
+<div class=""><p style="font-size:16px;font-weight:bolder;">Current News</p></div>
 <script type="text/javascript" >
 
     // -------------------------------------------------------------------

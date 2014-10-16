@@ -2,45 +2,133 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e94f5c0d-0ca2-4524-b7a1-d20a600ba87f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/es5-sham.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/es5-shim.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/ext-plugin-gray.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/table.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-commons-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-commons-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-commons-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-dashboard-integration-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager/WEB-INF/lib/dhis-web-maintenance-appmanager-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager/WEB-INF/lib/dhis-web-maintenance-appmanager-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-dataadmin-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-datadictionary-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-dataset-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14/WEB-INF/lib/dhis-web-maintenance-mobile-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14/WEB-INF/lib/dhis-web-maintenance-mobile-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-organisationunit-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient/WEB-INF/lib/dhis-web-maintenance-patient-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient/WEB-INF/lib/dhis-web-maintenance-patient-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-settings-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-maintenance-user-2.14.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-portal-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-portal-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-portal-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-portal-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/dhis-web-dashboard-integration/cms.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/dhis-web-dashboard-integration/cms.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-dashboard-integration/cms.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-dashboard-integration/cms.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/dhis-web-dashboard-integration/cms.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/dhis-web-dashboard-integration/cms.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-dashboard-integration/cms.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-dashboard-integration/cms.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/cms-image-manager/css/imageManager.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/cms-image-manager/css/imageManager.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/cms-image-manager/css/imageManager.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/mainHome.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/mainHome.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/mainHome.vm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/mainHome.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/CMSscript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/CMSscript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/javascripts/CMSscript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/javascripts/CMSscript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/ardsMacros.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/ardsMacros.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/ardsMacros.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/ardsMacros.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/ardsMacros.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/ardsMacros.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/ardsMacros.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/ardsMacros.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/favourites.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/favourites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/favourites.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/favourites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/javascripts/favourites.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/javascripts/favourites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/javascripts/favourites.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/javascripts/favourites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/header.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/header.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/header.vm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/header.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataadmin/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-datadictionary/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-dataset/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-organisationunit/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/css/sliderman.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/css/sliderman.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/css/sliderman.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/css/sliderman.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/css/sliderman.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/css/sliderman.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/css/sliderman.css" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/dhis-web-commons/css/sliderman.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ards.iws" />
@@ -52,11 +140,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="Commander">
-    <leftPanel />
-    <rightPanel />
-    <splitter proportion="0.5" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -69,48 +152,114 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="news.vm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/news.vm">
+      <file leaf-file-name="CmsAction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.666667" vertical-offset="2268" max-vertical-offset="7182">
-              <caret line="142" column="77" selection-start-line="142" selection-start-column="77" selection-end-line="142" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cms.vm" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.632912" vertical-offset="1652" max-vertical-offset="6858">
-              <caret line="357" column="12" selection-start-line="357" selection-start-column="12" selection-end-line="357" selection-end-column="12" />
+            <state vertical-scroll-proportion="-7.92" vertical-offset="4158" max-vertical-offset="5454">
+              <caret line="298" column="78" selection-start-line="298" selection-start-column="75" selection-end-line="298" selection-end-column="93" />
               <folding>
-                <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#2;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#2583#2584#0" expanded="false" />
+                <element signature="e#2631#2632#0" expanded="false" />
+                <element signature="e#2687#2688#0" expanded="false" />
+                <element signature="e#2751#2752#0" expanded="false" />
+                <element signature="e#2905#2906#0" expanded="false" />
+                <element signature="e#2957#2958#0" expanded="false" />
+                <element signature="e#3426#3427#0" expanded="false" />
+                <element signature="e#3461#3462#0" expanded="false" />
+                <element signature="e#3548#3549#0" expanded="false" />
+                <element signature="e#3590#3591#0" expanded="false" />
+                <element signature="e#3740#3741#0" expanded="false" />
+                <element signature="e#3775#3776#0" expanded="false" />
+                <element signature="e#3866#3867#0" expanded="false" />
+                <element signature="e#3897#3898#0" expanded="false" />
+                <element signature="e#4043#4044#0" expanded="false" />
+                <element signature="e#4076#4077#0" expanded="false" />
+                <element signature="e#4166#4167#0" expanded="false" />
+                <element signature="e#4197#4198#0" expanded="false" />
+                <element signature="e#4330#4331#0" expanded="false" />
+                <element signature="e#4357#4358#0" expanded="false" />
+                <element signature="e#4447#4448#0" expanded="false" />
+                <element signature="e#4477#4478#0" expanded="false" />
+                <element signature="e#4611#4612#0" expanded="false" />
+                <element signature="e#4639#4640#0" expanded="false" />
+                <element signature="e#4731#4732#0" expanded="false" />
+                <element signature="e#4762#4763#0" expanded="false" />
+                <element signature="e#4900#4901#0" expanded="false" />
+                <element signature="e#4930#4931#0" expanded="false" />
+                <element signature="e#5028#5029#0" expanded="false" />
+                <element signature="e#5062#5063#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sliderman.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css">
+      <file leaf-file-name="HomeAction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1386">
-              <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+            <state vertical-scroll-proportion="-2.16" vertical-offset="4104" max-vertical-offset="4770">
+              <caret line="281" column="93" selection-start-line="281" selection-start-column="93" selection-end-line="281" selection-end-column="93" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2562#2563#0" expanded="false" />
+                <element signature="e#2610#2611#0" expanded="false" />
+                <element signature="e#2666#2667#0" expanded="false" />
+                <element signature="e#2730#2731#0" expanded="false" />
+                <element signature="e#2884#2885#0" expanded="false" />
+                <element signature="e#2936#2937#0" expanded="false" />
+                <element signature="e#3405#3406#0" expanded="false" />
+                <element signature="e#3440#3441#0" expanded="false" />
+                <element signature="e#3527#3528#0" expanded="false" />
+                <element signature="e#3569#3570#0" expanded="false" />
+                <element signature="e#3719#3720#0" expanded="false" />
+                <element signature="e#3754#3755#0" expanded="false" />
+                <element signature="e#3845#3846#0" expanded="false" />
+                <element signature="e#3876#3877#0" expanded="false" />
+                <element signature="e#4022#4023#0" expanded="false" />
+                <element signature="e#4055#4056#0" expanded="false" />
+                <element signature="e#4145#4146#0" expanded="false" />
+                <element signature="e#4176#4177#0" expanded="false" />
+                <element signature="e#4309#4310#0" expanded="false" />
+                <element signature="e#4336#4337#0" expanded="false" />
+                <element signature="e#4426#4427#0" expanded="false" />
+                <element signature="e#4456#4457#0" expanded="false" />
+                <element signature="e#4591#4592#0" expanded="false" />
+                <element signature="e#4619#4620#0" expanded="false" />
+                <element signature="e#4711#4712#0" expanded="false" />
+                <element signature="e#4742#4743#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cms.vm" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="8.0" vertical-offset="216" max-vertical-offset="5868">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1412148900739" expanded="true" signature="2193:2205" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="3898:3925" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="5080:5133" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="6327:6347" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="7912:7925" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="8186:8198" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="8454:8464" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="10486:10497" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="14525:14538" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="15212:15224" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="15462:15472" placeholder="..." />
+                <marker date="1412148900739" expanded="true" signature="16084:16099" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.vm" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.016" vertical-offset="2721" max-vertical-offset="3258">
+              <caret line="130" column="91" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -119,40 +268,56 @@
       <file leaf-file-name="ardsMacros.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="47.185184" vertical-offset="6224" max-vertical-offset="6678">
-              <caret line="275" column="24" selection-start-line="275" selection-start-column="24" selection-end-line="275" selection-end-column="24" />
+            <state vertical-scroll-proportion="-4.4444447" vertical-offset="5298" max-vertical-offset="6516">
+              <caret line="301" column="29" selection-start-line="301" selection-start-column="29" selection-end-line="301" selection-end-column="29" />
               <folding>
-                <element signature="e#15376#15405#0#HTML" expanded="true" />
+                <element signature="e#41#74#0#HTML" expanded="true" />
+                <element signature="e#102#130#0#HTML" expanded="true" />
+                <element signature="e#145#185#0#HTML" expanded="true" />
+                <element signature="e#315#346#0#HTML" expanded="true" />
+                <element signature="e#428#518#0#HTML" expanded="true" />
+                <element signature="e#572#664#0#HTML" expanded="true" />
+                <element signature="e#845#878#0#HTML" expanded="true" />
+                <element signature="e#1138#1171#0#HTML" expanded="true" />
+                <element signature="e#1822#1855#0#HTML" expanded="true" />
+                <element signature="e#1896#1928#0#HTML" expanded="true" />
+                <element signature="e#2179#2215#0#HTML" expanded="true" />
+                <element signature="e#2365#2401#0#HTML" expanded="true" />
+                <element signature="e#2521#2557#0#HTML" expanded="true" />
+                <element signature="e#2710#2747#0#HTML" expanded="true" />
+                <element signature="e#2970#3002#0#HTML" expanded="true" />
+                <element signature="e#3132#3164#0#HTML" expanded="true" />
+                <element signature="e#3303#3335#0#HTML" expanded="true" />
+                <element signature="e#3500#3536#0#HTML" expanded="true" />
+                <element signature="e#3666#3702#0#HTML" expanded="true" />
+                <element signature="e#3854#3891#0#HTML" expanded="true" />
+                <element signature="e#4256#4293#0#HTML" expanded="true" />
+                <element signature="e#4706#4738#0#HTML" expanded="true" />
+                <element signature="e#4887#4919#0#HTML" expanded="true" />
+                <element signature="e#5103#5135#0#HTML" expanded="true" />
+                <element signature="e#5357#5383#0#HTML" expanded="true" />
+                <element signature="e#5406#5465#0#HTML" expanded="true" />
+                <element signature="e#5747#5779#0#HTML" expanded="true" />
+                <element signature="e#5932#5964#0#HTML" expanded="true" />
+                <element signature="e#6028#6048#0#HTML" expanded="true" />
+                <element signature="e#6139#6171#0#HTML" expanded="true" />
+                <element signature="e#6376#6408#0#HTML" expanded="true" />
+                <element signature="e#6737#6781#0#HTML" expanded="true" />
+                <element signature="e#9636#9680#0#HTML" expanded="true" />
+                <element signature="e#11670#11700#0#HTML" expanded="true" />
+                <element signature="e#13645#13663#0#HTML" expanded="true" />
+                <element signature="e#13932#13952#0#HTML" expanded="true" />
+                <element signature="e#15253#15282#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imageManager.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css">
+      <file leaf-file-name="mainHome.vm" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="1620">
-              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="analysis.vm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="63.074074" vertical-offset="2153" max-vertical-offset="2754">
-              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="540">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state vertical-scroll-proportion="18.222221" vertical-offset="492" max-vertical-offset="2358">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,22 +326,59 @@
       <file leaf-file-name="home.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-51.48148" vertical-offset="1076" max-vertical-offset="3042">
-              <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
-              <folding />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2934">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#4;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#5;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#6;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#7;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#8;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#button#8;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainHome.vm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
+      <file leaf-file-name="CMSscript.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0" vertical-offset="1728" max-vertical-offset="2574">
-              <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+            <state vertical-scroll-proportion="10.212121" vertical-offset="10921" max-vertical-offset="12708">
+              <caret line="588" column="36" selection-start-line="588" selection-start-column="36" selection-end-line="588" selection-end-column="36" />
               <folding>
-                <element signature="n#style#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1413102481897" expanded="true" signature="3000:3010" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="10887:10911" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="11634:11644" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="11903:11915" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="16198:16225" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="16456:16483" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="16658:16683" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="17946:17956" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="19666:19676" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="21784:21794" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="22239:22249" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="23087:23097" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="24107:24117" placeholder="..." />
+                <marker date="1413102481897" expanded="true" signature="26419:26429" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="favourites.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3525" max-vertical-offset="5202">
+              <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -197,28 +399,18 @@
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/es5-sham.map" />
+        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/main.vm" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menuWithTree.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/news.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css" />
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="x" value="-1" />
+    <option name="y" value="27" />
+    <option name="width" value="1368" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -249,6 +441,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,8 +456,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -273,12 +466,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -287,16 +480,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -305,290 +498,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-reporting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-reporting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-reporting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance-organisationunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance-organisationunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance-organisationunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance-organisationunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-maintenance-organisationunit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-dataentry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web-dashboard-integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -597,32 +520,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web-dashboard-integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -631,36 +554,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web-dashboard-integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web-dashboard-integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -669,84 +592,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web-dashboard-integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons-resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons-resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dhis-web-dashboard-integration" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascript" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -755,36 +634,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons-resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="dhis-web-dashboard-integration" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -793,40 +664,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons-resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="dhis-web-dashboard-integration" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="hisp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dhis" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -835,45 +714,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ARDS-LGMD2-web-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="ards" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dhis-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons-resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="dhis-web-dashboard-integration" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dhis-web-commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="hisp" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dhis" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1117,84 +1007,47 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="e94f5c0d-0ca2-4524-b7a1-d20a600ba87f" name="Default" comment="" />
       <created>1412957458588</created>
       <updated>1412957458588</updated>
       <workItem from="1412957458901" duration="19567000" />
-      <workItem from="1413261705698" duration="12434000" />
-      <workItem from="1413293031954" duration="3701000" />
-      <workItem from="1413300783693" duration="7739000" />
-      <workItem from="1413309278117" duration="1832000" />
-      <workItem from="1413370045928" duration="6932000" />
     </task>
-    <task id="LOCAL-00001" summary="Interface changes">
-      <created>1413307473708</created>
-      <updated>1413307473708</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52205000" />
-  </component>
-  <component name="TodoView" selected-index="0">
-    <todo-panel id="selected-file">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="default-changelist">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="false" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="19567000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15277778" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15025042" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41434264" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41489363" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1212,152 +1065,84 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Interface changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Interface changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="3042">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/webapp/dhis-web-maintenance-dataadmin/menu.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/index.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="288">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menu.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1413261472562" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menuWithTree.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1797" max-vertical-offset="2574">
-          <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6444">
+        <state vertical-scroll-proportion="-7.92" vertical-offset="4158" max-vertical-offset="5454">
           <caret line="298" column="78" selection-start-line="298" selection-start-column="75" selection-end-line="298" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2583#2584#0" expanded="false" />
+            <element signature="e#2631#2632#0" expanded="false" />
+            <element signature="e#2687#2688#0" expanded="false" />
+            <element signature="e#2751#2752#0" expanded="false" />
+            <element signature="e#2905#2906#0" expanded="false" />
+            <element signature="e#2957#2958#0" expanded="false" />
+            <element signature="e#3426#3427#0" expanded="false" />
+            <element signature="e#3461#3462#0" expanded="false" />
+            <element signature="e#3548#3549#0" expanded="false" />
+            <element signature="e#3590#3591#0" expanded="false" />
+            <element signature="e#3740#3741#0" expanded="false" />
+            <element signature="e#3775#3776#0" expanded="false" />
+            <element signature="e#3866#3867#0" expanded="false" />
+            <element signature="e#3897#3898#0" expanded="false" />
+            <element signature="e#4043#4044#0" expanded="false" />
+            <element signature="e#4076#4077#0" expanded="false" />
+            <element signature="e#4166#4167#0" expanded="false" />
+            <element signature="e#4197#4198#0" expanded="false" />
+            <element signature="e#4330#4331#0" expanded="false" />
+            <element signature="e#4357#4358#0" expanded="false" />
+            <element signature="e#4447#4448#0" expanded="false" />
+            <element signature="e#4477#4478#0" expanded="false" />
+            <element signature="e#4611#4612#0" expanded="false" />
+            <element signature="e#4639#4640#0" expanded="false" />
+            <element signature="e#4731#4732#0" expanded="false" />
+            <element signature="e#4762#4763#0" expanded="false" />
+            <element signature="e#4900#4901#0" expanded="false" />
+            <element signature="e#4930#4931#0" expanded="false" />
+            <element signature="e#5028#5029#0" expanded="false" />
+            <element signature="e#5062#5063#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5058" max-vertical-offset="5670">
+        <state vertical-scroll-proportion="-2.16" vertical-offset="4104" max-vertical-offset="4770">
           <caret line="281" column="93" selection-start-line="281" selection-start-column="93" selection-end-line="281" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5940">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#2;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2562#2563#0" expanded="false" />
+            <element signature="e#2610#2611#0" expanded="false" />
+            <element signature="e#2666#2667#0" expanded="false" />
+            <element signature="e#2730#2731#0" expanded="false" />
+            <element signature="e#2884#2885#0" expanded="false" />
+            <element signature="e#2936#2937#0" expanded="false" />
+            <element signature="e#3405#3406#0" expanded="false" />
+            <element signature="e#3440#3441#0" expanded="false" />
+            <element signature="e#3527#3528#0" expanded="false" />
+            <element signature="e#3569#3570#0" expanded="false" />
+            <element signature="e#3719#3720#0" expanded="false" />
+            <element signature="e#3754#3755#0" expanded="false" />
+            <element signature="e#3845#3846#0" expanded="false" />
+            <element signature="e#3876#3877#0" expanded="false" />
+            <element signature="e#4022#4023#0" expanded="false" />
+            <element signature="e#4055#4056#0" expanded="false" />
+            <element signature="e#4145#4146#0" expanded="false" />
+            <element signature="e#4176#4177#0" expanded="false" />
+            <element signature="e#4309#4310#0" expanded="false" />
+            <element signature="e#4336#4337#0" expanded="false" />
+            <element signature="e#4426#4427#0" expanded="false" />
+            <element signature="e#4456#4457#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4619#4620#0" expanded="false" />
+            <element signature="e#4711#4712#0" expanded="false" />
+            <element signature="e#4742#4743#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="3240">
-          <caret line="130" column="20" selection-start-line="130" selection-start-column="20" selection-end-line="130" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5418" max-vertical-offset="6624">
-          <caret line="301" column="29" selection-start-line="301" selection-start-column="29" selection-end-line="301" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2358">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2934">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10584" max-vertical-offset="13860">
-          <caret line="588" column="17" selection-start-line="588" selection-start-column="17" selection-end-line="588" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3525" max-vertical-offset="5202">
-          <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1365,6 +1150,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1494">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.0" vertical-offset="216" max-vertical-offset="5868">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1412148900739" expanded="true" signature="2193:2205" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="3898:3925" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="5080:5133" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="6327:6347" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="7912:7925" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="8186:8198" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="8454:8464" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="10486:10497" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="14525:14538" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="15212:15224" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="15462:15472" placeholder="..." />
+            <marker date="1412148900739" expanded="true" signature="16084:16099" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1372,6 +1179,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1379,6 +1187,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,6 +1195,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1393,6 +1203,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1400,13 +1211,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10584" max-vertical-offset="13860">
-          <caret line="588" column="17" selection-start-line="588" selection-start-column="17" selection-end-line="588" selection-end-column="17" />
+        <state vertical-scroll-proportion="10.212121" vertical-offset="10921" max-vertical-offset="12708">
+          <caret line="588" column="36" selection-start-line="588" selection-start-column="36" selection-end-line="588" selection-end-column="36" />
+          <folding>
+            <marker date="1413102481897" expanded="true" signature="3000:3010" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="10887:10911" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="11634:11644" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="11903:11915" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="16198:16225" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="16456:16483" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="16658:16683" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="17946:17956" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="19666:19676" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="21784:21794" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="22239:22249" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="23087:23097" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="24107:24117" placeholder="..." />
+            <marker date="1413102481897" expanded="true" signature="26419:26429" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1414,248 +1242,92 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3525" max-vertical-offset="5202">
           <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.84" vertical-offset="3412" max-vertical-offset="4770">
-          <caret line="281" column="93" selection-start-line="281" selection-start-column="93" selection-end-line="281" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0" vertical-offset="216" max-vertical-offset="3258">
-          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.32" vertical-offset="3973" max-vertical-offset="5436">
-          <caret line="298" column="78" selection-start-line="298" selection-start-column="75" selection-end-line="298" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/main.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.222221" vertical-offset="4476" max-vertical-offset="5364">
-          <caret line="279" column="26" selection-start-line="279" selection-start-column="26" selection-end-line="279" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/profile.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.5185184" vertical-offset="122" max-vertical-offset="792">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-reporting/src/main/webapp/dhis-web-reporting/menu.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-reporting/src/main/webapp/dhis-web-reporting/index.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="481">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/webapp/dhis-web-maintenance-dataadmin/menu.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="774">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/index.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="481">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menu.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1413261472562" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menuWithTree.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="198">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/webapp/dhis-web-maintenance-dataadmin/index.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="481">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/news.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.666667" vertical-offset="2268" max-vertical-offset="7182">
-          <caret line="142" column="77" selection-start-line="142" selection-start-column="77" selection-end-line="142" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0" vertical-offset="1728" max-vertical-offset="2574">
-          <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#1;n#nav#0;n#footer#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="63.074074" vertical-offset="2153" max-vertical-offset="2754">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/javascript/news.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="494">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/javascript/pages.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/style/pages.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="494">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/style/news.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="494">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/style/analysis.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="494">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="47.185184" vertical-offset="6224" max-vertical-offset="6678">
-          <caret line="275" column="24" selection-start-line="275" selection-start-column="24" selection-end-line="275" selection-end-column="24" />
+        <state vertical-scroll-proportion="-4.4444447" vertical-offset="5298" max-vertical-offset="6516">
+          <caret line="301" column="29" selection-start-line="301" selection-start-column="29" selection-end-line="301" selection-end-column="29" />
           <folding>
-            <element signature="e#15376#15405#0#HTML" expanded="true" />
+            <element signature="e#41#74#0#HTML" expanded="true" />
+            <element signature="e#102#130#0#HTML" expanded="true" />
+            <element signature="e#145#185#0#HTML" expanded="true" />
+            <element signature="e#315#346#0#HTML" expanded="true" />
+            <element signature="e#428#518#0#HTML" expanded="true" />
+            <element signature="e#572#664#0#HTML" expanded="true" />
+            <element signature="e#845#878#0#HTML" expanded="true" />
+            <element signature="e#1138#1171#0#HTML" expanded="true" />
+            <element signature="e#1822#1855#0#HTML" expanded="true" />
+            <element signature="e#1896#1928#0#HTML" expanded="true" />
+            <element signature="e#2179#2215#0#HTML" expanded="true" />
+            <element signature="e#2365#2401#0#HTML" expanded="true" />
+            <element signature="e#2521#2557#0#HTML" expanded="true" />
+            <element signature="e#2710#2747#0#HTML" expanded="true" />
+            <element signature="e#2970#3002#0#HTML" expanded="true" />
+            <element signature="e#3132#3164#0#HTML" expanded="true" />
+            <element signature="e#3303#3335#0#HTML" expanded="true" />
+            <element signature="e#3500#3536#0#HTML" expanded="true" />
+            <element signature="e#3666#3702#0#HTML" expanded="true" />
+            <element signature="e#3854#3891#0#HTML" expanded="true" />
+            <element signature="e#4256#4293#0#HTML" expanded="true" />
+            <element signature="e#4706#4738#0#HTML" expanded="true" />
+            <element signature="e#4887#4919#0#HTML" expanded="true" />
+            <element signature="e#5103#5135#0#HTML" expanded="true" />
+            <element signature="e#5357#5383#0#HTML" expanded="true" />
+            <element signature="e#5406#5465#0#HTML" expanded="true" />
+            <element signature="e#5747#5779#0#HTML" expanded="true" />
+            <element signature="e#5932#5964#0#HTML" expanded="true" />
+            <element signature="e#6028#6048#0#HTML" expanded="true" />
+            <element signature="e#6139#6171#0#HTML" expanded="true" />
+            <element signature="e#6376#6408#0#HTML" expanded="true" />
+            <element signature="e#6737#6781#0#HTML" expanded="true" />
+            <element signature="e#9636#9680#0#HTML" expanded="true" />
+            <element signature="e#11670#11700#0#HTML" expanded="true" />
+            <element signature="e#13645#13663#0#HTML" expanded="true" />
+            <element signature="e#13932#13952#0#HTML" expanded="true" />
+            <element signature="e#15253#15282#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/cms-image-manager/css/imageManager.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="1620">
-          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1386">
-          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/widgets.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3471934" vertical-offset="648" max-vertical-offset="15408">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.112266116" vertical-offset="54" max-vertical-offset="4140">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-51.48148" vertical-offset="1076" max-vertical-offset="3042">
-          <caret line="137" column="18" selection-start-line="137" selection-start-column="18" selection-end-line="137" selection-end-column="18" />
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2934">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#2;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#3;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#4;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#5;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#6;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#7;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#8;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#button#8;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="18.222221" vertical-offset="492" max-vertical-offset="2358">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
+    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.632912" vertical-offset="1652" max-vertical-offset="6858">
-          <caret line="357" column="12" selection-start-line="357" selection-start-column="12" selection-end-line="357" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#span#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#label#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#2;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#3;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-1.016" vertical-offset="2721" max-vertical-offset="3258">
+          <caret line="130" column="91" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
+          <folding />
         </state>
       </provider>
     </entry>

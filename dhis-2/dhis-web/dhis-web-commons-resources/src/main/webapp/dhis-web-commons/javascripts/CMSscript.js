@@ -454,7 +454,7 @@ $(document).ready(function(){
                                             .done(function() {
                                                 $( "#dialog" ).dialog( "close" );
                                                 console.log($("a#"+unique_id).html());
-                                                $("a#"+unique_id).parent("p").parent("td").parent("tr").remove();
+                                                $("a#"+unique_id).parent("p").parent("li").remove();
 //                                                location.reload(true);
                                             })
                                             .fail(function() {

@@ -17,6 +17,7 @@
     <link href="../dhis-web-commons/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
     <link href="../dhis-web-commons/fontawesome4/css/font-awesome.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/sliderman.css" rel="stylesheet">
+    <link href="../dhis-web-commons/css/dataTables.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/onoff.css" rel="stylesheet">
     <link href="../dhis-web-commons/css/docs.min.css" rel="stylesheet">
     <link href="../dhis-web-commons/cms-image-manager/css/imageManager.css" rel="stylesheet">
@@ -126,6 +127,9 @@
     <script src="../dhis-web-commons/javascripts/jQuery/jqueryUI/jquery-ui.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/ckeditor/adapters/jquery.js"></script>
+    <script src="../dhis-web-commons/javascripts/chart.js"></script>
+    <script src="../dhis-web-commons/javascripts/ext-all.js"></script>
+    <script src="../dhis-web-commons/javascripts/CMSscript.js"></script>
 
 
     <!-- Tinymce -->
@@ -167,9 +171,6 @@
     <script type="text/javascript" src="../dhis-web-commons/analysis/data_analysis1.js"></script>
     <script src="../dhis-web-commons/assets/js/jquery.dataTables.min.js"></script>
     <script src="../dhis-web-commons/assets/js/dataTables.bootstrap.min.js"></script>
-    <script src="../dhis-web-commons/javascripts/ext-all.js"></script>
-    <script type="text/javascript" src="../dhis-web-commons/javascripts/chart.js"></script>
-    <script type="text/javascript" src="../dhis-web-commons/javascripts/table.js"></script>
     <script src="../dhis-web-commons/javascripts/favourites.js"></script>
 </head>
 #end

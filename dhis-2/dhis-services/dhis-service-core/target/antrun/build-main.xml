@@ -4,10 +4,10 @@
   <tstamp>
     <format pattern="yyyy-MM-dd HH:mm:ss" property="now"/>
   </tstamp>
-  <mkdir dir="/home/mahane/IdeaProjects/ARDS-LGMD2-web-portal/dhis-2/dhis-services/dhis-service-core/target/classes"/>
+  <mkdir dir="/home/leonard/dev1/ards/dhis-2/dhis-services/dhis-service-core/target/classes"/>
   <exec outputproperty="revision" executable="bzr" failifexecutionfails="false">
     <arg value="revno"/>
   </exec>
-  <echo message="build.version = 2.14&#10;build.time = ${now}&#10;build.revision = ${revision}&#10;" file="/home/mahane/IdeaProjects/ARDS-LGMD2-web-portal/dhis-2/dhis-services/dhis-service-core/target/classes/build.properties"/>
+  <echo message="build.version = 2.14&#10;build.time = ${now}&#10;build.revision = ${revision}&#10;" file="/home/leonard/dev1/ards/dhis-2/dhis-services/dhis-service-core/target/classes/build.properties"/>
 </target>
 </project>
