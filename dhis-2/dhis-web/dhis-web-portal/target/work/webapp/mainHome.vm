@@ -105,11 +105,11 @@
             $('#leftbarcontents').animate({
                 direction: 'left',
                 left: '-=250'
-            }, 800, function() {
+            }, 900, function() {
                 // Animation complete.
                 $('#mainPages').css({
                     marginLeft: -180,
-                    width:   1000
+                    width:1200
                 })
             });
         }
@@ -123,11 +123,11 @@
         });
         $('#mainPages').css({
             marginLeft: -07,
-            width:   1000
+            width:   1050
         })
         $('#leftbarcontents').animate({
             left: '+=250'
-        }, 800, function() {
+        }, 900, function() {
             // Animation complete.
 
         });
