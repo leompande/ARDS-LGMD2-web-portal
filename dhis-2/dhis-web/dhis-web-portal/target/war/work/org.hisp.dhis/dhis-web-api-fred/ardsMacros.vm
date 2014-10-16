@@ -62,7 +62,7 @@
                                     <li style="color:#ffffff!important;"><a href="${module.defaultAction}">$i18n.getString( $module.name )&nbsp;</a></li>
                                 #end
                             #end
-                            <li style="color:#ffffff!important;"><a href="../dhis-web-dashboard-integration/cms.action">CMS&nbsp;</a></li>
+                            <li style="color:#ffffff!important;"><a href="../dhis-web-dashboard-integration/cms.action" id="cms_settings_button">CMS&nbsp;</a></li>
                         </ul>
                     </li>
                 #end
@@ -186,10 +186,10 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
-                    <div class="panel-body">
+                <div id="collapseTwo"  class="panel-collapse collapse in">
+                    <div class="panel-body" id="contextMenu">
 
-                        <ul class="nav nav-pills nav-stacked list-group cms_document">
+                        <ul id="contextMenuItems" class="nav nav-pills nav-stacked list-group cms_document">
 
 
                         </ul>
@@ -250,7 +250,7 @@
                         </ul>
                         </br>
 
-                        <form role="form" method="post" id="addLink" action="#">
+                        <form id="addImportantLink" role="form" method="post"  action="#">
                             <div class="form-group">
                                 <label for="link-name">Link Name</label>
                                 <input type="text" name="linkName" class="form-control" id="link-name" placeholder="Link Name">
@@ -302,6 +302,57 @@
     <div id="statistics_chart_1" class="row">
 
     </div>
+##    <script>
+##                Ext.onReady(function() {
+##            DHIS.getChart({
+##                "type": "column",
+##                "columns": [
+##                    {
+##                        "dimension": "de",
+##                        "items": [
+##                            {
+##                                "id": "ASooesZ6GoT"
+##                            }, {
+##                                "id": "Ba9mZCFaUCV"
+##                            }, {
+##                                "id": "HW0eal57uXm"
+##                            }, {
+##                                "id": "gqJB49icYtm"
+##                            }
+##                        ]
+##                    }
+##                ],
+##                "rows": [
+##                    {
+##                        "dimension": "pe",
+##                        "items": [
+##                            {
+##                                "id": "2013July"
+##                            }
+##                        ]
+##                    }
+##                ],
+##                "filters": [
+##                    {
+##                        "dimension": "ou",
+##                        "items": [
+##                            {
+##                                "id": "GWEtuPicnbB"
+##                            },{
+##                                "id": "mBBKzZonsgl"
+##                            },{
+##                                "id": "QodXYQxhHzV"
+##                            },{
+##                                "id": "S4WbqR1P0dA"
+##                            },
+##                        ]
+##                    }
+##                ],
+##                "url": "http://localhost:8080",
+##                "el": "statistics_chart"
+##            });
+##        });
+##    </script>
     <div id="statistics_chart_2" class="row">
 
     </div>

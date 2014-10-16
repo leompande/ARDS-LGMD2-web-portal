@@ -1,10 +1,1169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/dhis-web-api-fred/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/dhis-web-api-fred" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/vn/dhis-web-spreadsheet-reporting/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/vn/dhis-web-spreadsheet-reporting/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web3">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web4">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-sandboxbk/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-sandboxbk/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web5">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web6">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web7">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web8">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-dataentry-ccem/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-dataentry-ccem/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web9">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-dashboard/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-dashboard/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web10">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/dhis-web-maintenance-patient" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web11">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web12">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-importexport/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-importexport" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web13">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web14">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-linelisting-in/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-linelisting-in/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web15">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web16">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-mapping/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-mapping" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web17">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/target/dhis-web-importexport/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/target/dhis-web-importexport" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web18">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web19">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/dhis-web-maintenance-dataset" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web20">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/tz/dhis-web-hrentry/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/tz/dhis-web-hrentry/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web21">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-sandbox/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-sandbox/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web22">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web23">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/target/dhis-web-caseentry/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/target/dhis-web-caseentry" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web24">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-visualizer/target/dhis-web-visualizer/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-visualizer/target/dhis-web-visualizer" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web25">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-mobile/dhis-web-sms/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-mobile/dhis-web-sms/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web26">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-organisationunit" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web27">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-caseentry/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-caseentry" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web28">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-mobile/smsclient/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-mobile/smsclient/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web29">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-sms/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-sms" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web30">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web31">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataset" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web32">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/vn/dhis-web-dataentry-hospital/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/vn/dhis-web-dataentry-hospital/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web33">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-pivot/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-pivot/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web34">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web35">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-coldchain/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-coldchain/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web36">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web37">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/dhis-web-maintenance-datadictionary" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web38">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web39">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web40">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web41">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/target/dhis-web-reporting/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/target/dhis-web-reporting" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web42">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-datadictionary" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web43">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-api-fred/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-api-fred" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web44">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web45">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-pivot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-pivot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web46">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web47">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-alert/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-alert/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web48">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web49">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-mobile/dhis-web-mobile/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-mobile/dhis-web-mobile/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web50">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web51">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/bd/dhis-web-linelisting-manpower/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/bd/dhis-web-linelisting-manpower/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web52">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web53">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-leprosy/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-leprosy/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web54">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web55">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web56">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-validationrule-in/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-validationrule-in/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web57">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/dhis-web-maintenance-mobile-2.14" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web58">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web59">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/tools/dhis2-tools-deb/pkg/usr/share/dhis2-tools/skel/conf/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/tools/dhis2-tools-deb/pkg/usr/share/dhis2-tools/skel/conf" relative="/WEB-INF" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web60">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-validationrule/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-validationrule" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web61">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-visualizer/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-visualizer/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web62">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dataentry/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dataentry" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web63">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web64">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-pbf/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-pbf/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web65">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web66">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/vn/dhis-web-phieusanh/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/vn/dhis-web-phieusanh/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web67">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/target/dhis-web-validationrule/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/target/dhis-web-validationrule" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web68">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/dhis-web-maintenance-settings" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web69">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/dhis-web-maintenance-appmanager" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web70">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/target/dhis-web-light/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/target/dhis-web-light" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web71">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-user" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web72">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-settings" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web73">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-excelimport/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-excelimport/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web74">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/target/dhis-web-dataentry/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/target/dhis-web-dataentry" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web75">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-reports-in/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-reports-in/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web76">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-ccem/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-ccem/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web77">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-in/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-maintenance-in/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web78">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/dhis-web-maintenance-dataadmin" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web79">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/target/dhis-web-mapping/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/target/dhis-web-mapping" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web80">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-visualizer/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-visualizer" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web81">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/dhis-web-maintenance-organisationunit" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web82">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-pivot/target/dhis-web-pivot/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-pivot/target/dhis-web-pivot" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web83">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-reports-national/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-reports-national/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web84">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/target/dhis-web-mobile/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/target/dhis-web-mobile" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web85">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/vn/dhis-web-datastatus/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/vn/dhis-web-datastatus/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web86">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-survey/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-survey/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web87">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-light/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-light" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web88">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web89">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/war/work/org.hisp.dhis/dhis-web-commons-resources/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/war/work/org.hisp.dhis/dhis-web-commons-resources" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web90">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-maintenance-dataadmin" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web91">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-ihrissyncmanager/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-ihrissyncmanager/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web92">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web93">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/tz/dhis-web-maintenance-hr/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/tz/dhis-web-maintenance-hr/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web94">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/bd/dhis-web-linelisting-bd/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/bd/dhis-web-linelisting-bd/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web95">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/dhis-web-maintenance-user" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web96">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-reporting/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-reporting" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web97">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web98">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/target/dhis-web-sms/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/target/dhis-web-sms" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web99">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/local/in/dhis-web-dataentry-linelisting/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/local/in/dhis-web-dataentry-linelisting/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web100">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web101">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-dashboard-integration" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-eventreporting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-sandbox/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-patient/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-ihrissyncmanager/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/src/main/resources/META-INF/dhis/servlet.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-coldchain/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-dataentry-linelisting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-lookup/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-dbmanager/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-survey/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-dxf2/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-web-spreadsheet-reporting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-dashboard/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-system/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/src/main/resources/META-INF/dhis/mobile.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-administration/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-scheduler/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-mobile/dhis-web-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/bd/dhis-web-linelisting-manpower/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-jdbc/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-validationrule/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mobile/target/classes/META-INF/dhis/mobile.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-i18n/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-mobile/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-patient/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-reporting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-mapgeneration/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-maintenance-pbf/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataset/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/src/main/resources/META-INF/dhis/security.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-linelisting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-mobile/dhis-service-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/src/main/resources/META-INF/dhis/servlet.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-jdbc/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/tz/dhis-web-hrentry/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/target/classes/META-INF/dhis/servlet.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-validationrule-in/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-excelimport/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-administration/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-configuration/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-i18n/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-service-vn/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-mobile/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/target/test-classes/META-INF/dhis/beans-test.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-analytics/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-service-aggregationengine/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-importexport/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-service-spreadsheet-reporting/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-alert/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-web-phieusanh/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-external/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/bd/dhis-web-linelisting-bd/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-datamart-default/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-user/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-mapgeneration/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-light/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-web-datastatus/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/tz/dhis-service-hr/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/tools/dhis-adhoc/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-analytics/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-linelisting-in/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-datamart-default/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-dataentrystatus/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons/target/classes/META-INF/dhis/security.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-dataentry-ccem/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-mapping/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-dxf2/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-hibernate/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-system/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-reports-in/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/tz/dhis-web-maintenance-hr/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-ihrissyncmanager/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-survey/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/target/classes/META-INF/dhis/security.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-mobile/dhis-service-sms/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-reporting/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/classes/META-INF/dhis/webapi-fred.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-mobile/smsclient/src/main/java/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-hibernate/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-reporting/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-in-services/dhis-in-service-reports/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-eventreporting/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/vn/dhis-web-dataentry-hospital/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-importexport/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/src/main/resources/META-INF/dhis/webapi-fred.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-reports-national/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-caseentry/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-maintenance-ccem/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-sms/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-mobile/dhis-web-sms/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dataentry/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-leprosy/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-maintenance-in/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-importexport/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-settings/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-sandboxbk/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/local/in/dhis-web-coldchain/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-mobile/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/target/classes/META-INF/dhis/servlet.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-mobile/target/classes/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons/src/main/resources/META-INF/dhis/security.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-services/dhis-service-core/src/test/resources/META-INF/dhis/beans-test.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-patient/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-support/dhis-support-external/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-dataadmin/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-appmanager/src/main/resources/META-INF/dhis/beans.xml</file>
+          <file>file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-datadictionary/src/main/resources/META-INF/dhis/beans.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sass-stdlib" level="application" />
   </component>
 </module>
 
