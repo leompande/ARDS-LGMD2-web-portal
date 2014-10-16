@@ -33,7 +33,7 @@ var chartsCounting = 1;
                         divCounter++;
                         console.log(val.id);
                     // checking the data elements maching json charts
-                        var graphImage = '<img src="../api/charts/'+val.id+'/data?width=210&height=250" onclick="dhis2.db.exploreChart( &quot;O3kS3whDRKk&quot; )" title="Click to explore ">';
+                        var graphImage = '<a href="../api/charts/'+val.id+'/data" target="_blank"><img src="../api/charts/'+val.id+'/data?width=210&height=250"  title="Click to explore "></a>';
                         $('#statistics_chart_'+divCounter).html(graphImage);
 
                     }

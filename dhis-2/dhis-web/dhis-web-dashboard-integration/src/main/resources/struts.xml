@@ -163,9 +163,16 @@
             <!--<param name="page">/dhis-web-dashboard-integration/cms.vm</param>-->
             <!--<param name="javascripts">javascript/usergroup.js</param>-->
         </action>
+        <action name="addDatabaseDocs" class="org.hisp.dhis.dashboard.action.AddDatabaseDocsAction">
+            <result name="success" type="velocity">/mainHome.vm</result>
+            <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
+        </action>
         <action name="ListDocs" class="org.hisp.dhis.dashboard.action.ListDocsAction">
             <result name="success" type="velocity">/mainHome.vm</result>
             <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
+        </action>
+        <action name="listDocuments" class="org.hisp.dhis.dashboard.action.DocsDatabaseAction">
+            <result name="success" type="velocity-json">/dhis-web-dashboard-integration/docs.vm</result>
         </action>
         <action name="deleteDocument" class="org.hisp.dhis.dashboard.action.DeleteDocumentAction">
             <result name="success" type="velocity">/mainHome.vm</result>
@@ -184,7 +191,6 @@
         </action>
         <action name="listCharts" class="org.hisp.dhis.dashboard.action.pickFavouritesAction">
             <result name="success" type="velocity-json">/dhis-web-dashboard-integration/charts.vm</result>
-
         </action>
         <action name="addLink" class="org.hisp.dhis.dashboard.action.AddLinkAction">
             <result name="success" type="velocity">/mainHome.vm</result>

@@ -1,4 +1,4 @@
-<form id="documentForm" action="uploadImage.action" method="post" enctype="multipart/form-data" class="inputForm">
+<form id="imageDocumentForm" action="uploadImage.action" method="post" enctype="multipart/form-data" class="inputForm">
     <input type="hidden" id="id" name="id" value="">
 
     <div class="form-group">
@@ -19,8 +19,18 @@
 
 <script>
     $(document).ready(function(){
-        $("#documentForm").submit(function(e){
+        $("#imageDocumentForm").submit(function(e){
+            ///// process docs
+            window.location.replace("cms.action");
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: 'uploadImage.action',
+                    data: new FormData(this),
+                    success: function(){
 
+                    }
+                });
         });
     });
 
