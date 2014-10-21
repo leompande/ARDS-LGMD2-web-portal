@@ -17,7 +17,6 @@ $(document).ready(function(){
     $("#article_menus").hide();
     $("#add_div").show();
 
-
     $("div#cms_menu_bar a#manage_articles").addClass("active");
     // CMS main menus //
     $("div#cms_menu_bar a").on("click",function(){
@@ -149,13 +148,11 @@ $(document).ready(function(){
                         $("button#cancel_article_editor").on("click",function(){
                             $("input#edit_page_name").val("");
                             $("input#imposter_article_id").val("");
-//                            $("textarea#article_edit").val("");
-//                            CKEDITOR.instances.article_edit.setData("");
                             $("input#imposter_article_edit").val("");
                             $("div#editorArticleFormContainer").hide();
                             $("div#article_"+buttonArray[1]+"_pages").show();
                             $("div#button_group_"+buttonArray[1]).show();
-//                            buttonArray[1]="";
+
                         });
 
                         ///// process article edit
@@ -174,7 +171,9 @@ $(document).ready(function(){
                                 });
 
                                 function whenSucceed(){
+                                    location.reload(true);
                                     allowSubmit = false;
+
                                 }
                                 setTimeout(function(){ allowSubmit = true; }, 5000);
 
@@ -182,7 +181,7 @@ $(document).ready(function(){
                     });
                     $("a.delete_article_button").on("click",function(){
                         $("div#editorArticleFormContainer").hide();
-//                        alert($(this).attr("id"));
+
                         var deleteArray = $(this).attr("id").split("_");
 
                         if (!allowSubmit) return false;
@@ -234,19 +233,16 @@ $(document).ready(function(){
                     var IdArray =  $(this).attr("id").split("_");
                     var menu_id = IdArray[1];
                     if($(this).attr("class").indexOf("edit")>=0){
-
-                        var textToEdited = $("tr#rowspecific_"+menu_id+" td:first span").html();
-                        $("tr#rowspecific_"+menu_id+" td:first input").val(textToEdited);
-                        $("tr#rowspecific_"+menu_id+" td:first input").show();
-                        $("tr#rowspecific_"+menu_id+" td:first span").hide();
-                        $("tr#rowspecific_"+menu_id+" td:last a#save_"+menu_id).show();
-                        $("tr#rowspecific_"+menu_id+" td:last a#edit_"+menu_id).hide();
-
-                        $("a.save").on("click",function(){
+                    var textToEdited = $("tr#rowspecific_"+menu_id+" td:first span").html();
+                    $("tr#rowspecific_"+menu_id+" td:first input").val(textToEdited);
+                    $("tr#rowspecific_"+menu_id+" td:first input").show();
+                    $("tr#rowspecific_"+menu_id+" td:first span").hide();
+                    $("tr#rowspecific_"+menu_id+" td:last a#save_"+menu_id).show();
+                    $("tr#rowspecific_"+menu_id+" td:last a#edit_"+menu_id).hide();
+                    $("a.save").on("click",function(){
                             var menu_id = IdArray[1];
                             var textEdited =  $("tr#rowspecific_"+menu_id+" td:first input.text_inputs").val();
                             $("tr#rowspecific_"+menu_id+" td:first span").html(textEdited);
-
                             $("tr#rowspecific_"+menu_id+" td:last span.signal").html("");
                             var url = "editTabMenu.action";
                             $.post( url,"&menu="+textEdited+"&menu_id="+menu_id)
@@ -264,13 +260,10 @@ $(document).ready(function(){
                                 .fail(function(data,error){
                                     console.log(error);
                                 });
-
-                        });
+                    });
 
                     }
-
                     if($(this).attr("class").indexOf("delete")>=0){
-
                         var menu_id = IdArray[1];
                         var url = "deleteTabMenu.action";
                         $.post( url,"&item="+menu_id)
@@ -283,7 +276,6 @@ $(document).ready(function(){
                             .fail(function(data,error){
                                 console.log(error);
                             });
-
                     }
                 });
             });
@@ -417,7 +409,7 @@ $(document).ready(function(){
                                 Doc_menu_cms += '<li class="list-group-item">';
                                 Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
                                 Doc_menu_cms += '<span class="fa fa-globe"></span>&nbsp;'+ val['name']+'</a>';
-                                Doc_menu_cms += '<a  class="delete_document" href="#" id="deleteDocument_'+vals.id+'">';//href="../dhis-web-reporting/removeDocument.action"
+                                Doc_menu_cms += '<a  class="delete_document" href="#" id="deleteDocument_'+vals.id+'">';
                                 Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-trash-o pull-right"></i>';
                                 Doc_menu_cms += '</a>';
                                 Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
@@ -838,6 +830,32 @@ $(document).ready(function(){
 
     });
 
+
+    $("#hidden_links").hide();
+    $("#hidden_links_button").on("click",function(ev){
+        ev.preventDefault();
+        $("#hidden_links").show();
+        $("#_hide").on("click",function(e){
+            e.preventDefault();
+            $("#hidden_links").hide();
+        });
+        $(".unhide").on("click",function(e){
+            e.preventDefault();
+            var unique_id = $(this).attr("id");
+            var ary = unique_id.split(",");
+
+            $.post( "unHideLink.action","linkid="+ary[1])
+                .done(function(){
+                    $(this).parent().parent().hide("slow");
+                    location.reload(true);
+                })
+                .fail(function(){
+
+                });
+
+
+        });
+    });
 
     ///// process docs
     $('#documentForm').on('submit', function(e) {

@@ -209,7 +209,7 @@
                             <div class="form-group">
                                 <input type="hidden" id="upload" name="external" value="false" >
                             </div>
-                            <input type="submit" value="Add Document" class="btn btn-success btn-sm" >
+                            <input type="submit" value="Add Document" class="btn btn-success btn-sm form-control" >
 
                         </form>
 
@@ -248,6 +248,33 @@
 
                         </ul>
                         </br>
+                        <button class="btn btn-warning btn-sm form-control" id="hidden_links_button">Hidden Links</button>
+                        <ul class="nav nav-pills nav-stacked list-group" id="hidden_links">
+                            #if($hiddenLinks)
+                                #foreach( $hiddenlinks in $hiddenLinks)
+                                    <li class="list-group-item">
+                                        <p><a target="_blank" href="$hiddenlinks.get(2)" class="text-success">
+                                            <i class="fa fa-globe"></i>&nbsp;&nbsp;$hiddenlinks.get(1)</a>
+
+                                            <a  href="#" class="unhide" id="unhides,$hiddenlinks.get(0)">
+                                                <i  style="color:orange" title="Un Hide link $hiddenlinks.get(1)" class="fa fa-plus pull-right"></i>
+                                            </a>
+                                            <a  href="#" class="remove" id="remove,$hiddenlinks.get(0)">
+                                                <i  style="color:red;" title="Delete link $hiddenlinks.get(1)" class="fa fa-trash-o pull-right"></i>
+                                            </a>
+                                        </p>
+                                    </li>
+                                #end
+                            #else
+                                <li class="list-group-item">
+                                    <a href="#" class="form-control" id="_hide"> No hidden links </a>
+                                </li>
+                            #end
+                            <li class="list-group-item">
+                                <a href="#" class="btn btn-xs btn-default form-control" id="_hide">Hide</a>
+                            </li>
+                        </ul>
+                        </br>
 
                         <form id="addImportantLink" role="form" method="post"  action="#">
                             <div class="form-group">
@@ -258,7 +285,7 @@
                                 <label for="add-link">Url/Link</label>
                                 <input type="text" name="linkUrl" class="form-control" id="add-link" placeholder="Url/Link eg. http://www.example.com">
                             </div>
-                            <button class="btn btn-success btn-sm">Add Other link</button>
+                            <button class="btn btn-success btn-sm form-control">Add Other link</button>
                         </form>
                         <p id="link"></p>
                     </div>

@@ -123,9 +123,21 @@ public class CmsAction
         return otherLinks;
     }
     private Collection<String> linkRows;
-    public Collection<String> geLinkRows()
+    public Collection<String> getLinkRows()
     {
         return linkRows;
+    }
+
+//////////// for hidden Links ///////////////
+    private Collection<Collection> hiddenLinks;
+    public Collection<Collection> getHiddenLinks()
+    {
+        return hiddenLinks;
+    }
+    private Collection<String> hiddenlinkRows;
+    public Collection<String> getHiddenlinkRows()
+    {
+        return hiddenlinkRows;
     }
 
     ///////// for documents ///////////
@@ -253,6 +265,34 @@ public class CmsAction
 
 
             otherLinks.add(linkRows);
+
+        }
+        ///////////////////////////////////////////////
+        /////////// HIDDEN LINKS/////////////////////
+
+        hiddenLinks = new ArrayList<Collection> (  );
+
+
+        SqlRowSet hidden_link_rows = jt.queryForRowSet("SELECT * FROM cms_other_links where status = 'disabled'");
+
+        while (hidden_link_rows.next()) {
+
+            hiddenlinkRows = new ArrayList<String> (  );
+
+
+            if(hidden_link_rows.getString("id") != null && !hidden_link_rows.getString("id").isEmpty()) {
+                hiddenlinkRows.add(new String(hidden_link_rows.getString("id")));
+            }
+            if(hidden_link_rows.getString("organisation_name") != null && !hidden_link_rows.getString("organisation_name").isEmpty()) {
+                hiddenlinkRows.add(new String(hidden_link_rows.getString("organisation_name")));
+            }
+            if(hidden_link_rows.getString("url") != null && !hidden_link_rows.getString("url").isEmpty()) {
+                hiddenlinkRows.add(new String(hidden_link_rows.getString("url")));
+            }
+
+
+
+            hiddenLinks.add(hiddenlinkRows);
 
         }
 

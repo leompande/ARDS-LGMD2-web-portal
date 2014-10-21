@@ -208,6 +208,12 @@
             <!--<param name="javascripts">javascript/usergroup.js</param>-->
         </action>
         <!--Analysis-->
+        <action name="unHideLink" class="org.hisp.dhis.dashboard.action.UnHideLinkAction">
+            <result name="success" type="velocity">/mainHome.vm</result>
+            <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
+            <!--<param name="javascripts">javascript/usergroup.js</param>-->
+        </action>
+        <!--Analysis-->
 
         <action name="analysis" class="org.hisp.dhis.dashboard.action.AnalysisAction">
             <result name="success" type="velocity">/mainHome.vm</result>
