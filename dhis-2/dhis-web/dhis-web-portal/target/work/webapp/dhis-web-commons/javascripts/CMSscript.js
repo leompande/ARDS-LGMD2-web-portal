@@ -420,6 +420,7 @@ $(document).ready(function(){
                                 $(".cms_document").html(Doc_menu_cms);
                                 $(".document_menu").html(Doc_menu);
                                 $(".document_panel").html(Doc_grid);
+                                console.log($(".cms_document").html());
                             }
                         }
 

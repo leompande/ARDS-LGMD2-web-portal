@@ -121,5 +121,45 @@
         </footer>
     </div>
 </div>
+<script type="text/javascript">
+
+    var m  = 0;
+    var mx = 0;
+    function minSide(){
+        $('#min').hide('fast', function(){
+            $('#max').show();
+        });
+        if(m == 0){
+            $('#leftbarcontents').animate({
+                direction: 'left',
+                left: '-=250'
+            }, 900, function() {
+                // Animation complete.
+                $('#mainPages').css({
+                    marginLeft: -180,
+                    width:1200
+                })
+            });
+        }
+
+    }
+
+    function maxSide(){
+
+        $('#max').hide('fast', function(){
+            $('#min').show();
+        });
+        $('#mainPages').css({
+            marginLeft: -07,
+            width:   1050
+        })
+        $('#leftbarcontents').animate({
+            left: '+=250'
+        }, 900, function() {
+            // Animation complete.
+
+        });
+    }
+</script>
 </body>
 </html>
