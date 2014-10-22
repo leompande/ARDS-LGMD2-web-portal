@@ -12,9 +12,6 @@ body {
 .page-wrap {
     padding-bottom:40px; /* Height of the footer element */
 }
-.page-wraps {
-    padding-bottom:80px; /* Height of the footer element */
-}
 .site-footer {
     background:#457B49;
     height:40px;

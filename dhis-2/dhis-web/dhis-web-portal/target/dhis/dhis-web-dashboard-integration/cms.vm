@@ -116,7 +116,7 @@
                                     <i class="fa fa-plus-square">
                                     </i>&nbsp;edit item</button>
                                 <button  type="button" id="cancel_article_editor" class="btn btn-danger btn-sm">
-                                <i class="fa fa-times"></i>&nbsp;cancel</button>&nbsp;<span id="output_edit"></span>
+                                    <i class="fa fa-times"></i>&nbsp;cancel</button>&nbsp;<span id="output_edit"></span>
                             </form>
                         </div>
 
@@ -164,10 +164,10 @@
                                         <li title="click to view">
                                             <a redirect_to="article_$heads.get(0)_pages" href="#" >
                                                 <i class="icon-chevron-right"></i>
-                                        #if($heads.get(1))
-                                            $heads.get(1)
-                                        #else
-                                        #end
+                                                #if($heads.get(1))
+                                                    $heads.get(1)
+                                                #else
+                                                #end
                                             </a>
                                         </li>
                                     #end

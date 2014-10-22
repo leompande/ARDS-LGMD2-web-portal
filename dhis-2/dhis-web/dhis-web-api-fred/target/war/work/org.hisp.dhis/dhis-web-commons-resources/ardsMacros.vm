@@ -142,9 +142,9 @@
                                 #foreach( $links in $otherLinks)
 
                                     <tr>
-                                    <td><i class="fa fa-globe"></i></td>
-                                       <td><a target="_blank" href="$links.get(2)" class="text-success">
-                                             $links.get(1)</a></td>
+                                        <td><i class="fa fa-globe"></i></td>
+                                        <td><a target="_blank" href="$links.get(2)" class="text-success">
+                                            $links.get(1)</a></td>
 
                                     </tr>
 
@@ -233,9 +233,9 @@
                                 #foreach( $links in $otherLinks)
 
                                     <tr>
-                                      <td><i class="fa fa-globe"></i></td>
-                                       <td> <p><a target="_blank" href="$links.get(2)" class="text-success">
-                                             $links.get(1)</a>
+                                        <td><i class="fa fa-globe"></i></td>
+                                        <td> <p><a target="_blank" href="$links.get(2)" class="text-success">
+                                            $links.get(1)</a>
 
                                             <a  href="#" class="hides" id="hides,$links.get(0)">
                                                 <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-minus pull-right"></i>
@@ -244,7 +244,7 @@
                                                 <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-trash-o pull-right"></i>
                                             </a>
                                         </p>
-                                       </td>
+                                        </td>
                                     </tr>
 
                                 #end
