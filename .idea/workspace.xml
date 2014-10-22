@@ -71,7 +71,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-portal-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/WEB-INF/lib/dhis-web-portal-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-portal-2.14.jar" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/WEB-INF/lib/dhis-web-portal-2.14.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis.war" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis.war" />
-<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/javascripts/CMSscript.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/CMSscript.js" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-commons/javascripts/CMSscript.js" />
@@ -92,7 +91,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/header.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/header.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/header.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/header.vm" />
-=======
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/dhis-web-dashboard-integration/analysis.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/dhis-web-dashboard-integration/dhis-web-dashboard-integration/analysis.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-dashboard-integration/analysis.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/dhis-web-dashboard-integration/analysis.vm" />
@@ -103,7 +101,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/dhis/mainHome.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/mainHome.vm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/mainHome.vm" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/mainHome.vm" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/target/maven-archiver/pom.properties" />
@@ -142,6 +139,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-settings/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-maintenance-user/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" />
+      <list default="true" id="e94f5c0d-0ca2-4524-b7a1-d20a600ba87f" name="Default" comment="Look and feel of ARDS webportal">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ards.iws" />
@@ -165,7 +163,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-<<<<<<< HEAD
       <file leaf-file-name="CmsAction.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -204,7 +201,6 @@
                 <element signature="e#5028#5029#0" expanded="false" />
                 <element signature="e#5062#5063#0" expanded="false" />
               </folding>
-=======
       <file leaf-file-name="news.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/news.vm">
           <provider selected="true" editor-type-id="text-editor">
@@ -218,10 +214,9 @@
       <file leaf-file-name="cms.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1652" max-vertical-offset="6858">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6426" max-vertical-offset="6858">
               <caret line="357" column="12" selection-start-line="357" selection-start-column="12" selection-end-line="357" selection-end-column="12" />
               <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
             </state>
           </provider>
         </entry>
@@ -229,7 +224,6 @@
       <file leaf-file-name="HomeAction.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state vertical-scroll-proportion="-2.16" vertical-offset="4104" max-vertical-offset="4770">
               <caret line="281" column="93" selection-start-line="281" selection-start-column="93" selection-end-line="281" selection-end-column="93" />
               <folding>
@@ -261,20 +255,18 @@
                 <element signature="e#4711#4712#0" expanded="false" />
                 <element signature="e#4742#4743#0" expanded="false" />
               </folding>
-=======
-            <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="1386">
-              <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="1386">
+        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1386">
+        <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
               <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-            </state>
+         </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="cms.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="8.0" vertical-offset="216" max-vertical-offset="5868">
+       <state vertical-scroll-proportion="8.0" vertical-offset="216" max-vertical-offset="5868">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <marker date="1412148900739" expanded="true" signature="2193:2205" placeholder="..." />
@@ -289,29 +281,28 @@
                 <marker date="1412148900739" expanded="true" signature="15212:15224" placeholder="..." />
                 <marker date="1412148900739" expanded="true" signature="15462:15472" placeholder="..." />
                 <marker date="1412148900739" expanded="true" signature="16084:16099" placeholder="..." />
-=======
             <state vertical-scroll-proportion="-10.481482" vertical-offset="5207" max-vertical-offset="5760">
               <caret line="305" column="20" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="20" />
               <folding>
                 <element signature="e#15376#15405#0#HTML" expanded="true" />
                 <element signature="e#16292#16353#0#HTML" expanded="true" />
                 <element signature="e#16391#16417#0#HTML" expanded="true" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-              </folding>
-            </state>
+ </folding>
+  <state vertical-scroll-proportion="0.0" vertical-offset="5207" max-vertical-offset="5760">
+              <caret line="305" column="20" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="20" />
+              <folding />
+ </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="header.vm" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="-1.016" vertical-offset="2721" max-vertical-offset="3258">
+ <state vertical-scroll-proportion="-1.016" vertical-offset="2721" max-vertical-offset="3258">
               <caret line="130" column="91" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
-=======
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
+      <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
+         <state vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="1620">
+            <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -320,8 +311,7 @@
       <file leaf-file-name="ardsMacros.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="-4.4444447" vertical-offset="5298" max-vertical-offset="6516">
+           <state vertical-scroll-proportion="-4.4444447" vertical-offset="5298" max-vertical-offset="6516">
               <caret line="301" column="29" selection-start-line="301" selection-start-column="29" selection-end-line="301" selection-end-column="29" />
               <folding>
                 <element signature="e#41#74#0#HTML" expanded="true" />
@@ -361,18 +351,17 @@
                 <element signature="e#13645#13663#0#HTML" expanded="true" />
                 <element signature="e#13932#13952#0#HTML" expanded="true" />
                 <element signature="e#15253#15282#0#HTML" expanded="true" />
-=======
-            <state vertical-scroll-proportion="-7.3333335" vertical-offset="1458" max-vertical-offset="2754">
+           <state vertical-scroll-proportion="-7.3333335" vertical-offset="1458" max-vertical-offset="2754">
               <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-              <folding>
+            <folding>
                 <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-              </folding>
+             </folding>
+             <folding />
             </state>
           </provider>
         </entry>
@@ -382,7 +371,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="18.222221" vertical-offset="492" max-vertical-offset="2358">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
+              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+             <folding />
             </state>
           </provider>
         </entry>
@@ -390,8 +381,7 @@
       <file leaf-file-name="home.vm" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2934">
+           <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2934">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -409,16 +399,14 @@
                 <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
-=======
-            <state vertical-scroll-proportion="-14.148149" vertical-offset="1238" max-vertical-offset="3042">
-              <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
+           <state vertical-scroll-proportion="-14.148149" vertical-offset="1238" max-vertical-offset="3042">
+           <state vertical-scroll-proportion="0.0" vertical-offset="1238" max-vertical-offset="3042">
+             <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
               <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="CMSscript.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -440,14 +428,12 @@
                 <marker date="1413102481897" expanded="true" signature="24107:24117" placeholder="..." />
                 <marker date="1413102481897" expanded="true" signature="26419:26429" placeholder="..." />
               </folding>
-=======
       <file leaf-file-name="mainHome.vm" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.032549728" vertical-offset="1926" max-vertical-offset="2574">
-              <caret line="108" column="37" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.60940325" vertical-offset="1481" max-vertical-offset="2574">
+              <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
               <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
             </state>
           </provider>
         </entry>
@@ -482,9 +468,7 @@
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/CMSscript.js" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/javascripts/favourites.js" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm" />
-<<<<<<< HEAD
-=======
-        <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menuWithTree.vm" />
+       <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-maintenance/dhis-web-maintenance-organisationunit/src/main/webapp/dhis-web-maintenance-organisationunit/menuWithTree.vm" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/news.vm" />
@@ -493,8 +477,7 @@
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/sliderman.css" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm" />
         <option value="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-      </list>
+     </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -502,7 +485,11 @@
     <option name="y" value="27" />
     <option name="width" value="1368" />
     <option name="height" value="742" />
-  </component>
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+ </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -799,7 +786,7 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-<<<<<<< HEAD
+
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="ards" />
@@ -854,11 +841,11 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-=======
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
         </subPane>
       </pane>
-    </panes>
+     <pane id="Scope" />
+      <pane id="PackagesPane" />
+   </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -1108,20 +1095,19 @@
       <created>1412957458588</created>
       <updated>1412957458588</updated>
       <workItem from="1412957458901" duration="19567000" />
-<<<<<<< HEAD
-    </task>
+   </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="19567000" />
-=======
-      <workItem from="1413261705698" duration="12434000" />
+     <workItem from="1413261705698" duration="12434000" />
       <workItem from="1413293031954" duration="3701000" />
       <workItem from="1413300783693" duration="7739000" />
       <workItem from="1413309278117" duration="1832000" />
       <workItem from="1413370045928" duration="7116000" />
       <workItem from="1413378468169" duration="2259000" />
-      <workItem from="1413433976262" duration="3654000" />
+      <workItem from="1413433976262" duration="4647000" />
+      <workItem from="1413950410365" duration="711000" />
     </task>
     <task id="LOCAL-00001" summary="Interface changes">
       <created>1413307473708</created>
@@ -1131,11 +1117,15 @@
       <created>1413377189707</created>
       <updated>1413377189707</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Interface changes">
+      <created>1413439036540</created>
+      <updated>1413439036540</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58302000" />
+    <option name="totallyTimeSpent" value="60006000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1156,11 +1146,11 @@
       <flatten-packages value="false" />
       <is-autoscroll-to-source value="false" />
     </todo-panel>
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="false" />
+   <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+   <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1170,22 +1160,19 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-=======
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27469134" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27314815" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1215,13 +1202,14 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+   <MESSAGE value="Interface changes" />
+    <MESSAGE value="Look and feel of ARDS webportal" />
+    <option name="LAST_COMMIT_MESSAGE" value="Look and feel of ARDS webportal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< HEAD
-=======
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="3042">
@@ -1266,13 +1254,11 @@
         </state>
       </provider>
     </entry>
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/CmsAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.92" vertical-offset="4158" max-vertical-offset="5454">
           <caret line="298" column="78" selection-start-line="298" selection-start-column="75" selection-end-line="298" selection-end-column="93" />
-<<<<<<< HEAD
-          <folding>
+         <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#2583#2584#0" expanded="false" />
             <element signature="e#2631#2632#0" expanded="false" />
@@ -1305,7 +1291,6 @@
             <element signature="e#5028#5029#0" expanded="false" />
             <element signature="e#5062#5063#0" expanded="false" />
           </folding>
-=======
         </state>
       </provider>
     </entry>
@@ -1321,14 +1306,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5940">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/java/org/hisp/dhis/dashboard/action/HomeAction.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="-2.16" vertical-offset="4104" max-vertical-offset="4770">
+       <state vertical-scroll-proportion="-2.16" vertical-offset="4104" max-vertical-offset="4770">
           <caret line="281" column="93" selection-start-line="281" selection-start-column="93" selection-end-line="281" selection-end-column="93" />
           <folding>
             <element signature="imports" expanded="false" />
@@ -1359,12 +1342,10 @@
             <element signature="e#4711#4712#0" expanded="false" />
             <element signature="e#4742#4743#0" expanded="false" />
           </folding>
-=======
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2358">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-        </state>
+       </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/leftmenu.vm">
@@ -1463,8 +1444,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3525" max-vertical-offset="5202">
           <caret line="280" column="21" selection-start-line="280" selection-start-column="21" selection-end-line="280" selection-end-column="21" />
-<<<<<<< HEAD
-          <folding />
+         <folding />
         </state>
       </provider>
     </entry>
@@ -1515,7 +1495,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
-=======
         </state>
       </provider>
     </entry>
@@ -1640,12 +1619,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/style/analysis.css">
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2934">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-<<<<<<< HEAD
-          <folding>
+         <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#button#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1668,7 +1645,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="18.222221" vertical-offset="492" max-vertical-offset="2358">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
+
         </state>
       </provider>
     </entry>
@@ -1686,14 +1663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/cms.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1652" max-vertical-offset="6858">
@@ -1704,28 +1673,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/home.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.148149" vertical-offset="1238" max-vertical-offset="3042">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1238" max-vertical-offset="3042">
           <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/header.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.016" vertical-offset="2721" max-vertical-offset="3258">
           <caret line="130" column="91" selection-start-line="130" selection-start-column="91" selection-end-line="130" selection-end-column="91" />
-=======
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/ardsMacros.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.481482" vertical-offset="5207" max-vertical-offset="5760">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5207" max-vertical-offset="5760">
           <caret line="305" column="20" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="20" />
-          <folding>
-            <element signature="e#15376#15405#0#HTML" expanded="true" />
-            <element signature="e#16292#16353#0#HTML" expanded="true" />
-            <element signature="e#16391#16417#0#HTML" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1741,37 +1704,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
           <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
+
           <folding />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-=======
+    <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-dashboard-integration/src/main/webapp/dhis-web-dashboard-integration/analysis.vm">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.3333335" vertical-offset="1458" max-vertical-offset="2754">
           <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#3;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/mainHome.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032549728" vertical-offset="1926" max-vertical-offset="2574">
-          <caret line="108" column="37" selection-start-line="108" selection-start-column="37" selection-end-line="108" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.60940325" vertical-offset="1481" max-vertical-offset="2574">
+          <caret line="101" column="29" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
   </component>
 </project>
 
