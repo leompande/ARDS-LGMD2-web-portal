@@ -25,6 +25,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-commons-resources/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-dashboard-integration/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" afterPath="$PROJECT_DIR$/dhis-2/dhis-web/dhis-web-portal/target/work/webapp/META-INF/maven/org.hisp.dhis/dhis-web-portal/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ards.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1013,7 +1014,7 @@
       <workItem from="1413433976262" duration="4647000" />
       <workItem from="1413950410365" duration="711000" />
       <workItem from="1413985893879" duration="593000" />
-      <workItem from="1413990086280" duration="758000" />
+      <workItem from="1413990086280" duration="1050000" />
     </task>
     <task id="LOCAL-00001" summary="Interface changes">
       <created>1413307473708</created>
@@ -1031,7 +1032,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61357000" />
+    <option name="totallyTimeSpent" value="61649000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
