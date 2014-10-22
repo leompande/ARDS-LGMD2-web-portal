@@ -112,7 +112,8 @@ $(document).ready(function(){
                 /// CMS ARTICLES VIEWING AND MANIPULATION
                 $("div.article_conteiner_pages").hide();
                 $("div.available_articles_pages").hide();
-                $("div#back_to_list").hide();
+                $("div#editorArticleFormContainer").hide();
+                $("div.back_to_list").hide();
                 $("ul#article_list_pages li a").on("click",function(e){
                     e.preventDefault();
                     $("div.available_articles_pages").hide();
@@ -120,18 +121,95 @@ $(document).ready(function(){
                     $("div.title_pages").hide();
                     $("#bs-docs-pages").hide();
                     $("#pagination-docs").hide();
-                    $("div.article_conteiner_pages").show();
+                    $("div.back_to_list").hide();
                     $("div#"+$(this).attr("redirect_to")).show();
-                    $("div#back_to_list").show();
                     var prevRedirect = $(this).attr("redirect_to");
-                    $("a#back_to_list_button").on("click",function(){
+                    var buttonArray = prevRedirect.split("_");
+                    $("div#button_group_"+buttonArray[1]).show();
+                    $("a#backArticle_"+buttonArray[1]).on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
                         $("div#"+prevRedirect).hide();
-                        $("div#back_to_list").hide();
+                        $("div.back_to_list").hide();
                         $("div.article_conteiner_pages").hide();
                         $("div.available_articles_pages").hide();
                         $("div.title_pages").show();
                         $("#bs-docs-pages").show();
                         $("#pagination-docs").show();
+                    });
+                    $("a.edit_article_button").on("click",function(){
+                        var title   = $("div.title_"+buttonArray[1]+"_pages").html();
+                        var content = $("div.body_"+buttonArray[1]+"_pages").html();
+                        $("div#article_"+buttonArray[1]+"_pages").hide();
+                        $("input#edit_page_name").val(title.trim());
+                        $("input#imposter_article_id").val(buttonArray[1]);
+                        $("textarea#article_edit").val(content.trim());
+                        $("div#editorArticleFormContainer").show();
+                        $("div.article_conteiner_pages").hide();
+                        $("div#button_group_"+buttonArray[1]).hide();
+                        $("button#cancel_article_editor").on("click",function(){
+                            $("input#edit_page_name").val("");
+                            $("input#imposter_article_id").val("");
+//                            $("textarea#article_edit").val("");
+//                            CKEDITOR.instances.article_edit.setData("");
+                            $("input#imposter_article_edit").val("");
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#article_"+buttonArray[1]+"_pages").show();
+                            $("div#button_group_"+buttonArray[1]).show();
+//                            buttonArray[1]="";
+                        });
+
+                        ///// process article edit
+                        allowSubmit = true;
+                        $("form#edit_article_form").on("submit",function(e){
+                            $("input#imposter_article_edit").val(CKEDITOR.instances.article_edit.getData());
+                            var formValues = $(this).serialize();
+                            e.preventDefault();
+                                if (!allowSubmit) return false;
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: 'editArticle.action',
+                                    data: formValues,
+                                    success: whenSucceed
+                                });
+
+                                function whenSucceed(){
+                                    allowSubmit = false;
+                                }
+                                setTimeout(function(){ allowSubmit = true; }, 5000);
+
+                        });
+                    });
+                    $("a.delete_article_button").on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
+//                        alert($(this).attr("id"));
+                        var deleteArray = $(this).attr("id").split("_");
+
+                        if (!allowSubmit) return false;
+
+                        $.ajax({
+                            type: "POST",
+                            url: 'removeArticle.action',
+                            data: "&item="+deleteArray[1],
+                            success: whenSucceed
+                        });
+
+                        function whenSucceed(){
+                            allowSubmit = false;
+                            $("article_"+deleteArray[1]+"_pages").hide();
+                            $("button_group_"+deleteArray[1]).hide();
+                            $("a[redirect_to='article_"+deleteArray[1]+"_pages']").hide();
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#"+prevRedirect).hide();
+                            $("div.back_to_list").hide();
+                            $("div.article_conteiner_pages").hide();
+                            $("div.available_articles_pages").hide();
+                            $("div.title_pages").show();
+                            $("#bs-docs-pages").show();
+                            $("#pagination-docs").show();
+                        }
+                        setTimeout(function(){ allowSubmit = true; }, 5000);
+
                     });
                 });
 
@@ -253,7 +331,7 @@ $(document).ready(function(){
         var items = $("ul#article_list li");
 
         var numItems = items.length;
-        var perPage = 3;
+        var perPage = 10;
 
         // only show the first 2 (or "first per_page") items initially
         items.slice(perPage).hide();
@@ -275,16 +353,16 @@ $(document).ready(function(){
         });
 
 
-    /// CMS ARTICLES VIEWING AND MANIPULATION
-    $("div.article_conteiner").hide();
-    $("div.available_articles").hide();
-    $("ul#article_list li a").on("click",function(e){
-        e.preventDefault();
-        $("div.article_conteiner").show();
-        $("div.available_articles").hide();
-        $("div.article_"+$(this).attr("id")).show();
-
-    });
+//    /// CMS ARTICLES VIEWING AND MANIPULATION
+//    $("div.article_conteiner").hide();
+//    $("div.available_articles").hide();
+//    $("ul#article_list li a").on("click",function(e){
+//        e.preventDefault();
+//        $("div.article_conteiner").show();
+//        $("div.available_articles").hide();
+//        $("div.article_"+$(this).attr("id")).show();
+//
+//    });
 
 
    ///////////// SLIDE SHOW////////////////////
@@ -301,50 +379,121 @@ $(document).ready(function(){
             if(val['name']==="image"){
                 Image_grid +='<img class="slideProperty img-rounded img-responsive" src="'+val['href']+'/data" alt="" title="" />';
 
+                $(".SliderName_3").html(Image_grid).promise().done(function(){
+                    demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
+                    demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
+                    demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
+                    demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
+                    demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
+                    demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
+
+                    effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
+
+                    var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
+
+                });
+
             }else{
-                /// left menu document download
-                Doc_grid += '<li class="list-group-item">';
-                Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_grid += '<span class="fa fa-globe"></span>&nbsp;&nbsp;'+ val['name']+'</a>';
-                Doc_grid += '</li>';
+                $.getJSON("listDocuments.action",function( data ){
 
-                //navbar download
-                Doc_menu +='<li style="color:#ffffff!important;">';
-                Doc_menu +='<a title="View Document(Download)" target="_blank" href="'+val['href']+'/data">';
-                Doc_menu += val['name'];
-                Doc_menu +='</a>';
-                Doc_menu +=' </li>';
+                    $.each(data,function(index,vals){
 
-                // cms left menu document
-                Doc_menu_cms += '<li data-enabled="canDelete" class="list-group-item">';
-                Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_menu_cms += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
-                Doc_menu_cms += '<a data-target-fn="removeDocument"  class="delete_document" >';//href="../dhis-web-reporting/removeDocument.action"
-                Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-times pull-right"></i>';
-                Doc_menu_cms += '</a>';
-                Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
-                Doc_menu_cms += '<i  style="color:orange" title="Hide Document " class="fa fa-minus pull-right"></i>';
-                Doc_menu_cms += '</a--></p>';
-                Doc_menu_cms += '</li>';
+                        if(vals.file_type=="doc"){
+                            if(vals.file_name == val['name'] && vals.status == "enabled"){
+                                //left menu document download
+                                Doc_grid += '<li class="list-group-item">';
+                                Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
+                                Doc_grid += '<span class="fa fa-globe"></span>&nbsp;&nbsp;'+ val['name']+'</a>';
+                                Doc_grid += '</li>';
+
+                                //navbar download
+                                Doc_menu +='<li style="color:#ffffff!important;">';
+                                Doc_menu +='<a title="View Document(Download)" target="_blank" href="'+val['href']+'/data">';
+                                Doc_menu += val['name'];
+                                Doc_menu +='</a>';
+                                Doc_menu +='</li>';
+
+                                //cms left menu document
+                                Doc_menu_cms += '<li class="list-group-item">';
+                                Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
+                                Doc_menu_cms += '<span class="fa fa-globe"></span>&nbsp;'+ val['name']+'</a>';
+                                Doc_menu_cms += '<a  class="delete_document" href="#" id="deleteDocument_'+vals.id+'">';//href="../dhis-web-reporting/removeDocument.action"
+                                Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-trash-o pull-right"></i>';
+                                Doc_menu_cms += '</a>';
+                                Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
+                                Doc_menu_cms += '<i  style="color:orange" title="Hide Document " class="fa fa-minus pull-right"></i>';
+                                Doc_menu_cms += '</a--></p>';
+                                Doc_menu_cms += '</li>';
+
+                                $(".cms_document").html(Doc_menu_cms);
+                                $(".document_menu").html(Doc_menu);
+                                $(".document_panel").html(Doc_grid);
+                            }
+                        }
+
+
+                    });
+
+                    $(".cms_document li").each(function(){
+                        $(this).find("a.delete_document").on("click",function(e){
+                            e.preventDefault();
+                            var unique_id = $(this).attr("id");
+                            var ary = unique_id.split("_");
+                            $("#dialog").html("Are you sure to Delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success ' id='yes' >yes</a><a class='btn btn-xs btn-danger ' id='no'>no</a></span>");
+                            $("#dialog").dialog({ title: "Deleting Document" ,
+                                show: {
+                                    effect: 'slide',
+                                    complete: function() {
+                                        console.log('animation complete');
+                                    }
+                                },
+                                open: function(event, ui) {
+                                    $("#yes").click(function(){
+                                        console.log($("#yes").html());
+                                        $.post("deleteDocument.action","docId="+ary[1])
+                                            .done(function() {
+                                                $( "#dialog" ).dialog( "close" );
+                                                console.log($("a#"+unique_id).html());
+                                                $("a#"+unique_id).parent("p").parent("td").parent("tr").remove();
+//                                                location.reload(true);
+                                            })
+                                            .fail(function() {
+                                                alert("not deleted");
+                                            });
+
+
+
+                                    });
+
+                                    $("#no").click(function(){
+                                        $( "#dialog" ).dialog( "close" );
+                                    });
+                                }
+                            });
+                        });
+                    });
+
+
+                })
 
             }
         });
-        $(".cms_document").html(Doc_menu_cms);
-        $(".document_menu").html(Doc_menu);
-        $(".document_panel").html(Doc_grid);
-        $(".SliderName_3").html(Image_grid).promise().done(function(){
-            demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
-            demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
-            demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
-            demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
-            demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
-            demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
-
-            effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
-
-            var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
-
-        });
+//        $(".cms_document").html(Doc_menu_cms);
+//        $(".document_menu").html(Doc_menu);
+//        $(".document_panel").html(Doc_grid);
+//        $(".SliderName_3").html(Image_grid).promise().done(function(){
+//            demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
+//            demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
+//            demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
+//            demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
+//            demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
+//            demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
+//
+//            effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
+//
+//            var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
+//
+//        });
 
 
     });
@@ -441,6 +590,7 @@ $(document).ready(function(){
 
     $( 'textarea#content_new' ).ckeditor();
     $( 'textarea#content_edit' ).ckeditor();
+    $( 'textarea#article_edit' ).ckeditor();
 
     $("#editor").hide();
     $("#creator").hide();
@@ -457,7 +607,6 @@ $(document).ready(function(){
                 var og = ""; if($("select#add_picked_cat").val() == "Select Category"){}else{og = $("select#add_picked_cat").val();}
                 $.post( "addHtml.action",$(this).serialize()+"&origin="+og)
                     .done(function() {
-
                         $("#output").html(" ");
                         location.reload(true);
                     })
@@ -640,7 +789,7 @@ $(document).ready(function(){
         e.preventDefault()
         var unique_id = $(this).attr("id");
         var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success yes' >yes</a><a class='btn btn-xs btn-danger no' >no</a></span>");
+        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success' id='yes' >yes</a><a class='btn btn-xs btn-danger' id='no' >no</a></span>");
         $("#dialog").dialog({ title: "Deleting Link" ,
             show: {
                 effect: 'slide',
@@ -649,20 +798,18 @@ $(document).ready(function(){
                 }
             },
             open: function(event, ui) {
-                console.log("dialog opened");
-                console.log( $(".yes").html());
-                $(".yes").on("click",function(){
-                console.log("yes clicked");
-//                    $.post("removeLink.action","linkid="+ary[1])
-//                        .done(function() {
-//                            $( "#dialog" ).dialog( "close" );
-//                            $(this).parent().parent().remove("slow");
-//                            location.reload(true);
-//                        })
-//                        .fail(function() {
-//                            alert("not deleted");
-//                        });
-//
+                $("#yes").on("click",function(){
+
+                    $.post("removeLink.action","linkid="+ary[1])
+                        .done(function() {
+                            $( "#dialog" ).dialog( "close" );
+                            $(this).parent().parent().remove("slow");
+                            location.reload(true);
+                        })
+                        .fail(function() {
+                            alert("delete failed");
+                        });
+
 
 
                 });
@@ -695,6 +842,16 @@ $(document).ready(function(){
     ///// process docs
     $('#documentForm').on('submit', function(e) {
 
+        var docname = $("#documentForm input#document_name").val();
+        $.ajax({
+            type: "POST",
+            url: 'addDatabaseDocs.action',
+            data: "&docname="+docname,
+            success: function(){
+//                location.reload(true);
+            }
+        });
+
         $.ajax({
             type: "POST",
             url: 'addDocs.action',
@@ -704,48 +861,13 @@ $(document).ready(function(){
         e.preventDefault();
 
         function whenSucceed(){
-            location.reload(true);
+            console.log(docname);
+
         }
 
     });
 
-    //// docs operations
-    //// link operation
-    $(".delete_document").on("click",function(e){
-        e.preventDefault()
-        var unique_id = $(this).attr("id");
-        var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to Delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success yes' >yes</a><a class='btn btn-xs btn-danger no'>no</a></span>");
-        $("#dialog").dialog({ title: "Deleting Document" ,
-            show: {
-                effect: 'slide',
-                complete: function() {
-                    console.log('animation complete');
-                }
-            },
-            open: function(event, ui) {
-                $(".yes").click(function(){
 
-                    $.post("deleteDocument.action","docId="+ary[1])
-                        .done(function() {
-                            $( "#dialog" ).dialog( "close" );
-//                            $(this).parent().parent().remove("slow");
-                            location.reload(true);
-                        })
-                        .fail(function() {
-                            alert("not deleted");
-                        });
-
-
-
-                });
-
-                $(".no").click(function(){
-                    $( "#dialog" ).dialog( "close" );
-                });
-            }
-        });
-    });
 
     $(".hide_document").on("click",function(e){
         e.preventDefault();
@@ -760,6 +882,9 @@ $(document).ready(function(){
 
             });
    });
+
+
+
 
 
 });

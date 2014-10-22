@@ -71,11 +71,12 @@
                 <li style="border-right: solid 1px #888;width:172px!important;" class="hidden-sm hidden-xs">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;$encoder.htmlEncode( $currentUser.name )<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li style="color:#ffffff!important;"><a href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
-                        <li style="color:#ffffff!important;"><a href="#" class="menuLink"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;<!--i18n.getString( "help" )-->Help Center</a></li>
-                        <li style="color:#ffffff!important;"><a href="../dhis-web-commons-about/showUpdateUserAccountForm.action"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
+                        <li><a href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
+                        <li><a href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;Help Center</a></li>
+                        <li><a href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
+                        <li><a href="../dhis-web-commons-about/showUpdateUserAccountForm.action"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                         <li class="divider"></li>
-                        <li style="color:#ffffff!important;"><a href="../dhis-web-commons-security/logout.action"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
+                        <li><a href="../dhis-web-commons-security/logout.action"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -86,7 +87,7 @@
 #end
 
 #macro( leftMenu )
-<div class="col-md-2 hidden-sm hidden-xs"  style="padding-right: 0px;padding-left: 0px">
+<div class="col-md-2 hidden-sm hidden-xs" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
     <div id="left-Menu">
         <div class="panel-group" id="accordion">
             <div class="panel panel-success">
@@ -136,20 +137,21 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <ul class="nav nav-pills nav-stacked list-group">
+                        <table class="table">
                             #if($otherLinks)
                                 #foreach( $links in $otherLinks)
 
-                                    <li class="list-group-item">
-                                        <p><a target="_blank" href="$links.get(2)" class="text-success">
-                                            <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a>
+                                    <tr>
+                                    <td><i class="fa fa-globe"></i></td>
+                                       <td><a target="_blank" href="$links.get(2)" class="text-success">
+                                             $links.get(1)</a></td>
 
-                                    </li>
+                                    </tr>
 
                                 #end
                             #end
 
-                        </ul>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -157,7 +159,7 @@
     </div>
 </div>
 #end#macro( cmsLeftMenu )
-<div class="col-md-2 hidden-sm hidden-xs"  style="padding-right: 0px;padding-left: 0px">
+<div class="col-md-2 hidden-sm hidden-xs" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
     <div id="left-Menu">
         <div class="panel-group" id="accordion">
             <div class="panel panel-success">
@@ -189,8 +191,7 @@
                 <div id="collapseTwo"  class="panel-collapse collapse in">
                     <div class="panel-body" id="contextMenu">
 
-                        <ul id="contextMenuItems" class="nav nav-pills nav-stacked list-group cms_document">
-
+                        <ul class="nav nav-pills nav-stacked list-group cms_document">
 
                         </ul>
 
@@ -210,7 +211,6 @@
                             <div class="form-group">
                                 <input type="hidden" id="upload" name="external" value="false" >
                             </div>
-
                             <input type="submit" value="Add Document" class="btn btn-success btn-sm" >
 
                         </form>
@@ -228,26 +228,29 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <ul class="nav nav-pills nav-stacked list-group">
+                        <table class="table">
                             #if($otherLinks)
                                 #foreach( $links in $otherLinks)
 
-                                    <li class="list-group-item">
-                                        <p><a target="_blank" href="$links.get(2)" class="text-success">
-                                            <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a>
+                                    <tr>
+                                      <td><i class="fa fa-globe"></i></td>
+                                       <td> <p><a target="_blank" href="$links.get(2)" class="text-success">
+                                             $links.get(1)</a>
 
-                                            <a  href="#" class="remove" id="remove,$links.get(0)">
-                                                <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-times pull-right"></i>
-                                            </a>
                                             <a  href="#" class="hides" id="hides,$links.get(0)">
-                                                <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-times pull-right"></i>
-                                            </a></p>
-                                    </li>
+                                                <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-minus pull-right"></i>
+                                            </a>
+                                            <a  href="#" class="remove" id="remove,$links.get(0)">
+                                                <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-trash-o pull-right"></i>
+                                            </a>
+                                        </p>
+                                       </td>
+                                    </tr>
 
                                 #end
                             #end
 
-                        </ul>
+                        </table>
                         </br>
 
                         <form id="addImportantLink" role="form" method="post"  action="#">
@@ -298,66 +301,15 @@
 </div>
 #end
 #macro( chartStatistics )
-<div id="statistics_charts" class="col-md-12">
+<div id="statistics_charts" class="col-md-12" style="font-family: LiberationSansRegular, arial, sans-serif;">
+    <div  class="row">
+        <div style="text-align: center;font-size: 1.5em;"><b> <u>Favourites Charts</u> </b></div>
+    </div></br>
     <div id="statistics_chart_1" class="row">
-
-    </div>
-##    <script>
-##                Ext.onReady(function() {
-##            DHIS.getChart({
-##                "type": "column",
-##                "columns": [
-##                    {
-##                        "dimension": "de",
-##                        "items": [
-##                            {
-##                                "id": "ASooesZ6GoT"
-##                            }, {
-##                                "id": "Ba9mZCFaUCV"
-##                            }, {
-##                                "id": "HW0eal57uXm"
-##                            }, {
-##                                "id": "gqJB49icYtm"
-##                            }
-##                        ]
-##                    }
-##                ],
-##                "rows": [
-##                    {
-##                        "dimension": "pe",
-##                        "items": [
-##                            {
-##                                "id": "2013July"
-##                            }
-##                        ]
-##                    }
-##                ],
-##                "filters": [
-##                    {
-##                        "dimension": "ou",
-##                        "items": [
-##                            {
-##                                "id": "GWEtuPicnbB"
-##                            },{
-##                                "id": "mBBKzZonsgl"
-##                            },{
-##                                "id": "QodXYQxhHzV"
-##                            },{
-##                                "id": "S4WbqR1P0dA"
-##                            },
-##                        ]
-##                    }
-##                ],
-##                "url": "http://localhost:8080",
-##                "el": "statistics_chart"
-##            });
-##        });
-##    </script>
+    </div></br>
     <div id="statistics_chart_2" class="row">
-
-    </div>
+    </div></br>
     <div id="statistics_chart_3" class="row">
-
     </div>
 </div>
 #end

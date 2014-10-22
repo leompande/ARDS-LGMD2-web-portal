@@ -243,15 +243,9 @@
                                             <a  href="#" class="remove" id="remove,$links.get(0)">
                                                 <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-trash-o pull-right"></i>
                                             </a>
-<<<<<<< HEAD
                                         </p>
-                                    </li>
-=======
-                                            <a  href="#" class="hides" id="hides,$links.get(0)">
-                                                <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-times pull-right"></i>
-                                            </a></p></td>
+                                       </td>
                                     </tr>
->>>>>>> 944d538758f4106da16b73121fdba8da67bbc9c6
 
                                 #end
                             #end
