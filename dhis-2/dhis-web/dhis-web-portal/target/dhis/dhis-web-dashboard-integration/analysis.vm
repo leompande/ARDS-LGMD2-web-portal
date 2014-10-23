@@ -90,13 +90,9 @@
             </div>
         </div>
         <div class="row" id="content_to_hide">
-<<<<<<< HEAD
 
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-=======
          <div class="col-md-12">
            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -145,10 +141,7 @@
             <div class="panel-group" id="accordion2">
 
             </div>
-<<<<<<< HEAD
-=======
           </div>
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
-        </div>
+
     </div>
 

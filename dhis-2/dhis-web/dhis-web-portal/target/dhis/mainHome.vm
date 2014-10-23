@@ -121,8 +121,6 @@
         </footer>
     </div>
 </div>
-<<<<<<< HEAD
-=======
 <script type="text/javascript">
 
     var m  = 0;
@@ -163,6 +161,5 @@
         });
     }
 </script>
->>>>>>> b30f61266c2b14f58daa070fe9a7886a62fe9916
 </body>
 </html>
