@@ -20,10 +20,10 @@
     var i18n_add = '$encoder.jsEscape( $i18n.getString( "add" ), "'")';
 </script>
 
-<div class="row ">
+<div class="row">
     #parse( "ardsMacros.vm" )
     #leftMenu()
-    <div class="col-md-10">
+    <div class="col-md-10" id="mainPages">
         <div class="analysis-wraper">
             <div class="alert alert-danger fade in" role="alert" style="padding: 4px">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
@@ -94,6 +94,12 @@
         <div class="row" id="content_to_hide">
             <div class="col-md-10">
                 <div id="contents" class="">
+            <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
+            <p>
+           <div id="min"><a href="#" onclick="javascript:minSide()" title="hide menu"><img src="../images/hide_menu.png" width="16" height="16" /></a></div>
+           <div id="max" style="display:none"><a href="#" onclick="javascript:maxSide()" title="show menu"><img src="../images/extend_menu.png" width="16" height="16" /></a></div>
+                </p>
+                   </span>
                     <div id="default_home">
                         <div id="page_switcher">
                             <div class="onoffswitch pull-right" ><input type="checkbox" class="toggleBtn onoffswitch-checkbox" checked="" id="onoffswitch6"><label for="onoffswitch6" class="onoffswitch-label"><div class="onoffswitch-inner" style=""></div><div class="onoffswitch-switch" style=""></div></label></div>
@@ -147,7 +153,7 @@
                         </div>
                     </div>
                 </div><br>
-                <div class="row" style="width:210px;margin-left:-30px;">
+                <div class="row">
                     #chartStatistics()
                 </div>
             </div>

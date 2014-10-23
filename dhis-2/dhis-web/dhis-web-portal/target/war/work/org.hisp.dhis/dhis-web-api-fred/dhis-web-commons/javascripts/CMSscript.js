@@ -17,7 +17,6 @@ $(document).ready(function(){
     $("#article_menus").hide();
     $("#add_div").show();
 
-
     $("div#cms_menu_bar a#manage_articles").addClass("active");
     // CMS main menus //
     $("div#cms_menu_bar a").on("click",function(){
@@ -30,35 +29,39 @@ $(document).ready(function(){
             $("#article_menus").hide();
             $("#add_div").hide();
             $("#other_pages").show();
+            $("div.title_pages").show();
+            $("#bs-docs-pages").show();
+            $("#pagination-docs").show();
             $("#add_new_article_form").hide();
 
             $("textarea#newpage").ckeditor();
 
             $("#add_new_page").on("click",function(){
+                $("div.display_article_for_cms").hide();
                 $("form#add_new_article_form").show();
 
-                        $('#add_new_article_button').on('click', function(e) {
+                        $('#add_new_article_form').on('submit', function(e) {
+                            e.preventDefault();
                             var sendOnce = false;
                             var data = CKEDITOR.instances.newpage.getData();
-
                             $("#imposter_newpage").val(data);
-                            e.preventDefault();
+
                             if(!$("input#page_name").val()){
                                 $("#page_label").css({"color":"red","font-weight":"bold"});
                                 $('#page_label').blink();
                             }else{
 
-                                var page_name = $("input#page_name").val();
-                                var description = $("textarea#description").val();
-                                var imposter_newpage = $("input#imposter_newpage").val();
-                                var formData = "&page_name="+page_name+"&description="+description+"&imposter_newpage="+imposter_newpage;
+
                                 $("#output_article_pane").html("<h3 ><i class='fa fa-spin fa-spinner '></i><span>Making changes please wait...</span><h3>");
                                if(!sendOnce){
-                                   $.post( "addArticle.action",formData)
+                                   $.post( "addArticle.action",$(this).serialize())
                                        .done(function() {
                                            $('#add_new_article_form').find("input[type=text], textarea").val("");
                                            $("#output_article_pane").html(" ");
                                            sendOnce = true;
+//                                           $("a#cms_settings_button").trigger("click");
+//                                           $("a#manage_pages").trigger("click");
+
                                        })
                                        .fail(function() {
                                            $("#output_article_pane").html("<h3 style='color:red;'><i class='fa fa-spin fa-spinner '></i><span>Adding failure ... </span><h3>");
@@ -71,9 +74,147 @@ $(document).ready(function(){
                         $("#cancel_add_new_article_button").on("click",function(){
                             $('#add_new_article_form').find("input[type=text], textarea").val("");
                             $("#add_new_article_form").hide();
+                            $("div.display_article_for_cms").show();
                         });
 
             });
+
+
+
+                /////////////// CMS ARTICLES PAGINATION //////////
+
+
+                var items = $("ul#article_list_pages li");
+
+                var numItems = items.length;
+                var perPage = 3;
+
+                // only show the first 3 (or "first per_page") items initially
+                items.slice(perPage).hide();
+                // now setup your pagination
+                // you need that .pagination-page div before/after your table
+                $("#cmsArticlePaginataionDiv").pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    cssStyle: "compact-theme",
+                    onPageClick: function(pageNumber) { // this is where the magic happens
+                        // someone changed page, lets hide/show trs appropriately
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+
+
+
+                /// CMS ARTICLES VIEWING AND MANIPULATION
+                $("div.article_conteiner_pages").hide();
+                $("div.available_articles_pages").hide();
+                $("div#editorArticleFormContainer").hide();
+                $("div.back_to_list").hide();
+                $("ul#article_list_pages li a").on("click",function(e){
+                    e.preventDefault();
+                    $("div.available_articles_pages").hide();
+                    $("div#article_title").hide();
+                    $("div.title_pages").hide();
+                    $("#bs-docs-pages").hide();
+                    $("#pagination-docs").hide();
+                    $("div.back_to_list").hide();
+                    $("div#"+$(this).attr("redirect_to")).show();
+                    var prevRedirect = $(this).attr("redirect_to");
+                    var buttonArray = prevRedirect.split("_");
+                    $("div#button_group_"+buttonArray[1]).show();
+                    $("a#backArticle_"+buttonArray[1]).on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
+                        $("div#"+prevRedirect).hide();
+                        $("div.back_to_list").hide();
+                        $("div.article_conteiner_pages").hide();
+                        $("div.available_articles_pages").hide();
+                        $("div.title_pages").show();
+                        $("#bs-docs-pages").show();
+                        $("#pagination-docs").show();
+                    });
+                    $("a.edit_article_button").on("click",function(){
+                        var title   = $("div.title_"+buttonArray[1]+"_pages").html();
+                        var content = $("div.body_"+buttonArray[1]+"_pages").html();
+                        $("div#article_"+buttonArray[1]+"_pages").hide();
+                        $("input#edit_page_name").val(title.trim());
+                        $("input#imposter_article_id").val(buttonArray[1]);
+                        $("textarea#article_edit").val(content.trim());
+                        $("div#editorArticleFormContainer").show();
+                        $("div.article_conteiner_pages").hide();
+                        $("div#button_group_"+buttonArray[1]).hide();
+                        $("button#cancel_article_editor").on("click",function(){
+                            $("input#edit_page_name").val("");
+                            $("input#imposter_article_id").val("");
+                            $("input#imposter_article_edit").val("");
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#article_"+buttonArray[1]+"_pages").show();
+                            $("div#button_group_"+buttonArray[1]).show();
+
+                        });
+
+                        ///// process article edit
+                        allowSubmit = true;
+                        $("form#edit_article_form").on("submit",function(e){
+                            $("input#imposter_article_edit").val(CKEDITOR.instances.article_edit.getData());
+                            var formValues = $(this).serialize();
+                            e.preventDefault();
+                                if (!allowSubmit) return false;
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: 'editArticle.action',
+                                    data: formValues,
+                                    success: whenSucceed
+                                });
+
+                                function whenSucceed(){
+                                    location.reload(true);
+                                    allowSubmit = false;
+
+                                }
+                                setTimeout(function(){ allowSubmit = true; }, 5000);
+
+                        });
+                    });
+                    $("a.delete_article_button").on("click",function(){
+                        $("div#editorArticleFormContainer").hide();
+
+                        var deleteArray = $(this).attr("id").split("_");
+
+                        if (!allowSubmit) return false;
+
+                        $.ajax({
+                            type: "POST",
+                            url: 'removeArticle.action',
+                            data: "&item="+deleteArray[1],
+                            success: whenSucceed
+                        });
+
+                        function whenSucceed(){
+                            allowSubmit = false;
+                            $("article_"+deleteArray[1]+"_pages").hide();
+                            $("button_group_"+deleteArray[1]).hide();
+                            $("a[redirect_to='article_"+deleteArray[1]+"_pages']").hide();
+                            $("div#editorArticleFormContainer").hide();
+                            $("div#"+prevRedirect).hide();
+                            $("div.back_to_list").hide();
+                            $("div.article_conteiner_pages").hide();
+                            $("div.available_articles_pages").hide();
+                            $("div.title_pages").show();
+                            $("#bs-docs-pages").show();
+                            $("#pagination-docs").show();
+                        }
+                        setTimeout(function(){ allowSubmit = true; }, 5000);
+
+                    });
+                });
+
+
+
+
         }
         if(menu_name =="manage_images"){
             $("#Slide_manager_pane").show();
@@ -92,19 +233,16 @@ $(document).ready(function(){
                     var IdArray =  $(this).attr("id").split("_");
                     var menu_id = IdArray[1];
                     if($(this).attr("class").indexOf("edit")>=0){
-
-                        var textToEdited = $("tr#rowspecific_"+menu_id+" td:first span").html();
-                        $("tr#rowspecific_"+menu_id+" td:first input").val(textToEdited);
-                        $("tr#rowspecific_"+menu_id+" td:first input").show();
-                        $("tr#rowspecific_"+menu_id+" td:first span").hide();
-                        $("tr#rowspecific_"+menu_id+" td:last a#save_"+menu_id).show();
-                        $("tr#rowspecific_"+menu_id+" td:last a#edit_"+menu_id).hide();
-
-                        $("a.save").on("click",function(){
+                    var textToEdited = $("tr#rowspecific_"+menu_id+" td:first span").html();
+                    $("tr#rowspecific_"+menu_id+" td:first input").val(textToEdited);
+                    $("tr#rowspecific_"+menu_id+" td:first input").show();
+                    $("tr#rowspecific_"+menu_id+" td:first span").hide();
+                    $("tr#rowspecific_"+menu_id+" td:last a#save_"+menu_id).show();
+                    $("tr#rowspecific_"+menu_id+" td:last a#edit_"+menu_id).hide();
+                    $("a.save").on("click",function(){
                             var menu_id = IdArray[1];
                             var textEdited =  $("tr#rowspecific_"+menu_id+" td:first input.text_inputs").val();
                             $("tr#rowspecific_"+menu_id+" td:first span").html(textEdited);
-
                             $("tr#rowspecific_"+menu_id+" td:last span.signal").html("");
                             var url = "editTabMenu.action";
                             $.post( url,"&menu="+textEdited+"&menu_id="+menu_id)
@@ -122,13 +260,10 @@ $(document).ready(function(){
                                 .fail(function(data,error){
                                     console.log(error);
                                 });
-
-                        });
+                    });
 
                     }
-
                     if($(this).attr("class").indexOf("delete")>=0){
-
                         var menu_id = IdArray[1];
                         var url = "deleteTabMenu.action";
                         $.post( url,"&item="+menu_id)
@@ -141,7 +276,6 @@ $(document).ready(function(){
                             .fail(function(data,error){
                                 console.log(error);
                             });
-
                     }
                 });
             });
@@ -189,7 +323,7 @@ $(document).ready(function(){
         var items = $("ul#article_list li");
 
         var numItems = items.length;
-        var perPage = 3;
+        var perPage = 10;
 
         // only show the first 2 (or "first per_page") items initially
         items.slice(perPage).hide();
@@ -211,76 +345,147 @@ $(document).ready(function(){
         });
 
 
-    /// CMS ARTICLES VIEWING AND MANIPULATION
-    $("div.article_conteiner").hide();
-    $("div.available_articles").hide();
-    $("ul#article_list li a").on("click",function(e){
-        e.preventDefault();
-        $("div.article_conteiner").show();
-        $("div.available_articles").hide();
-        $("div.article_"+$(this).attr("id")).show();
-
-    });
+//    /// CMS ARTICLES VIEWING AND MANIPULATION
+//    $("div.article_conteiner").hide();
+//    $("div.available_articles").hide();
+//    $("ul#article_list li a").on("click",function(e){
+//        e.preventDefault();
+//        $("div.article_conteiner").show();
+//        $("div.available_articles").hide();
+//        $("div.article_"+$(this).attr("id")).show();
+//
+//    });
 
 
    ///////////// SLIDE SHOW////////////////////
-    Image_grid ='';
-    Doc_grid = '';
-    Doc_menu = '';
-    Doc_menu_cms = '';
+
     $.ajax({
         url: "../api/documents.json",
         dataType: 'json'
     }).done(function(data) {
-
+        Image_grid ='';
+        Doc_grid = '';
+        Doc_menu = '';
+        Doc_menu_cms = '';
         $.each(data.documents,function(index,val){
             if(val['name']==="image"){
                 Image_grid +='<img class="slideProperty img-rounded img-responsive" src="'+val['href']+'/data" alt="" title="" />';
 
+                $(".SliderName_3").html(Image_grid).promise().done(function(){
+                    demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
+                    demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
+                    demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
+                    demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
+                    demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
+                    demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
+
+                    effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
+
+                    var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
+
+                });
+
             }else{
-                /// left menu document download
-                Doc_grid += '<li class="list-group-item">';
-                Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_grid += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
-                Doc_grid += '</li>';
+                $.getJSON("listDocuments.action",function( data ){
 
-                //navbar download
-                Doc_menu +='<li style="color:#ffffff!important;">';
-                Doc_menu +='<a title="View Document(Download)" target="_blank" href="'+val['href']+'/data">';
-                Doc_menu += val['name'];
-                Doc_menu +='</a>';
-                Doc_menu +=' </li>';
+                    $.each(data,function(index,vals){
 
-                // cms left menu document
-                Doc_menu_cms += '<li class="list-group-item">';
-                Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
-                Doc_menu_cms += '<span class="fa fa-globe"></span>'+ val['name']+'</a>';
-                Doc_menu_cms += '<a  href="../dhis-web-reporting/removeDocument.action" class="delete_document" >';
-                Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-times pull-right"></i>';
-                Doc_menu_cms += '</a>';
-                Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
-                Doc_menu_cms += '<i  style="color:orange" title="Hide Document " class="fa fa-minus pull-right"></i>';
-                Doc_menu_cms += '</a--></p>';
-                Doc_menu_cms += '</li>';
+                        if(vals.file_type=="doc"){
+                            if(vals.file_name == val['name'] && vals.status == "enabled"){
+                                //left menu document download
+                                Doc_grid += '<li class="list-group-item">';
+                                Doc_grid += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
+                                Doc_grid += '<span class="fa fa-globe"></span>&nbsp;&nbsp;'+ val['name']+'</a>';
+                                Doc_grid += '</li>';
+
+                                //navbar download
+                                Doc_menu +='<li style="color:#ffffff!important;">';
+                                Doc_menu +='<a title="View Document(Download)" target="_blank" href="'+val['href']+'/data">';
+                                Doc_menu += val['name'];
+                                Doc_menu +='</a>';
+                                Doc_menu +='</li>';
+
+                                //cms left menu document
+                                Doc_menu_cms += '<li class="list-group-item">';
+                                Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
+                                Doc_menu_cms += '<span class="fa fa-globe"></span>&nbsp;'+ val['name']+'</a>';
+                                Doc_menu_cms += '<a  class="delete_document" href="#" id="deleteDocument_'+vals.id+'">';
+                                Doc_menu_cms += '<i  style="color:red;" title="Delete Document" class="fa fa-trash-o pull-right"></i>';
+                                Doc_menu_cms += '</a>';
+                                Doc_menu_cms += '<!--a  href="#" class="hide_document" id="document_hides,$document.get(0)">';
+                                Doc_menu_cms += '<i  style="color:orange" title="Hide Document " class="fa fa-minus pull-right"></i>';
+                                Doc_menu_cms += '</a--></p>';
+                                Doc_menu_cms += '</li>';
+
+                                $(".cms_document").html(Doc_menu_cms);
+                                $(".document_menu").html(Doc_menu);
+                                $(".document_panel").html(Doc_grid);
+                            }
+                        }
+
+
+                    });
+
+                    $(".cms_document li").each(function(){
+                        $(this).find("a.delete_document").on("click",function(e){
+                            e.preventDefault();
+                            var unique_id = $(this).attr("id");
+                            var ary = unique_id.split("_");
+                            $("#dialog").html("Are you sure to Delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success ' id='yes' >yes</a><a class='btn btn-xs btn-danger ' id='no'>no</a></span>");
+                            $("#dialog").dialog({ title: "Deleting Document" ,
+                                show: {
+                                    effect: 'slide',
+                                    complete: function() {
+                                        console.log('animation complete');
+                                    }
+                                },
+                                open: function(event, ui) {
+                                    $("#yes").click(function(){
+                                        console.log($("#yes").html());
+                                        $.post("deleteDocument.action","docId="+ary[1])
+                                            .done(function() {
+                                                $( "#dialog" ).dialog( "close" );
+                                                console.log($("a#"+unique_id).html());
+                                                $("a#"+unique_id).parent("p").parent("li").remove();
+//                                                location.reload(true);
+                                            })
+                                            .fail(function() {
+                                                alert("not deleted");
+                                            });
+
+
+
+                                    });
+
+                                    $("#no").click(function(){
+                                        $( "#dialog" ).dialog( "close" );
+                                    });
+                                }
+                            });
+                        });
+                    });
+
+
+                })
 
             }
         });
-        $(".cms_document").html(Doc_menu_cms);
-        $(".document_menu").html(Doc_menu);
-        $(".document_panel").html(Doc_grid);
-        $(".SliderName_3").html(Image_grid).promise().done(function(){
-            demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
-            demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
-            demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
-            demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
-            demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
-            demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
-
-            effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
-
-            var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
-
-        });
+//        $(".cms_document").html(Doc_menu_cms);
+//        $(".document_menu").html(Doc_menu);
+//        $(".document_panel").html(Doc_grid);
+//        $(".SliderName_3").html(Image_grid).promise().done(function(){
+//            demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
+//            demo3Effect2 = {name: 'myEffect32', right: true, move: true, duration: 400};
+//            demo3Effect3 = {name: 'myEffect33', bottom: true, move: true, duration: 400};
+//            demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
+//            demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
+//            demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
+//
+//            effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
+//
+//            var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
+//
+//        });
 
 
     });
@@ -377,6 +582,7 @@ $(document).ready(function(){
 
     $( 'textarea#content_new' ).ckeditor();
     $( 'textarea#content_edit' ).ckeditor();
+    $( 'textarea#article_edit' ).ckeditor();
 
     $("#editor").hide();
     $("#creator").hide();
@@ -393,7 +599,6 @@ $(document).ready(function(){
                 var og = ""; if($("select#add_picked_cat").val() == "Select Category"){}else{og = $("select#add_picked_cat").val();}
                 $.post( "addHtml.action",$(this).serialize()+"&origin="+og)
                     .done(function() {
-
                         $("#output").html(" ");
                         location.reload(true);
                     })
@@ -551,20 +756,24 @@ $(document).ready(function(){
 
 
     ///// process link
-    $('#addLink').on('submit', function(e) {
-
+    allowSubmit = true;
+    $('#addImportantLink').on('submit', function(e) {
         e.preventDefault();
 
-        $.post("addLink.action",$(this).serialize())
-            .done(function() {
-                location.reload(true);
-            })
-            .fail(function() {
+        if (!allowSubmit) return false;
+        allowSubmit = false;
 
+            $.ajax({
+                type: "POST",
+                url: 'addLink.action',
+                data: $(this).serialize(),
+                success: whenSucceed
             });
 
-
-
+        function whenSucceed(){
+            location.reload(true);
+        }
+        setTimeout(function(){ allowSubmit = true; }, 5000);
     });
 
     //// link operation
@@ -572,7 +781,7 @@ $(document).ready(function(){
         e.preventDefault()
         var unique_id = $(this).attr("id");
         var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success' id='yes'>yes</a><a class='btn btn-xs btn-danger' id='no'>no</a></span>");
+        $("#dialog").html("Are you sure to delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success' id='yes' >yes</a><a class='btn btn-xs btn-danger' id='no' >no</a></span>");
         $("#dialog").dialog({ title: "Deleting Link" ,
             show: {
                 effect: 'slide',
@@ -581,7 +790,7 @@ $(document).ready(function(){
                 }
             },
             open: function(event, ui) {
-                $("#yes").click(function(){
+                $("#yes").on("click",function(){
 
                     $.post("removeLink.action","linkid="+ary[1])
                         .done(function() {
@@ -590,14 +799,14 @@ $(document).ready(function(){
                             location.reload(true);
                         })
                         .fail(function() {
-                            alert("not deleted");
+                            alert("delete failed");
                         });
 
 
 
                 });
 
-                $("#no").click(function(){
+                $("#no").on("click",function(){
                     $( "#dialog" ).dialog( "close" );
                 });
             }
@@ -622,58 +831,61 @@ $(document).ready(function(){
     });
 
 
+    $("#hidden_links").hide();
+    $("#hidden_links_button").on("click",function(ev){
+        ev.preventDefault();
+        $("#hidden_links").show();
+        $("#_hide").on("click",function(e){
+            e.preventDefault();
+            $("#hidden_links").hide();
+        });
+        $(".unhide").on("click",function(e){
+            e.preventDefault();
+            var unique_id = $(this).attr("id");
+            var ary = unique_id.split(",");
+
+            $.post( "unHideLink.action","linkid="+ary[1])
+                .done(function(){
+                    $(this).parent().parent().hide("slow");
+                    location.reload(true);
+                })
+                .fail(function(){
+
+                });
+
+
+        });
+    });
+
     ///// process docs
-    $('#addDocs').on('submit', function(e) {
+    $('#documentForm').on('submit', function(e) {
+
+        var docname = $("#documentForm input#document_name").val();
+        $.ajax({
+            type: "POST",
+            url: 'addDatabaseDocs.action',
+            data: "&docname="+docname,
+            success: function(){
+//                location.reload(true);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: 'addDocs.action',
+            data: new FormData( this ),
+            success: whenSucceed
+        });
         e.preventDefault();
 
-        $("#addDocs").ajaxSubmit({
-            complete: function(xhr) {
+        function whenSucceed(){
+            console.log(docname);
 
-                location.reload(true);
-            }
-        });
-
+        }
 
     });
 
 
-    //// docs operations
-    //// link operation
-    $(".delete_document").on("click",function(e){
-        e.preventDefault()
-        var unique_id = $(this).attr("id");
-        var ary = unique_id.split(",");
-        $("#dialog").html("Are you sure to Delete? &nbsp;&nbsp;<span style='color:red;'>Irriversible action</span></br><span class='btn-group'><a class='btn btn-xs btn-success yes' >yes</a><a class='btn btn-xs btn-danger no'>no</a></span>");
-        $("#dialog").dialog({ title: "Deleting Document" ,
-            show: {
-                effect: 'slide',
-                complete: function() {
-                    console.log('animation complete');
-                }
-            },
-            open: function(event, ui) {
-                $(".yes").click(function(){
-
-                    $.post("deleteDocument.action","docId="+ary[1])
-                        .done(function() {
-                            $( "#dialog" ).dialog( "close" );
-//                            $(this).parent().parent().remove("slow");
-                            location.reload(true);
-                        })
-                        .fail(function() {
-                            alert("not deleted");
-                        });
-
-
-
-                });
-
-                $(".no").click(function(){
-                    $( "#dialog" ).dialog( "close" );
-                });
-            }
-        });
-    });
 
     $(".hide_document").on("click",function(e){
         e.preventDefault();
@@ -688,6 +900,9 @@ $(document).ready(function(){
 
             });
    });
+
+
+
 
 
 });
