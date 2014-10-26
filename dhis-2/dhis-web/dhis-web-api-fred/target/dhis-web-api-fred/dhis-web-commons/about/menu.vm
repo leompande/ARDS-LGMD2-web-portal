@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 jQuery( document ).ready( function() {
   jQuery( "#showMainMenuLink" ).attr( "href", "modules.action" );

@@ -1,6 +1,5 @@
 
 #sharingDialog()
-
 <script type="text/javascript">
     var i18n_share_your_interpretation_of = '$encoder.jsEscape( $i18n.getString( "share_your_interpretation_of" ), "'")';
     var i18n_interpretation_was_shared = '$encoder.jsEscape( $i18n.getString( "interpretation_was_shared" ), "'")';

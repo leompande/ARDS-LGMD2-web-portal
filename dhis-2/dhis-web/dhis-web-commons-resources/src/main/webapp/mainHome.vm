@@ -11,22 +11,22 @@
 <!--BOOTSTRAP HEADER-->
 <style>
     .dropdown-menu > li > a{
-    //color:#ffffff!important;
+    //  color:#ffffff!important;
     }
 </style>
 <div class="container-fluid">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
-    <div class="page-wraps">
+    <div class="page-wrap">
         <div class="row">
             <div class="col-md-12">
-                <!-- Message body area-->
+               <!-- Message body area-->
                 <div id="headerMessage" class="bold"></div>
                 <!-- end of meassage body-->
 
                 <!-- central bar-->
                 <div class="page col-md-12"><!--mainPage--> <!-- Do not set style attr -->
-                    #if( !$page )
+                 #if( !$page )
                         <p>$i18n.getString( "no_page_specified" )</p>
                     #else
                         #parse( $page )
@@ -34,9 +34,10 @@
                 </div>
             </div>
         </div>
+        </div>
         <div class="row">
-            <footer class="site-footer" style="background-color:#457B49;">
-                <nav class="navbar navbar-inverse" role="navigation">
+            <footer class="site-footer" style="height:40px;">
+                <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:10px;margin: 0px;border-radius:0px">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header" style="background-color:#457B49;">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -47,9 +48,9 @@
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2" style="background-color:#457B49;">
-                        <ul class="nav navbar-nav" style="background-color:#457B49">
-                            <li class="dropup" style="border-right: solid 1px #888; color:#ffffff!important">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                        <ul class="nav navbar-nav" style="background-color:#457B49;">
+                            <li class="dropup" style="border-right: solid 1px #888">
                                 <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:40px!important;margin-top:-10px;">
                                     Related Links
                                     <span class="caret"></span>
@@ -57,19 +58,27 @@
                                 <ul class="dropdown-menu">
                                     #if($otherLinks)
                                         #foreach( $links in $otherLinks)
-                                            <li class="dropdown-submenu" style="color:#ffffff!important;"><a href="$links.get(2)" target="_blank" class="text-success"><i class="fa fa-globe"></i>$links.get(1)</a></li>
+                                            <li class="dropdown-submenu" style="background-color:#ccc;"><a href="$links.get(2)" target="_blank" class="text-success"><i class="fa fa-globe"></i>$links.get(1)</a></li>
                                         #end
                                     #end
                                 </ul>
                             </li>
 
                             <li class="dropup " style="border-right: solid 1px #888">
-                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:30px!important;margin-top:-10px;background-color:;">
+                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:40px!important;margin-top:-10px;background-color:;">
                                     Downloads
                                     <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu document_menu" style="color:#fff;">
-
+                                <ul class="dropdown-menu">
+                                    #if($docs)
+                                        #foreach( $document in $docs)
+                                            <li>
+                                                <a title="View Document(Download)" target="_blank" href="slideshowImages/$document.get(1)" class="text-success">
+                                                    <i class="fa fa-cloud-download"></i>$document.get(1)<i class="fa fa-chevron-right pull-right"></i>
+                                                </a>
+                                            </li>
+                                        #end
+                                    #end
                                 </ul>
 
                             </li>
@@ -78,21 +87,19 @@
                                 <a href="#" style="color:#ffffff!important;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;$encoder.htmlEncode( $currentUser.name )<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
-                                    <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;<!--i18n.getString( "help" )-->Help Center</a></li>
+                                    <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;Help Center</a></li>
                                     <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
                                     <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserAccountForm.action"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                                     <li class="divider"></li>
                                     <li><a style="color:#ffffff!important;" href="../dhis-web-commons-security/logout.action"><i class="fa fa-power-off"></i>&nbsp;Logout</a></li>
                                 </ul>
                             </li>
-
-
-                        </ul>
+                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
             </footer>
-        </div>
-    </div>
+        </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
     <script type="text/javascript">
 
         var m  = 0;
@@ -100,18 +107,11 @@
         function minSide(){
             $('#min').hide('fast', function(){
                 $('#max').show();
+
             });
             if(m == 0){
-                $('#leftbarcontents').animate({
-                    direction: 'left',
-                    left: '-=250'
-                }, 900, function() {
-                    // Animation complete.
-                    $('#mainPages').css({
-                        marginLeft: -180,
-                        width:1200
-                    })
-                });
+                $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
+                $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
             }
 
         }
@@ -120,17 +120,10 @@
 
             $('#max').hide('fast', function(){
                 $('#min').show();
-            });
-            $('#mainPages').css({
-                marginLeft: -07,
-                width:   1050
-            })
-            $('#leftbarcontents').animate({
-                left: '+=250'
-            }, 900, function() {
-                // Animation complete.
 
             });
+            $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
+            $( '#mainPages' ).css( 'margin-left', '' );
         }
     </script>
 </body>
