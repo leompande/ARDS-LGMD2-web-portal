@@ -65,11 +65,10 @@ public class UnHideDocumentAction
     public String execute()
             throws Exception
     {
-        String inserQuery = "UPDATE cms_files SET status = 'disabled'  WHERE id = ?";
+        String inserQuery = "UPDATE cms_files SET status = 'enabled'  WHERE id = ?";
         jdbcTemplate = new JdbcTemplate(dataSource);
         int[] types = {Types.BIGINT};
         jdbcTemplate.update(inserQuery, new Object[] {this.getDocid()},types);
-
         return SUCCESS;
     }
 }

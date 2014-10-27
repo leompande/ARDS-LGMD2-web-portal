@@ -260,7 +260,7 @@
         </ul>
 
         <div class="tab-content" id="content">
-            <div class="col-md-12 " style="margin:3px;">
+            <div class="row " style="margin:3px;">
                 <div class="btn-group  pull-left" >
                     <a class="btn btn-default btn-sm new_article" id="new_article" title="Add New" ><i class="fa fa-plus"></i>&nbsp;Add New</a>
                 </div>

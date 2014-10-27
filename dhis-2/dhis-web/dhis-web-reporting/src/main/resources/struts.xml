@@ -13,7 +13,9 @@
       <param name="page">/dhis-web-reporting/index.vm</param>
       <param name="menu">/dhis-web-reporting/menu.vm</param>
     </action>
-    
+      <action name="listDocuments" class="org.hisp.dhis.dashboard.action.DocsDatabaseAction">
+          <result name="success" type="velocity-json">/dhis-web-dashboard-integration/docs.vm</result>
+      </action>
     <!-- Document -->
 
     <action name="saveDocument" class="org.hisp.dhis.reporting.document.action.SaveDocumentAction">

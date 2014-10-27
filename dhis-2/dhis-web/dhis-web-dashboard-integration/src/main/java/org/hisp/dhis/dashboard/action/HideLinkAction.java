@@ -65,7 +65,7 @@ public class HideLinkAction
     public String execute()
             throws Exception
     {
-        System.out.println(this.getLinkid());
+
         String inserQuery = "UPDATE cms_other_links SET status = 'disabled'  WHERE id = ?";
         jdbcTemplate = new JdbcTemplate(dataSource);
         int[] types = {Types.BIGINT};

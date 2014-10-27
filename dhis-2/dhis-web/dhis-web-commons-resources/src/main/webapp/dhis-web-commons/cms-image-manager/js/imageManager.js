@@ -3,10 +3,9 @@ $(document).ready(function(){
     $("#manage_images").on("click",function(){
 
         $.ajax({
-            url: "listImages.action",
+            url: "/api/documents.json",
             dataType: 'json'
-        }).done(function(response) {
-
+        }).done(function(data) {
             // menu displays
             Image_grid = "<div class='row' id='menu_container'>";
             Image_grid +="<div class='btn-group'>";
@@ -23,38 +22,37 @@ $(document).ready(function(){
 
             ///image displays
             Image_grid += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table'>";
-            Image_grid += "<tr>";
-            var rowCounter = 0;
-            /// assign new row
-            for(var tdCounter=0;tdCounter<response.length;tdCounter++){
-                if( rowCounter>4){
-                    rowCounter = 0;
-                    Image_grid += "</tr>";
-                    Image_grid += "<tr>";
-                }else{
 
-                    Image_grid += "<td>";
-                    Image_grid += "<div class='col-xs-3 col-md-2 "+response[tdCounter].status+"'>";
-                    Image_grid += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img class='thumbnail ' src='slideshowImages/"+response[tdCounter].file_name+"'/></a>";
-                    Image_grid += "<span class='btn-group ' style='width:133px;'>";
-                    Image_grid += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+response[tdCounter].id+"'><i class='fa fa-times'></i></a>";
-                    if(response[tdCounter].status ==="disabled" || $("#"+response[tdCounter].id).parent().parent().attr("class")==="disabled"){
-                        Image_grid += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='"+response[tdCounter].id+"'><i class='fa fa-lock'></i></a>";
+            var tdCounter = 0;
+            $.each(data.documents,function(index,val){
+                if(val['name']==="image"){
+                    if(tdCounter>4){
 
+                        Image_grid += "</tr>";
+                        Image_grid += "<tr>";
                     }else{
-                        Image_grid += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+response[tdCounter].id+"'><i class='fa fa-lock'></i></a>";
+                        Image_grid += "<td>";
+                        Image_grid += "<a>";
+                        Image_grid += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img class='thumbnail ' src='"+val['href']+"/data'/></a>";
+                        Image_grid += "</a>";
+                        Image_grid += "<span class='btn-group ' style='width:133px;'>";
+                        Image_grid += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
+                        if(val['id'] ==="disabled" || $("#"+val['id']).parent().parent().attr("class")==="disabled"){
+                            Image_grid += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
 
+                        }else{
+                            Image_grid += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
+
+                        }
+                        Image_grid += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
+                        Image_grid += "</span></br>";
+                        Image_grid += "<td>";
+                        tdCounter++;
                     }
-                    Image_grid += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+response[tdCounter].id+"'><i class='fa fa-folder-open'></i></a>";
-                    Image_grid += "</span></br>";
-                    Image_grid += "<span style='font-style:italic;font-size:11px;'>Dimension("+response.length+")</span>";
-                    Image_grid += "</div>";
-                    Image_grid += "</td>";
-
-                    rowCounter++;
 
                 }
-            }
+            });
+
             Image_grid += "</table></div>";
             $(".Image-manager").html(Image_grid);
             $("#add_div").hide();

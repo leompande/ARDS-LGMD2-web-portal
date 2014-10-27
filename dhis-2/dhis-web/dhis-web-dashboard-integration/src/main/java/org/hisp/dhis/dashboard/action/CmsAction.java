@@ -301,7 +301,7 @@ public class CmsAction
         docs = new ArrayList<Collection> (  );
 
 
-        SqlRowSet doc_rows = jt.queryForRowSet("SELECT * FROM cms_files WHERE file_type='document'");
+        SqlRowSet doc_rows = jt.queryForRowSet("SELECT * FROM cms_files WHERE file_type='doc'");
 
         while (doc_rows.next()) {
 

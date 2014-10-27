@@ -190,10 +190,13 @@
                 </div>
                 <div id="collapseTwo"  class="panel-collapse collapse in">
                     <div class="panel-body" id="contextMenu">
-                        <table class="table">
+                        <table class="table cms_document">
 
                         </table>
+                        <a class="btn btn-sm btn-warning form-control" id="hidden_docs">Hidden Documents</a>
+                        <table class="table cms_hidden_document">
 
+                        </table>
                         </br>
 
                         <form id="documentForm" action="addDocs.action" method="post" enctype="multipart/form-data" class="inputForm">
