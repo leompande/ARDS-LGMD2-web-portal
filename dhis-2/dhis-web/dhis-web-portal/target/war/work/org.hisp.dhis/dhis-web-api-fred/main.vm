@@ -3,148 +3,21 @@
 <!--[if IE 8]><html #if( $manifest ) manifest="$manifest" #end class="ie8"><![endif]-->
 <!--[if IE 9]><html #if( $manifest ) manifest="$manifest" #end class="ie9"><![endif]-->
 <!--[if !IE]><html #if( $manifest ) manifest="$manifest" #end><![endif]-->
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     #parse( "header.vm" )
     #header()
-##<head>
-##    <meta charset="utf-8">
-##    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-##    <meta name="viewport" content="width=device-width, initial-scale=1">
-##    <title>$encoder.htmlEncode( $applicationTitle )</title>
-##    <meta name="description" content="DHIS 2">
-##    <meta name="keywords" content="DHIS 2">
-##    <!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"-->
-##    <link type="text/css" rel="stylesheet" href="../dhis-web-commons/font-awesome/css/font-awesome.min.css?_rev=$!{buildRevision}" />
-##    <link type="text/css" rel="stylesheet" media="screen" href="../dhis-web-commons/javascripts/jQuery/ui/css/redmond/jquery-ui-1.9.1.custom.css?_rev=$!{buildRevision}" />
-##    <link type="text/css" rel="stylesheet" media="screen,print" href="../dhis-web-commons/css/${stylesheet}?_rev=$!{buildRevision}" />
-##    <link type="text/css" rel="stylesheet" media="screen,print" href="../dhis-web-commons/css/widgets.css?_rev=$!{buildRevision}" />
-##    <link type="text/css" rel="stylesheet" media="print" href="../dhis-web-commons/css/print.css?_rev=$!{buildRevision}" />
-##
-##    <link href="../dhis-web-commons/bootstrap3/css/bootstrap.css?_rev=$!{buildRevision}" rel="stylesheet">
-##    <link href="../dhis-web-commons/bootstrap3/css/bootstrap-theme.css?_rev=$!{buildRevision}" rel="stylesheet">
-##    <link href="../dhis-web-commons/font-awesome4/css/font-awesome.css?_rev=$!{buildRevision}" rel="stylesheet">
-##    <link href="../dhis-web-commons/css/sliderman.css" rel="stylesheet">
-##    <link href="../dhis-web-commons/css/style.css" rel="stylesheet">
-##    #foreach ( $style in $stylesheets )
-##        <link type="text/css" rel="stylesheet" href="${style}?_rev=$!{buildRevision}">
-##    #end
-##    <link rel="shortcut icon" href="../favicon.ico" />
-##
-##    <script type="text/javascript">
-##        var dateFormat = 'yy-mm-dd';
-##    </script>
-##
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-shim.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js?_rev=$!{buildRevision}"></script>
-##
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
-##    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js?_rev=$!{buildRevision}"></script>
-##    <script src="../dhis-web-commons/javascripts/sliderman.js"></script>
-##    <!--link href="styles.css" rel="stylesheet">
-##      <link href="http://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet" type="text/css">
-##    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-##    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-##    <!--[if lt IE 9]>
-##    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-##    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-##    <![endif]-->
-##    <style>
-##        .leftmenu{
-##            font-size: 0.9em;
-##        }
-##
-##        a.overwrite:focus{
-##            background-color:#447148!important;
-##        }
-##        html,
-##        body {
-##            margin:0;
-##            padding:0;
-##            height:100%;
-##        }
-##        .container-fluid {
-##            min-height:100%;
-##            position:relative;
-##        }
-##
-##        .page-wrap {
-##            padding-bottom:40px; /* Height of the footer element */
-##        }
-##        .site-footer {
-##            background:#457B49;
-##            height:40px;
-##            width: 100%;
-##            position:absolute;
-##            bottom:0;
-##            left:0;
-##        }
-##    </style>
-##
-##
-##
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-shim.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js?_rev=$!{buildRevision}"></script>
-##
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.min.js?_rev=$!{buildRevision}"></script>
-##    <!--[if lte IE 8]><script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/placeholders.jquery.min.js?_rev=$!{buildRevision}"></script><![endif]-->
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.utils.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.ext.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.metadata.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.tablesorter.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.upload-1.0.2.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.dhisAjaxSelect.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/ui/jquery-ui-1.9.1.custom.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/ui/jquery.blockUI.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.validate.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.validate.ext.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.cookie.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.glob.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.date.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.tmpl.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.autogrow.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/underscore.min.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.util.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/commons.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/commons.ajax.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/lists.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/periodType.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/date.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/json2.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/validationRules.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.array.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.select.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.comparator.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.availability.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.trigger.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.sharing.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.ss.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.ls.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.idb.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.memory.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.storage.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.contextmenu.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/dhis2/dhis2.appcache.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../dhis-web-commons/i18nJavaScript.action?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../main.js?_rev=$!{buildRevision}"></script>
-##    <script type="text/javascript" src="../request.js?_rev=$!{buildRevision}"></script>
-##    #foreach( $javascript in $javascripts )
-##        <script type="text/javascript" src="${javascript}?_rev=$!{buildRevision}"></script>
-##    #end
-##    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-##
-##</head>
 <body><!--style="background-image: url(../dhis-web-commons/css/portalImages/body-bg.png); font-family: Maven Pro;"-->
     #parse( "macros.vm" )
 <!--BOOTSTRAP HEADER-->
 <style>
     .dropdown-menu > li > a{
-    //color:#ffffff!important;
+    //  color:#ffffff!important;
     }
 </style>
 <div class="container-fluid">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
-    <div class="page-wrap">
+<div class="page-wrap">
         <div class="row">
             <div class="col-md-12">
 
@@ -164,24 +37,32 @@
                 <!-- end of meassage body-->
 
                 <!-- central bar-->
-                <div class="page col-md-9" id="mainPages"><!--mainPage--> <!-- Do not set style attr -->
-               <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
+                        <div class="page col-md-9" id="mainPages"><!--mainPage--> <!-- Do not set style attr -->
+                        <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
 
-                  <p>
+                        <p>
                         <div id="min"><a href="#" onclick="javascript:minSide()" title="hide menu"><img src="../images/hide_menu.png" width="16" height="16" /></a></div>
                         <div id="max" style="display:none"><a href="#" onclick="javascript:maxSide()" title="show menu"><img src="../images/extend_menu.png" width="16" height="16" /></a></div>
-                   </p>
+                        </p>
 
-                   </span>
-                    #if( !$page )
+                        </span>
+                        #if( !$page )
                         <p>$i18n.getString( "no_page_specified" )</p>
-                    #else
+                        #else
                         #parse( $page )
-                    #end
+                        #end
+
+          <div id="rightBar">
+          <span id="hideRightBar"><a href="javascript:hideHelpContent()" title="$i18n.getString( 'close' )">
+              <img id="hideRightBarImg" src="../images/hide.png" alt="$i18n.getString( 'close' )"/></a>
+          </span>
+          <div id="rightBarContents"/></div>
                 </div>
-            </div>
+        #googleAnalyticsUA()
         </div>
-        <div class="row">
+     </div>
+    </div>
+<div class="row">
             <footer class="site-footer" style="height:40px;">
                 <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:10px;margin: 0px;border-radius:0px">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -247,7 +128,7 @@
                 </nav>
             </footer>
         </div><!-- /.container-fluid -->
-    </div><!-- /.container-fluid -->
+    </div>
     <script type="text/javascript">
 
         var m  = 0;
@@ -255,18 +136,11 @@
         function minSide(){
             $('#min').hide('fast', function(){
                 $('#max').show();
+
             });
             if(m == 0){
-                $('#leftbarcontents').animate({
-                    direction: 'left',
-                    left: '-=270'
-                }, 800, function() {
-                    // Animation complete.
-                    $('#mainPages').css({
-                        marginLeft: -270,
-                        width:   1000
-                    })
-                });
+                $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
+                $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
             }
 
         }
@@ -275,18 +149,11 @@
 
             $('#max').hide('fast', function(){
                 $('#min').show();
-            });
-            $('#mainPages').css({
-                marginLeft: -67,
-                width:   1000
-            })
-            $('#leftbarcontents').animate({
-                left: '+=270'
-            }, 800, function() {
-                // Animation complete.
 
             });
-        }
+            $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
+            $( '#mainPages' ).css( 'margin-left', '' );
+          }
     </script>
 </body>
 </html>

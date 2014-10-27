@@ -85,7 +85,6 @@
 </div>
 <!-- navigation ends here-->
 #end
-
 #macro( leftMenu )
 <div class="col-md-2 hidden-sm hidden-xs" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
     <div id="left-Menu">
