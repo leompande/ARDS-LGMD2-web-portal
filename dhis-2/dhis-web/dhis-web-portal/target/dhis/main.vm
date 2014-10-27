@@ -6,6 +6,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
     #parse( "header.vm" )
     #header()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a282789af68ba114a6affaa0b276f6910acb8e0
 <body><!--style="background-image: url(../dhis-web-commons/css/portalImages/body-bg.png); font-family: Maven Pro;"-->
     #parse( "macros.vm" )
 <!--BOOTSTRAP HEADER-->
@@ -65,6 +69,7 @@
     </div>
 <div class="row">
             <footer class="site-footer" style="height:40px;">
+<<<<<<< HEAD
                 <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:0px;margin: 0px;border-radius:0px">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header" style="background-color:#457B49;">
@@ -127,6 +132,9 @@
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
+=======
+                #footerMenuBar()
+>>>>>>> 7a282789af68ba114a6affaa0b276f6910acb8e0
             </footer>
         </div><!-- /.container-fluid -->
     </div>

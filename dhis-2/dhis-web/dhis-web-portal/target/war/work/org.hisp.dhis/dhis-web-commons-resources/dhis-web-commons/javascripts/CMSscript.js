@@ -405,7 +405,8 @@ $(document).ready(function(){
                                 Doc_menu +='</a>';
                                 Doc_menu +='</li>';
 
-                                //cms left menu document
+                                //cms left menu
+
                                 Doc_menu_cms += '<li class="list-group-item">';
                                 Doc_menu_cms += '<p><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
                                 Doc_menu_cms += '<span class="fa fa-globe"></span>&nbsp;'+ val['name']+'</a>';
