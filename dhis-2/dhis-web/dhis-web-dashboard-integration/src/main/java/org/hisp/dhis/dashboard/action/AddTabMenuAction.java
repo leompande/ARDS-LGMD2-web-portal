@@ -39,6 +39,7 @@ public class AddTabMenuAction
 {
 
     private String menu;
+    private int order = 0;
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
 
@@ -49,6 +50,15 @@ public class AddTabMenuAction
     public String getMenu( )
     {
         return this.menu;
+    }
+
+    public void setOrder( int order )
+    {
+        this.order = order;
+    }
+    public int getOrder( )
+    {
+        return this.order;
     }
 
 
@@ -67,13 +77,24 @@ public class AddTabMenuAction
             throws Exception
     {
 
-        String inserQuery = "insert into cms_tabmenus (menu) values (?) ";
+        String inserQuery = "insert into cms_tabmenus (menu,preference_order) values (?,?) ";
         jdbcTemplate = new JdbcTemplate(dataSource);
         if(this.getMenu() == null || this.getMenu().isEmpty()){
 
         }else{
-
-            jdbcTemplate.update(inserQuery, new Object[] {this.getMenu()});
+            if(this.getMenu().equals("Agriculture")){
+                this.setOrder(1);
+            }
+            if(this.getMenu().equals("Livestock")){
+                this.setOrder(2);
+            }
+            if(this.getMenu().equals("Fisheries")){
+                this.setOrder(3);
+            }
+            if(this.getMenu().equals("Trade")){
+                this.setOrder(4);
+            }
+            jdbcTemplate.update(inserQuery, new Object[] {this.getMenu(),this.getOrder()});
 
         }
 

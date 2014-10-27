@@ -35,6 +35,24 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.Types;
 import javax.sql.DataSource;
 
+
+import org.apache.commons.io.IOUtils;
+import org.hisp.dhis.api.utils.ContextUtils;
+import org.hisp.dhis.api.utils.ContextUtils.CacheStrategy;
+import org.hisp.dhis.document.Document;
+import org.hisp.dhis.document.DocumentService;
+import org.hisp.dhis.external.location.LocationManager;
+import org.hisp.dhis.external.location.LocationManagerException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+
+
 public class DeleteDocumentAction
         implements Action
 {

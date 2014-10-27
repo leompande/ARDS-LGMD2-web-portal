@@ -213,7 +213,7 @@
                             <div class="form-group">
                                 <input type="hidden" id="upload" name="external" value="false" >
                             </div>
-                            <input type="submit" value="Add Document" class="btn btn-success btn-sm" >
+                            <input type="submit" value="Add Document" class="btn btn-success btn-sm form-control" >
 
                         </form>
 
@@ -291,7 +291,7 @@
                                 <label for="add-link">Url/Link</label>
                                 <input type="text" name="linkUrl" class="form-control" id="add-link" placeholder="Url/Link eg. http://www.example.com">
                             </div>
-                            <button class="btn btn-success btn-sm">Add Other link</button>
+                            <button class="btn btn-success btn-sm form-control">Add Other link</button>
                         </form>
                         <p id="link"></p>
                     </div>
