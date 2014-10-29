@@ -65,6 +65,11 @@
             <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
             <!--<param name="javascripts">javascript/usergroup.js</param>-->
         </action>
+        <action name="unHideDocument" class="org.hisp.dhis.dashboard.action.UnHideDocumentAction">
+            <result name="success" type="velocity">/mainHome.vm</result>
+            <param name="page">/dhis-web-dashboard-integration/cms.vm</param>
+            <!--<param name="javascripts">javascript/usergroup.js</param>-->
+        </action>
         <action name="removeHtml" class="org.hisp.dhis.dashboard.action.RemoveHtmlAction">
             <result name="success" type="velocity">/mainHome.vm</result>
             <param name="page">/dhis-web-dashboard-integration/cms.vm</param>

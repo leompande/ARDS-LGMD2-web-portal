@@ -66,7 +66,7 @@ public class HideDocumentAction
             throws Exception
     {
 
-        String updateQuery = "UPDATE cms_files SET status = 'disabled' WHERE id = ? AND file_type='document'";
+        String updateQuery = "UPDATE cms_files SET status = 'disabled' WHERE id = ? AND file_type='doc'";
         jdbcTemplate = new JdbcTemplate(dataSource);
         int[] types = {Types.BIGINT};
         jdbcTemplate.update(updateQuery, new Object[] {this.getDocId()},types);

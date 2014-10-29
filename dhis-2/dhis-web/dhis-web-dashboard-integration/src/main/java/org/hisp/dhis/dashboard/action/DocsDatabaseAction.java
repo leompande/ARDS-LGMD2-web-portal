@@ -153,7 +153,7 @@ public class DocsDatabaseAction
         docCollection = new ArrayList<Collection> (  );
 
 
-        SqlRowSet doc_rows = jt.queryForRowSet("SELECT * FROM cms_files WHERE status='enabled'");
+        SqlRowSet doc_rows = jt.queryForRowSet("SELECT * FROM cms_files ");
 
         while (doc_rows.next()) {
 

@@ -53,7 +53,7 @@
             <a class="btn btn-default btn-sm manage_articles" id="manage_articles" title="Manage Articles" ><i class="fa fa-file-text-o"></i></a>
             <a class="btn btn-default btn-sm manage_articles_menus" id="manage_articles_menus" title="Manage Article Menus" ><i class="fa fa-list"></i></a>
             <a class="btn btn-default btn-sm manage_images" id="manage_images" title="Manage Images" ><i class="fa fa-picture-o"></i></a>
-            <a class="btn btn-default btn-sm manage_pages" id="manage_pages" title="Manage Pages" ><i class="fa fa-th-large"></i></a>
+            <a class="btn btn-default btn-sm manage_pages" id="manage_pages" title="Manage Information Sharing" ><i class="fa fa-th-large"></i></a>
         </div>
 
         <div class="btn-group  pull-right" id="page_switcher">
@@ -91,8 +91,8 @@
                 </form>
                 <div class="row display_article_for_cms" style="font-family: LiberationSansRegular, arial, sans-serif">
                     <div id="article_main_title">
-                        <div class="col-md-10 col-md-offset-1 pull-left" style="text-align: center;">
-                            <h3>ARDS-LGMD2 ARTICLES</h3>
+                        <div class="col-md-10  pull-left" >
+                            <h3>ARDS-LGMD2 INFORMATION SHARING</h3>
                         </div>
 
                     </div>
@@ -260,7 +260,7 @@
         </ul>
 
         <div class="tab-content" id="content">
-            <div class="col-md-12 " style="margin:3px;">
+            <div class="row " style="margin:3px;">
                 <div class="btn-group  pull-left" >
                     <a class="btn btn-default btn-sm new_article" id="new_article" title="Add New" ><i class="fa fa-plus"></i>&nbsp;Add New</a>
                 </div>
