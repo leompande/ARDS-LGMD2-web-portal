@@ -6,10 +6,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
     #parse( "header.vm" )
     #header()
-<<<<<<< HEAD
-
-=======
->>>>>>> 9fdcba75e4da1d8e499f7eb9aa9a16e50e6ff54e
 <body><!--style="background-image: url(../dhis-web-commons/css/portalImages/body-bg.png); font-family: Maven Pro;"-->
     #parse( "macros.vm" )
 <!--BOOTSTRAP HEADER-->
@@ -69,8 +65,8 @@
     </div>
 <div class="row">
             <footer class="site-footer" style="height:40px;">
-<<<<<<< HEAD
                 #footerMenuBar()
+<<<<<<< HEAD
 =======
                 <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:0px;margin: 0px;border-radius:0px">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -136,17 +132,29 @@
                     </div><!-- /.navbar-collapse -->
                 </nav>
 >>>>>>> 9fdcba75e4da1d8e499f7eb9aa9a16e50e6ff54e
+=======
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
             </footer>
         </div><!-- /.container-fluid -->
     </div>
 
 <script type="text/javascript">
 
+<<<<<<< HEAD
     var m  = 0;
     var mx = 0;
     function minSide(){
         $('#min').hide('fast', function(){
             $('#max').show();
+=======
+            });
+            if(m == 0){
+                $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
+                $( '#mainPages' ).animate({ direction: 'right', marginLeft: '0px', duration: 200 });
+                $( '#mainPages').removeClass("col-md-10");
+                $( '#mainPages').addClass("col-md-12");
+            }
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
 
         });
         if(m == 0){
@@ -160,6 +168,7 @@
 
     function maxSide(){
 
+<<<<<<< HEAD
         $('#max').hide('fast', function(){
             $('#min').show();
 
@@ -170,5 +179,14 @@
         $( '#mainPages' ).addClass("col-md-10");
     }
 </script>
+=======
+            });
+            $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
+            $( '#mainPages' ).css( 'margin-left', '' );
+            $( '#mainPages').removeClass("col-md-12");
+            $( '#mainPages').addClass("col-md-10");
+          }
+    </script>
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
 </body>
 </html>

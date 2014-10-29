@@ -20,12 +20,7 @@
     <div class="page-wrap" style="padding-bottom: 40px;">
         <div class="row">
             <div class="col-md-12">
-<<<<<<< HEAD
-
                 <!-- Message body area-->
-=======
-               <!-- Message body area-->
->>>>>>> 9fdcba75e4da1d8e499f7eb9aa9a16e50e6ff54e
                 <div id="headerMessage" class="bold"></div>
                 <!-- end of meassage body-->
 
@@ -55,10 +50,10 @@
                 </div>
 =======
         <div class="row">
-<<<<<<< HEAD
             #footerMenuBar()
         </div>
     </div>
+<<<<<<< HEAD
 =======
             <footer class="site-footer" style="height:40px;">
                 <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:10px;margin: 0px;border-radius:0px">
@@ -126,6 +121,8 @@
     </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 >>>>>>> 9fdcba75e4da1d8e499f7eb9aa9a16e50e6ff54e
+=======
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
     <script type="text/javascript">
 
         var m  = 0;
@@ -138,8 +135,13 @@
             if(m == 0){
                 $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
                 $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
+<<<<<<< HEAD
                 $( '#mainPages' ).removeClass("col-md-10");
                 $( '#mainPages' ).addClass("col-md-12");
+=======
+                $( '#mainPages').removeClass("col-md-10");
+                $( '#mainPages').addClass("col-md-12");
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
             }
 
         }
@@ -149,11 +151,17 @@
             $('#max').hide('fast', function(){
                 $('#min').show();
 
+
             });
             $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
             $( '#mainPages' ).css( 'margin-left', '' );
+<<<<<<< HEAD
             $( '#mainPages' ).removeClass("col-md-12");
             $( '#mainPages' ).addClass("col-md-10");
+=======
+            $( '#mainPages').removeClass("col-md-12");
+            $( '#mainPages').addClass("col-md-10");
+>>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
         }
     </script>
 </body>
