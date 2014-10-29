@@ -7,7 +7,7 @@ jQuery( document ).ready( function() {
 <div class="panel-group" id="accordion">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h4 class="panel-title">
+                <h4 class="panel-title" style="padding: 0px 0px!important;">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="parent_menu">
                         Data Analysis
                     </a>

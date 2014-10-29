@@ -90,24 +90,6 @@
             </div>
         </div>
         <div class="row" id="content_to_hide">
-<<<<<<< HEAD
-
-         <div class="col-md-12">
-           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src='../dhis-web-commons/analysis/data3.jpg' style="height: 400px; width: 100%" class="img-responsive">
-                        <div class="carousel-caption">
-                            ...
-=======
             <div class="col-md-12">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -125,7 +107,6 @@
                             <div class="carousel-caption">
                                 ...
                             </div>
->>>>>>> 8cd4b8fccdd91674890261472b6408b91721e385
                         </div>
                         <div class="item">
                             <img src='../dhis-web-commons/analysis/data4.jpg' style="height: 400px; width: 100%" class="img-responsive">
@@ -160,12 +141,7 @@
 
                 </div>
             </div>
-<<<<<<< HEAD
-          </div>
-
-=======
         </div>
->>>>>>> 8cd4b8fccdd91674890261472b6408b91721e385
     </div>
 </div>
 

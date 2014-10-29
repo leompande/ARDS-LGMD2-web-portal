@@ -7,7 +7,7 @@
     </li>
     <li class="introItem" onclick="window.location.href='displayViewReportForm.action'">
         <img src="../icons/reportingratesummary.png" class="introIcon">
-        <div class="introItemText"><div class="introItemHeader">Custome Report</div><div>View and add reports based on the JasperReports library. These can be based on report tables and can be designed in iReport.</div></div>
+        <div class="introItemText"><div class="introItemHeader">Custom Report</div><div>View and add reports based on the JasperReports library. These can be based on report tables and can be designed in iReport.</div></div>
     </li>
     #introListImgItem( "displayViewDataCompletenessForm.action" "reporting_rate_summary" "reportingratesummary" )
 </ul>

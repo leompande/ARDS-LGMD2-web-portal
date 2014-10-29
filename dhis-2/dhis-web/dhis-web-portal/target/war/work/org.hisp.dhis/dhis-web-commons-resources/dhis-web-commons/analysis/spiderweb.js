@@ -61,7 +61,6 @@ function drawSpider(title,url,category,dataArray){
         //creating series
         var series_to_use = (category == 'pe')?period_series:orgunit_series
         var title_to_use = (category == 'pe')?orgunit_series:period_series
-        console.log(data_series);
         $('#mainarea').highcharts({
 
             chart: {

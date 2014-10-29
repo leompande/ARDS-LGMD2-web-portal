@@ -86,7 +86,7 @@
 <!-- navigation ends here-->
 #end
 #macro( leftMenu )
-<div class="col-md-2 hidden-sm hidden-xs" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
+<div class="col-md-2" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
     <div id="left-Menu">
         <div class="panel-group" id="accordion">
             <div class="panel panel-success">
@@ -158,7 +158,7 @@
     </div>
 </div>
 #end#macro( cmsLeftMenu )
-<div class="col-md-2 hidden-sm hidden-xs" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
+<div class="col-md-2" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
     <div id="left-Menu">
         <div class="panel-group" id="accordion">
             <div class="panel panel-success">

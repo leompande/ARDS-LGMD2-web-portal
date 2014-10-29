@@ -72,6 +72,7 @@
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
                         </button>
                     </div>
 
@@ -131,31 +132,35 @@
         </div><!-- /.container-fluid -->
     </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var m  = 0;
-        var mx = 0;
-        function minSide(){
-            $('#min').hide('fast', function(){
-                $('#max').show();
+    var m  = 0;
+    var mx = 0;
+    function minSide(){
+        $('#min').hide('fast', function(){
+            $('#max').show();
 
-            });
-            if(m == 0){
-                $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
-                $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
-            }
-
+        });
+        if(m == 0){
+            $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
+            $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
+            $( '#mainPages' ).removeClass("col-md-10");
+            $( '#mainPages' ).addClass("col-md-12");
         }
 
-        function maxSide(){
+    }
 
-            $('#max').hide('fast', function(){
-                $('#min').show();
+    function maxSide(){
 
-            });
-            $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
-            $( '#mainPages' ).css( 'margin-left', '' );
-          }
-    </script>
+        $('#max').hide('fast', function(){
+            $('#min').show();
+
+        });
+        $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
+        $( '#mainPages' ).css( 'margin-left', '' );
+        $( '#mainPages' ).removeClass("col-md-12");
+        $( '#mainPages' ).addClass("col-md-10");
+    }
+</script>
 </body>
 </html>

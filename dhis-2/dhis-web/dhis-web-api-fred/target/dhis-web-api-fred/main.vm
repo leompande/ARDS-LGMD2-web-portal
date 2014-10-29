@@ -14,7 +14,7 @@
     //  color:#ffffff!important;
     }
 </style>
-<div class="container-fluid">
+<div class="container-fluid" id="wrapper">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
 <div class="page-wrap">
@@ -37,9 +37,9 @@
                 <!-- end of meassage body-->
 
                 <!-- central bar-->
+                     <div id="page-content-wrapper">
                         <div class="page col-md-9" id="mainPages"><!--mainPage--> <!-- Do not set style attr -->
                         <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
-
                         <p>
                         <div id="min"><a href="#" onclick="javascript:minSide()" title="hide menu"><img src="../images/hide_menu.png" width="16" height="16" /></a></div>
                         <div id="max" style="display:none"><a href="#" onclick="javascript:maxSide()" title="show menu"><img src="../images/extend_menu.png" width="16" height="16" /></a></div>
@@ -59,16 +59,18 @@
           <div id="rightBarContents"/></div>
                 </div>
         #googleAnalyticsUA()
+             </div>
         </div>
      </div>
     </div>
 <div class="row">
             <footer class="site-footer" style="height:40px;">
-                <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:10px;margin: 0px;border-radius:0px">
+                <nav class="navbar navbar-inverse" role="navigation" style="min-height:40px!important;padding-top:0px;margin: 0px;border-radius:0px">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header" style="background-color:#457B49;">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
                             <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
@@ -78,7 +80,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                         <ul class="nav navbar-nav" style="background-color:#457B49;">
                             <li class="dropup" style="border-right: solid 1px #888">
-                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:30px!important;margin-top:-10px;">
+                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:40px!important;margin-top:-10px;">
                                     Related Links
                                     <span class="caret"></span>
                                 </a>
@@ -92,7 +94,7 @@
                             </li>
 
                             <li class="dropup " style="border-right: solid 1px #888">
-                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:30px!important;margin-top:-10px;background-color:;">
+                                <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:40px!important;margin-top:-10px;background-color:;">
                                     Downloads
                                     <span class="caret"></span>
                                 </a>
@@ -129,31 +131,36 @@
             </footer>
         </div><!-- /.container-fluid -->
     </div>
-    <script type="text/javascript">
 
-        var m  = 0;
-        var mx = 0;
-        function minSide(){
-            $('#min').hide('fast', function(){
-                $('#max').show();
+<script type="text/javascript">
 
-            });
-            if(m == 0){
-                $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
-                $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
-            }
+    var m  = 0;
+    var mx = 0;
+    function minSide(){
+        $('#min').hide('fast', function(){
+            $('#max').show();
 
+        });
+        if(m == 0){
+            $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
+            $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
+            $( '#mainPages' ).removeClass("col-md-10");
+            $( '#mainPages' ).addClass("col-md-12");
         }
 
-        function maxSide(){
+    }
 
-            $('#max').hide('fast', function(){
-                $('#min').show();
+    function maxSide(){
 
-            });
-            $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
-            $( '#mainPages' ).css( 'margin-left', '' );
-          }
-    </script>
+        $('#max').hide('fast', function(){
+            $('#min').show();
+
+        });
+        $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
+        $( '#mainPages' ).css( 'margin-left', '' );
+        $( '#mainPages' ).removeClass("col-md-12");
+        $( '#mainPages' ).addClass("col-md-10");
+    }
+</script>
 </body>
 </html>
