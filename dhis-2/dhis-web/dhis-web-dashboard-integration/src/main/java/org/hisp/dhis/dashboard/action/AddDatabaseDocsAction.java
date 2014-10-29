@@ -73,9 +73,12 @@ public class AddDatabaseDocsAction
         System.out.println(docname);
         String inserQuery = "INSERT INTO cms_files (file_type,file_name,status) VALUES(?,?,?)";
         int[] types = {Types.VARCHAR,Types.VARCHAR,Types.VARCHAR};
+        String myDelimiter = "_";
+        String [] name = this.docname.split("\\Q"+myDelimiter);
+        System.out.println(name[0]);
+        if (name[0] == "image") {
 
-        if (this.docname == "image") {
-            jdbcTemplate.update(inserQuery, new Object[] {this.docname,this.docname,"enabled"});
+            jdbcTemplate.update(inserQuery, new Object[] {"image",this.docname,"enabled"});
             }else{
                 jdbcTemplate.update(inserQuery, new Object[] {"doc",this.docname,"enabled"});
             }
