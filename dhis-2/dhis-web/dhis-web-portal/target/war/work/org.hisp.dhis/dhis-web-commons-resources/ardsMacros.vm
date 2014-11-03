@@ -385,7 +385,7 @@
                     <a href="#" style="color:#ffffff!important;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;$encoder.htmlEncode( $currentUser.name )<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
-                        <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;<!--i18n.getString( "help" )-->Help Center</a></li>
+                        <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;Help Center</a></li>
                         <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
                         <li><a style="color:#ffffff!important;" href="../dhis-web-commons-about/showUpdateUserAccountForm.action"><i class="fa fa-lock"></i>&nbsp;Change Password</a></li>
                         <li class="divider"></li>

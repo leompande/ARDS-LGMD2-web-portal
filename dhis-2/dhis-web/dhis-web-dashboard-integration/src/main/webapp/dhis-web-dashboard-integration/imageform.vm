@@ -47,17 +47,6 @@
 
             }
 
-//            e.preventDefault();
-//            ///// process docs
-//                $.ajax({
-//                    type: "POST",
-//                    url: 'uploadImage.action',
-//                    data: "",
-//                    success: function(){
-////                        window.location.replace("cms.action");
-//                    }
-//
-//                });
         });
 
 

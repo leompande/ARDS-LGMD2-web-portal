@@ -43,8 +43,8 @@
     <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-shim.min.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js"></script>
 
-##    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
-##    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
+    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js"></script>
 
 ##    <script src="../dhis-web-commons/bootstrap/js/js/bootstrap.min.js"></script>
 ##    <script src="../dhis-web-commons/bootstrap/js/js/jquery-1.11.0.js"></script>

@@ -237,8 +237,11 @@
 
 <div class="row" id="Slide_manager_pane">
     <div class="row" >
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12 ">
             <h3>Managing Slide Show Images </h3>
+        </div>
+        <div class=" col-md-12" id="upload_image_div">
+            <a class='btn btn-default btn-sm' id='upload_image_file' data-toggle='modal' data-target='' title='upload image'><i class='fa fa-picture-o'></i> &nbsp;Upload Image</a>
         </div>
     </div>
     <div class="col-md-12 Image-manager well"></div>

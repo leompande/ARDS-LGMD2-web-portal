@@ -1,5 +1,19 @@
 
 $(document).ready(function(){
+    var ImagesArray = new Array();
+    (function(){
+        $.getJSON("listDocuments.action",function( data ){
+
+            $.each(data,function(index,vals){
+                var fname = vals.file_name.split("_");
+                if(fname[0]=="image"){
+                    ImagesArray[vals.file_name] = vals.status;
+                }
+            });
+
+        });
+    })();
+
     $("#manage_images").on("click",function(){
         $("div#upload_image_div a#upload_image_file").on("click",function(){
                 $(this).attr("data-target","#myModal");
@@ -12,16 +26,7 @@ $(document).ready(function(){
             dataType: 'json'
         }).done(function(data) {
             //fetch from database the list of images
-            $.getJSON("listDocuments.action",function( data ){
 
-                $.each(data,function(index,vals){
-                    var fname = vals.file_name.split("_");
-                    if(fname[0]=="image"){
-                        console.log("abc");
-                    }
-                });
-
-            });
             // menu displays
             var Display_Image = "";
             var Hidden_Image  = "";
@@ -41,29 +46,32 @@ $(document).ready(function(){
             ///image displays
             Display_Image += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table_display'>";
             Hidden_Image += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table_hidden'>";
+            Display_Image += "<tr>";
+            Hidden_Image += "<tr>";
 
             var tdCounter = 1;
             $.each(data.documents,function(index,val){
                 var image_name = val['name'].split("_");
                 if(image_name[0]==="image"){
-                    console.log(image_name[0]);
-                    if(tdCounter==4){
+                    if(tdCounter===4){
                         tdCounter=1;
-                        if(val['id'] === "enabled"){
+                        if(ImagesArray[val['name']] === "enabled"){
                             Display_Image += "<td>";
                             Display_Image += "<a>";
                             Display_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img style='width:145;height:100px;' class='thumbnail ' src='"+val['href']+"/data'/></a>";
                             Display_Image += "</a>";
                             Display_Image += "<span class='btn-group ' style='width:133px;'>";
                             Display_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
-                            Display_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
+                            Display_Image += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
 
 
                             Display_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
                             Display_Image += "</span></br>";
                             Display_Image += "</td>";
+                            Display_Image += "</tr>";
+                            Display_Image += "<tr>";
                         }
-                        if(val['id'] ==="disabled") {
+                        if(ImagesArray[val['name']] ==="disabled") {
 
                             Hidden_Image += "<td>";
                             Hidden_Image += "<a>";
@@ -71,30 +79,30 @@ $(document).ready(function(){
                             Hidden_Image += "</a>";
                             Hidden_Image += "<span class='btn-group ' style='width:133px;'>";
                             Hidden_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='" + val['id'] + "'><i class='fa fa-times'></i></a>";
-                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-lock'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-unlock'></i></a>";
                             Hidden_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='" + val['id'] + "'><i class='fa fa-folder-open'></i></a>";
                             Hidden_Image += "</span></br>";
                             Hidden_Image += "</td>";
+                            Hidden_Image += "</tr>";
+                            Hidden_Image += "<tr>";
 
                         }
-
-                        tdCounter++;
                     }else{
-                        if(val['id'] === "enabled"){
+                        if(ImagesArray[val['name']] === "enabled"){
                         Display_Image += "<td>";
                         Display_Image += "<a>";
                         Display_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img style='width:145;height:100px;' class='thumbnail ' src='"+val['href']+"/data'/></a>";
                         Display_Image += "</a>";
                         Display_Image += "<span class='btn-group ' style='width:133px;'>";
                         Display_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
-                            Display_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
+                        Display_Image += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
 
 
                         Display_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
                         Display_Image += "</span></br>";
                         Display_Image += "</td>";
                         }
-                        if(val['id'] ==="disabled") {
+                        if(ImagesArray[val['name']] ==="disabled") {
 
                             Hidden_Image += "<td>";
                             Hidden_Image += "<a>";
@@ -102,7 +110,7 @@ $(document).ready(function(){
                             Hidden_Image += "</a>";
                             Hidden_Image += "<span class='btn-group ' style='width:133px;'>";
                             Hidden_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='" + val['id'] + "'><i class='fa fa-times'></i></a>";
-                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-lock'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-unlock'></i></a>";
                             Hidden_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='" + val['id'] + "'><i class='fa fa-folder-open'></i></a>";
                             Hidden_Image += "</span></br>";
                             Hidden_Image += "</td>";
@@ -286,7 +294,6 @@ $(document).ready(function(){
                 },
                 open: function(event, ui) {
                     $("a.accept").on("click",function(){
-                        console.log("abc");
                         $.ajax({
                             type: "POST",
                             url:"hideImage.action",

@@ -348,6 +348,7 @@ $(document).ready(function(){
 
    ///////////// SLIDE SHOW////////////////////
 
+
     $.ajax({
         url: "../api/documents.json",
         dataType: 'json'
@@ -368,9 +369,7 @@ $(document).ready(function(){
                     demo3Effect4 = {name: 'myEffect34', left: true, move: true, duration: 400};
                     demo3Effect5 = {name: 'myEffect35', rows: 3, cols: 9, delay: 50, duration: 100, order: 'random', fade: true};
                     demo3Effect6 = {name: 'myEffect36', rows: 2, cols: 4, delay: 100, duration: 400, order: 'random', fade: true, chess: true};
-
                     effectsDemo3 = [demo3Effect1,demo3Effect2,demo3Effect3,demo3Effect4,demo3Effect5,demo3Effect6,'blinds'];
-
                     var demoSlider_3 = Sliderman.slider({container: 'SliderName_3', width: 210, height: 130, effects: effectsDemo3, display: {autoplay: 6000}});
 
                 });
@@ -460,7 +459,6 @@ $(document).ready(function(){
                                         $.post("deleteDocument.action","docId="+ary[1])
                                             .done(function() {
                                                 $( "#dialog" ).dialog( "close" );
-                                                console.log($("a#"+unique_id).html());
                                                 $("a#"+unique_id).parent("p").parent("li").remove();
 //                                                location.reload(true);
                                             })
@@ -506,8 +504,6 @@ $(document).ready(function(){
                                                 alert("not deleted");
                                             });
 
-
-
                                     });
 
                                     $("#no").click(function(){
@@ -518,7 +514,6 @@ $(document).ready(function(){
                         });
                     });
                     $(".hide_document").on("click",function(e){
-                        alert("hiding")
                         e.preventDefault();
                         var unique_id = $(this).attr("id");
                         var ary = unique_id.split(",");
@@ -640,7 +635,6 @@ $(document).ready(function(){
         e.preventDefault();
         var selected = $(this).serialize();
         if ($(".favourite_charts option:selected").length>3){
-//            alert("maximum limit 3 favourites, "+$(".favourite_charts option:selected").length+" selected");
         }else if(!$(".favourite_charts option:selected").length){
             alert("No favourite selected");
         }else{
@@ -671,7 +665,6 @@ $(document).ready(function(){
         $("#creator").show("slow",function(){// show tinymcee creaor
             $("#output").html("");
             $('#add_item_form').on('submit', function(e) {
-
                 var data = CKEDITOR.instances.content_new.getData();
                 $("#imposter").val(data);
                 e.preventDefault();
@@ -781,21 +774,16 @@ $(document).ready(function(){
                             $( "#dialog" ).dialog( "close" );
                             $("div#"+ary[1]).hide("slow");
                             location.reload(true);
-
                         })
                         .fail(function() {
                             $("#output").html("<p style='color:red;'> failure </p>");
                         });
-
-
                 });
-
                 $("#no").click(function(){
                     $( "#dialog" ).dialog( "close" );
                 });
             }
         });
-
     });
     ///REMOVE
     $("a.remove_content").on("click",function(){
@@ -811,22 +799,16 @@ $(document).ready(function(){
             },
             open: function(event, ui) {
                 $("#yes").click(function(){
-
                     $.post("removeHtml.action","item="+ary[1])
                         .done(function() {
                             $( "#dialog" ).dialog("close");
                             $("div#"+ary[1]).hide("slow");
                             location.reload(true);
-
                         })
                         .fail(function() {
                             $("#output").html("<p style='color:red;'> failure </p>");
                         });
-
-
-
                 });
-
                 $("#no").click(function(){
                     $( "#dialog" ).dialog( "close" );
                 });

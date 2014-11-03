@@ -1,15 +1,38 @@
 
 $(document).ready(function(){
+    var ImagesArray = new Array();
+    (function(){
+        $.getJSON("listDocuments.action",function( data ){
+
+            $.each(data,function(index,vals){
+                var fname = vals.file_name.split("_");
+                if(fname[0]=="image"){
+                    ImagesArray[vals.file_name] = vals.status;
+                }
+            });
+
+        });
+    })();
+
     $("#manage_images").on("click",function(){
+        $("div#upload_image_div a#upload_image_file").on("click",function(){
+                $(this).attr("data-target","#myModal");
+                $("#myModal .modal-body").load("/dhis-web-dashboard-integration/imageform.vm").promise().done(function(){
+                });
+        });
 
         $.ajax({
             url: "/api/documents.json",
             dataType: 'json'
         }).done(function(data) {
+            //fetch from database the list of images
+
             // menu displays
+            var Display_Image = "";
+            var Hidden_Image  = "";
             Image_grid = "<div class='row' id='menu_container'>";
             Image_grid +="<div class='btn-group'>";
-            Image_grid +="<a class='btn btn-success btn-sm' id='upload_image_file' data-toggle='modal' data-target='' title='upload image'><i class='fa fa-picture-o'></i></a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='view_displayed_image_files' title='view displayed'><i class='fa fa-image'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='hide_all_image_files' title='hide all'><i class='fa fa-minus-circle'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='delete_all_image_files' title='delete all'><i class='fa fa-times-circle-o'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='hidden_image_files' title='hidden'><i class='fa fa-unlock-alt'></i></a>"
@@ -21,40 +44,104 @@ $(document).ready(function(){
             Image_grid +="</div>";
 
             ///image displays
-            Image_grid += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table'>";
+            Display_Image += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table_display'>";
+            Hidden_Image += "<div class='row' id='table_container' ><table class='col-md-10' id='image_table_hidden'>";
+            Display_Image += "<tr>";
+            Hidden_Image += "<tr>";
 
-            var tdCounter = 0;
+            var tdCounter = 1;
             $.each(data.documents,function(index,val){
-                if(val['name']==="image"){
-                    if(tdCounter>4){
+                var image_name = val['name'].split("_");
+                if(image_name[0]==="image"){
+                    if(tdCounter===4){
+                        tdCounter=1;
+                        if(ImagesArray[val['name']] === "enabled"){
+                            Display_Image += "<td>";
+                            Display_Image += "<a>";
+                            Display_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img style='width:145;height:100px;' class='thumbnail ' src='"+val['href']+"/data'/></a>";
+                            Display_Image += "</a>";
+                            Display_Image += "<span class='btn-group ' style='width:133px;'>";
+                            Display_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
+                            Display_Image += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
 
-                        Image_grid += "</tr>";
-                        Image_grid += "<tr>";
-                    }else{
-                        Image_grid += "<td>";
-                        Image_grid += "<a>";
-                        Image_grid += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img class='thumbnail ' src='"+val['href']+"/data'/></a>";
-                        Image_grid += "</a>";
-                        Image_grid += "<span class='btn-group ' style='width:133px;'>";
-                        Image_grid += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
-                        if(val['id'] ==="disabled" || $("#"+val['id']).parent().parent().attr("class")==="disabled"){
-                            Image_grid += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
 
-                        }else{
-                            Image_grid += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
+                            Display_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
+                            Display_Image += "</span></br>";
+                            Display_Image += "</td>";
+                            Display_Image += "</tr>";
+                            Display_Image += "<tr>";
+                        }
+                        if(ImagesArray[val['name']] ==="disabled") {
+
+                            Hidden_Image += "<td>";
+                            Hidden_Image += "<a>";
+                            Hidden_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img class='thumbnail ' style='width:145;height:100px;' src='" + val['href'] + "/data'/></a>";
+                            Hidden_Image += "</a>";
+                            Hidden_Image += "<span class='btn-group ' style='width:133px;'>";
+                            Hidden_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='" + val['id'] + "'><i class='fa fa-times'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-unlock'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='" + val['id'] + "'><i class='fa fa-folder-open'></i></a>";
+                            Hidden_Image += "</span></br>";
+                            Hidden_Image += "</td>";
+                            Hidden_Image += "</tr>";
+                            Hidden_Image += "<tr>";
 
                         }
-                        Image_grid += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
-                        Image_grid += "</span></br>";
-                        Image_grid += "<td>";
+                    }else{
+                        if(ImagesArray[val['name']] === "enabled"){
+                        Display_Image += "<td>";
+                        Display_Image += "<a>";
+                        Display_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img style='width:145;height:100px;' class='thumbnail ' src='"+val['href']+"/data'/></a>";
+                        Display_Image += "</a>";
+                        Display_Image += "<span class='btn-group ' style='width:133px;'>";
+                        Display_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='"+val['id']+"'><i class='fa fa-times'></i></a>";
+                        Display_Image += "<a class='btn btn-xs btn-warning hide-image-button' title='hide' id='"+val['id']+"'><i class='fa fa-lock'></i></a>";
+
+
+                        Display_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='"+val['id']+"'><i class='fa fa-folder-open'></i></a>";
+                        Display_Image += "</span></br>";
+                        Display_Image += "</td>";
+                        }
+                        if(ImagesArray[val['name']] ==="disabled") {
+
+                            Hidden_Image += "<td>";
+                            Hidden_Image += "<a>";
+                            Hidden_Image += "<a href='#' class=' preview-image-button' title='preview' data-toggle='modal' data-target=''><img class='thumbnail ' style='width:145;height:100px;' src='" + val['href'] + "/data'/></a>";
+                            Hidden_Image += "</a>";
+                            Hidden_Image += "<span class='btn-group ' style='width:133px;'>";
+                            Hidden_Image += "<a class='btn btn-xs btn-danger delete-image-button' title='delete' id='" + val['id'] + "'><i class='fa fa-times'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-default unhide-image-button' title='un hide' id='" + val['id'] + "'><i class='fa fa-unlock'></i></a>";
+                            Hidden_Image += "<a class='btn btn-xs btn-success preview-image-button' title='preview' data-toggle='modal' data-target='' id='" + val['id'] + "'><i class='fa fa-folder-open'></i></a>";
+                            Hidden_Image += "</span></br>";
+                            Hidden_Image += "</td>";
+
+                        }
+
                         tdCounter++;
                     }
 
                 }
             });
 
-            Image_grid += "</table></div>";
-            $(".Image-manager").html(Image_grid);
+            Display_Image += "</table></div>";
+            Hidden_Image += "</table></div>";
+            var Merged_display = Image_grid+Display_Image+Hidden_Image;
+            $(".Image-manager").html(Merged_display);
+            $("#image_table_hidden").hide();//hide all the hidden images
+            $("#view_displayed_image_files").on("click",function(){
+                $(".active").removeClass("active");
+                $(this).addClass("active");
+                $("#image_table_display").hide();
+                $("#image_table_hidden").hide();
+                $("#image_table_display").show();
+            });
+            $("#hidden_image_files").on("click",function(){
+                $(".active").removeClass("active");
+                $(this).addClass("active");
+                $("#image_table_hidden").hide();
+                $("#image_table_display").hide();
+                $("#image_table_hidden").show();
+            });
             $("#add_div").hide();
             $("#display_divs").hide().promise().done(function(){
                 $("#Slide_manager_pane").show("slow",function(){
@@ -207,7 +294,6 @@ $(document).ready(function(){
                 },
                 open: function(event, ui) {
                     $("a.accept").on("click",function(){
-                        console.log("abc");
                         $.ajax({
                             type: "POST",
                             url:"hideImage.action",

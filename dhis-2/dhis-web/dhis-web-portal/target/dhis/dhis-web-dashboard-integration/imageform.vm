@@ -1,9 +1,9 @@
-<form id="imageDocumentForm" action="uploadImage.action" method="post" enctype="multipart/form-data" class="inputForm">
+<form id="imageDocumentForm" action="addDocs.action" method="post" enctype="multipart/form-data" class="inputForm">
     <input type="hidden" id="id" name="id" value="">
 
     <div class="form-group">
         <!--label for="image_name">Picture Discription <em title="Required" class="required"></em></label-->
-        <input type="hidden" id="document_name" style="width:100% !important;" name="name" value="image" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
+        <input type="text" id="document_name" style="width:100% !important;" name="name" value="" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
     </div>
     <div class="form-group">
         <label for="add-link">Image File <em title="Required" class="required">*</em></label>
@@ -19,19 +19,40 @@
 
 <script>
     $(document).ready(function(){
+       var unique_imagename =  new Date().getUTCMilliseconds();
+        $("#document_name").val("image_"+unique_imagename);
         $("#imageDocumentForm").submit(function(e){
-            ///// process docs
-            window.location.replace("cms.action");
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: 'uploadImage.action',
-                    data: new FormData(this),
-                    success: function(){
 
-                    }
-                });
+
+            var docname = $("#imageDocumentForm input#document_name").val();
+            $.ajax({
+                type: "POST",
+                url: 'addDatabaseDocs.action',
+                data: "&docname="+docname,
+                success: function(){
+//                location.reload(true);
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: 'addDocs.action',
+                data: new FormData( this ),
+                success: whenSucceed
+            });
+            e.preventDefault();
+
+            function whenSucceed(){
+                console.log(docname);
+
+            }
+
         });
+
+
+
+
+
     });
 
 </script>
