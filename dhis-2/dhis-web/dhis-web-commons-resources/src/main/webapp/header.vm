@@ -41,12 +41,6 @@
 
     <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
     <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-=======
-
-##    <script src="../dhis-web-commons/bootstrap/js/js/bootstrap.min.js"></script>
-##    <script src="../dhis-web-commons/bootstrap/js/js/jquery-1.11.0.js"></script>
->>>>>>> c5bb604578b9544790319c059e5ed18b8a96ffdd
 
     <script src="../dhis-web-commons/javascripts/sliderman.js"></script>
     <script src="../dhis-web-commons/cms-image-manager/js/imageManager.js"></script>
