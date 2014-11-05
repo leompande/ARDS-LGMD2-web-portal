@@ -85,7 +85,7 @@ public class DeleteDocumentAction
     {
 
         int[] types = {Types.BIGINT};
-        String inserQuery = "DELETE FROM  cms_files  WHERE id = ? AND file_type='doc'";
+        String inserQuery = "DELETE FROM  cms_files  WHERE id = ?";
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(inserQuery, new Object[] {this.getDocId()},types);
         return SUCCESS;
