@@ -101,7 +101,7 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <div class="panel-group" id="accordion1"></div>
+                                <div class="accordion" id="accordion1"></div>
                             </li>
                         </ul>
                     </div>
@@ -136,21 +136,18 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <table class="table">
+                        <ul class="nav nav-pills nav-stacked list-group" style=" margin-left: 0;padding-left: 0em;text-indent: -0.1em;">
                             #if($otherLinks)
                                 #foreach( $links in $otherLinks)
-
-                                    <tr>
-                                        <td><i class="fa fa-globe"></i></td>
-                                        <td><a target="_blank" href="$links.get(2)" class="text-success">
-                                            $links.get(1)</a></td>
-
-                                    </tr>
+                                  <li class="list-group-item">
+                                    <p><target="_blank" href="$links.get(2)" class="text-success">
+                                     <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a></p>
+                                    </li>
 
                                 #end
                             #end
 
-                        </table>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -173,7 +170,7 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <div class="panel-group" id="accordion1"></div>
+                                <div class="accordion" id="accordion1"></div>
                             </li>
                         </ul>
                     </div>
@@ -229,32 +226,31 @@
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <table class="table">
+                        <ul class="nav nav-pills nav-stacked list-group" style=" margin-left: 0;padding-left: 0em;text-indent: -0.1em;">
                             #if($otherLinks)
                                 #foreach( $links in $otherLinks)
-
-                                    <tr>
-                                        <td><i class="fa fa-globe"></i></td>
-                                        <td> <p><a target="_blank" href="$links.get(2)" class="text-success">
-                                            $links.get(1)</a>
-
+                                    <li class="list-group-item">
+                                      <p><a target="_blank" href="$links.get(2)" class="text-success">
+                                            <i class="fa fa-globe"></i> &nbsp;&nbsp;$links.get(1)</a>
+                                          <span class=" pull-right">
                                             <a  href="#" class="hides" id="hides,$links.get(0)">
                                                 <i  style="color:orange" title="Hide link $links.get(1)" class="fa fa-minus pull-right"></i>
-                                            </a>
+                                            </a></span>
+                                             <span class="pull-right">
                                             <a  href="#" class="remove" id="remove,$links.get(0)">
                                                 <i  style="color:red;" title="Delete link $links.get(1)" class="fa fa-trash-o pull-right"></i>
-                                            </a>
-                                        </p>
-                                        </td>
-                                    </tr>
+                                            </a></span>
+                                       </p>
+
+                                    </li>
 
                                 #end
                             #end
 
-                        </table>
+                        </ul>
                         </br>
                         <button class="btn btn-warning btn-sm form-control" id="hidden_links_button">Hidden Links</button>
-                        <ul class="nav nav-pills nav-stacked list-group" id="hidden_links">
+                        <ul class="nav nav-pills nav-stacked list-group" id="hidden_links" style="margin-left: 0;padding-left: 0em;text-indent: -0.1em;">
                             #if($hiddenLinks)
                                 #foreach( $hiddenlinks in $hiddenLinks)
                                     <li class="list-group-item">

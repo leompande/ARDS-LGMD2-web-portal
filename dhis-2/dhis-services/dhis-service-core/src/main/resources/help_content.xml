@@ -2644,7 +2644,7 @@ details of a particular selected user.</para>
 <para><emphasis role="bold">GIS:</emphasis> Present and analyse your data using thematic maps. You can view both data elements and indicators and given that you have coordinates for all your orgunits you can drill down the hierarchy and view maps for all levels from country polygons to facility points. See the separate chapter on GIS for more details. All the map information is built into ARDS and all you need to do is to register coordinates for your adminstrative units and the maps will be available.</para>
 </section>
 <section id="standard_reports">
-<title>Using standard reports</title>
+<title>Using custom reports</title>
 <para>You access the available reports from the Services drop-down menu, by selecting Reports. In the report menu in the left bar, click Standard Report. A list of all pre-defined reports will appear in the main window. </para>
 <screenshot>
 <screeninfo>Standard reports</screeninfo>
@@ -2680,8 +2680,8 @@ details of a particular selected user.</para>
 <para> </para>
 </section>
 <section id="dataset_reports">
-<title>Using dataset reports</title>
-<para>Dataset reports are printer friendly views of the data entry screen filled with either raw or aggregated data. These are only available for data sets that have custom data entry forms and not for default or section forms.</para>
+<title>Standard Report</title>
+<para>Standard reports are printer friendly views of the data entry screen filled with either raw or aggregated data. These are only available for data sets that have custom data entry forms and not for default or section forms.</para>
 <para>You can access data set reports from the Report menu under Services.</para>
 <para>A Criteria window will appear where you fill in the details for your report:</para>
 <para><emphasis role="bold">Dataset:</emphasis> The data set you want to display.</para>
@@ -2723,25 +2723,25 @@ details of a particular selected user.</para>
 </mediaobject>
 </screenshot>
 </section>
-<!--<section id="reporting_reporting_rate_summary">-->
-<!--<title>Using reporting rate summary</title>-->
-<!--<para>Access the reporting rate summary from the Services-&gt;Reports menu. Reporting rate summaries will show how many datasets (forms) that have been submitted by adminstrative unit and period. You an use one of three different methods to calculate completeness; 1) based on complete button in data entry, 2) based on a set of defined compulsory data elements, or 3) based on the total registered data values for a dataset. </para>-->
-<!--<para><emphasis role="bold">To run the report do the following:</emphasis></para>-->
-<!--<para>Select an orgunit from the tree.</para>-->
-<!--<para>Select one of the completeness methods.</para>-->
-<!--<para>Select all or one dataset (All will give you a report with all datasets for the seelcted orgunit. One dataset will give you a report with completeness for all the children of the selected orgunit.</para>-->
-<!--<para>Select a period type and a period from the list of available periods for that period type. Move back/forward one year by using the Prev/Next buttons.</para>-->
-<!--<para>Then the report will be shown automatically.</para>-->
-<!--<para>Change any of the parameters above and the report will be updated automatically.</para>-->
-<!--<screenshot>-->
-<!--<screeninfo>Completeness report</screeninfo>-->
-<!--<mediaobject>-->
-<!--<imageobject>-->
-<!--<imagedata width="100%" fileref="resources/images/ARDSUserManual/completeness_report.png" format="PNG"/>-->
-<!--</imageobject>-->
-<!--</mediaobject>-->
-<!--</screenshot>-->
-<!--</section>-->
+<section id="reporting_reporting_rate_summary">
+<title>Using completeness summary</title>
+<para>Access the reporting rate summary from the Services-&gt;Reports menu. Reporting rate summaries will show how many datasets (forms) that have been submitted by adminstrative unit and period. You an use one of three different methods to calculate completeness; 1) based on complete button in data entry, 2) based on a set of defined compulsory data elements, or 3) based on the total registered data values for a dataset. </para>
+<para><emphasis role="bold">To run the report do the following:</emphasis></para>
+<para>Select an orgunit from the tree.</para>
+<para>Select one of the completeness methods.</para>
+<para>Select all or one dataset (All will give you a report with all datasets for the seelcted orgunit. One dataset will give you a report with completeness for all the children of the selected orgunit.</para>
+<para>Select a period type and a period from the list of available periods for that period type. Move back/forward one year by using the Prev/Next buttons.</para>
+<para>Then the report will be shown automatically.</para>
+<para>Change any of the parameters above and the report will be updated automatically.</para>
+<screenshot>
+<screeninfo>Completeness report</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata width="100%" fileref="resources/images/ARDSUserManual/completeness_report.png" format="PNG"/>
+</imageobject>
+</mediaobject>
+</screenshot>
+</section>
 <!--<section id="orgunit_distribution_reports">-->
 <!--<title>Using Adminstrative unit distribution reports</title>-->
 <!--<para>You can access the Orgunit Distribution reports from the left side menu in the Services-&gt;Reports module. </para>-->
@@ -2895,27 +2895,27 @@ details of a particular selected user.</para>
 <!--</section>-->
 <!--</chapter>-->
 <!--<chapter>-->
-<!--&lt;!&ndash;<title>Data dimensions in ARDS</title>&ndash;&gt;-->
-<!--&lt;!&ndash;<section>&ndash;&gt;-->
-<!--&lt;!&ndash;<title>The core building blocks describing the data</title>&ndash;&gt;-->
-<!--&lt;!&ndash;<para>A data value in ARDS (core module for aggregated data) is at minimum described by three dimensions, 1) data element, 2) adminstrative unit, and 3) period, which also forms the core building blocks of the data model. E.g. if you want to know how many children that were immunised for measles in Gerehun CHC in December 2009, the three dimensions to that value are the Data Element &quot;Measles doses given&quot;, the adminstrative Unit &quot;Gerehun CHC&quot;, and the Period &quot;Dec-09&quot;. All data values have at least these three dimensions describing What, Where and When.</para>&ndash;&gt;-->
-<!--&lt;!&ndash;<para><table frame="all">&ndash;&gt;-->
-<!--&lt;!&ndash;<title/>&ndash;&gt;-->
-<!--&lt;!&ndash;<tgroup cols="4">&ndash;&gt;-->
-<!--&lt;!&ndash;<colspec colname="c1"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<colspec colname="c2"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<colspec colname="c3"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<colspec colname="c4"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<thead>&ndash;&gt;-->
-<!--&lt;!&ndash;<row>&ndash;&gt;-->
-<!--&lt;!&ndash;<entry>adminstrative Unit</entry>&ndash;&gt;-->
-<!--&lt;!&ndash;<entry>Data Element</entry>&ndash;&gt;-->
-<!--&lt;!&ndash;<entry>Period</entry>&ndash;&gt;-->
-<!--&lt;!&ndash;<entry>Value</entry>&ndash;&gt;-->
-<!--&lt;!&ndash;</row>&ndash;&gt;-->
-<!--&lt;!&ndash;</thead>&ndash;&gt;-->
-<!--&lt;!&ndash;<tbody>&ndash;&gt;-->
-<!--&lt;!&ndash;<row>&ndash;&gt;-->
+<!--<!-<title>Data dimensions in ARDS</title>&ndash;&gt;-->
+<!--<!-<section>&ndash;&gt;-->
+<!--<!-<title>The core building blocks describing the data</title>&ndash;&gt;-->
+<!--<!-<para>A data value in ARDS (core module for aggregated data) is at minimum described by three dimensions, 1) data element, 2) adminstrative unit, and 3) period, which also forms the core building blocks of the data model. E.g. if you want to know how many children that were immunised for measles in Gerehun CHC in December 2009, the three dimensions to that value are the Data Element &quot;Measles doses given&quot;, the adminstrative Unit &quot;Gerehun CHC&quot;, and the Period &quot;Dec-09&quot;. All data values have at least these three dimensions describing What, Where and When.</para>&ndash;&gt;-->
+<!--<!-<para><table frame="all">&ndash;&gt;-->
+<!--<!-<title/>&ndash;&gt;-->
+<!--<!-<tgroup cols="4">&ndash;&gt;-->
+<!--<!-<colspec colname="c1"/>&ndash;&gt;-->
+<!--<!-<colspec colname="c2"/>&ndash;&gt;-->
+<!--<!-<colspec colname="c3"/>&ndash;&gt;-->
+<!--<!-<colspec colname="c4"/>&ndash;&gt;-->
+<!--<!-<thead>&ndash;&gt;-->
+<!--<!-<row>&ndash;&gt;-->
+<!--<!-<entry>adminstrative Unit</entry>&ndash;&gt;-->
+<!--<!-<entry>Data Element</entry>&ndash;&gt;-->
+<!--<!-<entry>Period</entry>&ndash;&gt;-->
+<!--<!-<entry>Value</entry>&ndash;&gt;-->
+<!--<!-</row>&ndash;&gt;-->
+<!--<!-</thead>&ndash;&gt;-->
+<!--<!-<tbody>&ndash;&gt;-->
+<!--<!-<row>&ndash;&gt;-->
 <!--&lt;!&ndash;<entry>Gerehun CHC</entry>&ndash;&gt;-->
 <!--&lt;!&ndash;<entry>Measles doses given</entry>&ndash;&gt;-->
 <!--&lt;!&ndash;<entry>Dec-09</entry>&ndash;&gt;-->
@@ -3902,8 +3902,8 @@ as drop-down lists with auto-completion support.
 <!--</listitem>-->
 <!--</itemizedlist>-->
 <!--</section>-->
-<!--&lt;!&ndash;<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ARDS_user_man_mobile_web_based.xml" encoding="UTF-8"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ARDS_mobile_sms_data_entry.xml" encoding="UTF-8"/>&ndash;&gt;-->
+<!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ARDS_user_man_mobile_web_based.xml" encoding="UTF-8"/>-->
+<!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ARDS_mobile_sms_data_entry.xml" encoding="UTF-8"/>-->
 <!--</chapter>-->
 <chapter>
 <title>ARDS Spreadsheet Reporting</title>
@@ -5305,10 +5305,10 @@ elements. The &apos;Sort&apos; button can be used to sort the data elements into
           <!--are being recorded. Based on the services of the program by the time, the system creates-->
           <!--an activity plan for the person.</para>-->
       <!--</section>-->
-      <!--&lt;!&ndash;<section>&ndash;&gt;-->
-        <!--&lt;!&ndash;<title>Treatment case</title>&ndash;&gt;-->
-        <!--&lt;!&ndash;<para>Each interaction with the person related to the case is considered to be an treatment case and these cases are recorded into the individual case. Individual case is updated with the identification of both the agriculture worker and the person who is receiving the service.</para>&ndash;&gt;-->
-      <!--&lt;!&ndash;</section>&ndash;&gt;-->
+      <!--<section>-->
+        <!--<title>Treatment case</title>-->
+        <!--<para>Each interaction with the person related to the case is considered to be an treatment case and these cases are recorded into the individual case. Individual case is updated with the identification of both the agriculture worker and the person who is receiving the service.</para>-->
+      <!--</section>-->
       <!--<section>-->
         <!--<title>Reports</title>-->
         <!--<para>The module provides two functions for viewing the  reports to get an overview of the services provided for a program or a program stage.</para>-->
@@ -5555,12 +5555,12 @@ elements. The &apos;Sort&apos; button can be used to sort the data elements into
               <!--<para><emphasis role="italic">Parameters</emphasis> - Provide parameters  which are used for generating a message for each person. The parameters include <emphasis role="italic">person name</emphasis>,<emphasis role="italic"> program name</emphasis>, <emphasis role="italic">incident date, days since incident date, enrollment date, days since enrollment date, adminstrative unit name</emphasis>. Double-click on an option to insert it into template message field below.-->
 <!--</para>-->
             <!--</listitem>-->
-            <!--&lt;!&ndash;<listitem>&ndash;&gt;-->
-              <!--&lt;!&ndash;<para><emphasis role="italic">Message</emphasis> - Content of template message. E.g.&ndash;&gt;-->
-            <!--&lt;!&ndash;Dear {patient-name}, please come to your appointment at {due-date}.&ndash;&gt;-->
-              <!--&lt;!&ndash;</para>&ndash;&gt;-->
-             <!--&lt;!&ndash;<para>Click <emphasis role="italic">Add more...</emphasis> button to add more template reminder messages.</para>&ndash;&gt;-->
-            <!--&lt;!&ndash;</listitem>&ndash;&gt;-->
+            <!--<listitem>-->
+              <!--<para><emphasis role="italic">Message</emphasis> - Content of template message. E.g.-->
+            <!--Dear {patient-name}, please come to your appointment at {due-date}.-->
+              <!--</para>-->
+             <!--<para>Click <emphasis role="italic">Add more...</emphasis> button to add more template reminder messages.</para>-->
+            <!--</listitem>-->
           <!--</itemizedlist>-->
           <!--<para>To assign a program for adminstrative units, click<emphasis role="italic"> Assign program to adminstrative units</emphasis> icon, the first icon under Operations, corresponding to the program you would like and select adminstrative units where provide the program.</para>-->
           <!--<para>To assign a program for user roles, click <emphasis role="italic">Assign program to userroles</emphasis> icon, the second icon under Operations, corresponding to the-->

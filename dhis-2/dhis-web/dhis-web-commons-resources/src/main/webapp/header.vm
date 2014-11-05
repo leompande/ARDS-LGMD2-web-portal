@@ -14,6 +14,7 @@
     <link type="text/css" rel="stylesheet" media="print" href="../dhis-web-commons/css/print.css?_rev=$!{buildRevision}" />
 
     <link href="../dhis-web-commons/bootstrap3/css/bootstrap.css" rel="stylesheet">
+
     <link href="../dhis-web-commons/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
     <link href="../dhis-web-commons/fontawesome4/css/font-awesome.css" rel="stylesheet">
 
@@ -40,7 +41,7 @@
     <script type="text/javascript" src="../dhis-web-commons/javascripts/es5-sham.min.js"></script>
 
     <script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/jquery.1.11.min.js?_rev=$!{buildRevision}"></script>
-    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="../dhis-web-commons/bootstrap3/js/bootstrap.js"></script>
 
     <script src="../dhis-web-commons/javascripts/sliderman.js"></script>
     <script src="../dhis-web-commons/cms-image-manager/js/imageManager.js"></script>

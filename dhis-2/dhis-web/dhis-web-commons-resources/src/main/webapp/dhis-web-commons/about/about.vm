@@ -1,3 +1,4 @@
+<div class="row" style="padding-top: 20px;">
 <div class="analysis-wraper">
     <div class="alert alert-danger fade in" role="alert" style="padding: 4px">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
@@ -63,6 +64,7 @@
 
     </div>
 </div>
+    </div>
 <div class="row" id="content_to_hide">
 <h3>$i18n.getString( "about_dhis2" )</h3>
 

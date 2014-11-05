@@ -137,7 +137,7 @@
                     </a>
                 </div>
 
-                <div class="panel-group" id="accordion2">
+                <div class="accordion" id="accordion2">
 
                 </div>
             </div>
