@@ -1,7 +1,0 @@
-{ "userGroup":
-  {
-    "id": $!{group.id},
-    "name": "$!encoder.jsonEncode( ${group.name} )",
-	"noOfUsers": "${memberCount}"
-  }
-}

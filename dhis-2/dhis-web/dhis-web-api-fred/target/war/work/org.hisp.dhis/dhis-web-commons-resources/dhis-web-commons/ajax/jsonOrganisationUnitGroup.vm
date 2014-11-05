@@ -1,7 +1,0 @@
-{ "organisationUnitGroup":
-  {
-    "id": "$!{organisationUnitGroup.id}",
-    "name": "$!encoder.jsonEncode( ${organisationUnitGroup.displayName} )",
-    "memberCount": "$!{organisationUnitGroup.members.size()}"
-  }
-}
