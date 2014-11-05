@@ -261,7 +261,6 @@ $(document).ready(function(){
                             url:"deleteDocument.action",
                             data: "docId="+image_id,
                             success: function(){
-                                $( "#dialog" ).dialog( "close" );
                                 location.reload(true);
                             },
                             dataType: "text"
@@ -294,7 +293,6 @@ $(document).ready(function(){
                             url:"hideDocument.action",
                             data: "docId="+image_id,
                             success: function(){
-                                $( "#dialog" ).dialog( "close" );
                                 location.reload(true);
                             },
                             dataType: "text"

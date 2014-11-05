@@ -961,7 +961,6 @@ function in_array(id, array) {
 function deleteIt(id,unique_id){
     $.post("deleteDocument.action","docId="+id)
         .done(function() {
-            $("#dialog").dialog("close");
             location.reload(true);
         })
         .fail(function() {
