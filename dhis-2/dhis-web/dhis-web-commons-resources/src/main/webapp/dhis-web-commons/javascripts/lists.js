@@ -316,6 +316,8 @@ $(document).ready(function() {
         var m = document.createElement("select");
         m.id = o.id+"_storage";
         m.style.visibility="hidden";
+        m.style.display="none";
+        m.style.height="0px";
         document.body.appendChild(m);
     });
 });
