@@ -1,9 +1,0 @@
-#set( $size = $patients.size() )
-{ "patients": [
-#foreach( $patient in $patients )
-  {
-    "id": $!{patient.id},
-    "uid": "$!encoder.jsonEncode( ${patient.uid} )"    
-  }#if( $velocityCount < $size ),#end
-#end
-] }

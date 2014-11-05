@@ -1,6 +1,0 @@
-[
-#set( $size1 = $docCollection.size() )
-#foreach( $doc in $docCollection )
-{"id":"$encoder.jsonEncode( ${doc[0]})","file_name":"$encoder.jsonEncode( ${doc[1]})","file_type":"$encoder.jsonEncode( ${doc[2]})","status":"$encoder.jsonEncode( ${doc[3]})"}#if( $velocityCount < $size1 ),#end
-
-#end ]

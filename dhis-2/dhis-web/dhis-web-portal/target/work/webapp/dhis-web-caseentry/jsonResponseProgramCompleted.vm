@@ -1,4 +1,0 @@
-{
-  "response": "programcompleted",
-  "message": "$!encoder.jsonEncode( ${message} )"
-}

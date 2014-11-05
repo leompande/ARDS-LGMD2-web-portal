@@ -1,2 +1,0 @@
-{ "usernames": [#foreach( $username in $usernames ){"u":"$username"}#if( $velocityCount < $usernames.size() ),#end #end]
-}

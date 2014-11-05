@@ -17,7 +17,7 @@
 <div class="container-fluid">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
-    <div class="page-wrap">
+    <div class="page-wrap" style="padding-bottom: 40px;">
         <div class="row">
             <div class="col-md-12">
                 <!-- Message body area-->
@@ -35,11 +35,11 @@
             </div>
         </div>
         </div>
-        <div class="row">
+  <div class="row">
             #footerMenuBar()
         </div>
     </div>
-    <script type="text/javascript">
+ <script type="text/javascript">
 
         var m  = 0;
         var mx = 0;
@@ -51,8 +51,9 @@
             if(m == 0){
                 $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
                 $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
-                $( '#mainPages').removeClass("col-md-10");
-                $( '#mainPages').addClass("col-md-12");
+                $( '#mainPages' ).removeClass("col-md-10");
+                $( '#mainPages' ).addClass("col-md-12");
+
             }
 
         }
@@ -61,13 +62,12 @@
 
             $('#max').hide('fast', function(){
                 $('#min').show();
-
-
-            });
+                     });
             $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
             $( '#mainPages' ).css( 'margin-left', '' );
-            $( '#mainPages').removeClass("col-md-12");
-            $( '#mainPages').addClass("col-md-10");
+           $( '#mainPages' ).removeClass("col-md-12");
+            $( '#mainPages' ).addClass("col-md-10");
+
         }
     </script>
 </body>

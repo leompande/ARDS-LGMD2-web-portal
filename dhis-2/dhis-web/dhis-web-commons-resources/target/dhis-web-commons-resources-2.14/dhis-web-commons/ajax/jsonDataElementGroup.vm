@@ -1,9 +1,0 @@
-{ "dataElementGroup": 
-  {
-    "id": $!{dataElementGroup.id},
-    "name": "$!encoder.jsonEncode( ${dataElementGroup.displayName} )",
-	"shortName": "$!encoder.jsonEncode( ${dataElementGroup.displayShortName} )",
-	"code": "$!encoder.jsonEncode( ${dataElementGroup.code} )",
-    "memberCount": "$memberCount"
-  } 
-}

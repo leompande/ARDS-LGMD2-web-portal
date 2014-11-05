@@ -1,2 +1,0 @@
-#set( $size = $object.size() )
-{"dataElementGroups":[#foreach( $dataElementGroup in $object ) {"id":"$!{dataElementGroup.id}","name":"$!encoder.jsonEncode( ${dataElementGroup.name} )" }#if( $velocityCount < $size ),#end#end]}

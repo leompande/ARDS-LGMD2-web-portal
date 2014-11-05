@@ -1,7 +1,0 @@
-{ "programStageSection":
-  {
-    "id": "$!{section.id}",
-    "name": "$!encoder.jsonEncode( ${section.name} )",
-    "dataElementCount": "$!{section.programStageDataElements.size()}"
-  }
-}

@@ -1,9 +1,0 @@
-#set( $size1 = $periods.size() )
-{ "periods": [
-#foreach( $period in $periods )
-  {
-    "name": "$!format.formatPeriod( ${period} )"
-  }#if( $velocityCount < $size1 ),#end
-#end ],
-  "periodValid": ${periodValid}
-}

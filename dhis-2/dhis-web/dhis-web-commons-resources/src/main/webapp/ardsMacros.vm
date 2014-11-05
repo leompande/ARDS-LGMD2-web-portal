@@ -342,7 +342,7 @@
 </div>
 #end
 #macro(footerMenuBar)
-<footer class="site-footer" style="background-color:#457B49;">
+<footer class="site-footer" style="background-color:#457B49;height:40px;">
     <nav class="navbar navbar-inverse" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header" style="background-color:#457B49;">
@@ -371,7 +371,7 @@
                 </li>
 
                 <li class="dropup " style="border-right: solid 1px #888">
-                    <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:30px!important;margin-top:-10px;background-color:;">
+                    <a class="btn dropdown-toggle overwrite" data-toggle="dropdown" style="height:40px!important;margin-top:-10px;background-color:;">
                         Downloads
                         <span class="caret"></span>
                     </a>
