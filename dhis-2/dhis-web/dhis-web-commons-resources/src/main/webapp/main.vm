@@ -14,7 +14,7 @@
     //  color:#ffffff!important;
     }
 </style>
-<div class="container-fluid" id="wrapper">
+<div class="container-fluid">
     #parse( "ardsMacros.vm" )
     #headerMenuBar()
 <div class="page-wrap">
@@ -80,7 +80,7 @@
         if(m == 0){
             $( '#leftbarcontents' ).hide( 'slide', { direction: 'left', duration: 200 } );
             $( '#mainPages' ).animate( { direction: 'right', marginLeft: '0px', duration: 200 } );
-            $( '#mainPages' ).removeClass("col-md-10");
+            $( '#mainPages' ).removeClass("col-md-9");
             $( '#mainPages' ).addClass("col-md-12");
         }
 
@@ -94,7 +94,7 @@
         $( '#leftbarcontents' ).css( 'width', '' ).show( 'slide', { direction: 'left', duration: 200 } );
         $( '#mainPages' ).css( 'margin-left', '' );
         $( '#mainPages' ).removeClass("col-md-12");
-        $( '#mainPages' ).addClass("col-md-10");
+        $( '#mainPages' ).addClass("col-md-9");
     }
 </script>
 
