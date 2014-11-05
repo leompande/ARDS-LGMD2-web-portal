@@ -113,16 +113,9 @@ Ext.onReady( function() {
 
 			conf.period = {
 				periodTypes: [
-					//{id: 'Daily', name: PT.i18n.daily},
-					//{id: 'Weekly', name: PT.i18n.weekly},
 					{id: 'Monthly', name: PT.i18n.monthly},
-					//{id: 'BiMonthly', name: PT.i18n.bimonthly},
 					{id: 'Quarterly', name: PT.i18n.quarterly},
-					//{id: 'SixMonthly', name: PT.i18n.sixmonthly},
-					{id: 'Yearly', name: PT.i18n.yearly},
-					{id: 'FinancialOct', name: PT.i18n.financial_oct},
-					{id: 'FinancialJuly', name: PT.i18n.financial_july},
-					{id: 'FinancialApril', name: PT.i18n.financial_april}
+					{id: 'FinancialJuly', name: PT.i18n.financial_july}
 				]
 			};
 
