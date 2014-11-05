@@ -154,6 +154,7 @@
     <script src="../dhis-web-commons/cms-image-manager/js/imageManager.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/modules/exporting.js"></script>
+<script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script type="text/javascript" src="../dhis-web-commons/analysis/Highcharts/js/themes/sand-signika.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Signika:400,700" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="../dhis-web-commons/analysis/orgUnits.js"></script>

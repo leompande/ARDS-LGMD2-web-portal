@@ -6786,7 +6786,7 @@ Ext.onReady( function() {
 				data: [
 					[dimConf.indicator.objectName, GIS.i18n.indicator],
 					[dimConf.dataElement.objectName, GIS.i18n.dataelement],
-					[dimConf.dataSet.objectName, GIS.i18n.reporting_rates]
+					[dimConf.dataSet.objectName, "Completeness Report"]
 				]
 			}),
 			listeners: {

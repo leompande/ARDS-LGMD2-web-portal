@@ -3,7 +3,7 @@
 
     <div class="form-group">
         <!--label for="image_name">Picture Discription <em title="Required" class="required"></em></label-->
-        <input type="text" id="document_name" style="width:100% !important;" name="name" value="" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
+        <input type="hidden" id="document_name" style="width:100% !important;" name="name" value="" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
     </div>
     <div class="form-group">
         <label for="add-link">Image File <em title="Required" class="required">*</em></label>
@@ -47,17 +47,6 @@
 
             }
 
-//            e.preventDefault();
-//            ///// process docs
-//                $.ajax({
-//                    type: "POST",
-//                    url: 'uploadImage.action',
-//                    data: "",
-//                    success: function(){
-////                        window.location.replace("cms.action");
-//                    }
-//
-//                });
         });
 
 

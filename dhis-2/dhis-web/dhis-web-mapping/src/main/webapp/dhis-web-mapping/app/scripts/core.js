@@ -2183,16 +2183,12 @@ Ext.onReady( function() {
 				relativePeriods: [
 					{id: 'LAST_MONTH', name: GIS.i18n.last_month},
 					{id: 'LAST_QUARTER', name: GIS.i18n.last_quarter},
-					{id: 'LAST_FINANCIAL_YEAR', name: GIS.i18n.last_financial_year},
-					{id: 'THIS_YEAR', name: GIS.i18n.this_year},
-					{id: 'LAST_YEAR', name: GIS.i18n.last_year}
+					{id: 'LAST_FINANCIAL_YEAR', name: GIS.i18n.last_financial_year}
 				],
 				relativePeriodsMap: {
 					'LAST_MONTH': {id: 'LAST_MONTH', name: GIS.i18n.last_month},
 					'LAST_QUARTER': {id: 'LAST_QUARTER', name: GIS.i18n.last_quarter},
-					'LAST_FINANCIAL_YEAR': {id: 'LAST_FINANCIAL_YEAR', name: GIS.i18n.last_financial_year},
-					'THIS_YEAR': {id: 'THIS_YEAR', name: GIS.i18n.this_year},
-					'LAST_YEAR': {id: 'LAST_YEAR', name: GIS.i18n.last_year}
+					'LAST_FINANCIAL_YEAR': {id: 'LAST_FINANCIAL_YEAR', name: GIS.i18n.last_financial_year}
 				},
 				integratedRelativePeriodsMap: {
 					'LAST_MONTH': 'LAST_MONTH',
