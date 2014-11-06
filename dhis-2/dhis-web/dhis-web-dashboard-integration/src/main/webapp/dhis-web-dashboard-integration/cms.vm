@@ -108,7 +108,7 @@
 </div>
 <div class="row" id="content_to_hide">
 
-<div class="row">
+<div class="">
 <div class="col-md-10">
 <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
          <p>
@@ -118,7 +118,7 @@
         </span>
 <div id="contents">
 <div class="row">
-    <div class="col-md-12 menu_conteiner" style="margin:10px;">
+    <div class="col-md-12 menu_conteiner">
         <div class="btn-group  pull-left" id="cms_menu_bar" style="margin-left:-15px;">
             <a href="#" class="btn btn-default btn-sm  disabled" role="button"  style="display:block!important;"><b><i class="fa fa-spanner"></i> &nbsp; Home Page Managers  :</b></a>
             <a class="btn btn-default btn-sm manage_articles" id="manage_articles" title="Manage Articles" ><i class="fa fa-file-text-o"></i> &nbsp; Articles</a>
