@@ -15,7 +15,8 @@
 </div>
 <!-- navigation bar here-->
 <div class="row">
-    <nav class="navbar navbar-static-top navbar-inverse responsive" role="navigation">
+
+    <nav class="topnav navbar navbar-static-top navbar-inverse responsive" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header" style="background-color:#457B49;">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -24,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../dhis-web-dashboard-integration/home.action"><i class="fa fa-home"></i> ARDS</a>
+            <a class="navbar-brand" href="../dhis-web-dashboard-integration/home.action" style="padding-left: 15px"><i class="fa fa-home"></i> ARDS</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,9 +69,9 @@
                 #end
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right:20px;" >
-                <li style="border-right: solid 1px #888;width:172px!important;" class="hidden-sm hidden-xs">
+                <li style="width:172px!important;" class="hidden-sm hidden-xs">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;$encoder.htmlEncode( $currentUser.name )<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="padding-left: 3px;">
                         <li><a href="../dhis-web-commons-about/showUpdateUserProfileForm.action"><i class="fa fa-pencil"></i>&nbsp;Update Info</a></li>
                         <li><a href="../dhis-web-commons-about/help.action"><i class="fa fa-question-circle " style="color:black;"></i>&nbsp;Help Center</a></li>
                         <li><a href="../dhis-web-commons-about/about.action" class="menuLink"><i class="fa fa-info-circle" style="color:black;"></i>&nbsp;About ARDS</a></li>
