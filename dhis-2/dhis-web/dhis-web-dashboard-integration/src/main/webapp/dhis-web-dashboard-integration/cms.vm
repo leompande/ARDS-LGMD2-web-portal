@@ -38,6 +38,76 @@
     #parse( "ardsMacros.vm" )
     #cmsLeftMenu()
 <div class="col-md-10" id="mainPages">
+
+<div class="analysis-wraper">
+    <div class="alert alert-danger fade in" role="alert" style="padding: 4px">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+        <strong>Empty Value!</strong> Please select at least one Administrative unit, period and data.
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            Administrative units <br>
+            <div class="btn-group btn-group-xs unitfilter">
+                <button type="button" class="btn btn-default" id="allunits">all</button>
+                <button type="button" class="btn btn-default" id="regions">Regions</button>
+                <button type="button" class="btn btn-default" id="district">disticts</button>
+            </div>
+            <br>
+            <select name="adminUnit" multiple="multiple" class="adminUnit">
+
+            </select>
+        </div>
+        <div class="col-sm-3">
+            Periods <br>
+            <div class="btn-group btn-group-xs periodfilter" >
+                <button type="button" class="btn btn-default" id="years">Yearly</button>
+                <button type="button" class="btn btn-default" id="quarters">quarterly</button>
+                <button type="button" class="btn btn-default" id="mounths">monthly</button>
+            </div>
+            <br>
+            <select name="periods" multiple="multiple" class="periods">
+
+            </select>
+        </div>
+        <div class="col-sm-3">
+            Data
+            <div style="height: 22px"></div>
+            <select name="data" multiple="multiple" class="data-element">
+
+            </select>
+        </div>
+        <div class="col-sm-3">
+            Category
+            <div style="height: 22px"></div>
+            <select name="category" class="category">
+                <option value="ou">administrative units</option>
+                <option value="pe">period</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 15px">
+        <div class="col-sm-12">
+            <div class="btn-group btn-group-xs reports">
+                <button class="btn btn-default" id="draw_table"><img src='../dhis-web-commons/analysis/table.png' style='height:20px;width:20px'> Table</button>
+                <button class="btn btn-default" id="draw_bar"><img src='../dhis-web-commons/analysis/bar.png' style='height:20px;width:20px'> Bar Chart</button>
+                <button class="btn btn-default" id="draw_column"><img src='../dhis-web-commons/analysis/column.png' style='height:20px;width:20px'> Column Chart</button>
+                <button class="btn btn-default" id="draw_line"><img src='../dhis-web-commons/analysis/line.png' style='height:20px;width:20px'> Line Chart</button>
+                <button class="btn btn-default" id="draw_pie"><img src='../dhis-web-commons/analysis/pie.png' style='height:20px;width:20px'> Pie Chart</button>
+                <button class="btn btn-default" id="draw_staked"><img src='../dhis-web-commons/analysis/stacked.png' style='height:20px;width:20px'> Stacked Chart</button>
+                <button class="btn btn-default" id="draw_spider"><img src='../dhis-web-commons/analysis/spider.jpg' style='height:20px;width:20px'> Spider Chart</button>
+                <button class="btn btn-default" id="draw_combined"><img src='../dhis-web-commons/analysis/combined.jpg' style='height:20px;width:20px'> Combined Chart</button>
+                <button class="btn btn-default" id="export_cvs"  style="margin-left: 5px"><img src='../dhis-web-commons/analysis/cvs.jpg' style='height:20px;width:20px'> Export to Excel</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="mainarea" style="margin-top: 15px">
+
+    </div>
+</div>
+<div class="row" id="content_to_hide">
+
 <div class="row">
 <div class="col-md-10">
 <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
@@ -372,6 +442,7 @@
     <div class="row">
         #cmsStatistics()
     </div>
+</div>
 </div>
 </div>
 </div>

@@ -101,7 +101,7 @@
 <div id="default_home">
 
 <div id="table_data" class='row'>
-<div class="row" id="">
+<div>
 <style type="text/css">
 
     #example3{
@@ -134,7 +134,7 @@
 </style>
 <!-- feeds body--->
 
-<div class="row">
+<div>
 <div class="col-md-12 ">
 <span id="showLeftBars" class="pull-left hidden-sm hidden-xs">
          <p>
