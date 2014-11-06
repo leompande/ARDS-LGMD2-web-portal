@@ -8,11 +8,15 @@ $(document).ready(function(){
     //building a menu from named report tables
     $.getJSON( "../api/reportTables.json", function( data ) {
         var mainmenu = new Array();
+        var menuarr = ["Agriculture","Livestock","Fishery","Trade","General Information"];
         var arrayCounter = 0;
         $.each( data.reportTables, function( key, value ) {
             var arr = value.name.split(':');
             if(arr.length != 1){
-                if($.inArray(arr[0], mainmenu) == -1){
+                if($.inArray(arr[0], menuarr) == -1){
+                    var len = menuarr.length -1;
+                    menuarr[len] = arr[0];
+                    menuarr[menuarr.length] = "General Information";
                     mainmenu[arrayCounter] = arr[0];
                     arrayCounter++;
                 }
@@ -20,12 +24,12 @@ $(document).ready(function(){
         });
         var menu ="";
         var menu1 ="";
-        for(var i=0;i<mainmenu.length; i++){
+        for(var i=0;i<menuarr.length; i++){
             menu += '<div class="accordion-group">';
             menu += '<div class="accordion-heading">';
 //            menu += '<h6 style="padding: 5px 5px;font-size: 10pt">';
             menu += '<a class="text-success accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOneItem'+i+'">';
-            menu += '<i class="fa fa-chevron-circle-down pull-right"></i>'+mainmenu[i];
+            menu += '<i class="fa fa-chevron-circle-down pull-right"></i>'+menuarr[i];
             menu += '</a>';
 //            menu += '</h6>';
             menu += '</div>';
@@ -35,7 +39,7 @@ $(document).ready(function(){
             $.each( data.reportTables, function( key, value ) {
                 var arr = value.name.split(':');
                 if(arr.length != 1){
-                    if(mainmenu[i] == arr[0]){
+                    if(menuarr[i] == arr[0]){
                         menu += '<li style="padding: 8px 4px" class="menuitem listmenu" allstring="'+arr[1]+'"><a style="padding-left: 0px; padding-right: 0px" href="#" id="'+value.id+'" class="text-success"></i>'+arr[1].substring(0,20)+'...<i class="fa fa-chevron-right pull-right"></i> </a></li>';
                     }
                 }
@@ -49,7 +53,7 @@ $(document).ready(function(){
             menu1 += '<div class="accordion-heading">';
 //            menu1 += '<h6 style="padding: 5px 5px;font-size: 10pt">';
             menu1 += '<a class="text-success accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwoItem'+i+'">';
-            menu1 += '<i class="fa fa-chevron-circle-down pull-right"></i>'+mainmenu[i];
+            menu1 += '<i class="fa fa-chevron-circle-down pull-right"></i>'+menuarr[i];
             menu1 += '</a>';
 //            menu1 += '</h6>';
             menu1 += '</div>';
@@ -59,7 +63,7 @@ $(document).ready(function(){
             $.each( data.reportTables, function( key, value ) {
                 var arr = value.name.split(':');
                 if(arr.length != 1){
-                    if(mainmenu[i] == arr[0]){
+                    if(menuarr[i] == arr[0]){
                         menu1 += '<li style="padding: 8px 4px" class="menuitem listmenu" allstring="'+arr[1]+'"><a style="padding-left: 0px; padding-right: 0px" href="#" id="'+value.id+'" class="text-success"></i>'+arr[1]+'...<i class="fa fa-chevron-right pull-right"></i> </a></li>';
                     }
                 }
@@ -100,8 +104,7 @@ $(document).ready(function(){
                 $.each(data.organisationUnits, function (key, value) {
                     first_orgunit[key] = value.id;
                 });
-                //creating organization unit multselect from orgUnit.js
-                prepareOrganisationUnit(first_orgunit);
+
                 $.each(data.periods, function (key, value) {
                     first_period[key] = value.id;
                 });
@@ -112,8 +115,72 @@ $(document).ready(function(){
                 $(".data-element").multiselect("destroy");
                 $(".data-element").css('width', '180px');
                 $('.data-element').html(data_element_select).multiselect().multiselectfilter();
-//            });
 
+                //creating organization unit multselect from orgUnit.js
+//                prepareOrganisationUnit(first_orgunit);
+
+                //creating organization unit multselect
+                var district = [];
+                var districtOptions="<optgroup label='Districts'>";
+                var regions = [];
+                var regionsOptions = "<optgroup label='Regions'>";
+                var allunits = [];
+                var allunitsOptions ="";
+                $.getJSON( "../dhis-web-commons/analysis/organisationUnits.json", function( data ) {
+                    $.each( data.organisationUnits, function( key, value ) {
+                        //populate regions
+                        if(value.level == 2){
+                            var temp ={ name: value.name, id: value.id };
+                            regions.push(temp);
+                            if($.inArray(value.id, first_orgunit) == -1){
+                                regionsOptions += '<option value="'+value.id+'">'+value.name+' Region</option>';
+                            }else{
+                                regionsOptions += '<option value="'+value.id+'" selected="selected">'+value.name+' Region</option>';
+                            }
+                        }
+                        //populate districts
+                        if(value.level == 3){
+                            var temp ={ name: value.name, id: value.id };
+                            district.push(temp);
+                            if($.inArray(value.id, first_orgunit) == -1){
+                                districtOptions += '<option value="'+value.id+'">'+value.name+'</option>';
+                            }else{
+                                districtOptions += '<option value="'+value.id+'" selected="selected">'+value.name+'</option>';
+                            }
+                        }
+
+
+                    });
+                    regionsOptions += "<optgroup/>"
+                    districtOptions += "<optgroup/>"
+                    allunitsOptions = regionsOptions + districtOptions
+                    $('.adminUnit').multiselect().multiselectfilter();
+                    $('#allunits').click(function(){
+                        $('.unitfilter button').removeClass('btn-success').addClass('btn-default');
+                        $(this).removeClass('btn-default').addClass('btn-success');
+                        $(".adminUnit").multiselectfilter("destroy");
+                        $(".adminUnit").multiselect("destroy");
+                        $('.adminUnit').html(allunitsOptions);
+                        $('.adminUnit').multiselect().multiselectfilter();
+                    })
+                    $('#district').click(function(){
+                        $('.unitfilter button').removeClass('btn-success').addClass('btn-default');
+                        $(this).removeClass('btn-default').addClass('btn-success');
+                        $(".adminUnit").multiselectfilter("destroy");
+                        $(".adminUnit").multiselect("destroy");
+                        $('.adminUnit').html(districtOptions);
+                        $('.adminUnit').multiselect().multiselectfilter();
+                    })
+                    $('#regions').click(function(){
+                        $('.unitfilter button').removeClass('btn-success').addClass('btn-default');
+                        $(this).removeClass('btn-default').addClass('btn-success');
+                        $(".adminUnit").multiselectfilter("destroy");
+                        $(".adminUnit").multiselect("destroy");
+                        $('.adminUnit').html(regionsOptions);
+                        $('.adminUnit').multiselect().multiselectfilter();
+                    })
+                    $('.adminUnit').css('width', '180px');
+                    $('#allunits').trigger('click')
 
             //hiding error alert
             $('.alert').hide();
@@ -220,8 +287,8 @@ $(document).ready(function(){
             $('.analysis-wraper').fadeIn();
                 $('#draw_table').trigger("click");
 
+            });
         });
-            $('#draw_table').trigger("click");
 
         });
  });
