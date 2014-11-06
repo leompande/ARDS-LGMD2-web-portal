@@ -140,8 +140,8 @@
                             #if($otherLinks)
                                 #foreach( $links in $otherLinks)
                                   <li class="list-group-item">
-                                    <p><target="_blank" href="$links.get(2)" class="text-success">
-                                     <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a></p>
+                                    <a target="_blank" href="$links.get(2)" class="text-success">
+                                     <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a>
                                     </li>
 
                                 #end
@@ -284,7 +284,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="add-link">Url/Link</label>
-                                <input type="text" name="linkUrl" class="form-control" id="add-link" placeholder="Url/Link eg. http://www.example.com">
+                                <input type="url" name="linkUrl" class="form-control" id="add-link" placeholder="Url/Link eg. http://www.example.com" required="required">
                             </div>
                             <button class="btn btn-success btn-sm form-control">Add Other link</button>
                         </form>
