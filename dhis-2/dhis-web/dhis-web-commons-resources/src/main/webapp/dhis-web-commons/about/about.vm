@@ -31,13 +31,15 @@
             </select>
         </div>
         <div class="col-sm-3">
-            Data<br><br>
+            Data
+            <div style="height: 22px"></div>
             <select name="data" multiple="multiple" class="data-element">
 
             </select>
         </div>
         <div class="col-sm-3">
-            Category<br><br>
+            Category
+            <div style="height: 22px"></div>
             <select name="category" class="category">
                 <option value="ou">administrative units</option>
                 <option value="pe">period</option>
