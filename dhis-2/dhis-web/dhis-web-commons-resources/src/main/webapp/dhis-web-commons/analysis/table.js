@@ -20,7 +20,7 @@ function drawTable(title,url,category,dataArray){
         });
         var title_to_use = (category == 'pe')?orgunit_series:period_series
         //creating data series
-        var table ='<h3>'+title+' '+title_to_use+'</h3>'
+        var table ='<h3 class="text-center" style="color:black;font-size:16px;font-weight:bold;fill:black;font-family: LiberationSansRegular, arial, sans-serif;">'+title+' '+title_to_use+'</h3>'
         table += '<table class="table table-bordered table-responsive" id="example">';
         var theads = "<thead></thead><tr><th></th>";
         var rows = "";
