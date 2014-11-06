@@ -1,91 +1,85 @@
 <script type="text/javascript">
 jQuery( document ).ready( function() {
   jQuery( "#showMainMenuLink" ).attr( "href", "modules.action" );
+
 } );
+
 </script>
-<div class="col-lg-10">
-<div class="panel-group" id="accordion">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h4 class="panel-title" style="padding: 0px 0px!important;">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="parent_menu">
-                        Data Analysis
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <div class="panel-group" id="accordion1"></div>
-                        </li>
-                    </ul>
+
+<div class="col-md-10" id="leftbarcontents" style="padding-right: 0px;padding-left: 0px">
+    <div id="left-Menu">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="parent_menu">
+                            Data Analysis
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <div class="accordion" id="accordion1"></div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="parent_menu">
-                        Documents
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse in">
-                <div class="panel-body">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="parent_menu">
+                            Documents
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in">
+                    <div class="panel-body">
 
-                    <table class="table table-condensed table-hover">
-                        #if($docs)
-                            #foreach( $document in $docs)
+                        <ul class="nav nav-pills nav-stacked list-group document_panel">
 
-                                <tr>
-                                    <td><i class="fa fa-cloud-download"></i></td>
-                                    <td><a title="View Document(Download)" target="_blank" href="slideshowImages/$document.get(1)" class="text-success">
-                                        $document.get(1)<i class="fa fa-chevron-right pull-right"></i>
-                                    </a></td>
-                                </tr>
+                        </ul>
 
-
-                            #end
-                        #end
-                    </table>
+                        </br>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="parent_menu">
-                        Links
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <table class=" table table-condensed table-hover">
-                        #if($otherLinks)
-                            #foreach( $links in $otherLinks)
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="parent_menu">
+                            Links
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked list-group" style=" margin-left: 0;padding-left: 0em;text-indent: -0.1em;">
+                            #if($otherLinks)
+                                #foreach( $links in $otherLinks)
+                                    <li class="list-group-item">
+                                        <a target="_blank" href="$links.get(2)" class="text-success">
+                                            <i class="fa fa-globe"></i>&nbsp;&nbsp;$links.get(1)</a>
+                                    </li>
 
-                                <tr>
-                                    <td><i class="fa fa-globe"></i></td>
-                                    <td><a  href="$links.get(2)" target="_blank" class="text-success">
-                                        $links.get(1)</a></td>
-
-                                </tr>
-
-
+                                #end
                             #end
-                        #end
 
-                    </table>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<ul>
+</div>
 
-	<li><a href="../${startModule}/index.action" target="_blank">$i18n.getString( "home_page" )&nbsp;</a></li>
-	<!--li><a href="#" target="_blank">$i18n.getString( "launchpad_site" )&nbsp;</a></li-->
-</ul>
-    </div>
+
+<script>
+    $(document).ready(function(){
+        $("#leftbarcontents").removeClass("col-md-2").addClass("col-md-12");
+    })
+</script>
+
 

@@ -27,13 +27,13 @@ $(document).ready(function(){
         for(var i=0;i<menuarr.length; i++){
             menu += '<div class="accordion-group">';
             menu += '<div class="accordion-heading">';
-//            menu += '<h6 style="padding: 5px 5px;font-size: 10pt">';
+            menu += '<h6 class="panel-title" style="padding: 5px 5px;font-size: 10pt">';
             menu += '<a class="text-success accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOneItem'+i+'">';
             menu += '<i class="fa fa-chevron-circle-down pull-right"></i>'+menuarr[i];
             menu += '</a>';
-//            menu += '</h6>';
+            menu += '</h6>';
             menu += '</div>';
-            menu += '<div id="collapseOneItem'+i+'" class="accordion-body collapse in">';
+            menu += '<div id="collapseOneItem'+i+'" class="accordion-body collapse">';
             menu += '<div class="accordion-inner">';
             menu += '<ul class="nav nav-pills nav-stacked">';
             $.each( data.reportTables, function( key, value ) {
@@ -51,13 +51,13 @@ $(document).ready(function(){
 
             menu1 += '<div class="accordion-group">';
             menu1 += '<div class="accordion-heading">';
-//            menu1 += '<h6 style="padding: 5px 5px;font-size: 10pt">';
+            menu1 += '<h6 class="panel-title" style="padding: 5px 5px;font-size: 10pt">';
             menu1 += '<a class="text-success accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwoItem'+i+'">';
             menu1 += '<i class="fa fa-chevron-circle-down pull-right"></i>'+menuarr[i];
             menu1 += '</a>';
-//            menu1 += '</h6>';
+            menu1 += '</h6>';
             menu1 += '</div>';
-            menu1 += '<div id="collapseTwoItem'+i+'" class="accordion-body collapse in">';
+            menu1 += '<div id="collapseTwoItem'+i+'" class="accordion-body collapse">';
             menu1 += '<div class="accordion-inner">';
             menu1 += '<ul class="nav nav-pills nav-stacked">';
             $.each( data.reportTables, function( key, value ) {

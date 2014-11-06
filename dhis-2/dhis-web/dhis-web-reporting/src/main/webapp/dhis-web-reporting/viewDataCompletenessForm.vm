@@ -3,6 +3,13 @@
 		selectionTreeSelection.setMultipleSelectionAllowed( false );
 		selectionTree.clearSelectedOrganisationUnits();
 		selectionTree.buildSelectionTree();
+            $("option[value=Daily]").hide();
+            $("option[value=Weekly]").hide();
+            $("option[value=BiMonthly]").hide();
+            $("option[value=SixMonthly]").hide();
+            $("option[value=Yearly]").hide();
+            $("option[value=FinancialApril]").hide();
+            $("option[value=FinancialOct]").hide();
 	});
 
 	var i18n_please_select_org_unit = '$encoder.jsEscape( $i18n.getString( "please_select_org_unit" ) , "'")';

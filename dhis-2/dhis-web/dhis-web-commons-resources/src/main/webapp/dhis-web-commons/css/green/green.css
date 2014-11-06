@@ -393,7 +393,7 @@ a.menuLink:hover
   text-decoration: none;
   padding: 8px 12px;
   cursor: pointer;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
 }
 
 #leftBarContents a:hover

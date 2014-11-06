@@ -1,4 +1,10 @@
 #macro( headerMenuBar )
+<style>
+    #leftBarContents ul a
+    {
+        border: 1px solid #ddd;
+    }
+</style>
 <div class="row" style="background-color:#457B49;">
     <div class="col-md-2" style="font-weight: bolder;">
         <div style="font-weight: bolder; color:#fff;" class="hidden-sm hidden-xs">

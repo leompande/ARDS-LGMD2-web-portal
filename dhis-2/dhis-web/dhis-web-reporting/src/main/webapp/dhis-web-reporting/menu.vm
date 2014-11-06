@@ -1,3 +1,4 @@
+
 <div class="col-md-3 hidden-sm hidden-xs " style="width:250px;">
 
         <div class="panel-group" id="accordion">
@@ -13,13 +14,16 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="">
-                                <a href="showDataSetReportForm.action">Standard Report&nbsp;</a>
+                                <a href="showDataSetReportForm.action">Standard Report&nbsp;
+                                    <i class="fa fa-chevron-right pull-right"></i></a>
                             </li>
                             <li class="">
-                                <a href="displayViewReportForm.action">Custom Report&nbsp;</a>
+                                <a href="displayViewReportForm.action">Custom Report&nbsp;
+                                    <i class="fa fa-chevron-right pull-right"></i></a>
                             </li>
                             <li class="">
-                            <a href="displayViewDataCompletenessForm.action">Completeness Summary&nbsp;</a>
+                            <a href="displayViewDataCompletenessForm.action">Completeness Summary&nbsp;
+                                <i class="fa fa-chevron-right pull-right"></i></a>
                             </li>
                             <li class="">
 

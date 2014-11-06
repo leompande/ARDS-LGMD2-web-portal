@@ -6,10 +6,15 @@
         <div class="introItemText"><div class="introItemHeader">Standard Reports</div><div>View standard reports. These reports are based on data entry screens and will produce a report with aggregated data.</div></div>
     </li>
     <li class="introItem" onclick="window.location.href='displayViewReportForm.action'">
-        <img src="../icons/reportingratesummary.png" class="introIcon">
+        <img src="../icons/dataset.png" class="introIcon">
         <div class="introItemText"><div class="introItemHeader">Custom Report</div><div>View and add reports based on the JasperReports library. These can be based on report tables and can be designed in iReport.</div></div>
     </li>
-    #introListImgItem( "displayViewDataCompletenessForm.action" "reporting_rate_summary" "reportingratesummary" )
+    <li class="introItem" onclick="window.location.href='displayViewDataCompletenessForm.action'">
+        <img src="../icons/reportingratesummary.png" class="introIcon">
+        <div class="introItemText"><div class="introItemHeader">Completeness Summary</div>
+            <div>Browse the reporting rates of data sets by administrative unit and period based on various criteria for submission.</div></div>
+    </li>
+##    #introListImgItem( "displayViewDataCompletenessForm.action" "reporting_rate_summary" "reportingratesummary" )
 </ul>
 
 
