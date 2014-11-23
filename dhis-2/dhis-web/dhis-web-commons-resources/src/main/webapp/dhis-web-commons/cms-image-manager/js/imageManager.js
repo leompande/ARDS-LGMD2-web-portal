@@ -34,7 +34,7 @@ $(document).ready(function(){
             var Hidden_Image  = "";
             Image_grid = "<div class='row' id='menu_container'>";
             Image_grid +="<div class='btn-group'>";
-            Image_grid +="<a class='btn btn-success btn-sm' id='view_displayed_image_files' title='view displayed'><i class='fa fa-image'></i></a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='view_displayed_image_files' title='view displayed'><i class='fa fa-th-list'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='hide_all_image_files' title='hide all'><i class='fa fa-minus-circle'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='delete_all_image_files' title='delete all'><i class='fa fa-times-circle-o'></i></a>"
             Image_grid +="<a class='btn btn-success btn-sm' id='hidden_image_files' title='hidden'><i class='fa fa-unlock-alt'></i></a>"

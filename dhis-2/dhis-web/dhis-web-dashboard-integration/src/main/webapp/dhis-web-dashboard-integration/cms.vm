@@ -121,9 +121,9 @@
     <div class="col-md-12 menu_conteiner">
         <div class="btn-group  pull-left" id="cms_menu_bar" style="margin-left:-15px;">
             <a href="#" class="btn btn-default btn-sm  disabled" role="button"  style="display:block!important;"><b><i class="fa fa-spanner"></i> &nbsp; Home Page Managers  :</b></a>
-            <a class="btn btn-default btn-sm manage_articles" id="manage_articles" title="Manage Articles" ><i class="fa fa-file-text-o"></i> &nbsp; Articles</a>
-            <a class="btn btn-default btn-sm manage_articles_menus" id="manage_articles_menus" title="Manage Article Menus" ><i class="fa fa-list"></i>  &nbsp; Home Page Menus</a>
-            <a class="btn btn-default btn-sm manage_images" id="manage_images" title="Manage Images" ><i class="fa fa-picture-o"> &nbsp; Slide Show Images</i></a>
+            <a class="btn btn-default btn-sm manage_articles" id="manage_articles" title="Manage Home Articles" ><i class="fa fa-file-text-o"></i> &nbsp;Home Page Articles</a>
+            <a class="btn btn-default btn-sm manage_articles_menus" id="manage_articles_menus" title="Manage Home Page Article Menus" ><i class="fa fa-list"></i>  &nbsp; Home Page Menus</a>
+            <a class="btn btn-default btn-sm manage_images" id="manage_images" title="Manage Slide Show Images" ><i class="fa fa-picture-o"> &nbsp; Slide Show </i></a>
             <a class="btn btn-default btn-sm manage_pages" id="manage_pages" title="Manage Information Sharing" ><i class="fa fa-th-large"></i> &nbsp; Information Sharing</a>
         </div>
 

@@ -1,3 +1,8 @@
+
+window.imageArray = new Array();
+window.documentArray = new Array();
+window.hiddendocumentArray = new Array();
+window.hiddenimageArray = new Array();
 $(document).ready(function(){
     $(".text_inputs").hide();
     $(".save").hide();
@@ -351,10 +356,6 @@ $(document).ready(function(){
         url: "../api/documents.json",
         dataType: 'json'
     }).done(function(dataDocs) {
-        documentArray = new Array();
-        imageArray = new Array();
-        hiddendocumentArray = new Array();
-        hiddenimageArray = new Array();
         docIds = new Array();
         imageIds = new Array();
         Image_grid ='';
@@ -373,11 +374,12 @@ $(document).ready(function(){
                 if(vals.file_type=="doc"){
                     if(vals.status == "enabled"){
                         docIds[vals.file_name] = vals.id;
-                        documentArray[documentCounter] = vals.file_name;
+                        window.documentArray[documentCounter] = vals.file_name;
                         documentCounter++;
-                    }else{
+                    }
+                    if(vals.status == "disabled"){
                         docIds[vals.file_name] = vals.id;
-                        hiddendocumentArray[documentCounter] = vals.file_name;
+                        window.hiddendocumentArray[hiddendocumentCounter] = vals.file_name;
                         hiddendocumentCounter++;
                     }
                 }
@@ -386,11 +388,11 @@ $(document).ready(function(){
                 if(vals.file_type=="image"){
                     if(vals.status == "enabled"){
                         imageIds[vals.file_name] = vals.id;
-                        imageArray[imageCounter] = vals.file_name;
+                        window.imageArray[imageCounter] = vals.file_name;
                         imageCounter++;
                     }else{
                         imageIds[vals.file_name] = vals.id;
-                        hiddenimageArray[hiddenimageCounter] = vals.file_name;
+                        window.hiddenimageArray[hiddenimageCounter] = vals.file_name;
                         hiddenimageCounter++;
                     }
                 }
@@ -401,7 +403,7 @@ $(document).ready(function(){
              })).done(function () {
 
             $.each(dataDocs.documents,function(index,val){
-                if(in_array(val['name'],imageArray)){
+                if(window.imageArray.indexOf(val['name'])>-1){
                     Image_grid +='<img class="slideProperty img-rounded img-responsive" src="'+val['href']+'/data" alt="" title="" />';
                     $(".SliderName_3").html(Image_grid).promise().done(function(){
                         demo3Effect1 = {name: 'myEffect31', top: true, move: true, duration: 400};
@@ -416,7 +418,7 @@ $(document).ready(function(){
                 }
 
 
-                if(in_array(val['name'],documentArray)){
+                if(window.documentArray.indexOf(val['name'])>-1){
                         //left menu document download
                         Doc_grid += '<tr class="list-group-item">';
                         Doc_grid += '<td><a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
@@ -453,7 +455,8 @@ $(document).ready(function(){
                 }
 
 
-                if(in_array(val['name'],hiddendocumentArray)){
+                if(window.hiddendocumentArray.indexOf(val['name'])>-1){
+
                     Doc_menu_cms_hidden +='<tr >';
                     Doc_menu_cms_hidden +='<td>';
                     Doc_menu_cms_hidden +='<a title="View Document(Download)" target="_blank" href="'+val['href']+'/data" class="text-success">';
