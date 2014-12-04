@@ -34,11 +34,11 @@ $(document).ready(function(){
             var Hidden_Image  = "";
             Image_grid = "<div class='row' id='menu_container'>";
             Image_grid +="<div class='btn-group'>";
-            Image_grid +="<a class='btn btn-success btn-sm' id='view_displayed_image_files' title='view displayed'><i class='fa fa-th-list'></i></a>"
-            Image_grid +="<a class='btn btn-success btn-sm' id='hide_all_image_files' title='hide all'><i class='fa fa-minus-circle'></i></a>"
-            Image_grid +="<a class='btn btn-success btn-sm' id='delete_all_image_files' title='delete all'><i class='fa fa-times-circle-o'></i></a>"
-            Image_grid +="<a class='btn btn-success btn-sm' id='hidden_image_files' title='hidden'><i class='fa fa-unlock-alt'></i></a>"
-            Image_grid +="<a class='btn btn-success btn-sm' id='unhide_all_image_files' title='un hide all'><i class='fa fa-unlock'></i></a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='view_displayed_image_files' title='view onslide displayed'><i class='fa fa-th-list'></i>&nbsp;On Slide Images </a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='hide_all_image_files' title='hide all'><i class='fa fa-minus-circle'></i>&nbsp;Hide All </a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='delete_all_image_files' title='delete all'><i class='fa fa-times-circle-o'></i>&nbsp;Delete All</a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='hidden_image_files' title='hidden'><i class='fa fa-unlock-alt'></i>&nbsp;Hidden </a>"
+            Image_grid +="<a class='btn btn-success btn-sm' id='unhide_all_image_files' title='un hide all'><i class='fa fa-unlock'></i>&nbsp;Unhide All</a>"
             Image_grid +="</div>";
             Image_grid +="<div class='pull-right'>";
             Image_grid +="<a href='#' title='close' id='closing-image-manager'><i class='fa fa-times fa-2x alert-success'></i></a>"
@@ -235,7 +235,7 @@ $(document).ready(function(){
 
             if(link_id === "unhide_all_image_files"){
                 $.ajax({url:"unHideAllImages.action"}).done(function(data){
-                    $(".disabled").show();
+                    location.reload(true);
                 });
             }
         });

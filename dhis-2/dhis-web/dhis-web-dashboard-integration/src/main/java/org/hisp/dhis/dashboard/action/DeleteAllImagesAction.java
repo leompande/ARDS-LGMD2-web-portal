@@ -58,7 +58,7 @@ public class DeleteAllImagesAction
             throws Exception
     {
 
-        String inserQuery = "DELETE FROM cms_files  WHERE file_type ='image' AND status ='disabled'";
+        String inserQuery = "DELETE FROM cms_files  WHERE file_type ='image'";
         jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.update(inserQuery);
 

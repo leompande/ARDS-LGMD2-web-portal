@@ -64,8 +64,10 @@
                                 #end
                             #end
                             <li style="color:#ffffff!important;"><a href="../dhis-web-importexport/index.action" id="">Import Export&nbsp;</a></li>
+                           #if($encoder.htmlEncode( $currentUser.username )=="admin")
                             <li style="color:#ffffff!important;"><a href="../dhis-web-dashboard-integration/cms.action" id="cms_settings_button">CMS&nbsp;</a></li>
-                        </ul>
+                           #end
+                           </ul>
                     </li>
                 #end
             </ul>
@@ -202,11 +204,11 @@
 
                             <div class="form-group">
                                 <label for="document_name">Document Name <em title="Required" class="required">*</em></label>
-                                <input type="text" id="document_name" style="width:100% !important;" name="name" value="" class="{validate:{required:true,minlength:2,maxlength:160}} form-control">
+                                <input type="text" id="document_name" style="width:100% !important;" name="name" value="" class="{validate:{required:true,minlength:2,maxlength:160}} form-control" required="required">
                             </div>
                             <div class="form-group">
                                 <label for="add-link">File <em title="Required" class="required">*</em></label>
-                                <input type="file" id="upload" name="upload"  class="{validate:{required:true}} form-control">
+                                <input type="file" id="upload" name="upload"  class="{validate:{required:true}} form-control" required="required">
                             </div>
                             <div class="form-group">
                                 <input type="hidden" id="upload" name="external" value="false" >
