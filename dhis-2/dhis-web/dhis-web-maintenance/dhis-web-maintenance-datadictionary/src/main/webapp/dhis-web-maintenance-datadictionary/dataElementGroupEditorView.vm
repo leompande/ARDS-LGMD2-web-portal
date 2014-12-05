@@ -36,7 +36,7 @@
 	$i18n.getString( "data_element_group_management" ) #openHelp( "dataElementGroupEditor" )
 </h3>
 
-<div id="tabs" style="position:absolute">
+<div id="tabs">
 	<ul>
 		<li><a href="#view_1">$i18n.getString( "view_1" )</a></li>
 		<li><a href="#view_2">$i18n.getString( "view_2" )</a></li>

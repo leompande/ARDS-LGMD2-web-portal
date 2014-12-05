@@ -671,7 +671,12 @@ Ext.onReady( function() {
 
 	GIS.core.StyleMap = function(id, labelConfig) {
 		var defaults = {
-				fillOpacity: 1,
+
+
+
+
+
+									fillOpacity: 1,
 				strokeColor: '#fff',
 				strokeWidth: 1
 			},

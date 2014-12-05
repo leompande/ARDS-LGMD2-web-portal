@@ -1157,6 +1157,46 @@
         </fileset>
       </configuration>
     </facet>
+    <facet type="web" name="Web102">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/target/dhis-web-commons-resources-2.14/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web103">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-api-fred/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web104">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-commons-resources/src/main/webapp/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web105">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/dhis-2/dhis-web/dhis-web-portal/target/war/work/org.hisp.dhis/dhis-web-commons-resources/dhis-web-commons/analysis/Highcharts/exporting-server/java/highcharts-export/highcharts-export-web/src/main/webapp" relative="/" />
+        </webroots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
