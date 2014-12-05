@@ -11,7 +11,7 @@
     </li>
     <li class="introItem" onclick="window.location.href='displayViewDataCompletenessForm.action'">
         <img src="../icons/reportingratesummary.png" class="introIcon">
-        <div class="introItemText"><div class="introItemHeader">Completeness Summary</div>
+        <div class="introItemText"><div class="introItemHeader">Submission Status</div>
             <div>Browse the reporting rates of data sets by administrative unit and period based on various criteria for submission.</div></div>
     </li>
 ##    #introListImgItem( "displayViewDataCompletenessForm.action" "reporting_rate_summary" "reportingratesummary" )

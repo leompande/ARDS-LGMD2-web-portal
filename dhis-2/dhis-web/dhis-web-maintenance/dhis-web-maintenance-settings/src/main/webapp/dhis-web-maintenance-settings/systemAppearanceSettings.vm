@@ -20,14 +20,14 @@
 </script>
 
 <div style="width:370px;">
-    <div style="float:right;">
-        <select id="localeSelect" name="localeSelect" onchange="changeLocale()" style="width:auto !important;">
-            <option value="">[ Select locale ]</option>
-            #foreach( $locale in $availableLocales )
-                <option value="$locale.toString()">$locale.getDisplayName()</option>
-            #end
-        </select>
-    </div>
+##    <div style="float:right;">
+##        <select id="localeSelect" name="localeSelect" onchange="changeLocale()" style="width:auto !important;">
+##            <option value="">[ Select locale ]</option>
+##            #foreach( $locale in $availableLocales )
+##                <option value="$locale.toString()">$locale.getDisplayName()</option>
+##            #end
+##        </select>
+##    </div>
 </div>
 
 <h3>$i18n.getString( "appearance_settings" ) #openHelp( "systemAppearanceSettings" )</h3>
@@ -58,16 +58,16 @@
     </select>
 </div>
 
-<div class="settingLabel">$i18n.getString( "flag" )</div>
+##<div class="settingLabel">$i18n.getString( "flag" )</div>
 
-<div class="setting">
-    <select id="flag" name="flag">
-        <option value="NO_FLAG">$i18n.getString( "no_flag" )</option>
-        #foreach ( $flag in $flags )
-            <option value="$flag" #if( $flag == $keyFlag )selected="selected"#end>$i18n.getString( $flag )</option>
-        #end
-    </select>
-</div>
+##<div class="setting">
+##    <select id="flag" name="flag">
+##        <option value="NO_FLAG">$i18n.getString( "no_flag" )</option>
+##        #foreach ( $flag in $flags )
+##            <option value="$flag" #if( $flag == $keyFlag )selected="selected"#end>$i18n.getString( $flag )</option>
+##        #end
+##    </select>
+##</div>
 
 <div class="settingLabel">$i18n.getString( "start_page" )</div>
 

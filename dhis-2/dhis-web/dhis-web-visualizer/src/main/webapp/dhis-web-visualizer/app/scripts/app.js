@@ -145,7 +145,7 @@ Ext.onReady( function() {
         domainAxisTitle = Ext.create('Ext.form.field.Text', {
             style: 'margin-bottom:2px; margin-left:2px',
             width: 310,
-            fieldLabel: NS.i18n.domain_axis_label,
+            fieldLabel: 'Domain(Y axis) title',//NS.i18n.domain_axis_label,
             labelStyle: 'color:#333',
             labelWidth: 123,
             maxLength: 100,
@@ -155,7 +155,7 @@ Ext.onReady( function() {
         rangeAxisTitle = Ext.create('Ext.form.field.Text', {
             style: 'margin-bottom:0; margin-left:2px',
             width: 310,
-            fieldLabel: NS.i18n.range_axis_label,
+            fieldLabel: 'Range(X axis) title',//NS.i18n.range_axis_label,
             labelStyle: 'color:#333',
             labelWidth: 123,
             maxLength: 100,
@@ -2572,7 +2572,7 @@ Ext.onReady( function() {
 
         indicator = {
             xtype: 'panel',
-            title: '<div class="ns-panel-title-data">' + NS.i18n.indicators + '</div>',
+            title: '<div class="ns-panel-title-data"> Computed Values </div>',//' + NS.i18n.indicators + '
             hideCollapseTool: true,
             getDimension: function() {
                 var config = {
@@ -2941,7 +2941,7 @@ Ext.onReady( function() {
 
         dataSet = {
             xtype: 'panel',
-            title: '<div class="ns-panel-title-data">Completeness report</div>',
+            title: '<div class="ns-panel-title-data">Submission Status</div>',
             hideCollapseTool: true,
             getDimension: function() {
                 var config = {

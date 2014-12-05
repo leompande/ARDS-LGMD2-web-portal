@@ -122,7 +122,7 @@
 	<tr>
 		<th>$i18n.getString( "available_roles" )</th>
 		<th></th>
-		<th>$i18n.getString( "selected_roles" )
+		<th>$i18n.getString( "selected_roles" ) <em title="$i18n.getString( 'required' )" class="required">*</em>
 			<select id="roleValidator" style="display:none"/>
 		</th>
 	</tr>

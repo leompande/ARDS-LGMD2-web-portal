@@ -2871,7 +2871,7 @@ Ext.onReady( function() {
 
         indicator = {
             xtype: 'panel',
-            title: '<div class="ns-panel-title-data">' + NS.i18n.indicators + '</div>',
+            title: '<div class="ns-panel-title-data">Computed Values</div>',//' + NS.i18n.indicators + '
             hideCollapseTool: true,
             getDimension: function() {
                 var config = {
@@ -3240,7 +3240,7 @@ Ext.onReady( function() {
 
         dataSet = {
             xtype: 'panel',
-            title: '<div class="ns-panel-title-data">Completeness report</div>',
+            title: '<div class="ns-panel-title-data">Submission Status</div>',
             hideCollapseTool: true,
             getDimension: function() {
                 var config = {

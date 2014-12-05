@@ -4081,7 +4081,7 @@ Ext.onReady( function() {
 		};
 
 		stage = Ext.create('Ext.form.field.ComboBox', {
-			fieldLabel: GIS.i18n.indicator,
+			fieldLabel: 'Computed Values',///GIS.i18n.indicator,
 			editable: false,
 			valueField: 'id',
 			displayField: 'name',
@@ -6784,9 +6784,9 @@ Ext.onReady( function() {
 			store: Ext.create('Ext.data.ArrayStore', {
 				fields: ['id', 'name'],
 				data: [
-					[dimConf.indicator.objectName, GIS.i18n.indicator],
+					[dimConf.indicator.objectName, 'Computed Values'],//GIS.i18n.indicator],
 					[dimConf.dataElement.objectName, GIS.i18n.dataelement],
-					[dimConf.dataSet.objectName, "Completeness Report"]
+					[dimConf.dataSet.objectName, "Submission Status"]
 				]
 			}),
 			listeners: {
@@ -6797,7 +6797,7 @@ Ext.onReady( function() {
 		});
 
 		indicatorGroup = Ext.create('Ext.form.field.ComboBox', {
-			fieldLabel: GIS.i18n.indicator_group,
+			fieldLabel: 'Computed Values group',//GIS.i18n.indicator_group,
 			editable: false,
 			valueField: 'id',
 			displayField: 'name',
@@ -6820,7 +6820,7 @@ Ext.onReady( function() {
 		});
 
 		indicator = Ext.create('Ext.form.field.ComboBox', {
-			fieldLabel: GIS.i18n.indicator,
+			fieldLabel: 'Computed Values',//GIS.i18n.indicator,
 			editable: false,
 			valueField: 'id',
 			displayField: 'name',
