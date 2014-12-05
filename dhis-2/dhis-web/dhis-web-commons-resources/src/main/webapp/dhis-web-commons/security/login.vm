@@ -47,9 +47,9 @@
         <div class="col-md-6">
             <div class="row">
              <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-1">
-                <div class="col-md-3 hidden-xs hidden-sm hidden-md">
+                <div class="col-md-4 hidden-xs hidden-sm hidden-md">
                     <!--img id="flagArea" src="../flags/tanzania.png"-->
-                    <img class=" img-responsive" style="width:150px; height:72px;" src="tanzania.png">
+                    <img class=" img-responsive"  src="tanzania.png">
                 </div>
                 <div class="col-md-8 col-md-offset-1 hidden-xs hidden-sm hidden-md">
                     <div class="row">
@@ -64,7 +64,7 @@
                         #end
                     </div>
                 </div>
-               </div>
+              </div>
            </div>
             <div class="row hidden-xs visible-md visible-lg" style="margin-top:10px;">
                 <div class="col-md-12 col-md-offset-1"><span id=""><img class="img-responsive" style="width:400px;height:250px;" src="merged.png"></span></div>

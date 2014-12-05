@@ -2135,7 +2135,7 @@ Ext.onReady( function() {
                     items: [
                         {
                             xtype: 'label',
-                            text: NS.i18n.series,
+                            text: 'Series(Y-axis)',
                             style: 'font-size:11px; font-weight:bold; padding:0 4px'
                         },
                         { bodyStyle: 'padding:1px 0; border-style:none;	background-color:transparent' },
@@ -2148,7 +2148,7 @@ Ext.onReady( function() {
                     items: [
                         {
                             xtype: 'label',
-                            text: NS.i18n.category,
+                            text: 'Category(X-axis)',
                             style: 'font-size:11px; font-weight:bold; padding:0 4px'
                         },
                         { bodyStyle: 'padding:1px 0; border-style:none;	background-color:transparent' },
